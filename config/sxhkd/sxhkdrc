@@ -16,7 +16,7 @@ super + Return
 	xst -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
 
 ctrl + super + Return
-	xst
+	kitty
 
 super + grave
 	scratch

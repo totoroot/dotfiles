@@ -12,6 +12,7 @@ in {
     user.packages = with pkgs; [
       docker
       docker-compose
+      lazydocker
     ];
 
     env.DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";

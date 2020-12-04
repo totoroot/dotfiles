@@ -1,0 +1,51 @@
+filetype: NIX
+
+detect:
+    filename: "\\.nix$"
+
+rules:
+    #brackets and Operators
+    - special: "(\\{|\\}|\\(|\\)|\\;|\\]|\\[|`|\\\\|\\$|<|>|!|=|&|\\|)"
+    # Reserved words
+    - statement: "\\b(assert|else|if|in|inherit|let|rec|then|with|isNull)\\b"
+    - statement.built_in: "\\b(abort|baseNameOf|builtins|derivation|dirOf|fetchTarball|import|map|removeAttrs|throw)\\b"
+    - statement.built_in: "\\b(builtins\\.)(abort|add|all|any|attrNames|attrValues|bitAnd|bitOr|bitXorcompareVersions|concatLists|concatStringsSep|currentSystem)\\b"
+    - statement.built_in: "\\b(builtins\\.)(deepSeq|derivation|dirOf|div|elem|elemAt|fetchurl|fetchTarball|fetchGit|filter|filterSource|foldl|functionArgs|fromJSON)\\b"
+    - statement.built_in: "\\b(builtins\\.)(genList|getAttr|getEnv|hasAttr|hashString|hashFile|head|import|intersectAttrs|isAttrs|isList|isFunction|isString|isInt)\\b"
+    - statement.built_in: "\\b(builtins\\.)(isFloat|isBool|isPath|isNull|length|lessThan|listToAttrs|map|match|mul|parseDrvName|path|pathExists|placeholder|readDir)\\b"
+    - statement.built_in: "\\b(builtins\\.)(readFile|removeAttrs|replaceStrings|seq|sort|split|splitVersion|stringLength|sub|substring|tail|throw|toFile|toJSON)\\b"
+    - statement.built_in: "\\b(builtins\\.)(toPath|toXML|trace|tryEval|typeOf)\\b"      
+    # Numbers
+    - constant.number: "\\b[0-9]+\\b"
+    # Booleans
+    - constant.bool: "\\b(false|true|null)\\b"
+    # String double quotes
+    - constant.string:
+        start: \"
+        end: \"
+        skip: \\.
+        rules:
+            - constant.specialChar: (\\0|\\\\|\\t|\\n|\\r|\\"|\\')
+            - constant.unicode: \\u\{[[:xdigit:]]+}
+            - constant: "\\$\\{.+\\}"
+   # String double single quotes
+    - constant.string:
+        start: \'\'
+        end: \'\'
+        skip: \\.
+        rules:
+            - constant.specialChar: (\\0|\\\\|\\t|\\n|\\r|\\"|\\')
+            - constant.unicode: \\u\{[[:xdigit:]]+}             
+            - constant: "\\$\\{.+\\}"
+    #comment line
+    - comment:
+        start: "(^|\\s)#"
+        end: "$"
+        rules:
+            - todo: "(TODO|XXX|FIXME):?"
+    # commnet block
+    - comment.block:
+        start: "/\\*"
+        end: "\\*/"
+        rules:
+            - todo: "(TODO|XXX|FIXME):?"

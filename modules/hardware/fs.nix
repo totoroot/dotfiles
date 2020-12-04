@@ -23,24 +23,5 @@ in {
         hfsprogs
       ];
     }
-
-    (mkIf (!cfg.zfs.enable && cfg.ssd.enable) {
-      services.fstrim.enable = true;
-    })
-
-    (mkIf cfg.zfs.enable (mkMerge [
-      {
-        boot.loader.grub.copyKernels = true;
-        boot.supportedFilesystems = [ "zfs" ];
-        boot.zfs.devNodes = "/dev/disk/by-partuuid";
-        services.zfs.autoScrub.enable = true;
-      }
-
-      (mkIf cfg.ssd.enable {
-        # Will only TRIM SSDs; skips over HDDs
-        services.fstrim.enable = false;
-        services.zfs.trim.enable = true;
-      })
-    ]))
   ]);
 }

@@ -32,15 +32,24 @@
 
 ## Quick start
 
-1. Yoink [NixOS 20.09][nixos] (must be newer than Sept 12, 2020 for `nixos-install --flake`).
+1. Yoink [NixOS 20.09][nixos].
 2. Boot into the installer.
-3. Do your partitions and mount your root to `/mnt`
-4. `git clone https://github.com/hlissner/dotfiles /mnt/etc/nixos`
-5. Install NixOS: `nixos-install --root /mnt --flake /mnt/etc/nixos#XYZ`, where
-   `XYZ` is your hostname.  Use `#generic` for a simple, universal config.
-6. OPTIONAL: Create a sub-directory in `hosts/` for your device. See [host/kuro]
-   as an example.
-7. Reboot!
+3. Do your partitions and mount your root to `/mnt`. I recommend first doing `sudo su` for ease of use. Be careful with those labels though.
+4. Clone the repo with `git clone https://github.com/totoroot/dotfiles-nixos /mnt/etc/nixos`.
+6. In case git is not installed, run `nix-env -iA nixos.git`.
+7. Make sure the config you are about to install has the right hardware-configuration.
+8. For a new host enter the cloned repo and duplicate an existing configuration (`cd nixos && cp -r hosts/purple hosts/<new-host>`) and make adjustments with `nano hosts/<new-host>/default.nix`.
+
+   For a different partitioning scheme make sure to change the hardware-configuration with `nano hosts/<new-host>/hardware-configuration.nix`.
+
+   In case you dont know how to set up this config run `nixos-generate-config --dir hosts/<new-host>/ && rm hosts/<new-host>/configuration.nix`
+9. Add nixPkgs channel and install flakes `nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && nix-channel --update && nix-env -iA nixpkgs.nixFlakes`.
+10. Install NixOS with configuration for host "purple" `nixos-install --root /mnt --flake /mnt/etc/nixos#purple`.
+#11. Edit either `~/.config/nix/nix.conf` or `/etc/nix/nix.conf` and add `experimental-features = nix-command flakes`.
+
+This is needed to expose the Nix 2.0 CLI and flakes support that are hidden behind feature-flags. 
+
+11. Reboot!
 
 ## Management
 
@@ -71,8 +80,8 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 
 + **How do I "set up my partitions"?**
 
-  My main host [has a README](hosts/kuro/README.org) you can use as a reference.
-  I set up an EFI+GPT system and partitions with `parted` and `zfs`.
+  My main host [has a README](hosts/purple/README.org) you can use as a reference.
+  I set up an EFI+GPT system and partitions with `parted`.
   
 + **How 2 flakes?**
 

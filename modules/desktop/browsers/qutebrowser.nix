@@ -17,14 +17,6 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       qutebrowser
-      (makeDesktopItem {
-        name = "qutebrowser-private";
-        desktopName = "Qutebrowser (Private)";
-        genericName = "Open a private Qutebrowser window";
-        icon = "qutebrowser";
-        exec = "${qutebrowser}/bin/qutebrowser ':open -p'";
-        categories = "Network";
-      })
     ];
 
     home = {
@@ -32,7 +24,7 @@ in {
         source = "${configDir}/qutebrowser";
         recursive = true;
       };
-      dataFile."qutebrowser/userstyles.css".text = cfg.userStyles;
+      # dataFile."qutebrowser/userstyles.css".text = cfg.userStyles;
     };
   };
 }
