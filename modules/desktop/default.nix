@@ -24,7 +24,8 @@ in {
     ];
 
     user.packages = with pkgs; [
-      feh       # image viewer
+      feh
+      qview
       xclip
       xdotool
       libqalculate  # calculator cli w/ currency conversion
@@ -46,6 +47,20 @@ in {
         symbola
         noto-fonts
         noto-fonts-cjk
+        carlito
+        emojione
+        fira-code
+        fira-code-symbols
+        font-awesome_5
+        hack-font
+        lato
+        source-code-pro
+        source-han-mono
+        source-han-sans
+        source-han-serif
+        source-sans-pro
+        source-serif-pro
+        julia-mono
       ];
     };
 

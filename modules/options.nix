@@ -30,7 +30,7 @@ with lib.my;
       isNormalUser = true;
       name = let name = builtins.getEnv "USER"; in
              if elem name [ "" "root" ]
-             then "hlissner" else name;
+             then "mathym" else name;
       uid = 1000;
     };
 
@@ -41,12 +41,12 @@ with lib.my;
 
       # I only need a subset of home-manager's capabilities. That is, access to
       # its home.file, home.xdg.configFile and home.xdg.dataFile so I can deploy
-      # files easily to my $HOME, but 'home-manager.users.hlissner.home.file.*'
+      # files easily to my $HOME, but 'home-manager.users.mathym.home.file.*'
       # is much too long and harder to maintain, so I've made aliases in:
       #
-      #   home.file        ->  home-manager.users.hlissner.home.file
-      #   home.configFile  ->  home-manager.users.hlissner.home.xdg.configFile
-      #   home.dataFile    ->  home-manager.users.hlissner.home.xdg.dataFile
+      #   home.file        ->  home-manager.users.mathym.home.file
+      #   home.configFile  ->  home-manager.users.mathym.home.xdg.configFile
+      #   home.dataFile    ->  home-manager.users.mathym.home.xdg.dataFile
       users.${config.user.name} = {
         home = {
           file = mkAliasDefinitions options.home.file;

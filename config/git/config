@@ -1,13 +1,13 @@
 [user]
-	name = Henrik Lissner
-	email = henrik@lissner.net
-	signingkey = 5F6C0EA160557395
+	name = Matthias Thym
+	email = git@thym.at
+	signingkey = C1B257DC8E8CFCC4
 [commit]
-	gpgsign = true
+	gpgsign = false
 [core]
 	whitespace = trailing-space
 [github]
-	user = hlissner
+	user = totoroot
 [rebase]
 	autosquash = true
 [push]
@@ -31,7 +31,7 @@
 	clean = git-lfs clean -- %f
 [url "https://github.com/"]
     insteadOf = gh:
-[url "git@github.com:hlissner/"]
+[url "git@github.com:totoroot/"]
     insteadOf = gh:/
 [url "https://gitlab.com/"]
     insteadOf = gl:
@@ -39,5 +39,5 @@
     insteadOf = gist:
 [url "https://bitbucket.org/"]
     insteadOf = bb:
-[url "https://git.v0.com"]
-    insteadOf = v0:
+[url "https://git.thym.at"]
+    insteadOf = gogs:

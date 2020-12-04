@@ -11,6 +11,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias wget='wget -c'
+alias cat='bat -Pp'
 
 alias mk=make
 alias rcp='rsync -vaP --delete'
@@ -19,6 +20,20 @@ alias gurl='curl --compressed'
 
 alias y='xclip -selection clipboard -in'
 alias p='xclip -selection clipboard -out'
+
+# edit zshrc
+alias zshconfig="$EDITOR ~/.zshrc"
+# source zshrc
+alias zshsource="source ~/.zshrc"
+# alias to scan wireless network for connected devices
+alias scan="sudo nmap -sn 192.168.8.0/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
+# find largest files in directory
+alias ducks="sudo du -cks -- * | sort -rn | head"
+# set python3 as standard python interpreter
+alias python='/usr/bin/python3'
+# rm EXIF data from images in directory
+alias rmexif='exiftool -all='
+
 
 alias sc=systemctl
 alias ssc='sudo systemctl'
