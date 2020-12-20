@@ -1,4 +1,4 @@
-# modules/desktop/media/keepassxc.nix
+# modules/desktop/keepassxc.nix
 
 { config, options, lib, pkgs, ... }:
 
@@ -7,7 +7,7 @@ with lib.my;
 let cfg = config.modules.desktop.keepassxc;
 in {
   options.modules.desktop.keepassxc = {
-    enable             = mkBoolOpt false;
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
@@ -18,7 +18,7 @@ in {
     home.configFile = {
       "keepassxc/keepassxc.ini".source = "${configDir}/keepassxc/keepassxc.ini";
     };
-    # TODO zsh alias
-    # alias pw=keepassxc-cli open Nextcloud/pass.kdbx
+    
+    modules.shell.zsh.rcFiles = [ "${configDir}/keepassxc/aliases.zsh" ];
   };
 }
