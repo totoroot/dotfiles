@@ -8,10 +8,12 @@
   ## Modules
   modules = {
     desktop = {
-      bspwm.enable		= true;
+      bspwm.enable		  = true;
       documents.enable 	= true;
-      mail.enable      	= true;
       keepassxc.enable 	= true;
+      mail.enable      	= true;
+      thunar.enable     = true;
+      vscodium.enable   = true;
       apps = {
         rofi.enable       	= true;
         godot.enable       	= false;
@@ -21,10 +23,10 @@
         smart.enable       	= true;
       };
       browsers = {
-        default			= "firefox";
-        firefox.enable 	= true;
+        default			        = "firefox";
+        firefox.enable 	    = true;
         qutebrowser.enable 	= true;
-        chromium.enable 	= true;
+        chromium.enable 	  = true;
       };
       communication = {
         discord.enable  = true;
@@ -84,12 +86,12 @@
       cli.enable    = true;
     };
     services = {
-      docker.enable 		= true;
-      gitea.enable  		= false;
-      jellyfin.enable		= false;
-      k8s.enable    		= true;
-      nginx.enable			= false;
-      ssh.enable    		= true;
+      docker.enable 		  = true;
+      gitea.enable  		  = false;
+      jellyfin.enable		  = false;
+      k8s.enable    		  = true;
+      nginx.enable			  = false;
+      ssh.enable    		  = true;
       transmission.enable	= false;
     };
     theme.active = "alucard";
@@ -97,12 +99,12 @@
 
 
   ## Local config
-  programs.ssh.startAgent = true;
-  services.openssh.startWhenNeeded = true;
+  programs.ssh.startAgent           = true;
+  services.openssh.startWhenNeeded  = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable  = true;
   # The global useDHCP flag is deprecated, therefore explicitly set to false
   # here. Per-interface useDHCP will be mandatory in the future, so this
   # generated config replicates the default behaviour.
-  networking.useDHCP = false;
+  networking.useDHCP                = false;
 }

@@ -8,16 +8,14 @@
 * jitsi
 * rtl8812au-5.9.3.2
 * polybar setup
-* choose file manager (dolphin, nnn, lf, fff) and configure
 * ssh setup
 * ghostwriter config + theme
-* nextcloud-client config
+* nextcloud-client config with nix
 * screenshot tool script
 * set up evolution
 * usb auto-mount
 * micro wc plugin in config
 * pass for rofi with keepassxc-cli
-* keepassxc zsh config
 * format hdd and add to hardware config
 * fix zsh keybindings
 * fix kitty keybindings
@@ -27,4 +25,5 @@
 * duplicate options (fdupes, jdupes, rmlint, dupeguru)
 * julia compiler setup
 * setup borgbackup with nix config
-* mullvad config
+* mullvad config + autostart
+* fix cursor
