@@ -31,11 +31,10 @@ margin-top = 0
 margin-bottom = 34
 
 [bar/main]
-monitor = ${env:MONITOR}
+monitor = ${env:MONITORS[0]}
 monitor-strict = true
 enable-ipc = true
 wm-restack = bspwm
-# REQUIRED to move the window with hideit.sh
 override-redirect = true
 fixed-center = true
 
@@ -68,7 +67,7 @@ font-2 = "Siji:pixelsize=10;2"
 
 modules-left = pulseaudio pad cpu memory
 modules-center = bspwm
-modules-right = redshift date
+modules-right = date
 
 ;tray-position = center
 ;tray-padding = 2
