@@ -3,7 +3,6 @@
 * modify zsh theme
 * vlc dark theme
 * vlc config into nixos dotfiles
-* vscodium
 * signal-cli
 * jitsi
 * rtl8812au-5.9.3.2
@@ -20,7 +19,7 @@
 * fix zsh keybindings
 * fix kitty keybindings
 * setup SMART disk health monitoring
-* k8s setup
+* k8s setup (minikube, k3s, kind, ?)
 * k8s config
 * duplicate options (fdupes, jdupes, rmlint, dupeguru)
 * julia compiler setup
