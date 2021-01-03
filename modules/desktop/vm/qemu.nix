@@ -1,3 +1,5 @@
+# modules/desktop/vm/qemu.nix
+
 { options, config, lib, pkgs, ... }:
 
 with lib;
