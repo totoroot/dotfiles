@@ -1,10 +1,12 @@
+# modules/hardware/disks.nix
+
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.hardware.fs;
+let cfg = config.modules.hardware.disks;
 in {
-  options.modules.hardware.fs = {
+  options.modules.hardware.disks = {
     enable = mkBoolOpt false;
     zfs.enable = mkBoolOpt false;
     ssd.enable = mkBoolOpt false;
@@ -20,7 +22,10 @@ in {
         sshfs
         exfat
         ntfs3g
-        hfsprogs
+        parted			    # partitioning tool
+        unstable.duf		# graphical disk usage utility
+        smartmontools		# drive health monitoring
+        hdparm          # get disk speeds
       ];
     }
   ]);
