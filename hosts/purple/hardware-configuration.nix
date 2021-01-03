@@ -33,12 +33,19 @@
   fileSystems."/home" =
     { device = "/dev/disk/by-label/home";
       fsType = "ext4";
-      options = [ "noatime"];
+      options = [ "noatime" ];
     };
 
-  fileSystems."/mnt/music" =
-    { device = "/dev/disk/by-label/music";
+  fileSystems."/mnt/data" =
+    { device = "/dev/disk/by-label/data";
       fsType = "ext4";
+      options = [ "noatime" ];
+    };
+
+  fileSystems."/mnt/photos" =
+    { device = "/dev/disk/by-label/photos";
+      fsType = "ext4";
+      options = [ "noatime" ];
     };
 
   swapDevices = [];

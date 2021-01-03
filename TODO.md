@@ -13,12 +13,11 @@
 * screenshot tool script
 * set up evolution
 * usb auto-mount
-* micro wc plugin in config
+* add micro plugins to config
 * pass for rofi with keepassxc-cli
-* format hdd and add to hardware config
 * fix zsh keybindings
 * fix kitty keybindings
-* setup SMART disk health monitoring
+* setup SMART disk health monitoring with reporting
 * k8s setup (minikube, k3s, kind, ?)
 * k8s config
 * duplicate options (fdupes, jdupes, rmlint, dupeguru)
@@ -26,3 +25,5 @@
 * setup borgbackup with nix config
 * mullvad config + autostart
 * fix cursor
+* fan curves GPU and case fans
+* temperature monitoring

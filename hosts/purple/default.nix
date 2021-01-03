@@ -15,12 +15,12 @@
       thunar.enable     = true;
       vscodium.enable   = true;
       apps = {
-        rofi.enable       	= true;
-        godot.enable       	= false;
         blender.enable     	= true;
-        nextcloud.enable   	= true;
         ghostwriter.enable 	= true;
-        smart.enable       	= true;
+        godot.enable       	= true;
+        nextcloud.enable   	= true;
+        rofi.enable       	= true;
+        smart.enable        = true;
       };
       browsers = {
         default			        = "firefox";
@@ -57,7 +57,7 @@
       clojure.enable     = false;
       common-lisp.enable = false;
       go.enable          = true;
-      julia.enable		 = false;
+      julia.enable  		 = false;
       lua.enable         = false;
       node.enable        = false;
       python.enable      = true;
@@ -72,7 +72,7 @@
     };
     hardware = {
       audio.enable   = true;
-      fs.enable      = false;
+      disks.enable      = true;
       nvidia.enable  = true;
       sensors.enable = true;
     };
