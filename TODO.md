@@ -27,3 +27,6 @@
 * fix cursor
 * fan curves GPU and case fans
 * temperature monitoring
+* add ghostwriter and soundkonverter to config after failed build
+* add media and volume control with shortcuts
+* launch programs with shortcuts
