@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# switches through listed layouts whenever script is run
+KEYMAPS=('eu' 'us' 'at' 'ru')
+
+DEFAULT_KEYMAP="eu"
+KEYMAP_INDEX=`echo ${KEYMAPS[@]/$(xkbmon -o)//} | cut -d/ -f1 | wc -w | tr -d ' '`
+
+if [ $KEYMAP_INDEX -lt 3 ]
+then
+    KEYMAP_INDEX=$[$KEYMAP_INDEX+1]
+else
+    KEYMAP_INDEX=0
+fi
+
+echo "Switched to keymap: ${KEYMAPS[$KEYMAP_INDEX]}" && setxkbmap ${KEYMAPS[$KEYMAP_INDEX]} && notify-send -u low "Switched to keymap: ${KEYMAPS[$KEYMAP_INDEX]}"
