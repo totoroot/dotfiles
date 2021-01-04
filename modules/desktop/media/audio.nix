@@ -15,12 +15,12 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs;
       (if cfg.player.enable then [
-		musikcube
+		    musikcube
       ] else []) ++
 
       (if cfg.misc.enable then [
         picard
-        soundkonverter
+        # soundkonverter TODO failed with last build
         audacity
       ] else []);
   };
