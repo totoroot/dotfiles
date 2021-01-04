@@ -15,7 +15,10 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # install aerc version from nixpkgs (often not latest)
-      (mkIf cfg.aerc.enable aerc)
+      (mkIf cfg.aerc.enable [
+        unstable.aerc
+        w3m
+      ])
       (mkIf cfg.evolution.enable gnome3.evolution)
     ];
 
