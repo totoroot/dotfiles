@@ -13,6 +13,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       unstable.virt-manager
+      unstable.libvirt
     ];
     
     user.extraGroups = [ "libvirt" ];
