@@ -1,5 +1,83 @@
-super + alt + Escape
-	bspc quit
+## Programs ##
+
+ctrl + alt + f
+    firefox
+
+ctrl + alt + x
+    keepassxc
+
+ctrl + alt + a
+    aerc
+
+ctrl + alt + s
+    signal
+
+ctrl + alt + t
+    telegram
+
+ctrl + alt + o
+    libreoffice
+
+ctrl + alt + k
+    kitty
+
+ctrl + alt + m
+    musikcube
+
+ctrl + alt + d
+    discord
+
+ctrl + alt + e
+    element
+
+## Brightness Control ##
+
+super + Up
+	light -A 5
+	
+super + Down
+	light -U 5
+
+## Volume Control ##
+
+ctrl + alt + Return
+	amixer -q set Master toggle
+	
+crtl + alt + Down
+	amixer -q set Master 10%- unmute
+	
+crtl + alt + Up
+	amixer -q set Master 10%+ unmute
+
+## Media Control ##
+
+ctrl + alt + Space
+	playerctl play-pause
+	
+ctrl + alt + Right
+	playerctl next
+	
+ctrl + alt + Left
+	playerctl previous
+
+## Rofi ##
+
+alt + space
+	$DOTFILES/bin/rofi/appmenu
+
+alt + Tab
+	$DOTFILES/bin/rofi/windowmenu
+
+alt + backslash
+	$DOTFILES/bin/rofi/passmenu
+
+alt + slash
+	$DOTFILES/bin/rofi/filemenu -x
+
+## Other ##
+	
+super + alt + p
+	bspc config focus_follows_pointer {true,false}
 
 super + {_,shift + }q
 	bspc node -{c,k}
@@ -15,45 +93,18 @@ super + apostrophe
 super + Return
 	xst -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
 
-ctrl + super + Return
-	kitty
-
-super + grave
-	scratch
-
-super + shift + grave
-	emacsclient -e '(open-scratch-frame)'
-
-super + space
-	$DOTFILES/bin/rofi/appmenu
-
-super + Tab
-	$DOTFILES/bin/rofi/windowmenu
-
-super + backslash
-	$DOTFILES/bin/rofi/passmenu
-
-super + slash
-	$DOTFILES/bin/rofi/filemenu -x
-
 super + Escape
 	pkill -USR1 -x sxhkd
-
-
-#
-##
 
 ## Toggle floating/fullscreen
 super + {_,ctrl + }f
 	bspc node -t ~{floating,fullscreen}
-
 
 super + {_,ctrl +}{h,j,k,l}
 	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
 
 super + shift + {_,ctrl +}{h,j,k,l}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
-
 
 ## Resize by preselection
 super + alt + {1-9}
@@ -83,10 +134,6 @@ super + ctrl + {Left,Down,Up,Right}
 super + shift + {Left,Down,Up,Right}
 	bspc node -v {-40 0,0 40,0 -40,40 0}
 
-
-#
-## Media keys
-
 # screenshot region
 Print
 	scrcap
@@ -96,25 +143,3 @@ super + Print
 # screencast region to gif
 super + ctrl + Print
 	scrrec -s ~/recordings/$(date +%F-%T).gif
-
-XF86MonBrightnessUp
-	light -A 5
-XF86MonBrightnessDown
-	light -U 5
-
-XF86AudioMute
-	amixer -q set Master toggle
-XF86AudioLowerVolume
-	amixer -q set Master 10%- unmute
-XF86AudioRaiseVolume
-	amixer -q set Master 10%+ unmute
-
-XF86Audio{Play,Pause}
-	spt-send toggle
-XF86AudioNext
-	spt-send next
-XF86AudioPrev
-	spt-send prev
-
-# X86Search
-
