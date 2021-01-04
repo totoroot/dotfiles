@@ -22,13 +22,12 @@ in {
       unzip				    # extract zip archives
       exiftool			  # metadata tool
       aria2				    # multi-protocol download utility
-      borgbackup		  # backup utility with compression and encryptioN
+      borgbackup		  # backup utility with compression and encryption
+      playerctl       # control media players from command line
+      light           # control display brightness from command line
+      colorpicker     # X11 color picker
       ## file managers
       lf              # terminal file manager
-      ## disk tools
-      parted			    # partitioning tool
-      unstable.duf		# graphical disk usage utility
-      smartmontools		# drive health monitoring	
       ## other fun stuff
       gomatrix			  # matrix effect
       lolcat			    # freakin rainbow terminal effect
