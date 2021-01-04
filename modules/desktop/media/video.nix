@@ -15,25 +15,24 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs;
-      (if cfg.player.enable then [
+    user.packages = with pkgs; [
+      ffmpeg
+      (mkIf cfg.player.enable [
         mpv-with-scripts
-     	mpvc  # CLI controller for mpv
+     	  mpvc  # CLI controller for mpv
         celluloid
         vlc
-      ] else []) ++
-
-      (if cfg.recording.enable then [
+      ])
+      (mkIf cfg.recording.enable [
         obs-studio
         vokoscreen
-      ] else []) ++
-      
-      (if cfg.cut.enable then [
+      ])
+      (mkIf cfg.cut.enable [
         kdenlive
-      ] else []) ++
-
-      (if cfg.transcode.enable then [
+      ])
+      (mkIf cfg.transcode.enable [
         handbrake
-      ] else []);
+      ])
+    ];
   };
 }
