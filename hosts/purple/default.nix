@@ -80,13 +80,14 @@
       sensors.enable = true;
     };
     shell = {
-      direnv.enable = true;
-      git.enable    = true;
-      gnupg.enable  = true;
-      pass.enable   = true;
-      tmux.enable   = false;
-      zsh.enable    = true;
-      cli.enable    = true;
+      direnv.enable   = true;
+      git.enable      = true;
+      gnupg.enable    = true;
+      pass.enable     = true;
+      taskell.enable  = true;
+      tmux.enable     = false;
+      zsh.enable      = true;
+      cli.enable      = true;
     };
     services = {
       docker.enable 		  = true;

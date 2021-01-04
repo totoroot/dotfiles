@@ -29,8 +29,6 @@ alias zshsource="source ~/.zshrc"
 alias scan="sudo nmap -sn 192.168.8.0/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
 # find largest files in directory
 alias ducks="sudo du -cks -- * | sort -rn | head"
-# set python3 as standard python interpreter
-alias python='/usr/bin/python3'
 # rm EXIF data from images in directory
 alias rmexif='exiftool -all='
 
