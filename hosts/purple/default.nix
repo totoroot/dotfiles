@@ -12,11 +12,12 @@
       documents.enable 	= true;
       keepassxc.enable 	= true;
       mail.enable      	= true;
+      screenshot.enable = true;
       thunar.enable     = true;
       vscodium.enable   = true;
       apps = {
         blender.enable     	= true;
-        ghostwriter.enable 	= true;
+        ghostwriter.enable 	= false; # TODO failed with last build
         godot.enable       	= true;
         nextcloud.enable   	= true;
         rofi.enable       	= true;
@@ -46,7 +47,9 @@
         kitty.enable = true;
       };
       vm = {
-        qemu.enable = true;
+        qemu.enable         = true;
+        virtualbox.enable   = false;
+        virt-manager.enable = true;
       };
     };
     connectivity = {
