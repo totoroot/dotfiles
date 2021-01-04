@@ -7,13 +7,13 @@ ctrl + alt + x
     keepassxc
 
 ctrl + alt + a
-    aerc
+    xst aerc
 
 ctrl + alt + s
     signal
 
 ctrl + alt + t
-    telegram
+    telegram-desktop
 
 ctrl + alt + o
     libreoffice
@@ -22,13 +22,16 @@ ctrl + alt + k
     kitty
 
 ctrl + alt + m
-    musikcube
+    xst musikcube
 
 ctrl + alt + d
     discord
 
 ctrl + alt + e
     element
+
+ctrl + alt + c
+    codium
 
 ## Brightness Control ##
 
@@ -75,6 +78,9 @@ alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
 ## Other ##
+
+ctrl + Space
+    $DOTFILES/bin/keymapswitcher
 	
 super + alt + p
 	bspc config focus_follows_pointer {true,false}
