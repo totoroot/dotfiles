@@ -14,7 +14,8 @@ in {
     user.packages = with pkgs; [
       go
       go-tools
-      hugo		# static website engine
+      hugo      # static website engine
+      terraform # infrastructure setup tool
     ];
   };
 }
