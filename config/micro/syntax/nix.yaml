@@ -4,7 +4,7 @@ detect:
     filename: "\\.nix$"
 
 rules:
-    #brackets and Operators
+    # Brackets and Operators
     - special: "(\\{|\\}|\\(|\\)|\\;|\\]|\\[|`|\\\\|\\$|<|>|!|=|&|\\|)"
     # Reserved words
     - statement: "\\b(assert|else|if|in|inherit|let|rec|then|with|isNull)\\b"
@@ -28,7 +28,7 @@ rules:
             - constant.specialChar: (\\0|\\\\|\\t|\\n|\\r|\\"|\\')
             - constant.unicode: \\u\{[[:xdigit:]]+}
             - constant: "\\$\\{.+\\}"
-   # String double single quotes
+    # String double single quotes
     - constant.string:
         start: \'\'
         end: \'\'
@@ -37,13 +37,13 @@ rules:
             - constant.specialChar: (\\0|\\\\|\\t|\\n|\\r|\\"|\\')
             - constant.unicode: \\u\{[[:xdigit:]]+}             
             - constant: "\\$\\{.+\\}"
-    #comment line
+    # Comment line
     - comment:
         start: "(^|\\s)#"
         end: "$"
         rules:
             - todo: "(TODO|XXX|FIXME):?"
-    # commnet block
+    # Comment block
     - comment.block:
         start: "/\\*"
         end: "\\*/"
