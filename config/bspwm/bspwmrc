@@ -24,3 +24,6 @@ bspc rule -r '*'
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
 done
+
+# workaround to autostart mullvad-vpn
+command -v mullvad-vpn >/dev/null && mullvad-vpn
