@@ -42,8 +42,10 @@ in {
       exa
       fasd
       fd
+      sd
       fzf
       tldr
+      zsh-history-substring-search
     ];
 
     env = {
