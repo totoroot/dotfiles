@@ -1,19 +1,12 @@
 <div align="center">
    
-[![Made with Doom Emacs](https://img.shields.io/badge/Made_with-Doom_Emacs-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white)](https://github.com/hlissner/doom-emacs)
 [![NixOS 20.09](https://img.shields.io/badge/NixOS-v20.09-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
 
 </div>
 
 **Hey,** you. You're finally awake. You were trying to configure your OS declaratively, right? Walked right into that NixOS ambush, same as us, and those dotfiles over there.
 
-<img src="/../screenshots/alucard/fakebusy.png" width="100%" />
-
-<p align="center">
-<span><img src="/../screenshots/alucard/desktop.png" height="178" /></span>
-<span><img src="/../screenshots/alucard/rofi.png" height="178" /></span>
-<span><img src="/../screenshots/alucard/tiling.png" height="178" /></span>
-</p>
+**Screenshots follow as soon as bspwm config is done.**
 
 ------
 
@@ -22,8 +15,8 @@
 | **Shell:** | zsh + zgen |
 | **DM:** | lightdm + lightdm-mini-greeter |
 | **WM:** | bspwm + polybar |
-| **Editor:** | [Doom Emacs][doom-emacs] (and occasionally [vim]) |
-| **Terminal:** | st |
+| **Editor:** | [micro] (and occasionally [vim]) |
+| **Terminal:** | kitty (and xst for cli programs)
 | **Launcher:** | rofi |
 | **Browser:** | firefox |
 | **GTK Theme:** | [Ant Dracula](https://github.com/EliverLara/Ant-Dracula) |
@@ -80,16 +73,40 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 
 + **How do I "set up my partitions"?**
 
-  My main host [has a README](hosts/purple/README.org) you can use as a reference.
-  I set up an EFI+GPT system and partitions with `parted`.
+  My main host [has a README](hosts/kuro/README.org) you can use as a reference.
+  I set up an EFI+GPT system and partitions with `parted` and `zfs`.
+  
++ **Why did you write bin/hey?**
+
+  I'm nonplussed by the user story for nix's CLI tools and thought fixing it
+  would be more productive than complaining about it on the internet. Then I
+  thought, [why not do both](https://youtube.com/watch?v=vgk-lA12FBk)?
   
 + **How 2 flakes?**
 
-  It wouldn't be the NixOS experience if I gave you all the answers in one,
-  convenient place.
+  Would it be the NixOS experience if I gave you all the answers in one,
+  convenient place?
+  
+  No, but here are some resources that helped me:
+  
+  + [A three-part tweag article that everyone's read.](https://www.tweag.io/blog/2020-05-25-flakes/)
+  + [An overengineered config to scare off beginners.](https://github.com/nrdxp/nixflk)
+  + [A minimalistic config for scared beginners.](https://github.com/colemickens/nixos-flake-example)
+  + [A nixos wiki page that spells out the format of flake.nix.](https://nixos.wiki/wiki/Flakes)
+  + [Official documentation that nobody reads.](https://nixos.org/learn.html)
+  + [Some great videos on general nixOS tooling and hackery.](https://www.youtube.com/channel/UC-cY3DcYladGdFQWIKL90SQ)
+  + A couple flake configs that I 
+    [may](https://github.com/LEXUGE/nixos) 
+    [have](https://github.com/bqv/nixrc)
+    [shamelessly](https://git.sr.ht/~dunklecat/nixos-config/tree)
+    [rummaged](https://github.com/utdemir/dotfiles)
+    [through](https://github.com/purcell/dotfiles).
+  + [Some notes about using Nix](https://github.com/justinwoo/nix-shorts)
+  + [What helped me figure out generators (for npm, yarn, python and haskell)](https://myme.no/posts/2020-01-26-nixos-for-development.html)
+  + [What y'all will need when Nix drives you to drink.](https://www.youtube.com/watch?v=Eni9PPPPBpg)
 
 
-[doom-emacs]: https://github.com/hlissner/doom-emacs
+[micro]: https://micro-editor.github.io
 [vim]: https://github.com/hlissner/.vim
 [nixos]: https://releases.nixos.org/?prefix=nixos/20.09-small/
 [host/kuro]: https://github.com/hlissner/dotfiles/tree/master/hosts/kuro
