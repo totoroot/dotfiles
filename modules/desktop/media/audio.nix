@@ -20,7 +20,6 @@ in {
 
       (if cfg.misc.enable then [
         picard
-        # soundkonverter TODO failed with last build
         audacity
       ] else []);
   };
