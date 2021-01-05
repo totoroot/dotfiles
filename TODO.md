@@ -1,4 +1,4 @@
-## To Do
+## Open
 
 - setup gpg accounts correctly
 - aerc pgp integration
@@ -26,27 +26,28 @@
 - fix cursor
 - fan curves GPU and case fans
 - temperature monitoring
-- add ghostwriter and soundkonverter to config after failed build
+- replace soundkonverter by a ffmpeg script
 - install anki
 - pulseaudio mixer and sink control
 - pulseaudio mixer systray
-- fix libreoffice
 - webdav sync tasks
+- install sd or fix fasd
 
-## Doing
+## In Progress
 
 - add custom binaries to path
 - launch programs with shortcuts
 - keymap switcher with indicator (xkbmon)
-- install terraform
-- install ansible
 - add media and volume control with shortcuts
-- install taskell and setup config
 - fix zsh keybindings
 - fix kitty keybindings
 - aerc w3m html viewer
-- ffmpeg installation and integration
 
-## Done
+## Completed
 
 - screenshot tool script
+- fix libreoffice
+- install terraform
+- install ansible
+- install taskell and setup config
+- install ffmpeg
