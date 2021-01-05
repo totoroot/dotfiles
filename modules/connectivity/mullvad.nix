@@ -17,7 +17,7 @@ in {
 
     services.mullvad-vpn.enable = true;
 
-  	# Workaround for https://github.com/NixOS/nixpkgs/issues/91923
-  	# networking.iproute2.enable = true;
+    # autostart still does not work -> workaround in bspwmrc
+    # xdg.configFile."autostart/mullvad-vpn.desktop".source = "${mullvad-vpn}/share/applications/mullvad-vpn.desktop";
   };
 }
