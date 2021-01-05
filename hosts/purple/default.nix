@@ -17,7 +17,7 @@
       vscodium.enable   = true;
       apps = {
         blender.enable     	= true;
-        ghostwriter.enable 	= false; # TODO failed with last build
+        ghostwriter.enable 	= false;
         godot.enable       	= true;
         nextcloud.enable   	= true;
         rofi.enable       	= true;
@@ -60,7 +60,7 @@
       clojure.enable     = false;
       common-lisp.enable = false;
       go.enable          = true;
-      julia.enable  		 = false;
+      julia.enable  		 = true;
       lua.enable         = false;
       node.enable        = false;
       python.enable      = true;
@@ -75,7 +75,7 @@
     };
     hardware = {
       audio.enable   = true;
-      disks.enable      = true;
+      disks.enable   = true;
       nvidia.enable  = true;
       sensors.enable = true;
     };
@@ -84,7 +84,7 @@
       git.enable      = true;
       gnupg.enable    = true;
       pass.enable     = true;
-      taskell.enable  = true;
+      taskell.enable  = false;
       tmux.enable     = false;
       zsh.enable      = true;
       cli.enable      = true;
@@ -101,11 +101,9 @@
     theme.active = "alucard";
   };
 
-
   ## Local config
   programs.ssh.startAgent           = true;
   services.openssh.startWhenNeeded  = true;
-
   networking.networkmanager.enable  = true;
   # The global useDHCP flag is deprecated, therefore explicitly set to false
   # here. Per-interface useDHCP will be mandatory in the future, so this
