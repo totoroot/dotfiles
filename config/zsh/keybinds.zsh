@@ -1,9 +1,32 @@
 # <Ctrl>/<Alt> + <Left>/<Right>
 bindkey "^[[1;3D" backward-word
 bindkey "^[[1;3C" forward-word
-bindkey "^[[1;5C" beginning-of-line
-bindkey "^[[1;5D" end-of-line
+bindkey "^[[1;5D" beginning-of-line
+bindkey "^[[1;5C" end-of-line
 
 # bind UP and DOWN arrow keys
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+
+# TODO fix zsh-history-substring-search
+
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
+
+# fuzzy finder on <Ctrl> + <F>
+bindkey '^F' fzf
+
+# C-z to toggle current process (background/foreground)
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+# Open current prompt in external editor
+autoload -Uz edit-command-line; zle -N edit-command-line
+bindkey '^E' edit-command-line
