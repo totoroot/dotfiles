@@ -48,6 +48,13 @@
       options = [ "noatime" ];
     };
 
+  # temporarily mount old system drive to ease transition
+  fileSystems."/mnt/system" =
+      { device = "/dev/disk/by-uuid/bd55c91f-6e1a-40ed-a303-e68fe700df9b";
+        fsType = "ext4";
+        options = [ "noatime" ];
+      };
+
   swapDevices = [];
 
   # high-resolution display
