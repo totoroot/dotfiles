@@ -7,19 +7,23 @@ alias q=exit
 alias clr=clear
 alias sudo='sudo '
 alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+alias cp='cp -rv'
+alias mv='mv -v'
 alias mkdir='mkdir -p'
 alias wget='wget -c'
 alias cat='bat -Pp'
+alias find='fd'
+alias replace='sd'
 
 alias mk=make
 alias rcp='rsync -vaP --delete'
 alias rmirror='rsync -rtvu --delete'
 alias gurl='curl --compressed'
+alias todo='taskell'
+alias disks='lsblk -o name,label,mountpoint,size,uuid'
 
-alias y='xclip -selection clipboard -in'
-alias p='xclip -selection clipboard -out'
+alias clipin='xclip -selection clipboard -in'
+alias clipout='xclip -selection clipboard -out'
 
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"
