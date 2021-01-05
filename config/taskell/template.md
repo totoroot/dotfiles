@@ -1,8 +1,8 @@
-## To Do
+## Open
 
 
-## Doing
+## In Progress
 
 
-## Done
+## Completed
 
