@@ -31,17 +31,15 @@
 - pulseaudio mixer and sink control
 - pulseaudio mixer systray
 - webdav sync tasks
-- install sd or fix fasd
 
 ## In Progress
 
 - add custom binaries to path
-- launch programs with shortcuts
-- keymap switcher with indicator (xkbmon)
 - add media and volume control with shortcuts
 - fix zsh keybindings
 - fix kitty keybindings
 - aerc w3m html viewer
+- install sd or fix fasd
 
 ## Completed
 
@@ -51,3 +49,5 @@
 - install ansible
 - install taskell and setup config
 - install ffmpeg
+- keymap switcher with indicator (xkbmon)
+- launch programs with shortcuts
