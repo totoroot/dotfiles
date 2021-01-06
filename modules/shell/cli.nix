@@ -38,5 +38,7 @@ in {
       cheat				    # interactive cheatsheets
       tokei				    # code statistics
     ];
+
+    user.extraGroups = [ "admin" ];
   };
 }

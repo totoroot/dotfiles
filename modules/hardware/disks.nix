@@ -27,6 +27,9 @@ in {
         smartmontools		# drive health monitoring
         hdparm          # get disk speeds
       ];
+
+      # add user to group disk for access on disks without sudo
+      user.extraGroups = [ "disk" ];
     }
   ]);
 }
