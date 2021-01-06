@@ -1,8 +1,12 @@
 # <Ctrl>/<Alt> + <Left>/<Right>
-bindkey "^[[1;3D" backward-word
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;5D" beginning-of-line
-bindkey "^[[1;5C" end-of-line
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
+bindkey '^[[1;5D' beginning-of-line
+bindkey '^[[1;5C' end-of-line
+
+bindkey '^[[3;3~' forward-kill-word
+bindkey '^[[3;5~' forward-kill-line
+bindkey '^H' backward-kill-line
 
 # bind UP and DOWN arrow keys
 
