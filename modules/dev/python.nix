@@ -12,9 +12,16 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python38Full
-      ansible       # automation tool
-      ansible-lint  # linter for ansible
+      python38
+      python38Packages.pip
+      python37Packages.pipdate    # pip update helpers
+      python38Packages.ipython
+      python38Packages.setuptools
+      python38Packages.pylint
+      python38Packages.poetry     # Python dependency management and packaging made easy
+      ansible                     # automation tool
+      ansible-lint                # linter for ansible
+      unstable.esptool            # ESP8266 and ESP32 serial bootloader utility
     ];
 
     env.IPYTHONDIR      = "$XDG_CONFIG_HOME/ipython";
