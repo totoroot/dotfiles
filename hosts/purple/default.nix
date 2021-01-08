@@ -17,7 +17,7 @@
       vscodium.enable   = true;
       apps = {
         blender.enable     	= true;
-        ghostwriter.enable 	= false;
+        ghostwriter.enable 	= true;
         godot.enable       	= true;
         nextcloud.enable   	= true;
         rofi.enable       	= true;
