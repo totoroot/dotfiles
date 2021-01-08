@@ -19,7 +19,6 @@ alias mk=make
 alias rcp='rsync -vaP --delete'
 alias rmirror='rsync -rtvu --delete'
 alias gurl='curl --compressed'
-alias todo='taskell'
 alias disks='lsblk -o name,label,mountpoint,size,uuid'
 
 alias clipin='xclip -selection clipboard -in'
