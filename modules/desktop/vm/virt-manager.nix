@@ -17,5 +17,7 @@ in {
     ];
     
     user.extraGroups = [ "libvirt" ];
+
+    virtualisation.libvirtd.enable = true;
   };
 }
