@@ -34,6 +34,8 @@
 - install sshpass
 - page up and down for history navigation
 - up and down for substring search
+- look at ssh tools (passh, autossh, sshguard, sshuttle, sshchat, ssh-import-id)
+- install rofi calc
 
 ## In Progress
 
