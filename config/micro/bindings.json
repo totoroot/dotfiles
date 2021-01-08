@@ -18,7 +18,7 @@
 	"Alt-}": "ParagraphNext",
 	"AltDown": "MoveLinesDown",
 	"AltLeft": "WordLeft",
-	"AltRight": "WordRight"
+	"AltRight": "WordRight",
 	"AltShiftDown": "SpawnMultiCursorDown",
 	"AltShiftLeft": "SelectToStartOfTextToggle",
 	"AltShiftRight": "SelectToEndOfLine",
