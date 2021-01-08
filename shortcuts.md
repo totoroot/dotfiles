@@ -101,6 +101,7 @@ See ~/dotfiles/config/micro/bindings.json
 | ctrl + = | zoom in |
 | ctrl + - | zoom out |
 | ctrl + 0 | zoom reset |
+| ctrl + shift + i | toggle inspector |
 | esc | stop |
 | tab | focus next field |
 | shift + tab | focus previous field |
