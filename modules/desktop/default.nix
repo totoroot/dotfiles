@@ -28,14 +28,6 @@ in {
       qview
       xclip
       xdotool
-      libqalculate  # calculator cli w/ currency conversion
-      (makeDesktopItem {
-        name = "scratch-calc";
-        desktopName = "Calculator";
-        icon = "calc";
-        exec = ''scratch "${tmux}/bin/tmux new-session -s calc -n calc qalc"'';
-        categories = "Development";
-      })
     ];
 
     fonts = {
@@ -46,9 +38,8 @@ in {
         dejavu_fonts
         symbola
         noto-fonts
-        noto-fonts-cjk
         carlito
-        emojione
+        # emojione TODO investigate broken dependencies
         fira-code
         fira-code-symbols
         font-awesome_5
