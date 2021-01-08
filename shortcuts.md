@@ -38,8 +38,8 @@ See ~/dotfiles/config/micro/bindings.json
 | alt + g | show bindings |
 | alt + up | move line up |
 | alt + down | move line down |
-| alt + left | backward word |
-| alt + right | forward word |
+| alt + left/b | backward word |
+| alt + right/f | forward word |
 | ctrl + up | beginning of file |
 | ctrl + down | end of file |
 | ctrl + left | beginning of line |
@@ -129,3 +129,13 @@ See ~/dotfiles/config/micro/bindings.json
 | m | toggle mute |
 | , | toggle shuffle |
 | . | toggle repeat (off|list|track)
+
+## zsh
+| alt + u | make next word uppercase |
+| alt + l | make next word lowercase |
+| alt + c | make next word capitalized |
+| ctrl + left | beginning of line |
+| ctrl + right | end of line |
+| alt + left/b | backward word |
+| alt + right/f | forward word |
+| ctrl + e | edit command in editor |
