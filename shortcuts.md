@@ -6,6 +6,14 @@
 | b,w | pageup |
 | q | quit |
 
+## kitty
+
+| ctrl + enter | new tile |
+| ctrl + l | switch tiling mode |
+| ctrl + shift + t | new tab |
+| ctrl + shift + w | close tab |
+| ctrl + shift + left/right | switch tab|
+
 ## micro
 
 | ctrl + t | open tab |
