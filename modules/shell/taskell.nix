@@ -14,7 +14,9 @@ in {
     user.packages = with pkgs; [
       taskell
     ];
-
+    environment.shellAliases = {
+      todo = "taskell";
+    };
     home.configFile = {
       "taskell/bindings.ini".source = "${configDir}/taskell/bindings.ini";
       "taskell/config.ini".source = "${configDir}/taskell/config.ini";
