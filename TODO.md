@@ -31,6 +31,9 @@
 - pulseaudio mixer and sink control
 - pulseaudio mixer systray
 - webdav sync tasks
+- install sshpass
+- page up and down for history navigation
+- up and down for substring search
 
 ## In Progress
 
@@ -40,6 +43,8 @@
 - fix kitty keybindings
 - aerc w3m html viewer
 - install sd or fix fasd
+- write shortcut cheatsheet
+- micro keybinding alt + back/forward
 
 ## Completed
 
