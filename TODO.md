@@ -31,7 +31,6 @@
 - pulseaudio mixer and sink control
 - pulseaudio mixer systray
 - webdav sync tasks
-- install sshpass
 - page up and down for history navigation
 - up and down for substring search
 - look at ssh tools (passh, autossh, sshguard, sshuttle, sshchat, ssh-import-id)
@@ -46,7 +45,6 @@
 - aerc w3m html viewer
 - install sd or fix fasd
 - write shortcut cheatsheet
-- micro keybinding alt + back/forward
 
 ## Completed
 
@@ -58,3 +56,5 @@
 - install ffmpeg
 - keymap switcher with indicator (xkbmon)
 - launch programs with shortcuts
+- install sshpass
+- micro keybinding alt + back/forward

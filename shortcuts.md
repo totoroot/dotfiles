@@ -8,13 +8,21 @@
 
 ## kitty
 
-| ctrl + enter | new tile |
-| ctrl + l | switch tiling mode |
+| ctrl + shift + enter | new tile |
+| ctrl + shift + l | switch tiling mode |
 | ctrl + shift + t | new tab |
 | ctrl + shift + w | close tab |
-| ctrl + shift + left/right | switch tab|
+| ctrl + shift + left/right | switch tab |
+| ctrl + shift + = | zoom in |
+| ctrl + shift + - | zoom out |
+| ctrl + shift + number | switch to terminal with number|
+| ctrl + shift + q | quit window |
+| ctrl + shift + e | open selected URL in default browser |
+| ctrl + shift + r | resize active terminal |
 
 ## micro
+
+See ~/dotfiles/config/micro/bindings.json
 
 | ctrl + t | open tab |
 | ctrl + q | close tab/quit |
@@ -26,8 +34,18 @@
 | ctrl + a | select all |
 | ctrl + z | undo |
 | ctrl + y | redo |
-| ctrl + g | goto line | * |
+| ctrl + g | goto line |
 | alt + g | show bindings |
+| alt + up | move line up |
+| alt + down | move line down |
+| alt + left | backward word |
+| alt + right | forward word |
+| ctrl + up | beginning of file |
+| ctrl + down | end of file |
+| ctrl + left | beginning of line |
+| ctrl + right | end of line |
+| ctrl + backspace | delete word |
+| ctrl + delete | forward-delete word |
 
 ## sxhkd
 
@@ -49,6 +67,8 @@
 | super + shift + down | move window down |
 | super + shift + left | move window left |
 | super + shift + right | move window right |
+| ctrl + alt + space | media play/pause toggle |
+| ctrl + alt +  |  |
 
 ## bspwm
 
@@ -100,4 +120,12 @@
 | t | tracks |
 | i | increase volume |
 | k | decrease volume |
-| k | jumpo 10 seconds |
+| j | go one track up |
+| l | go one track down |
+| p | fast forward ten seconds |
+| u | rewind ten seconds |
+| y | rewind X |
+| o | fast forward X |
+| m | toggle mute |
+| , | toggle shuffle |
+| . | toggle repeat (off|list|track)
