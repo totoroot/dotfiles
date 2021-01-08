@@ -1,8 +1,4 @@
-<div align="center">
-   
 [![NixOS 20.09](https://img.shields.io/badge/NixOS-v20.09-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
-
-</div>
 
 **Hey,** you. You're finally awake. You were trying to configure your OS declaratively, right? Walked right into that NixOS ambush, same as us, and those dotfiles over there.
 
@@ -78,7 +74,7 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
   
 + **Why did you write bin/hey?**
 
-  I'm nonplussed by the user story for nix's CLI tools and thought fixing it
+  I'm non-plussed by the user story for nix's CLI tools and thought fixing it
   would be more productive than complaining about it on the internet. Then I
   thought, [why not do both](https://youtube.com/watch?v=vgk-lA12FBk)?
   
