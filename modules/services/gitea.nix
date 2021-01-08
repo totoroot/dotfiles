@@ -18,18 +18,19 @@ in {
 
     services.gitea = {
       enable = true;
-      log.level = "Info";
 
       user = "git";
-      database = {
-        user = "git";
-        type = "postgres";
-      };
-      useWizard = false;
+      database.user = "git";
+
       disableRegistration = true;
 
       # We're assuming SSL-only connectivity
       cookieSecure = true;
+      # Only log what's important
+      log.level = "Error";
+      settings.server.DISABLE_ROUTER_LOG = true;
     };
+
+    user.extraGroups = [ "gitea" ];
   };
 }
