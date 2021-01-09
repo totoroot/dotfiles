@@ -21,6 +21,9 @@ bspc config remove_unplugged_monitors true
 # Rules
 bspc rule -r '*'
 
+bspc config border_width 10
+bspc config window_gap 10
+
 #
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
