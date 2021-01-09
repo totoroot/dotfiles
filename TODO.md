@@ -35,10 +35,10 @@
 - up and down for substring search
 - look at ssh tools (passh, autossh, sshguard, sshuttle, sshchat, ssh-import-id)
 - install rofi calc
+- install wacom tablet
 
 ## In Progress
 
-- add custom binaries to path
 - add media and volume control with shortcuts
 - fix zsh keybindings
 - fix kitty keybindings
@@ -58,3 +58,5 @@
 - launch programs with shortcuts
 - install sshpass
 - micro keybinding alt + back/forward
+- add custom binaries to path
+- add go binaries to path
