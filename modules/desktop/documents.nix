@@ -20,14 +20,14 @@ in {
     ] else []) ++
     
     (if cfg.office.enable then [
-      libreoffice-fresh   # install latest version of libre office
+      unstable.libreoffice-fresh   # install latest version of libre office
       pdf2odt             # pdf to odt/ods converter
     ] else []) ++
 
     (if cfg.pdf.enable then [
-      pdfcpu        # pdf processor
+      unstable.pdfcpu        # pdf processor
       pdfgrep       # grep for pdf
-      pdfpc         # pdf presenter console
+      unstable.pdfpc         # pdf presenter console
       pdfsandwich   # ocr for pdf
       wkhtmltopdf   # render html to pdf
       zathura       # pdf viewer

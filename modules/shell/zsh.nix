@@ -38,12 +38,12 @@ in {
     user.packages = with pkgs; [
       zsh
       nix-zsh-completions
-      bat
+      unstable.bat
       exa
       fasd
-      fd
+      unstable.fd
       sd
-      fzf
+      unstable.fzf
       tldr
       zsh-history-substring-search
     ];

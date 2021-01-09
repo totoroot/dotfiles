@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      micro
+      unstable.micro
     ];
     environment.shellAliases = {
       m = "micro";
