@@ -11,7 +11,6 @@
     extraModulePackages = [];
     kernelModules = [
       "kvm-amd"
-      "asix"  # REVIEW Remove me when 5.9 kernel is available
     ];
   };
 

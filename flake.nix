@@ -13,11 +13,12 @@
   inputs = 
     {
       # Core dependencies.
-      # Two inputs so I can track them separately at different rates.
-      nixpkgs.url          = "nixpkgs/master";
-      nixpkgs-unstable.url = "nixpkgs/master";
+      nixos.url          = "nixpkgs/nixos-20.09";
+      nixos-unstable.url = "nixpkgs/nixos-unstable";
 
-      home-manager.url   = "github:rycee/home-manager/master";
+      nixpkgs.url        = "nixpkgs/master";
+
+      home-manager.url   = "github:rycee/home-manager/release-20.09";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
       # Extras
@@ -25,30 +26,32 @@
       nixos-hardware.url = "github:nixos/nixos-hardware";
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, ... }:
     let
-      inherit (lib) attrValues;
-      inherit (lib.my) mapModules mapModulesRec mapHosts;
+      inherit (builtins) baseNameOf;
+      inherit (lib) nixosSystem mkIf removeSuffix attrNames attrValues;
+      inherit (lib.my) dotFilesDir mapModules mapModulesRec mapHosts;
 
       system = "x86_64-linux";
+
+      lib = nixos.lib.extend
+        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
 
       mkPkgs = pkgs: extraOverlays: import pkgs {
         inherit system;
         config.allowUnfree = true;  # forgive me Stallman senpai
         overlays = extraOverlays ++ (attrValues self.overlays);
       };
-      pkgs  = mkPkgs nixpkgs [ self.overlay ];
-      uPkgs = mkPkgs nixpkgs-unstable [];
+      pkgs  = mkPkgs nixos [ self.overlay ];
+      unstable = mkPkgs nixos-unstable [];
 
-      lib = nixpkgs.lib.extend
-        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
     in {
       lib = lib.my;
 
       overlay =
         final: prev: {
-          unstable = uPkgs;
-          my = self.packages."${system}";
+          inherit unstable;
+          user = self.packages."${system}";
         };
 
       overlays =
