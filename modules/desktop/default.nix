@@ -31,7 +31,7 @@ in {
     ];
 
     fonts = {
-      fontDir.enable = true;
+      enableFontDir = true;
       enableGhostscriptFonts = true;
       fonts = with pkgs; [
         ubuntu_font_family
@@ -39,7 +39,7 @@ in {
         symbola
         noto-fonts
         carlito
-        # emojione TODO investigate broken dependencies
+        emojione
         fira-code
         fira-code-symbols
         font-awesome_5
@@ -51,7 +51,7 @@ in {
         source-han-serif
         source-sans-pro
         source-serif-pro
-        julia-mono
+        unstable.julia-mono
       ];
     };
 
