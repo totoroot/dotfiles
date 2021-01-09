@@ -12,10 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      go
-      go-tools
-      hugo      # static website engine
-      terraform # infrastructure setup tool
+      unstable.go
+      unstable.go-tools
+      unstable.hugo      # static website engine
+      unstable.terraform # infrastructure setup tool
     ];
   };
 }

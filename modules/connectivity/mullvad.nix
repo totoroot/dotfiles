@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      mullvad-vpn
+      unstable.mullvad-vpn
     ];
 
     services.mullvad-vpn.enable = true;

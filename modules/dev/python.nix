@@ -20,7 +20,7 @@ in {
       python38Packages.pylint
       python38Packages.poetry     # Python dependency management and packaging made easy
       ansible                     # automation tool
-      ansible-lint                # linter for ansible
+      unstable.ansible-lint                # linter for ansible
       unstable.esptool            # ESP8266 and ESP32 serial bootloader utility
     ];
 

@@ -16,7 +16,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      qutebrowser
+      unstable.qutebrowser
     ];
 
     home = {
