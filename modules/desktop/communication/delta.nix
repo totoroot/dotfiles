@@ -2,15 +2,15 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.communication.jitsi;
+let cfg = config.modules.desktop.communication.delta;
 in {
-  options.modules.desktop.communication.jitsi = {
+  options.modules.desktop.communication.delta = {
     enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      jitsi-meet-electron
+      unstable.deltachat-electron
     ];
   };
 }

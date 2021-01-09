@@ -32,8 +32,10 @@
       communication = {
         discord.enable  = true;
         element.enable  = true;
+        jitsi.enable    = true;
         signal.enable   = true;
         telegram.enable = true;
+        delta.enable    = true;
       };
       media = {
         graphics.enable  = true;
