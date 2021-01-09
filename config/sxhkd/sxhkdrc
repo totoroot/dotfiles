@@ -10,7 +10,7 @@ ctrl + alt + a
     xst aerc
 
 ctrl + alt + s
-    signal
+    signal-desktop
 
 ctrl + alt + t
     telegram-desktop
@@ -35,22 +35,18 @@ ctrl + alt + c
 
 ## Brightness Control ##
 
-super + Up
-	light -A 5
-	
-super + Down
-	light -U 5
+# TODO later
 
 ## Volume Control ##
 
 ctrl + alt + Return
-	amixer -q set Master toggle
+	pulsemixer --toggle-mute
 	
 crtl + alt + Down
-	amixer -q set Master 10%- unmute
+	pulsemixer --change-volume -"10" --unmute
 	
 crtl + alt + Up
-	amixer -q set Master 10%+ unmute
+	pulsemixer --change-volume +"10" --unmute
 
 ## Media Control ##
 
@@ -84,6 +80,9 @@ ctrl + space
 
 super + p
     polybar-msg cmd toggle
+
+super + g
+    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 10; else bspc config -d focused window_gap 
 
 ## Other ##
 	
