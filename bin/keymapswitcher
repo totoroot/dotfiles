@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # switches through listed layouts whenever script is run
-KEYMAPS=('eu' 'us' 'at' 'ru')
+KEYMAPS=('eu' 'at' 'ru' 'us -variant colemak')
 
 DEFAULT_KEYMAP="eu"
 KEYMAP_INDEX=`echo ${KEYMAPS[@]/$(xkbmon -o)//} | cut -d/ -f1 | wc -w | tr -d ' '`
