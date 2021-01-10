@@ -22,7 +22,6 @@ case "$(echo -e "$options" | $rofi_command -dmenu -selected-row 2)" in
         zzz
         ;;
     $suspend)
-        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
         systemctl suspend
         ;;
     $log_out)
