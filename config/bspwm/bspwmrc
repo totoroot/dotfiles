@@ -1,18 +1,18 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -x
 
 export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
 if [[ $(hostname) == 'purple' ]]; then
-    xrandr --output ${MONITORS[0]}
+    xrandr --output ${MONITORS[1]}
     # xrandr --output ${MONITORS[1]} --above ${MONITORS[0]}
     # set workspaces
-    bspc monitor ${MONITORS[0]} -d {1,2,5,6}
-    bspc monitor ${MONITORS[1]} -d {3,4,7,8}
+    bspc monitor ${MONITORS[1]} -d {1,2,5,6}
+    bspc monitor ${MONITORS[2]} -d {3,4,7,8}
 else
     xrandr --auto
-    bspc monitor ${MONITORS[0]} -d {1,2,3,4}
+    bspc monitor ${MONITORS[1]} -d {1,2,3,4}
 fi
 
 bspc config remove_disabled_monitors true
@@ -21,13 +21,12 @@ bspc config remove_unplugged_monitors true
 # Rules
 bspc rule -r '*'
 
-bspc config border_width 10
-bspc config window_gap 10
-
-#
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
 done
+
+bspc config border_width 10
+bspc config window_gap 10
 
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
