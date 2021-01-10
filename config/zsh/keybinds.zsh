@@ -14,7 +14,7 @@ bindkey '^[[3;5~' vi-kill-eol
 
 # Delete previous/next word with <Alt> + <Backspace>/<Delete>
 # bindkey '' backward-kill-word Already bound to ?
-# bindkey '^[[3;3~' ?
+bindkey '^[[3;3~' kill-word
 
 # C-z to toggle current process (background/foreground)
 fancy-ctrl-z () {
