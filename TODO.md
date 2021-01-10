@@ -15,7 +15,6 @@
 - set up evolution
 - usb auto-mount
 - add micro plugins to config
-- pass for rofi with keepassxc-cli
 - setup SMART disk health monitoring with reporting
 - k8s setup (minikube, k3s, kind, ?)
 - k8s config
@@ -36,6 +35,13 @@
 - look at ssh tools (passh, autossh, sshguard, sshuttle, sshchat, ssh-import-id)
 - install rofi calc
 - install wacom tablet
+- fix rofi passmenu
+    > use keepassxc-cli instead of pass or import entries form keepassxc-cli to pass
+- fix rofi powermenu
+- install xdo
+- install go packages automatically
+- install pulseeffects
+- install tt and speedread
 
 ## In Progress
 
@@ -60,3 +66,5 @@
 - micro keybinding alt + back/forward
 - add custom binaries to path
 - add go binaries to path
+- install jitsi
+- install delta chat
