@@ -27,6 +27,7 @@ in {
       feh
       qview
       xclip
+      xdo
       xdotool
     ];
 
