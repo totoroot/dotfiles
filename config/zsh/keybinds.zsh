@@ -1,11 +1,20 @@
-# <Ctrl>/<Alt> + <Left>/<Right>
+# Move in prompt with <Ctrl>/<Alt> + <Left>/<Right>
 bindkey '^[[1;3D' backward-word
 bindkey '^[[1;3C' forward-word
 bindkey '^[[1;5D' beginning-of-line
 bindkey '^[[1;5C' end-of-line
-# bindkey '^[[3;3~' forward delete word
-bindkey '^[[3;5~' kill-eol
+
+# Move in prompt with <Home> and <End>
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
+# Delete rest of prompt with <Ctrl> + <Backspace>/<Delete>
 bindkey '^H' backward-kill-line
+bindkey '^[[3;5~' vi-kill-eol
+
+# Delete previous/next word with <Alt> + <Backspace>/<Delete>
+# bindkey '' backward-kill-word Already bound to ?
+# bindkey '^[[3;3~' ?
 
 # C-z to toggle current process (background/foreground)
 fancy-ctrl-z () {
