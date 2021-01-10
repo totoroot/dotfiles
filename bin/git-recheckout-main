@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+git fetch
+git reset --hard
+if [ `git branch --list tmp` ]
+then
+	git checkout tmp
+else
+	git checkout origin/main -b tmp
+fi
+git branch -D main
+git checkout origin/main -b main
