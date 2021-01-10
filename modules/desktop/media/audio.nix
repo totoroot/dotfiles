@@ -19,7 +19,8 @@ in {
       ] else []) ++
 
       (if cfg.misc.enable then [
-        picard
+        unstable.pulseeffects
+        unstable.picard
         audacity
       ] else []);
   };
