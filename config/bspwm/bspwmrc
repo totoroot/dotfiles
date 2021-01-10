@@ -5,8 +5,7 @@ set -x
 export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
 if [[ $(hostname) == 'purple' ]]; then
-    xrandr --output ${MONITORS[1]}
-    # xrandr --output ${MONITORS[1]} --above ${MONITORS[0]}
+    xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
     # set workspaces
     bspc monitor ${MONITORS[1]} -d {1,2,5,6}
     bspc monitor ${MONITORS[2]} -d {3,4,7,8}
