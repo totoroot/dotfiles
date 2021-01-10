@@ -140,3 +140,47 @@ See ~/dotfiles/config/micro/bindings.json
 | alt + left/b | backward word |
 | alt + right/f | forward word |
 | ctrl + e | edit command in editor |
+
+
+## taskell
+### general
+| q | quit |
+| u | undo |
+| r | redo |
+| / | search tasks |
+| ? | help |
+| ! | show due tasks |
+| k | go up |
+|j | go down |
+| h | go left|
+| l | go right |
+| G | go to bottom |
+| g | go to top |
+### new tasks
+| a | new task |
+| O | new task above |
+| o | new task below |
+| + | duplicate task |
+### editing tasks
+| e/i/A | edit task|
+| C | clear task title |
+| D | delete task|
+| enter | show task details |
+| @ | enter due date  |
+| backspace | clear due date |
+### moving tasks
+| K | move task up |
+| J | move task down |
+| ˙ | move to top of previous 
+| ¬ | move to top of next list |
+| H | move to bottom of previous list |
+| L | move to bottom of next list |
+| space | move to bottom of last list |
+| m | move to list by number |
+### lists
+| N | new list |
+| E | edit list |
+| X | delete list |
+| N | list |
+| < | move task to left list |
+| > | move task to right list |
