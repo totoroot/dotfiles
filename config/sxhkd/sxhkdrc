@@ -82,7 +82,7 @@ super + p
     polybar-msg cmd toggle
 
 super + g
-    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 10; else bspc config -d focused window_gap 
+    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 10; else bspc config -d focused window_gap 150; fi
 
 ## Other ##
 	
