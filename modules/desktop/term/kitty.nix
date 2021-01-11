@@ -15,5 +15,9 @@ in {
     home.configFile = {
       "kitty/kitty.conf".source = "${configDir}/kitty/kitty.conf";
     };
+    # fixes compatibility problems for xterm-kitty on ssh server
+    environment.shellAliases = {
+      kssh = "kitty +kitten ssh";
+    };
   };
 }
