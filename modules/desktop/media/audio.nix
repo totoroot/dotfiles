@@ -19,6 +19,7 @@ in {
       ] else []) ++
 
       (if cfg.misc.enable then [
+        unstable.pulsemixer
         unstable.pulseeffects
         unstable.picard
         audacity
