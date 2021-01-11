@@ -5,10 +5,7 @@
 - modify zsh theme
 - vlc dark theme
 - vlc config into nixos dotfiles
-- signal-cli
-- jitsi
 - rtl8812au-5.9.3.2
-- polybar setup
 - ssh setup
 - ghostwriter config + theme
 - nextcloud-client config with nix
@@ -19,15 +16,12 @@
 - k8s setup (minikube, k3s, kind, ?)
 - k8s config
 - duplicate options (fdupes, jdupes, rmlint, dupeguru)
-- julia compiler setup
 - setup borgbackup with nix config
 - mullvad config + autostart
 - fix cursor
 - fan curves GPU and case fans
 - temperature monitoring
 - replace soundkonverter by a ffmpeg script
-- install anki
-- pulseaudio mixer and sink control
 - pulseaudio mixer systray
 - webdav sync tasks
 - page up and down for history navigation
@@ -37,11 +31,7 @@
 - install wacom tablet
 - fix rofi passmenu
     > use keepassxc-cli instead of pass or import entries form keepassxc-cli to pass
-- fix rofi powermenu
-- install xdo
-- install go packages automatically
-- install pulseeffects
-- install tt and speedread
+- fix gsmartcontrol
 
 ## In Progress
 
@@ -49,8 +39,16 @@
 - fix zsh keybindings
 - fix kitty keybindings
 - aerc w3m html viewer
-- install sd or fix fasd
 - write shortcut cheatsheet
+- fix rofi powermenu
+- install go packages automatically
+- install tt and speedread
+- install anki
+- pulseaudio mixer and sink control
+- polybar setup
+- install gpg gui
+- install signal-cli
+- isntall youtube-dl
 
 ## Completed
 
@@ -68,3 +66,8 @@
 - add go binaries to path
 - install jitsi
 - install delta chat
+- install xdo
+- install pulseeffects
+- julia compiler setup
+- enable nvidia cool bits
+- install sd or fix fasd
