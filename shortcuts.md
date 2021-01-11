@@ -19,6 +19,11 @@
 | ctrl + shift + q | quit window |
 | ctrl + shift + e | open selected URL in default browser |
 | ctrl + shift + r | resize active terminal |
+| ctrl + shift + u | launch hexcode input mode |
+| ctrl + shift + h | navigate through scrollback |
+| ctrl + shift + k | scroll up |
+| ctrl + shift + j | scroll down |
+| ctrl + l | clear |
 
 ## micro
 
