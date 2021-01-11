@@ -13,7 +13,7 @@ in {
       unstable.micro
     ];
     environment.shellAliases = {
-      m = "micro";
+      m = "f -e micro";
     };
     home.configFile = {
       "micro/settings.json".source = "${configDir}/micro/settings.json";
