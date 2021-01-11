@@ -27,7 +27,7 @@
         default			        = "firefox";
         firefox.enable 	    = true;
         qutebrowser.enable 	= true;
-        chromium.enable 	  = true;
+        chromium.enable 	  = false;
       };
       communication = {
         discord.enable  = true;
