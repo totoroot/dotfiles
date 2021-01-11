@@ -11,6 +11,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       signal-desktop
+      signal-cli
     ];
   };
 }
