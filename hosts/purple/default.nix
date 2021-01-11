@@ -16,9 +16,12 @@
       thunar.enable     = true;
       vscodium.enable   = true;
       apps = {
+        anki.enable         = true;
         blender.enable     	= true;
+        evolution.enable    = true;
         ghostwriter.enable 	= true;
         godot.enable       	= true;
+        gpa.enable          = true;
         nextcloud.enable   	= true;
         rofi.enable       	= true;
         smart.enable        = true;
