@@ -13,6 +13,14 @@ in {
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
+    services.xserver.screenSection = ''
+        Option "metamodes" "DP-0: nvidia-auto-select +0+2160, DP-2: nvidia-auto-select +0+0"
+    '';
+
+    services.xserver.deviceSection = ''
+      Option "Coolbits" "28"
+    '';
+
     environment.systemPackages = with pkgs; [
       # Respect XDG conventions, damn it!
       (writeScriptBin "nvidia-settings" ''
