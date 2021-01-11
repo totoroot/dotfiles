@@ -146,6 +146,18 @@ See ~/dotfiles/config/micro/bindings.json
 | alt + right/f | forward word |
 | ctrl + e | edit command in editor |
 
+## pulsemixer
+| q | quit |
+| k/up | go up |
+| j/down | go down |
+| h | lower volume |
+| l | raise volume |
+| m | mute device |
+| enter | open menu |
+| space | ? |
+| F1 | switch to "Output" tab |
+| F2 | switch to "Input" tab |
+| F3 | switch to "Cards" tab |
 
 ## taskell
 ### general
