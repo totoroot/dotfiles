@@ -17,5 +17,8 @@ in {
       unstable.hugo      # static website engine
       unstable.terraform # infrastructure setup tool
     ];
+    env.GOPATH  = "$HOME/.go";
+    env.GOBIN   = "$GOPATH/bin";
+    env.PATH    = [ "$GOBIN" ];
   };
 }
