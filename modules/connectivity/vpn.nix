@@ -16,5 +16,7 @@ in {
     ];
 
     services.mullvad-vpn.enable = true;
+
+    networking.iproute2.enable = true;
   };
 }
