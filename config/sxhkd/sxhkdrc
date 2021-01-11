@@ -7,7 +7,7 @@ ctrl + alt + x
     keepassxc
 
 ctrl + alt + a
-    xst aerc
+    kitty aerc
 
 ctrl + alt + s
     signal-desktop
@@ -22,13 +22,16 @@ ctrl + alt + k
     kitty
 
 ctrl + alt + m
-    xst musikcube
+    kitty musikcube
     
 ctrl + alt + e
     element
 
 ctrl + alt + c
     codium
+
+ctrl + alt + v
+    kitty pulsemixer
 
 ## Brightness Control ##
 
