@@ -53,7 +53,7 @@ with inputs;
 
   boot.loader = {
     efi.canTouchEfiVariables = mkDefault true;
-    systemd-boot.configurationLimit = 20;
+    systemd-boot.configurationLimit = 10;
     systemd-boot.enable = mkDefault true;
   };
 
