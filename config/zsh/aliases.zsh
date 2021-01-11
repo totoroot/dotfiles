@@ -14,6 +14,8 @@ alias wget='wget -c'
 alias cat='bat -Pp'
 alias find='fd'
 alias replace='sd'
+alias cdd='cd $XDG_CONFIG_HOME/dotfiles'
+alias cds='cd /etc/nixos'
 
 alias mk=make
 alias rcp='rsync -vaP --delete'
