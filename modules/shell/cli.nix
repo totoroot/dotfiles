@@ -12,7 +12,6 @@ in {
     user.packages = with pkgs; [
       ## system utilities
       gotop               # graphical activity monitor
-      zenith          # zoomable system monitor
       tree                # directory listing as tree
       pstree   			      # show running processes as tree
       sd 				          # intuitive sed alternative
@@ -29,6 +28,10 @@ in {
       jq                  # lightweight JSON processor 
       unstable.yq         # jq wrapper for YAML files
       unstable.yamllint   # linter for yaml files
+      xkbmon              # keyboard layout monitor for X11
+      translate-shell     # translator
+      speedread           # terminal based reader for maximum wpm
+      unstable.youtube-dl # download manager (not only for youtube)
       ## file managers
       unstable.lf         # terminal file manager
       ## other fun stuff
@@ -40,6 +43,7 @@ in {
       neofetch			      # system info script
       cheat				        # interactive cheatsheets
       tokei				        # code statistics
+      thefuck             # corrects fuckups in console
     ];
 
     user.extraGroups = [ "admin" ];
