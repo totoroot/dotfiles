@@ -18,7 +18,7 @@ in {
       unstable.terraform # infrastructure setup tool
     ];
     env.GOPATH  = "$HOME/.go";
-    env.GOBIN   = "$GOPATH/bin";
+    env.GOBIN   = "$HOME/.go/bin";
     env.PATH    = [ "$GOBIN" ];
   };
 }
