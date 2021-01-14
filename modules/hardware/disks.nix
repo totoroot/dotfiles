@@ -19,12 +19,12 @@ in {
 
       # Support for more filesystems, mostly to support external drives
       environment.systemPackages = with pkgs; [
-        sshfs
-        exfat
-        ntfs3g
-        parted			    # partitioning tool
-        unstable.duf		# graphical disk usage utility
-        smartmontools		# drive health monitoring
+        sshfs           # mount remote directories
+        exfat           # mount exfat drives (macOS compatibility)
+        ntfs3g          # mount ntfs drives (Windows compatibility)
+        parted          # partitioning tool
+        unstable.duf    # graphical disk usage utility
+        smartmontools   # drive health monitoring
         hdparm          # get disk speeds
       ];
 
