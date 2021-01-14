@@ -43,12 +43,7 @@
 - fix rofi powermenu
 - install go packages automatically
 - install tt and speedread
-- install anki
-- pulseaudio mixer and sink control
 - polybar setup
-- install gpg gui
-- install signal-cli
-- isntall youtube-dl
 
 ## Completed
 
@@ -71,3 +66,8 @@
 - julia compiler setup
 - enable nvidia cool bits
 - install sd or fix fasd
+- pulseaudio mixer and sink control
+- install anki
+- install youtube-dl
+- install gpg gui
+- install signal-cli
