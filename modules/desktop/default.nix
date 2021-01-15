@@ -58,6 +58,14 @@ in {
 
     ## Apps/Services
     services.xserver.displayManager.lightdm.greeters.mini.user = config.user.name;
+    
+    ## Enable flatpak to install packages from flathub
+    services.flatpak.enable = true;
+    ## Enable flatpak xdg generation
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    };
 
     services.picom = {
       backend = "glx";
