@@ -2,6 +2,8 @@
 
 **Hey,** you. You're finally awake. You were trying to configure your OS declaratively, right? Walked right into that NixOS ambush, same as us, and those dotfiles over there.
 
+Note that this repository is a fork of [Henrik Lissner's dotfiles](https://github.com/hlissner/dotfiles).
+
 **Screenshots follow as soon as bspwm config is done.**
 
 ------
@@ -11,8 +13,8 @@
 | **Shell:** | zsh + zgen |
 | **DM:** | lightdm + lightdm-mini-greeter |
 | **WM:** | bspwm + polybar |
-| **Editor:** | [micro] (and occasionally [vim]) |
-| **Terminal:** | kitty (and xst for cli programs)
+| **Editor:** | [micro] (and occasionally vim) |
+| **Terminal:** | kitty |
 | **Launcher:** | rofi |
 | **Browser:** | firefox |
 | **GTK Theme:** | [Ant Dracula](https://github.com/EliverLara/Ant-Dracula) |
@@ -34,7 +36,7 @@
    In case you dont know how to set up this config run `nixos-generate-config --dir hosts/<new-host>/ && rm hosts/<new-host>/configuration.nix`
 9. Add nixPkgs channel and install flakes `nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && nix-channel --update && nix-env -iA nixpkgs.nixFlakes`.
 10. Install NixOS with configuration for host "purple" `nixos-install --root /mnt --flake /mnt/etc/nixos#purple`.
-#11. Edit either `~/.config/nix/nix.conf` or `/etc/nix/nix.conf` and add `experimental-features = nix-command flakes`.
+11. Edit either `~/.config/nix/nix.conf` or `/etc/nix/nix.conf` and add `experimental-features = nix-command flakes`.
 
 This is needed to expose the Nix 2.0 CLI and flakes support that are hidden behind feature-flags. 
 
@@ -48,6 +50,7 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 |-------------------|-----------------------------------------------------------------|
 | `hey rebuild`     | Rebuild this flake (shortcut: `hey re`)                         |
 | `hey upgrade`     | Update flake lockfile and switch to it (shortcut: `hey up`)     |
+| `hey update`      | Update flake lockfile (shortcut: `hey u`)                       |
 | `hey rollback`    | Roll back to previous system generation                         |
 | `hey gc`          | Runs `nix-collect-garbage -d`. Use sudo to clean system profile |
 | `hey push REMOTE` | Deploy these dotfiles to REMOTE (over ssh)                      |
@@ -65,18 +68,12 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 
   1. Set `USER` the first time you run `nixos-install`: `USER=myusername
      nixos-install --root /mnt --flake #XYZ`
-  2. Or change `"hlissner"` in modules/options.nix.
+  2. Or change `"mathym"` in modules/options.nix.
 
 + **How do I "set up my partitions"?**
 
-  My main host [has a README](hosts/kuro/README.org) you can use as a reference.
-  I set up an EFI+GPT system and partitions with `parted` and `zfs`.
-  
-+ **Why did you write bin/hey?**
-
-  I'm non-plussed by the user story for nix's CLI tools and thought fixing it
-  would be more productive than complaining about it on the internet. Then I
-  thought, [why not do both](https://youtube.com/watch?v=vgk-lA12FBk)?
+  My main host [has a README](hosts/purple/README.org) you can use as a reference.
+  I set up an EFI+GPT system and partitions with `parted`.
   
 + **How 2 flakes?**
 
@@ -103,6 +100,5 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 
 
 [micro]: https://micro-editor.github.io
-[vim]: https://github.com/hlissner/.vim
 [nixos]: https://releases.nixos.org/?prefix=nixos/20.09-small/
-[host/kuro]: https://github.com/hlissner/dotfiles/tree/master/hosts/kuro
+[host/purple]: https://github.com/totoroot/dotfiles/tree/master/hosts/purple
