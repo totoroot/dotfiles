@@ -10,6 +10,7 @@
     desktop = {
       bspwm.enable		  = true;
       documents.enable 	= true;
+      flatpak.enable    = true;
       keepassxc.enable 	= true;
       mail.enable      	= true;
       screenshot.enable = true;
@@ -33,12 +34,12 @@
         chromium.enable 	  = false;
       };
       communication = {
+        delta.enable    = true;
         discord.enable  = true;
-        element.enable  = true;
         jitsi.enable    = true;
+        matrix.enable   = true;
         signal.enable   = true;
         telegram.enable = true;
-        delta.enable    = true;
       };
       media = {
         graphics.enable  = true;
@@ -79,11 +80,12 @@
       micro.enable = true;
     };
     hardware = {
-      audio.enable    = true;
-      disks.enable    = true;
-      nvidia.enable   = true;
-      sensors.enable  = true;
-      wacom.enable    = true;
+      audio.enable      = true;
+      bluetooth.enable  = true;
+      disks.enable      = true;
+      nvidia.enable     = true;
+      sensors.enable    = true;
+      wacom.enable      = true;
     };
     shell = {
       direnv.enable   = true;
