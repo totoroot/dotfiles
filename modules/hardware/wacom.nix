@@ -10,15 +10,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    # For my intuos4 pro. Doesn't work for cintiqs.
+    # Works for my Wacom Intuos Pro Medium on NixOS 20.09
     services.xserver.wacom.enable = true;
-    # TODO Move this to udev
+    environment.systemPackages = with pkgs; [
+      unstable.libwacom
+    ];
+    # Lock tablet to main display
     system.userActivationScripts.wacom = ''
-      # lock tablet to main display
-      if xinput list --id-only "Wacom Intuos Pro S Pen stylus" 2>&1 >/dev/null; then
-        xinput map-to-output $(xinput list --id-only "Wacom Intuos Pro S Pen stylus") DVI-I-1
-        xinput map-to-output $(xinput list --id-only "Wacom Intuos Pro S Pen eraser") DVI-I-1
-        xinput map-to-output $(xinput list --id-only "Wacom Intuos Pro S Pen cursor") DVI-I-1
+      if xinput list --id-only "Wacom Intuos Pro M Pen stylus" 2>&1 >/dev/null; then
+        xinput map-to-output $(xinput list --id-only "Wacom Intuos Pro M Pen stylus") DP-0
+        xinput map-to-output $(xinput list --id-only "Wacom Intuos Pro M Pen eraser") DP-0
+        xinput map-to-output $(xinput list --id-only "Wacom Intuos Pro M Pen cursor") DP-0
       fi
     '';
   };

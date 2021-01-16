@@ -79,10 +79,11 @@
       micro.enable = true;
     };
     hardware = {
-      audio.enable   = true;
-      disks.enable   = true;
-      nvidia.enable  = true;
-      sensors.enable = true;
+      audio.enable    = true;
+      disks.enable    = true;
+      nvidia.enable   = true;
+      sensors.enable  = true;
+      wacom.enable    = true;
     };
     shell = {
       direnv.enable   = true;
