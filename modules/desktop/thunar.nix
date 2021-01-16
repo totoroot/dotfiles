@@ -13,6 +13,8 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       xfce.thunar
+      xfce.thunar-volman
+      xfce.thunar-archive-plugin
     ];
   };
 }
