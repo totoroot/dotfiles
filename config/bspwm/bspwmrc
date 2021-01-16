@@ -29,3 +29,6 @@ bspc config window_gap 10
 
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
+
+# workaround until nfancurve works
+notify-send 'Set GPU fan speed!'
