@@ -8,7 +8,7 @@ let cfg = config.modules.desktop.documents;
 in {
   options.modules.desktop.documents = {
     enable = mkBoolOpt false;
-    ebook.enable = mkBoolOpt false;
+    ebook.enable = mkBoolOpt true;
     office.enable = mkBoolOpt true;
     pdf.enable = mkBoolOpt true;
   };
@@ -20,17 +20,18 @@ in {
     ] else []) ++
     
     (if cfg.office.enable then [
-      unstable.libreoffice-fresh   # install latest version of libre office
-      pdf2odt             # pdf to odt/ods converter
+      unstable.libreoffice-fresh  # install latest version of libre office
+      pdf2odt                     # pdf to odt/ods converter
     ] else []) ++
 
     (if cfg.pdf.enable then [
-      unstable.pdfcpu        # pdf processor
-      pdfgrep       # grep for pdf
-      unstable.pdfpc         # pdf presenter console
-      pdfsandwich   # ocr for pdf
-      wkhtmltopdf   # render html to pdf
-      zathura       # pdf viewer
+      zathura           # pdf viewer
+      qpdfview          # advanced pdf viewer for forms and annotations
+      unstable.pdfcpu   # pdf processor
+      pdfgrep           # grep for pdf
+      unstable.pdfpc    # pdf presenter console
+      pdfsandwich       # ocr for pdf
+      wkhtmltopdf       # render html to pdf
     ] else []);
   };
 }
