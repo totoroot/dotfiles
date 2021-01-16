@@ -8,7 +8,6 @@ let cfg = config.modules.desktop.media.graphics;
 in {
   options.modules.desktop.media.graphics = {
     enable         = mkBoolOpt false;
-    tools.enable   = mkBoolOpt true;
     raster.enable  = mkBoolOpt true;
     photo.enable   = mkBoolOpt true;
     vector.enable  = mkBoolOpt true;
@@ -17,14 +16,15 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs;
-      (if cfg.tools.enable then [
-        font-manager   # so many damned fonts...
-        imagemagick    # for image manipulation from the shell
+      (if cfg.enable then [
+        imv           # simplest image viewer
+        qview         # simple image viewer
+        imagemagick   # console image manipulation tool
       ] else []) ++
 
       (if cfg.raster.enable then [
-        krita
-        gimp
+        unstable.krita
+        unstable.gimp
         # gimpPlugins.resynthesizer2  # content-aware scaling in gimp
       ] else []) ++
 
@@ -33,7 +33,7 @@ in {
       ] else []) ++
 
       (if cfg.photo.enable then [
-        darktable
+        unstable.darktable
       ] else []) ++
 
       (if cfg.sprites.enable then [

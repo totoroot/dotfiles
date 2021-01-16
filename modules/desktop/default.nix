@@ -24,11 +24,12 @@ in {
     ];
 
     user.packages = with pkgs; [
-      feh
-      qview
-      xclip
-      xdo
-      xdotool
+      xclip         # access X clipboard from console
+      xdo           # perform elementary actions on X windows
+      xdotool       # X input and window management tool
+      fontpreview   # minimal font viewer
+      sxiv          # simple X image viewer
+                    # comes as a dependency with fontpreview anyways
     ];
 
     fonts = {
@@ -58,14 +59,6 @@ in {
 
     ## Apps/Services
     services.xserver.displayManager.lightdm.greeters.mini.user = config.user.name;
-    
-    ## Enable flatpak to install packages from flathub
-    services.flatpak.enable = true;
-    ## Enable flatpak xdg generation
-    xdg.portal = {
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    };
 
     services.picom = {
       backend = "glx";

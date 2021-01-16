@@ -6,8 +6,27 @@
 { config, home-manager, ... }:
 {
   ### A tidy $HOME is a tidy mind
-  home-manager.users.${config.user.name}.xdg.enable = true;
-
+  home-manager.users.${config.user.name}.xdg ={
+    enable = true;
+    mime.enable = true;
+    # Until https://github.com/rycee/home-manager/issues/1213 is solved.
+    configFile."mimeapps.list".force = true;
+    mimeApps.enable = true;
+    mimeApps.defaultApplications = {
+      "text/plain" = "micro.desktop";
+      "text/markdown" = "ghostwriter.desktop";
+      "text/html" = "firefox.desktop";
+      "text/x-csrc" = "micro.desktop";
+      "application/x-shellscript" = "micro.desktop";
+      "application/pdf" = "zathura.desktop";
+      "application/x-download" = "thunar.desktop";
+      "image/jpeg" = "imv.desktop";
+      "image/png" = "imv.desktop";
+      "image/gif" = "imv.desktop";
+      "video/mp4" = "mpv.desktop";
+    };
+  };
+  
   environment = {
     sessionVariables = {
       # These are the defaults, and xdg.enable does set them, but due to load
