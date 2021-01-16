@@ -26,6 +26,9 @@ alias disks='lsblk -o name,label,mountpoint,size,uuid'
 alias clipin='xclip -selection clipboard -in'
 alias clipout='xclip -selection clipboard -out'
 
+alias viewinst='nix-env --query --installed'
+alias viewdeps='nix-env -iA --dry-run'
+
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"
 # source zshrc
