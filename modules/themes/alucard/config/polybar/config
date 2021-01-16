@@ -28,10 +28,10 @@ accent = #604c7e
 
 [global/wm]
 margin-top = 0
-margin-bottom = 34
+margin-bottom = 68
 
 [bar/main]
-monitor = ${env:MONITORS[0]}
+monitor = DP-0
 monitor-strict = true
 enable-ipc = true
 wm-restack = bspwm
