@@ -13,7 +13,7 @@ ctrl + alt + s
     signal-desktop
 
 ctrl + alt + t
-    telegram-desktop
+    thunar
 
 ctrl + alt + o
     libreoffice
@@ -25,7 +25,7 @@ ctrl + alt + m
     kitty musikcube
     
 ctrl + alt + e
-    element
+    fractal
 
 ctrl + alt + c
     codium
@@ -42,10 +42,10 @@ ctrl + alt + v
 ctrl + alt + Return
 	pulsemixer --toggle-mute
 	
-crtl + alt + Down
+crtl + alt + PageDown
 	pulsemixer --change-volume -"10" --unmute
 	
-crtl + alt + Up
+crtl + alt + PageUp
 	pulsemixer --change-volume +"10" --unmute
 
 ## Media Control ##
@@ -73,7 +73,7 @@ alt + backslash
 alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
-ctrl + alt + Delete
+alt + Return
 	$DOTFILES/bin/rofi/powermenu -x
 
 ## Custom ##
@@ -98,16 +98,8 @@ super + {_,shift + }q
 super + t
 	bspc desktop -l next
 
-super + apostrophe
+super + a
 	bspc window -s last
-
-# Attach to a detached session. If none is available create a new one, rather
-# than attach to one that is already attached to elsewhere.
-super + Return
-	xst -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
-
-super + Escape
-	pkill -USR1 -x sxhkd
 
 ## Toggle floating/fullscreen
 super + {_,ctrl + }f
@@ -121,19 +113,13 @@ super + shift + {_,ctrl +}{h,j,k,l}
 
 ## Resize by preselection
 super + alt + {1-9}
-	$DOTFILES/bin/bspwm/presel 0.{1-9}
+    bspc {desktop -f,node -d} {1-9,10};
 
 super + alt + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
-super + alt + Return
-	$DOTFILES/bin/bspwm/subtract-presel
-
-super + alt + Delete
-	bspc node -p cancel
-
-super + {_,shift +}{1-9,0}
-	bspc {desktop -f,node -d} {1-9,10};
+# super + alt + Return
+	# $DOTFILES/bin/bspwm/subtract-presel
 
 # expand a window by moving one of its side outward
 super + {Left,Down,Up,Right}
@@ -150,9 +136,27 @@ super + shift + {Left,Down,Up,Right}
 # screenshot region
 super + s
 	scrcap
-# screencast region to mp4
-super + c
-	scrrec -s ~/Pictures/Screenshots/$(date +%F-%T).mp4
-# screencast region to gif
-super + g
-	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
+
+# ---- don't really get these ----
+
+# # Attach to a detached session. If none is available create a new one, rather
+# # than attach to one that is already attached to elsewhere.
+# super + Return
+	# xst -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
+
+# super + Escape
+	# pkill -USR1 -x sxhkd
+
+# super + alt + Delete
+	# bspc node -p cancel
+
+# super + {_,shift +}{1-9,0}
+	# $DOTFILES/bin/bspwm/presel 0.{1-9}
+
+# # screencast region to mp4
+# super + c
+	# scrrec -s ~/Pictures/Screenshots/$(date +%F-%T).mp4
+	
+# # screencast region to gif
+# super + g
+	# scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
