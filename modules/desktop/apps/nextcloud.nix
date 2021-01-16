@@ -1,3 +1,5 @@
+# modules/desktop/apps/nextcloud.nix
+
 { config, options, lib, pkgs, ... }:
 
 with lib;
