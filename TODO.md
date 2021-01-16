@@ -32,6 +32,7 @@
 - fix rofi passmenu
     > use keepassxc-cli instead of pass or import entries form keepassxc-cli to pass
 - fix gsmartcontrol
+- make custom color scheme for bat
 
 ## In Progress
 
@@ -44,6 +45,9 @@
 - install go packages automatically
 - install tt and speedread
 - polybar setup
+- enable flatpak for host purple
+- install quicklookup as flatpak
+- set default applications for file types
 
 ## Completed
 
