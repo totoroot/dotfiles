@@ -18,7 +18,7 @@
       "text/html" = "firefox.desktop";
       "text/x-csrc" = "micro.desktop";
       "application/x-shellscript" = "micro.desktop";
-      "application/pdf" = "zathura.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
       "application/x-download" = "thunar.desktop";
       "image/jpeg" = "imv.desktop";
       "image/png" = "imv.desktop";
