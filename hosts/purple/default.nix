@@ -26,6 +26,7 @@
         gsmartcontrol.enable  = true;
         nextcloud.enable      = true;
         rofi.enable           = true;
+        torrent.enable        = true;
       };
       browsers = {
         default			        = "firefox";
