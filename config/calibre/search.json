@@ -1,0 +1,41 @@
+{
+  "cache_thread_count": 2,
+  "config_dialog_geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAAFAAAAJHQAABj8AAAv6AAABRQAACSIAAAY6AAAL9QAAAAAAAAAAB4AAAAFFAAAJIgAABjoAAAv1"
+  },
+  "config_dialog_tab_index": 0,
+  "cover_thread_count": 2,
+  "details_thread_count": 4,
+  "first_run": false,
+  "geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAAGyAAAJGQAABc4AAAv+AAABtwAACR4AAAXJAAAL+QAAAAAAAAAAB4AAAAG3AAAJHgAABckAAAv5"
+  },
+  "hang_time": 75,
+  "max_results": 10,
+  "open_external": true,
+  "results_view_column_width": [
+    85,
+    206,
+    61,
+    77,
+    128,
+    28,
+    28
+  ],
+  "search_thread_count": 4,
+  "sort_col": 2,
+  "sort_order": 0,
+  "store_checked": {
+    "Archive.org": true,
+    "EbooksGratuits.com": true,
+    "ManyBooks": true,
+    "Project Gutenberg": true
+  },
+  "store_splitter_state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAEAAAACAAAATAAAAVAB/////wEAAAABAA=="
+  },
+  "timeout": 75
+}
