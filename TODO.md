@@ -1,14 +1,11 @@
 ## Open
 
-- setup gpg accounts correctly
-- aerc pgp integration
 - modify zsh theme
 - vlc dark theme
 - vlc config into nixos dotfiles
 - rtl8812au-5.9.3.2
 - ssh setup
 - ghostwriter config + theme
-- nextcloud-client config with nix
 - set up evolution
 - usb auto-mount
 - add micro plugins to config
@@ -17,7 +14,6 @@
 - k8s config
 - duplicate options (fdupes, jdupes, rmlint, dupeguru)
 - setup borgbackup with nix config
-- mullvad config + autostart
 - fix cursor
 - fan curves GPU and case fans
 - temperature monitoring
@@ -28,11 +24,12 @@
 - up and down for substring search
 - look at ssh tools (passh, autossh, sshguard, sshuttle, sshchat, ssh-import-id)
 - install rofi calc
-- install wacom tablet
 - fix rofi passmenu
     > use keepassxc-cli instead of pass or import entries form keepassxc-cli to pass
 - fix gsmartcontrol
 - make custom color scheme for bat
+- remove hardlinks to DP-0
+- add redshift module to polybar
 
 ## In Progress
 
@@ -40,14 +37,17 @@
 - fix zsh keybindings
 - fix kitty keybindings
 - aerc w3m html viewer
+- aerc pgp integration
 - write shortcut cheatsheet
 - fix rofi powermenu
 - install go packages automatically
 - install tt and speedread
-- polybar setup
-- enable flatpak for host purple
-- install quicklookup as flatpak
-- set default applications for file types
+- install quicklookup from flathub
+- install wacom tablet
+- finally fix mullvad-vpn
+- mullvad config + autostart
+- nextcloud-client config with nix
+- setup gpg accounts correctly
 
 ## Completed
 
@@ -75,3 +75,6 @@
 - install youtube-dl
 - install gpg gui
 - install signal-cli
+- set default applications for file types
+- enable flatpak for host purple
+- fix polybar setup
