@@ -33,6 +33,9 @@ ctrl + alt + c
 ctrl + alt + v
     kitty pulsemixer
 
+ctrl + alt + w
+    kitty weechat
+
 ## Brightness Control ##
 
 # TODO later
@@ -42,10 +45,10 @@ ctrl + alt + v
 ctrl + alt + Return
 	pulsemixer --toggle-mute
 	
-crtl + alt + PageDown
+crtl + alt + ,
 	pulsemixer --change-volume -"10" --unmute
 	
-crtl + alt + PageUp
+crtl + alt + .
 	pulsemixer --change-volume +"10" --unmute
 
 ## Media Control ##
@@ -150,8 +153,8 @@ super + s
 # super + alt + Delete
 	# bspc node -p cancel
 
-# super + {_,shift +}{1-9,0}
-	# $DOTFILES/bin/bspwm/presel 0.{1-9}
+super + {_,shift +}{1-9,0}
+	$DOTFILES/bin/bspwm/presel 0.{1-9}
 
 # # screencast region to mp4
 # super + c
