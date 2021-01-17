@@ -12,11 +12,11 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      unstable.mullvad-vpn
+      mullvad-vpn
     ];
 
-    services.mullvad-vpn.enable = true;
-
+    networking.wireguard.enable = true;
     networking.iproute2.enable = true;
+    services.mullvad-vpn.enable = true;
   };
 }
