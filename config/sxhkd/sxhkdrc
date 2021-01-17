@@ -45,10 +45,10 @@ ctrl + alt + w
 ctrl + alt + Return
 	pulsemixer --toggle-mute
 	
-crtl + alt + ,
+crtl + alt + [
 	pulsemixer --change-volume -"10" --unmute
 	
-crtl + alt + .
+crtl + alt + ]
 	pulsemixer --change-volume +"10" --unmute
 
 ## Media Control ##
