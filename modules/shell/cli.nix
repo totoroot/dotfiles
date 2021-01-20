@@ -44,6 +44,7 @@ in {
       cheat				        # interactive cheatsheets
       tokei				        # code statistics
       thefuck             # corrects fuckups in console
+      nmap                # network discovery utility
     ];
 
     user.extraGroups = [ "admin" ];
