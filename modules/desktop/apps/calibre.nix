@@ -17,7 +17,7 @@ in {
     
     home.configFile = {
           "calibre/store/search.json".source = "${configDir}/calibre/search.json";
-          "calibre/global.py.json".source = "${configDir}/global.py.json";
+          "calibre/global.py.json".source = "${configDir}/calibre/global.py.json";
     };
   };
 }
