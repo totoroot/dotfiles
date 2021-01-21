@@ -8,9 +8,11 @@
   boot = {
     initrd.availableKernelModules = [ "ahci" "ohci_pci" "ehci_pci" "xhci_pci" "usbhid" "uas" "sd_mod" ];
     initrd.kernelModules = [];
-    extraModulePackages = [];
+    extraModulePackages = with pkgs.linuxPackages; [ it87 ];
     kernelModules = [
       "kvm-amd"
+      "coretemp"
+      "it87"
     ];
   };
 
