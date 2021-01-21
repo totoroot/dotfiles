@@ -15,6 +15,7 @@ in {
       xfce.thunar
       xfce.thunar-volman
       xfce.thunar-archive-plugin
+      xfce.gvfs
     ];
   };
 }
