@@ -26,6 +26,8 @@ in {
         unstable.duf    # graphical disk usage utility
         smartmontools   # drive health monitoring
         hdparm          # get disk speeds
+        bashmount       # menu-driven mounting tool for removeable drives
+        testdisk        # data recovery utilities
       ];
 
       # add user to group disk for access on disks without sudo
