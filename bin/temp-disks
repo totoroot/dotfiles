@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+ # Simple script that should work in bash just as well as in the far superior zsh.
+ # Prints the disk name and the temperature extracted from S.M.A.R.T. output of disks next to it for ideal output for e.g. Telegraf agent.
+
+DISKS=( $(lsblk -dn -o name) )
+
+for DISK in "${DISKS[@]}"
+do
+    if [[ "$DISK" =~ .*nvme.* ]]; then
+        paste <(echo "${DISK}") <(smartctl -A /dev/${DISK} | grep "Temperature Sensor" | tr -d '\n' | awk '{print $4,$8}')
+    else
+	    paste <(echo "${DISK}") <(smartctl -A /dev/${DISK} | grep Temperature_Celsius | awk '{print $10}')
+	fi
+done
