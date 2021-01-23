@@ -30,5 +30,7 @@ command -v mullvad-vpn >/dev/null && mullvad-vpn
 # same for nextlcoud-client
 command -v nextcloud >/dev/null && nextcloud
 
+sleep 30
+
 # workaround until nfancurve works
 notify-send 'Set GPU fan speed!'
