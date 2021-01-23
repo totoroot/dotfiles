@@ -14,6 +14,7 @@
       "coretemp"
       "it87"
       "v4l2loopback"
+      "rtl8812au"
     ];
   };
 
