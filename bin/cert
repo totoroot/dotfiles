@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+# Query an URL to see the expiration date of a website
+
+[ -z "$1" ] && echo "Error: Maybe add a domain to check?"
+
+if [[ $1 == https://* ]] ; then
+	URL=$1
+else
+	URL="https://${1}"
+fi
+
+curl --insecure -v $URL 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }' | head -n 6
