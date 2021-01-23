@@ -1,0 +1,201 @@
+#!/usr/bin/env bash
+# author: deadc0de6 (https://github.com/deadc0de6)
+# Copyright (c) 2018, deadc0de6
+
+
+# print some debug
+#
+# $1: debug info
+debug()
+{
+  if [ "${debug}" = "yes" ]; then
+    echo -e "${c_debug}[DEBUG]${c_reset}${1}"
+  fi
+}
+
+
+# retrieve the branches
+# that are tracking a remote
+#
+# $1: repository path
+# stores the list in ${branches}
+get_branches()
+{
+  debug "getting branches for \"${1}\""
+  branches=""
+  branches=$(git -C "${1}" for-each-ref "${git_head_path}" --format='%(refname:short)' | xargs)
+  curbranch=$(git -C "${1}" symbolic-ref -q HEAD)
+  curbranch=${curbranch#refs/heads/}
+}
+
+
+# format git-status XYs
+#
+# $1: repository path
+# $2: branch
+# $3: current branch
+# stores the string in ${status}
+get_status()
+{
+  debug "getting status for branch \"${2}\" in \"${1}\""
+  nok=""
+  status="${st_clean}"
+  if [ "${2}" = "${3}" ]; then
+    # get more info if it's the current branch
+    changes=$(git -C "${1}" status --short | awk '{print $1}' | sort | uniq | xargs)
+    for i in ${changes}; do
+      if [ "$i" = "??" ]; then
+        nok="${nok}${st_untracked}${sep}"
+      elif [ "$i" != "" ]; then
+        nok="${nok}${st_modified}${sep}"
+      fi
+    done
+    # check if need push
+    hasremote=$(git -C "${1}" branch -vv 2>/dev/null | grep -c "^..${2}.*\\[origin/.*\\].*$")
+    debug "branch \"${2}\" - nb remote(s): ${hasremote}"
+    if [ "${hasremote}" -gt 0 ]; then
+      changes=$(git -C "${1}" cherry -v | wc -l)
+      [ "${changes}" -gt "0" ] && nok="${nok}${st_push}${sep}"
+    fi
+  fi
+  branch_status "${1}" "${2}"
+  [ "${insync}" = false ] && nok="${nok}${st_sync}${sep}"
+  # strip space
+  nok=${nok%%${sep}}
+  [ "${nok}" != "" ] && status="${st_dirty} (${nok})"
+}
+
+# parse a branch status from origin
+#
+# $1: repository
+# $2: branch
+# stores true|false in insync
+branch_status()
+{
+  debug "getting branch status \"${2}\" in \"${1}\""
+  insync=true
+  loc=${2}
+  rem=$(git -C "${1}" config --get branch."${loc}".merge)
+  cnts=$(git -C "${1}" rev-list --left-right --pretty=oneline --count "${loc}"..."${rem}")
+  ahead=$(echo "${cnts}" | awk '{print $1}')
+  behind=$(echo "${cnts}" | awk '{print $2}')
+  hasremote=$(git -C "${1}" branch -vv 2>/dev/null | grep -c "^..${2}.*\\[origin/.*\\].*$")
+  [ "${ahead}" -gt 0 ] && insync=false
+  [ "${behind}" -gt 0 ] && insync=false
+  [ "${hasremote}" -lt 1 ] && insync=false
+}
+
+# output the result for a specific repo
+# on a specific branch
+#
+# $1: repo
+# $2: branch
+# $3: status
+# $4: current branch
+output()
+{
+  br="${c_gray}${2}${c_reset}"
+  # if current branch, in white
+  [ "${2}" = "${4}" ] && br="${2}"
+  echo -e "${c_blue}${1}${c_reset}/${br} ${3}"
+}
+
+# colors
+c_reset="\\e[0m"
+c_blue="\\e[34m"
+c_yellow="\\e[33m"
+c_green="\\e[32m"
+c_red="\\e[31m"
+c_magenta="\\e[35m"
+c_gray="\\e[37m"
+c_debug="\\e[43m"
+
+# status
+t_clean="clean"
+t_dirty="dirty"
+
+# status info
+t_untracked="untracked files"
+t_modified="modified files"
+t_sync="not in sync"
+t_push="need push"
+
+# global vars
+version="0.6.1"
+gitsub=".git"
+paths="."
+depth="4"
+git_head_path="refs/heads"
+sep=","
+debug="no"
+
+# usage
+usage="\\n$(basename "${0}") [-vsD] [-d <depth>] [<path> ...]"
+usage="${usage}\\n"
+usage="${usage}\\n\\t-d <depth> \\tDepth to search for git directories (default: ${depth})."
+usage="${usage}\\n\\t-s\\t\\tUse symbols instead of text."
+usage="${usage}\\n\\t-D\\t\\tPrint debug information."
+usage="${usage}\\n\\t-h\\t\\tPrint usage."
+usage="${usage}\\n\\t-v\\t\\tPrint version."
+
+# parse arguments
+args="f:d:hvsD"
+while getopts ${args} arg; do
+  case ${arg} in
+    d)
+      depth="${OPTARG}"
+      ;;
+    D)
+      debug="yes"
+      ;;
+    v)
+      echo "$(basename "${0}") version ${version}"
+      echo "https://github.com/deadc0de6/gitell"
+      exit 0
+      ;;
+    s)
+      t_clean="[✔]"
+      t_dirty="[✘]"
+      t_untracked="*"
+      t_modified="+"
+      t_sync="⌁"
+      t_push="⇡"
+      ;;
+    h)
+      echo -e "${usage}" && exit 0
+      ;;
+    *)
+      echo -e "${usage}" && exit 1
+      ;;
+  esac
+done
+shift "$((OPTIND - 1))"
+[ "$#" -gt 0 ] && [ "$*" != "" ] && paths="$*"
+
+# status
+st_clean="${c_green}${t_clean}${c_reset}"
+st_dirty="${c_red}${t_dirty}${c_reset}"
+st_untracked="${c_yellow}${t_untracked}${c_reset}"
+st_modified="${c_yellow}${t_modified}${c_reset}"
+st_sync="${c_magenta}${t_sync}${c_reset}"
+st_push="${c_magenta}${t_push}${c_reset}"
+
+# loop through all paths
+for path in ${paths}; do
+  if [ ! -e "${path}" ]; then
+    echo "[WARNING] \"${path}\" does not exist"
+    continue
+  fi
+  # loop through all git repositories
+  find -L "${path}" -maxdepth "${depth}" -name "${gitsub}" -type d | while read -r g; do
+    p=$(dirname "${g}")
+    # make sure we are in a git tree
+    git -C "${p}" rev-parse --is-inside-work-tree >/dev/null || continue
+    get_branches "${p}"
+    # loop through all branches
+    for b in ${branches}; do
+      get_status "${p}" "${b}" "${curbranch}"
+      output "${p}" "${b}" "${status}" "${curbranch}"
+    done
+  done
+done
