@@ -14,6 +14,8 @@ in {
     ];
     environment.shellAliases = {
       m = "f -e micro";
+      # just don't ask
+      mciro = "f -e micro";
     };
     home.configFile = {
       "micro/settings.json".source = "${configDir}/micro/settings.json";
