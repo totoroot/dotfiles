@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # switches through listed layouts whenever script is run
-KEYMAPS=('eu' 'at' 'ru' 'us -variant colemak')
+if [[ -z "$KEYMAPS" ]]; then
+    KEYMAPS=('eu' 'at')
+fi
 
-DEFAULT_KEYMAP="eu"
 KEYMAP_INDEX=`echo ${KEYMAPS[@]/$(xkbmon -o)//} | cut -d/ -f1 | wc -w | tr -d ' '`
 
 if [ $KEYMAP_INDEX -lt 3 ]
