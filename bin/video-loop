@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+# Video loopback for enabling streaming from OBS to virtual camera
+# Why port 1929? The BBC made the world's first (live) television broadcast to British audiences on September 30, 1929.
+
+sudo modprobe v4l2loopback devices=1 card_label="loopback 1" exclusive_caps=1,1,1,1,1,1,1,1
+ffmpeg -f flv -listen 1 -i rtmp://localhost:1929 -f v4l2 -vcodec rawvideo /dev/videoX
