@@ -119,4 +119,6 @@
   # here. Per-interface useDHCP will be mandatory in the future, so this
   # generated config replicates the default behaviour.
   networking.useDHCP                = false;
+  # Set keymaps for this host
+  environment.variables.KEYMAPS = "('eu' 'ru' 'us -variant colemak')";
 }
