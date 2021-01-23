@@ -108,7 +108,7 @@
       ssh.enable    		  = true;
       transmission.enable	= false;
     };
-    theme.active = "alucard";
+    theme.active = "quack";
   };
 
   ## Local config
