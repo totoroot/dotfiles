@@ -1,0 +1,225 @@
+[colors]
+black = ${xrdb:color0}
+bblack = ${xrdb:color8}
+red = ${xrdb:color1}
+bred = ${xrdb:color9}
+green = ${xrdb:color2}
+bgreen = ${xrdb:color10}
+yellow = ${xrdb:color3}
+byellow = ${xrdb:color11}
+blue = ${xrdb:color4}
+bblue = ${xrdb:color12}
+magenta = ${xrdb:color5}
+bmagenta = ${xrdb:color13}
+cyan = ${xrdb:color6}
+bcyan = ${xrdb:color14}
+white = ${xrdb:color7}
+bwhite = ${xrdb:color15}
+
+bg = ${xrdb:background}
+fg = ${colors.magenta}
+bg-alt = #1E2029
+fg-alt = #373844
+bg-dark = #181a23
+
+alert = ${colors.yellow}
+accent = #604c7e
+
+
+[global/wm]
+margin-top = 0
+margin-bottom = 68
+
+[bar/main]
+monitor = DP-0
+monitor-strict = true
+enable-ipc = true
+wm-restack = bspwm
+override-redirect = true
+fixed-center = true
+
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+width = 100%
+height = 68
+offset-x = 0
+offset-y = 0
+bottom = true
+
+overline-size = 0
+overline-color = #f00
+underline-size = 0
+underline-color = #00f
+
+border-bottom-size = 0
+border-top-size = 1
+border-color = ${colors.bg-dark}
+
+padding-left = 2
+padding-right = 2
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = "Fira Code:pixelsize=32;8"
+font-1 = "Wuncon Siji:pixelsize=12;2"
+font-2 = "Siji:pixelsize=10;2"
+
+modules-left = pulseaudio pad cpu memory
+modules-center = bspwm
+modules-right = date
+
+;tray-position = center
+;tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+enable-click = true
+
+# ws-icon-0 = 1;
+# ws-icon-1 = 2;
+# ws-icon-2 = 3;
+# ws-icon-3 = 4;
+# ws-icon-4 = 5;
+# ws-icon-5 = 6;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+label-padding = 1
+
+label-focused = %icon%
+label-focused-background = ${colors.bg-dark}
+label-focused-foreground = ${colors.fg}
+; label-focused-underline = ${colors.magenta}
+; label-focused-foreground = ${xrdb:color2}
+label-focused-padding = 1
+
+label-occupied = %icon%
+label-occupied-foreground = ${colors.accent}
+label-occupied-padding = 1
+
+; label-urgent = %icon%
+label-urgent-foreground = ${colors.alert}
+; label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.fg-alt}
+label-empty-padding = 1
+
+[module/date]
+type = internal/date
+interval = 5
+
+label = %date%  %time%
+date = %Y-%m-%d
+time = %H:%M
+format-prefix = ""
+format-prefix-padding = 1
+; format-prefix-background = ${colors.bg-alt}
+format-prefix-foreground = ${colors.accent}
+; format-underline = ${xrdb:color4}
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:80:...%
+label-padding-left = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format = <bar-load>
+format-prefix = ""
+format-foreground = ${colors.accent}
+; format-underline = #f90000
+; label = %percentage%%
+format-padding = 1
+
+bar-load-indicator =
+bar-load-width = 8
+bar-load-foreground-0 = ${colors.fg}
+bar-load-foreground-1 = ${colors.fg}
+bar-load-foreground-2 = ${colors.yellow}
+bar-load-foreground-3 = ${colors.alert}
+bar-load-foreground-4 = ${colors.alert}
+bar-load-fill = |
+bar-load-empty = ¦
+bar-load-empty-foreground = ${colors.fg-alt}
+
+[module/memory]
+type = internal/memory
+interval = 3
+format = <bar-used>
+format-prefix = ""
+format-prefix-foreground = ${colors.accent}
+; format-underline = #4bffdc
+; label = %percentage_used%%
+format-padding-left = 1
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 8
+bar-used-foreground-0 = ${colors.fg}
+bar-used-foreground-1 = ${colors.fg}
+bar-used-foreground-2 = ${colors.yellow}
+bar-used-foreground-3 = ${colors.alert}
+bar-used-foreground-4 = ${colors.alert}
+bar-used-fill = |
+bar-used-empty = ¦
+bar-used-empty-foreground = ${colors.fg-alt}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; format-volume = <label-volume> <bar-volume>
+format-volume = <ramp-volume> <bar-volume>
+; label-volume = " "
+label-volume-foreground = ${colors.accent}
+
+; format-muted-prefix = " "
+format-muted-foreground = ${colors.alert}
+label-muted = 
+
+bar-volume-width = 8
+# bar-volume-foreground-0 = ${colors.magenta}
+# bar-volume-foreground-1 = ${colors.magenta}
+# bar-volume-foreground-2 = ${colors.magenta}
+# bar-volume-foreground-3 = ${colors.magenta}
+# bar-volume-foreground-4 = ${colors.magenta}
+# bar-volume-foreground-5 = ${colors.magenta}
+# bar-volume-foreground-6 = ${colors.magenta}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 1
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 1
+bar-volume-empty = ─
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.fg-alt}
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+;=====================================================
+; Custom scripts
+;=====================================================
+
+[module/pad]
+type = custom/text
+content = "   "
+content-foreground = ${colors.fg-alt}
+
+[module/redshift]
+type = custom/script
+exec = ~/.config/polybar/modules/redshift
+exec-if = pgrep -x redshift
+interval = 60
+format-padding = 1
+
+; vim:ft=dosini
