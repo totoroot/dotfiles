@@ -68,7 +68,7 @@ in {
             ''gtk-theme-name="${cfg.gtk.theme}"''}
           ${optionalString (cfg.gtk.iconTheme != "")
             ''gtk-icon-theme-name="${cfg.gtk.iconTheme}"''}
-          gtk-font-name="Sans 10"
+          gtk-font-name="Sans 20"
         '';
         # QT4/5 global theme
         "Trolltech.conf".text = ''
