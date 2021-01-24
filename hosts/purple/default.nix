@@ -120,7 +120,7 @@
   # here. Per-interface useDHCP will be mandatory in the future, so this
   # generated config replicates the default behaviour.
   networking.useDHCP                = false;
-  # Set keymaps for this host
-  environment.variables.KEYMAPS = "'eu' 'ru' 'us'";
-  #'at' 'us -variant colemak'";
+  # set eurkey as default layout
+  # set more keymaps and use them with bin/keymapswitcher
+  services.xserver.layout           = "eu";
 }
