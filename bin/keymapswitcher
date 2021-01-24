@@ -2,8 +2,10 @@
 
 # switches through listed layouts whenever script is run
 if [[ -z "$KEYMAPS" ]]; then
-    KEYMAPS=('eu' 'at')
+    KEYMAPS="'eu' 'at' 'us'"
 fi
+
+KEYMAPS=($KEYMAPS)
 
 KEYMAP_INDEX=`echo ${KEYMAPS[@]/$(xkbmon -o)//} | cut -d/ -f1 | wc -w | tr -d ' '`
 

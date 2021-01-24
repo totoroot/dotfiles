@@ -121,5 +121,6 @@
   # generated config replicates the default behaviour.
   networking.useDHCP                = false;
   # Set keymaps for this host
-  environment.variables.KEYMAPS = "('eu' 'ru' 'us -variant colemak')";
+  environment.variables.KEYMAPS = "'eu' 'ru' 'us'";
+  #'at' 'us -variant colemak'";
 }
