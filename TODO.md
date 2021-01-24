@@ -30,6 +30,7 @@
 - make custom color scheme for bat
 - remove hardlinks to DP-0
 - add redshift module to polybar
+- config autostart packages
 
 ## In Progress
 
@@ -38,19 +39,21 @@
 - fix kitty keybindings
 - aerc w3m html viewer
 - aerc pgp integration
-- write shortcut cheatsheet
 - fix rofi powermenu
 - install go packages automatically
 - install tt and speedread
 - install quicklookup from flathub
-- install wacom tablet
-- finally fix mullvad-vpn
-- mullvad config + autostart
 - nextcloud-client config with nix
 - setup gpg accounts correctly
+- calibre config with Nix
+- fix nvidia-settings issues
+- enable v4l2loopback module
 
 ## Completed
 
+- install wacom tablet
+- adjust pwm fans
+- install torrent client
 - screenshot tool script
 - fix libreoffice
 - install terraform
@@ -78,3 +81,7 @@
 - set default applications for file types
 - enable flatpak for host purple
 - fix polybar setup
+- finally fix mullvad-vpn
+- write shortcut cheatsheet
+- add old shell scripts
+
