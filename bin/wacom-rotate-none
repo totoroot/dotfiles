@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+xsetwacom set 'Wacom Intuos Pro M Pen stylus' rotate none && xsetwacom set 'Wacom Intuos Pro M (WL) Pen stylus' rotate none
+xsetwacom set 'Wacom Intuos Pro M Pen cursor' rotate none && xsetwacom set 'Wacom Intuos Pro M (WL) Pen cursor' rotate none
+xsetwacom set 'Wacom Intuos Pro M Pen eraser' rotate none && xsetwacom set 'Wacom Intuos Pro M (WL) Pen eraser' rotate none
+xsetwacom set 'Wacom Intuos Pro M Finger touch' rotate none && xsetwacom set 'Wacom Intuos Pro M (WL) Finger touch' rotate none
