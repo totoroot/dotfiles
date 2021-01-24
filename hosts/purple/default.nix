@@ -85,6 +85,7 @@
       audio.enable      = true;
       bluetooth.enable  = true;
       disks.enable      = true;
+      fancontrol.enable = true;
       nvidia.enable     = true;
       sensors.enable    = true;
       wacom.enable      = true;
