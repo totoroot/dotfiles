@@ -15,6 +15,8 @@
       "it87"
       "v4l2loopback"
       "rtl8812au"
+      "k10temp"
+      "fam15h_power"
     ];
   };
 
