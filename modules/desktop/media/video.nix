@@ -16,7 +16,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      ffmpeg
+      ffmpeg-full
       (mkIf cfg.player.enable mpv-with-scripts)
       (mkIf cfg.player.enable mpvc)
       (mkIf cfg.player.enable vlc)
