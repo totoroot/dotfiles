@@ -16,7 +16,6 @@ in {
       pstree   			      # show running processes as tree
       sd 				          # intuitive sed alternative
       unstable.fd         # intuitive find alertnative
-      nvtop				        # task monitor for Nvidia GPUs
       zip				          # create/modify zip archives
       unzip				        # extract zip archives
       exiftool			      # metadata tool
