@@ -25,13 +25,12 @@ bg-dark = #181a23
 alert = ${colors.yellow}
 accent = #604c7e
 
-
 [global/wm]
 margin-top = 0
 margin-bottom = 68
 
 [bar/main]
-monitor = DP-0
+monitor = ${MONITORS[1]}
 monitor-strict = true
 enable-ipc = true
 wm-restack = bspwm
