@@ -19,10 +19,11 @@ in {
       ] else []) ++
 
       (if cfg.misc.enable then [
-        unstable.pulsemixer
-        unstable.pulseeffects
-        unstable.picard
-        audacity
+        pulsemixer        # cli mixer for pulseaudio
+        unstable.picard   # music tagger
+        audacity          # audio editing suite
+        pulseeffects      # equalizer and other effects for pulseaudio
+        lsp-plugins       # audio plugins needed for pulseeffects
       ] else []);
   };
 }
