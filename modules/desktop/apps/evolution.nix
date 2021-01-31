@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      unstable.gnome3.evolution
+      unstable.evolution
     ];
   };
 }
