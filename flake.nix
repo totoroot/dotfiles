@@ -43,7 +43,6 @@
       };
       pkgs  = mkPkgs nixos [ self.overlay ];
       unstable = mkPkgs nixos-unstable [];
-      nixpkgs = mkPkgs nixpkgs [];
 
     in {
       lib = lib.my;
@@ -51,7 +50,6 @@
       overlay =
         final: prev: {
           inherit unstable;
-          inherit nixpkgs;
           user = self.packages."${system}";
         };
 
