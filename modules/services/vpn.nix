@@ -1,12 +1,12 @@
-# modules/connectivity/vpn.nix
+# modules/services/vpn.nix
 
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.connectivity.vpn;
+let cfg = config.modules.services.vpn;
 in {
-  options.modules.connectivity.vpn = {
+  options.modules.services.vpn = {
     enable = mkBoolOpt false;
   };
 
