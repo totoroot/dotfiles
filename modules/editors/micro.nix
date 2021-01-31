@@ -13,9 +13,10 @@ in {
       unstable.micro
     ];
     environment.shellAliases = {
+      # use fasd file finder for micro
       m = "f -e micro";
       # just don't ask
-      mciro = "f -e micro";
+      mciro = "micro";
     };
     home.configFile = {
       "micro/settings.json".source = "${configDir}/micro/settings.json";
