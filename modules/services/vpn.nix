@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      mullvad-vpn
+      nixpkgs.mullvad-vpn
     ];
 
     networking.wireguard.enable = true;

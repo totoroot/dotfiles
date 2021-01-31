@@ -61,9 +61,6 @@
         virt-manager.enable = true;
       };
     };
-    connectivity = {
-      vpn.enable = true;
-    };
     dev = {
       cc.enable          = true;
       clojure.enable     = false;
@@ -107,6 +104,7 @@
       jellyfin.enable		  = false;
       k8s.enable    		  = true;
       nginx.enable			  = false;
+      vpn.enable          = true;
       ssh.enable    		  = true;
       transmission.enable	= false;
     };
