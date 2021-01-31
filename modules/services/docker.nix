@@ -12,7 +12,8 @@ in {
     user.packages = with pkgs; [
       docker
       docker-compose
-      lazydocker
+      lazydocker          # terminal UI for docker and docker-compose
+      ctop                # container activity monitor
     ];
 
     env.DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
