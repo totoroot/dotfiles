@@ -82,64 +82,80 @@ alt + slash
 alt + Return
 	$DOTFILES/bin/rofi/powermenu -x
 
-## Custom ##
+## Node Controls ##
 
+## Switch between preset keymaps
 ctrl + space
     $DOTFILES/bin/keymapswitcher
 
+## Toggle Polybar
 super + p
     polybar-msg cmd toggle
 
+## Toggle window gap
 super + g
     if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 0; else bspc config -d focused window_gap 150; fi
 
-## Other ##
-	
+## Toggle focus follow for nodes	
 super + alt + p
 	bspc config focus_follows_pointer {true,false}
 
+## Quit active node
 super + {_,shift + }q
 	bspc node -{c,k}
 
+## Send active node to desktop on last used monitor and switch to it
+super + shift + m
+    bspc node -m last --follow
+
+## Send to desktop with number 1
+super + shift + {1-9,0}
+    bspc node -d '^{1-9,10}' --follow
+
+## Toggle fullscreen for active node
 super + t
 	bspc desktop -l next
 
-super + a
-	bspc window -s last
-
-## Toggle floating/fullscreen
+## Toggle floating/tiling for active node
 super + {_,ctrl + }f
 	bspc node -t ~{floating,fullscreen}
 
+## Change active node
 super + {_,ctrl +}{h,j,k,l}
 	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
 
+## Swap nodes 
 super + shift + {_,ctrl +}{h,j,k,l}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
 
-## Resize by preselection
+
 super + alt + {1-9}
     bspc {desktop -f,node -d} {1-9,10};
 
+## Open new node in preselected space
 super + alt + {h,j,k,l}
 	bspc node -p {west,south,north,east}
+
+## Cancel resizing by preselection
+super + alt + Delete
+	bspc node -p cancel
 
 # super + alt + Return
 	# $DOTFILES/bin/bspwm/subtract-presel
 
-# expand a window by moving one of its side outward
+# Expand a node by moving one of its side outward
 super + {Left,Down,Up,Right}
 	bspc node -z {left -40 0,bottom 0 40,top 0 -40,right 40 0}
 
-# contract a window by moving one of its side inward
+# Contract a node by moving one of its side inward
 super + ctrl + {Left,Down,Up,Right}
 	bspc node -z {right -40 0,top 0 40,bottom 0 -40,left 40 0}
 
-# move a floating window
+# Move a floating node
 super + shift + {Left,Down,Up,Right}
 	bspc node -v {-40 0,0 40,0 -40,40 0}
 
-# screenshot region
+# Screenshot region
 super + s
 	scrcap
 
@@ -153,16 +169,16 @@ super + s
 # super + Escape
 	# pkill -USR1 -x sxhkd
 
-# super + alt + Delete
-	# bspc node -p cancel
-
 super + {_,shift +}{1-9,0}
 	$DOTFILES/bin/bspwm/presel 0.{1-9}
 
-# # screencast region to mp4
+super + a
+	bspc window -s last
+
+# # Screencast region to mp4
 # super + c
 	# scrrec -s ~/Pictures/Screenshots/$(date +%F-%T).mp4
 	
-# # screencast region to gif
+# # Screencast region to gif
 # super + g
 	# scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
