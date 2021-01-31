@@ -22,7 +22,6 @@
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
       # Extras
-      emacs-overlay.url  = "github:nix-community/emacs-overlay";
       nixos-hardware.url = "github:nixos/nixos-hardware";
     };
 
@@ -44,6 +43,7 @@
       };
       pkgs  = mkPkgs nixos [ self.overlay ];
       unstable = mkPkgs nixos-unstable [];
+      nixpkgs = mkPkgs nixpkgs [];
 
     in {
       lib = lib.my;
@@ -51,6 +51,7 @@
       overlay =
         final: prev: {
           inherit unstable;
+          inherit nixpkgs;
           user = self.packages."${system}";
         };
 
