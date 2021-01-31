@@ -31,9 +31,10 @@
       };
       browsers = {
         default			        = "firefox";
+        chromium.enable 	  = false;
         firefox.enable 	    = true;
         qutebrowser.enable 	= true;
-        chromium.enable 	  = false;
+        tor.enable          = true;
       };
       communication = {
         delta.enable    = true;
