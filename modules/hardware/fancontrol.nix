@@ -21,8 +21,8 @@ in {
       FCFANS=hwmon0/pwm3=hwmon0/fan3_input+hwmon0/fan2_input hwmon0/pwm1=hwmon0/fan1_input
       MINTEMP=hwmon0/pwm3=30 hwmon0/pwm1=30
       MAXTEMP=hwmon0/pwm3=60 hwmon0/pwm1=60
-      MINSTART=hwmon0/pwm3=150 hwmon0/pwm1=150
-      MINSTOP=hwmon0/pwm3=100 hwmon0/pwm1=100
+      MINSTART=hwmon0/pwm3=120 hwmon0/pwm1=120
+      MINSTOP=hwmon0/pwm3=80 hwmon0/pwm1=80
       '';
   };
 }
