@@ -1,4 +1,4 @@
-z{ ... }:
+{ ... }:
 {
   imports = [
     ../personal.nix
