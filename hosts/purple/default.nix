@@ -1,4 +1,4 @@
-{ ... }:
+z{ ... }:
 {
   imports = [
     ../personal.nix
@@ -70,7 +70,7 @@
       lua.enable         = false;
       node.enable        = false;
       python.enable      = true;
-      rust.enable        = false;
+      rust.enable        = true;
       scala.enable       = false;
       shell.enable       = true;
     };
