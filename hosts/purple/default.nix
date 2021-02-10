@@ -84,6 +84,7 @@ z{ ... }:
       bluetooth.enable  = true;
       disks.enable      = true;
       fancontrol.enable = true;
+      keebs.enable      = true;
       nvidia.enable     = true;
       sensors.enable    = true;
       wacom.enable      = true;
