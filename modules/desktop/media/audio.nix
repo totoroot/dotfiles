@@ -25,5 +25,9 @@ in {
         pulseeffects      # equalizer and other effects for pulseaudio
         lsp-plugins       # audio plugins needed for pulseeffects
       ] else []);
+
+    environment.shellAliases = {
+      pm = "pulsemixer";
+    };
   };
 }
