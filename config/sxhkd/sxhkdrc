@@ -6,9 +6,6 @@ ctrl + alt + f
 ctrl + alt + x
     keepassxc
 
-ctrl + alt + a
-    kitty aerc
-
 ctrl + alt + s
     signal-desktop
 
@@ -18,41 +15,42 @@ ctrl + alt + t
 ctrl + alt + d
     thunar
 
-ctrl + alt + o
+ctrl + alt + l
     libreoffice
 
-ctrl + alt + k
-    kitty
-
-ctrl + alt + m
-    kitty musikcube
-    
 ctrl + alt + e
     fractal
 
 ctrl + alt + c
     codium
 
-ctrl + alt + v
-    kitty pulsemixer
+ctrl + alt + k
+    kitty
+
+ctrl + alt + m
+    kitty musikcube
 
 ctrl + alt + w
     kitty weechat
 
-## Brightness Control ##
+ctrl + alt + a
+    kitty aerc
 
-# TODO later
+### Open all one-off terminal tools in floating xst window
+
+ctrl + alt + v
+    xst -g 80x15 pulsemixer
 
 ## Volume Control ##
 
 ctrl + alt + Return
-	pulsemixer --toggle-mute
+	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
 	
-crtl + alt + [
-	pulsemixer --change-volume -"10" --unmute
+crtl + alt + Up
+	pulsemixer --change-volume -"10" --unmute && notify-send 'Raised Volume'
 	
-crtl + alt + ]
-	pulsemixer --change-volume +"10" --unmute
+crtl + alt + Down
+	pulsemixer --change-volume +"10" --unmute && notify-send 'Decreased Volume'
 
 ## Media Control ##
 
@@ -89,7 +87,7 @@ ctrl + space
     $DOTFILES/bin/keymapswitcher
 
 ## Toggle Polybar
-super + p
+super + alt + p
     polybar-msg cmd toggle
 
 ## Toggle window gap
@@ -97,8 +95,8 @@ super + g
     if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 0; else bspc config -d focused window_gap 150; fi
 
 ## Toggle focus follow for nodes	
-super + alt + p
-	bspc config focus_follows_pointer {true,false}
+super + p
+	bspc config focus_follows_pointer {false,true}
 
 ## Quit active node
 super + {_,shift + }q
@@ -161,10 +159,8 @@ super + s
 
 # ---- don't really get these ----
 
-# # Attach to a detached session. If none is available create a new one, rather
-# # than attach to one that is already attached to elsewhere.
-# super + Return
-	# xst -e bash -c "(tmux ls | grep -qEv 'attached|scratch' && tmux at) || tmux"
+## Attach to a detached session. If none is available create a new one, rather
+## than attach to one that is already attached to elsewhere.
 
 # super + Escape
 	# pkill -USR1 -x sxhkd
