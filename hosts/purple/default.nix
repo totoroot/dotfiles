@@ -95,7 +95,6 @@
       gnupg.enable    = true;
       pass.enable     = true;
       taskell.enable  = true;
-      tmux.enable     = false;
       zsh.enable      = true;
       cli.enable      = true;
     };
