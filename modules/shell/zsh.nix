@@ -41,8 +41,8 @@ in {
       unstable.bat
       exa
       fasd
-      unstable.fd
-      sd
+      unstable.sd         # intuitive sed alternative
+      unstable.fd         # intuitive find alertnative
       unstable.fzf
       tldr
       zsh-history-substring-search
