@@ -11,8 +11,8 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       ## system utilities
-      gotop               # graphical activity monitor coded in Go
-      ytop                # same but better coded in Rust
+      gotop               # graphical activity monitor
+      htop                # interactive process viewer
       stress-ng           # stresstest your system
       hyperfine           # benchmark commands
       tree                # directory listing as tree
