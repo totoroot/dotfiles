@@ -31,6 +31,9 @@
 - remove hardlinks to DP-0
 - add redshift module to polybar
 - config autostart packages
+- pulseaudio sink switcher
+- add pulseaudio config to dotfiles
+- add gotop config to dotfiles
 
 ## In Progress
 
@@ -48,9 +51,11 @@
 - calibre config with Nix
 - fix nvidia-settings issues
 - enable v4l2loopback module
+- use fzf for completion
 
 ## Completed
 
+- colorpicker in terminal
 - install wacom tablet
 - adjust pwm fans
 - install torrent client
