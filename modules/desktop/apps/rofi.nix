@@ -40,14 +40,14 @@ in {
         exec = "${binDir}/rofi/bookmarkmenu";
       })
       (makeDesktopItem {
-        name = "rofi-filemenu";
-        desktopName = "Open Directory in Terminal";
+        name = "rofi-filemenu-thunar";
+        desktopName = "Open Directory in Thunar";
         icon = "folder";
         exec = "${binDir}/rofi/filemenu";
       })
       (makeDesktopItem {
-        name = "rofi-filemenu-scratch";
-        desktopName = "Open Directory in Scratch Terminal";
+        name = "rofi-filemenu";
+        desktopName = "Open Directory in Terminal";
         icon = "folder";
         exec = "${binDir}/rofi/filemenu -x";
       })
