@@ -33,14 +33,9 @@ bindkey '^Z' fancy-ctrl-z
 autoload -Uz edit-command-line; zle -N edit-command-line
 bindkey '^E' edit-command-line
 
-# bind UP and DOWN arrow keys
-
-# TODO fix zsh-history-substring-search
-# zle -N history-substring-search-up
-# bindkey '^[[A' history-substring-search-up
-# zle -N history-substring-search-down
-# bindkey '^[[B' history-substring-search-down
-
-# fuzzy finder on <Ctrl> + <F>
-# zle -N fzf
-# bindkey '^F' fzf
+# Fuzzy history search on <Ctrl> + <F>
+fuzzy-hist() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --height "30%" | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
+zle -N fuzzy-hist
+bindkey '^F' h
