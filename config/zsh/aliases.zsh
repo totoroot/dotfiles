@@ -23,8 +23,10 @@ alias rmirror='rsync -rtvu --delete'
 alias gurl='curl --compressed'
 alias disks='lsblk -o name,label,mountpoint,size,uuid'
 
-alias clipin='xclip -selection clipboard -in'
-alias clipout='xclip -selection clipboard -out'
+alias clipin='xclip -sel clip -i'
+alias clipout='xclip -sel clip -o'
+
+alias colorpick="echo && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o"
 
 alias viewinst='nix-env --query --installed'
 alias viewdeps='nix-env -iA --dry-run'
