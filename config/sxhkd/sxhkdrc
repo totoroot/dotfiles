@@ -38,8 +38,17 @@ ctrl + alt + a
 
 ### Open all one-off terminal tools in floating xst window
 
+ctrl + alt + q
+    xst -g 80x15
+
 ctrl + alt + v
     xst -g 80x15 pulsemixer
+
+ctrl + alt + j
+    xst -g 80x15 -f JuliaMono-18 julia
+
+ctrl + alt + p
+    xst -g 80x15 python
 
 ## Volume Control ##
 

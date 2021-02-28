@@ -155,9 +155,9 @@ See ~/dotfiles/config/micro/bindings.json
 | m | mute device |
 | enter | open menu |
 | space | ? |
-| F1 | switch to "Output" tab |
-| F2 | switch to "Input" tab |
-| F3 | switch to "Cards" tab |
+| o | switch to "Output" tab |
+| i | switch to "Input" tab |
+| c | switch to "Cards" tab |
 
 ## taskell
 ### general
