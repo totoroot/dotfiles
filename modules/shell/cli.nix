@@ -32,6 +32,7 @@ in {
       translate-shell     # translator
       speedread           # terminal based reader for maximum wpm
       unstable.youtube-dl # download manager (not only for youtube)
+      pulsemixer          # cli mixer for pulseaudio
       ## file managers
       unstable.lf         # terminal file manager
       ## other fun stuff
@@ -48,5 +49,14 @@ in {
     ];
 
     user.extraGroups = [ "admin" ];
+
+    home.configFile = {
+      "gotop/gotop.conf".source = "${configDir}/gotop/gotop.conf";
+      "pulsemixer/pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";    };
+
+    environment.shellAliases = {
+      gt = "gotop";
+      pm = "pulsemixer";
+    };
   };
 }
