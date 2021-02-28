@@ -32,8 +32,6 @@
 - add redshift module to polybar
 - config autostart packages
 - pulseaudio sink switcher
-- add pulseaudio config to dotfiles
-- add gotop config to dotfiles
 
 ## In Progress
 
@@ -52,10 +50,12 @@
 - fix nvidia-settings issues
 - enable v4l2loopback module
 - use fzf for completion
-- add cli bluetooth controls
 
 ## Completed
 
+- add gotop config to dotfiles
+- add pulsemixer config to dotfiles
+- add cli bluetooth controls
 - colorpicker in terminal
 - install wacom tablet
 - adjust pwm fans
@@ -90,4 +90,3 @@
 - finally fix mullvad-vpn
 - write shortcut cheatsheet
 - add old shell scripts
-

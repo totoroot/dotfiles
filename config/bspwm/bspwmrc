@@ -24,8 +24,8 @@ for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
 done
 
-# workaround to autostart mullvad-vpn
-command -v mullvad-vpn >/dev/null && mullvad-vpn
-
-# same for nextlcoud-client
-command -v nextcloud >/dev/null && nextcloud
+# # workaround to autostart mullvad-vpn
+# command -v mullvad-vpn >/dev/null && mullvad-vpn
+# 
+# # same for nextlcoud-client
+# command -v nextcloud >/dev/null && nextcloud
