@@ -15,19 +15,14 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs;
       (if cfg.player.enable then [
-		    musikcube
+		    musikcube         # terminal music player
       ] else []) ++
 
       (if cfg.misc.enable then [
-        pulsemixer        # cli mixer for pulseaudio
         unstable.picard   # music tagger
         audacity          # audio editing suite
         pulseeffects      # equalizer and other effects for pulseaudio
         lsp-plugins       # audio plugins needed for pulseeffects
       ] else []);
-
-    environment.shellAliases = {
-      pm = "pulsemixer";
-    };
   };
 }

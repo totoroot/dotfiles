@@ -7,6 +7,7 @@ alias q=exit
 alias clr=clear
 alias please='sudo '
 alias rm='rm -i'
+alias purge='rm -rf'
 alias cp='cp -rv'
 alias mv='mv -v'
 alias mkdir='mkdir -p'
