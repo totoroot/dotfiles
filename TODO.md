@@ -52,6 +52,7 @@
 - fix nvidia-settings issues
 - enable v4l2loopback module
 - use fzf for completion
+- add cli bluetooth controls
 
 ## Completed
 
