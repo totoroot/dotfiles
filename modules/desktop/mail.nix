@@ -12,9 +12,9 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      # install aerc version from nixpkgs (often not latest)
-      unstable.aerc
-      w3m
+      unstable.aerc     # TUI email client with vim keybindings
+      w3m               # text based browser for displaying html emails
+      sylpheed          # lightweight GUI email client
     ];
 
     home.configFile = {
