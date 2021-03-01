@@ -20,7 +20,6 @@
         anki.enable           = true;
         blender.enable        = true;
         calibre.enable        = true;
-        evolution.enable      = true;
         ghostwriter.enable    = true;
         godot.enable          = true;
         gpa.enable            = true;
