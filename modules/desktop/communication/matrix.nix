@@ -13,9 +13,9 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       element-desktop
-      unstable.fractal
-      unstable.weechat
-      unstable.weechatScripts.weechat-matrix
+      fractal
+      weechat
+      weechatScripts.weechat-matrix
     ];
   };
 }
