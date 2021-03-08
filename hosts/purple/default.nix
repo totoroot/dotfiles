@@ -12,7 +12,6 @@
       documents.enable 	= true;
       flatpak.enable    = true;
       keepassxc.enable 	= true;
-      mail.enable      	= true;
       screenshot.enable = true;
       thunar.enable     = true;
       vscodium.enable   = true;
@@ -89,9 +88,11 @@
       wacom.enable      = true;
     };
     shell = {
+      archive.enable  = true;
       direnv.enable   = true;
       git.enable      = true;
       gnupg.enable    = true;
+      mail.enable     = true;
       pass.enable     = true;
       taskell.enable  = true;
       zsh.enable      = true;
