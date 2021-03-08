@@ -14,7 +14,11 @@ in {
     user.packages = with pkgs; [
       python38
       python38Packages.pip
-      python37Packages.pipdate    # pip update helpers
+      python38Packages.pipdate    # pip update helpers
+      python38Packages.virtualenv
+      python38Packages.pytest-virtualenv
+      python38Packages.virtualenv-clone
+      python38Packages.tox
       python38Packages.ipython
       python38Packages.setuptools
       python38Packages.pylint
