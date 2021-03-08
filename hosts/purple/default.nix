@@ -31,7 +31,7 @@
         default			        = "firefox";
         chromium.enable 	  = false;
         firefox.enable 	    = true;
-        qutebrowser.enable 	= true;
+        qutebrowser.enable 	= false;
         tor.enable          = true;
       };
       communication = {
