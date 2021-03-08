@@ -29,6 +29,14 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+# Vim's C-x C-l in zsh
+history-beginning-search-backward-then-append() {
+  zle history-beginning-search-backward
+  zle vi-add-eol
+}
+zle -N history-beginning-search-backward-then-append
+bindkey -M viins '^x^l' history-beginning-search-backward-then-append
+
 # Open current prompt in external editor
 autoload -Uz edit-command-line; zle -N edit-command-line
 bindkey '^E' edit-command-line
