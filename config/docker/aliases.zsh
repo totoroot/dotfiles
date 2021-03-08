@@ -3,6 +3,7 @@ alias dkc=docker-compose
 alias dkm=docker-machine
 alias dkl='dk logs'
 alias dkcl='dkc logs'
+alias dps='docker ps'
 
 dkclr() {
   dk stop $(docker ps -a -q)
