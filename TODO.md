@@ -32,27 +32,30 @@
 - add redshift module to polybar
 - config autostart packages
 - pulseaudio sink switcher
+- setup docker on CUDA
+- VSCodium setup with NixOS config
+- fix rofi powermenu
+- install quicklookup
 
 ## In Progress
 
-- add media and volume control with shortcuts
-- fix zsh keybindings
-- fix kitty keybindings
 - aerc w3m html viewer
 - aerc pgp integration
-- fix rofi powermenu
-- install go packages automatically
+- install go packages with NixOS config
 - install tt and speedread
-- install quicklookup from flathub
 - nextcloud-client config with nix
-- setup gpg accounts correctly
 - calibre config with Nix
 - fix nvidia-settings issues
 - enable v4l2loopback module
-- use fzf for completion
+- use fzf for history substring search
 
 ## Completed
 
+- setup gpg accounts correctly
+- add quick terminals for julia and python
+- add media and control with shortcuts
+- fix zsh keybindings
+- fix kitty keybindings
 - add gotop config to dotfiles
 - add pulsemixer config to dotfiles
 - add cli bluetooth controls
