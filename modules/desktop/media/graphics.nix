@@ -25,7 +25,7 @@ in {
       (if cfg.raster.enable then [
         unstable.krita
         unstable.gimp
-        # gimpPlugins.resynthesizer2  # content-aware scaling in gimp
+        gimpPlugins.resynthesizer2  # content-aware scaling in gimp
       ] else []) ++
 
       (if cfg.vector.enable then [
