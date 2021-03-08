@@ -16,7 +16,7 @@ bindkey '^[[3;5~' vi-kill-eol
 # bindkey '' backward-kill-word Already bound to ?
 bindkey '^[[3;3~' kill-word
 
-# C-z to toggle current process (background/foreground)
+# <Ctrl> + <Z> to toggle current process (background/foreground)
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
@@ -29,7 +29,7 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-# Vim's C-x C-l in zsh
+# Vim's <Ctrl> + <X> and <Ctrl> + <L> in zsh
 history-beginning-search-backward-then-append() {
   zle history-beginning-search-backward
   zle vi-add-eol
@@ -37,7 +37,7 @@ history-beginning-search-backward-then-append() {
 zle -N history-beginning-search-backward-then-append
 bindkey -M viins '^x^l' history-beginning-search-backward-then-append
 
-# Open current prompt in external editor
+# Open current prompt in external editor on <Ctrl> + <E>
 autoload -Uz edit-command-line; zle -N edit-command-line
 bindkey '^E' edit-command-line
 
