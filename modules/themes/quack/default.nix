@@ -14,8 +14,8 @@ in {
           wallpaper = mkDefault ./config/wallpaper.png;
           gtk = {
             theme = "Dracula";
-            iconTheme = "Paper";
-            cursorTheme = "Paper";
+            iconTheme = "Dracula";
+            cursorTheme = "Dracula";
           };
         };
 
@@ -27,7 +27,6 @@ in {
           qutebrowser.userStyles = concatMapStringsSep "\n" toCSSFile [
             ./config/qutebrowser/github.scss
             ./config/qutebrowser/monospace-textareas.scss
-            ./config/qutebrowser/quora.scss
             ./config/qutebrowser/stackoverflow.scss
             ./config/qutebrowser/xkcd.scss
             ./config/qutebrowser/youtube.scss
