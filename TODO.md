@@ -36,6 +36,16 @@
 - VSCodium setup with NixOS config
 - fix rofi powermenu
 - install quicklookup
+- telegram config with Nix
+- signal config with Nix
+- blender config with Nix
+- vscodium config with Nix
+- firefox extensions with Nix
+- set dracula theme for blender
+- set dracula theme for blender
+- set dracula theme for libreoffice
+- set dracula theme for inkscape
+- Install XFCE
 
 ## In Progress
 
@@ -51,6 +61,13 @@
 
 ## Completed
 
+- micro config in NixOS config
+- kitty config in NixOS config
+- set dracula theme for vscodium
+- set dracula theme for signal
+- set dracula theme for telegram
+- set dracula theme for kitty
+- set dracula theme for micro
 - setup gpg accounts correctly
 - add quick terminals for julia and python
 - add media and control with shortcuts
