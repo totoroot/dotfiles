@@ -46,6 +46,8 @@
 - set dracula theme for libreoffice
 - set dracula theme for inkscape
 - Install XFCE
+- keybindings in vscodium
+- install qownnotes
 
 ## In Progress
 
