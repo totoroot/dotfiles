@@ -12,6 +12,7 @@
       documents.enable 	= true;
       flatpak.enable    = true;
       keepassxc.enable 	= true;
+      kvantum.enable    = true;
       screenshot.enable = true;
       thunar.enable     = true;
       vscodium.enable   = true;

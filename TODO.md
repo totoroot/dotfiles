@@ -1,6 +1,5 @@
 ## Open
 
-- modify zsh theme
 - vlc dark theme
 - vlc config into nixos dotfiles
 - rtl8812au-5.9.3.2
@@ -41,10 +40,7 @@
 - blender config with Nix
 - vscodium config with Nix
 - firefox extensions with Nix
-- set dracula theme for blender
-- set dracula theme for blender
 - set dracula theme for libreoffice
-- set dracula theme for inkscape
 - Install XFCE
 - keybindings in vscodium
 - install qownnotes
@@ -63,8 +59,10 @@
 
 ## Completed
 
+- modify zsh theme
 - micro config in NixOS config
 - kitty config in NixOS config
+- set dracula theme for blender
 - set dracula theme for vscodium
 - set dracula theme for signal
 - set dracula theme for telegram

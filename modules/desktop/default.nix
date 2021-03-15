@@ -24,12 +24,15 @@ in {
     ];
 
     user.packages = with pkgs; [
-      xclip         # access X clipboard from console
-      xdo           # perform elementary actions on X windows
-      xdotool       # X input and window management tool
-      fontpreview   # minimal font viewer
-      sxiv          # simple X image viewer
-                    # comes as a dependency with fontpreview anyways
+      xclip                 # access X clipboard from console
+      xdo                   # perform elementary actions on X windows
+      xdotool               # X input and window management tool
+      fontpreview           # minimal font viewer
+      sxiv                  # simple X image viewer (dependency fontpreview)
+      feh                   # light-weight image viewer 
+      qgnomeplatform        # QPlatformTheme for a better Qt application inclusion in GNOME
+      qt5ct                 # Qt5 Configuration Tool
+      libsForQt5.qtstyleplugin-kvantum # SVG-based Qt5 theme engine plus a config tool and extra themes
     ];
 
     fonts = {
@@ -109,10 +112,10 @@ in {
       };
     };
 
-    # Try really hard to get QT to respect my GTK theme.
+    # Apply suggestion by benneti to use kvantum to configure QT apps
     env.GTK_DATA_PREFIX = [ "${config.system.path}" ];
-    env.QT_QPA_PLATFORMTHEME = "gtk2";
-    qt5 = { style = "gtk2"; platformTheme = "gtk2"; };
+    env.QT_QPA_PLATFORMTHEME = "gnome";
+    env.QT_STYLE_OVERRIDE = "kvantum";
 
     services.xserver.displayManager.sessionCommands = ''
       # GTK2_RC_FILES must be available to the display manager.
