@@ -21,6 +21,7 @@ in {
       unstable.pdfpc      # pdf presenter console
       pdfsandwich         # ocr for pdf
       wkhtmltopdf         # render html to pdf
+      xournalpp           # handwriting notetaking software with PDF annotation support
     ];
   };
 }
