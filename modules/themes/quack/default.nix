@@ -33,6 +33,9 @@ in {
           ];
         };
       };
+      env = {
+        BAT_THEME = "Dracula";
+      };
     }
 
     # Desktop (X11) theming
