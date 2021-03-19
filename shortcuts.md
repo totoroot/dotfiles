@@ -159,6 +159,34 @@ See ~/dotfiles/config/micro/bindings.json
 | i | switch to "Input" tab |
 | c | switch to "Cards" tab |
 
+## youtube
+
+| / | search bar |
+| shift + / | show keyboard shortcuts |
+| k/space | play/pause toggle |
+| j | rewind 10 seconds |
+| l | forward 10 seconds |
+| left | rewind 5 seconds |
+| right | forward 5 seconds |
+| home/0 | go to beginning of video |
+| end | go to end of video |
+| m | mute toggle |
+| down | decrease volume by 5% |
+| up | increase volume by 5% |
+| c | closed captions toggle |
+| w | window opacity in cc mode |
+| o | text opacity in cc mode |
+| + | increase font size in cc mode |
+| - | decrease font size in cc mode |
+| 1 | go to 10% of video |
+| 9 | go to 90% of video |
+| shift + , | playback speed 25% lower |
+| shift + . | playback speed 25% higher |
+| f | full screen toggle |
+| t | theater mode toggle |
+| i | miniplayer toggle |
+| type "awesome" | rainbow timeline |
+
 ## taskell
 ### general
 | q | quit |
