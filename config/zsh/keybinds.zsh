@@ -40,10 +40,3 @@ bindkey -M viins '^x^l' history-beginning-search-backward-then-append
 # Open current prompt in external editor on <Ctrl> + <E>
 autoload -Uz edit-command-line; zle -N edit-command-line
 bindkey '^E' edit-command-line
-
-# Fuzzy history search on <Ctrl> + <F>
-fuzzy-hist() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --height "30%" | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
-}
-zle -N fuzzy-hist
-bindkey '^F' fuzzy-hist
