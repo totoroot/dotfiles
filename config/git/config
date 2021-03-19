@@ -18,6 +18,9 @@
 	autosquash = true
 [push]
 	default = current
+[pack]
+    windowMemory = 2g
+    packSizeLimit = 1g
 [alias]
 	amend = commit --amend
 	exec = "!exec "
