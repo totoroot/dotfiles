@@ -1,7 +1,6 @@
 ## Open
 
-- vlc dark theme
-- vlc config into nixos dotfiles
+- lazydocker config in nix
 - rtl8812au-5.9.3.2
 - ssh setup
 - ghostwriter config + theme
@@ -32,7 +31,6 @@
 - config autostart packages
 - pulseaudio sink switcher
 - setup docker on CUDA
-- VSCodium setup with NixOS config
 - fix rofi powermenu
 - install quicklookup
 - telegram config with Nix
@@ -53,12 +51,12 @@
 - install tt and speedread
 - nextcloud-client config with nix
 - calibre config with Nix
-- fix nvidia-settings issues
 - enable v4l2loopback module
 - use fzf for history substring search
 
 ## Completed
 
+- fix nvidia-settings issues
 - modify zsh theme
 - micro config in NixOS config
 - kitty config in NixOS config
