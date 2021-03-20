@@ -7,12 +7,10 @@
 - set up evolution
 - usb auto-mount
 - add micro plugins to config
-- setup SMART disk health monitoring with reporting
 - k8s setup (minikube, k3s, kind, ?)
 - k8s config
 - duplicate options (fdupes, jdupes, rmlint, dupeguru)
 - setup borgbackup with nix config
-- fix cursor
 - fan curves GPU and case fans
 - temperature monitoring
 - replace soundkonverter by a ffmpeg script
@@ -25,7 +23,6 @@
 - fix rofi passmenu
     > use keepassxc-cli instead of pass or import entries form keepassxc-cli to pass
 - fix gsmartcontrol
-- make custom color scheme for bat
 - remove hardlinks to DP-0
 - add redshift module to polybar
 - config autostart packages
@@ -37,7 +34,6 @@
 - signal config with Nix
 - blender config with Nix
 - vscodium config with Nix
-- firefox extensions with Nix
 - set dracula theme for libreoffice
 - Install XFCE
 - keybindings in vscodium
@@ -45,6 +41,9 @@
 
 ## In Progress
 
+- setup SMART disk health monitoring with reporting
+- dracula theme for bat
+- increase cursor size
 - aerc w3m html viewer
 - aerc pgp integration
 - install go packages with NixOS config
@@ -52,10 +51,10 @@
 - nextcloud-client config with nix
 - calibre config with Nix
 - enable v4l2loopback module
-- use fzf for history substring search
 
 ## Completed
 
+- use fzf for history substring search
 - fix nvidia-settings issues
 - modify zsh theme
 - micro config in NixOS config
