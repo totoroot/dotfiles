@@ -107,6 +107,14 @@ super + g
 super + p
 	bspc config focus_follows_pointer {false,true}
 
+## Toggle Wacom device	
+super + w
+	wacom-toggle
+
+## Rotate Wacom device	
+super + r
+	wacom-rotate
+
 ## Quit active node
 super + {_,shift + }q
 	bspc node -{c,k}
