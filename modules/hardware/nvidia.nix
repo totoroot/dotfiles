@@ -35,7 +35,7 @@ in {
     
     user.packages = with pkgs; [
       pciutils          # inspect and manipulate PCI devices
-      nvtop			        # task monitor for Nvidia GPUs
+      unstable.nvtop    # task monitor for Nvidia GPUs
     ];
   };
 }
