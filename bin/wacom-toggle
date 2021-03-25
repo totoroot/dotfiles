@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+# toggles Wacom device on and off
+SET=('off' 'on')
+
+CURRENT=`xsetwacom get 'Wacom Intuos Pro M Finger touch' touch || xsetwacom get 'Wacom Intuos Pro M (WL) Finger touch' touch`
+
+# replace current object in array with "/" and get index
+INDEX=`echo ${SET[@]/$CURRENT//} | cut -d/ -f1 | wc -w | tr -d ' '`
+
+INDEX=$[$INDEX+1]
+
+if [ $INDEX -lt ${#SET[@]} ]
+then
+    INDEX=$[$INDEX+1]
+else
+    INDEX=1
+fi
+
+xsetwacom set 'Wacom Intuos Pro M Finger touch' touch ${SET[$INDEX]} || xsetwacom set 'Wacom Intuos Pro M (WL) Finger touch' touch ${SET[$INDEX]}
+
+echo "Set Wacom device touch to ${SET[$INDEX]}" && notify-send -u low "Set Wacom device touch to ${SET[$INDEX]}"

@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+# switches through listed rotations whenever script is run
+SET=('none' 'cw' 'ccw')
+
+CURRENT=`xsetwacom get 'Wacom Intuos Pro M Finger touch' rotate || xsetwacom get 'Wacom Intuos Pro M (WL) Finger touch' rotate`
+
+# replace current object in array with "/" and get index
+INDEX=`echo ${SET[@]/$CURRENT//} | cut -d/ -f1 | wc -w | tr -d ' '`
+
+INDEX=$[$INDEX+1]
+
+if [ $INDEX -lt ${#SET[@]} ]
+then
+    INDEX=$[$INDEX+1]
+else
+    INDEX=1
+fi
+
+xsetwacom set 'Wacom Intuos Pro M Pen stylus' rotate ${SET[$INDEX]} || xsetwacom set 'Wacom Intuos Pro M (WL) Pen stylus' rotate ${SET[$INDEX]}
+xsetwacom set 'Wacom Intuos Pro M Pen cursor' rotate ${SET[$INDEX]} || xsetwacom set 'Wacom Intuos Pro M (WL) Pen cursor' rotate ${SET[$INDEX]}
+xsetwacom set 'Wacom Intuos Pro M Pen eraser' rotate ${SET[$INDEX]} || xsetwacom set 'Wacom Intuos Pro M (WL) Pen eraser' rotate ${SET[$ROTATION_INDEX]}
+xsetwacom set 'Wacom Intuos Pro M Finger touch' rotate ${SET[$INDEX]} || xsetwacom set 'Wacom Intuos Pro M (WL) Finger touch' rotate ${SET[$INDEX]}
+
+echo "Set Wacom device rotation to ${SET[$INDEX]}" && notify-send -u low "Set Wacom device rotation to ${SET[$INDEX]}"
