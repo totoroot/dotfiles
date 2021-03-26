@@ -3,7 +3,9 @@
 	email = git@thym.at
 	signingkey = C1B257DC8E8CFCC4
 [commit]
-	gpgsign = false    
+	gpgsign = false
+[init]
+    defaultBranch = main    
 [pull]
     rebase=true
 [fetch]
