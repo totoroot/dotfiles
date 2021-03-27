@@ -37,15 +37,16 @@ in {
 
     user.packages = with pkgs; [
       zsh
-      nix-zsh-completions
-      unstable.bat
-      exa
-      fasd
+      nix-zsh-completions # ZSH completions for Nix, NixOS, and NixOps
+      unstable.bat        # cat(1) clone with syntax highlighting and Git integration
+      exa                 # replacement for 'ls' written in Rust
+      fasd                # quick command-line access to files and directories for POSIX shells
       unstable.sd         # intuitive sed alternative
       unstable.fd         # intuitive find alertnative
-      unstable.fzf
-      tldr
-      zsh-history-substring-search
+      unstable.fzf        # command-line fuzzy finder written in Go
+      psmisc              # set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
+      tldr                # simplified and community-driven man pages
+      zsh-history-substring-search  # fish shell history-substring-search for Zsh
     ];
 
     env = {
