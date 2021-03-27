@@ -187,6 +187,23 @@ See ~/dotfiles/config/micro/bindings.json
 | i | miniplayer toggle |
 | type "awesome" | rainbow timeline |
 
+## jitsi-meet
+
+| f | show or hide video thumbnails |
+| m | mute or unmute your microphone |
+| v | start or stop fyour camera |
+| a | manage call quality |
+| c | open or close chat |
+| d | switch between camera and screensharing |
+| r | raise or lower your hand |
+| s | view or exit full screen |
+| w | toggle file view |
+| ? | show or hide keyboard shortcuts |
+| space | push to talk |
+| t | show speaker stats |
+| 0 | focus on your video |
+| 1-9 | focus on another person's video |
+
 ## taskell
 ### general
 | q | quit |
