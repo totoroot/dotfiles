@@ -35,13 +35,17 @@ in {
       pulsemixer          # cli mixer for pulseaudio
       ## file managers
       unstable.lf         # terminal file manager
+      ## fetch programs
+      unstable.neofetch   # fast, highly customizable system info script
+      unstable.fet-sh     # fetch written in posix shell without any external commands
+      unstable.pfetch     # pretty system information tool written in POSIX sh
+      unstable.disfetch     # yet another *nix distro fetching program, but less complex
       ## other fun stuff
       gomatrix			      # matrix effect
       lolcat			        # freakin rainbow terminal effect
       nms 				        # data encryption effect
       pdfcpu			        # cli pdf processor
       pdfpc				        # pdf presenter console
-      neofetch			      # system info script
       cheat				        # interactive cheatsheets
       tokei				        # code statistics
       thefuck             # corrects fuckups in console
