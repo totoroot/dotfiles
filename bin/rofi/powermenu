@@ -1,30 +1,3 @@
 #!/usr/bin/env sh
 
-rofi_command="rofi -theme theme/powermenu.rasi"
-
-### Options ###
-power_off="\tShutdown"
-reboot="\tReboot"
-rest="\tSleep"
-suspend="鈴\tSuspend"
-log_out="\tLogout"
-# Variable passed to rofi
-options="$power_off\n$reboot\n$rest\n$suspend\n$log_out"
-
-case "$(echo -e "$options" | $rofi_command -dmenu -selected-row 2)" in
-    $power_off)
-        systemctl poweroff
-        ;;
-    $reboot)
-        systemctl reboot
-        ;;
-    $rest)
-        zzz
-        ;;
-    $suspend)
-        systemctl suspend
-        ;;
-    $log_out)
-        bspc quit
-        ;;
-esac
+rofi -show power-menu -modi "power-menu:rofi-power-menu" -theme theme/powermenu.rasi
