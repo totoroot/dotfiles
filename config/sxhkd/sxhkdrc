@@ -97,11 +97,11 @@ ctrl + space
 
 ## Toggle Polybar
 super + alt + p
-    polybar-msg cmd toggle
+    polybar-msg cmd toggle && bspc config -m primary top_padding 0
 
 ## Toggle window gap
 super + g
-    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 0; else bspc config -d focused window_gap 150; fi
+    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
 
 ## Toggle focus follow for nodes	
 super + p
