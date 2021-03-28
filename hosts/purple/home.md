@@ -10,3 +10,4 @@
 |mai|mail|
 |shr|shared files|
 |dkt|desktop|
+|nts|notes|

@@ -7,11 +7,11 @@ export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 if [[ $(hostname) == 'purple' ]]; then
     xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
     # set workspaces
-    bspc monitor ${MONITORS[1]} -d {1,2,5,6}
-    bspc monitor ${MONITORS[2]} -d {3,4,7,8}
+    bspc monitor ${MONITORS[1]} -d {Main,Dev,Messaging,Editing}
+    bspc monitor ${MONITORS[2]} -d {Pass,Music,Browsing,Recording}
 else
     xrandr --auto
-    bspc monitor ${MONITORS[1]} -d {1,2,3,4}
+    bspc monitor ${MONITORS[1]} -d {Main,Dev,Messaging,Editing,Pass,Music,Browsing,Recording}
 fi
 
 bspc config remove_disabled_monitors true
@@ -20,9 +20,11 @@ bspc config remove_unplugged_monitors true
 # Rules
 bspc rule -r '*'
 
-for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
-  source "$file"
-done
+bspc rule -a xst-256color state=floating
+bspc rule -a Firefox desktop='^1'
+bspc rule -a kitty desktop='^1'
+bspc rule -a KeePassXC desktop='^1'
+bspc rule -a musikcube desktop='^2'
 
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
