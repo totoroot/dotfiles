@@ -12,8 +12,9 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      maim              # X screenshot utility
-      unstable.hacksaw  # selection tool for screenshot scripts
+      maim                # X screenshot utility
+      unstable.hacksaw    # selection tool for screenshot scripts
+      unstable.flameshot  # powerful yet simple to use screenshot software
     ];
   };
 }
