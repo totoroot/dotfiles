@@ -2,15 +2,27 @@
 
  # Simple script that should work in bash just as well as in the far superior zsh.
  # Must be run with sudo to get temperatures from smartctl
- # Prints the disk name and the temperature extracted from S.M.A.R.T. output of disks next to it for ideal output for e.g. Telegraf agent.
+ # Prints the disk name and the temperature extracted from S.M.A.R.T. output of all installed disks in JSON array for use with Telegraf or other metrics agents.
 
 DISKS=( $(lsblk -dn -o name) )
+OUTPUT=("{")
 
 for DISK in "${DISKS[@]}"
 do
+    # Handle PCIe NVMe disks
     if [[ "$DISK" =~ .*nvme.* ]]; then
-        paste <(echo "$DISK") <(smartctl -A /dev/${DISK} | grep "Temperature Sensor" | tr -d '\n' | awk '{print $4,$8}')
+        OUTPUT+=`paste <(echo "{\"$DISK\"") <(smartctl -A /dev/${DISK} | grep "Temperature Sensor" | tr -d "\n" | awk '{print "\""$8"\""}') | sed "s/\s\{1,\}/:/g"`
+    # Handle SATA disks
     else
-	    paste <(echo "$DISK") <(smartctl -A /dev/${DISK} | grep Temperature_Celsius | awk '{print $10}')
+	    OUTPUT+=`paste <(echo "\"$DISK\"") <(smartctl -A /dev/${DISK} | grep "Temperature_Celsius" | awk '{print "\""$10"\""}') | sed "s/\s\{1,\}/:/g"`
 	fi
+	# Close json array after last disk
+	if [[ "$DISK" =~ "${DISKS[-1]}" ]]; then
+        OUTPUT+="}"
+    else
+        OUTPUT+=","
+    fi
 done
+
+# Remove whitespace characters in array
+echo $OUTPUT | sed "s/\s*//g"
