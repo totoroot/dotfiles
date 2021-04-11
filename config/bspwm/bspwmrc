@@ -28,6 +28,3 @@ bspc rule -a musikcube desktop='^2'
 
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
-
-# same for nextlcoud-client
-command -v nextcloud >/dev/null && nextcloud
