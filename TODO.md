@@ -1,8 +1,6 @@
 ## Open
 
 - lazydocker config in nix
-- rtl8812au-5.9.3.2
-- ssh setup
 - ghostwriter config + theme
 - set up evolution
 - usb auto-mount
@@ -17,7 +15,6 @@
 - pulseaudio mixer systray
 - webdav sync tasks
 - page up and down for history navigation
-- up and down for substring search
 - look at ssh tools (passh, autossh, sshguard, sshuttle, sshchat, ssh-import-id)
 - install rofi calc
 - fix rofi passmenu
@@ -28,7 +25,6 @@
 - config autostart packages
 - pulseaudio sink switcher
 - setup docker on CUDA
-- fix rofi powermenu
 - install quicklookup
 - telegram config with Nix
 - signal config with Nix
@@ -37,7 +33,7 @@
 - set dracula theme for libreoffice
 - Install XFCE
 - keybindings in vscodium
-- install qownnotes
+- pwd as kitty tab title
 
 ## In Progress
 
@@ -54,6 +50,9 @@
 
 ## Completed
 
+- ssh setup
+- install qownnotes
+- fix rofi powermenu
 - use fzf for history substring search
 - fix nvidia-settings issues
 - modify zsh theme
