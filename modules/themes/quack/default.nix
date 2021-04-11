@@ -93,8 +93,8 @@ in {
           "xtheme/90-theme".source = ./config/Xresources;
         }
         (mkIf desktop.bspwm.enable {
-          "bspwm/rc.d/polybar" = { source = ./config/polybar/launch.sh; };
-          "bspwm/rc.d/theme" = { source = ./config/bspwm/bspwmrc; };
+          "bspwm/rc.d/polybar".source = ./config/polybar/launch.sh;
+          "bspwm/rc.d/theme".source = ./config/bspwm/bspwmrc;
         })
         (mkIf desktop.apps.rofi.enable {
           "rofi/theme" = { source = ./config/rofi; recursive = true; };
