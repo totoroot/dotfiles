@@ -23,6 +23,7 @@ in {
       (mkIf cfg.recording.enable obs-studio)
       (mkIf cfg.recording.enable vokoscreen)
       (mkIf cfg.cut.enable kdenlive)
+      (mkIf cfg.cut.enable unstable.natron)
       (mkIf cfg.transcode.enable handbrake)
     ];
   };
