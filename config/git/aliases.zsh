@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-g() { [[ $# = 0 ]] && git status --short . || git $*; }
-
+alias g='() { [[ $# = 0 ]] && git status --short . || git $*; }'
 alias git='git'
 alias ga='git add'
 alias gaa='git add --all'
@@ -46,7 +45,13 @@ alias gstall='git stash --all'
 alias gsu='git submodule update'
 alias gr='git reset HEAD'
 alias grb='git rebase -i'
+alias gri='(){ git rebase -i HEAD~$1 }'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grv='git rev-parse'
+
+
+
+
+
 
