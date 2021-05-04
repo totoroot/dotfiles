@@ -15,5 +15,3 @@ echo 'Polybar launched...'
 # Launch polybar systray
 polybar -c ~/.config/dotfiles/modules/themes/quack/config/polybar/config-primary.ini systray >$XDG_DATA_HOME/systray.log 2>&1 &
 echo 'Systray launched...'
-
-#-c ~/.config/dotfiles/modules/themes/quack/config/polybar/config-primary.ini
