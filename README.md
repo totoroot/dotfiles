@@ -46,16 +46,33 @@ This is needed to expose the Nix 2.0 CLI and flakes support that are hidden behi
 
 And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 
-| Command           | Description                                                     |
-|-------------------|-----------------------------------------------------------------|
-| `hey rebuild`     | Rebuild this flake (shortcut: `hey re`)                         |
-| `hey upgrade`     | Update flake lockfile and switch to it (shortcut: `hey up`)     |
-| `hey update`      | Update flake lockfile (shortcut: `hey u`)                       |
-| `hey rollback`    | Roll back to previous system generation                         |
-| `hey gc`          | Runs `nix-collect-garbage -d`. Use sudo to clean system profile |
-| `hey push REMOTE` | Deploy these dotfiles to REMOTE (over ssh)                      |
-| `hey check`       | Run tests and checks for this flake                             |
-| `hey show`        | Show flake outputs of this repo                                 |
+```
+Usage: hey [global-options] [command] [sub-options]
+
+Available Commands:
+  check                  Run 'nix flake check' on your dotfiles
+  gc                     Garbage collect & optimize nix store
+  generations            Explore, manage, diff across generations
+  help [SUBCOMMAND]      Show usage information for this script or a subcommand
+  rebuild                Rebuild the current system's flake
+  repl                   Open a nix-repl with nixpkgs and dotfiles preloaded
+  rollback               Roll back to last generation
+  search                 Search nixpkgs for a package
+  show                   [ARGS...]
+  ssh HOST [COMMAND]     Run a bin/hey command on a remote NixOS system
+  swap PATH [PATH...]    Recursively swap nix-store symlinks with copies (or back).
+  test                   Quickly rebuild, for quick iteration
+  theme THEME_NAME       Quickly swap to another theme module
+  update [INPUT...]      Update specific flakes or all of them
+  upgrade                Update all flakes and rebuild system
+
+Options:
+    -d, --dryrun                     Don't change anything; preform dry run
+    -D, --debug                      Show trace on nix errors
+    -f, --flake URI                  Change target flake to URI
+    -h, --help                       Display this help, or help for a specific command
+    -i, -A, -q, -e, -p               Forward to nix-env
+```
 
 ## Frequently asked questions
 
@@ -66,15 +83,23 @@ And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
   
 + **How do I change the default username?**
 
-  1. Set `USER` the first time you run `nixos-install`: `USER=myusername
-     nixos-install --root /mnt --flake #XYZ`
+  1. Set the `USER` environment variable the first time you run `nixos-install`:
+  `USER=myusername nixos-install --root /mnt --flake /path/to/dotfiles#XYZ`
   2. Or change `"mathym"` in modules/options.nix.
 
 + **How do I "set up my partitions"?**
 
   My main host [has a README](hosts/purple/README.org) you can use as a reference.
   I set up an EFI+GPT system and partitions with `parted`.
+
+  **Why did you write bin/hey?**
   
+    I envy Guix's CLI and want similar for NixOS, but its toolchain is spread
+    across many commands, none of which are as intuitive: `nix`,
+    `nix-collect-garbage`, `nixos-rebuild`, `nix-env`, `nix-shell`.
+  
+    I don't claim `hey` is the answer, but everybody likes their own brew.
+
 + **How 2 flakes?**
 
   Would it be the NixOS experience if I gave you all the answers in one,
