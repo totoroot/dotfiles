@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      unstable.julia
+      unstable.julia-stable
       unstable.julia-mono
     ];
   };
