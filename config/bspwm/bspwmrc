@@ -5,13 +5,13 @@ set -x
 export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
 if [[ $(hostname) == 'purple' ]]; then
-    xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
-    # set workspaces
-    bspc monitor ${MONITORS[1]} -d {Main,Dev,Messaging,Editing}
-    bspc monitor ${MONITORS[2]} -d {Pass,Music,Browsing,Recording}
-else
+    # xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
+    # # set workspaces
+    # bspc monitor ${MONITORS[1]} -d {Main,Dev,Messaging,Editing}
+    # bspc monitor ${MONITORS[2]} -d {Pass,Music,Browsing,Recording}
+# else
     xrandr --auto
-    bspc monitor ${MONITORS[1]} -d {Main,Dev,Messaging,Editing,Pass,Music,Browsing,Recording}
+    bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Editing,Browsing,Recording}
 fi
 
 bspc config remove_disabled_monitors true
@@ -23,8 +23,17 @@ bspc rule -r '*'
 bspc rule -a xst-256color state=floating
 bspc rule -a Firefox desktop='^1'
 bspc rule -a kitty desktop='^1'
-bspc rule -a KeePassXC desktop='^1'
-bspc rule -a musikcube desktop='^2'
+bspc rule -a codium desktop='^2'
+bspc rule -a KeePassXC desktop='^3'
+bspc rule -a musikcube desktop='^4'
+bspc rule -a signal-desktop desktop='^5'
+bspc rule -a telegram-desktop desktop='^5'
+bspc rule -a gimp desktop='^6'
+bspc rule -a obs desktop='^8'
 
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
+
+# No idea why these still are not run at login
+$DOTFILES/modules/themes/quack/config/polybar/launch.sh
+$DOTFILES/modules/themes/quack/config/bspwm/bspwmrc
