@@ -8,7 +8,7 @@ if ! zgen saved; then
   zgen load zdharma/history-search-multi-word
   zgen load zsh-users/zsh-completions src
   zgen load junegunn/fzf shell
-  zgen load trystan2k/zsh-tab-title
+  zgen load trystan2k/zsh-tab-title && export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
   [ -z "$SSH_CONNECTION" ] && zgen load zdharma/fast-syntax-highlighting
   zgen save
 fi
