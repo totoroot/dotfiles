@@ -36,5 +36,10 @@ bspc rule -a telegram-desktop desktop='^5'
 bspc rule -a gimp desktop='^6'
 bspc rule -a obs desktop='^8'
 
+# source rc files
+for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
+  source "$file"
+done
+
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
