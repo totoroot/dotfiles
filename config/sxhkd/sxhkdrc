@@ -124,12 +124,12 @@ super + shift + m
     bspc node -m last --follow
 
 ## Send to desktop with number and follow
-super + shift + {1-9,0}
-    bspc node -d '^{0-9}' --follow
+super + shift + {0-9}
+    bspc node -d '^{1-9,10}' --follow
 
 ## Switch to desktop with number
-super + {1-9,0}
-    bspc desktop --focus '^{0-9}'
+super + {0-9}
+    bspc desktop --focus '^{1-9,10}'
 
 ## Toggle fullscreen for active node
 super + t
