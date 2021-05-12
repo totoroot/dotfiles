@@ -5,13 +5,18 @@ set -x
 export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
 if [[ $(hostname) == 'purple' ]]; then
-    # xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
-    # # set workspaces
-    # bspc monitor ${MONITORS[1]} -d {Main,Dev,Messaging,Editing}
-    # bspc monitor ${MONITORS[2]} -d {Pass,Music,Browsing,Recording}
-# else
+    if [ ${#MONITORS[@]} -eq 2 ]; then
+        xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
+        # set workspaces
+        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Editing,Browsing,Recording,Notes}
+        bspc monitor ${MONITORS[2]} -d {VMs}
+    else
+        xrandr --output ${MONITORS[1]}
+        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Editing,Browsing,Recording}
+    fi
+else
     xrandr --auto
-    bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Editing,Browsing,Recording}
+    bspc monitor ${MONITORS[1]} -d {1,2,3,4}
 fi
 
 bspc config remove_disabled_monitors true
@@ -33,7 +38,3 @@ bspc rule -a obs desktop='^8'
 
 # workaround to autostart mullvad-vpn
 command -v mullvad-vpn >/dev/null && mullvad-vpn
-
-# No idea why these still are not run at login
-$DOTFILES/modules/themes/quack/config/polybar/launch.sh
-$DOTFILES/modules/themes/quack/config/bspwm/bspwmrc
