@@ -18,7 +18,7 @@ in {
       qpdfview            # advanced pdf viewer for forms and annotations
       unstable.pdfcpu     # pdf processor
       pdfgrep             # grep for pdf
-      unstable.pdfpc      # pdf presenter console
+      pdfpc      # pdf presenter console
       pdfsandwich         # ocr for pdf
       wkhtmltopdf         # render html to pdf
       xournalpp           # handwriting notetaking software with PDF annotation support
