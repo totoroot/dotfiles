@@ -30,7 +30,7 @@
       };
       browsers = {
         default			        = "firefox";
-        chromium.enable 	  = false;
+        chromium.enable 	  = true;
         firefox.enable 	    = true;
         qutebrowser.enable 	= false;
         tor.enable          = true;
