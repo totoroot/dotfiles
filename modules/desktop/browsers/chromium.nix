@@ -13,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      nixos.ungoogled-chromium
+      ungoogled-chromium
       (makeDesktopItem {
         name = "chromium-incognito";
         desktopName = "Chromium (Incognito)";
