@@ -85,6 +85,7 @@
       fancontrol.enable = true;
       keebs.enable      = true;
       nvidia.enable     = true;
+      printers.enable   = true;
       sensors.enable    = true;
       wacom.enable      = true;
     };
