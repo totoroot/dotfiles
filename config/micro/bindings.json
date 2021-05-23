@@ -14,6 +14,7 @@
 	"Alt-n": "SpawnMultiCursor",
 	"Alt-p": "RemoveMultiCursor",
 	"Alt-x": "SkipMultiCursor",
+	"Alt-w": "lua:initlua.toggleSoftwrap"
 	"Alt-{": "ParagraphPrevious",
 	"Alt-}": "ParagraphNext",
 	"AltDown": "MoveLinesDown",
