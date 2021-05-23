@@ -74,25 +74,25 @@ ctrl + alt + Left
 
 ## Rofi ##
 
-alt + space
+alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
-alt + Tab
+alt + ,
 	$DOTFILES/bin/rofi/windowmenu
 
-alt + backslash
+alt + .
 	$DOTFILES/bin/rofi/passmenu
 
 alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
-alt + Return
+alt + ;
 	$DOTFILES/bin/rofi/powermenu -x
 
 ## Node Controls ##
 
 ## Switch between preset keymaps
-ctrl + space
+super + l
     $DOTFILES/bin/keymapswitcher
 
 ## Toggle Polybar
@@ -101,7 +101,11 @@ super + alt + p
 
 ## Toggle window gap
 super + g
-    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
+        if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
+
+## Toggle fullscreen for active node
+super + t
+	bspc desktop -l next && polybar-msg cmd toggle && bspc config -m primary top_padding 0
 
 ## Toggle focus follow for nodes
 super + p
@@ -130,10 +134,6 @@ super + shift + {0-9}
 ## Switch to desktop with number
 super + {0-9}
     bspc desktop --focus '^{1-9,10}'
-
-## Toggle fullscreen for active node
-super + t
-	bspc desktop -l next
 
 ## Toggle floating/tiling for active node
 super + {_,ctrl + }f
@@ -178,6 +178,14 @@ super + shift + {Left,Down,Up,Right}
 super + s
 	scrcap
 
+# Screencast region to mp4
+super + c
+	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).mp4
+	
+# Screencast region to gif
+super + x
+	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
+
 # ---- don't really get these ----
 
 ## Attach to a detached session. If none is available create a new one, rather
@@ -191,11 +199,3 @@ super + {_,shift +}{1-9,0}
 
 super + a
 	bspc window -s last
-
-# # Screencast region to mp4
-# super + c
-	# scrrec -s ~/Pictures/Screenshots/$(date +%F-%T).mp4
-	
-# # Screencast region to gif
-# super + g
-	# scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif

@@ -26,15 +26,6 @@ bspc config remove_unplugged_monitors true
 bspc rule -r '*'
 
 bspc rule -a xst-256color state=floating
-bspc rule -a Firefox desktop='^1'
-bspc rule -a kitty desktop='^1'
-bspc rule -a codium desktop='^2'
-bspc rule -a KeePassXC desktop='^3'
-bspc rule -a musikcube desktop='^4'
-bspc rule -a signal-desktop desktop='^5'
-bspc rule -a telegram-desktop desktop='^5'
-bspc rule -a gimp desktop='^6'
-bspc rule -a obs desktop='^8'
 
 # source rc files
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
