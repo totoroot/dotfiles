@@ -77,16 +77,16 @@ ctrl + alt + Left
 alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
-alt + ,
+alt + comma
 	$DOTFILES/bin/rofi/windowmenu
 
-alt + .
+alt + period
 	$DOTFILES/bin/rofi/passmenu
 
 alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
-alt + ;
+alt + semicolon
 	$DOTFILES/bin/rofi/powermenu -x
 
 ## Node Controls ##
@@ -95,15 +95,11 @@ alt + ;
 super + l
     $DOTFILES/bin/keymapswitcher
 
-## Toggle Polybar
-super + alt + p
-    polybar-msg cmd toggle && bspc config -m primary top_padding 0
-
 ## Toggle window gap
 super + g
         if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
 
-## Toggle fullscreen for active node
+## Toggle fullscreen for active node and toggle polybar
 super + t
 	bspc desktop -l next && polybar-msg cmd toggle && bspc config -m primary top_padding 0
 
