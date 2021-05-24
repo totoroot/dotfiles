@@ -99,9 +99,13 @@ super + l
 super + g
         if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
 
-## Toggle fullscreen for active node and toggle polybar
-super + t
-	bspc desktop -l next && polybar-msg cmd toggle && bspc config -m primary top_padding 0
+## Set window state for active node
+super + {t,shift + t,s,f}
+        bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+## Toggle polybar
+super + alt + p
+	polybar-msg cmd toggle && bspc config -m primary top_padding 0
 
 ## Toggle focus follow for nodes
 super + p
@@ -130,10 +134,6 @@ super + shift + {0-9}
 ## Switch to desktop with number
 super + {0-9}
     bspc desktop --focus '^{1-9,10}'
-
-## Toggle floating/tiling for active node
-super + {_,ctrl + }f
-	bspc node -t ~{floating,fullscreen}
 
 ## Change active node
 super + {_,ctrl +}{h,j,k,l}
