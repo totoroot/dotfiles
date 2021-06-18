@@ -1,5 +1,38 @@
 # Command Line
 
+## lf
+
+| q | quit |
+| k/up | go up in list |
+| j/down | go down in list |
+| h | go to parent directory |
+| l | open file|
+| e | open file in editor |
+| i | open file in pager |
+| w | open file in shell |
+| ctrl + u | half page up |
+| ctrl + d | half page down |
+| ctrl + b/pgup | full page up |
+| ctrl + f/pgdn | full page down |
+| gg/home | go to top of list |
+| G/end | go to bottom of list |
+| gh | go to home directory |
+| space | toggle selection |
+| v | invert selections in current directory |
+| u | clear selections |
+| y | copy current or selections |
+| d | cut current or selections |
+| p | paste copy or cut selections |
+| c | clear copy or cut selections |
+| : | read builtin or custom command |
+| $ | runs a command in shell |
+| & | runs a command in background |
+| ! | runs a command in shell but waits for key press |
+| / | reads pattern for search |
+| ? | reads pattern for back search |
+| n | go to next matching file |
+| N | go to previous matching file |
+
 ## bat
 
 | z | pagedown |
