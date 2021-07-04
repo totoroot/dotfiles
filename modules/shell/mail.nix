@@ -20,6 +20,8 @@ in {
 
       (if cfg.desktop.enable then [
         sylpheed      # lightweight GUI email client
+        thunderbird   # a full-featured email client
+        birdtray      # mail system tray notification icon for Thunderbird
       ] else []);
 
     home.configFile = {
