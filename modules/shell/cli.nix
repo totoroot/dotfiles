@@ -11,6 +11,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       ## system utilities
+      cheat               # create and view interactive cheatsheets
       gotop               # graphical activity monitor
       htop                # interactive process viewer
       stress-ng           # stresstest your system
@@ -21,25 +22,25 @@ in {
       unzip				        # extract zip archives
       exiftool			      # metadata tool
       aria2				        # multi-protocol download utility
-      unstable.borgbackup # backup utility with compression and encryption
+      borgbackup          # backup utility with compression and encryption
       playerctl           # control media players from command line
       light               # control display brightness from command line
       colorpicker         # X11 color picker
       jq                  # lightweight JSON processor 
-      unstable.yq         # jq wrapper for YAML files
-      unstable.yamllint   # linter for yaml files
+      yq                  # jq wrapper for YAML files
+      yamllint            # linter for yaml files
       xkbmon              # keyboard layout monitor for X11
       translate-shell     # translator
       speedread           # terminal based reader for maximum wpm
-      unstable.youtube-dl # download manager (not only for youtube)
+      youtube-dl          # download manager (not only for youtube)
       pulsemixer          # cli mixer for pulseaudio
       ## file managers
-      unstable.lf         # terminal file manager
+      lf                  # terminal file manager
       ## fetch programs
-      unstable.neofetch   # fast, highly customizable system info script
-      unstable.fet-sh     # fetch written in posix shell without any external commands
-      unstable.pfetch     # pretty system information tool written in POSIX sh
-      unstable.disfetch     # yet another *nix distro fetching program, but less complex
+      neofetch            # fast, highly customizable system info script
+      fet-sh              # fetch written in posix shell without any external commands
+      pfetch              # pretty system information tool written in POSIX sh
+      disfetch            # yet another *nix distro fetching program, but less complex
       ## other fun stuff
       gomatrix			      # matrix effect
       lolcat			        # freakin rainbow terminal effect
