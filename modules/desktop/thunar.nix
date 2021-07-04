@@ -15,7 +15,7 @@ in {
       xfce.thunar
       xfce.thunar-volman
       xfce.thunar-archive-plugin
-      xfce.gvfs
+      gvfs                       # virtual Filesystem support library 
     ];
   };
 }

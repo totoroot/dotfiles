@@ -13,12 +13,12 @@
   inputs = 
     {
       # Core dependencies.
-      nixos.url          = "nixpkgs/nixos-20.09";
+      nixos.url          = "nixpkgs/nixos-21.05";
       nixos-unstable.url = "nixpkgs/nixos-unstable";
 
       nixpkgs.url        = "nixpkgs/master";
 
-      home-manager.url   = "github:rycee/home-manager/release-20.09";
+      home-manager.url   = "github:rycee/home-manager/release-21.05";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
       # Extras

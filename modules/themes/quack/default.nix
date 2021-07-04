@@ -41,20 +41,23 @@ in {
     # Desktop (X11) theming
     (mkIf config.services.xserver.enable {
       user.packages = with pkgs; [
-        unstable.dracula-theme
+        dracula-theme
         paper-icon-theme # for rofi
       ];
       fonts = {
         fonts = with pkgs; [
+          mononoki
+          julia-mono
           fira-code
           fira-code-symbols
+          fira-mono
           jetbrains-mono
           siji
           font-awesome-ttf
         ];
         fontconfig.defaultFonts = {
           sansSerif = ["Fira Sans"];
-          monospace = ["Fira Code"];
+          monospace = ["Mononoki"];
         };
       };
 
