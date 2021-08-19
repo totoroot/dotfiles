@@ -27,8 +27,8 @@ in {
       # python38Packages.jupytext   # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
       ansible                     # automation tool
       ansible-lint                # linter for ansible
-      unstable.esptool            # ESP8266 and ESP32 serial bootloader utility
-      unstable.micropython        # Python implementation for MCUs
+      esptool                     # ESP8266 and ESP32 serial bootloader utility
+      micropython                 # Python implementation for MCUs
     ];
 
     env.IPYTHONDIR      = "$XDG_CONFIG_HOME/ipython";
