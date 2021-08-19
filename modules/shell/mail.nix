@@ -30,6 +30,11 @@ in {
       "aerc/aerc.conf".source = "${configDir}/aerc/aerc.conf";
       "aerc/filters".source = "${configDir}/aerc/filters";
       "aerc/templates".source = "${configDir}/aerc/templates";
+      # after istalling thunderbird and importing the profile open thunderbird with
+      # `thunderbird -ProfileManager &` and choose the profile directory
+      "thunderbird/profiles.ini".source = "${configDir}/thunderbird/profiles.ini";
+      "thunderbird/installs.ini".source = "${configDir}/thunderbird/installs.ini";
+      "thunderbird/signature-professional.html".source = "${configDir}/thunderbird/signature-professional.html";
     };
   };
 }
