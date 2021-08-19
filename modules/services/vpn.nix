@@ -12,11 +12,12 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      mullvad-vpn
+      unstable.mullvad-vpn
     ];
 
     networking.wireguard.enable = true;
     networking.iproute2.enable = true;
+    networking.firewall.checkReversePath = "loose";
     services.mullvad-vpn.enable = true;
   };
 }
