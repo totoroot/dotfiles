@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -x
+
 ## Add this to your wm startup file.
 
 # Terminate already running bar instances

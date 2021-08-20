@@ -32,6 +32,15 @@ in {
 
       # add user to group disk for access on disks without sudo
       user.extraGroups = [ "disk" ];
+
+      services.udev = {
+      extraRules = ''
+        KERNEL=="sd*", ACTION=="add", ATTR{removable}=="1", \
+        RUN+="$XDG_BIN_HOME/polybar-scripts/usb-mount.sh --update"
+        KERNEL=="sd*", ACTION=="remove", \
+        RUN+="$XDG_BIN_HOME/polybar-scripts/usb-mount.sh --update"
+        '';
+    }; 
     }
   ]);
 }

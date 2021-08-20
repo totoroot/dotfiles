@@ -33,4 +33,4 @@ for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
 done
 
 # workaround to autostart mullvad-vpn
-command -v mullvad-vpn >/dev/null && mullvad-vpn
+command -v mullvad >/dev/null && mullvad connect &

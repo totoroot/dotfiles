@@ -34,6 +34,7 @@ in {
         };
       };
       env = {
+        XDG_THEME_CONFIG = "$XDG_CONFIG_HOME/dotfiles/modules/themes/quack/config/";
         BAT_THEME = "Dracula";
       };
     }
@@ -83,10 +84,13 @@ in {
 
       # Login screen theme
       services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
+        font = "Monospace"
+        font-size = 14
         text-color = "#ff79c6"
         password-background-color = "#1E2029"
         window-color = "#181a23"
         border-color = "#181a23"
+        password-character = "💜"
       '';
 
       # Other dotfiles
