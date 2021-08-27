@@ -123,5 +123,5 @@
   networking.useDHCP                = false;
   # set eurkey as default layout
   # set more keymaps and use them with bin/keymapswitcher
-  services.xserver.layout           = "us";
+  services.xserver.layout           = "eu";
 }
