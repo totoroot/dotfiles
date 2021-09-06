@@ -90,7 +90,7 @@ in {
         password-background-color = "#1E2029"
         window-color = "#181a23"
         border-color = "#181a23"
-        password-character = "💜"
+        password-character = "*"
       '';
 
       # Other dotfiles
