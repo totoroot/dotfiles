@@ -8,11 +8,11 @@ if [[ $(hostname) == 'purple' ]]; then
     if [ ${#MONITORS[@]} -eq 2 ]; then
         xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
         # set workspaces
-        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Editing,Browsing,Recording,Notes}
-        bspc monitor ${MONITORS[2]} -d {VMs}
+        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording}
+        bspc monitor ${MONITORS[2]} -d {Aux}
     else
         xrandr --output ${MONITORS[1]}
-        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Editing,Browsing,Recording}
+        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
     fi
 else
     xrandr --auto
