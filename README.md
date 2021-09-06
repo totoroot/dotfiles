@@ -1,10 +1,10 @@
-[![NixOS 20.09](https://img.shields.io/badge/NixOS-v20.09-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
+[  ![NixOS 21.05](https://img.shields.io/badge/NixOS-v21.05-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
 
 **Hey,** you. You're finally awake. You were trying to configure your OS declaratively, right? Walked right into that NixOS ambush, same as us, and those dotfiles over there.
 
 Note that this repository is a fork of [Henrik Lissner's dotfiles](https://github.com/hlissner/dotfiles).
 
-**Screenshots follow as soon as bspwm config is done.**
+**Screenshots will follow.**
 
 ------
 
@@ -13,8 +13,8 @@ Note that this repository is a fork of [Henrik Lissner's dotfiles](https://githu
 | **Shell:** | zsh + zgen |
 | **DM:** | lightdm + lightdm-mini-greeter |
 | **WM:** | bspwm + polybar |
-| **Editor:** | [micro] (and occasionally vim) |
-| **Terminal:** | kitty |
+| **Editor:** | [micro] (and occasionally nvim) |
+| **Terminal:** | [kitty] |
 | **Launcher:** | rofi |
 | **Browser:** | firefox |
 | **GTK Theme:** | [Ant Dracula](https://github.com/EliverLara/Ant-Dracula) |
@@ -23,7 +23,7 @@ Note that this repository is a fork of [Henrik Lissner's dotfiles](https://githu
 
 ## Quick start
 
-1. Yoink [NixOS 20.09][nixos].
+1. Yoink [NixOS 21.05][nixos].
 2. Boot into the installer.
 3. Do your partitions and mount your root to `/mnt`. I recommend first doing `sudo su` for ease of use. Be careful with those labels though.
 4. Clone the repo with `git clone https://github.com/totoroot/dotfiles-nixos /mnt/etc/nixos`.
@@ -125,5 +125,6 @@ Options:
 
 
 [micro]: https://micro-editor.github.io
+[kitty]: https://sw.kovidgoyal.net/kitty/
 [nixos]: https://releases.nixos.org/?prefix=nixos/20.09-small/
 [host/purple]: https://github.com/totoroot/dotfiles/tree/master/hosts/purple
