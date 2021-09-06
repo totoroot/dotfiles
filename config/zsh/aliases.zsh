@@ -65,3 +65,12 @@ take() {
 zman() {
   PAGER="less -g -I -s '+/^       "$1"'" man zshall;
 }
+
+beep() {
+    sh -c '
+    ( \speaker-test --frequency 800 --test sine > /dev/null 2>&1 )&
+    BEEP_PID=$(pgrep speaker-test)
+    \sleep 0.04s
+    \kill -9 $BEEP_PID
+    '
+}
