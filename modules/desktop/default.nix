@@ -32,6 +32,7 @@ in {
       qgnomeplatform        # QPlatformTheme for a better Qt application inclusion in GNOME
       qt5ct                 # Qt5 Configuration Tool
       libsForQt5.qtstyleplugin-kvantum # SVG-based Qt5 theme engine plus a config tool and extra themes
+      hicolor-icon-theme    # default fallback theme used by implementations of the icon theme specification
     ];
 
     ## Apps/Services
