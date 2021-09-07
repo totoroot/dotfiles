@@ -27,38 +27,12 @@ in {
       xclip                 # access X clipboard from console
       xdo                   # perform elementary actions on X windows
       xdotool               # X input and window management tool
-      fontpreview           # minimal font viewer
       sxiv                  # simple X image viewer (dependency fontpreview)
       feh                   # light-weight image viewer 
       qgnomeplatform        # QPlatformTheme for a better Qt application inclusion in GNOME
       qt5ct                 # Qt5 Configuration Tool
       libsForQt5.qtstyleplugin-kvantum # SVG-based Qt5 theme engine plus a config tool and extra themes
     ];
-
-    fonts = {
-      fontDir.enable = true;
-      enableGhostscriptFonts = true;
-      fonts = with pkgs; [
-        ubuntu_font_family
-        dejavu_fonts
-        symbola
-        noto-fonts
-        carlito
-        emojione
-        fira-code
-        fira-code-symbols
-        font-awesome_5
-        hack-font
-        lato
-        source-code-pro
-        source-han-mono
-        source-han-sans
-        source-han-serif
-        source-sans-pro
-        source-serif-pro
-        unstable.julia-mono
-      ];
-    };
 
     ## Apps/Services
     services.xserver.displayManager.lightdm.greeters.mini.user = config.user.name;
