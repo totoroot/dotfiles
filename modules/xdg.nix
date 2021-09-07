@@ -13,17 +13,18 @@
     configFile."mimeapps.list".force = true;
     mimeApps.enable = true;
     mimeApps.defaultApplications = {
-      "text/plain" = "micro.desktop";
-      "text/markdown" = "ghostwriter.desktop";
+      "text/plain" = "mousepad.desktop";
+      "text/markdown" = "qownnotes.desktop";
       "text/html" = "firefox.desktop";
-      "text/x-csrc" = "micro.desktop";
-      "application/x-shellscript" = "micro.desktop";
+      "text/x-csrc" = "mousepad.desktop";
+      "application/x-shellscript" = "mousepad.desktop";
       "application/pdf" = "org.pwmt.zathura.desktop";
       "application/x-download" = "thunar.desktop";
       "image/jpeg" = "imv.desktop";
       "image/png" = "imv.desktop";
       "image/gif" = "imv.desktop";
       "video/mp4" = "mpv.desktop";
+      "audio/mp3" = "lollypop.desktop";
     };
   };
   
