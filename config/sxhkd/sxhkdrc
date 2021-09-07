@@ -18,9 +18,6 @@ ctrl + alt + d
 ctrl + alt + l
     libreoffice
 
-ctrl + alt + e
-    fractal
-
 ctrl + alt + c
     codium
 
@@ -28,10 +25,10 @@ ctrl + alt + k
     kitty
 
 ctrl + alt + m
-    kitty musikcube
+    thunderbird
 
-ctrl + alt + w
-    kitty weechat
+ctrl + alt + n
+    QOwnNotes
 
 ctrl + alt + a
     kitty aerc
@@ -129,11 +126,11 @@ super + shift + m
 
 ## Send to desktop with number and follow
 super + shift + {0-9}
-    bspc node -d '^{1-9,10}' --follow
+    bspc node -d '^{10,1-9}' --follow
 
 ## Switch to desktop with number
 super + {0-9}
-    bspc desktop --focus '^{1-9,10}'
+    bspc desktop --focus '^{10,1-9}'
 
 ## Change active node
 super + {_,ctrl +}{h,j,k,l}
