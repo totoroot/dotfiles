@@ -49,25 +49,25 @@ ctrl + alt + p
 
 ## Volume Control ##
 
-ctrl + alt + Backspace
+ctrl + alt + slash
 	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
 	
 ctrl + alt + Up
-	pulsemixer --change-volume -"10" --unmute && notify-send 'Raised Volume'
+	pulsemixer --change-volume +"10" --unmute && notify-send 'Raised Volume'
 	
 ctrl + alt + Down
-	pulsemixer --change-volume +"10" --unmute && notify-send 'Decreased Volume'
+	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
 
 ## Media Control ##
 
 ctrl + alt + Return
-	playerctl play-pause
+	playerctl play-pause && notify-send 'Play/Pause'
 	
 ctrl + alt + Right
-	playerctl next
+	playerctl next && notify-send 'Next'
 	
 ctrl + alt + Left
-	playerctl previous
+	playerctl previous && notify-send 'Previous'
 
 ## Rofi ##
 
@@ -125,7 +125,7 @@ super + shift + m
     bspc node -m last --follow
 
 ## Send to desktop with number and follow
-super + shift + {0-9}
+super + ctrl + {0-9}
     bspc node -d '^{10,1-9}' --follow
 
 ## Switch to desktop with number
