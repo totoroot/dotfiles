@@ -15,12 +15,14 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs;
       (if cfg.player.enable then [
-		    musikcube         # terminal music player
+		    musikcube               # terminal music player
+		    cmus                    # small, fast and powerful console music player for Linux and *BSD
+		    lollypop                # modern music player for GNOME
       ] else []) ++
 
       (if cfg.misc.enable then [
-        picard                # music tagger
-        audacity              # audio editing suite
+        picard                  # music tagger
+        audacity                # audio editing suite
         # pulseeffects-legacy   # equalizer and other effects for pulseaudio
         # lsp-plugins           # audio plugins needed for pulseeffects
       ] else []);
