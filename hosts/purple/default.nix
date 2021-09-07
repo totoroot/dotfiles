@@ -10,6 +10,7 @@
     desktop = {
       bspwm.enable		  = true;
       documents.enable 	= true;
+      fonts.enable 	    = true;
       flatpak.enable    = true;
       keepassxc.enable 	= true;
       kvantum.enable    = true;
