@@ -49,18 +49,18 @@ ctrl + alt + p
 
 ## Volume Control ##
 
-ctrl + alt + Return
+ctrl + alt + Backspace
 	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
 	
-crtl + alt + Up
+ctrl + alt + Up
 	pulsemixer --change-volume -"10" --unmute && notify-send 'Raised Volume'
 	
-crtl + alt + Down
+ctrl + alt + Down
 	pulsemixer --change-volume +"10" --unmute && notify-send 'Decreased Volume'
 
 ## Media Control ##
 
-ctrl + alt + space
+ctrl + alt + Return
 	playerctl play-pause
 	
 ctrl + alt + Right
