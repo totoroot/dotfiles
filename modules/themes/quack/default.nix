@@ -14,8 +14,8 @@ in {
           wallpaper = mkDefault ./config/wallpaper.png;
           gtk = {
             theme       = "Dracula";
-            iconTheme   = "Paper";
-            cursorTheme = "Paper";
+            iconTheme   = "Papirus";
+            cursorTheme = "Papirus";
           };
         };
 
