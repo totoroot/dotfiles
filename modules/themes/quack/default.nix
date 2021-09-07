@@ -43,7 +43,7 @@ in {
     (mkIf config.services.xserver.enable {
       user.packages = with pkgs; [
         dracula-theme
-        paper-icon-theme # for rofi
+        papirus-icon-theme
       ];
       fonts.fontconfig.defaultFonts = {
         sansSerif = ["Fira Sans"];
