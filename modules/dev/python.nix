@@ -29,6 +29,7 @@ in {
       ansible-lint                # linter for ansible
       esptool                     # ESP8266 and ESP32 serial bootloader utility
       micropython                 # Python implementation for MCUs
+      thonny                      # Python IDE for beginners
     ];
 
     env.IPYTHONDIR      = "$XDG_CONFIG_HOME/ipython";
