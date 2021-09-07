@@ -24,15 +24,17 @@ in {
     ];
 
     user.packages = with pkgs; [
-      xclip                 # access X clipboard from console
-      xdo                   # perform elementary actions on X windows
-      xdotool               # X input and window management tool
-      sxiv                  # simple X image viewer (dependency fontpreview)
-      feh                   # light-weight image viewer 
-      qgnomeplatform        # QPlatformTheme for a better Qt application inclusion in GNOME
-      qt5ct                 # Qt5 Configuration Tool
-      libsForQt5.qtstyleplugin-kvantum # SVG-based Qt5 theme engine plus a config tool and extra themes
-      hicolor-icon-theme    # default fallback theme used by implementations of the icon theme specification
+      xclip                             # access X clipboard from console
+      xdo                               # perform elementary actions on X windows
+      xdotool                           # X input and window management tool
+      sxiv                              # simple X image viewer (dependency fontpreview)
+      feh                               # light-weight image viewer 
+      qgnomeplatform                    # QPlatformTheme for a better Qt application inclusion in GNOME
+      qt5ct                             # Qt5 Configuration Tool
+      libsForQt5.qtstyleplugin-kvantum  # SVG-based Qt5 theme engine plus a config tool and extra themes
+      # Fallback icon themes
+      gnome3.adwaita-icon-theme
+      hicolor-icon-theme                # default fallback theme used by implementations of the icon theme specification
     ];
 
     ## Apps/Services
