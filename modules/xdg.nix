@@ -13,6 +13,7 @@
     configFile."mimeapps.list".force = true;
     mimeApps.enable = true;
     mimeApps.defaultApplications = {
+      "inode/directory" = "Thunar.desktop";
       "text/plain" = "mousepad.desktop";
       "text/markdown" = "qownnotes.desktop";
       "text/html" = "firefox.desktop";

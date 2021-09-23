@@ -96,6 +96,7 @@
       direnv.enable   = true;
       git.enable      = true;
       gnupg.enable    = true;
+      lf.enable       = true;
       mail.enable     = true;
       pass.enable     = true;
       taskell.enable  = true;
