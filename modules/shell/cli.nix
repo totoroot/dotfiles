@@ -34,8 +34,6 @@ in {
       speedread           # terminal based reader for maximum wpm
       youtube-dl          # download manager (not only for youtube)
       pulsemixer          # cli mixer for pulseaudio
-      ## file managers
-      lf                  # terminal file manager
       ## fetch programs
       neofetch            # fast, highly customizable system info script
       fet-sh              # fetch written in posix shell without any external commands

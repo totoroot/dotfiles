@@ -1,0 +1,7 @@
+map <enter> cd
+
+set previewer lfpreviewer
+
+set cleaner lfcleaner
+
+set ratios 1:2:3
