@@ -13,11 +13,18 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       lf
+      bat
+      unrar
+      poppler
+      unzip
+      imagemagick
       catdoc
       ffmpegthumbnailer
       chafa
       odt2txt
       exiftool
+      transmission
+      gnumeric
     ];
       
     home.configFile = {
