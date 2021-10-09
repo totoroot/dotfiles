@@ -27,6 +27,7 @@ in {
       # python38Packages.jupytext   # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
       ansible                     # automation tool
       ansible-lint                # linter for ansible
+      yamllint                    # linter for yaml files
       esptool                     # ESP8266 and ESP32 serial bootloader utility
       micropython                 # Python implementation for MCUs
       pandoc                      # Conversion between markup formats
@@ -49,6 +50,14 @@ in {
       po     = "poetry";
       ipy    = "ipython --no-banner";
       ipylab = "ipython --pylab=qt5 --no-banner";
+    };
+
+    home.configFile = {
+      "yamllint/yamllint.yml".source = "${configDir}/yamllint/yamllint.yml";
+    };
+
+    environment.shellAliases = {
+      yamllint = "yamllint -c ~/${configDir}/yamllint/yamllint.yml";
     };
   };
 }

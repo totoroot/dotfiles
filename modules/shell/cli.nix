@@ -28,7 +28,6 @@ in {
       colorpicker         # X11 color picker
       jq                  # lightweight JSON processor 
       yq                  # jq wrapper for YAML files
-      yamllint            # linter for yaml files
       xkbmon              # keyboard layout monitor for X11
       translate-shell     # translator
       speedread           # terminal based reader for maximum wpm

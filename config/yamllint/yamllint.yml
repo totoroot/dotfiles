@@ -1,0 +1,9 @@
+extends: default
+
+rules:
+  document-start: disable
+  quoted-strings:
+    quote-type: double
+    required: only-when-needed
+  truthy:
+    allowed-values: ["yes", "no"]
