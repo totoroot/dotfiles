@@ -1,0 +1,25 @@
+location:
+    # List of source directories to backup.
+    source_directories:
+        - /home/mathym/nts
+        - /mnt/photos
+
+    # Paths of local or remote repositories to backup to.
+    repositories:
+        - root@plum:/mnt/backup/backup-purple.borg
+
+retention:
+    # Retention policy for how many backups to keep.
+    keep_daily: 8
+    keep_weekly: 4
+    keep_monthly: 2
+
+consistency:
+    # List of checks to run to validate your backups.
+    checks:
+        - repository
+        - archives
+
+storage:
+    # Passphrase for the encryption key used for this backup
+    encryption_passphrase: "IzBUUn16ABSqPvMlGEEY1AvUlE5LHcE50QrV5q31"
