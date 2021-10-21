@@ -28,6 +28,7 @@ in {
         hdparm          # get disk speeds
         bashmount       # menu-driven mounting tool for removeable drives
         testdisk        # data recovery utilities
+        lvm2            # tools to support Logical Volume Management (LVM)
       ];
 
       # add user to group disk for access on disks without sudo
