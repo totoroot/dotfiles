@@ -59,3 +59,7 @@ config.codekit
 *.so
 *.dll
 *.pyc
+
+# VSCode #
+##########
+.vscode
