@@ -44,6 +44,8 @@ in {
         source-han-serif
         source-sans-pro
         source-serif-pro
+        corefonts
+        vistafonts
       ]; 
     };
   };
