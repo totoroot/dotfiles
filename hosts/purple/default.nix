@@ -67,6 +67,7 @@
       clojure.enable     = false;
       common-lisp.enable = false;
       go.enable          = true;
+      java.enable  		   = true;
       julia.enable  		 = true;
       lua.enable         = false;
       node.enable        = false;
