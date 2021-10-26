@@ -6,17 +6,18 @@ export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
 if [[ $(hostname) == 'purple' ]]; then
     if [ ${#MONITORS[@]} -eq 2 ]; then
-        xrandr --output ${MONITORS[1]} --primary --below ${MONITORS[2]}
+        xrandr --output HDMI-0 --primary
+        xrandr --output DP-0 --above HDMI-0 
         # set workspaces
-        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording}
-        bspc monitor ${MONITORS[2]} -d {Aux}
+        bspc monitor HDMI-0 -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
+        bspc monitor DP-0 -d Other
     else
         xrandr --output ${MONITORS[1]}
         bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
     fi
 else
     xrandr --auto
-    bspc monitor ${MONITORS[1]} -d {1,2,3,4}
+    bspc monitor ${MONITORS[1]} -d {I,II,III,IV,V,VI,VII,VIII,IX,X}
 fi
 
 bspc config remove_disabled_monitors true
