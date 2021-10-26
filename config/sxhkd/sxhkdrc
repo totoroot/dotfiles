@@ -97,8 +97,8 @@ super + g
         if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
 
 ## Set window state for active node
-super + {t,shift + t,s,f}
-        bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {f,r,s,t}
+        bspc node -t {fullscreen,pseudo_tiled,floating,tiled}
 
 ## Toggle polybar
 super + ctrl + p
@@ -120,17 +120,21 @@ super + ctrl + r
 super + {_,shift + }q
 	bspc node -{c,k}
 
+## Switch to desktop on last used monitor
+super + m
+    bspc monitor last --focus
+
 ## Send active node to desktop on last used monitor and switch to it
 super + ctrl + m
     bspc node -m last --follow
 
-## Send to desktop with number and follow
-super + ctrl + {0-9}
-    bspc node -d '^{10,1-9}' --follow
-
 ## Switch to desktop with number
 super + {0-9}
-    bspc desktop --focus '^{10,1-9}'
+    bspc desktop --focus 'primary:^{10,1-9}'
+
+## Send to desktop with number and follow
+super + ctrl + {0-9}
+    bspc node -d 'primary:^{10,1-9}' --follow
 
 ## Change active node
 super + {Left,Down,Up,Right}
@@ -139,7 +143,6 @@ super + {Left,Down,Up,Right}
 ## Swap nodes 
 super + {_,ctrl +}{Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
-
 
 super + alt + {1-9}
     bspc {desktop -f,node -d} {1-9,10};
