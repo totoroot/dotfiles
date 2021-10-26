@@ -101,7 +101,7 @@ super + {t,shift + t,s,f}
         bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 ## Toggle polybar
-super + alt + p
+super + ctrl + p
 	polybar-msg cmd toggle && bspc config -m primary top_padding 0
 
 ## Toggle focus follow for nodes
@@ -109,11 +109,11 @@ super + p
 	bspc config focus_follows_pointer {false,true}
 
 ## Toggle Wacom device	
-super + w
+super + ctrl + w
 	wacom-toggle
 
 ## Rotate Wacom device	
-super + r
+super + ctrl + r
 	wacom-rotate
 
 ## Quit active node
@@ -121,7 +121,7 @@ super + {_,shift + }q
 	bspc node -{c,k}
 
 ## Send active node to desktop on last used monitor and switch to it
-super + shift + m
+super + ctrl + m
     bspc node -m last --follow
 
 ## Send to desktop with number and follow
@@ -133,11 +133,11 @@ super + {0-9}
     bspc desktop --focus '^{10,1-9}'
 
 ## Change active node
-super + {_,ctrl +}{h,j,k,l}
+super + {Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
 
 ## Swap nodes 
-super + shift + {_,ctrl +}{h,j,k,l}
+super + {_,ctrl +}{Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
 
 
@@ -156,16 +156,16 @@ super + alt + Delete
 	# $DOTFILES/bin/bspwm/subtract-presel
 
 # Expand a node by moving one of its side outward
-super + {Left,Down,Up,Right}
-	bspc node -z {left -40 0,bottom 0 40,top 0 -40,right 40 0}
+super + alt + {Left,Down,Up,Right}
+	bspc node -z {left -120 0,bottom 0 120,top 0 -120,right 120 0}
 
 # Contract a node by moving one of its side inward
-super + ctrl + {Left,Down,Up,Right}
-	bspc node -z {right -40 0,top 0 40,bottom 0 -40,left 40 0}
+super + shift + {Left,Down,Up,Right}
+	bspc node -z {right -120 0,top 0 120,bottom 0 -120,left 120 0}
 
 # Move a floating node
 super + shift + {Left,Down,Up,Right}
-	bspc node -v {-40 0,0 40,0 -40,40 0}
+	bspc node -v {-120 0,0 120,0 -120,120 0}
 
 # Screenshot region
 super + s
