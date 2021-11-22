@@ -6,11 +6,11 @@ export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
 if [[ $(hostname) == 'purple' ]]; then
     if [ ${#MONITORS[@]} -eq 2 ]; then
-        xrandr --output HDMI-0 --primary
-        xrandr --output DP-0 --above HDMI-0 
+        xrandr --output DP-0 --pos 0x1440 --primary
+        xrandr --output HDMI-0 --pos 200x0
         # set workspaces
-        bspc monitor HDMI-0 -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
-        bspc monitor DP-0 -d Other
+        bspc monitor DP-0 -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
+        bspc monitor HDMI-0 -d Other
     else
         xrandr --output ${MONITORS[1]}
         bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}

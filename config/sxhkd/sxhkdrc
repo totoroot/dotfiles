@@ -75,10 +75,10 @@ alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
 alt + comma
-	$DOTFILES/bin/rofi/windowmenu
+	$DOTFILES/bin/rofi/passmenu
 
 alt + period
-	$DOTFILES/bin/rofi/passmenu
+	$DOTFILES/bin/rofi/windowmenu
 
 alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
