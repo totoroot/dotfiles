@@ -10,18 +10,19 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      kompose
       kubectl
       kubectx
+      kubens
       kubernetes-helm
       helmfile
+      kompose
     ];
 
     env.KUBECONFIG = "$XDG_CONFIG_HOME/k8s";
 
     # user.extraGroups = [ "docker" ];
 
-    # modules.shell.zsh.rcFiles = [ "${configDir}/k8s/aliases.zsh" ];
+    modules.shell.zsh.rcFiles = [ "${configDir}/k8s/aliases.zsh" ];
 
     # virtualisation = {
       # docker = {
