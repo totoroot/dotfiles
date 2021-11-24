@@ -27,11 +27,32 @@ alias gd='git diff'
 alias gf='git fetch'
 alias gi='git init'
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Creset %C(red)%G?%Creset%C(green)%d%Creset %s %Cblue(%cr) %C(bold blue)<%aN>%Creset"'
+alias gli='gitlint --config ~/.config/gitlint/default.ini --commits HEAD'
 alias gll='git log --pretty="format:%C(yellow)%h%Creset %C(red)%G?%Creset%C(green)%d%Creset %s %Cblue(%cr) %C(bold blue)<%aN>%Creset"'
+alias glo='() {
+    if (( $1 )); then
+        git log --oneline --format="%s" | head -n $1
+    else
+        git log --oneline --format="%s"
+    fi
+}'
+alias gloh='() {
+    if (( $1 )); then
+        git log --oneline --pretty="format:%C(yellow)%h%Creset %s" | head -n $1
+    else
+        git log --oneline --pretty="format:%C(yellow)%h%Creset %s"
+    fi
+}'
 alias gL='gl --stat'
 alias gp='git push'
 alias gpf!='git push --force'
 alias gpl='git pull --rebase --autostash'
+alias gr='git reset HEAD'
+alias grb='git rebase -i'
+alias gri='(){ git rebase -i HEAD~$1 }'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grv='git rev-parse'
 alias gss='git status --short .'
 alias gsh='git show'
 alias gst='git status'
@@ -44,15 +65,4 @@ alias gstp='git stash pop'
 alias gsts='git stash show --text'
 alias gstall='git stash --all'
 alias gsu='git submodule update'
-alias gr='git reset HEAD'
-alias grb='git rebase -i'
-alias gri='(){ git rebase -i HEAD~$1 }'
-alias grba='git rebase --abort'
-alias grbc='git rebase --continue'
-alias grv='git rev-parse'
-
-
-
-
-
-
+alias gu='git fetch && git rebase origin/master'
