@@ -9,45 +9,45 @@
   modules = {
     desktop = {
       bspwm.enable = true;
-      documents.enable = true;
+      documents.enable = false;
       fonts.enable = true;
-      flatpak.enable = true;
+      flatpak.enable = false;
       keepassxc.enable = true;
-      kvantum.enable = true;
-      screenshot.enable = true;
+      kvantum.enable = false;
+      screenshot.enable = false;
       thunar.enable = true;
       apps = {
-        anki.enable = true;
-        blender.enable = true;
-        calibre.enable = true;
-        geany.enable = true;
-        ghostwriter.enable = true;
-        godot.enable = true;
-        gpa.enable = true;
-        gsmartcontrol.enable = true;
-        nextcloud.enable = true;
+        anki.enable = false;
+        blender.enable = false;
+        calibre.enable = false;
+        geany.enable = false;
+        ghostwriter.enable = false;
+        godot.enable = false;
+        gpa.enable = false;
+        gsmartcontrol.enable = false;
+        nextcloud.enable = false;
         rofi.enable = true;
-        torrent.enable = true;
-        vscodium.enable = true;
+        torrent.enable = false;
+        vscodium.enable = false;
       };
       browsers = {
         default = "firefox";
-        chromium.enable = true;
+        chromium.enable = false;
         firefox.enable = true;
         qutebrowser.enable = false;
-        tor.enable = true;
+        tor.enable = false;
       };
       communication = {
-        delta.enable = true;
-        discord.enable = true;
-        jitsi.enable = true;
-        matrix.enable = true;
-        signal.enable = true;
-        telegram.enable = true;
+        delta.enable = false;
+        discord.enable = false;
+        jitsi.enable = false;
+        matrix.enable = false;
+        signal.enable = false;
+        telegram.enable = false;
       };
       media = {
-        graphics.enable = true;
-        video.enable = true;
+        graphics.enable = false;
+        video.enable = false;
         audio.enable = true;
         daw.enable = false;
       };
@@ -57,28 +57,28 @@
         kitty.enable = true;
       };
       vm = {
-        qemu.enable = true;
+        qemu.enable = false;
         virtualbox.enable = false;
-        virt-manager.enable = true;
+        virt-manager.enable = false;
       };
     };
     dev = {
-      cc.enable = true;
+      cc.enable = false;
       clojure.enable = false;
       common-lisp.enable = false;
-      go.enable = true;
-      java.enable = true;
-      julia.enable = true;
+      go.enable = false;
+      java.enable = false;
+      julia.enable = false;
       lua.enable = false;
       node.enable = false;
-      python.enable = true;
-      rust.enable = true;
+      python.enable = false;
+      rust.enable = false;
       scala.enable = false;
       shell.enable = true;
     };
     editors = {
       default = "micro";
-      vim.enable = true;
+      vim.enable = false;
       micro.enable = true;
     };
     hardware = {
@@ -87,7 +87,7 @@
       disks.enable = true;
       fancontrol.enable = true;
       keebs.enable = true;
-      nvidia.enable = true;
+      nvidia.enable = false;
       printers.enable = true;
       sensors.enable = true;
       wacom.enable = true;
@@ -101,19 +101,19 @@
       lf.enable = true;
       mail.enable = true;
       pass.enable = true;
-      taskell.enable  = true;
+      taskell.enable = true;
       zsh.enable = true;
       cli.enable = true;
     };
     services = {
       docker.enable = true;
       gitea.enable = false;
-      jellyfin.enable = false;
-      k8s.enable = true;
-      nginx.enable  = false;
-      vpn.enable = true;
+      jellyfin.enable	= false;
+      k8s.enable = false;
+      nginx.enable = false;
+      vpn.enable = false;
       ssh.enable = true;
-      transmission.enable	= false;
+      transmission.enable = false;
     };
     theme.active = "quack";
   };
@@ -134,6 +134,26 @@
 
   # Set default monitor
   environment.variables = rec {
-    MONITORS = ["HDMI-0", "DP-0"];
-  }; 
+    MONITORS = ["HDMI-A-0"];
+  };
+
+  # Create some home directories
+  home.file = {
+    "archive/.use".text = "archive";
+    "books/.use".text = "books";
+    "dev/.use".text = "dev";
+    "documents/.use".text = "documents";
+    "downloads/.use".text = "downloads";
+    "graphics/.use".text = "graphics";
+    "inbox/.use".text = "inbox";
+    "music/.use".text = "music";
+    "notes/.use".text = "notes";
+    "outbox/.use".text = "outbox";
+    "photos/.use".text = "photos";
+    "resources/.use".text = "resources";
+    "shared/.use".text = "shared";
+    "tmp/.use".text = "tmp";
+    "uni/.use".text = "uni";
+    "zero/.use".text = "zero";
+  };
 }

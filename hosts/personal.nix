@@ -4,9 +4,9 @@ with lib;
 {
   networking.hosts =
     let hostConfig = {
-          "192.168.8.1"  = [ "white" ];
-          "192.168.8.101"  = [ "purple" ];
-          "192.168.8.102" = [ "olive" ];
+          "192.168.8.1"   = [ "white" ];
+          "192.168.8.101" = [ "purple" ];
+          "192.168.8.102" = [ "violet" ];
         };
         hosts = flatten (attrValues hostConfig);
         hostName = config.networking.hostName;
