@@ -13,8 +13,6 @@ in {
       unstable.micro
     ];
     environment.shellAliases = {
-      # use fasd file finder for micro
-      m = "f -e micro";
       # just don't ask
       mciro = "micro";
     };
@@ -22,6 +20,8 @@ in {
       "micro/settings.json".source = "${configDir}/micro/settings.json";
       "micro/bindings.json".source = "${configDir}/micro/bindings.json";
       "micro/syntax".source = "${configDir}/micro/syntax";
+      "micro/colorschemes".source = "${configDir}/micro/colorschemes/";
+      "micro/plug".source = "${configDir}/micro/plug/";
     };
   };
 }
