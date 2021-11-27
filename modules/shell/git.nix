@@ -11,15 +11,15 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       gitAndTools.gitFull
-      lazygit 				# terminal ui for git
-      onefetch 				# git repo summary
-      gitlint               # git commit linter
+      lazygit           # terminal ui for git
+      onefetch 				  # git repo summary
+      unstable.gitlint  # git commit linter
     ];
 
     home.configFile = {
       "git/config".source = "${configDir}/git/config";
       "git/ignore".source = "${configDir}/git/ignore";
-      "gitlint/default.ini".source = "${configDir}/gitlint/default.ini";
+      "git/gitlint/default.ini".source = "${configDir}/gitlint/default.ini";
     };
 
     modules.shell.zsh.rcFiles = [ "${configDir}/git/aliases.zsh" ];
