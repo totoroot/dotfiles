@@ -19,7 +19,7 @@ in {
     home.configFile = {
       "git/config".source = "${configDir}/git/config";
       "git/ignore".source = "${configDir}/git/ignore";
-      "git/gitlint/default.ini".source = "${configDir}/gitlint/default.ini";
+      "gitlint/default.ini".source = "${configDir}/git/gitlint/default.ini";
     };
 
     modules.shell.zsh.rcFiles = [ "${configDir}/git/aliases.zsh" ];
