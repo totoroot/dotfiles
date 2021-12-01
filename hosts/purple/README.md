@@ -1,23 +1,5 @@
 # Overview
 
-## Specs
-
-|THING|TYPE|
-|---|---|
-|CPU|AMD FX-6300 6-Core 3,5GHz (overclocked)|
-|MOBO|ASUS AM3+ M5A97 R2.0|
-|COOL|Noctua AM3 Cooler + Noctua NF-P14r redux|
-|FANS|2 x Noctua NF-P14r redux +  Noctua NF-S12B redux|
-|GPU|Palit GeForce GTX 970 JetStream 4GB|
-|RAM|4 x 8GB DDR3 1333MHz Mushkin Essentials|
-|PCI|PCI-Express card Icybox M.2 NVMe|
-|SSD|500GB Samsung 970 EVO NVMe M.2 SSD|
-|SSD|1TB SanDisk Plus SSD|
-|SSD|180GB Corsair Force GS SSD|
-|HDD|2TB Seagate BarraCuda Compute HDD|
-|KBD|DREVO Calibur 60%|
-|MOUSE|Anker Wireless Vertical Mouse 2,4GHz|
-
 ## Installation
 
 ### Set up root file system
