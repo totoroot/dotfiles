@@ -1,4 +1,7 @@
-## Programs ##
+# sxhkd - Simple X HotKey Daemon
+
+## Launch applications
+## Key Sequence: ctrl + alt
 
 ctrl + alt + f
     firefox
@@ -47,7 +50,8 @@ ctrl + alt + j
 ctrl + alt + p
     xst -g 80x15 python
 
-## Volume Control ##
+
+## Volume Control
 
 ctrl + alt + slash
 	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
@@ -58,7 +62,8 @@ ctrl + alt + Up
 ctrl + alt + Down
 	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
 
-## Media Control ##
+
+## Media Control
 
 ctrl + alt + Return
 	playerctl play-pause && notify-send 'Play/Pause'
@@ -69,7 +74,8 @@ ctrl + alt + Right
 ctrl + alt + Left
 	playerctl previous && notify-send 'Previous'
 
-## Rofi ##
+
+## Rofi
 
 alt + Return
 	$DOTFILES/bin/rofi/appmenu
@@ -86,99 +92,104 @@ alt + slash
 alt + semicolon
 	$DOTFILES/bin/rofi/powermenu -x
 
-## Node Controls ##
 
-## Switch between preset keymaps
+## bspwm Node Controls
+## Key Sequence: super
+
+### Switch between preset keymaps
 super + l
     $DOTFILES/bin/keymapswitcher
 
-## Toggle window gap
+### Toggle window gap
 super + g
         if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
 
-## Set window state for active node
+### Set window state for active node
 super + {f,r,s,t}
         bspc node -t {fullscreen,pseudo_tiled,floating,tiled}
 
-## Toggle polybar
-super + ctrl + p
-	polybar-msg cmd toggle && bspc config -m primary top_padding 0
-
-## Toggle focus follow for nodes
+### Toggle focus follow for nodes
 super + p
 	bspc config focus_follows_pointer {false,true}
-
-## Toggle Wacom device	
-super + ctrl + w
-	wacom-toggle
-
-## Rotate Wacom device	
-super + ctrl + r
-	wacom-rotate
 
 ## Quit active node
 super + {_,shift + }q
 	bspc node -{c,k}
 
-## Switch to desktop on last used monitor
+### Toggle polybar
+super + ctrl + p
+	polybar-msg cmd toggle && bspc config -m primary top_padding 0
+
+### Toggle Wacom device	
+super + ctrl + w
+	wacom-toggle
+
+### Rotate Wacom device	
+super + ctrl + r
+	wacom-rotate
+
+### Switch to desktop on last used monitor
 super + m
     bspc monitor last --focus
 
-## Send active node to desktop on last used monitor and switch to it
+### Send active node to desktop on last used monitor and switch to it
 super + ctrl + m
     bspc node -m last --follow
 
-## Switch to desktop with number
+### Switch to desktop with number
 super + {0-9}
     bspc desktop --focus 'primary:^{10,1-9}'
 
-## Send to desktop with number and follow
+### Send to desktop with number and follow
 super + ctrl + {0-9}
     bspc node -d 'primary:^{10,1-9}' --follow
 
-## Change active node
+### Change active node
 super + {Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
 
-## Swap nodes 
+### Swap nodes 
 super + {_,ctrl +}{Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
 
 super + alt + {1-9}
     bspc {desktop -f,node -d} {1-9,10};
 
-## Open new node in preselected space
+### Open new node in preselected space
 super + alt + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
-## Cancel resizing by preselection
-super + alt + Delete
-	bspc node -p cancel
-
-# super + alt + Return
-	# $DOTFILES/bin/bspwm/subtract-presel
-
-# Expand a node by moving one of its side outward
+### Expand a node by moving one of its side outward
 super + alt + {Left,Down,Up,Right}
 	bspc node -z {left -120 0,bottom 0 120,top 0 -120,right 120 0}
 
-# Contract a node by moving one of its side inward
+### Contract a node by moving one of its side inward
 super + shift + {Left,Down,Up,Right}
 	bspc node -z {right -120 0,top 0 120,bottom 0 -120,left 120 0}
 
-# Move a floating node
+### Move a floating node
 super + shift + {Left,Down,Up,Right}
 	bspc node -v {-120 0,0 120,0 -120,120 0}
 
-# Screenshot region
+### Reload bspwm
+super + alt + r
+    $DOTFILES/config/bspwm/bspwmrc
+
+### xrandr auto
+super + alt + x
+    xrandr --auto
+
+## Screen grabs
+
+### Screenshot region
 super + s
 	scrcap
 
-# Screencast region to mp4
+### Screencast region to mp4
 super + c
 	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).mp4
 	
-# Screencast region to gif
+### Screencast region to gif
 super + x
 	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
 
@@ -195,3 +206,10 @@ super + {_,shift +}{1-9,0}
 
 super + a
 	bspc window -s last
+
+### Cancel resizing by preselection
+super + alt + Delete
+	bspc node -p cancel
+
+# super + alt + Return
+	# $DOTFILES/bin/bspwm/subtract-presel
