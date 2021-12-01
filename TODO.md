@@ -2,14 +2,12 @@
 
 - lazydocker config in nix
 - ghostwriter config + theme
-- set up evolution
 - usb auto-mount
 - add micro plugins to config
 - k8s setup (minikube, k3s, kind, ?)
 - k8s config
 - duplicate options (fdupes, jdupes, rmlint, dupeguru)
 - setup borgbackup with nix config
-- fan curves GPU and case fans
 - temperature monitoring
 - replace soundkonverter by a ffmpeg script
 - pulseaudio mixer systray
@@ -31,25 +29,33 @@
 - blender config with Nix
 - vscodium config with Nix
 - set dracula theme for libreoffice
-- Install XFCE
+- Install XFCE and/or KDE
 - keybindings in vscodium
-- pwd as kitty tab title
+- enable v4l2loopback module
+- fan curves GPU and case fans
+- aerc w3m html viewer
+- aerc pgp integration
+- nextcloud-client config with nix
+- calibre config with Nix
+- install pretty Wacom GUI like on MacOS
+- install hascard TUI flashcard program
+- setup SMART disk health monitoring with reporting
+- install go packages with NixOS config
+- install tt and speedread
+- enable printing with CUPS and brlaser
+-
 
 ## In Progress
 
-- setup SMART disk health monitoring with reporting
-- dracula theme for bat
-- increase cursor size
-- aerc w3m html viewer
-- aerc pgp integration
-- install go packages with NixOS config
-- install tt and speedread
-- nextcloud-client config with nix
-- calibre config with Nix
-- enable v4l2loopback module
 
 ## Completed
 
+- fix window switcher
+- troubleshoot Wacom user activation script
+- separate font config
+- fix icon themes
+- set cwd and process as tab title in terminal
+- dracula theme for bat
 - ssh setup
 - install qownnotes
 - fix rofi powermenu
