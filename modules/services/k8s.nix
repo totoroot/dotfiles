@@ -10,12 +10,26 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Kubernetes CLI
       kubectl
+      
+      # Package manager for kubectl plugins
+      krew
+      
+      # Utility to quickly switch between K8s clusters (kubectx) and namespaces (kubens)
       kubectx
-      kubens
+
+      # Package manager for K8s charts
       kubernetes-helm
+
+      # Deploy helm charts to defferent environments with ease 
       helmfile
+
+      # Translate docker-compose files into K8s resources
       kompose
+
+      # Kubernetes IDE
+      lens
     ];
 
     env.KUBECONFIG = "$XDG_CONFIG_HOME/k8s";
