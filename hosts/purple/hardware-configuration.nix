@@ -53,12 +53,6 @@
       options = [ "noatime" ];
     };
 
-  # fileSystems."/mnt/vms" =
-      # { device = "/dev/disk/by-label/vms";
-        # fsType = "ext4";
-        # options = [ "noatime" ];
-      # };
-
   swapDevices = [];
 
   # high-resolution display
