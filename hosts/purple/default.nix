@@ -35,7 +35,7 @@
         chromium.enable = true;
         firefox.enable = true;
         qutebrowser.enable = false;
-        tor.enable = true;
+        tor.enable = false;
       };
       communication = {
         delta.enable = true;
@@ -134,6 +134,6 @@
 
   # Set default monitor
   environment.variables = rec {
-    MONITORS = ["HDMI-0", "DP-0"];
+    MONITORS = ["HDMI-0" "DP-0"];
   }; 
 }
