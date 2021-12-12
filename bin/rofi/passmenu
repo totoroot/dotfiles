@@ -22,7 +22,7 @@ if [[ $1 == -r ]]; then
 fi
 
 url=
-# Get qutebrowser's current url
+# Get Firefox's current url
 win=$(xdotool getactivewindow)
 if [[ -n $win ]]; then
   winname=$(xdotool getwindowname $win)
