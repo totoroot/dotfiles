@@ -12,7 +12,7 @@
     "comment": true,
     "cursorline": true,
     "diff": true,
-    "diffgutter": false,
+    "diffgutter": true,
     "divchars": "|-",
     "divreverse": true,
     "encoding": "utf-8",
