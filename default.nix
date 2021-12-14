@@ -40,7 +40,7 @@ with inputs;
     # useSandbox = true;
   };
   system.configurationRevision = mkIf (self ? rev) self.rev;
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 
 
   ## Some reasonable, global defaults

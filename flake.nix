@@ -8,17 +8,17 @@
 # are loaded.
 
 {
-  description = "A grossly incandescent nixos config.";
+  description = "A grossly incandescent NixOS config.";
 
   inputs = 
     {
       # Core dependencies.
-      nixos.url          = "nixpkgs/nixos-21.05";
+      nixos.url          = "nixpkgs/nixos-21.11";
       nixos-unstable.url = "nixpkgs/nixos-unstable";
 
       nixpkgs.url        = "nixpkgs/master";
 
-      home-manager.url   = "github:rycee/home-manager/release-21.05";
+      home-manager.url   = "github:rycee/home-manager/release-21.11";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
       # Extras
