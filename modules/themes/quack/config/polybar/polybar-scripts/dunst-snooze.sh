@@ -6,9 +6,9 @@ case "$1" in
         ;;
     *)
         if [ "$(dunstctl is-paused)" = "true" ]; then
-            echo "#1"
+            echo "off"
         else
-            echo "#2"
+            echo "on"
         fi
         ;;
 esac
