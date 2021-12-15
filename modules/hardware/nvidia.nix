@@ -22,7 +22,7 @@ in {
     '';
 
     environment.systemPackages = with pkgs; [
-      nvidia-video-sdk  # needed for NVENC support in OBS
+      # nvidia-video-sdk  # needed for NVENC support in OBS
       # nvidia-docker     # NVIDIA container runtime for Docker
       
       # Respect XDG conventions, damn it!
