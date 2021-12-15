@@ -95,6 +95,7 @@
     shell = {
       archive.enable = true;
       borg.enable = true;
+      clipboard.enable = true;
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;

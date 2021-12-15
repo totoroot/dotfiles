@@ -55,10 +55,10 @@ ctrl + alt + p
 
 ctrl + alt + slash
 	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
-	
+
 ctrl + alt + Up
 	pulsemixer --change-volume +"10" --unmute && notify-send 'Raised Volume'
-	
+
 ctrl + alt + Down
 	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
 
@@ -67,10 +67,10 @@ ctrl + alt + Down
 
 ctrl + alt + Return
 	playerctl play-pause && notify-send 'Play/Pause'
-	
+
 ctrl + alt + Right
 	playerctl next && notify-send 'Next'
-	
+
 ctrl + alt + Left
 	playerctl previous && notify-send 'Previous'
 
@@ -81,7 +81,7 @@ alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
 alt + comma
-	$DOTFILES/bin/rofi/passmenu
+	$DOTFILES/bin/rofi/clipmenu
 
 alt + period
 	$DOTFILES/bin/rofi/windowmenu
@@ -120,11 +120,11 @@ super + {_,shift + }q
 super + ctrl + p
 	polybar-msg cmd toggle && bspc config -m primary top_padding 0
 
-### Toggle Wacom device	
+### Toggle Wacom device
 super + ctrl + w
 	wacom-toggle
 
-### Rotate Wacom device	
+### Rotate Wacom device
 super + ctrl + r
 	wacom-rotate
 
@@ -148,7 +148,7 @@ super + ctrl + {0-9}
 super + {Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
 
-### Swap nodes 
+### Swap nodes
 super + {_,ctrl +}{Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
 
@@ -188,7 +188,7 @@ super + s
 ### Screencast region to mp4
 super + c
 	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).mp4
-	
+
 ### Screencast region to gif
 super + x
 	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
