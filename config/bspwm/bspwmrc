@@ -35,3 +35,5 @@ done
 
 # workaround to autostart mullvad-vpn
 command -v mullvad >/dev/null && mullvad connect &
+
+greenclip daemon >/dev/null &
