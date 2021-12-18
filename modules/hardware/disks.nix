@@ -50,6 +50,8 @@ in {
         nvme-cli
         # LUKS disk encryption
         cryptsetup
+        # removable disk automounter for udisks
+        udiskie
       ];
 
       # add user to group disk for access on disks without sudo
