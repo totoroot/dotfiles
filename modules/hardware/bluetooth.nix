@@ -23,6 +23,7 @@ in {
           pulseaudioFull
           bluez
           bluez-tools
+          blueman
         ];
         # Enable additional codecs
         extraModules = [ pkgs.pulseaudio-modules-bt ];
