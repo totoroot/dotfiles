@@ -33,7 +33,7 @@ for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
 done
 
-# workaround to autostart mullvad-vpn
+# workaround to autostart a couple daemons
 command -v mullvad >/dev/null && mullvad connect &
-
 greenclip daemon >/dev/null &
+udiskie --tray -aF &
