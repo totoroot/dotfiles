@@ -26,7 +26,7 @@ in {
       playerctl           # control media players from command line
       light               # control display brightness from command line
       colorpicker         # X11 color picker
-      jq                  # lightweight JSON processor 
+      jq                  # lightweight JSON processor
       yq                  # jq wrapper for YAML files
       xkbmon              # keyboard layout monitor for X11
       translate-shell     # translator
@@ -48,6 +48,7 @@ in {
       tokei				        # code statistics
       thefuck             # corrects fuckups in console
       nmap                # network discovery utility
+      pipes               # animated pipes terminal screensaver
     ];
 
     user.extraGroups = [ "admin" ];

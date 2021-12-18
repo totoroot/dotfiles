@@ -27,7 +27,7 @@ in {
         # creates and maintains the history of snapshots of btrfs filesystems
         unstable.btrfs-snap
         # visualize the layout of a mounted btrfs
-        btrfs-heatmap
+        # btrfs-heatmap
         # mount ntfs drives (Windows compatibility)
         ntfs3g
         # partitioning tool
