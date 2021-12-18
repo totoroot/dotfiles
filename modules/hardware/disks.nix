@@ -17,18 +17,39 @@ in {
     {
       programs.udevil.enable = true;
 
-      # Support for more filesystems, mostly to support external drives
       environment.systemPackages = with pkgs; [
-        sshfs           # mount remote directories
-        exfat           # mount exfat drives (macOS compatibility)
-        ntfs3g          # mount ntfs drives (Windows compatibility)
-        parted          # partitioning tool
-        unstable.duf    # graphical disk usage utility
-        smartmontools   # drive health monitoring
-        hdparm          # get disk speeds
-        bashmount       # menu-driven mounting tool for removeable drives
-        testdisk        # data recovery utilities
-        lvm2            # tools to support Logical Volume Management (LVM)
+        # mount remote directories
+        sshfs
+        # mount exfat drives (macOS compatibility)
+        exfat
+        # utilities for the btrfs filesystem
+        btrfs-progs
+        # creates and maintains the history of snapshots of btrfs filesystems
+        unstable.btrfs-snap
+        # visualize the layout of a mounted btrfs
+        btrfs-heatmap
+        # mount ntfs drives (Windows compatibility)
+        ntfs3g
+        # partitioning tool
+        parted
+        # graphical disk usage utility
+        unstable.duf
+        # drive health monitoring
+        smartmontools
+        # tool to get/set ATA/SATA drive parameters under Linux
+        hdparm
+        # get disk temperature for ATA/SATA drives
+        hddtemp
+        # menu-driven mounting tool for removeable drives
+        bashmount
+        # data recovery utilities
+        testdisk
+        # tools to support Logical Volume Management (LVM)
+        lvm2
+        # NVM-Express user space tooling for Linux
+        nvme-cli
+        # LUKS disk encryption
+        cryptsetup
       ];
 
       # add user to group disk for access on disks without sudo
@@ -41,7 +62,7 @@ in {
         KERNEL=="sd*", ACTION=="remove", \
         RUN+="$XDG_BIN_HOME/polybar-scripts/usb-mount.sh --update"
         '';
-    }; 
+    };
     }
   ]);
 }
