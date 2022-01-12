@@ -107,7 +107,7 @@
       cli.enable = true;
     };
     services = {
-      docker.enable = true;
+      containers.enable = true;
       gitea.enable = false;
       jellyfin.enable = false;
       k8s.enable = true;

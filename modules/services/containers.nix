@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.docker;
+let cfg = config.modules.services.containers;
 in {
-  options.modules.services.docker = {
+  options.modules.services.containers = {
     enable = mkBoolOpt false;
   };
 
