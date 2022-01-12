@@ -7,6 +7,7 @@ with lib;
           "192.168.8.1"   = [ "white" ];
           "192.168.8.101" = [ "purple" ];
           "192.168.8.102" = [ "violet" ];
+          "192.168.8.103" = [ "lilac" ];
         };
         hosts = flatten (attrValues hostConfig);
         hostName = config.networking.hostName;
@@ -16,7 +17,7 @@ with lib;
   time.timeZone = mkDefault "Europe/Vienna";
   i18n.defaultLocale = mkDefault "en_US.UTF-8";
   # For redshift, mainly
-  # Go try find my home with those coordinates 
+  # Go try find my home with those coordinates
   # as those are randomly picked within a range near my home
   location = (if config.time.timeZone == "Europe/Vienna" then {
     latitude = 47.064;
