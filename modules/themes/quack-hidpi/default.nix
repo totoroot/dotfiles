@@ -1,4 +1,4 @@
-# modules/themes/quack/default.nix --- a regal dracula-inspired theme
+# modules/themes/quack-hidpi/default.nix --- a regal dracula-inspired theme
 
 { options, config, lib, pkgs, ... }:
 
@@ -6,7 +6,7 @@ with lib;
 with lib.my;
 let cfg = config.modules.theme;
 in {
-  config = mkIf (cfg.active == "quack") (mkMerge [
+  config = mkIf (cfg.active == "quack-hidpi") (mkMerge [
     # Desktop-agnostic configuration
     {
       modules = {
@@ -16,6 +16,7 @@ in {
             theme       = "Dracula";
             iconTheme   = "Papirus";
             cursorTheme = "Papirus";
+            # cursorSize  = 36;
           };
         };
 
@@ -34,7 +35,7 @@ in {
         };
       };
       env = {
-        XDG_THEME_CONFIG = "$XDG_CONFIG_HOME/dotfiles/modules/themes/quack/config/";
+        XDG_THEME_CONFIG = "$XDG_CONFIG_HOME/dotfiles/modules/themes/quack-hidpi/config/";
         BAT_THEME = "Dracula";
       };
     }
@@ -71,15 +72,26 @@ in {
       };
 
       # Login screen theme
-      services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
-        font = "Monospace"
-        font-size = 14
-        text-color = "#ff79c6"
-        password-background-color = "#1E2029"
-        window-color = "#181a23"
-        border-color = "#181a23"
-        password-character = "."
-      '';
+      services.xserver.displayManager.lightdm.greeters = {
+        mini = {
+          # More information here: https://github.com/prikhi/lightdm-mini-greeter/blob/master/data/lightdm-mini-greeter.conf
+          extraConfig = ''
+            font = "Monospace"
+            font-size = 38
+            text-color = "#ff79c6"
+            password-background-color = "#1E2029"
+            window-color = "#181a23"
+            border-color = "#181a23"
+            password-character = "-1"
+            password-input-width = 20
+          '';
+        };
+        gtk.cursorTheme = {
+          # name = "Vanilla-DMZ";
+          # package = pkgs.vanilla-dmz;
+          size = 128;
+        };
+      };
 
       # Other dotfiles
       home.configFile = with config.modules; mkMerge [

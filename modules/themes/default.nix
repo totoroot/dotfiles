@@ -31,6 +31,7 @@ in {
       theme = mkOpt str "";
       iconTheme = mkOpt str "";
       cursorTheme = mkOpt str "";
+      # cursorSize = mkOpt str "";
     };
 
     onReload = mkOpt (attrsOf lines) {};
@@ -56,6 +57,7 @@ in {
             ''gtk-icon-theme-name=${cfg.gtk.iconTheme}''}
           ${optionalString (cfg.gtk.cursorTheme != "")
             ''gtk-cursor-theme-name=${cfg.gtk.cursorTheme}''}
+          gtk-cursor-theme-size=36
           gtk-fallback-icon-theme=gnome
           gtk-application-prefer-dark-theme=true
           gtk-xft-hinting=1

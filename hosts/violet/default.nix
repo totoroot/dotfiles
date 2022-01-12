@@ -8,6 +8,9 @@
   ## Modules
   modules = {
     desktop = {
+      gaming = {
+        retro.enable = true;
+      };
       bspwm.enable = true;
       documents.enable = false;
       fonts.enable = true;
@@ -46,10 +49,11 @@
         telegram.enable = false;
       };
       media = {
-        graphics.enable = false;
-        video.enable = false;
         audio.enable = true;
         daw.enable = false;
+        graphics.enable = false;
+        kodi.enable = true;
+        video.enable = false;
       };
       term = {
         default = "kitty";
@@ -112,11 +116,11 @@
       jellyfin.enable	= false;
       k8s.enable = false;
       nginx.enable = false;
-      vpn.enable = false;
+      vpn.enable = true;
       ssh.enable = true;
       transmission.enable = false;
     };
-    theme.active = "quack";
+    theme.active = "quack-hidpi";
   };
 
   ## Local config
@@ -135,7 +139,7 @@
 
   # Set default monitor
   environment.variables = rec {
-    MONITORS = ["HDMI-A-0"];
+    MAIN_MONITOR = "HDMI-A-0";
   };
 
   # Create some home directories
@@ -145,6 +149,7 @@
     "dev/.use".text = "dev";
     "documents/.use".text = "documents";
     "downloads/.use".text = "downloads";
+    "games/.use".text = "games";
     "graphics/.use".text = "graphics";
     "inbox/.use".text = "inbox";
     "music/.use".text = "music";
@@ -156,5 +161,13 @@
     "tmp/.use".text = "tmp";
     "uni/.use".text = "uni";
     "zero/.use".text = "zero";
+  };
+
+  # Scale all elemnts
+  services.xserver.dpi = 350;
+  environment.variables = {
+    GDK_SCALE = "2";
+    GDK_DPI_SCALE = "0.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
 }
