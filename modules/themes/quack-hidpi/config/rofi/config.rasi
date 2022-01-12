@@ -26,10 +26,10 @@ configuration {
   magenta: #bd93f9;
   blue:    #61bfff;
 
-  text-font:      "Fira Sans 15";
-  text-mono-font: "Fira Code 13";
+  text-font:      "Fira Sans 40";
+  text-mono-font: "Fira Code 38";
   /* icon-font:      "Hurmit Nerd Font Mono 26"; */
-  icon-font:      "FontAwesome 20";
+  icon-font:      "FontAwesome 62";
 
   background-color: transparent;
   text-color: @fg-list;
@@ -40,12 +40,12 @@ configuration {
 
 /**** Layout ****/
 window {
-  width:    1000px;
+  width:    1600px;
   y-offset: -50px;
   anchor:   north;
   location: center;
   border: 1px;
-  border-radius: 6px 6px 0 0;
+  border-radius: 10px 10px 0 0;
   children: [ inputbar, listview ];
 
 }
