@@ -12,6 +12,8 @@ in {
     user.packages = with pkgs; [
       docker
       docker-compose
+      podman
+      podman-compose
       lazydocker          # terminal UI for docker and docker-compose
       ctop                # container activity monitor
     ];
