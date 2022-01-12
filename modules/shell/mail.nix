@@ -14,14 +14,19 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs;
       (if cfg.enable then [
-        unstable.aerc # TUI email client with vim keybindings
-        w3m           # text based browser for displaying html emails
+        # TUI email client with vim keybindings
+        aerc
+        # text based browser for displaying html emails
+        w3m
       ] else []) ++
 
       (if cfg.desktop.enable then [
-        sylpheed      # lightweight GUI email client
-        thunderbird   # a full-featured email client
-        birdtray      # mail system tray notification icon for Thunderbird
+        # lightweight GUI email client
+        # sylpheed
+        # a full-featured email client
+        thunderbird
+        # mail system tray notification icon for Thunderbird
+        birdtray
       ] else []);
 
     home.configFile = {
