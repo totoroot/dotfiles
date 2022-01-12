@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Multi-platform emulator frontend for libretro cores
-      retroarch
+      unstable.retroarch
     ];
     
   # Create directory for retro games

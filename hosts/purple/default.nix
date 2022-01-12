@@ -8,6 +8,9 @@
   ## Modules
   modules = {
     desktop = {
+      gaming = {
+        retro.enable = true;
+      };
       bspwm.enable = true;
       documents.enable = true;
       fonts.enable = true;
