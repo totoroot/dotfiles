@@ -7,8 +7,8 @@
 
   ## Modules
   modules = {
-    desktop = false;
-    dev = false;
+    desktop = {};
+    dev = {};
     editors = {
       default = "micro";
       vim.enable = true;
