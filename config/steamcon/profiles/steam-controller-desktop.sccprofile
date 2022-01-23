@@ -1,0 +1,68 @@
+{
+    "_": "", 
+    "buttons": {
+        "A": {
+            "action": "button(Keys.KEY_SPACE)"
+        }, 
+        "B": {
+            "action": "button(Keys.KEY_ENTER)"
+        }, 
+        "BACK": {
+            "action": "button(Keys.KEY_DELETE)"
+        }, 
+        "C": {
+            "action": "hold(quickmenu('Profiles.menu'), keyboard())"
+        }, 
+        "CPADPRESS": {
+            "action": "button(Keys.BTN_LEFT)"
+        }, 
+        "LB": {
+            "action": "button(Keys.KEY_LEFTCTRL)"
+        }, 
+        "LGRIP": {
+            "action": "button(Keys.KEY_VOLUMEDOWN)"
+        }, 
+        "RB": {
+            "action": "button(Keys.KEY_LEFTALT)"
+        }, 
+        "RGRIP": {
+            "action": "button(Keys.KEY_VOLUMEUP)"
+        }, 
+        "RPAD": {
+            "action": "button(Keys.BTN_LEFT)"
+        }, 
+        "START": {
+            "action": "button(Keys.KEY_BACKSPACE)"
+        }, 
+        "X": {
+            "action": "button(Keys.KEY_ESC)"
+        }, 
+        "Y": {
+            "action": "button(Keys.KEY_PLAYPAUSE)"
+        }
+    }, 
+    "cpad": {
+        "action": "mouse()"
+    }, 
+    "gyro": {
+        "action": "cemuhook()"
+    }, 
+    "is_template": false, 
+    "menus": {}, 
+    "pad_left": {
+        "action": "rotate(10.0, feedback(LEFT, 144, 2.0, circular(mouse(Rels.REL_WHEEL))))"
+    }, 
+    "pad_right": {
+        "action": "smooth(8, 0.75, 2, feedback(RIGHT, 128, ball(mouse())))"
+    }, 
+    "stick": {
+        "action": "dpad(button(Keys.KEY_UP), button(Keys.KEY_DOWN), button(Keys.KEY_LEFT), button(Keys.KEY_RIGHT))"
+    }, 
+    "trigger_left": {
+        "action": "button(Keys.BTN_RIGHT)"
+    }, 
+    "trigger_right": {
+        "action": "button(Keys.BTN_LEFT)"
+    }, 
+    "version": 1.4
+}
