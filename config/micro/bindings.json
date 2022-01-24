@@ -38,6 +38,7 @@
 	"Ctrl-h": "Backspace",
 	"Ctrl-j": "PlayMacro",
 	"Ctrl-l": "CutLine",
+	"Ctrl-Shift-j": "lua:joinLines.joinLines",
 	"Ctrl-k": "ToggleRuler",
 	"Ctrl-n": "FindNext",
 	"Ctrl-o": "OpenFile",
