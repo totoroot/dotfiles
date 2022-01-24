@@ -95,6 +95,7 @@
       nvidia.enable = false;
       printers.enable = true;
       sensors.enable = true;
+      steamcon.enable = true;
       wacom.enable = true;
     };
     shell = {
