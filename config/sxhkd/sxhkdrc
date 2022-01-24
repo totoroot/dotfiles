@@ -53,24 +53,42 @@ ctrl + alt + p
 
 ## Volume Control
 
+### Mute audio
+XF86AudioMute
+	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
 ctrl + alt + slash
 	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
 
+### Raise volume
+XF86AudioRaiseVolume
+	pulsemixer --change-volume +"10" --unmute && notify-send 'Raised Volume'
 ctrl + alt + Up
 	pulsemixer --change-volume +"10" --unmute && notify-send 'Raised Volume'
 
+### Lower volume
+XF86AudioLowerVolume
+	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
 ctrl + alt + Down
 	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
 
 
 ## Media Control
 
+### Play/Pause player
+XF86Audio{Play,Stop}
+	playerctl play-pause && notify-send 'Play/Pause'
 ctrl + alt + Return
 	playerctl play-pause && notify-send 'Play/Pause'
 
+### Next track
+XF86AudioNext
+	playerctl next && notify-send 'Next'
 ctrl + alt + Right
 	playerctl next && notify-send 'Next'
 
+### Previous track
+XF86AudioPrevious
+	playerctl previous && notify-send 'Previous'
 ctrl + alt + Left
 	playerctl previous && notify-send 'Previous'
 
@@ -149,35 +167,39 @@ super + {Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
 
 ### Swap nodes
-super + {_,ctrl +}{Left,Down,Up,Right}
+super + ctrl + {Left,Down,Up,Right}
 	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
 
-super + alt + {1-9}
-    bspc {desktop -f,node -d} {1-9,10};
-
 ### Open new node in preselected space
-super + alt + {h,j,k,l}
+super + alt + {Left,Down,Up,Right}
 	bspc node -p {west,south,north,east}
 
+### Cancel resizing by preselection
+super + alt + Delete
+	bspc node -p cancel
+
+super + alt + Return
+	$DOTFILES/bin/bspwm/subtract-presel
+
 ### Expand a node by moving one of its side outward
-super + alt + {Left,Down,Up,Right}
+super + ctrl + shift + {Left,Down,Up,Right}
 	bspc node -z {left -120 0,bottom 0 120,top 0 -120,right 120 0}
 
 ### Contract a node by moving one of its side inward
-super + shift + {Left,Down,Up,Right}
+super + alt + shift + {Left,Down,Up,Right}
 	bspc node -z {right -120 0,top 0 120,bottom 0 -120,left 120 0}
 
 ### Move a floating node
 super + shift + {Left,Down,Up,Right}
 	bspc node -v {-120 0,0 120,0 -120,120 0}
 
-### Reload bspwm
-super + alt + r
-    $DOTFILES/config/bspwm/bspwmrc
-
-### xrandr auto
+### Reload displays bspwm
 super + alt + x
-    xrandr --auto
+    xrandr --auto && $DOTFILES/config/bspwm/bspwmrc
+
+### Reload sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
 
 ## Screen grabs
 
@@ -192,24 +214,3 @@ super + c
 ### Screencast region to gif
 super + x
 	scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).gif
-
-# ---- don't really get these ----
-
-## Attach to a detached session. If none is available create a new one, rather
-## than attach to one that is already attached to elsewhere.
-
-# super + Escape
-	# pkill -USR1 -x sxhkd
-
-super + {_,shift +}{1-9,0}
-	$DOTFILES/bin/bspwm/presel 0.{1-9}
-
-super + a
-	bspc window -s last
-
-### Cancel resizing by preselection
-super + alt + Delete
-	bspc node -p cancel
-
-# super + alt + Return
-	# $DOTFILES/bin/bspwm/subtract-presel
