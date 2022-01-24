@@ -13,9 +13,10 @@ in {
   config = mkIf cfg.enable {
 
     programs.java.enable = true;
-  
+
     user.packages = with pkgs; [
       jetbrains.idea-ultimate
+      jdk
       maven
     ];
 
@@ -23,6 +24,10 @@ in {
 
     environment.shellAliases = {
       intellij = "idea-ultimate";
+    };
+
+    home.configFile = {
+      "JetBrains/IntelliJIdea2021.3/keymaps/custom.xml".source = "${configDir}/jetbrains/keymaps/custom.xml";
     };
   };
 }
