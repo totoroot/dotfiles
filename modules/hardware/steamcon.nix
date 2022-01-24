@@ -20,5 +20,11 @@ in {
         SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", MODE="0666"
         '';
     };
+
+    home.configFile = {
+      "scc/config.json".source = "${configDir}/steamcon/config.json";
+      "scc/menus".source = "${configDir}/steamcon/menus";
+      "scc/profiles".source = "${configDir}/steamcon/profiles";
+    };
   };
 }
