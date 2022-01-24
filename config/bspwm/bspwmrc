@@ -7,7 +7,7 @@ export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 if [[ $(hostname) == 'purple' ]]; then
     if [ ${#MONITORS[@]} -eq 2 ]; then
         xrandr --output DP-0 --pos 0x1440 --primary
-        xrandr --output HDMI-0 --pos 200x0
+        xrandr --output HDMI-0 --pos 200x0 --auto
         # set workspaces
         bspc monitor DP-0 -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
         bspc monitor HDMI-0 -d Other
@@ -33,7 +33,17 @@ for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
 done
 
+feh --bg-center $DOTFILES/modules/themes/quack/config/wallpaper.png
+
 # workaround to autostart a couple daemons
-command -v mullvad >/dev/null && mullvad connect &
-greenclip daemon >/dev/null &
-udiskie --tray -aF &
+if ! pgrep mullvad > /dev/null; then
+    command -v mullvad >/dev/null && mullvad connect &
+fi
+
+if ! pgrep greenclip > /dev/null; then
+    greenclip daemon >/dev/null &
+fi
+
+if ! pgrep udiskie > /dev/null; then
+    udiskie --tray -aF &
+fi
