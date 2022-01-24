@@ -23,8 +23,8 @@ in {
 
     home.configFile = {
       "scc/config.json".source = "${configDir}/steamcon/config.json";
-      "scc/menus".source = "${configDir}/steamcon/menus";
-      "scc/profiles".source = "${configDir}/steamcon/profiles";
+      "scc/menus/.use".source = "${configDir}/steamcon/menus/.use";
+      "scc/profiles/steam-controller-desktop.sccprofile".source = "${configDir}/steamcon/profiles/steam-controller-desktop.sccprofile";
     };
   };
 }
