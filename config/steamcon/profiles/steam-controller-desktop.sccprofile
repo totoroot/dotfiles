@@ -11,16 +11,19 @@
             "action": "button(Keys.KEY_DELETE)"
         },
         "C": {
-            "action": "hold(quickmenu('Profiles.menu'), keyboard())"
+            "action": "doubleclick(shell('firefox'), hold(turnoff(), keyboard()))"
         },
         "CPADPRESS": {
-            "action": "button(Keys.BTN_LEFT)"
+            "action": "button(Keys.BTN_MOUSE)"
         },
         "LB": {
             "action": "button(Keys.KEY_LEFTCTRL)"
         },
         "LGRIP": {
             "action": "button(Keys.KEY_VOLUMEDOWN)"
+        },
+        "LPAD": {
+            "action": "button(Keys.KEY_LEFTMETA) and button(Keys.BTN_MOUSE)"
         },
         "RB": {
             "action": "button(Keys.KEY_LEFTALT)"
@@ -29,10 +32,13 @@
             "action": "button(Keys.KEY_VOLUMEUP)"
         },
         "RPAD": {
-            "action": "button(Keys.BTN_LEFT)"
+            "action": "button(Keys.BTN_MOUSE)"
         },
         "START": {
             "action": "button(Keys.KEY_BACKSPACE)"
+        },
+        "STICKPRESS": {
+            "action": "button(Keys.KEY_LEFTMETA) and button(Keys.BTN_RIGHT)"
         },
         "X": {
             "action": "button(Keys.KEY_ESC)"
@@ -50,19 +56,19 @@
     "is_template": false,
     "menus": {},
     "pad_left": {
-        "action": "rotate(10.0, feedback(LEFT, 200, 2.0, circular(mouse(Rels.REL_WHEEL))))"
+        "action": "feedback(LEFT, 200, 2.0, circular(mouse(Rels.REL_WHEEL)))"
     },
     "pad_right": {
-        "action": "smooth(8, 0.75, 2, feedback(RIGHT, 200, ball(mouse())))"
+        "action": "feedback(RIGHT, 200, mouse())"
     },
     "stick": {
         "action": "dpad(button(Keys.KEY_UP), button(Keys.KEY_DOWN), button(Keys.KEY_LEFT), button(Keys.KEY_RIGHT))"
     },
     "trigger_left": {
-        "action": "button(Keys.BTN_RIGHT)"
+        "action": "trigger(50, 255, button(Keys.BTN_RIGHT)) and trigger(254, 255, button(Keys.KEY_LEFTALT) and button(Keys.KEY_LEFT))"
     },
     "trigger_right": {
-        "action": "button(Keys.BTN_LEFT)"
+        "action": "trigger(50, 255, button(Keys.BTN_MOUSE)) and trigger(254, 255, repeat(button(Keys.BTN_MOUSE)))"
     },
     "version": 1.4
 }
