@@ -13,6 +13,7 @@
 	"Alt-m": "SpawnMultiCursorSelect",
 	"Alt-n": "SpawnMultiCursor",
 	"Alt-p": "RemoveMultiCursor",
+	"Alt-t": "AddTab",
 	"Alt-x": "SkipMultiCursor",
 	"Alt-w": "lua:initlua.toggleSoftwrap",
 	"Alt-{": "ParagraphPrevious",
