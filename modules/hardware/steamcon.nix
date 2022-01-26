@@ -10,7 +10,9 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      # A standalone Steam controller driver
       # steamcontroller
+      # User-mode driver and GUI for Steam Controller and other controllers
       sc-controller
     ];
 
