@@ -1,74 +1,74 @@
 {
-    "_": "",
+    "_": "", 
     "buttons": {
         "A": {
             "action": "button(Keys.KEY_SPACE)"
-        },
+        }, 
         "B": {
             "action": "button(Keys.KEY_ENTER)"
-        },
+        }, 
         "BACK": {
             "action": "button(Keys.KEY_DELETE)"
-        },
+        }, 
         "C": {
             "action": "doubleclick(shell('firefox'), hold(turnoff(), keyboard()))"
-        },
+        }, 
         "CPADPRESS": {
             "action": "button(Keys.BTN_MOUSE)"
-        },
+        }, 
         "LB": {
             "action": "button(Keys.KEY_LEFTCTRL)"
-        },
+        }, 
         "LGRIP": {
             "action": "button(Keys.KEY_VOLUMEDOWN)"
-        },
+        }, 
         "LPAD": {
             "action": "button(Keys.KEY_LEFTMETA) and button(Keys.BTN_MOUSE)"
-        },
+        }, 
         "RB": {
             "action": "button(Keys.KEY_LEFTALT)"
-        },
+        }, 
         "RGRIP": {
             "action": "button(Keys.KEY_VOLUMEUP)"
-        },
+        }, 
         "RPAD": {
             "action": "button(Keys.BTN_MOUSE)"
-        },
+        }, 
         "START": {
             "action": "button(Keys.KEY_BACKSPACE)"
-        },
+        }, 
         "STICKPRESS": {
             "action": "button(Keys.KEY_LEFTMETA) and button(Keys.BTN_RIGHT)"
-        },
+        }, 
         "X": {
             "action": "button(Keys.KEY_ESC)"
-        },
+        }, 
         "Y": {
             "action": "button(Keys.KEY_PLAYPAUSE)"
         }
-    },
+    }, 
     "cpad": {
         "action": "mouse()"
-    },
+    }, 
     "gyro": {
         "action": "cemuhook()"
-    },
-    "is_template": false,
-    "menus": {},
+    }, 
+    "is_template": false, 
+    "menus": {}, 
     "pad_left": {
         "action": "feedback(LEFT, 200, 2.0, circular(mouse(Rels.REL_WHEEL)))"
-    },
+    }, 
     "pad_right": {
-        "action": "feedback(RIGHT, 200, mouse())"
-    },
+        "action": "smooth(15, 0.75, 2, feedback(RIGHT, 144, sens(4.0, 4.0, ball(1.0, mouse()))))"
+    }, 
     "stick": {
         "action": "dpad(button(Keys.KEY_UP), button(Keys.KEY_DOWN), button(Keys.KEY_LEFT), button(Keys.KEY_RIGHT))"
-    },
+    }, 
     "trigger_left": {
-        "action": "trigger(50, 255, button(Keys.BTN_RIGHT)) and trigger(254, 255, button(Keys.KEY_LEFTALT) and button(Keys.KEY_LEFT))"
-    },
+        "action": "trigger(50, 255, button(Keys.BTN_RIGHT))"
+    }, 
     "trigger_right": {
-        "action": "trigger(50, 255, button(Keys.BTN_MOUSE)) and trigger(254, 255, repeat(button(Keys.BTN_MOUSE)))"
-    },
+        "action": "trigger(50, 255, button(Keys.BTN_MOUSE))"
+    }, 
     "version": 1.4
 }
