@@ -49,6 +49,10 @@ in {
       thefuck             # corrects fuckups in console
       nmap                # network discovery utility
       pipes               # animated pipes terminal screensaver
+      # Conversion between markup formats
+      pandoc
+      # Shell script analysis tool
+      shellcheck
     ];
 
     user.extraGroups = [ "admin" ];

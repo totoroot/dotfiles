@@ -24,7 +24,7 @@
         anki.enable = false;
         blender.enable = false;
         calibre.enable = false;
-        geany.enable = false;
+        ide.enable = false;
         ghostwriter.enable = false;
         godot.enable = false;
         gpa.enable = false;

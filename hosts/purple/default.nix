@@ -23,7 +23,7 @@
         anki.enable = true;
         blender.enable = true;
         calibre.enable = true;
-        geany.enable = true;
+        ide.enable = true;
         ghostwriter.enable = true;
         godot.enable = true;
         gpa.enable = true;
@@ -90,6 +90,7 @@
       disks.enable = true;
       fancontrol.enable = true;
       keebs.enable = true;
+      mcus.enable = true;
       nvidia.enable = true;
       printers.enable = true;
       sensors.enable = true;
