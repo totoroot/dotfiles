@@ -29,24 +29,16 @@ in {
       python38Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
       # python38Packages.jupytext
-      # # Scientific tools for Python
-      # python38Packages.numpy
-      # # Python Data Analysis Library
-      # python38Packages.pandas
+      # Scientific tools for Python
+      python38Packages.numpy
+      # Python Data Analysis Library
+      python38Packages.pandas
       # Automation tool
       ansible
       # Linter for ansible
       ansible-lint
       # Linter for yaml files
       yamllint
-      # ESP8266 and ESP32 serial bootloader utility
-      esptool
-      # Python implementation for MCUs
-      micropython
-      # Conversion between markup formats
-      pandoc
-      # Python IDE for beginners
-      thonny
     ];
 
     env.IPYTHONDIR      = "$XDG_CONFIG_HOME/ipython";
