@@ -42,7 +42,7 @@
       };
       communication = {
         delta.enable = true;
-        discord.enable = true;
+        discord.enable = false;
         jitsi.enable = true;
         matrix.enable = true;
         signal.enable = true;
