@@ -45,7 +45,7 @@
 	"Ctrl-o": "OpenFile",
 	"Ctrl-p": "FindPrevious",
 	"Ctrl-q": "Quit",
-	"Ctrl-r": "command-edit: replace -i ",
+	"Ctrl-r": "command-edit: replace ",
 	"Ctrl-s": "Save",
 	"Ctrl-t": "AddTab",
 	"Ctrl-u": "ToggleMacro",
