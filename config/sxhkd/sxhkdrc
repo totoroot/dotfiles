@@ -55,42 +55,42 @@ ctrl + alt + p
 
 ### Mute audio
 XF86AudioMute
-	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
+	pulsemixer --toggle-mute && notify-send -u low 'Muted/Unmuted'
 ctrl + alt + slash
-	pulsemixer --toggle-mute && notify-send 'Muted/Unmuted'
+	pulsemixer --toggle-mute && notify-send -u low 'Muted/Unmuted'
 
 ### Raise volume
 XF86AudioRaiseVolume
-	pulsemixer --change-volume +"10" --unmute && notify-send 'Raised Volume'
+	pulsemixer --change-volume +"10" --unmute && notify-send -u low 'Raised Volume'
 ctrl + alt + Up
-	pulsemixer --change-volume +"10" --unmute && notify-send 'Raised Volume'
+	pulsemixer --change-volume +"10" --unmute && notify-send -u low 'Raised Volume'
 
 ### Lower volume
 XF86AudioLowerVolume
-	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
+	pulsemixer --change-volume -"10" --unmute && notify-send -u low 'Decreased Volume'
 ctrl + alt + Down
-	pulsemixer --change-volume -"10" --unmute && notify-send 'Decreased Volume'
+	pulsemixer --change-volume -"10" --unmute && notify-send -u low 'Decreased Volume'
 
 
 ## Media Control
 
 ### Play/Pause player
 XF86Audio{Play,Stop}
-	playerctl play-pause && notify-send 'Play/Pause'
+	playerctl play-pause && notify-send -u low 'Play/Pause'
 ctrl + alt + Return
-	playerctl play-pause && notify-send 'Play/Pause'
+	playerctl play-pause && notify-send -u low 'Play/Pause'
 
 ### Next track
 XF86AudioNext
-	playerctl next && notify-send 'Next'
+	playerctl next && notify-send -u low 'Next'
 ctrl + alt + Right
-	playerctl next && notify-send 'Next'
+	playerctl next && notify-send -u low 'Next'
 
 ### Previous track
 XF86AudioPrevious
-	playerctl previous && notify-send 'Previous'
+	playerctl previous && notify-send -u low 'Previous'
 ctrl + alt + Left
-	playerctl previous && notify-send 'Previous'
+	playerctl previous && notify-send -u low 'Previous'
 
 
 ## Rofi
