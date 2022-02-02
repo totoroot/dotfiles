@@ -77,7 +77,6 @@
       python.enable = true;
       rust.enable = true;
       scala.enable = false;
-      shell.enable = true;
     };
     editors = {
       default = "micro";
