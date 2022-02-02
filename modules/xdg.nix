@@ -1,34 +1,41 @@
 # xdg.nix
-#
+
 # Set up and enforce XDG compliance. Other modules will take care of their own,
 # but this takes care of the general cases.
 
-{ config, home-manager, ... }:
+{ config, home-manager, pkgs, ... }:
 {
   ### A tidy $HOME is a tidy mind
   home-manager.users.${config.user.name}.xdg ={
     enable = true;
-    mime.enable = true;
     # Until https://github.com/rycee/home-manager/issues/1213 is solved.
     configFile."mimeapps.list".force = true;
-    mimeApps.enable = true;
-    mimeApps.defaultApplications = {
-      "inode/directory" = "Thunar.desktop";
-      "text/plain" = "mousepad.desktop";
-      "text/markdown" = "qownnotes.desktop";
-      "text/html" = "firefox.desktop";
-      "text/x-csrc" = "mousepad.desktop";
-      "application/x-shellscript" = "mousepad.desktop";
-      "application/pdf" = "org.pwmt.zathura.desktop";
-      "application/x-download" = "thunar.desktop";
-      "image/jpeg" = "imv.desktop";
-      "image/png" = "imv.desktop";
-      "image/gif" = "imv.desktop";
-      "video/mp4" = "mpv.desktop";
-      "audio/mp3" = "lollypop.desktop";
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "Thunar.desktop";
+        "text/plain" = "mousepad.desktop";
+        "text/markdown" = "qownnotes.desktop";
+        "text/x-csrc" = "mousepad.desktop";
+        "application/x-shellscript" = "mousepad.desktop";
+        "application/pdf" = "org.pwmt.zathura.desktop";
+        "application/x-download" = "thunar.desktop";
+        "image/jpeg" = "imv.desktop";
+        "image/png" = "imv.desktop";
+        "image/gif" = "imv.desktop";
+        "video/mp4" = "mpv.desktop";
+        "audio/mp3" = "lollypop.desktop";
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/about" = "firefox.desktop";
+        "x-scheme-handler/unknown" =  "firefox.desktop";
+        "x-scheme-handler/mailto" = "thunderbird.desktop";
+      };
     };
   };
-  
+
   environment = {
     sessionVariables = {
       # These are the defaults, and xdg.enable does set them, but due to load
@@ -38,6 +45,10 @@
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME   = "$HOME/.local/share";
       XDG_BIN_HOME    = "$HOME/.local/bin";
+      # Firefox really wants a desktop directory to exist
+      XDG_DESKTOP_DIR = "~/tmp";
+      # Setting this for Electon apps that do not respect mime default apps
+      DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
     };
     variables = {
       # Conform more programs to XDG conventions. The rest are handled by their
