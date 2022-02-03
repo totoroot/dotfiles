@@ -46,8 +46,8 @@
         discord.enable = false;
         jitsi.enable = false;
         matrix.enable = false;
-        signal.enable = false;
-        telegram.enable = false;
+        signal.enable = true;
+        telegram.enable = true;
       };
       media = {
         audio.enable = true;
