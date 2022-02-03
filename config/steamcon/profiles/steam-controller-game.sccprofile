@@ -1,0 +1,74 @@
+{
+    "_": "", 
+    "buttons": {
+        "A": {
+            "action": "button(Keys.BTN_GAMEPAD)"
+        }, 
+        "B": {
+            "action": "button(Keys.BTN_EAST)"
+        }, 
+        "BACK": {
+            "action": "button(Keys.BTN_SELECT)"
+        }, 
+        "C": {
+            "action": "doubleclick(button(Keys.BTN_MODE), hold(turnoff(), button(Keys.KEY_ESC)))"
+        }, 
+        "CPADPRESS": {
+            "action": "button(Keys.BTN_MOUSE)"
+        }, 
+        "LB": {
+            "action": "button(Keys.BTN_TL)"
+        }, 
+        "LGRIP": {
+            "action": "axis(Axes.ABS_Z)"
+        }, 
+        "LPAD": {
+            "action": "button(Keys.KEY_LEFTMETA) and button(Keys.BTN_MOUSE)"
+        }, 
+        "RB": {
+            "action": "button(Keys.BTN_TR)"
+        }, 
+        "RGRIP": {
+            "action": "axis(Axes.ABS_RZ)"
+        }, 
+        "RPAD": {
+            "action": "button(Keys.BTN_MOUSE)"
+        }, 
+        "START": {
+            "action": "button(Keys.BTN_START)"
+        }, 
+        "STICKPRESS": {
+            "action": "button(Keys.KEY_LEFTMETA) and button(Keys.BTN_RIGHT)"
+        }, 
+        "X": {
+            "action": "button(Keys.BTN_NORTH)"
+        }, 
+        "Y": {
+            "action": "button(Keys.BTN_WEST)"
+        }
+    }, 
+    "cpad": {
+        "action": "mouse()"
+    }, 
+    "gyro": {
+        "action": "cemuhook()"
+    }, 
+    "is_template": false, 
+    "menus": {}, 
+    "pad_left": {
+        "action": "feedback(LEFT, 200, 2.0, XY(axis(Axes.ABS_X), raxis(Axes.ABS_Y)))"
+    }, 
+    "pad_right": {
+        "action": "smooth(15, 0.75, 2, feedback(RIGHT, 144, sens(4.0, 4.0, ball(1.0, mouse()))))"
+    }, 
+    "stick": {
+        "action": "dpad(button(Keys.KEY_UP), button(Keys.KEY_DOWN), button(Keys.KEY_LEFT), button(Keys.KEY_RIGHT))"
+    }, 
+    "trigger_left": {
+        "action": "trigger(50, 255, axis(Axes.ABS_Z))"
+    }, 
+    "trigger_right": {
+        "action": "trigger(50, 255, axis(Axes.ABS_RZ))"
+    }, 
+    "version": 1.4
+}
