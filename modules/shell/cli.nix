@@ -11,47 +11,83 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       ## system utilities
-      cheat               # create and view interactive cheatsheets
-      gotop               # graphical activity monitor
-      htop                # interactive process viewer
-      stress-ng           # stresstest your system
-      hyperfine           # benchmark commands
-      tree                # directory listing as tree
-      pstree   			      # show running processes as tree
-      zip				          # create/modify zip archives
-      unzip				        # extract zip archives
-      exiftool			      # metadata tool
-      aria2				        # multi-protocol download utility
-      borgbackup          # backup utility with compression and encryption
-      playerctl           # control media players from command line
-      light               # control display brightness from command line
-      colorpicker         # X11 color picker
-      jq                  # lightweight JSON processor
-      yq                  # jq wrapper for YAML files
-      xkbmon              # keyboard layout monitor for X11
-      translate-shell     # translator
-      speedread           # terminal based reader for maximum wpm
-      youtube-dl          # download manager (not only for youtube)
-      pulsemixer          # cli mixer for pulseaudio
+      # create and view interactive cheatsheets
+      cheat
+      # graphical activity monitor
+      gotop
+      # interactive process viewer
+      htop
+      # stresstest your system
+      stress-ng
+      # benchmark commands
+      hyperfine
+      # directory listing as tree
+      tree
+      # show running processes as tree
+      pstree
+      # create/modify zip archives
+      zip
+      # extract zip archives
+      unzip
+      # metadata tool
+      exiftool
+      # multi-protocol download utility
+      aria2
+      # backup utility with compression and encryption
+      borgbackup
+      # control media players from command line
+      playerctl
+      # control display brightness from command line
+      light
+      # X11 color picker
+      colorpicker
+      # small utility to create JSON objects
+      jo
+      # lightweight JSON processor
+      jq
+      # jq wrapper for YAML files
+      yq
+      # keyboard layout monitor for X11
+      xkbmon
+      # translator
+      translate-shell
+      # terminal based reader for maximum wpm
+      speedread
+      # download manager (not only for youtube)
+      youtube-dl
+      # cli mixer for pulseaudio
+      pulsemixer
       ## fetch programs
-      neofetch            # fast, highly customizable system info script
-      fet-sh              # fetch written in posix shell without any external commands
-      pfetch              # pretty system information tool written in POSIX sh
-      disfetch            # yet another *nix distro fetching program, but less complex
+      # fast, highly customizable system info script
+      neofetch
+      # fetch written in posix shell without any external commands
+      fet-sh
+      # pretty system information tool written in POSIX sh
+      pfetch
+      # yet another *nix distro fetching program, but less complex
+      disfetch
       ## other fun stuff
-      gomatrix			      # matrix effect
-      lolcat			        # freakin rainbow terminal effect
-      nms 				        # data encryption effect
-      pdfcpu			        # cli pdf processor
-      pdfpc				        # pdf presenter console
-      cheat				        # interactive cheatsheets
-      tokei				        # code statistics
-      thefuck             # corrects fuckups in console
-      nmap                # network discovery utility
-      pipes               # animated pipes terminal screensaver
-      # Conversion between markup formats
+      # matrix effect
+      gomatrix
+      # freakin rainbow terminal effect
+      lolcat
+      # data encryption effect
+      nms
+      # cli pdf processor
+      pdfcpu
+      # pdf presenter console
+      pdfpc
+      # code statistics
+      tokei
+      # corrects fuckups in console
+      thefuck
+      # network discovery utility
+      nmap
+      # animated pipes terminal screensaver
+      pipes
+      # conversion between markup formats
       pandoc
-      # Shell script analysis tool
+      # shell script analysis tool
       shellcheck
     ];
 
