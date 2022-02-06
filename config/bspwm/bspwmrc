@@ -47,3 +47,6 @@ fi
 if ! pgrep udiskie > /dev/null; then
     udiskie --tray -aF &
 fi
+
+# Autostart scc-daemon for a working Steam controller
+scc-daemon start
