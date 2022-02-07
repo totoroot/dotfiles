@@ -115,6 +115,7 @@
       containers.enable = false;
       gitea.enable = false;
       jellyfin.enable	= false;
+      kdeconnect.enable = true;
       k8s.enable = false;
       nginx.enable = false;
       vpn.enable = true;
