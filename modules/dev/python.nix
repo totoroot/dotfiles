@@ -37,6 +37,8 @@ in {
       ansible
       # Linter for ansible
       ansible-lint
+      # Uncompromising Python code formatter
+      black
       # Linter for yaml files
       yamllint
     ];
