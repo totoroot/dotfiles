@@ -53,9 +53,15 @@
       media = {
         audio.enable = true;
         daw.enable = false;
-        graphics.enable = false;
+        graphics.enable = true;
         kodi.enable = true;
-        video.enable = false;
+        ncmpcpp.enable = false;
+        video = {
+          editing.enable = false;
+          player.enable = true;
+          recording.enable = false;
+          transcoding.enable = false;
+        };
       };
       term = {
         default = "kitty";
