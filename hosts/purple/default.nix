@@ -50,10 +50,17 @@
         telegram.enable = true;
       };
       media = {
-        graphics.enable = true;
-        video.enable = true;
         audio.enable = true;
         daw.enable = false;
+        graphics.enable = true;
+        kodi.enable = true;
+        ncmpcpp.enable = false;
+        video = {
+          editing.enable = true;
+          player.enable = true;
+          recording.enable = true;
+          transcoding.enable = true;
+        };
       };
       term = {
         default = "kitty";
