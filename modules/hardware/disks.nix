@@ -30,6 +30,8 @@ in {
         # btrfs-heatmap
         # mount ntfs drives (Windows compatibility)
         ntfs3g
+        # non-destructive FAT16/FAT32 resizer
+        fatresize
         # partitioning tool
         parted
         # graphical disk usage utility
