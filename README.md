@@ -14,7 +14,10 @@ Note that this repository is a fork of [Henrik Lissner's dotfiles](https://githu
 
 In case you need help getting started with NixOS and want to use these dotfiles as a starting point, feel free to raise issues asking for help or send me an Email to my Git commit address which you can find on my profile.
 
-**Screenshots will follow.**
+## Screenshots 4K Display
+
+![Full Desktop](https://codeberg.org/totoroot/dotfiles/raw/branch/screenshots/screenshot-full.png)
+![Floating Desktop](https://codeberg.org/totoroot/dotfiles/raw/branch/screenshots/screenshot-floating.png)
 
 ------
 
