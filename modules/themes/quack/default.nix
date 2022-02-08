@@ -58,8 +58,20 @@ in {
         shadow = true;
         shadowOffsets = [ (-10) (-10) ];
         shadowOpacity = 0.22;
-        # activeOpacity = "1.00";
-        # inactiveOpacity = "0.92";
+        activeOpacity = 1.00;
+        inactiveOpacity = 0.92;
+        opacityRules = [
+          "100:class_g   *?= 'Firefox'"
+          "100:class_g   *?= 'Chromium-browser'"
+          "100:class_g   *?= 'GIMP'"
+          "100:class_g   *?= 'Blender'"
+          "100:class_g   *?= 'Inkscape'"
+          "100:class_g   *?= 'Krita'"
+          "100:class_g   *?= 'Kdenlive'"
+          "100:class_g   *?= 'mpv'"
+          "100:class_g   *?= 'umpv'"
+          "100:class_g   *?= 'zathura'"
+        ];
         settings = {
           shadow-radius = 12;
           # blur-background = true;
