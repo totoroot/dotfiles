@@ -5,7 +5,7 @@
 [commit]
 	gpgsign = false
 [init]
-    defaultBranch = main    
+    defaultBranch = main
 [pull]
     rebase=true
 [fetch]
@@ -44,6 +44,10 @@
     insteadOf = gh:
 [url "git@github.com:totoroot/"]
     insteadOf = gh:/
+[url "https://codeberg.org/"]
+    insteadOf = cb:
+[url "git@codeberg.org:totoroot/"]
+    insteadOf = cb:/
 [url "https://gitlab.com/"]
     insteadOf = gl:
 [url "https://gist.github.com/"]
