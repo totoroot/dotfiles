@@ -12,10 +12,18 @@ in {
     user.packages = with pkgs; [
       unstable.micro
     ];
-    environment.shellAliases = {
-      # just don't ask
-      mciro = "micro";
+
+    environment = {
+      shellAliases = {
+        m = "micro";
+        # just don't ask
+        mciro = "micro";
+      };
+      variables = {
+        MICRO_TRUECOLOR = "1";
+      };
     };
+
     home.configFile = {
       "micro/settings.json".source = "${configDir}/micro/settings.json";
       "micro/bindings.json".source = "${configDir}/micro/bindings.json";

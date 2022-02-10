@@ -97,6 +97,9 @@ Options:
     -i, -A, -q, -e, -p               Forward to nix-env
 ```
 
+## Some information to get you started configuring the install to your needs
+Mimeapps can be set in `modules/xdg.nix`.
+
 ## Frequently asked questions
 
 + **Why NixOS?**

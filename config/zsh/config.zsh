@@ -3,7 +3,7 @@
 # export _FASD_VIMINFO="$XDG_CACHE_HOME/viminfo"
 
 # Treat these characters as part of a word.
-WORDCHARS='_*?[]~&;!#$%^(){}<>'
+WORDCHARS='*?[]~&;!#$%^(){}<>'
 
 unsetopt BRACE_CCL        # Allow brace character class list expansion.
 setopt COMBINING_CHARS    # Combine zero-length punc chars (accents) with base char
