@@ -72,5 +72,8 @@
     },
     "*.nix": {
     	"tabsize": 2
+    },
+    "*.conf": {
+        "filetype": "toml"
     }
 }

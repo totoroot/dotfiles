@@ -12,12 +12,21 @@ in {
     user.packages = with pkgs; [
       kitty
     ];
+
     home.configFile = {
       "kitty/kitty.conf".source = "${configDir}/kitty/kitty.conf";
+      "kitty/open-actions.conf".source = "${configDir}/kitty/open-actions.conf";
     };
-    # fixes compatibility problems for xterm-kitty on ssh server
+
     environment.shellAliases = {
+      # Set terminfo for xterm-kitty when establishing SSH connection
       kssh = "kitty +kitten ssh";
+      # Display images inside kitty
+      # https://sw.kovidgoyal.net/kitty/kittens/icat/
+      icat = "kitty +kitten icat";
+      # Hyperlinked grep
+      # https://sw.kovidgoyal.net/kitty/kittens/hyperlinked_grep/
+      hg = "kitty +kitten hyperlinked_grep";
     };
   };
 }

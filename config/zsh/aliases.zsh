@@ -5,7 +5,7 @@ alias -- -='cd -'
 
 alias q=exit
 alias clr=clear
-alias please='sudo '
+alias please='sudo 'Wo warst denn gestern und letzte Woche?
 alias rm='rm -I'
 alias purge='rm -rf'
 alias cp='cp -rv'
@@ -22,7 +22,9 @@ alias mk=make
 alias rcp='rsync -vaP --delete'
 alias rmirror='rsync -rtvu --delete'
 alias gurl='curl --compressed'
+alias vurl='curl -L -v'
 alias disks='lsblk -o name,label,mountpoint,size,uuid'
+alias ccd='(){ mkdir -p "$1"; cd "$1";}'
 
 alias clipin='xclip -sel clip -i'
 alias clipout='xclip -sel clip -o'
@@ -33,6 +35,7 @@ alias colorpick="print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpi
 alias viewdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
 alias inst='(){ nix-env -iA nixos.$1 ;}'
 alias viewinst='nix-env --query --installed'
+alias remove='nix-env --uninstall'
 
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"
@@ -45,13 +48,15 @@ alias ducks="sudo du -cks -- * | sort -rn | head"
 # rm EXIF data from images in directory
 alias rmexif='exiftool -all='
 
-
 alias sc=systemctl
 alias ssc='sudo systemctl'
+alias sn="systemctl suspend"
+
+alias ls="ls --color=auto --hyperlink=auto"
+alias l="ls -1 -g"
 
 if command -v exa >/dev/null; then
   alias exa="exa --group-directories-first";
-  alias l="exa -1";
   alias ll="exa -lg";
   alias la="LC_COLLATE=C exa -la";
 fi
