@@ -50,7 +50,7 @@
     "scrollmargin": 3,
     "scrollspeed": 2,
     "smartpaste": true,
-    "softwrap": true,
+    "softwrap": false,
     "splitbottom": true,
     "splitright": true,
     "status": true,
