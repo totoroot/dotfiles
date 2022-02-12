@@ -5,22 +5,25 @@ alias -- -='cd -'
 
 alias q=exit
 alias clr=clear
-alias please='sudo 'Wo warst denn gestern und letzte Woche?
+alias please='sudo '
 alias rm='rm -I'
 alias purge='rm -rf'
-alias cp='cp -rv'
+alias cp='rsync -a'
+alias ccp='rsync -az'
+alias pcp='rsync -azP'
+alias rcp='rsync -vaP --delete'
+alias rmirror='rsync -rtvu --delete'
 alias mv='mv -v'
 alias mkdir='mkdir -p'
 alias wget='wget -c'
 alias cat='bat -Pp'
 alias find='fd'
 alias replace='sd'
+
 alias cdd='cd $XDG_CONFIG_HOME/dotfiles'
 alias cds='cd /etc/nixos'
 
 alias mk=make
-alias rcp='rsync -vaP --delete'
-alias rmirror='rsync -rtvu --delete'
 alias gurl='curl --compressed'
 alias vurl='curl -L -v'
 alias disks='lsblk -o name,label,mountpoint,size,uuid'
