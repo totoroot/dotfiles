@@ -14,7 +14,7 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = "Thunar.desktop";
+        "inode/directory" = "thunar.desktop";
         "text/plain" = "mousepad.desktop";
         "text/markdown" = "qownnotes.desktop";
         "text/x-csrc" = "mousepad.desktop";
