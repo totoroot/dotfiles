@@ -3,46 +3,40 @@
 ## Launch applications
 ## Key Sequence: ctrl + alt
 
-ctrl + alt + f
-    firefox
-
-ctrl + alt + x
-    keepassxc
-
-ctrl + alt + s
-    signal-desktop
-
-ctrl + alt + t
-    telegram-desktop
-
-ctrl + alt + d
-    thunar
-
-ctrl + alt + l
-    libreoffice
-
-ctrl + alt + c
-    codium
-
-ctrl + alt + k
+ctrl + alt + 1
     kitty
 
-ctrl + alt + m
+ctrl + alt + 2
+    firefox
+
+ctrl + alt + 3
+    keepassxc
+
+ctrl + alt + 4
+    thunar
+
+ctrl + alt + 5
+    intellij
+
+ctrl + alt + 6
     thunderbird
 
-ctrl + alt + n
+ctrl + alt + 7
     QOwnNotes
 
-ctrl + alt + a
-    kitty aerc
+ctrl + alt + 8
+    gimp
+
+ctrl + alt + 9
+    codium
 
 ### Open all one-off terminal tools in floating xst window
 
-ctrl + alt + q
+ctrl + alt + 0
     xst -g 80x15
 
-ctrl + alt + v
-    xst -g 80x15 pulsemixer
+ctrl + alt + Escape
+xst -g 80x15 pulsemixer
 
 ctrl + alt + j
     xst -g 80x15 -f JuliaMono-18 julia
@@ -55,8 +49,6 @@ ctrl + alt + p
 
 ### Mute audio
 XF86AudioMute
-	pulsemixer --toggle-mute && notify-send -u low 'Muted/Unmuted'
-ctrl + alt + slash
 	pulsemixer --toggle-mute && notify-send -u low 'Muted/Unmuted'
 
 ### Raise volume
@@ -77,8 +69,6 @@ ctrl + alt + Down
 ### Play/Pause player
 XF86Audio{Play,Stop}
 	playerctl play-pause && notify-send -u low 'Play/Pause'
-ctrl + alt + Return
-	playerctl play-pause && notify-send -u low 'Play/Pause'
 
 ### Next track
 XF86AudioNext
@@ -95,19 +85,19 @@ ctrl + alt + Left
 
 ## Rofi
 
-alt + Return
+ctrl + alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
-alt + comma
+ctrl + alt + comma
 	$DOTFILES/bin/rofi/clipmenu
 
-alt + period
+ctrl + alt + period
 	$DOTFILES/bin/rofi/windowmenu
 
-alt + slash
+ctrl + alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
-alt + semicolon
+ctrl + alt + semicolon
 	$DOTFILES/bin/rofi/powermenu -x
 
 
@@ -120,11 +110,17 @@ super + l
 
 ### Toggle window gap
 super + g
-        if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
+    if [[ $(bspc config -d focused window_gap) -eq 150 ]]; then bspc config -d focused window_gap 20; else bspc config -d focused window_gap 150; fi
 
 ### Set window state for active node
 super + {f,r,s,t}
-        bspc node -t {fullscreen,pseudo_tiled,floating,tiled}
+    bspc node -t {fullscreen,pseudo_tiled,floating,tiled}
+
+### Switch to next/previous window
+super + ,
+    bspc window -f prev
+super + .
+    bspc window -f next
 
 ### Toggle focus follow for nodes
 super + p
