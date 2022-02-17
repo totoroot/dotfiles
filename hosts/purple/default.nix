@@ -10,6 +10,7 @@
     desktop = {
       gaming = {
         retro.enable = true;
+        steam.enable = true;
       };
       bspwm.enable = true;
       documents.enable = true;
