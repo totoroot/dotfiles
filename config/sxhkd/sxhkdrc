@@ -88,6 +88,9 @@ ctrl + alt + Left
 ctrl + alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
+alt + Return
+	$DOTFILES/bin/rofi/appmenu
+
 ctrl + alt + comma
 	$DOTFILES/bin/rofi/clipmenu
 
