@@ -12,10 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      unstable.virt-manager
-      unstable.libvirt
+      virt-manager
+      libvirt
     ];
-    
+
     user.extraGroups = [ "libvirt" ];
 
     virtualisation.libvirtd.enable = true;
