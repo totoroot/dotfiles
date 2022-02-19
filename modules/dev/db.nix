@@ -21,6 +21,10 @@ in {
       python38Packages.sqlalchemy
       # Universal SQL Client for developers, DBA and analysts
       dbeaver
+      # Self-contained, serverless, zero-configuration, transactional SQL database engine
+      sqlite
+      # Python CLI utility and library for manipulating SQLite databases
+      sqlite-utils
     ];
   };
 }
