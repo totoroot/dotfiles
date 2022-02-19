@@ -56,7 +56,8 @@ alias ssc='sudo systemctl'
 alias sn="systemctl suspend"
 
 alias ls="ls --color=auto --hyperlink=auto"
-alias l="ls -1 -g"
+alias l="ls -1"
+alias lg="ls -1 -g"
 
 if command -v exa >/dev/null; then
   alias exa="exa --group-directories-first";
