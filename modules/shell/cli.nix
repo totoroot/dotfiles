@@ -95,7 +95,8 @@ in {
 
     home.configFile = {
       "gotop/gotop.conf".source = "${configDir}/gotop/gotop.conf";
-      "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";    };
+      "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
+    };
 
     environment.shellAliases = {
       gt = "gotop";
