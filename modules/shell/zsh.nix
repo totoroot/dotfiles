@@ -37,16 +37,26 @@ in {
 
     user.packages = with pkgs; [
       zsh
-      nix-zsh-completions # ZSH completions for Nix, NixOS, and NixOps
-      bat                 # cat(1) clone with syntax highlighting and Git integration
-      exa                 # replacement for 'ls' written in Rust
-      fasd                # quick command-line access to files and directories for POSIX shells
-      sd                  # intuitive sed alternative
-      fd                  # intuitive find alertnative
-      fzf                 # command-line fuzzy finder written in Go
-      psmisc              # set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
-      tldr                # simplified and community-driven man pages
-      zsh-history-substring-search  # fish shell history-substring-search for Zsh
+      # ZSH completions for Nix, NixOS, and NixOps
+      nix-zsh-completions
+      # Fish shell history-substring-search for Zsh
+      zsh-history-substring-search
+      # cat(1) clone with syntax highlighting and Git integration
+      bat
+      # Replacement for 'ls' written in Rust
+      exa
+      # Quick command-line access to files and directories for POSIX shells
+      fasd
+      # Intuitive sed alternative
+      sd
+      # Intuitive find alternative
+      fd
+      # Command-line fuzzy finder written in Go
+      fzf
+      # Set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
+      psmisc
+      # Simplified and community-driven man pages
+      tldr
     ];
 
     env = {
