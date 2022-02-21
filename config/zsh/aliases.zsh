@@ -83,3 +83,7 @@ beep() {
     \kill -9 $BEEP_PID
     '
 }
+
+exists() {
+  command -v "$1" >/dev/null 2>&1
+}
