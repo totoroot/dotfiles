@@ -18,6 +18,7 @@ if [[ $TERM != dumb ]]; then
   source $ZDOTDIR/keybinds.zsh
   source $ZDOTDIR/completion.zsh
   source $ZDOTDIR/aliases.zsh
+  source $ZDOTDIR/extract.zsh
 
   ##
   function _cache {
