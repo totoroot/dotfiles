@@ -89,6 +89,10 @@ in {
       pandoc
       # shell script analysis tool
       shellcheck
+      # HTML validator and 'tidier'
+      html-tidy
+      # Cross-platform CLI csv pretty printer that uses column styling to maximize viewer enjoyment
+      tidy-viewer
     ];
 
     user.extraGroups = [ "admin" ];
