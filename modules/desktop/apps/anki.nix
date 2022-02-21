@@ -12,7 +12,8 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      anki
+      # Spaced repetition flashcard program
+      anki-bin
     ];
   };
 }
