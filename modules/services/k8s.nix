@@ -24,6 +24,8 @@ in {
       kompose
       # Colorizes kubectl output
       unstable.kubecolor
+      # Tool that makes it easy to run Kubernetes locally
+      minikube
     ];
 
     env.KUBECONFIG = "$XDG_CONFIG_HOME/k8s";
