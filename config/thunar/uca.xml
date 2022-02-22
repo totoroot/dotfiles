@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>kitty</icon>
+	<name>Open kitty here</name>
+	<unique-id>1608491858285913-1</unique-id>
+	<command>kitty %f</command>
+	<description>Open kitty terminal emulator</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>picard</icon>
+	<name>Tag with picard</name>
+	<unique-id>1645478643405723-1</unique-id>
+	<command>picard %F</command>
+	<description>Open Picard and load audio files for tagging</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<audio-files/>
+</action>
+<action>
+	<icon>micro</icon>
+	<name>Edit in micro</name>
+	<unique-id>1645479335993629-2</unique-id>
+	<command>kitty micro %f</command>
+	<description>Open micro terminal editor in kitty terminal emulator</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>mpv</icon>
+	<name>Play with umpv</name>
+	<unique-id>1645479452101705-3</unique-id>
+	<command>umpv %F</command>
+	<description>Play media file with umpv</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<audio-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>intellij</icon>
+	<name>Open in IDE</name>
+	<unique-id>1645480358922923-4</unique-id>
+	<command>idea-ultimate %f</command>
+	<description>Open directory or file in IntelliJ/IDEA</description>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>system-file-manager</icon>
+	<name>Extract with XArchiver</name>
+	<unique-id>1645480866298040-5</unique-id>
+	<command>xarchive %F</command>
+	<description>Open archives with XArchiver</description>
+	<patterns>*.zip;*.tar.gz;*.tar</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>gimp</icon>
+	<name>Edit with GIMP</name>
+	<unique-id>1645481015061304-6</unique-id>
+	<command>gimp %F</command>
+	<description>Open images in GIMP</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<image-files/>
+</action>
+</actions>
