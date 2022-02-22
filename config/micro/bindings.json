@@ -55,7 +55,7 @@
 	"Alt-Delete": "DeleteWordRight",
 	"Ctrl-Up": "CursorStart",
 	"Ctrl-Down": "CursorEnd",
-	"Ctrl-Left": "StartOfText",
+	"Ctrl-Left": "StartOfTextToggle",
 	"Ctrl-Right": "EndOfLine",
 	"Ctrl-Backspace": "SelectToStartOfText,Backspace",
 	"Ctrl-Delete": "SelectToEndOfLine,Delete",
