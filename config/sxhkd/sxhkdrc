@@ -35,7 +35,7 @@ ctrl + alt + 9
 ctrl + alt + 0
     xst -g 80x15
 
-ctrl + alt + Escape
+ctrl + alt + v
 xst -g 80x15 pulsemixer
 
 ctrl + alt + j
@@ -102,6 +102,12 @@ ctrl + alt + slash
 
 ctrl + alt + semicolon
 	$DOTFILES/bin/rofi/powermenu -x
+
+ctrl + alt + b
+	$DOTFILES/bin/rofi/bookmarkmenu
+
+ctrl + alt + e
+	$DOTFILES/bin/rofi/emojimenu
 
 
 ## bspwm Node Controls
