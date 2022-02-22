@@ -1,3 +1,15 @@
+# kubecolor alias
+alias kubectl='kubecolor'
+
+# Make completion work with kubecolor
+# source <(kubectl completion zsh)
+compdef kubecolor=kubectl
+
+# kubectl utils aliases
+alias kns='kubens'
+alias kctx='kubectx'
+
+# kubectl short aliases
 alias k='kubectl'
 alias ksys='kubectl --namespace=kube-system'
 alias ka='kubectl apply --recursive -f'
