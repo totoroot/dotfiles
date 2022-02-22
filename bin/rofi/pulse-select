@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+
+# Copyright (C) 2021  Jos van Bakel and Damien Cassou
+
+# Authors:
+# - Jos van Bakel <jos@codeaddict.org>
+# - Damien Cassou <damien@cassou.me>
+#
+# Url: https://gitlab.com/DamienCassou/rofi-pulse-select
+# Version: 0.1.0
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Commentary:
+
+# Choose PulseAudio sink/source via rofi. Changes default sink/source
+# and moves all streams to that device.
+#
+# Based on:
+# - https://blog.codeaddict.org/2020/04/26/using-rofi-to-switch-pulseaudio-default-sink/source/
+# - https://gist.github.com/Nervengift/844a597104631c36513c
+
+# Code:
+
+set -euo pipefail
+
+function usage {
+    echo "Usage:"
+    echo
+
+    echo "To change the default output (e.g., speaker):"
+    echo "\$ $0 sink"
+
+    echo
+
+    echo "To change the default input (e.g., microphone):"
+    echo "\$ $0 source"
+}
+
+function read_arguments {
+    if [[ ! $# -eq 1 ]]; then
+        usage >&2
+        exit 1
+    fi
+
+    local type="$1"
+
+    if [[ ! "$type" =~ (sink|source) ]]; then
+        usage >&2
+        exit 1
+    fi
+
+    echo "$type"
+}
+
+function formatlist {
+    awk "/^$type/ {s=\$1\" \"\$2;getline;gsub(/^ +/,\"\",\$0);print s\" \"\$0}"
+}
+
+function select_target {
+    local list
+    local default
+    local default_row
+
+    local type=$1
+
+    list=$(ponymix -t "$type" list | formatlist)
+    default=$(ponymix defaults | formatlist)
+
+    # line number of default in list (note: row starts at 0)
+    default_row=$(echo "$list" | grep -nr "$default" - | cut -f1 -d: | awk '{print $0-1}')
+
+    echo "$list" \
+        | rofi -dmenu -p "pulseaudio $type:" -selected-row "$default_row" \
+        | grep -Po '[0-9]+(?=:)'
+}
+
+function set_default {
+    local type="$1"
+    local device="$2"
+    ponymix set-default -t "$type" -d "$device"
+}
+
+function move_all_streams {
+    local type=$1
+
+    case "$type" in
+        sink)
+            for input in $(ponymix list -t sink-input|grep -Po '[0-9]+(?=:)'); do
+                         echo "moving stream sink $input -> $device"
+                         ponymix -t sink-input -d "$input" move "$device"
+            done
+            ;;
+
+        source)
+            for output in $(ponymix list -t source-output | grep -Po '[0-9]+(?=:)'); do
+                echo "moving stream source $output <- $device"
+                ponymix -t source-output -d "$output" move "$device"
+            done
+            ;;
+    esac
+}
+
+function main {
+    local type
+    local device
+
+    type=$(read_arguments "$@")
+    device=$(select_target "$type")
+
+    set_default "$type" "$device"
+
+    move_all_streams "$type"
+}
+
+main "$@"
+
+# Local Variables:
+# eval: (flycheck-mode)
+# End:
