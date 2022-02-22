@@ -15,7 +15,12 @@ in {
       xfce.thunar
       xfce.thunar-volman
       xfce.thunar-archive-plugin
-      gvfs                       # virtual Filesystem support library 
+      # virtual Filesystem support library
+      gvfs
     ];
+
+    home.configFile = {
+      "Thunar/uca.xml".source = "${configDir}/thunar/uca.xml";
+    };
   };
 }
