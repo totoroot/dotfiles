@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 image() {
 	if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]; then
