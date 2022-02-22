@@ -14,6 +14,8 @@ in {
     user.packages = with pkgs; [
       # Spaced repetition flashcard program
       anki-bin
+      # Simple program to convert markdown files into anki decks
+      markdown-anki-decks
     ];
   };
 }
