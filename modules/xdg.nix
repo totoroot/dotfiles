@@ -50,6 +50,7 @@
       # Setting this for Electon apps that do not respect mime default apps
       DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
     };
+
     variables = {
       # Conform more programs to XDG conventions. The rest are handled by their
       # respective modules.
