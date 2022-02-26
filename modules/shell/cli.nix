@@ -17,6 +17,8 @@ in {
       gotop
       # interactive process viewer
       htop
+      # resource monitor; python port of bashtop
+      bpytop
       # stresstest your system
       stress-ng
       # benchmark commands
@@ -99,6 +101,7 @@ in {
 
     home.configFile = {
       "gotop/gotop.conf".source = "${configDir}/gotop/gotop.conf";
+      "bpytop/bpytop.conf".source = "${configDir}/bpytop/bpytop.conf";
       "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
     };
 
