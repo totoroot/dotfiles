@@ -61,6 +61,8 @@ alias lg="ls -1 -g"
 
 if command -v exa >/dev/null; then
   alias exa="exa --group-directories-first";
+  alias lsc="exa";
+  alias lc="exa -l";
   alias ll="exa -lg";
   alias la="LC_COLLATE=C exa -la";
 fi
