@@ -73,4 +73,18 @@
 	<startup-notify/>
 	<image-files/>
 </action>
+<action>
+	<icon>user-trash</icon>
+	<name>Move to trash</name>
+	<unique-id>1645952138333028-1</unique-id>
+	<command>mv %F ~/.trash</command>
+	<description>Move specified files to trash</description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
 </actions>
