@@ -15,12 +15,15 @@ in {
       xfce.thunar
       xfce.thunar-volman
       xfce.thunar-archive-plugin
-      # virtual Filesystem support library
+      # Virtual filesystem support library
       gvfs
     ];
 
     home.configFile = {
+      # Set custom actions for thunar
       "Thunar/uca.xml".source = "${configDir}/thunar/uca.xml";
+      # Set user space bookmarks for thunar and other GTK applications
+      "gtk-3.0/bookmarks".source = "${configDir}/thunar/bookmarks";
     };
   };
 }
