@@ -18,6 +18,7 @@
       flatpak.enable = false;
       keepassxc.enable = true;
       kvantum.enable = true;
+      mail.enable = true;
       screenshot.enable = true;
       thunar.enable = true;
       apps = {
@@ -113,7 +114,7 @@
       git.enable = true;
       gnupg.enable = true;
       lf.enable = true;
-      mail.enable = true;
+      aerc.enable = true;
       pass.enable = true;
       taskell.enable = true;
       zsh.enable = true;
@@ -171,5 +172,6 @@
     "tmp/.use".text = "tmp";
     "uni/.use".text = "uni";
     "zero/.use".text = "zero";
+    ".trash/.use".text = "trash";
   };
 }

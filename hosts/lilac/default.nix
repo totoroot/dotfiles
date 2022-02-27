@@ -33,7 +33,7 @@
       git.enable = true;
       gnupg.enable = true;
       lf.enable = true;
-      mail.enable = false;
+      aerc.enable = false;
       pass.enable = false;
       taskell.enable  = false;
       zsh.enable = true;
@@ -80,5 +80,6 @@
     "resources/.use".text = "resources";
     "shared/.use".text = "shared";
     "tmp/.use".text = "tmp";
+    ".trash/.use".text = "trash";
   };
 }
