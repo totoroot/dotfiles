@@ -21,7 +21,7 @@ in {
     ];
 
     home.configFile = {
-      # After istalling thunderbird and importing the profile open thunderbird with
+      # After installing thunderbird and importing the profile open thunderbird with
       # `thunderbird -ProfileManager &` and choose the profile directory
       "thunderbird/profiles.ini".source = "${configDir}/thunderbird/profiles.ini";
       "thunderbird/installs.ini".source = "${configDir}/thunderbird/installs.ini";
