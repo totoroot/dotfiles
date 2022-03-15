@@ -48,6 +48,7 @@
       nginx.enable  = false;
       vpn.enable = true;
       ssh.enable = true;
+      tor.enable = true;
       transmission.enable	= false;
     };
     # theme.active = "quack";
