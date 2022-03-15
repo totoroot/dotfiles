@@ -13,5 +13,10 @@ in
     # Brother laser printer goes BRRRRRrrrrr
     services.printing.enable = true;
     services.printing.drivers = [ pkgs.brlaser ];
+
+    environment.systemPackages = with pkgs; [
+      # Printing settings utility
+      system-config-printer
+    ];
   };
 }
