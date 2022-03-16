@@ -31,6 +31,7 @@
         gpa.enable = true;
         gsmartcontrol.enable = true;
         nextcloud.enable = true;
+        osm.enable = true;
         rofi.enable = true;
         torrent.enable = true;
         vscodium.enable = true;
