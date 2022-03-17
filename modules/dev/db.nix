@@ -25,6 +25,8 @@ in {
       sqlite
       # Python CLI utility and library for manipulating SQLite databases
       sqlite-utils
+      # Graphical FTP, FTPS and SFTP client
+      filezilla
     ];
   };
 }
