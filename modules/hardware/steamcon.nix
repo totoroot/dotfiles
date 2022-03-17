@@ -40,6 +40,7 @@ in {
       "scc/config.json".source = "${configDir}/steamcon/config.json";
       "scc/menus/.use".source = "${configDir}/steamcon/menus/.use";
       "scc/profiles/steam-controller-desktop.sccprofile".source = "${configDir}/steamcon/profiles/steam-controller-desktop.sccprofile";
+      "scc/profiles/steam-controller-game.sccprofile".source = "${configDir}/steamcon/profiles/steam-controller-game.sccprofile";
     };
   };
 }
