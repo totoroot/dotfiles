@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Extensible editor for OpenStreetMap
-      josm
+      unstable.josm
       # Free and Open Source Geographic Information System
       qgis
     ];
