@@ -4,10 +4,13 @@ with lib;
 {
   networking.hosts =
     let hostConfig = {
-          "192.168.8.1"   = [ "white" ];
+          "192.168.8.1"   = [ "router" ];
+          "192.168.8.8"   = [ "printer" ];
           "192.168.8.101" = [ "purple" ];
           "192.168.8.102" = [ "violet" ];
           "192.168.8.103" = [ "lilac" ];
+          "192.168.8.105" = [ "notebook-work" ];
+          "38.242.198.235" = [ "boysenberry" ];
         };
         hosts = flatten (attrValues hostConfig);
         hostName = config.networking.hostName;
