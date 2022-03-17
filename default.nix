@@ -57,6 +57,11 @@ with inputs;
     systemd-boot.enable = mkDefault true;
   };
 
+  services.logind.extraConfig = ''
+    # Suspend when power button is short-pressed
+    HandlePowerKey=suspend
+  '';
+
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
     unstable.cached-nix-shell
