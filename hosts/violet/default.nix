@@ -4,6 +4,7 @@
     ../personal.nix
     ./hardware-configuration.nix
     ./home.nix
+    ./backup.nix
   ];
 
   ## Modules
