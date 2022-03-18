@@ -130,6 +130,7 @@
       nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;
+      syncthing.enable = true;
       transmission.enable = false;
     };
     theme.active = "quack-hidpi";
