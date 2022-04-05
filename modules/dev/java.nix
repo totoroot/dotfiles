@@ -15,8 +15,11 @@ in {
     programs.java.enable = true;
 
     user.packages = with pkgs; [
+      # Integrated Development Environment (IDE) by Jetbrains, requires paid license
       jetbrains.idea-ultimate
+      # The open-source Java Development Kit
       jdk
+      # Java build automation tool
       maven
     ];
 

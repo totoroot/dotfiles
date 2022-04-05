@@ -10,8 +10,11 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # A general purpose programming language
       scala
+      # The open-source Java Development Kit
       jdk
+      # A build tool for Scala, Java and more
       sbt
     ];
   };
