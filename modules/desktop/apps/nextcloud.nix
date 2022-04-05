@@ -12,7 +12,8 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      nextcloud-client
+      # Nextcloud desktop client
+      unstable.nextcloud-client
     ];
   };
 }
