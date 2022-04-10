@@ -17,27 +17,40 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs;
       (if cfg.enable then [
-        imv           # simplest image viewer
-        qview         # simple image viewer
-        imagemagick   # console image manipulation tool
+        # Software suite to create, edit, compose, or convert bitmap images
+        imagemagick
+        # Command line image viewer for tiling window managers
+        imv
+        # Practical and minimal image viewer
+        qview
+        # Qt5 image viewer with optional video support
+        qimgv
+        # Qt-based image viewer
+        nomacs
       ] else []) ++
 
       (if cfg.raster.enable then [
-        unstable.krita
-        unstable.gimp
-        gimpPlugins.resynthesizer   # content-aware scaling in gimp
+        # Free and open source painting application
+        krita
+        # The GNU Image Manipulation Program
+        gimp
+        # Content-aware scaling in gimp
+        gimpPlugins.resynthesizer
       ] else []) ++
 
       (if cfg.vector.enable then [
-        unstable.inkscape
+        # Vector graphics editor
+        inkscape-with-extensions
       ] else []) ++
 
       (if cfg.photo.enable then [
-        unstable.darktable
+        # Virtual lighttable and darkroom for photographers
+        darktable
       ] else []) ++
 
       (if cfg.sprites.enable then [
-        aseprite-unfree
+        # Animated sprite editor & pixel art tool
+        aseprite
       ] else []);
 
     home.configFile = mkIf cfg.raster.enable {
