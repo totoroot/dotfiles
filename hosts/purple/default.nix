@@ -86,11 +86,11 @@
       go.enable = true;
       java.enable = true;
       julia.enable = true;
-      lua.enable = false;
+      lua.enable = true;
       node.enable = false;
       python.enable = true;
       rust.enable = true;
-      scala.enable = false;
+      scala.enable = true;
     };
     editors = {
       default = "micro";
