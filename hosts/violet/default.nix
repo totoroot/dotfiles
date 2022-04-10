@@ -163,4 +163,10 @@
     GDK_DPI_SCALE = "0.5";
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
+
+  # Auto-login user mathym
+  services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
+    [SeatDefaults]
+    autologin-user=mathym
+  '';
 }
