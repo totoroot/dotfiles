@@ -102,6 +102,7 @@
       bluetooth.enable = true;
       disks.enable = true;
       fancontrol.enable = true;
+      image.enable = true;
       keebs.enable = true;
       mcus.enable = true;
       nvidia.enable = true;
