@@ -1,6 +1,5 @@
-{...}
+{...}:
 {
-  # Create some home directories
   home.file = {
     "archive/.use".text = "archive";
     "books/.use".text = "books";
@@ -15,6 +14,7 @@
     "photos/.use".text = "photos";
     "resources/.use".text = "resources";
     "shared/.use".text = "shared";
+    "sync/.use".text = "sync";
     "tmp/.use".text = "tmp";
     "uni/.use".text = "uni";
     "zero/.use".text = "zero";
