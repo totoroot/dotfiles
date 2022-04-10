@@ -10,7 +10,10 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Modern, hackable, featureful, OpenGL based terminal emulator
       kitty
+      # Graphical pdf (and epub, cbz, ...) reader that works inside the kitty terminal
+      termpdfpy
     ];
 
     home.configFile = {
