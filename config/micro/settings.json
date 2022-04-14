@@ -1,7 +1,7 @@
 {
     "autoclose": true,
     "autoindent": true,
-    "autosave": 0,
+    "autosave": true,
     "autosu": false,
     "backup": true,
     "backupdir": "",
