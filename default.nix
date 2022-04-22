@@ -62,6 +62,13 @@ with inputs;
     HandlePowerKey=suspend
   '';
 
+  # Take out the garbage every once in a while
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
     unstable.cached-nix-shell
