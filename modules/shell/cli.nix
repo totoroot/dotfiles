@@ -56,7 +56,8 @@ in {
       # Terminal based reader for maximum wpm
       speedread
       # Download manager (not only for youtube)
-      youtube-dl
+      # unstable.youtube-dl
+      unstable.yt-dlp
       # CLI mixer for pulseaudio
       pulsemixer
 
