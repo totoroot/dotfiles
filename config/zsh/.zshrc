@@ -1,4 +1,3 @@
-
 [ -d "$ZGEN_DIR" ] || git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
 source $ZGEN_SOURCE
 if ! zgen saved; then
@@ -35,7 +34,6 @@ if [[ $TERM != dumb ]]; then
 
   # use fd instead of find if installed
   if command -v fd >/dev/null; then
-    export FZF_DEFAULT_OPTS="--reverse --ansi"
     export FZF_DEFAULT_COMMAND="fd ."
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND="fd -t d . $HOME"
