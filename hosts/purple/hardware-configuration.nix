@@ -19,7 +19,6 @@
     ];
   };
 
-  # CPU
   nix.maxJobs = lib.mkDefault 16;
   powerManagement.cpuFreqGovernor = "performance";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -54,6 +53,5 @@
 
   swapDevices = [ { device = "/dev/disk/by-uuid/81651822-eb2c-4670-9b64-263386393b9a"; } ];
 
-  # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 }
