@@ -46,7 +46,8 @@ in {
         source-serif-pro
         corefonts
         vistafonts
-      ]; 
+        unstable.comic-mono
+      ];
     };
   };
 }
