@@ -57,7 +57,7 @@
       };
       media = {
         audio.enable = true;
-        daw.enable = false;
+        daw.enable = true;
         graphics.enable = true;
         kodi.enable = true;
         ncmpcpp.enable = false;
@@ -106,7 +106,6 @@
       image.enable = true;
       keebs.enable = true;
       mcus.enable = true;
-      mice.enable = false;
       nvidia.enable = true;
       printers.enable = true;
       sensors.enable = true;
