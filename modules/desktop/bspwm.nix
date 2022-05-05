@@ -15,8 +15,13 @@ in {
     '';
 
     environment.systemPackages = with pkgs; [
+      # Adds layout managing capabilities for bspwm
+      bsp-layout
+      # Cross-desktop display manager
       lightdm
+      # Lightweight and customizable notification daemon
       dunst
+      # Library that sends desktop notifications to a notification daemon
       libnotify
       (polybar.override {
         pulseSupport = true;
