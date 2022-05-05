@@ -7,24 +7,19 @@ with lib.my;
 let cfg = config.modules.desktop.media.audio;
 in {
   options.modules.desktop.media.audio = {
-    enable                 = mkBoolOpt false;
-    player.enable          = mkBoolOpt true;
-    misc.enable            = mkBoolOpt true;
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs;
-      (if cfg.player.enable then [
-		    musikcube               # terminal music player
-		    cmus                    # small, fast and powerful console music player for Linux and *BSD
-		    lollypop                # modern music player for GNOME
-      ] else []) ++
-
-      (if cfg.misc.enable then [
-        picard                  # music tagger
-        audacity                # audio editing suite
-        # pulseeffects-legacy   # equalizer and other effects for pulseaudio
-        # lsp-plugins           # audio plugins needed for pulseeffects
-      ] else []);
+    user.packages = with pkgs; [
+      # Terminal-based music player, library, and streaming audio server
+      musikcube
+      # Small, fast and powerful console music player
+      cmus
+      # Modern music player for GNOME
+      lollypop
+      # Official MusicBrainz music tagger
+      picard
+    ];
   };
 }
