@@ -34,6 +34,7 @@
         gsmartcontrol.enable = true;
         nextcloud.enable = true;
         osm.enable = true;
+        resolve.enable = true;
         rofi.enable = true;
         torrent.enable = true;
         vscodium.enable = true;
@@ -48,7 +49,7 @@
       };
       communication = {
         delta.enable = true;
-        discord.enable = false;
+        discord.enable = true;
         jitsi.enable = true;
         matrix.enable = true;
         signal.enable = true;
@@ -105,6 +106,7 @@
       image.enable = true;
       keebs.enable = true;
       mcus.enable = true;
+      mice.enable = false;
       nvidia.enable = true;
       printers.enable = true;
       sensors.enable = true;
@@ -158,4 +160,6 @@
   environment.variables = rec {
     MONITORS = ["HDMI-0" "DP-0"];
   };
+
+  programs.dconf.enable = true;
 }
