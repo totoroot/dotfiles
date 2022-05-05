@@ -1,9 +1,4 @@
 # modules/desktop/media/daw.nix
-#
-# I make music for my games. LMMS is my DAW; or will be, once I've weened myself
-# off of Fruityloops. When I'm in the mood for a quicky I fire up sunvox
-# instead. It runs absolutely anywhere, even on my ipad and phone. As if I'd
-# ever need to.
 
 { config, options, lib, pkgs, ... }:
 
@@ -17,10 +12,12 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      lmms        # for making music
-      sunvox      # for making music (where LMMS is overkill)
-      audacity    # for recording and remastering audio
-      lilypond    # music typesetting system
+      # Audio and sound editing suite
+      audacity
+      # Digital audio production and DJing workstation
+      bitwig-studio
+      # Music typesetting system
+      lilypond
     ];
   };
 }
