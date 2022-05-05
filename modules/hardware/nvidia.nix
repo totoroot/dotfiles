@@ -14,7 +14,7 @@ in {
     services.xserver.videoDrivers = [ "nvidia" ];
 
     services.xserver.screenSection = ''
-        Option "metamodes" "DP-0: nvidia-auto-select +0+2160, DP-2: nvidia-auto-select +0+0"
+        Option "metamodes" "HDMI-0: nvidia-auto-select +200+0, DP-0: nvidia-auto-select +0+1440"
     '';
 
     services.xserver.deviceSection = ''
@@ -22,9 +22,9 @@ in {
     '';
 
     environment.systemPackages = with pkgs; [
-      # nvidia-video-sdk  # needed for NVENC support in OBS
-      # nvidia-docker     # NVIDIA container runtime for Docker
-      
+      # NVIDIA Video Codec SDK (needed for NVENC support in OBS)
+      # nvidia-video-sdk
+
       # Respect XDG conventions, damn it!
       (writeScriptBin "nvidia-settings" ''
         #!${stdenv.shell}
@@ -32,10 +32,12 @@ in {
         exec ${config.boot.kernelPackages.nvidia_x11.settings}/bin/nvidia-settings --config="$XDG_CONFIG_HOME/nvidia/settings"
       '')
     ];
-    
+
     user.packages = with pkgs; [
-      pciutils          # inspect and manipulate PCI devices
-      nvtop    # task monitor for Nvidia GPUs
+      # Inspect and manipulate PCI devices
+      pciutils
+      # Task monitor for Nvidia GPUs
+      nvtop
     ];
   };
 }
