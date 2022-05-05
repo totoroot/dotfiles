@@ -1,5 +1,13 @@
+set previewer lfpreviewer
+set cleaner lfcleaner
+set ratios 1:2:3
+
 # interpreter for shell commands
-set shell sh
+set shell bash
+
+# set mouse
+# set icons
+set drawbox on
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -19,17 +27,6 @@ set ifs "\n"
 
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
-
-# use enter for shell commands
-map <enter> shell
-
-# execute current file (must be executable)
-map x $$f
-map X !$f
-
-# dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
@@ -99,9 +96,42 @@ cmd zip ${{
     rm -rf $1
 }}
 
-set previewer $XDG_CONFIG_HOME/dotfiles/lf/previewer.sh
-# map i $$XDG_CONFIG_HOME/dotfiles/lf/previewer.sh $f | less -RX
+map q quit
+map w quit
+map <up> up
+map half-up
+map <pgup> page-up
+map <down> down
+map half-down
+map <pgdown> page-down
+map scroll-down
+map x glob-unselect
 
-set cleaner lfcleaner
+# Mouse wheel events
+map <m-up> up
+map <m-down> down
+map <m-left> left
+map <m-right> right
 
-set ratios 1:2:3
+# Toggle hidden
+# <backspace> (<Ctrl>+<h>)
+map <backspace> set hidden!
+
+# Reload preview
+map <c-r> reload
+
+map <c-c> copy
+map <c-x> cut
+map <c-v> paste
+
+map <space> :toggle; down
+map <enter> open
+
+# Sorting entries
+# keys    command
+# sa      :{{ set sortby atime; set info atime; }}
+# sc      :{{ set sortby ctime; set info ctime; }}
+# se      :{{ set sortby ext; set info ; }}
+# sn      :{{ set sortby natural; set info ; }}
+# ss      :{{ set sortby size; set info size; }}
+# st      :{{ set sortby time; set info time; }}
