@@ -36,7 +36,7 @@ ctrl + alt + 0
     xst -g 80x15
 
 ctrl + alt + v
-xst -g 80x15 pulsemixer
+    xst -g 80x15 pulsemixer
 
 ctrl + alt + j
     xst -g 80x15 -f JuliaMono-18 julia
