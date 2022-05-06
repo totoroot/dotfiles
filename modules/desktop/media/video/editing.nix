@@ -12,8 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Video editor
       kdenlive
-      # Temporarily installed with flatpak due to broken Nix package
+      # Node-graph based, open-source compositing software
+      # FIXME Temporarily installed with flatpak due to broken Nix package
       # natron
     ];
   };
