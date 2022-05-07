@@ -85,37 +85,32 @@ ctrl + alt + Left
 
 ## Rofi
 
-ctrl + alt + Return
-	$DOTFILES/bin/rofi/appmenu
-
 alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
-ctrl + alt + comma
+alt + comma
 	$DOTFILES/bin/rofi/clipmenu
 
-ctrl + alt + period
+alt + period
 	$DOTFILES/bin/rofi/windowmenu
 
-ctrl + alt + slash
+alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
-ctrl + alt + semicolon
-	$DOTFILES/bin/rofi/powermenu -x
-
-ctrl + alt + b
+alt + semicolon
 	$DOTFILES/bin/rofi/bookmarkmenu
 
-ctrl + alt + e
-	$DOTFILES/bin/rofi/emojimenu
+super + Return
+    $DOTFILES/bin/rofi/powermenu -x
+
+
+## Switch between preset keymaps
+super + alt + l
+    $DOTFILES/bin/keymapswitcher
 
 
 ## bspwm Node Controls
 ## Key Sequence: super
-
-### Switch between preset keymaps
-super + l
-    $DOTFILES/bin/keymapswitcher
 
 ### Toggle window gap
 super + g
