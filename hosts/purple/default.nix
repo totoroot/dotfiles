@@ -21,6 +21,7 @@
       keepassxc.enable = true;
       kvantum.enable = true;
       mail.enable = true;
+      plank.enable = true;
       screenshot.enable = true;
       thunar.enable = true;
       apps = {

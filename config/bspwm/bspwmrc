@@ -49,4 +49,7 @@ if ! pgrep udiskie > /dev/null; then
 fi
 
 # Autostart scc-daemon for a working Steam controller
-scc-daemon start
+scc-daemon start > /dev/null &
+
+# Autostart plank
+plank -n default > /dev/null &
