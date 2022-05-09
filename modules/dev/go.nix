@@ -12,10 +12,12 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      unstable.go
+      # The Go Programming language
+      unstable.go_1_18
+      # Collection of tools and libraries for working with Go code, including linters and static analysis
       unstable.go-tools
-      unstable.hugo      # static website engine
-      unstable.terraform # infrastructure setup tool
+      # Fast and modern static website engine
+      unstable.hugo
     ];
     env.GOPATH  = "$HOME/.go";
     env.GOBIN   = "$HOME/.go/bin";
