@@ -33,10 +33,6 @@ in {
       python38Packages.numpy
       # Python Data Analysis Library
       python38Packages.pandas
-      # Automation tool
-      ansible
-      # Linter for ansible
-      ansible-lint
       # Uncompromising Python code formatter
       black
       # Linter for yaml files
