@@ -7,7 +7,7 @@ with lib.my;
 let cfg = config.modules.shell.taskell;
 in {
   options.modules.shell.taskell = {
-    enable  = mkBoolOpt false;
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
