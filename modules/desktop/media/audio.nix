@@ -21,5 +21,25 @@ in {
       # Official MusicBrainz music tagger
       picard
     ];
+
+
+    home.dconfSettings = {
+      "org/gnome/Lollypop" = {
+        background-mode = true;
+        hd-artwork = true;
+        import-advanced-artist-tags = true;
+        import-playlists = true;
+        music-uris = [
+          "file:///home/mathym/music/library"
+        ];
+        network-access-acl = 1048574;
+        notification-flag = 3;
+        orderby = "artist_title";
+        repeat = "auto_similar";
+        save-state = true;
+        volume-rate = 1.0;
+        window-maximized = true;
+      };
+    };
   };
 }
