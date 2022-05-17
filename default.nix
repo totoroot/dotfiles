@@ -42,7 +42,6 @@ with inputs;
   system.configurationRevision = mkIf (self ? rev) self.rev;
   system.stateVersion = "21.11";
 
-
   ## Some reasonable, global defaults
   # This is here to appease 'nix flake check' for generic hosts with no
   # hardware-configuration.nix or fileSystem config.
@@ -57,8 +56,8 @@ with inputs;
     systemd-boot.enable = mkDefault true;
   };
 
+  # Suspend when power button is short-pressed
   services.logind.extraConfig = ''
-    # Suspend when power button is short-pressed
     HandlePowerKey=suspend
   '';
 
