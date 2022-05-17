@@ -16,18 +16,53 @@ in {
       plank
     ];
 
+    home.dconfSettings = {
+      "net/launchpad/plank/docks/default" = {
+        alignment = "center";
+        auto-pinning = true;
+        current-workspace-only = false;
+        hide-delay = 0;
+        hide-mode = "intelligent";
+        icon-size = 128;
+        items-alignment = "center";
+        lock-items = false;
+        monitor = "";
+        offset = 0;
+        pinned-only = false;
+        position = "bottom";
+        pressure-reveal = false;
+        show-dock-item = false;
+        theme = "Transparent";
+        tooltips-enabled = true;
+        unhide-delay = 0;
+        zoom-enabled = true;
+        zoom-percent = 200;
+        dock-items = [
+          "kitty.dockitem"
+          "firefox.dockitem"
+          "thunar.dockitem"
+          "keepassxc.dockitem"
+          "mullvad.dockitem"
+          "lollypop.dockitem"
+          "signal.dockitem"
+          "telegram.dockitem"
+          "thunderbird.dockitem"
+          "qownnotes.dockitem"
+          "gimp.dockitem"
+          "spectacle.dockitem"
+          "mousepad.dockitem"
+        ];
+      };
+    };
+
     home.configFile = {
-      "plank/default/launchers/firefox.dockitem".text = ''
-        [PlankDockItemPreferences]
-        Launcher=file:///etc/profiles/per-user/mathym/share/applications/firefox.desktop
-      '';
       "plank/default/launchers/kitty.dockitem".text = ''
         [PlankDockItemPreferences]
         Launcher=file:///etc/profiles/per-user/mathym/share/applications/kitty.desktop
       '';
-      "plank/default/launchers/mousepad.dockitem".text = ''
+      "plank/default/launchers/firefox.dockitem".text = ''
         [PlankDockItemPreferences]
-        Launcher=file:///etc/profiles/per-user/mathym/share/applications/org.xfce.mousepad.desktop
+        Launcher=file:///etc/profiles/per-user/mathym/share/applications/firefox.desktop
       '';
       "plank/default/launchers/thunar.dockitem".text = ''
         [PlankDockItemPreferences]
@@ -36,6 +71,10 @@ in {
       "plank/default/launchers/keepassxc.dockitem".text = ''
         [PlankDockItemPreferences]
         Launcher=file:///etc/profiles/per-user/mathym/share/applications/org.keepassxc.KeePassXC.desktop
+      '';
+      "plank/default/launchers/mullvad.dockitem".text = ''
+        [PlankDockItemPreferences]
+        Launcher=file:///run/current-system/sw/share/applications/mullvad-vpn.desktop
       '';
       "plank/default/launchers/lollypop.dockitem".text = ''
         [PlankDockItemPreferences]
@@ -64,6 +103,10 @@ in {
       "plank/default/launchers/spectacle.dockitem".text = ''
         [PlankDockItemPreferences]
         Launcher=file:///etc/profiles/per-user/mathym/share/applications/org.kde.spectacle.desktop
+      '';
+      "plank/default/launchers/mousepad.dockitem".text = ''
+        [PlankDockItemPreferences]
+        Launcher=file:///etc/profiles/per-user/mathym/share/applications/org.xfce.mousepad.desktop
       '';
     };
   };
