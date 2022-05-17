@@ -13,7 +13,7 @@ set -e
 set -u
 
 # All supported choices
-all=(shutdown reboot suspend hibernate logout lockscreen)
+all=(suspend hibernate shutdown reboot)
 
 # By default, show all (i.e., just copy the array)
 show=("${all[@]}")
@@ -22,24 +22,24 @@ declare -A texts
 texts[lockscreen]="lock screen"
 texts[switchuser]="switch user"
 texts[logout]="log out"
-texts[suspend]="suspend"
-texts[hibernate]="hibernate"
-texts[reboot]="reboot"
-texts[shutdown]="shut down"
+texts[suspend]=" Suspend"
+texts[hibernate]=" Hibernate"
+texts[reboot]=" Reboot"
+texts[shutdown]="  Shut Down"
 
 declare -A icons
-icons[lockscreen]="\uf023"
+icons[lockscreen]="\uf09c"
 icons[switchuser]="\uf518"
-icons[logout]="\uf842"
-icons[suspend]="\uf9b1"
-icons[hibernate]="\uf7c9"
-icons[reboot]="\ufc07"
-icons[shutdown]="\uf011"
+icons[logout]="\uf0d0"
+icons[suspend]="\uf0f4"
+icons[hibernate]="\uf5dc"
+icons[reboot]="\uf794"
+icons[shutdown]=" \uf1e6"
 icons[cancel]="\u00d7"
 
 declare -A actions
 actions[lockscreen]="loginctl lock-session \$XDG_SESSION_ID"
-#actions[switchuser]="???"
+actions[switchuser]="???"
 actions[logout]="loginctl terminate-session \$XDG_SESSION_ID"
 actions[suspend]="systemctl suspend"
 actions[hibernate]="systemctl hibernate"
