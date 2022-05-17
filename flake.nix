@@ -10,15 +10,15 @@
 {
   description = "A grossly incandescent NixOS config.";
 
-  inputs = 
+  inputs =
     {
       # Core dependencies.
-      nixos.url          = "nixpkgs/nixos-21.11";
+      nixos.url = "nixpkgs/nixos-21.11";
       nixos-unstable.url = "nixpkgs/nixos-unstable";
 
-      nixpkgs.url        = "nixpkgs/master";
+      nixpkgs.url = "nixpkgs/master";
 
-      home-manager.url   = "github:rycee/home-manager/release-21.11";
+      home-manager.url = "github:rycee/home-manager/release-21.11";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
       # Extras
@@ -67,7 +67,7 @@
       nixosConfigurations =
         mapHosts ./hosts { inherit system; };
 
-        
+
       devShell."${system}" =
         import ./shell.nix { inherit pkgs; };
     };
