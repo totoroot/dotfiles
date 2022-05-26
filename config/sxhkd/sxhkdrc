@@ -15,21 +15,6 @@ ctrl + alt + 3
 ctrl + alt + 4
     thunar
 
-ctrl + alt + 5
-    intellij
-
-ctrl + alt + 6
-    thunderbird
-
-ctrl + alt + 7
-    QOwnNotes
-
-ctrl + alt + 8
-    gimp
-
-ctrl + alt + 9
-    codium
-
 ### Open all one-off terminal tools in floating xst window
 
 ctrl + alt + 0
@@ -88,16 +73,19 @@ ctrl + alt + Left
 alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
-alt + comma
+ctrl + alt + Return
+	$DOTFILES/bin/rofi/appmenu
+
+ctrl + alt + comma
 	$DOTFILES/bin/rofi/clipmenu
 
-alt + period
+ctrl + alt + period
 	$DOTFILES/bin/rofi/windowmenu
 
-alt + slash
+ctrl + alt + slash
 	$DOTFILES/bin/rofi/filemenu -x
 
-alt + semicolon
+ctrl + alt + semicolon
 	$DOTFILES/bin/rofi/bookmarkmenu
 
 super + Return
@@ -121,10 +109,10 @@ super + {f,r,s,t}
     bspc node -t {fullscreen,pseudo_tiled,floating,tiled}
 
 ### Switch to next/previous window
-super + ,
-    bspc window -f prev
-super + .
-    bspc window -f next
+super + comma
+    bspc node -f prev
+super + period
+    bspc node -f next
 
 ### Toggle focus follow for nodes
 super + p
@@ -163,12 +151,8 @@ super + ctrl + {0-9}
     bspc node -d 'primary:^{10,1-9}' --follow
 
 ### Change active node
-super + {Left,Down,Up,Right}
-	$DOTFILES/bin/bspwm/focus {_,-m }{west,south,north,east}
-
-### Swap nodes
-super + ctrl + {Left,Down,Up,Right}
-	$DOTFILES/bin/bspwm/swap {_,-m }{west,south,north,east}
+super + {_,ctrl + }{Left,Down,Up,Right}
+	bspc node --{focus,swap} {west,south,north,east}
 
 ### Open new node in preselected space
 super + alt + {Left,Down,Up,Right}
@@ -177,9 +161,6 @@ super + alt + {Left,Down,Up,Right}
 ### Cancel resizing by preselection
 super + alt + Delete
 	bspc node -p cancel
-
-super + alt + Return
-	$DOTFILES/bin/bspwm/subtract-presel
 
 ### Expand a node by moving one of its side outward
 super + ctrl + shift + {Left,Down,Up,Right}
