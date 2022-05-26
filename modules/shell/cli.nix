@@ -11,6 +11,8 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       ## System utilities
+      # Command line tool for the desktop trash can
+      trash-cli
       # Create and view interactive cheatsheets
       cheat
       # Graphical activity monitor
@@ -35,8 +37,6 @@ in {
       exiftool
       # Multi-protocol download utility
       aria2
-      # Backup utility with compression and encryption
-      borgbackup
       # Control media players from command line
       playerctl
       # Control display brightness from command line
@@ -79,8 +79,6 @@ in {
       nms
       # Cli PDF processor
       pdfcpu
-      # PDF presenter console
-      pdfpc
       # Code statistics
       tokei
       # Corrects fuckups in console
@@ -111,6 +109,8 @@ in {
     environment.shellAliases = {
       gt = "gotop";
       pm = "pulsemixer";
+      rm = "trash";
+      rst = "trash-restore";
     };
   };
 }
