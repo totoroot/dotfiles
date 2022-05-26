@@ -12,10 +12,14 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Classic 2D jump'n run sidescroller game
+      superTux
+      # Free 3D kart racing game
+      superTuxKart
       # Multi-platform emulator frontend for libretro cores
       unstable.retroarch
     ];
-    
+
   # Create directory for retro games
     home.file = {
       "games/retro/.use".text = "retro games";
