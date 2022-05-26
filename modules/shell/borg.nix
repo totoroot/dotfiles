@@ -1,12 +1,12 @@
-# modules/services/borg.nix
+# modules/shell/borg.nix
 
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.borg;
+let cfg = config.modules.shell.borg;
 in {
-  options.modules.services.borg = {
+  options.modules.shell.borg = {
     enable = mkBoolOpt false;
   };
 
@@ -16,10 +16,6 @@ in {
       borgbackup
       # Simple, configuration-driven backup software for servers and workstations
       borgmatic
-      # Simple backups based on borg
-      pika-backup
-      # Desktop Backup Client for Borg
-      vorta
     ];
 
     home.configFile = {
