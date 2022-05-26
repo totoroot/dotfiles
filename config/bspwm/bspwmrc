@@ -9,12 +9,15 @@ if [[ $(hostname) == 'purple' ]]; then
         xrandr --output DP-0 --pos 0x1440 --primary
         xrandr --output HDMI-0 --pos 200x0 --auto
         # set workspaces
-        bspc monitor DP-0 -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
+        bspc monitor DP-0 -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
         bspc monitor HDMI-0 -d Other
     else
         xrandr --output ${MONITORS[1]}
-        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Mail,Notes,Editing,Recording,Aux}
+        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
     fi
+elif [[ $(hostname) == 'violet' ]]; then
+    xrandr --output ${MONITORS[1]}
+    bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
 else
     xrandr --auto
     bspc monitor ${MONITORS[1]} -d {I,II,III,IV,V,VI,VII,VIII,IX,X}
@@ -24,9 +27,32 @@ bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
 
 # Rules
-bspc rule -r '*'
+bspc rule -r "*"
 
-bspc rule -a xst-256color state=floating
+## General
+bspc rule -a "xst-256color" state=floating
+bspc rule -a "spectacle"
+## Desktop 2 - Dev
+bspc rule -a "jetbrains-idea" desktop="Dev"
+## Desktop 3 - Pass
+bspc rule -a "KeePassXC" desktop="Pass"
+bspc rule -a "Mullvad VPN" state=tiled desktop="Pass"
+## Desktop 4 - Music
+bspc rule -a "Lollypop" desktop="Music"
+bspc rule -a "Picard" desktop="Music"
+## Desktop 5 - Messaging
+bspc rule -a "Signal" desktop="Messaging"
+bspc rule -a "TelegramDesktop" desktop="Messaging"
+## Desktop 6 - Office
+bspc rule -a "Thunderbird" desktop="Office"
+bspc rule -a "QOwnNotes" desktop="Office"
+## Desktop 7 - Editing
+bspc rule -a "Gimp-2.10" desktop="Editing"
+bspc rule -a "Inkscape" desktop="Editing"
+## Other monitor
+bspc rule -a "discord" desktop="Other"
+bspc rule -a "Chromium-browser" desktop="Other"
+
 
 # source rc files
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
