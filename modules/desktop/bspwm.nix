@@ -16,7 +16,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       # Adds layout managing capabilities for bspwm
-      bsp-layout
+      unstable.bsp-layout
       # Cross-desktop display manager
       lightdm
       # Lightweight and customizable notification daemon
