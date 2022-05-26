@@ -11,17 +11,18 @@ in {
   config = mkIf cfg.enable {
     sound.enable = true;
     hardware.pulseaudio.enable = true;
-    user.packages = with pkgs; [
-      unstable.noisetorch
-      (makeDesktopItem {
-        name = "noisetorch";
-        desktopName = "NoiseTorch";
-        genericName = "Virtual Microphone";
-        icon = "microphone";
-        exec = "${noisetorch}/bin/noisetorch";
-        categories = "Audio";
-      })
-    ];
+    # Disable NoiseTorch until it is safe to install again
+    # user.packages = with pkgs; [
+      # unstable.noisetorch
+      # (makeDesktopItem {
+        # name = "noisetorch";
+        # desktopName = "NoiseTorch";
+        # genericName = "Virtual Microphone";
+        # icon = "microphone";
+        # exec = "${noisetorch}/bin/noisetorch";
+        # categories = "Audio";
+      # })
+    # ];
 
     # HACK Prevents ~/.esd_auth files by disabling the esound protocol module
     #      for pulseaudio, which I likely don't need. Is there a better way?
