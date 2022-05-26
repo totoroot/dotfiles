@@ -29,6 +29,7 @@
     };
     shell = {
       archive.enable = false;
+      borg.enable = true;
       clipboard.enable = false;
       direnv.enable = false;
       git.enable = true;
@@ -41,7 +42,6 @@
       cli.enable = true;
     };
     services = {
-      borg.enable = false;
       containers.enable = true;
       gitea.enable = false;
       jellyfin.enable = false;
