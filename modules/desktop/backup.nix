@@ -12,6 +12,8 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # GTK3 & python based GUI for Syncthing
+      # syncthing-gtk # Currently broken
       # Simple backups based on borg
       pika-backup
       # Desktop Backup Client for Borg
