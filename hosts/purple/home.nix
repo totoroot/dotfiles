@@ -5,7 +5,7 @@
     "books/.use".text = "books";
     "dev/.use".text = "dev";
     "documents/.use".text = "documents";
-    "downloads/.use".text = "downloads";
+    "dl/.use".text = "downloads";
     "graphics/.use".text = "graphics";
     "inbox/.use".text = "inbox";
     "music/.use".text = "music";
@@ -18,6 +18,6 @@
     "tmp/.use".text = "tmp";
     "uni/.use".text = "uni";
     "zero/.use".text = "zero";
-    ".trash/.use".text = "trash";
+    "trash/".source = "/home/mathym/.local/share/Trash/files/";
   };
 }
