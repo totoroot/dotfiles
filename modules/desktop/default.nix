@@ -28,7 +28,7 @@ in {
       xdo                               # perform elementary actions on X windows
       xdotool                           # X input and window management tool
       sxiv                              # simple X image viewer (dependency fontpreview)
-      feh                               # light-weight image viewer 
+      feh                               # light-weight image viewer
       qgnomeplatform                    # QPlatformTheme for a better Qt application inclusion in GNOME
       qt5ct                             # Qt5 Configuration Tool
       libsForQt5.qtstyleplugin-kvantum  # SVG-based Qt5 theme engine plus a config tool and extra themes
