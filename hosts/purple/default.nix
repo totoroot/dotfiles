@@ -14,6 +14,7 @@
         retro.enable = true;
         steam.enable = true;
       };
+      backup.enable = true;
       bspwm.enable = true;
       documents.enable = true;
       fonts.enable = true;
@@ -23,7 +24,7 @@
       mail.enable = true;
       plank.enable = true;
       screenshot.enable = true;
-      thunar.enable = true;
+      fm.enable = true;
       apps = {
         anki.enable = true;
         blender.enable = true;
@@ -117,13 +118,14 @@
       archive.enable = true;
       borg.enable = true;
       clipboard.enable = true;
+      devops.enable = true;
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
       lf.enable = true;
       aerc.enable = true;
       pass.enable = true;
-      taskell.enable  = true;
+      taskell.enable = true;
       zsh.enable = true;
       cli.enable = true;
     };
