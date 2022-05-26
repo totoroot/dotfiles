@@ -18,11 +18,12 @@
       documents.enable = false;
       fonts.enable = true;
       flatpak.enable = false;
+      fm.enable = true;
       keepassxc.enable = true;
       kvantum.enable = false;
       mail.enable = true;
+      plank.enable = true;
       screenshot.enable = false;
-      thunar.enable = true;
       apps = {
         anki.enable = false;
         blender.enable = false;
@@ -155,6 +156,8 @@
   environment.variables = rec {
     MAIN_MONITOR = "HDMI-A-0";
   };
+
+  programs.dconf.enable = true;
 
   # Scale all elemnts
   services.xserver.dpi = 350;
