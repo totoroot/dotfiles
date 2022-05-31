@@ -20,7 +20,7 @@ in {
         genericName = "Open an incognito Chromium window";
         icon = "chromium";
         exec = "${chromium}/bin/chromium --incognito";
-        categories = "Network";
+        categories = [ "Network" ];
       })
     ];
   };
