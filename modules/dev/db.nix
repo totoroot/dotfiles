@@ -12,13 +12,13 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python38
+      python310
       # Scientific tools for Python
-      python38Packages.numpy
+      python310Packages.numpy
       # Python Data Analysis Library
-      python38Packages.pandas
+      python310Packages.pandas
       # Python SQL toolkit and Object Relational Mapper
-      python38Packages.sqlalchemy
+      python310Packages.sqlalchemy
       # Universal SQL Client for developers, DBA and analysts
       dbeaver
       # Self-contained, serverless, zero-configuration, transactional SQL database engine

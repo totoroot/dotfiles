@@ -12,27 +12,27 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python38
-      python38Packages.pip
+      python310
+      python310Packages.pip
       # pip update helpers
-      python38Packages.pipdate
-      python38Packages.virtualenv
-      python38Packages.pytest-virtualenv
-      python38Packages.virtualenv-clone
-      python38Packages.tox
-      python38Packages.ipython
-      python38Packages.setuptools
-      python38Packages.pylint
+      python310Packages.pipdate
+      python310Packages.virtualenv
+      python310Packages.pytest-virtualenv
+      python310Packages.virtualenv-clone
+      python310Packages.tox
+      python310Packages.ipython
+      python310Packages.setuptools
+      python310Packages.pylint
       # Python dependency management and packaging made easy
-      python38Packages.poetry
+      python310Packages.poetry
       # Jupyter lab environment notebook server extension
-      python38Packages.jupyterlab
+      python310Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
-      # python38Packages.jupytext
+      # python310Packages.jupytext
       # Scientific tools for Python
-      python38Packages.numpy
+      python310Packages.numpy
       # Python Data Analysis Library
-      python38Packages.pandas
+      python310Packages .pandas
       # Uncompromising Python code formatter
       black
       # Linter for yaml files
@@ -50,8 +50,6 @@ in {
 
     environment.shellAliases = {
       py     = "python";
-      py2    = "python2";
-      py3    = "python3";
       po     = "poetry";
       ipy    = "ipython --no-banner";
       ipylab = "ipython --pylab=qt5 --no-banner";
