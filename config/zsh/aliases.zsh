@@ -17,13 +17,13 @@ alias mv='mv -v'
 alias mkdir='mkdir -p'
 alias wget='wget -c'
 alias cat='bat -Pp'
+alias search='grep -ir --exclude-dir=".git"'
 alias find='fd'
 alias replace='sd'
 
 alias cdd='cd $XDG_CONFIG_HOME/dotfiles'
 alias cds='cd /etc/nixos'
 
-alias mk=make
 alias gurl='curl --compressed'
 alias vurl='curl -L -v'
 alias disks='lsblk -o name,label,mountpoint,size,uuid'
