@@ -23,7 +23,8 @@
       kvantum.enable = false;
       mail.enable = true;
       plank.enable = true;
-      screenshot.enable = false;
+      screenshot.enable = true;
+      fm.enable = true;
       apps = {
         anki.enable = false;
         blender.enable = false;
@@ -111,7 +112,6 @@
     };
     shell = {
       archive.enable = true;
-      borg.enable = true;
       clipboard.enable = true;
       direnv.enable = true;
       git.enable = true;
@@ -124,6 +124,7 @@
       cli.enable = true;
     };
     services = {
+      borg.enable = true;
       containers.enable = true;
       gitea.enable = false;
       jellyfin.enable	= false;
@@ -164,6 +165,7 @@
   environment.variables = {
     GDK_SCALE = "2";
     GDK_DPI_SCALE = "0.5";
+    QT_SCALE_FACTOR = "2";
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
 
