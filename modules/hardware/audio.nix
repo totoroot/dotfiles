@@ -20,7 +20,7 @@ in {
         # genericName = "Virtual Microphone";
         # icon = "microphone";
         # exec = "${noisetorch}/bin/noisetorch";
-        # categories = "Audio";
+        # categories = [ "Audio" ];
       # })
     # ];
 

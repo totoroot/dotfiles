@@ -29,15 +29,15 @@ in {
           #!${stdenv.shell}
           HOME="${cfg.libDir}" exec ${steam-run-native}/bin/steam-run "$@"
         '')
-        # So a rofi entry exists
+        # Add a desktop entry
         (makeDesktopItem {
           name = "steam";
           desktopName = "Steam";
           icon = "steam";
           exec = "steam";
-          terminal = "false";
-          mimeType = "x-scheme-handler/steam";
-          categories = "Network;FileTransfer;Game";
+          terminal = false;
+          mimeTypes = [ "x-scheme-handler/steam" ];
+          categories = [ "Network" "FileTransfer" "Game" ];
         })
       ];
       system.userActivationScripts.setupSteamDir = ''mkdir -p "${cfg.libDir}"'';

@@ -27,7 +27,7 @@ in {
         # support, so it must be selected here.
         # Also install bluetooth cli tools to make it usable.
         # Enable additional codecs
-        extraModules = [ pkgs.pulseaudio-modules-bt ];
+        extraModules = [];
       };
 
       hardware.bluetooth.settings = {
