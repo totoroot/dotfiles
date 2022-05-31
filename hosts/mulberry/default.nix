@@ -21,7 +21,7 @@
       kvantum.enable = true;
       mail.enable = true;
       screenshot.enable = true;
-      thunar.enable = true;
+      fm.enable = true;
       apps = {
         anki.enable = false;
         blender.enable = false;
@@ -109,7 +109,6 @@
     };
     shell = {
       archive.enable = true;
-      borg.enable = true;
       clipboard.enable = true;
       direnv.enable = true;
       git.enable = true;
@@ -122,6 +121,7 @@
       cli.enable = true;
     };
     services = {
+      borg.enable = false;
       containers.enable = false;
       gitea.enable = false;
       jellyfin.enable	= false;
