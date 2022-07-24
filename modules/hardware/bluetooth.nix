@@ -18,7 +18,6 @@ in {
         pulseaudioFull
         bluez
         bluez-tools
-        blueman
       ];
 
       hardware.pulseaudio = {
