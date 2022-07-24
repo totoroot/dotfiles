@@ -8,6 +8,7 @@
     defaultBranch = main
 [pull]
     rebase=true
+    autostash=true
 [fetch]
     prune=true
 [diff]
