@@ -26,7 +26,7 @@ in {
       # Python dependency management and packaging made easy
       python310Packages.poetry
       # Jupyter lab environment notebook server extension
-      python310Packages.jupyterlab
+      # python310Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
       # python310Packages.jupytext
       # Scientific tools for Python
