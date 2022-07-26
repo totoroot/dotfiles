@@ -14,7 +14,7 @@ in {
     services.xserver.videoDrivers = [ "nvidia" ];
 
     services.xserver.screenSection = ''
-        Option "metamodes" "HDMI-0: nvidia-auto-select +200+0, DP-0: nvidia-auto-select +0+1440"
+      Option "metamodes" "HDMI-0: nvidia-auto-select +200+0, DP-0: nvidia-auto-select +0+1440"
     '';
 
     services.xserver.deviceSection = ''
