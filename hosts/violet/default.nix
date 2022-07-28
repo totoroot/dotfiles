@@ -24,7 +24,6 @@
       mail.enable = true;
       plank.enable = true;
       screenshot.enable = true;
-      fm.enable = true;
       apps = {
         anki.enable = false;
         blender.enable = false;
@@ -112,6 +111,7 @@
     };
     shell = {
       archive.enable = true;
+      borg.enable = true;
       clipboard.enable = true;
       direnv.enable = true;
       git.enable = true;
@@ -124,7 +124,6 @@
       cli.enable = true;
     };
     services = {
-      borg.enable = true;
       containers.enable = true;
       gitea.enable = false;
       jellyfin.enable	= false;
