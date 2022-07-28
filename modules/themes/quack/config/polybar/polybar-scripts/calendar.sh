@@ -5,7 +5,7 @@ send_notification() {
 	HEAD=$(cal -m "$1" | head -n1)
 	BODY=$(cal -m "$1" | tail -n7 | sed -z "s|$TODAY|<u><b>$TODAY</b></u>|1")
 	dunstify -h string:x-canonical-private-synchronous:calendar \
-		"$HEAD" "$BODY$FOOT" -u NORMAL
+		"$HEAD" "$BODY$FOOT" -u NORMAL -t 5000
 }
 
 handle_action() {
