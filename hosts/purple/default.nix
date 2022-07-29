@@ -36,6 +36,7 @@
         gsmartcontrol.enable = true;
         nextcloud.enable = true;
         osm.enable = true;
+        polish.enable = true;
         resolve.enable = true;
         rofi.enable = true;
         torrent.enable = true;
