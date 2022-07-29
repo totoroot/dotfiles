@@ -8,6 +8,6 @@ case "$1" in
         dunstify "Disk Usage" "$(duf -style=ascii)" -u normal -t 30000
         ;;
     *)
-        df --output=avail / -h | tail -n 1 | sed 's/ //g'
+        df --output=avail / -h | tail -n 1 | sed 's/ //g' | sed 's/G/ GB/g'
         ;;
 esac
