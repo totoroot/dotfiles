@@ -45,6 +45,9 @@ alias gloh='() {
 }'
 alias gL='gl --stat'
 alias gp='git push'
+alias gpb='() {
+    git push --set-upstream origin $(git branch --show-current)
+}'
 alias gpf!='git push --force'
 alias gpl='git pull --rebase --autostash'
 alias gr='git reset HEAD'
