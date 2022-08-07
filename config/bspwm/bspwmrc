@@ -52,7 +52,7 @@ bspc rule -a "Inkscape" desktop="Editing"
 ## Other monitor
 bspc rule -a "discord" desktop="Other"
 bspc rule -a "Chromium-browser" desktop="Other"
-
+bspc rule -a "Plank" layer=above manage=on border=off
 
 # source rc files
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
