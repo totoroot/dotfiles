@@ -14,6 +14,8 @@ in {
     user.packages = with pkgs; [
       # Terminal file manager written in Go and heavily inspired by ranger
       lf
+      # Ranger-like terminal file manager written in Rust
+      unstable.joshuto
       # cat(1) clone with syntax highlighting and Git integration
       bat
       # MS-Word/Excel/PowerPoint to text converter
