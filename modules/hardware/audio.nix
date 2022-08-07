@@ -24,6 +24,11 @@ in {
       # })
     # ];
 
+    user.packages = with pkgs; [
+      # PulseAudio Preferences GUI
+      paprefs
+    ];
+
     # HACK Prevents ~/.esd_auth files by disabling the esound protocol module
     #      for pulseaudio, which I likely don't need. Is there a better way?
     hardware.pulseaudio.configFile =
