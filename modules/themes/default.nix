@@ -57,8 +57,8 @@ in {
             ''gtk-icon-theme-name=${cfg.gtk.iconTheme}''}
           ${optionalString (cfg.gtk.cursorTheme != "")
             ''gtk-cursor-theme-name=${cfg.gtk.cursorTheme}''}
-          gtk-cursor-theme-size=36
-          gtk-fallback-icon-theme=gnome
+          gtk-cursor-theme-size=32
+          gtk-fallback-icon-theme=Adwaita
           gtk-application-prefer-dark-theme=true
           gtk-xft-hinting=1
           gtk-xft-hintstyle=hintfull
