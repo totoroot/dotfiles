@@ -23,18 +23,30 @@ in {
       }
     ];
 
-    user.packages = with pkgs; [
-      xclip                             # access X clipboard from console
-      xdo                               # perform elementary actions on X windows
-      xdotool                           # X input and window management tool
-      sxiv                              # simple X image viewer (dependency fontpreview)
-      feh                               # light-weight image viewer
-      qgnomeplatform                    # QPlatformTheme for a better Qt application inclusion in GNOME
-      qt5ct                             # Qt5 Configuration Tool
-      libsForQt5.qtstyleplugin-kvantum  # SVG-based Qt5 theme engine plus a config tool and extra themes
+    environment.systemPackages = with pkgs; [
       # Fallback icon themes
-      gnome3.adwaita-icon-theme
-      hicolor-icon-theme                # default fallback theme used by implementations of the icon theme specification
+      gnome.adwaita-icon-theme
+      # A style to bend Qt applications to look like they belong into GNOME Shell
+      adwaita-qt
+      # Default fallback theme used by implementations of the icon theme specification
+      hicolor-icon-theme
+      # QPlatformTheme for a better Qt application inclusion in GNOME
+      qgnomeplatform
+    ];
+
+    user.packages = with pkgs; [
+      # Access X clipboard from console
+      xclip
+      # Perform elementary actions on X windows
+      xdo
+      # X input and window management tool
+      xdotool
+      # Simple X image viewer (dependency fontpreview)
+      sxiv
+      # Light-weight image viewer
+      feh
+      # SVG-based Qt5 theme engine plus a config tool and extra themes
+      libsForQt5.qtstyleplugin-kvantum
     ];
 
     ## Apps/Services
@@ -45,17 +57,13 @@ in {
       vSync = true;
       opacityRules = [
         # "100:class_g = 'Firefox'"
-        # "100:class_g = 'Vivaldi-stable'"
-        "100:class_g = 'VirtualBox Machine'"
         # Art/image programs where we need fidelity
         "100:class_g = 'Gimp'"
         "100:class_g = 'Inkscape'"
-        "100:class_g = 'aseprite'"
         "100:class_g = 'krita'"
         "100:class_g = 'feh'"
         "100:class_g = 'mpv'"
         "100:class_g = 'Rofi'"
-        "100:class_g = 'Peek'"
         "99:_NET_WM_STATE@:32a = '_NET_WM_STATE_FULLSCREEN'"
       ];
       shadowExclude = [
@@ -88,11 +96,6 @@ in {
         xrender-sync-fence = true;
       };
     };
-
-    # Apply suggestion by benneti to use kvantum to configure QT apps
-    env.GTK_DATA_PREFIX = [ "${config.system.path}" ];
-    env.QT_QPA_PLATFORMTHEME = "gnome";
-    env.QT_STYLE_OVERRIDE = "kvantum";
 
     services.xserver.displayManager.sessionCommands = ''
       # GTK2_RC_FILES must be available to the display manager.

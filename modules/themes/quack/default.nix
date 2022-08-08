@@ -15,7 +15,7 @@ in {
           gtk = {
             theme       = "Dracula";
             iconTheme   = "Papirus";
-            cursorTheme = "Papirus";
+            cursorTheme = "Dracula-cursors";
           };
         };
 
@@ -33,9 +33,12 @@ in {
           ];
         };
       };
+
       env = {
         XDG_THEME_CONFIG = "$XDG_CONFIG_HOME/dotfiles/modules/themes/quack/config/";
         BAT_THEME = "Dracula";
+        GTK_DATA_PREFIX = [ "${config.system.path}" ];
+        QT_STYLE_OVERRIDE = "kvantum";
       };
     }
 
@@ -45,6 +48,15 @@ in {
         dracula-theme
         papirus-icon-theme
       ];
+
+      home.file = {
+        ".Xresources".text = ''
+          Xft.dpi: 150
+          Xcursor.theme: Dracula-cursors
+          Xcursor.Size: 16
+        '';
+      };
+
       fonts.fontconfig.defaultFonts = {
         sansSerif = ["Fira Sans"];
         monospace = ["Mononoki"];
@@ -82,16 +94,27 @@ in {
         };
       };
 
-      # Login screen theme
-      services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
-        font = "Monospace"
-        font-size = 14
-        text-color = "#ff79c6"
-        password-background-color = "#1E2029"
-        window-color = "#181a23"
-        border-color = "#181a23"
-        password-character = "."
-      '';
+      services.xserver.displayManager = {
+        lightdm = {
+          greeters = {
+            gtk.cursorTheme = {
+              package = pkgs.dracula-theme;
+              name = "Dracula-cursors";
+              size = 32;
+            };
+            # Login screen theme
+            mini.extraConfig = ''
+              font = "Monospace"
+              font-size = 14
+              text-color = "#ff79c6"
+              password-background-color = "#1E2029"
+              window-color = "#181a23"
+              border-color = "#181a23"
+              password-character = "."
+            '';
+          };
+        };
+      };
 
       # Other dotfiles
       home.configFile = with config.modules; mkMerge [
