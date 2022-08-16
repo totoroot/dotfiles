@@ -34,6 +34,7 @@
       direnv.enable = false;
       git.enable = true;
       gnupg.enable = true;
+      iperf.enable = true;
       lf.enable = true;
       aerc.enable = false;
       pass.enable = false;

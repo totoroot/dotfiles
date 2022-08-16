@@ -116,6 +116,7 @@
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
+      iperf.enable = true;
       lf.enable = true;
       aerc.enable = true;
       pass.enable = true;
