@@ -123,6 +123,7 @@
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
+      iperf.enable = true;
       lf.enable = true;
       aerc.enable = true;
       pass.enable = true;
@@ -159,10 +160,14 @@
   # Optionally set more keymaps and use them with bin/keymapswitcher
   services.xserver.layout = "eu";
 
+  # Force DPI to optimize for ultrawide screen
+  services.xserver.dpi = 200;
+
   # Set default monitor
   environment.variables = rec {
     MONITORS = ["HDMI-0" "DP-0"];
   };
 
   programs.dconf.enable = true;
+
 }
