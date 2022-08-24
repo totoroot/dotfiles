@@ -44,7 +44,7 @@ in {
 
     # Desktop (X11) theming
     (mkIf config.services.xserver.enable {
-      user.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         dracula-theme
         papirus-icon-theme
       ];
