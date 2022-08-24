@@ -16,7 +16,11 @@
       "v4l2loopback"
       "k10temp"
       "fam15h_power"
+      "amdgpu"
     ];
+    # kernelParams = [
+      # "video=HDMI-1:3440x1440@60"
+    # ];
   };
 
   nix.maxJobs = lib.mkDefault 16;
