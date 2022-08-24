@@ -109,7 +109,8 @@
       image.enable = true;
       keebs.enable = true;
       mcus.enable = true;
-      nvidia.enable = true;
+      nvidia.enable = false;
+      radeon.enable = true;
       printers.enable = true;
       sensors.enable = true;
       steamcon.enable = true;
