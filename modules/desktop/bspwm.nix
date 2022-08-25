@@ -23,6 +23,17 @@ in {
       dunst
       # Library that sends desktop notifications to a notification daemon
       libnotify
+      # X11 screen lock utility with security in mind
+      xsecurelock
+      # Use external locker (such as i3lock) as X screen saver
+      xss-lock
+      # Launch a given program when your X session has been idle for a given time
+      xautolock
+      # xautolock rewrite in Rust, with a few extra features
+      # xidlehook
+      # i3lock is a bash script that takes a screenshot of the desktop, blurs the background and adds a lock icon and text
+      i3lock-fancy
+
       (polybar.override {
         pulseSupport = true;
         nlSupport = true;
@@ -38,6 +49,25 @@ in {
           defaultSession = "none+bspwm";
           lightdm.enable = true;
           lightdm.greeters.mini.enable = true;
+          sessionCommands = pkgs.lib.mkAfter ''
+            ${pkgs.xorg.xset}/bin/xset s 600 10
+            ${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- ${pkgs.xautolock}/bin/xautolock -locknow &
+            ${pkgs.xorg.xsetroot}/bin/xsetroot -cursor_name left_ptr
+          '';
+        };
+        xautolock = {
+          enable = true;
+          time = 30;
+          # enableNotifier = true;
+          # notify = 30;
+          # notifier = "${pkgs.libnotify}/bin/notify-send 'Locking in 30 seconds'";
+          locker = "${pkgs.xsecurelock}/bin/xsecurelock";
+          nowlocker = "${pkgs.xsecurelock}/bin/xsecurelock";
+          killer = "/run/current-system/systemd/bin/systemctl suspend";
+          killtime = 30;
+          # extraOptions = [
+            # "-detectsleep"
+          # ];
         };
         windowManager.bspwm.enable = true;
       };
