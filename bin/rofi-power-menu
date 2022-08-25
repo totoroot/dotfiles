@@ -13,7 +13,7 @@ set -e
 set -u
 
 # All supported choices
-all=(suspend hibernate shutdown reboot)
+all=(lockscreen suspend hibernate shutdown reboot)
 
 # By default, show all (i.e., just copy the array)
 show=("${all[@]}")
@@ -38,7 +38,7 @@ icons[shutdown]=" \uf1e6"
 icons[cancel]="\u00d7"
 
 declare -A actions
-actions[lockscreen]="loginctl lock-session \$XDG_SESSION_ID"
+actions[lockscreen]="loginctl lock-session $XDG_SESSION_ID"
 actions[switchuser]="???"
 actions[logout]="loginctl terminate-session \$XDG_SESSION_ID"
 actions[suspend]="systemctl suspend"
