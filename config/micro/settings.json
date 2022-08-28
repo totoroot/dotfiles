@@ -70,6 +70,9 @@
     "*.yml": {
     	"tabsize": 2
     },
+    "*.md": {
+    	"tabsize": 2
+    },
     "*.nix": {
     	"tabsize": 2
     },
