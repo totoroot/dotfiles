@@ -11,12 +11,6 @@
 Session.vim
 .netrwhist
 
-# Ignore tags (from etags and ctags)
-TAGS
-!TAGS/
-tags
-!tags/
-
 # Logs and databases #
 ######################
 *.log
