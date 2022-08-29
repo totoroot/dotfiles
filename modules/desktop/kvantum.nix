@@ -17,22 +17,22 @@ in {
       };
       "Dracula-kvantum" = {
         recursive = true;
-        source = "${pkgs.unstable.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula";
+        source = "${pkgs.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula";
         target = "Kvantum/Dracula";
       };
       "Dracula-Solid-kvantum" = {
         recursive = true;
-        source = "${pkgs.unstable.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula-Solid";
+        source = "${pkgs.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula-Solid";
         target = "Kvantum/Dracula-Solid";
       };
       "Dracula-purple-kvantum" = {
         recursive = true;
-        source = "${pkgs.unstable.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula-purple";
+        source = "${pkgs.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula-purple";
         target = "Kvantum/Dracula-purple";
       };
       "Dracula-purple-solid-kvantum" = {
         recursive = true;
-        source = "${pkgs.unstable.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula-purple-solid";
+        source = "${pkgs.dracula-theme}/share/themes/Dracula/kde/kvantum/Dracula-purple-solid";
         target = "Kvantum/Dracula-purple-solid";
       };
     };
