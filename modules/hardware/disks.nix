@@ -17,6 +17,15 @@ in {
     {
       programs.udevil.enable = true;
 
+      services.smartd = {
+        enable = true;
+        autodetect = true;
+        notifications = {
+          x11.enable = true;
+          test = true;
+        };
+      };
+
       environment.systemPackages = with pkgs; [
         # Mount exfat drives (macOS compatibility)
         exfat
