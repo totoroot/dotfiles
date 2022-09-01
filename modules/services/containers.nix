@@ -28,8 +28,8 @@ in {
     virtualisation = {
       docker = {
         enable = true;
+        enableOnBoot = true;
         autoPrune.enable = true;
-        enableOnBoot = false;
         # listenOptions = [];
       };
       podman = {
