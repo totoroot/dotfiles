@@ -48,6 +48,12 @@ alias gp='git push'
 alias gpb='() {git push --set-upstream origin $(git branch --show-current)}'
 alias gpf!='git push --force'
 alias gpl='git pull --rebase --autostash'
+# git prune local branches
+alias gprlb='git fetch -p ; git branch -r | awk "{print $1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print $1}" | xargs git branch -d'
+# git prune remote branches
+alias gprrb='() {
+  git remote prune $(git remote)
+}'
 alias gr='git reset HEAD'
 alias grb='git rebase -i'
 alias gri='(){ git rebase -i HEAD~$1 }'
