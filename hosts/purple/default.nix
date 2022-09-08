@@ -133,6 +133,9 @@
       cli.enable = true;
     };
     services = {
+      containers = {
+        snowflake.enable = false;
+      };
       containers.enable = true;
       gitea.enable = false;
       jellyfin.enable = false;

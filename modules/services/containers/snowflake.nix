@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.tor;
+let cfg = config.modules.services.containers.snowflake;
 in {
-  options.modules.services.tor = {
+  options.modules.services.containers.snowflake = {
     enable = mkBoolOpt false;
   };
 
