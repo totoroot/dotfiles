@@ -10,14 +10,13 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Modern and intuitive terminal-based text editor
       micro
     ];
 
     environment = {
       shellAliases = {
         m = "micro";
-        # just don't ask
-        mciro = "micro";
       };
       variables = {
         MICRO_TRUECOLOR = "1";

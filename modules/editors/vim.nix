@@ -13,11 +13,15 @@ in {
     user.packages = with pkgs;
       (if cfg.enable then [
         editorconfig-core-c
+        # Vim text editor fork focused on extensibility and agility
         unstable.neovim
+        # Post-modern modal text editor
+        unstable.helix
       ] else []) ++
 
       (if cfg.desktop.enable then [
-        unstable.neovide
+        # Simple graphical user interface for Neovim
+        # unstable.neovide
       ] else []);
 
     # This is for non-neovim, so it loads my nvim config
@@ -25,6 +29,11 @@ in {
 
     environment.shellAliases = {
       vim = "nvim";
+      helix = "hx";
+    };
+
+    home.configFile = {
+      "helix/config.toml".source = "${configDir}/helix/config.toml";
     };
   };
 }
