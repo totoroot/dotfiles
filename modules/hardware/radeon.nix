@@ -34,6 +34,12 @@ in {
       radeontop
       # Application to read current clocks of AMD Radeon cards
       radeon-profile
+      rocminfo
+      rocm-smi
+      rocm-runtime
+      rocm-opencl-runtime
+      rocm-cmake
+      rocm-thunk
     ];
   };
 }
