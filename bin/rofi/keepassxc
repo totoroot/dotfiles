@@ -2,7 +2,7 @@
 
 MSG_CMD='notify-send'
 
-m() { rofi -dmenu -theme theme/passmenu.rasi -i "$@";}
+m() { rofi -dmenu -theme $DOTFILES/config/rofi/passmenu.rasi -i "$@";}
 
 clip_username() {
   echo "$dbpass" | keepassxc-cli show "$db" "$entry" | grep 'UserName:' | \

@@ -112,7 +112,7 @@ in {
     '';
 
     home.configFile = {
-      "hypr/hyprland.conf".source = "${configDir}/hyprland/hyprland.conf";
+      "hypr/hyprland.conf".source = "${configDir}/hypr/hyprland.conf";
     };
   };
 }

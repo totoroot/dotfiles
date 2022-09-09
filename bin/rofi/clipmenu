@@ -3,4 +3,4 @@
 rofi -modi "clipboard:greenclip print" \
      -show clipboard \
      -run-command '{cmd}' \
-     -theme theme/clipmenu.rasi
+     -theme $DOTFILES/config/rofi/clipmenu.rasi
