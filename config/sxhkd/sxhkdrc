@@ -17,7 +17,7 @@ ctrl + alt + 4
 
 ### Open all one-off terminal tools in floating xst window
 
-ctrl + alt + 0
+ctrl + alt + x
     xst -g 80x15
 
 ctrl + alt + v
@@ -73,19 +73,17 @@ ctrl + alt + Left
 alt + Return
 	$DOTFILES/bin/rofi/appmenu
 
-ctrl + alt + Return
-	$DOTFILES/bin/rofi/appmenu
-
-ctrl + alt + comma
+alt + comma
 	$DOTFILES/bin/rofi/clipmenu
 
-ctrl + alt + period
+alt + period
 	$DOTFILES/bin/rofi/windowmenu
 
-ctrl + alt + slash
-	$DOTFILES/bin/rofi/filemenu -x
+# Conflict with comment shortcut in micro
+# alt + slash
+	# $DOTFILES/bin/rofi/filemenu -x
 
-ctrl + alt + semicolon
+alt + semicolon
 	$DOTFILES/bin/rofi/bookmarkmenu
 
 super + Return
@@ -96,6 +94,10 @@ super + Return
 super + alt + l
     $DOTFILES/bin/keymapswitcher
 
+
+## Lock screen
+super + ctrl + l
+    xautolock -locknow
 
 ## bspwm Node Controls
 ## Key Sequence: super
@@ -111,6 +113,7 @@ super + {f,r,s,t}
 ### Switch to next/previous window
 super + comma
     bspc node -f prev
+
 super + period
     bspc node -f next
 
@@ -153,6 +156,12 @@ super + ctrl + {0-9}
 ### Change active node
 super + {_,ctrl + }{Left,Down,Up,Right}
 	bspc node --{focus,swap} {west,south,north,east}
+
+ctrl + alt + {\[,\]}
+	bspc node --{focus} {west,east}
+
+ctrl + alt + {9,0}
+	bspc node --{swap} {west,east}
 
 ### Open new node in preselected space
 super + alt + {Left,Down,Up,Right}
