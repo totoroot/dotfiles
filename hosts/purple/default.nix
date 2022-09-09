@@ -15,7 +15,8 @@
         steam.enable = true;
       };
       backup.enable = true;
-      bspwm.enable = true;
+      bspwm.enable = false;
+      hyprland.enable = true;
       documents.enable = true;
       fonts.enable = true;
       flatpak.enable = true;
