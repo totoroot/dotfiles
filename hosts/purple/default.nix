@@ -136,6 +136,10 @@
       containers = {
         snowflake.enable = false;
       };
+      pods = {
+        languagetool.enable = true;
+        scrutiny.enable = true;
+      };
       containers.enable = true;
       gitea.enable = false;
       jellyfin.enable = false;
