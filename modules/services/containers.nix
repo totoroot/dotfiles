@@ -12,10 +12,16 @@ in {
     user.packages = with pkgs; [
       docker
       docker-compose
+      # Program for managing pods, containers and container images
       podman
+      # Podman Terminal UI
+      podman-tui
+      # Implementation of docker-compose with podman backend
       podman-compose
-      lazydocker          # terminal UI for docker and docker-compose
-      ctop                # container activity monitor
+      # Simple terminal UI for docker and docker-compose
+      lazydocker
+      # Top-like interface for container metrics
+      ctop
     ];
 
     env.DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
