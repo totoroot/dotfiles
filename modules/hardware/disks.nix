@@ -69,6 +69,12 @@ in {
 
       # Add user to group disk for access on disks without sudo
       user.extraGroups = [ "disk" ];
+
+      environment = {
+        shellAliases = {
+          # Not interested in special devices
+          duf = "duf -only local";
+        };
     }
   ]);
 }
