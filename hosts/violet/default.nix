@@ -128,6 +128,10 @@
       containers = {
         snowflake.enable = true;
       };
+      pods = {
+        scrutiny.enable = true;
+        languagetool.enable = false;
+      };
       containers.enable = true;
       gitea.enable = false;
       jellyfin.enable	= false;
