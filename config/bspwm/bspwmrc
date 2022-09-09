@@ -4,23 +4,18 @@ set -x
 
 export MONITORS=( $(xrandr -q | grep ' connected' | cut -d' ' -f1) )
 
-if [[ $(hostname) == 'purple' ]]; then
-    if [ ${#MONITORS[@]} -eq 2 ]; then
-        xrandr --output DP-0 --pos 0x1440 --primary
-        xrandr --output HDMI-0 --pos 200x0 --auto
-        # set workspaces
-        bspc monitor DP-0 -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
-        bspc monitor HDMI-0 -d Other
-    else
-        xrandr --output ${MONITORS[1]}
-        bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
-    fi
-elif [[ $(hostname) == 'violet' ]]; then
-    xrandr --output ${MONITORS[1]}
+if [ ${#MONITORS[@]} -eq 2 ]; then
+    xrandr --output ${MONITORS[1]} --primary
+    xrandr --output ${MONITORS[2]} --pos 200x0 --auto
+    # set workspaces
+    bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
+    bspc monitor ${MONITORS[2]} -d Other
+elif [[ $(hostname) == 'purple' ]] || [[ $(hostname) == 'violet' ]] ; then
+    xrandr --output ${MONITORS[1]} --primary
     bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
 else
     xrandr --auto
-    bspc monitor ${MONITORS[1]} -d {I,II,III,IV,V,VI,VII,VIII,IX,X}
+    bspc monitor ${MONITORS[1]} -d {Main,Dev,Pass,Music,Messaging,Office,Editing,Aux}
 fi
 
 bspc config remove_disabled_monitors true
@@ -50,14 +45,17 @@ bspc rule -a "QOwnNotes" desktop="Office"
 bspc rule -a "Gimp-2.10" desktop="Editing"
 bspc rule -a "Inkscape" desktop="Editing"
 ## Other monitor
-bspc rule -a "discord" desktop="Other"
-bspc rule -a "Chromium-browser" desktop="Other"
-bspc rule -a "Plank" layer=above manage=on border=off
+bspc rule -a "discord" desktop="Aux"
+bspc rule -a "Chromium-browser" desktop="Aux"
+## Dock
+bspc rule -a "plank" layer=above manage=on border=off
 
-# source rc files
+# Source rc files
 for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
   source "$file"
 done
+
+# Source autostart scripts
 
 feh --bg-center $DOTFILES/modules/themes/quack/config/wallpaper.png
 
@@ -75,7 +73,7 @@ if ! pgrep udiskie > /dev/null; then
 fi
 
 # Autostart scc-daemon for a working Steam controller
-scc-daemon start > /dev/null &
+pkill scc-daemon || scc-daemon start > /dev/null &
 
 # Autostart plank
-plank -n default > /dev/null &
+pkill plank || plank -n default > /dev/null &
