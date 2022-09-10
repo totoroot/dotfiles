@@ -1,10 +1,14 @@
 #!/usr/bin/env zsh
 
-alias g='() { [[ $# = 0 ]] && git status --short . || git $*; }'
-alias git='git'
+# Very concise ´git status´ or short for ´git ...´
+alias g='() {
+    [[ $# = 0 ]] && git status --short . || git $*;
+}'
+# Stage untracked or modified files and directories
 alias ga='git add'
 alias gaa='git add --all'
 alias gap='git add --patch'
+# Show local and remote branchs with latest commit
 alias gb='git branch -av'
 alias gop='git open'
 alias gbD='git branch -D'
@@ -29,6 +33,7 @@ alias gi='git init'
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Creset %C(red)%G?%Creset%C(green)%d%Creset %s %Cblue(%cr) %C(bold blue)<%aN>%Creset"'
 alias gli='gitlint --config ~/.config/gitlint/default.ini --commits HEAD'
 alias gll='git log --pretty="format:%C(yellow)%h%Creset %C(red)%G?%Creset%C(green)%d%Creset %s %Cblue(%cr) %C(bold blue)<%aN>%Creset"'
+# Very concise commit log with optional limit
 alias glo='() {
     if (( $1 )); then
         git log --oneline --format="%s" | head -n $1
@@ -36,6 +41,7 @@ alias glo='() {
         git log --oneline --format="%s"
     fi
 }'
+# Same as ´glo´ but with short commit hashes
 alias gloh='() {
     if (( $1 )); then
         git log --oneline --pretty="format:%C(yellow)%h%Creset %s" | head -n $1
@@ -43,26 +49,36 @@ alias gloh='() {
         git log --oneline --pretty="format:%C(yellow)%h%Creset %s"
     fi
 }'
+# Commit log with commit stats (added and removed lines)
 alias gL='gl --stat'
+alias gr='git reflog'
+# Reflog in the style of ´git log´
+alias glg='git log -g'
 alias gp='git push'
-alias gpb='() {git push --set-upstream origin $(git branch --show-current)}'
+# Push feature branch to remote and set upstream
+alias gpb='() {
+    git push --set-upstream origin $(git branch --show-current)
+}'
 alias gpf!='git push --force'
 alias gpl='git pull --rebase --autostash'
-# git prune local branches
+# Prune local branches
 alias gprlb='git fetch -p ; git branch -r | awk "{print $1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print $1}" | xargs git branch -d'
-# git prune remote branches
+# Prune remote branches
 alias gprrb='() {
-  git remote prune $(git remote)
+    git remote prune $(git remote)
 }'
-alias gr='git reset HEAD'
+alias grh='git reset HEAD'
+# Interactive rebase
 alias grb='git rebase -i'
-alias gri='(){ git rebase -i HEAD~$1 }'
+# Interactive rebase for x latest commits
+alias gri='() {
+    git rebase -i HEAD~$1
+}'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grst='git restore'
 alias grsts='git restore --staged'
 alias grv='git rev-parse'
-alias gss='git status --short .'
 alias gsh='git show'
 alias gst='git status'
 alias gsta='git stash push'
@@ -74,4 +90,12 @@ alias gstp='git stash pop'
 alias gsts='git stash show --text'
 alias gstall='git stash --all'
 alias gsu='git submodule update'
-alias gu='git fetch && git rebase origin/main'
+# Fetch remote changes and rebase local branch to remote main/master branch
+alias gu='() {
+    git fetch
+    if $(git branch --remotes | grep -q "^  $(git remote)/main"); then                                 ~/dev/private/dotfiles
+        git rebase $(git remote)/main
+    else
+        git rebase $(git remote)/master
+    fi
+}'
