@@ -75,6 +75,7 @@ in {
           # Not interested in special devices
           duf = "duf -only local";
         };
+      };
     }
   ]);
 }
