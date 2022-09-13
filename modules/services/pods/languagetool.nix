@@ -29,5 +29,11 @@ in {
         };
       };
     };
+    systemd.services.docker-languagetool.serviceConfig = {
+      User = "mathym";
+      Group = "docker";
+      CacheDirectory = "languagetool";
+      CacheDirectoryMode = "0750";
+    };
   };
 }
