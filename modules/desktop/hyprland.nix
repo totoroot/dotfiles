@@ -45,6 +45,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    nix.settings = {
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
+  
     programs = {
       hyprland = {
         enable = true;
@@ -81,16 +86,9 @@ in {
     };
 
     environment.sessionVariables = rec {
-      # GBM_BACKEND = "nvidia-drm";
-      # __GL_GSYNC_ALLOWED = "0";
-      # __GL_VRR_ALLOWED = "0";
-      # WLR_DRM_NO_ATOMIC = "1";
-      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-
       # Will break SDDM if running X11
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-
       GDK_BACKEND = "wayland";
       WLR_NO_HARDWARE_CURSORS = "1";
       MOZ_ENABLE_WAYLAND = "1";
