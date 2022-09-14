@@ -108,8 +108,8 @@ window#waybar.hidden {
 }
 
 #clock {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #bd93f9 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
     border-radius: 0px 20px 20px 0px;
     margin-right: 4px;
@@ -128,20 +128,20 @@ label:focus {
 }
 
 #cpu {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #memory {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #disk {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
@@ -150,26 +150,27 @@ label:focus {
 }
 
 #network {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #network.disconnected {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: red;
 }
 
 #pulseaudio {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
+    border-radius: 20px 0px 0px 20px;
     color: black;
 }
 
 #pulseaudio.muted {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: red;
 }
 
@@ -200,53 +201,53 @@ label:focus {
 }
 
 #custom-power{
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     font-size: 18px;
     border-radius: 20px;
     margin-left: 2px;
 }
 
 #custom-launcher{
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     font-size: 25px;
     border-radius: 20px;
     margin-right: 2px;
 }
 
 #custom-updater {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #custom-snip {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
     font-size: 20px;
 }
 
 #custom-layout{
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
     font-size: 18px;
     border-radius: 20px 0px 0px 20px;
 }
 
 #taskbar {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #ff79c6 52%, #FA8BFF 90%);
+    background-color: #bd93f9;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #ff79c6 90%);
     border-radius: 20px;
 
 }
 
 
 #temperature {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
     border-radius: 0px 20px 20px 0px;
 }
@@ -256,43 +257,43 @@ label:focus {
 }
 
 #tray {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(-45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #tray > .passive {
     -gtk-icon-effect: dim;
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
 }
 
 #idle_inhibitor {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     border-radius: 20px 0px 0px 20px;
 
 }
 
 #idle_inhibitor.activated {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
     color: black;
     border-radius: 20px 0px 0px 20px;
 
 }
 
 #language {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #ff79c6 52%, #ff79c6 90%);
+    background-color: #ff79c6;
+    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
     color: black;
     min-width: 16px;
     padding-left : 8px;

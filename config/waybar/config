@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 20,
+    "height": 28,
     "spacing": 2,
     "margin-top": 10,
     "margin-right": 10,
@@ -10,8 +10,8 @@
 
     // Choose the order of the modules
     "modules-left":[  "idle_inhibitor", "cpu", "memory", "temperature"],
-    "modules-center": [ "custom/launcher", "custom/media", "wlr/taskbar", "hyprland/window", "custom/power"],
-    "modules-right":["custom/layout", "pulseaudio", "network", "tray",  "clock"],
+    "modules-center": [ "custom/launcher", "wlr/taskbar", "hyprland/window", "custom/power"],
+    "modules-right":["pulseaudio", "network", "clock"],
 
     // Modules configuration
     "keyboard-state": {
@@ -24,9 +24,9 @@
         }
     },
     "hyprland/window": {
-        "format": "👉 {}"
+        "format": "Window {}"
     },
-     "wlr/taskbar": {
+    "wlr/taskbar": {
         "format": "{icon}",
         "icon-size": 20,
         "icon-theme": "Star",
@@ -43,6 +43,13 @@
         // "timezone": "Europe/Vienna",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$DOTFILES/config/waybar/scripts/wttr.py",
+        "return-type": "json"
     },
     "cpu": {
         "format": "{usage}% ",
@@ -72,7 +79,6 @@
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
-
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",
@@ -87,10 +93,9 @@
             "headset": "",
             "phone": "",
             "portable": "",
-            "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "kitty pulsemixer"
     },
     "custom/media": {
         "format": "{icon} {}",
@@ -105,12 +110,12 @@
         "on-click": "playerctl play-pause"
     },
     "custom/launcher":{
-        "format": "",
+        "format": "  ",
         "on-click": "$DOTFILES/bin/rofi/appmenu",
         "on-click-right": "killall rofi"
     },
     "custom/power":{
-        "format": "  ",
+        "format": "  ",
         "on-click": "$DOTFILES/bin/rofi/powermenu -x",
         "on-click-right": "killall rofi"
     }
