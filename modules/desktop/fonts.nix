@@ -12,9 +12,12 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      fontpreview   # highly customizable and minimal CLI font previewer
-      font-manager   # simple font management GUI for GTK desktop environments
-      fontforge     # a font editor
+      # Highly customizable and minimal CLI font previewer 
+      fontpreview
+      # Simple font management GUI for GTK desktop environments
+      font-manager
+      # Font editor
+      fontforge
     ];
 
     fonts = {
