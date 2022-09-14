@@ -151,7 +151,7 @@
       syncthing.enable = true;
       transmission.enable	= false;
     };
-    theme.active = "quack";
+    theme.active = "dracula-wayland";
   };
 
   ## Local config

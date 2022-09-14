@@ -10,7 +10,6 @@ let
     name = "dbus-hyprland-environment";
     destination = "/bin/dbus-hyprland-environment";
     executable = true;
-
     text = ''
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
       systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
@@ -61,19 +60,27 @@ in {
     environment.systemPackages = with pkgs; [
       # Dynamic tiling Wayland compositor that doesn't sacrifice on its looks
       hyprland
+      # The following two are from the hyprland flake...I think
+      dbus-hyprland-environment
+      configure-gtk
       # Core Wayland window system code and protocol
       wayland
       # ElKowars wacky widgets
       eww-wayland
       # Window switcher, run dialog and dmenu replacement for Wayland
       rofi-wayland
-      dbus-hyprland-environment
-      configure-gtk
+      # Command-line copy/paste utilities for Wayland
       wl-clipboard
       # Grab images from a Wayland compositor
       grim
+      # An xrandr clone for wlroots compositors
       wlr-randr
+      # Wallpaper tool for Wayland compositors
       swaybg
+      # Day/night gamma adjustments for Wayland
+      wlsunset
+      # Highly customizable Wayland bar for Sway and Wlroots based compositors
+      waybar
     ];
 
     services.dbus.enable = true;
@@ -86,7 +93,6 @@ in {
     };
 
     environment.sessionVariables = rec {
-      # Will break SDDM if running X11
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       GDK_BACKEND = "wayland";

@@ -1,0 +1,3 @@
+#main-window #TabsToolbar {
+  visibility: collapse !important;
+}
