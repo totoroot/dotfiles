@@ -43,7 +43,6 @@
         chromium.enable = false;
         firefox.enable = true;
         lynx.enable = true;
-        qutebrowser.enable = false;
         tor.enable = false;
       };
       communication = {

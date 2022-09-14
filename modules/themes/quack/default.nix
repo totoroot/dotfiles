@@ -24,13 +24,6 @@ in {
           firefox.userChrome = concatMapStringsSep "\n" readFile [
             ./config/firefox/userChrome.css
           ];
-          qutebrowser.userStyles = concatMapStringsSep "\n" toCSSFile [
-            ./config/qutebrowser/github.scss
-            ./config/qutebrowser/monospace-textareas.scss
-            ./config/qutebrowser/stackoverflow.scss
-            ./config/qutebrowser/xkcd.scss
-            ./config/qutebrowser/youtube.scss
-          ];
         };
       };
 
