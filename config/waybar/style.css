@@ -23,7 +23,7 @@
 
 window#waybar {
     background-color: transparent;
-    color: black;
+    color: #f8f8f2;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -35,7 +35,7 @@ window#waybar.hidden {
 
 #workspaces button {
     background: #282a36;
-    color: black;
+    color: #f8f8f2;
     border-radius: 20px;
 
 }
@@ -43,7 +43,7 @@ window#waybar.hidden {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     background: lightblue;
-    color: black;
+    color: #f8f8f2;
     border-bottom: 3px solid black;
 
 }
@@ -54,7 +54,7 @@ window#waybar.hidden {
 
 #workspaces button.focused:hover {
     background: lightblue;
-    color: black;
+    color: #f8f8f2;
     border-bottom: 3px solid black;
 
 }
@@ -89,7 +89,9 @@ window#waybar.hidden {
 #idle_inhibitor,
 #mpd {
     padding: 0 10px;
-    color: black;
+    color: #f8f8f2;
+    border: 2px solid;
+    border-color: #bd93f9;
 }
 
 #window,
@@ -108,9 +110,9 @@ window#waybar.hidden {
 }
 
 #clock {
-    background-color: #ff79c6;
-    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(-45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
     border-radius: 0px 20px 20px 0px;
     margin-right: 4px;
 
@@ -128,21 +130,21 @@ label:focus {
 }
 
 #cpu {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #memory {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #disk {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #backlight {
@@ -150,34 +152,34 @@ label:focus {
 }
 
 #network {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #network.disconnected {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: red;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #ff5555;
 }
 
 #pulseaudio {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
     border-radius: 20px 0px 0px 20px;
-    color: black;
+    color: #f8f8f2;
 }
 
 #pulseaudio.muted {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
     color: red;
 }
 
 #custom-media {
     background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    color: black;
+    /* background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); */
+    color: #f8f8f2;
     border-radius: 20px;
     margin-right: 5px;
     margin-left: 5px;
@@ -185,8 +187,8 @@ label:focus {
 
 #custom-media.custom-spotify {
     background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    color: black;
+    /* background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); */
+    color: #f8f8f2;
     border-radius: 20px;
     margin-right: 5px;
 
@@ -194,107 +196,108 @@ label:focus {
 
 #custom-media.custom-vlc {
     background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    color: black;
+    /* background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); */
+    color: #f8f8f2;
     border-radius: 20px;
     margin-right: 5px;
 }
 
-#custom-power{
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
+#custom-power {
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
     font-size: 18px;
     border-radius: 20px;
     margin-left: 2px;
 }
 
-#custom-launcher{
-    background-color: #ff79c6;
-    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
+#custom-launcher {
+    background-color: #282a36;
+    /* background-image: linear-gradient(-45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
     font-size: 25px;
     border-radius: 20px;
     margin-right: 2px;
 }
 
 #custom-updater {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #custom-snip {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
     font-size: 20px;
 }
 
 #custom-layout{
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
     font-size: 18px;
     border-radius: 20px 0px 0px 20px;
 }
 
 #taskbar {
-    background-color: #bd93f9;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #ff79c6 90%);
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #282a36 90%); */
     border-radius: 20px;
-
 }
 
+#taskbar:hover {
+    background-color: #44475a;
+}
 
 #temperature {
-    background-color: #ff79c6;
-    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(-45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
     border-radius: 0px 20px 20px 0px;
 }
 
 #temperature.critical {
-    background-color: #ff5555;
+    color: #ff5555;
 }
 
 #tray {
-    background-color: #ff79c6;
-    background-image: linear-gradient(-45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(-45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #tray > .passive {
     -gtk-icon-effect: dim;
-    background-color: #ff79c6;
-    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(-45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #ff79c6;
-    background-image: linear-gradient(-45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(-45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
 }
 
 #idle_inhibitor {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
     border-radius: 20px 0px 0px 20px;
-
 }
 
 #idle_inhibitor.activated {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #bd93f9 52%, #bd93f9 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
+    color: #f8f8f2;
     border-radius: 20px 0px 0px 20px;
 
 }
 
 #language {
-    background-color: #ff79c6;
-    background-image: linear-gradient(45deg, #ff79c6 0%, #ff79c6 52%, #ff79c6 90%);
-    color: black;
+    background-color: #282a36;
+    /* background-image: linear-gradient(45deg, #282a36 0%, #282a36 52%, #282a36 90%); */
+    color: #f8f8f2;
     min-width: 16px;
     padding-left : 8px;
     border-radius: 20px 0px 0px 20px;
