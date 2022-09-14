@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-rofi -show power-menu -modi "power-menu:rofi-power-menu" -theme theme/powermenu.rasi
+rofi -show power-menu \
+     -modi "power-menu:rofi-power-menu" \
+     -theme $DOTFILES/config/rofi/powermenu.rasi
