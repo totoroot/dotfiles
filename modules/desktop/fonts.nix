@@ -49,5 +49,10 @@ in {
         unstable.comic-mono
       ];
     };
+
+    fonts.fontconfig.defaultFonts = {
+      sansSerif = ["Fira Sans"];
+      monospace = ["Mononoki"];
+    };
   };
 }
