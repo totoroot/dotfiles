@@ -2,4 +2,4 @@
 
 rofi -show power-menu \
      -modi "power-menu:rofi-power-menu" \
-     -theme $DOTFILES/config/rofi/powermenu.rasi
+     -theme theme/powermenu.rasi

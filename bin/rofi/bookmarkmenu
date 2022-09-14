@@ -5,7 +5,7 @@
 #
 # requires: sqlite3
 
-ROFI_CMD='rofi -dmenu -theme $DOTFILES/config/rofi/bookmarkmenu.rasi -columns 1 -markup-rows -multi-select -p browser -i'
+ROFI_CMD='rofi -dmenu -theme theme/bookmarkmenu.rasi -columns 1 -markup-rows -multi-select -p browser -i'
 SEP=${1:-'{{::}}'}
 
 _do_rofi() {

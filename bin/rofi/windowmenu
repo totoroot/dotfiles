@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 rofi -show window \
      -show-icons \
-     -theme $DOTFILES/config/rofi/windowmenu.rasi
+     -theme theme/windowmenu.rasi

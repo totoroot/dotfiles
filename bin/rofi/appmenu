@@ -3,4 +3,4 @@
 rofi -show drun \
      -modi drun,run \
      -show-icons \
-     -theme $DOTFILES/config/rofi/appmenu.rasi
+     -theme theme/appmenu.rasi
