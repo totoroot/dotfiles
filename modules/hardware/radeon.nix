@@ -14,9 +14,19 @@ in {
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
+        # OpenCL ICD definition for AMD GPUs using the ROCm stack
         rocm-opencl-icd
+        # OpenCL runtime for AMD GPUs, part of the ROCm stack
         rocm-opencl-runtime
+        # AMD Open Source Driver For Vulkan
         amdvlk
+        # Hardware-accelerated video playpack
+        # VDPAU driver for the VAAPI library
+        vaapiVdpau
+        # VDPAU driver with OpenGL/VAAPI backend
+        libvdpau-va-gl
+        # Tool to query the Video Decode and Presentation API for Unix (VDPAU) abilities of the system
+        vdpauinfo
       ];
       extraPackages32 = with pkgs; [
         driversi686Linux.amdvlk
@@ -34,11 +44,17 @@ in {
       radeontop
       # Application to read current clocks of AMD Radeon cards
       radeon-profile
+      # ROCm Application for Reporting System Info
       rocminfo
+      # System management interface for AMD GPUs supported by ROCm
       rocm-smi
+      # Platform runtime for ROCm
       rocm-runtime
+      # OpenCL runtime for AMD GPUs, part of the ROCm stack
       rocm-opencl-runtime
+      # CMake modules for common build tasks for the ROCm stack
       rocm-cmake
+      # Radeon open compute thunk interface
       rocm-thunk
     ];
   };

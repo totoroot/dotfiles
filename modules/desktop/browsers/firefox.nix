@@ -48,7 +48,7 @@ in {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         # Stop creating ~/Downloads!
         "browser.download.dir" = "${homeDir}/dl";
-        # Don't use the built-in password manager; a nixos user is more likely
+        # Don't use the built-in password manager; a NixOS user is more likely
         # using an external one (you are using one, right?).
         "signon.rememberSignons" = false;
         # Do not check if Firefox is the default browser
@@ -71,6 +71,8 @@ in {
         "browser.newtab.preload" = false;
         "browser.newtabpage.directory.ping" = "";
         "browser.newtabpage.directory.source" = "data:text/plain,{}";
+        # Make use of hardware video acceleration
+        "media.ffmpeg.vaapi.enabled" = true;
         # Disable some not so useful functionality.
         "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
