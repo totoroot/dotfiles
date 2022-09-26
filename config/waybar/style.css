@@ -16,8 +16,8 @@
     border: none;
     border-radius: 0px;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: mononoki;
+    font-size: 16px;
     min-height: 0;
 }
 
@@ -90,7 +90,7 @@ window#waybar.hidden {
 #mpd {
     padding: 0 10px;
     color: #f8f8f2;
-    border: 2px solid;
+    border: 4px solid;
     border-color: #bd93f9;
 }
 
@@ -166,7 +166,6 @@ label:focus {
 #pulseaudio {
     background-color: #282a36;
     /* background-image: linear-gradient(45deg, #282a36 0%, #bd93f9 52%, #bd93f9 90%); */
-    border-radius: 20px 0px 0px 20px;
     color: #f8f8f2;
 }
 
@@ -264,6 +263,7 @@ label:focus {
     background-color: #282a36;
     /* background-image: linear-gradient(-45deg, #bd93f9 0%, #bd93f9 52%, #bd93f9 90%); */
     color: #f8f8f2;
+    border-radius: 20px 0px 0px 20px;
 }
 
 #tray > .passive {

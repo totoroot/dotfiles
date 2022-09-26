@@ -11,7 +11,7 @@
     // Choose the order of the modules
     "modules-left":[  "idle_inhibitor", "cpu", "memory", "disk", "temperature"],
     "modules-center": [ "custom/launcher", "wlr/taskbar", "hyprland/window", "custom/power"],
-    "modules-right":["pulseaudio", "network", "clock", "custom/weather"],
+    "modules-right":["tray", "network", "clock", "custom/weather"],
 
     // Modules configuration
     "keyboard-state": {
