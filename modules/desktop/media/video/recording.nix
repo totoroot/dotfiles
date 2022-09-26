@@ -13,7 +13,12 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       vokoscreen
+      # Free and open source software for video recording and live streaming
       obs-studio
+      # OBS Studio plugin that allows you to screen capture on wlroots based wayland compositors
+      obs-studio-plugins.wlrobs
+      # Audio device and application capture for OBS Studio using PipeWire
+      obs-studio-plugins.obs-pipewire-audio-capture
     ];
   };
 }
