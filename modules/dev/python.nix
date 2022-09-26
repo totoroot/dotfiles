@@ -23,6 +23,7 @@ in {
       python310Packages.ipython
       python310Packages.setuptools
       python310Packages.pylint
+      python310Packages.requests
       # Python dependency management and packaging made easy
       python310Packages.poetry
       # Jupyter lab environment notebook server extension
