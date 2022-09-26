@@ -12,18 +12,25 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      # File manager with GTK interface
-      pcmanfm
       # Xfce file manager
-      unstable.xfce.thunar
+      xfce.thunar
       # Thunar extension for automatic management of removable drives and media
-      unstable.xfce.thunar-volman
+      xfce.thunar-volman
       # Thunar plugin providing file context menus for archives
       xfce.thunar-archive-plugin
       # Thunar plugin providing tagging and renaming features for media files
       xfce.thunar-media-tags-plugin
+      # D-Bus thumbnailer service (needed for thumbnails in thunar)
+      xfce.tumbler
       # Virtual filesystem support library
       gvfs
+      # KDE file manager and accessories for displaying thumbnails, previews etc.
+      unstable.libsForQt5.dolphin
+      unstable.libsForQt5.dolphin-plugins
+      unstable.libsForQt5.kdegraphics-thumbnailers
+      unstable.libsForQt5.kio-extras
+      # Tray application and Dolphin/Plasma integration for Syncthing
+      unstable.syncthingtray
     ];
 
     home.configFile = {
