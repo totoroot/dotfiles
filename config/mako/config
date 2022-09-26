@@ -1,0 +1,33 @@
+# Mako notification daemon config
+## Styling
+background-color=#282a36
+text-color=#f8f8f2
+border-color=#bd93f9
+font=Sans 20
+anchor=top-center
+border-radius=20
+width=360
+height=720
+margin=40,0,0,0
+padding=0,0,80
+text-alignment=center
+
+## Actions and behaviour
+default-timeout=5000
+max-history=8
+# on-button-left=
+# on-button-middle=
+on-button-right=dismiss
+### Action triggered with notification; useful for playing notification sounds
+on-notify=exec mpv --no-video $DOTFILES/config/mako/quack.mp3
+
+[urgency=low]
+border-color=#bd93f9
+
+[urgency=normal]
+border-color=#ff79c6
+
+[urgency=high]
+border-color=#ff5555
+border-size=10
+default-timeout=0

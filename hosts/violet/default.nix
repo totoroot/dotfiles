@@ -128,8 +128,9 @@
         snowflake.enable = true;
       };
       pods = {
-        scrutiny.enable = true;
         languagetool.enable = false;
+        scrutiny.enable = true;
+        vaultwarden.enable = true;
       };
       containers.enable = true;
       gitea.enable = false;
