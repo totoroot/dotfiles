@@ -17,7 +17,7 @@ with inputs;
   # Configure nix and nixpkgs
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
   nix = {
-    package = pkgs.unstable.nixFlakes;
+    package = pkgs.unstable.nixVersions.stable;
     extraOptions = "experimental-features = nix-command flakes";
     nixPath = [
       "nixpkgs=${nixos}"
