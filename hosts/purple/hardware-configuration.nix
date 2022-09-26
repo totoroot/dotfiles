@@ -28,34 +28,34 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/8c3e271d-84ae-4e4c-b30a-da4a922babf6";
+    device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6EAA-309D";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/5dfc5e4e-943f-4d31-8e9c-d4f6be6e2c5c";
+    device = "/dev/disk/by-label/home";
     fsType = "ext4";
     options = [ "noatime" ];
   };
 
   fileSystems."/mnt/backup" = {
-    device = "/dev/disk/by-uuid/7e000029-709f-4098-a72d-7faab49ca2db";
+    device = "/dev/disk/by-label/backup";
     fsType = "ext4";
     options = [ "noatime" ];
   };
 
   fileSystems."/mnt/photos" = {
-    device = "/dev/disk/by-uuid/0ee239aa-88cd-4a40-a697-19beef515c0f";
+    device = "/dev/disk/by-label/photos";
     fsType = "ext4";
     options = [ "noatime" ];
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/81651822-eb2c-4670-9b64-263386393b9a"; } ];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   hardware.video.hidpi.enable = lib.mkDefault true;
 }
