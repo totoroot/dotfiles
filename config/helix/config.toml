@@ -1,1 +1,11 @@
 theme = "dracula"
+
+[keys.normal]
+"A-left" = "move_prev_word_start"
+"A-right" = "move_next_word_start"
+"A-s" = ":write"
+"A-w" = ":buffer-close"
+"A-q" = ":quit"
+
+[keys.insert]
+"A-s" = ["normal_mode", ":write", "insert_mode"]
