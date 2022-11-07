@@ -59,4 +59,4 @@ let-env NU_PLUGIN_DIRS = [
 
 # starship.rs prompt
 mkdir ~/.cache/starship
-starship init nu | save ~/.cache/starship/init.nu
+starship init nu | sed "s/size -c/size/" | save ~/.cache/starship/init.nu
