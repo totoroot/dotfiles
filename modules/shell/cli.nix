@@ -29,6 +29,8 @@ in {
       tree
       # Show running processes as tree
       pstree
+      # Collection of common network programs (including telnet, hostname, ifconfig)
+      inetutils
       # Create/modify zip archives
       zip
       # Extract zip archives
