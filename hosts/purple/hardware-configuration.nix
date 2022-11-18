@@ -23,39 +23,11 @@
     # ];
   };
 
-  nix.maxJobs = lib.mkDefault 16;
+  nix.settings.max-jobs = lib.mkDefault 16;
+
   powerManagement.cpuFreqGovernor = "performance";
+
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/home";
-    fsType = "ext4";
-    options = [ "noatime" ];
-  };
-
-  fileSystems."/mnt/backup" = {
-    device = "/dev/disk/by-label/backup";
-    fsType = "ext4";
-    options = [ "noatime" ];
-  };
-
-  fileSystems."/mnt/photos" = {
-    device = "/dev/disk/by-label/photos";
-    fsType = "ext4";
-    options = [ "noatime" ];
-  };
-
-  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   hardware.video.hidpi.enable = lib.mkDefault true;
 }
