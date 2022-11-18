@@ -13,7 +13,7 @@
   inputs =
     {
       # Core dependencies.
-      nixos.url = "nixpkgs/nixos-22.05";
+      nixos.url = "nixpkgs/nixos-unstable";
       nixos-unstable.url = "nixpkgs/nixos-unstable";
 
       nixpkgs.url = "nixpkgs/master";
