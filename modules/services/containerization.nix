@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.containers;
+let cfg = config.modules.services.containerization;
 in {
-  options.modules.services.containers = {
+  options.modules.services.containerization = {
     enable = mkBoolOpt false;
   };
 

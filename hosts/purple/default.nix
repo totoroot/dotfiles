@@ -133,6 +133,7 @@
       cli.enable = true;
     };
     services = {
+      containerization.enable = true;
       containers = {
         snowflake.enable = false;
       };
@@ -140,7 +141,6 @@
         languagetool.enable = true;
         scrutiny.enable = true;
       };
-      containers.enable = true;
       gitea.enable = false;
       jellyfin.enable = false;
       kdeconnect.enable = true;
