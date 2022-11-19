@@ -35,10 +35,12 @@ alias clipout='xclip -sel clip -o'
 alias colorpick="print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o"
 
 # ugly yet beautiful...hacky for sure
-alias viewdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
-alias inst='(){ nix-env -iA nixos.$1 ;}'
-alias viewinst='nix-env --query --installed'
-alias remove='nix-env --uninstall'
+alias nixdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
+alias nixinst='(){ nix-env -iA nixos.$1 ;}'
+alias nixviewinst='nix-env --query --installed'
+alias nixrm='nix-env --uninstall'
+alias nixfix='sudo nix-store --verify --check-contents --repair'
+alias nixup='sudo nixos-rebuild switch --flake .#purple --option pure-eval no'
 
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"
