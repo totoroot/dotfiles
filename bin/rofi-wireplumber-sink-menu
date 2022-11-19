@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#  Get array of hyprland windows/clients and select window with rofi
+selected="$(wpctl status \
+    | sed -n '/Audio/,/Video/p' \
+    | sed -n '/Sinks/,/Sink endpoints/p' \
+    | sed '1d;$d' | sed 's/[│]//g' \
+    | sed '/^[[:space:]]*$/d' \
+    | sed 's/\[[^]]*\]//g' \
+    | rofi -dmenu -i -theme theme/sinkmenu.rasi)"
+
+sink=$(echo "$selected" | sed 's|^[^0-9]*\([0-9]\+\).*|\1|')
+
+wpctl set-default "$sink" && notify-send "$selected set as default audio sink"
