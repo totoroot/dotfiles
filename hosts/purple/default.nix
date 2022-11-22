@@ -19,6 +19,7 @@
         kde-plasma.enable = true;
       };
       backup.enable = true;
+      clipboard.enable = true;
       documents.enable = true;
       fonts.enable = true;
       flatpak.enable = true;
@@ -122,7 +123,6 @@
     shell = {
       archive.enable = true;
       borg.enable = true;
-      clipboard.enable = true;
       devops.enable = true;
       direnv.enable = true;
       git.enable = true;

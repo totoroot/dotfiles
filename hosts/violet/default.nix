@@ -18,6 +18,7 @@
         hyprland.enable = false;
         kde-plasma.enable = true;
       };
+      clipboard.enable = true;
       documents.enable = false;
       fonts.enable = true;
       flatpak.enable = false;
