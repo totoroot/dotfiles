@@ -97,9 +97,10 @@
       scala.enable = true;
     };
     editors = {
-      default = "micro";
-      vim.enable = true;
+      default = "hx";
+      helix.enable = true;
       micro.enable = true;
+      vim.enable = true;
     };
     hardware = {
       audio.enable = true;
