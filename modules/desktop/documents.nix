@@ -29,7 +29,7 @@ in {
       # OCR tool for scanned PDFs
       pdfsandwich
       # Tools for rendering web pages to PDF or images
-      wkhtmltopdf
+      # wkhtmltopdf
       # Handwriting notetaking software with PDF annotation support
       xournalpp
       # Simple GUI text editor
