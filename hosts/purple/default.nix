@@ -26,6 +26,7 @@
       plank.enable = true;
       screenshot.enable = true;
       fm.enable = true;
+      mapping.enable = true;
       apps = {
         anki.enable = true;
         blender.enable = true;
@@ -36,7 +37,6 @@
         gpa.enable = true;
         gsmartcontrol.enable = true;
         nextcloud.enable = true;
-        osm.enable = true;
         polish.enable = true;
         resolve.enable = true;
         rofi.enable = true;

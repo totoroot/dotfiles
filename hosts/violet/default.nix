@@ -24,6 +24,7 @@
       mail.enable = true;
       plank.enable = true;
       screenshot.enable = true;
+      mapping.enable = false;
       apps = {
         anki.enable = false;
         blender.enable = false;

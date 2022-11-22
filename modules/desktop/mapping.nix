@@ -1,21 +1,21 @@
-# modules/desktop/apps/osm.nix
+# modules/desktop/mapping.nix
 
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.osm;
+let cfg = config.modules.desktop.mapping;
 in {
-  options.modules.desktop.apps.osm = {
+  options.modules.desktop.mapping = {
     enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Extensible editor for OpenStreetMap
-      unstable.josm
+      josm
       # Free and Open Source Geographic Information System
-      qgis
+      # qgis
     ];
   };
 }
