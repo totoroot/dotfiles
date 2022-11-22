@@ -16,11 +16,16 @@ in {
       ventoy-bin
       # Raspberry Pi Imaging Utility
       rpi-imager
-      # Etcher is still somewhat broken on NixOS...see https://github.com/NixOS/nixpkgs/issues/153537
+      # Very minimal GUI app that can write compressed disk images to USB drives
+      usbimager
+      # Etcher is marked as insecure on NixOS...see https://github.com/NixOS/nixpkgs/issues/153537#issuecomment-1115961395
       # Flash OS images to SD cards and USB drives, safely and easily
       # etcher
-      # Not yet packaged
-      # usbimager
     ];
+
+    environment.shellAliases = {
+      # In case we really need Etcher
+      etcher = "NIXPKGS_ALLOW_INSECURE=1 nix run nixpkgs#etcher --impure";
+    };
   };
 }
