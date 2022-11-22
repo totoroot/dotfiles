@@ -14,15 +14,18 @@ in {
     user.packages = with pkgs; [
       # X screenshot utility
       maim
-
       # Selection tool for screenshot scripts
-      unstable.hacksaw
-
+      hacksaw
       # Powerful yet simple to use screenshot software
-      unstable.flameshot
-
+      flameshot
       # KDE Plasma screenshot tool
       spectacle
+      # Grab images from a Wayland compositor
+      grim
+      # Select a region in a Wayland compositor
+      slurp
+      # Wayland native snapshot editing tool, inspired by Snappy on macOS
+      swappy
     ];
   };
 }

@@ -83,10 +83,6 @@ in {
       rofi-wayland
       # Command-line copy/paste utilities for Wayland
       wl-clipboard
-      # Grab images from a Wayland compositor
-      grim
-      # Select a region in a Wayland compositor
-      slurp
       # xrandr clone for wlroots compositors
       wlr-randr
       # Wallpaper tool for Wayland compositors
@@ -97,7 +93,8 @@ in {
       waybar
       # A lightweight Wayland notification daemon
       mako
-
+      # Tiny dynamic menu for Wayland
+      tofi
       # See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/sway.nix#L60
       qt5.qtwayland
     ];
