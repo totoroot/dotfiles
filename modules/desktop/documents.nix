@@ -34,6 +34,8 @@ in {
       xournalpp
       # Simple GUI text editor
       xfce.mousepad
+      # GNU/Linux-friendly version of the Wacom Inkling SketchManager
+      inklingreader
     ];
   };
 }
