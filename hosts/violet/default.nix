@@ -3,6 +3,7 @@
   imports = [
     ../personal.nix
     ./hardware-configuration.nix
+    ./mounts.nix
     ./home.nix
     ./backup.nix
   ];
