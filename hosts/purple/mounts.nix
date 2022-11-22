@@ -36,24 +36,27 @@
   fileSystems."/mnt/violet" = {
     device = "mathym@violet:";
     fsType = "sshfs";
-    options =
-      [ # Filesystem options
-        "allow_other"          # for non-root access
-        "_netdev"              # this is a network fs
-        # "x-systemd.automount"  # mount on demand
-        "follow_symlinks"
-        # SSH options
-        # Handle connection drops
-        "reconnect"
-        # Keep connections alive
-        "ServerAliveInterval=15"
-        "ServerAliveCountMax=3"
-        "IdentityFile=/home/mathym/.ssh/purple"
-        # Troubleshoot connection
-        # "sshfs_debug"
-        # Debugging options
-        "debug"
-        "loglevel=debug"
-      ];
+    options = [
+      # Filesystem options
+      "allow_other"          # for non-root access
+      "_netdev"              # this is a network fs
+      # "x-systemd.automount"  # mount on demand
+      "follow_symlinks"
+      # SSH options
+      # Handle connection drops
+      "reconnect"
+      # Keep connections alive
+      "ServerAliveInterval=15"
+      "ServerAliveCountMax=3"
+      "IdentityFile=/home/mathym/.ssh/purple"
+      # Troubleshoot connection
+      # "sshfs_debug"
+      # Debugging options
+      "debug"
+      "loglevel=debug"
+    ];
   };
+
+  # Do not start a sulogin shell if mounting a filesystem fails
+  systemd.enableEmergencyMode = false;
 }

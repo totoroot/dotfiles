@@ -182,7 +182,4 @@
   };
 
   programs.dconf.enable = true;
-
-  # Do not start a sulogin shell if mounting a filesystem fails
-  systemd.enableEmergencyMode = false;
 }
