@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 
 let 
-  cfg = config.modules.desktop.hyprland;
+  cfg = config.modules.desktop.environments.hyprland;
 
   # bash script to let dbus know about important env variables and
   # propagate them to relevent services run at the end of sway config
@@ -51,7 +51,7 @@ in {
     hyprland.nixosModules.default
   ];
   
-  options.modules.desktop.hyprland = {
+  options.modules.desktop.environments.hyprland = {
     enable = mkBoolOpt false;
   };
 
@@ -116,7 +116,7 @@ in {
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-wlr
       ];
-      gtkUsePortal = true;
+      # gtkUsePortal = true;
     };
 
     environment.sessionVariables = rec {
@@ -158,7 +158,7 @@ in {
           support32Bit = true;
         };
         pulse.enable = true;
-        jack.enable = true;
+        jack.enable = false;
       };
       dbus.enable = true;
       # Login manager configuration
@@ -166,7 +166,8 @@ in {
         enable = true;
         settings = rec {
           initial_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --time --asterisks --remember";
+            command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
+            # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --time --asterisks --remember";
             user = "mathym";
           };
           default_session = initial_session;
@@ -174,11 +175,14 @@ in {
       };
     };
 
+    user.extraGroups = [ "audio" ];
+
     security.rtkit.enable = true;
 
     # List of login environments for greetd
     environment.etc."greetd/environments".text = ''
       Hyprland
+      plasmashell
       zsh
       bash
       sh

@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.bspwm;
+let cfg = config.modules.desktop.environments.bspwm;
 in {
-  options.modules.desktop.bspwm = {
+  options.modules.desktop.environments.bspwm = {
     enable = mkBoolOpt false;
   };
 
@@ -46,9 +46,8 @@ in {
       xserver = {
         enable = true;
         displayManager = {
-          defaultSession = "none+bspwm";
-          lightdm.enable = true;
-          lightdm.greeters.mini.enable = true;
+          # lightdm.enable = true;
+          # lightdm.greeters.mini.enable = true;
           sessionCommands = pkgs.lib.mkAfter ''
             ${pkgs.xorg.xset}/bin/xset s 600 10
             ${pkgs.xss-lock}/bin/xss-lock --transfer-sleep-lock -- ${pkgs.xautolock}/bin/xautolock -locknow &

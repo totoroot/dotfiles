@@ -13,8 +13,11 @@
       gaming = {
         retro.enable = true;
         steam.enable = true;
+      environments = {
+        bspwm.enable = true;
+        hyprland.enable = false;
+        kde-plasma.enable = true;
       };
-      bspwm.enable = true;
       documents.enable = false;
       fonts.enable = true;
       flatpak.enable = false;
