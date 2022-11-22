@@ -47,8 +47,8 @@ in {
       colorpicker
       # small utility to create JSON objects
       jo
-      # Lightweight JSON processor
-      jq
+      # Faster implementation of the lightweight JSON processor
+      gojq
       # jq wrapper for YAML files
       yq
       # Keyboard layout monitor for X11
@@ -58,8 +58,7 @@ in {
       # Terminal based reader for maximum wpm
       speedread
       # Download manager (not only for youtube)
-      # unstable.youtube-dl
-      unstable.yt-dlp
+      yt-dlp
       # CLI mixer for pulseaudio
       pulsemixer
 
@@ -110,6 +109,7 @@ in {
 
     environment.shellAliases = {
       gt = "gotop";
+      jq = "gojq";
       pm = "pulsemixer";
       rm = "trash";
       rst = "trash-restore";
