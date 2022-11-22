@@ -142,7 +142,9 @@
       };
       pods = {
         languagetool.enable = true;
+        penpot.enable = true;
         scrutiny.enable = true;
+        vaultwarden.enable = true;
       };
       gitea.enable = false;
       jellyfin.enable = false;
