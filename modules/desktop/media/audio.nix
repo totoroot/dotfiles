@@ -22,7 +22,6 @@ in {
       picard
     ];
 
-
     home.dconfSettings = {
       "org/gnome/Lollypop" = {
         background-mode = true;
