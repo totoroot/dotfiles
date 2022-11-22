@@ -47,6 +47,10 @@ in {
       (if cfg.photo.enable then [
         # Virtual lighttable and darkroom for photographers
         darktable
+        # Toolkit for stitching photographs and assembling panoramas, together with an easy to use graphical front end
+        hugin
+        # Blends away the seams in a panoramic image mosaic using a multiresolution spline
+        enblend-enfuse
       ] else []) ++
 
       (if cfg.sprites.enable then [
