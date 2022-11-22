@@ -19,13 +19,13 @@ all=(lockscreen suspend hibernate shutdown reboot)
 show=("${all[@]}")
 
 declare -A texts
-texts[lockscreen]="lock screen"
-texts[switchuser]="switch user"
-texts[logout]="log out"
-texts[suspend]=" Suspend"
-texts[hibernate]=" Hibernate"
-texts[reboot]=" Reboot"
-texts[shutdown]="  Shut Down"
+texts[lockscreen]="   Lock Screen"
+texts[switchuser]="Switch User"
+texts[logout]="Log Out"
+texts[suspend]="  Suspend"
+texts[hibernate]="   Hibernate"
+texts[reboot]="  Reboot"
+texts[shutdown]="    Shut Down"
 
 declare -A icons
 icons[lockscreen]="\uf09c"
@@ -34,7 +34,7 @@ icons[logout]="\uf0d0"
 icons[suspend]="\uf0f4"
 icons[hibernate]="\uf5dc"
 icons[reboot]="\uf794"
-icons[shutdown]=" \uf1e6"
+icons[shutdown]="\uf1e6"
 icons[cancel]="\u00d7"
 
 declare -A actions
