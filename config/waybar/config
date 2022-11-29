@@ -1,39 +1,42 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 28,
-    "spacing": 4,
-    "margin-top": 10,
-    "margin-right": 10,
-    "margin-bottom":10,
-    "margin-left": 10,
-
-    // Choose the order of the modules
-    "modules-left":[  "idle_inhibitor", "cpu", "memory", "disk", "temperature"],
-    "modules-center": [ "custom/launcher", "wlr/taskbar", "hyprland/window", "custom/power"],
-    "modules-right":["tray", "network", "clock", "custom/weather"],
-
-    // Modules configuration
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "  {name} {icon}",
+    "height": 40,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-right": 0,
+    "margin-bottom":0,
+    "margin-left": 0,
+    "modules-left": ["custom/launcher", "custom/workspaces", "idle_inhibitor", "temperature", "cpu", "memory", "disk", "sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "pulseaudio", "backlight", "network", "custom/power"],
+    "sway/mode": {
+        "format": " {}"
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "disable-markup": false,
+        "format": "{icon}",
         "format-icons": {
-            "locked": "",
-            "unlocked": ""
+            "1": "1  ",
+            "2": "2  ",
+            "3": "3  ",
+            "4": "4  ",
+            "5": "5  ",
+            "6": "6  ",
+            "7": "7  ",
+            "8": "8  "
         }
     },
-    "hyprland/window": {
-        "format": "Window {}"
-    },
-    "wlr/taskbar": {
-        "format": "{icon}",
+    "tray": {
         "icon-size": 20,
-        "icon-theme": "Star",
-        "tooltip-format": "{title}",
-        "on-click": "minimize",
-        "on-click-middle": "close",
-        "on-click-right": "activate"
+        "spacing": 8
+    },
+    "sway/window": {
+        "max-length": 60,
+        "tooltip": false
+        // "format": "( {} )"
     },
     "idle_inhibitor": {
         "tooltip": false,
@@ -43,55 +46,54 @@
             "deactivated": ""
         }
     },
-    "tray": {
-        "icon-size": 20,
-        "spacing": 10
-    },
     "clock": {
+        "interval": 1,
         "timezone": "Europe/Vienna",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "custom/weather": {
-        "tooltip": true,
-        "format": "{}",
-        "interval": 1800,
-        "exec": "$DOTFILES/config/waybar/scripts/wttr.py",
-        "return-type": "json"
+        "format": "{:%a %d %b - %H:%M}",
+        "format-alt": "{:%Y-%m-%d %H:%M:%S}",
+        "on-click-right": "date +'%Y-%m-%d %H:%M:%S' | wl-copy"
     },
     "cpu": {
-        "tooltip": false,
-        "format": " {usage}%",
+        "interval": 5,
+        "format": "︁ {:0.1f}%",
+        "max-length": 10,
     },
     "memory": {
-        "format": " {}%"
-    },
-    "temperature": {
-        "thermal-zone": 1,
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        "format": "  {temperatureC}°C"
+        "interval": 30,
+        "format": "︁ {used:0.1f}/{total:0.1f}GiB",
+        "tooltip": true
     },
     "disk": {
         "interval": 30,
         "format": " {free}",
         "path": "/"
     },
-    "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": ["", ""]
+    "battery": {
+        "format": "{icon} {capacity}%{time}",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": " ({H}h{M}m)",
+        "format-charging": " {icon} {capacity}% - {time}",
+        "format-full": " {icon} Charged",
+        "interval": 15,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": false
     },
     "network": {
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": " Connected",
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
+        "format": "{icon}",
+        "format-alt": "︁  {ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-left",
+        "format-wifi": "  {essid} ({signalStrength}%)",
+        "format-ethernet": "︁  {ifname}",
+        "format-disconnected": "⚠  Disconnected",
+        "tooltip": false,
+        "on-click-right": "firefox --new-window https://www.netztest.at/en/Test"
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{volume}%",
         "format-bluetooth": "{icon}  {volume}%",
         "format-bluetooth-muted": "{icon}  {format_source}",
         "format-muted": "{format_source}",
@@ -105,30 +107,55 @@
             "portable": "",
             "default": ["", "", ""]
         },
-        "on-click": "kitty pulsemixer"
+        "scroll-step": 2,
+        "on-click": "pavucontrol", 
+        "on-click-right": "kitty pulsemixer",
+        "tooltip": false
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 15,
-        "format-icons": {
-            "spotify": " ",
-            "default": " "
-        },
-        "escape": true,
-        "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
-        "on-click": "playerctl play-pause"
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-alt": "{icon}",
+        "format-alt-click": "click-left",
+        "format-icons": ["", ""],
+        "on-scroll-up": "light -A 1",
+        "on-scroll-down": "light -U 1"
     },
-    "custom/launcher":{
-        "format": "  ",
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 75,
+        "interval": 5,
+        "format": "{icon} {temperatureC}°C",
+        "tooltip": false,
+        "format-icons": [
+            "", // Icon: temperature-empty
+            "", // Icon: temperature-quarter
+            "", // Icon: temperature-half
+            "", // Icon: temperature-three-quarters
+            ""  // Icon: temperature-full
+        ],
+    },
+    "custom/launcher": {
+        "format": "",
         "tooltip": false,
         "on-click": "$DOTFILES/bin/rofi/appmenu",
         "on-click-right": "killall rofi"
     },
-    "custom/power":{
-        "format": "  ",
+    "custom/power": {
+        "format": "",
         "tooltip": false,
         "on-click": "$DOTFILES/bin/rofi/powermenu -x",
         "on-click-right": "killall rofi"
+    },
+    "custom/system-monitor": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "foot gotop"
+    },
+    "custom/workspaces": {
+        "interval": 1,
+        "exec": "hyprctl activewindow | grep workspace | cut -d' ' -f2",
+        "tooltip": false,
+        "on-scroll-up": "hyprctl dispatch workspace -1",
+        "on-scroll-down": "hyprctl dispatch workspace +1"
     }
 }
