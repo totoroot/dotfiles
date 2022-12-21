@@ -96,6 +96,8 @@ in {
       html-tidy
       # Cross-platform CLI csv pretty printer that uses column styling to maximize viewer enjoyment
       tidy-viewer
+      # Disk usage analyzer with an ncurses interface
+      ncdu
     ];
 
     user.extraGroups = [ "admin" ];
@@ -113,6 +115,7 @@ in {
       pm = "pulsemixer";
       rm = "trash";
       rst = "trash-restore";
+      dui = "ncdu --color dark -rr -x --exclude .git";
     };
   };
 }
