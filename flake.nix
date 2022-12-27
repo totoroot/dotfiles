@@ -1,31 +1,33 @@
 # flake.nix --- the heart of my dotfiles
 #
-# Author:  Henrik Lissner <henrik@lissner.net>
-# URL:     https://github.com/hlissner/dotfiles
+# Author:  Matthias Thym <git@thym.at>
+# URL:     https://codeberg.org/totoroot/dotfiles
 # License: MIT
-#
-# Welcome to ground zero. Where the whole flake gets set up and all its modules
-# are loaded.
 
 {
-  description = "A grossly incandescent NixOS config.";
+  description = "My Personal NixOS, Linux and Darwin System Flake Configuration";
 
-  inputs =
-    {
-      # Core dependencies.
-      nixos.url = "nixpkgs/nixos-unstable";
-      nixos-unstable.url = "nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/master";
 
-      nixpkgs.url = "nixpkgs/master";
+    nixos.url = "github:nixos/nixpkgs/nixos-21.11";
 
-      home-manager.url = "github:rycee/home-manager/release-22.05";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-      # Extras
-      nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    home-manager = {
+   	  url = "github:nix-community/home-manager";
+   	  inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, ... }:
+    darwin = {
+  	  url = "github:lnl7/nix-darwin/master";
+  	  inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, nixos-hardware, home-manager, darwin, ... }:
     let
       inherit (builtins) baseNameOf;
       inherit (lib) nixosSystem mkIf removeSuffix attrNames attrValues;
@@ -38,12 +40,12 @@
 
       mkPkgs = pkgs: extraOverlays: import pkgs {
         inherit system;
-        config.allowUnfree = true;  # forgive me Stallman senpai
+        config.allowUnfree = true;
         overlays = extraOverlays ++ (attrValues self.overlays);
       };
+
       pkgs  = mkPkgs nixos [ self.overlay ];
       unstable = mkPkgs nixos-unstable [];
-
     in {
       lib = lib.my;
 
@@ -64,11 +66,34 @@
         { dotfiles = import ./.; }
         // mapModulesRec ./modules import;
 
-      nixosConfigurations =
-        mapHosts ./hosts { inherit system; };
-
-
       devShell."${system}" =
         import ./shell.nix { inherit pkgs; };
+
+	  # Configuration for NixOS hosts
+      nixosConfigurations =
+        mapHosts ./hosts {
+          inherit system;
+        };
+
+      # Configuration for macOS using Nix and home-manager
+	  darwinConfigurations = (
+        import ./darwin {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs home-manager darwin;
+        }
+      );
+
+	  # Configuration for generic Linux distros using Nix and home-manager
+      homeConfigurations = (
+        import ./generic-linux {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs home-manager;
+        }
+      );
+
+      # Flake variables
+      # purple = self.nixosConfigurations.purple.activationPackage;
+      steamdeck = self.homeConfigurations.steamdeck.activationPackage;
+      defaultPackage.x86_64-linux = self.steamdeck;
     };
 }
