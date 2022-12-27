@@ -17,13 +17,13 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager = {
-   	  url = "github:nix-community/home-manager";
-   	  inputs.nixpkgs.follows = "nixpkgs";
+          url = "github:nix-community/home-manager";
+          inputs.nixpkgs.follows = "nixpkgs";
     };
 
     darwin = {
-  	  url = "github:lnl7/nix-darwin/master";
-  	  inputs.nixpkgs.follows = "nixpkgs";
+         url = "github:lnl7/nix-darwin/master";
+         inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -69,21 +69,21 @@
       devShell."${system}" =
         import ./shell.nix { inherit pkgs; };
 
-	  # Configuration for NixOS hosts
+       # Configuration for NixOS hosts
       nixosConfigurations =
         mapHosts ./hosts {
           inherit system;
         };
 
       # Configuration for macOS using Nix and home-manager
-	  darwinConfigurations = (
+       darwinConfigurations = (
         import ./darwin {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs home-manager darwin;
         }
       );
 
-	  # Configuration for generic Linux distros using Nix and home-manager
+       # Configuration for generic Linux distros using Nix and home-manager
       homeConfigurations = (
         import ./generic-linux {
           inherit (nixpkgs) lib;

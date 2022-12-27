@@ -7,9 +7,9 @@
   fonts.fontconfig.enable = true;
 
   home = {
-  	username = "deck";
-  	homeDirectory = "/home/deck";
-  	stateVersion = "22.11";
+       username = "deck";
+       homeDirectory = "/home/deck";
+       stateVersion = "22.11";
 
     packages = with pkgs; [
       gotop

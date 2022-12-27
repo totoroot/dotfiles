@@ -154,7 +154,7 @@
       vpn.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
-      transmission.enable	= false;
+      transmission.enable     = false;
     };
     theme.active = "dracula-wayland";
   };

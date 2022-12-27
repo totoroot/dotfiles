@@ -53,7 +53,7 @@
       ssh.enable = true;
       tor.enable = true;
       syncthing.enable = true;
-      transmission.enable	= false;
+      transmission.enable     = false;
     };
   };
 

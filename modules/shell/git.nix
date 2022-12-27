@@ -12,7 +12,7 @@ in {
     user.packages = with pkgs; [
       gitAndTools.gitFull
       lazygit           # terminal ui for git
-      onefetch 				  # git repo summary
+      onefetch                       # git repo summary
       unstable.gitlint  # git commit linter
     ];
 
