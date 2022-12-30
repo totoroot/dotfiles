@@ -12,20 +12,31 @@
 # Article by tweag.io on Nix flakes: https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 
 {
-  description = "totoroot's NixOS flake";
+  description = "My Personal NixOS, Linux and Darwin System Flake Configuration";
 
-  inputs =
-    {
-      nixos.url = "nixpkgs/nixos-unstable";
-      nixos-unstable.url = "nixpkgs/nixos-unstable";
-      nixpkgs.url = "nixpkgs/master";
-      home-manager.url = "github:rycee/home-manager/release-22.05";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
-      nixos-hardware.url = "github:nixos/nixos-hardware";
-      devenv.url = "github:cachix/devenv/v0.4";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/master";
+
+    nixos.url = "github:nixos/nixpkgs/nixos-21.11";
+
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    home-manager = {
+          url = "github:nix-community/home-manager";
+          inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, devenv, ... }:
+    darwin = {
+         url = "github:lnl7/nix-darwin/master";
+         inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    devenv.url = "github:cachix/devenv/v0.4";
+  };
+
+  outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, nixos-hardware, home-manager, darwin, devenv, ... }:
     let
       inherit (builtins) baseNameOf;
       inherit (lib) nixosSystem mkIf removeSuffix attrNames attrValues;
@@ -67,11 +78,37 @@
         { dotfiles = import ./.; }
         // mapModulesRec ./modules import;
 
-      nixosConfigurations =
-        mapHosts ./hosts { inherit system; };
-
 
       devShell.${system} =
-        import ./shell.nix { inherit pkgs; };
+        import ./shell.nix {
+          inherit pkgs;
+        };
+
+       # Configuration for NixOS hosts
+      nixosConfigurations =
+        mapHosts ./hosts {
+          inherit system;
+        };
+
+      # Configuration for macOS using Nix and home-manager
+       darwinConfigurations = (
+        import ./darwin {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs home-manager darwin;
+        }
+      );
+
+       # Configuration for generic Linux distros using Nix and home-manager
+      homeConfigurations = (
+        import ./generic-linux {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs home-manager;
+        }
+      );
+
+      # Flake variables
+      # purple = self.nixosConfigurations.purple.activationPackage;
+      steamdeck = self.homeConfigurations.steamdeck.activationPackage;
+      defaultPackage.x86_64-linux = self.steamdeck;
     };
 }
