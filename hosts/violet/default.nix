@@ -11,9 +11,6 @@
   ## Modules
   modules = {
     desktop = {
-      gaming = {
-        retro.enable = true;
-        steam.enable = true;
       environments = {
         bspwm.enable = true;
         hyprland.enable = false;
@@ -58,6 +55,10 @@
         matrix.enable = false;
         signal.enable = true;
         telegram.enable = true;
+      };
+      gaming = {
+        retro.enable = true;
+        steam.enable = true;
       };
       media = {
         audio.enable = true;
@@ -104,7 +105,7 @@
       vim.enable = true;
     };
     hardware = {
-      audio.enable = true;
+      pulseaudio.enable = false;
       bluetooth.enable = true;
       disks.enable = true;
       fancontrol.enable = true;
@@ -118,7 +119,6 @@
     shell = {
       archive.enable = true;
       borg.enable = true;
-      clipboard.enable = true;
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
@@ -183,13 +183,4 @@
     QT_SCALE_FACTOR = "2";
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
-
-  # Auto-login user mathym
-  services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
-    [SeatDefaults]
-    autologin-user=mathym
-  '';
-
-  # Do not start a sulogin shell if mounting a filesystem fails
-  systemd.enableEmergencyMode = false;
 }

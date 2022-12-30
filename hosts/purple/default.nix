@@ -10,9 +10,6 @@
   ## Modules
   modules = {
     desktop = {
-      gaming = {
-        retro.enable = true;
-        steam.enable = true;
       environments = {
         bspwm.enable = true;
         hyprland.enable = true;
@@ -56,10 +53,14 @@
       communication = {
         delta.enable = true;
         discord.enable = true;
-        jitsi.enable = true;
+        jitsi.enable = false;
         matrix.enable = true;
         signal.enable = true;
         telegram.enable = true;
+      };
+      gaming = {
+        retro.enable = true;
+        steam.enable = true;
       };
       media = {
         audio.enable = true;
@@ -106,7 +107,7 @@
       vim.enable = true;
     };
     hardware = {
-      audio.enable = true;
+      pulseaudio.enable = false;
       bluetooth.enable = true;
       disks.enable = true;
       fancontrol.enable = true;
@@ -133,6 +134,7 @@
       pass.enable = true;
       taskell.enable = true;
       zsh.enable = true;
+      nu.enable = true;
       cli.enable = true;
     };
     services = {
