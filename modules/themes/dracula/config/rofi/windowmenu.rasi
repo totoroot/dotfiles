@@ -3,7 +3,7 @@
 @import "config.rasi"
 
 listview {
-  columns: 1;
+  columns: 2;
 }
 
 inputbar {

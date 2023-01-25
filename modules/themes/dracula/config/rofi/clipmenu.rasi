@@ -7,5 +7,5 @@ textbox-icon {
 }
 
 prompt {
-  enabled: true;
+  enabled: false;
 }

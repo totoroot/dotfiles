@@ -6,12 +6,12 @@ with lib;
 with lib.my;
 let cfg = config.modules.theme;
 in {
-  config = mkIf (cfg.active == "dracula-wayland") (mkMerge [
+  config = mkIf (cfg.active == "dracula") (mkMerge [
     # Desktop-agnostic configuration
     {
       modules = {
         theme = {
-          wallpaper = mkDefault ./config/wallpaper.png;
+          # wallpaper = mkDefault ./config/wallpaper.png;
           gtk = {
             theme       = "Dracula";
             iconTheme   = "Papirus";
@@ -28,10 +28,9 @@ in {
       };
 
       env = {
-        XDG_THEME_CONFIG = "$XDG_CONFIG_HOME/dotfiles/modules/themes/quack/config/";
+        XDG_THEME_CONFIG = "$XDG_CONFIG_HOME/dotfiles/modules/themes/dracula/config/";
         BAT_THEME = "Dracula";
         GTK_DATA_PREFIX = [ "${config.system.path}" ];
-        QT_STYLE_OVERRIDE = "kvantum";
       };
     }
 
@@ -40,11 +39,15 @@ in {
       environment.systemPackages = with pkgs; [
         dracula-theme
         papirus-icon-theme
+        libsForQt5.qt5ct
+        libsForQt5.qtstyleplugins
       ];
+
+      # For theming Qt applications - see programs.qt5ct
+      environment.variables.QT_QPA_PLATFORMTHEME = "qt5ct";
 
       home.file = {
         ".Xresources".text = ''
-          Xft.dpi: 150
           Xcursor.theme: Dracula-cursors
           Xcursor.Size: 16
         '';
