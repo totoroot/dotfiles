@@ -51,7 +51,7 @@
         tor.enable = false;
       };
       communication = {
-        delta.enable = true;
+        delta.enable = false;
         discord.enable = true;
         jitsi.enable = false;
         matrix.enable = true;
