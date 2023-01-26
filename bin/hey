@@ -271,7 +271,7 @@ module Hey
          "access (via your existing ssh key) to the remote -- which is immediately removed",
          "upon completion.",
          "",
-         "If COMMAND is anything else, it merely runs 'nix run github:hlissner/dotfiles",
+         "If COMMAND is anything else, it merely runs 'nix run codeberg:totoroot/dotfiles",
          "-- COMMAND' on the rmeote."
     args "HOST", "[COMMAND]"
     opts '--host HOST', "The nixos config to build and deploy to HOST"
@@ -296,7 +296,7 @@ module Hey
           end
         end
       else
-        command = "nix run github:hlissner/dotfiles -- #{command}"
+        command = "nix run codeberg:totoroot/dotfiles -- #{command}"
         puts "Running '#{command}' on #{target}"
         sh ["ssh", "-t", target, command]
       end
