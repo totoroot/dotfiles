@@ -41,6 +41,7 @@ alias nixviewinst='nix-env --query --installed'
 alias nixrm='nix-env --uninstall'
 alias nixfix='sudo nix-store --verify --check-contents --repair'
 alias nixup='sudo nixos-rebuild switch --flake .#purple --option pure-eval no'
+alias nixedit='(){ $EDITOR $(fd $1)/default.nix ;}'
 
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"
