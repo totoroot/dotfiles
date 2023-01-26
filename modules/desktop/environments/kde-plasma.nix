@@ -9,18 +9,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-    ];
-
     services = {
       xserver = {
         enable = true;
+        # Display Manager for KDE Plasma
         displayManager = {
           sddm.enable = true;
+          lightdm.enable = false;
         };
+        # Enable KDE Plasma itself
         desktopManager = {
           plasma5 = {
             enable = true;
+            # Exclude unnecessary KDE packages
             excludePackages = with pkgs.libsForQt5; [
               elisa
               gwenview
@@ -33,7 +34,5 @@ in {
         };
       };
     };
-
-    programs.dconf.enable = true;
   };
 }
