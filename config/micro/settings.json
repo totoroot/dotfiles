@@ -41,7 +41,7 @@
     "pluginrepos": [],
     "readonly": false,
     "relativeruler": false,
-    "rmtrailingws": false,
+    "rmtrailingws": true,
     "ruler": true,
     "savecursor": false,
     "savehistory": true,
