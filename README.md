@@ -2,7 +2,7 @@
     <img alt="Get it on Codeberg" src="https://get-it-on.codeberg.org/get-it-on-blue-on-white.png" height="88">
 </a>
 
-[![NixOS 22.05](https://img.shields.io/badge/NixOS-v22.05-blue.svg?style=flat&logo=NixOS&logoColor=white)](https://nixos.org)
+[![NixOS 23.05](https://img.shields.io/badge/NixOS-23.05-blue.svg?style=flat&logo=NixOS&logoColor=white)](https://nixos.org)
 
 [![Commit activity](https://img.shields.io/github/commit-activity/m/totoroot/dotfiles?style=flat)](https://codeberg.org/totoroot/dotfiles/activity/monthly)
 [![Latest commit](https://img.shields.io/github/last-commit/totoroot/dotfiles/main?label=Latest%20Commit&style=flat)](https://codeberg.org/totoroot/dotfiles/commits/branch/main)
