@@ -5,6 +5,13 @@ with lib.my;
 let cfg = config.modules.desktop;
 in {
   config = mkIf config.services.xserver.enable {
+
+    # Enable automatic login for the default user
+    services.xserver.displayManager.autoLogin = {
+      enable = true;
+      user = "mathym";
+    };
+
     assertions = [
       {
         assertion = (countAttrs (n: v: n == "enable" && value) cfg) < 2;
