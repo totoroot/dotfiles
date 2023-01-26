@@ -26,7 +26,8 @@ with lib.my;
 
   config = {
     user = {
-      description = "The primary user account";
+      # Used by KDE Plasma as display name on lockscreen
+      description = "Matthias Thym";
       extraGroups = [ "wheel" ];
       isNormalUser = true;
       name = let name = builtins.getEnv "USER"; in
