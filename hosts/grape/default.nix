@@ -1,59 +1,69 @@
 { ... }:
+
 {
   imports = [
-    ../personal.nix
     ./hardware-configuration.nix
-    ./home.nix
+    ./configuration.nix
+    # ./home.nix
   ];
 
-  ## Modules
   modules = {
+    theme.active = "dracula";
     desktop = {
-      gaming = {
-        retro.enable = false;
-        steam.enable = false;
+      environments = {
+        bspwm.enable = false;
+        hyprland.enable = false;
+        kde-plasma.enable = true;
       };
-      bspwm.enable = true;
-      documents.enable = true;
+      backup.enable = false;
+      clipboard.enable = false;
+      documents.enable = false;
       fonts.enable = true;
-      flatpak.enable = false;
-      keepassxc.enable = true;
-      kvantum.enable = true;
+      flatpak.enable = true;
+      geany.enable = true;
+      keepassxc.enable = false;
+      kvantum.enable = false;
       mail.enable = true;
-      screenshot.enable = true;
+      plank.enable = false;
+      screenshot.enable = false;
       fm.enable = true;
+      mapping.enable = false;
+      thonny.enable = true;
       apps = {
         anki.enable = false;
         blender.enable = false;
         calibre.enable = false;
-        ide.enable = false;
-        ghostwriter.enable = true;
+        ghostwriter.enable = false;
         godot.enable = false;
         gpa.enable = false;
         gsmartcontrol.enable = false;
-        nextcloud.enable = false;
-        rofi.enable = true;
+        nextcloud.enable = true;
+        polish.enable = true;
+        rofi.enable = false;
         torrent.enable = false;
-        vscodium.enable = false;
+        vscodium.enable = true;
       };
       browsers = {
         default = "firefox";
         chromium.enable = true;
         firefox.enable = true;
-        lynx.enable = true;
-        qutebrowser.enable = false;
+        lynx.enable = false;
         tor.enable = false;
       };
       communication = {
-        delta.enable = false;
-        discord.enable = false;
+        delta.enable = true;
+        discord.enable = true;
         jitsi.enable = true;
-        matrix.enable = false;
+        matrix.enable = true;
         signal.enable = true;
         telegram.enable = true;
       };
+      gaming = {
+        retro.enable = false;
+        steam.enable = false;
+      };
       media = {
-        audio.enable = true;
+        audio.enable = false;
         daw.enable = false;
         graphics.enable = true;
         kodi.enable = false;
@@ -61,8 +71,8 @@
         video = {
           editing.enable = false;
           player.enable = true;
-          recording.enable = true;
-          transcoding.enable = true;
+          recording.enable = false;
+          transcoding.enable = false;
         };
       };
       term = {
@@ -80,28 +90,32 @@
       cc.enable = false;
       clojure.enable = false;
       common-lisp.enable = false;
-      db.enable = false;
+      db.enable = true;
       go.enable = false;
       java.enable = false;
-      julia.enable = true;
+      julia.enable = false;
       lua.enable = false;
       node.enable = false;
       python.enable = true;
-      rust.enable = false;
+      rust.enable = true;
       scala.enable = false;
     };
     editors = {
       default = "micro";
-      vim.enable = false;
+      helix.enable = true;
       micro.enable = true;
+      vim.enable = true;
     };
     hardware = {
-      audio.enable = true;
+      pulseaudio.enable = false;
       bluetooth.enable = true;
-      disks.enable = true;
-      fancontrol.enable = true;
+      disks.enable = false;
+      fancontrol.enable = false;
+      image.enable = true;
       keebs.enable = true;
+      mcus.enable = true;
       nvidia.enable = false;
+      radeon.enable = false;
       printers.enable = true;
       sensors.enable = true;
       steamcon.enable = true;
@@ -109,49 +123,40 @@
     };
     shell = {
       archive.enable = true;
-      clipboard.enable = true;
+      borg.enable = true;
+      devops.enable = true;
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
+      iperf.enable = true;
       lf.enable = true;
       aerc.enable = true;
       pass.enable = true;
       taskell.enable = true;
       zsh.enable = true;
+      nu.enable = true;
       cli.enable = true;
     };
     services = {
-      borg.enable = false;
-      containers.enable = false;
+      containerization.enable = true;
+      containers = {
+        snowflake.enable = false;
+      };
+      pods = {
+        languagetool.enable = true;
+        penpot.enable = false;
+        scrutiny.enable = true;
+        vaultwarden.enable = false;
+      };
       gitea.enable = false;
-      jellyfin.enable     = false;
-      kdeconnect.enable = true;
+      jellyfin.enable = false;
+      kdeconnect.enable = false;
       k8s.enable = false;
-      nginx.enable = false;
-      vpn.enable = true;
-      ssh.enable = true;
+      nginx.enable  = false;
+      vpn.enable = false;
+      ssh.enable = false;
       syncthing.enable = true;
       transmission.enable = false;
     };
-    theme.active = "quack";
-  };
-
-  ## Local config
-  programs.ssh.startAgent = true;
-  services.openssh.startWhenNeeded = true;
-  networking.networkmanager.enable = true;
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false
-  # here. Per-interface useDHCP will be mandatory in the future, so this
-  # generated config replicates the default behaviour.
-  networking.useDHCP = false;
-
-  # Set Austrian as default layout
-  # Optionally set more keymaps and use them with bin/keymapswitcher
-  services.xserver.layout = "at";
-
-  # Set default monitor
-  environment.variables = rec {
-    MAIN_MONITOR = "eDP-1";
   };
 }
