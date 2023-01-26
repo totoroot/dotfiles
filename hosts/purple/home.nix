@@ -1,7 +1,7 @@
 {...}:
 {
   home.file = {
-    "archive/.use".text = "archive";
+    # "archive/.use".text = "archive";
     "books/.use".text = "books";
     "dev/.use".text = "dev";
     "documents/.use".text = "documents";
@@ -11,13 +11,14 @@
     "music/.use".text = "music";
     "notes/.use".text = "notes";
     "outbox/.use".text = "outbox";
-    "photos/.use".text = "photos";
+    # "photos/".source = "/mnt/photos";
     "resources/.use".text = "resources";
     "shared/.use".text = "shared";
+    # "shared/violet/".source = "/mnt/violet/";
     "sync/.use".text = "sync";
     "tmp/.use".text = "tmp";
     "uni/.use".text = "uni";
-    "zero/.use".text = "zero";
+    # "zero/.use".text = "zero";
     "trash/".source = "/home/mathym/.local/share/Trash/files/";
   };
 }
