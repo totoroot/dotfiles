@@ -18,7 +18,6 @@ in {
 
     home.configFile = {
       "Thonny/configuration.ini".source = "${configDir}/thonny/configuration.ini";
-      };
     };
   };
 }
