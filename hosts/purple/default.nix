@@ -1,4 +1,5 @@
 { ... }:
+
 {
   imports = [
     ../personal.nix
@@ -7,8 +8,8 @@
     ./home.nix
   ];
 
-  ## Modules
   modules = {
+    theme.active = "dracula";
     desktop = {
       environments = {
         bspwm.enable = true;
@@ -38,7 +39,6 @@
         gsmartcontrol.enable = true;
         nextcloud.enable = true;
         polish.enable = true;
-        resolve.enable = true;
         rofi.enable = true;
         torrent.enable = true;
         vscodium.enable = true;
@@ -132,7 +132,7 @@
       lf.enable = true;
       aerc.enable = true;
       pass.enable = true;
-      taskell.enable = true;
+      taskell.enable = false;
       zsh.enable = true;
       nu.enable = true;
       cli.enable = true;
@@ -158,7 +158,6 @@
       syncthing.enable = true;
       transmission.enable     = false;
     };
-    theme.active = "dracula-wayland";
   };
 
   ## Local config

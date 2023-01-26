@@ -132,7 +132,7 @@
       lf.enable = true;
       aerc.enable = true;
       pass.enable = true;
-      taskell.enable = true;
+      taskell.enable = false;
       zsh.enable = true;
       nu.enable = true;
       cli.enable = true;
