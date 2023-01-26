@@ -6,7 +6,7 @@ with lib;
 with lib.my;
 let cfg = config.modules.theme;
 in {
-  config = mkIf (cfg.active == "dracula") (mkMerge [
+  config = mkIf (cfg.active == "nord") (mkMerge [
     # Desktop-agnostic configuration
     {
       modules = {

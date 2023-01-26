@@ -39,12 +39,7 @@ in {
       environment.systemPackages = with pkgs; [
         dracula-theme
         papirus-icon-theme
-        libsForQt5.qt5ct
-        libsForQt5.qtstyleplugins
       ];
-
-      # For theming Qt applications - see programs.qt5ct
-      environment.variables.QT_QPA_PLATFORMTHEME = "qt5ct";
 
       home.file = {
         ".Xresources".text = ''
