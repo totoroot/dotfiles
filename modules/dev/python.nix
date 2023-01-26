@@ -25,15 +25,15 @@ in {
       python310Packages.pylint
       python310Packages.requests
       # Python dependency management and packaging made easy
-      python310Packages.poetry
+      python310Packages.poetry-core
       # Jupyter lab environment notebook server extension
-      # python310Packages.jupyterlab
+      python310Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
-      # python310Packages.jupytext
+      python310Packages.jupytext
       # Scientific tools for Python
       python310Packages.numpy
       # Python Data Analysis Library
-      python310Packages .pandas
+      python310Packages.pandas
       # Uncompromising Python code formatter
       black
       # Linter for yaml files
