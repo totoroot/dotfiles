@@ -3,14 +3,14 @@
 with lib;
 with lib.my;
 
-let 
+let
   cfg = config.modules.desktop.environments.hyprland;
 
   # bash script to let dbus know about important env variables and
   # propagate them to relevent services run at the end of sway config
   # see
   # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/"It-doesn't-work"-Troubleshooting-Checklist
-  # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts  
+  # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts
   # some user services to make sure they have the correct environment variables
   dbus-hyprland-environment = pkgs.writeTextFile {
     name = "dbus-hyprland-environment";
@@ -50,7 +50,7 @@ in {
   imports = [
     hyprland.nixosModules.default
   ];
-  
+
   options.modules.desktop.environments.hyprland = {
     enable = mkBoolOpt false;
   };
@@ -60,7 +60,7 @@ in {
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
-  
+
     programs = {
       hyprland = {
         enable = true;
@@ -99,7 +99,7 @@ in {
       qt5.qtwayland
     ];
 
-    
+
     # xdg-desktop-portal works by exposing a series of D-Bus interfaces
     # known as portals under a well-known name
     # (org.freedesktop.portal.Desktop) and object path
@@ -139,6 +139,7 @@ in {
     services = {
       pipewire = {
         enable = true;
+        audio.enable = true;
         # Server and user space API to deal with multimedia pipelines
         package = pkgs.pipewire;
         config = {
