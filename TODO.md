@@ -22,6 +22,7 @@
 - Add keyboard layout in Plasma with config
 - Fix keyboardswitcher shell script
 - Install Dracula KDE theme with NixOS config
+- Switch to flake for Hyrland
 
 ## In Progress
 
@@ -32,19 +33,3 @@
     - [ ] Test OBS screen recording
 
 ## Completed
-
-- Add Wayland menu bar
-    + Install and configure a suitable replacement for polybar
-    - [x] Find suitable replacement
-    - [x] Theme menu bar
-    - [x] Add clock
-    - [x] Add appmenu
-    - [x] Add powermenu
-- Clear NVME SSD and move /home to it
-- Create directories in /var/cache/ for pods
-    + Directories in /var/cache/ should be automatically created with superuser permissions for each container name
-- Fix hardware-accelerated video playback
-- Install notification daemon on Wayland
-- Theme hyprland windows
-- Install inklingreader on NixOS
-- Move promptconfig out of theme
