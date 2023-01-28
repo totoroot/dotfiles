@@ -29,6 +29,7 @@
       fm.enable = true;
       mapping.enable = false;
       thonny.enable = true;
+      vscodium.enable = true;
       apps = {
         anki.enable = false;
         blender.enable = false;
@@ -41,7 +42,6 @@
         polish.enable = true;
         rofi.enable = false;
         torrent.enable = false;
-        vscodium.enable = true;
       };
       browsers = {
         default = "firefox";

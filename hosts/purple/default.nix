@@ -28,6 +28,7 @@
       screenshot.enable = true;
       fm.enable = true;
       mapping.enable = true;
+      vscodium.enable = true;
       apps = {
         anki.enable = true;
         blender.enable = true;
@@ -41,7 +42,6 @@
         polish.enable = true;
         rofi.enable = true;
         torrent.enable = true;
-        vscodium.enable = true;
       };
       browsers = {
         default = "firefox";
