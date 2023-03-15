@@ -24,6 +24,8 @@ in {
     user.packages = with pkgs; [
       # PulseAudio Volume Control
       pavucontrol
+      # Audio visualizer
+      cava
       # Virtual microphone device with noise supression for PulseAudio
       noisetorch
       (makeDesktopItem {
@@ -37,7 +39,12 @@ in {
       # CLI mixer for PulseAudio
       pulsemixer
     ];
-    home.configFile."pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
+
+    home.configFile = {
+      "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
+      "cava/config".source = "${configDir}/cava/config";
+    };
+
     environment.shellAliases.pm = "pulsemixer";
     }
 
