@@ -19,8 +19,8 @@ in {
       gotop
       # Interactive process viewer
       htop
-      # Resource monitor; python port of bashtop
-      bpytop
+      # Resource monitor
+      btop
       # Stresstest your system
       stress-ng
       # Benchmark commands
@@ -102,7 +102,7 @@ in {
 
     home.configFile = {
       "gotop/gotop.conf".source = "${configDir}/gotop/gotop.conf";
-      "bpytop/bpytop.conf".source = "${configDir}/bpytop/bpytop.conf";
+      "btop/btop.conf".source = "${configDir}/btop/btop.conf";
       "cheat/conf.yml".source = "${configDir}/cheat/conf.yml";
     };
 
