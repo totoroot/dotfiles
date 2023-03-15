@@ -59,8 +59,6 @@ in {
       speedread
       # Download manager (not only for youtube)
       yt-dlp
-      # CLI mixer for pulseaudio
-      pulsemixer
 
       ## Fetch programs
       # Fast, highly customizable system info script
@@ -105,14 +103,12 @@ in {
     home.configFile = {
       "gotop/gotop.conf".source = "${configDir}/gotop/gotop.conf";
       "bpytop/bpytop.conf".source = "${configDir}/bpytop/bpytop.conf";
-      "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
       "cheat/conf.yml".source = "${configDir}/cheat/conf.yml";
     };
 
     environment.shellAliases = {
       gt = "gotop";
       jq = "gojq";
-      pm = "pulsemixer";
       rm = "trash";
       rst = "trash-restore";
       dui = "ncdu --color dark -rr -x --exclude .git";

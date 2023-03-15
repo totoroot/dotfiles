@@ -34,7 +34,12 @@ in {
         exec = "${noisetorch}/bin/noisetorch";
         categories = [ "Audio" ];
       })
-    ];}
+      # CLI mixer for PulseAudio
+      pulsemixer
+    ];
+    home.configFile."pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
+    environment.shellAliases.pm = "pulsemixer";
+    }
 
     # PipeWire Configuration
     (mkIf cfg.pipewire {
