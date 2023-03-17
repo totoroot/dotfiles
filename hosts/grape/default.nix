@@ -63,7 +63,7 @@
         steam.enable = false;
       };
       media = {
-        audio.enable = false;
+        audio.enable = true;
         daw.enable = false;
         graphics.enable = true;
         kodi.enable = false;

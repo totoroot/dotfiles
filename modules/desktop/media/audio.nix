@@ -20,15 +20,6 @@ in {
       lollypop
       # Official MusicBrainz music tagger
       picard
-      noisetorch
-      (makeDesktopItem {
-        name = "noisetorch";
-        desktopName = "NoiseTorch";
-        genericName = "Virtual Microphone";
-        icon = "microphone";
-        exec = "${noisetorch}/bin/noisetorch";
-        categories = [ "Audio" ];
-      })
     ];
 
     home.dconfSettings = {
