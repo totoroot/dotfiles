@@ -31,6 +31,11 @@ in {
 
     modules.shell.zsh.rcFiles = [ "${configDir}/docker/aliases.zsh" ];
 
+    # For misbehaving containers that delay shutdowns and reboots
+    systemd.extraConfig = ''
+      DefaultTimeoutStopSec=10s
+    '';
+
     virtualisation = {
       docker = {
         enable = true;
