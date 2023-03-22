@@ -33,7 +33,7 @@
          inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    devenv.url = "github:cachix/devenv/v0.4";
+    devenv.url = "github:cachix/devenv/v0.6.2";
   };
 
   outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, nixos-hardware, home-manager, darwin, devenv, ... }:
@@ -64,7 +64,7 @@
           inherit unstable;
           # Add overlays for flakes
           user = self.packages.${system};
-          devenv = devenv.packages.${system}.devenv; 
+          devenv = devenv.packages.${system}.devenv;
         };
 
       overlays =
