@@ -18,8 +18,8 @@ let
     executable = true;
     text = ''
       dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_DESKTOP=Hyprland
-      systemctl --user stop pipewire pipewire-pulse wireplumber xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
-      systemctl --user start pipewire pipewire-pulse wireplumber xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
+      # systemctl --user stop pipewire pipewire-pulse wireplumber xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
+      # systemctl --user start pipewire pipewire-pulse wireplumber xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
     '';
   };
 
@@ -136,28 +136,9 @@ in {
       NIXOS_OZONE_WL = "1";
     };
 
+    security.rtkit.enable = true;
+
     services = {
-      pipewire = {
-        enable = true;
-        audio.enable = true;
-        # Server and user space API to deal with multimedia pipelines
-        package = pkgs.pipewire;
-        config = {
-          # TODO move config to setting
-          pipewire-pulse = {};
-        };
-        wireplumber = {
-          enable = true;
-          # A modular session / policy manager for PipeWire
-          package = pkgs.wireplumber;
-        };
-        alsa = {
-          enable = true;
-          support32Bit = true;
-        };
-        pulse.enable = true;
-        jack.enable = false;
-      };
       dbus.enable = true;
       # Login manager configuration
       greetd = {
@@ -172,10 +153,6 @@ in {
         };
       };
     };
-
-    user.extraGroups = [ "audio" ];
-
-    security.rtkit.enable = true;
 
     # List of login environments for greetd
     environment.etc."greetd/environments".text = ''

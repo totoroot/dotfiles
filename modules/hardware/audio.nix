@@ -10,42 +10,43 @@ in {
     pulseaudio = mkBoolOpt false;
   };
 
-  config = mkIf cfg.enable (mkMerge [{
-    # Enable ALSA sound
-    sound.enable = true;
+  config = mkIf cfg.enable (mkMerge [
+    {
+      # Enable ALSA sound
+      sound.enable = true;
 
-    # RealtimeKit system service provides
-    # realtime scheduling priority to user processes on demand
-    # Required by the audio server
-    security.rtkit.enable = true;
+      # RealtimeKit system service provides
+      # realtime scheduling priority to user processes on demand
+      # Required by the audio server
+      security.rtkit.enable = true;
 
-    user.extraGroups = [ "audio" ];
+      user.extraGroups = [ "audio" ];
 
-    user.packages = with pkgs; [
-      # PulseAudio Volume Control
-      pavucontrol
-      # Audio visualizer
-      cava
-      # Virtual microphone device with noise supression for PulseAudio
-      noisetorch
-      (makeDesktopItem {
-        name = "noisetorch";
-        desktopName = "NoiseTorch";
-        genericName = "Virtual Microphone";
-        icon = "microphone";
-        exec = "${noisetorch}/bin/noisetorch";
-        categories = [ "Audio" ];
-      })
-      # CLI mixer for PulseAudio
-      pulsemixer
-    ];
+      user.packages = with pkgs; [
+        # PulseAudio Volume Control
+        pavucontrol
+        # Audio visualizer
+        cava
+        # Virtual microphone device with noise supression for PulseAudio
+        noisetorch
+        (makeDesktopItem {
+          name = "noisetorch";
+          desktopName = "NoiseTorch";
+          genericName = "Virtual Microphone";
+          icon = "microphone";
+          exec = "${noisetorch}/bin/noisetorch";
+          categories = [ "Audio" ];
+        })
+        # CLI mixer for PulseAudio
+        pulsemixer
+      ];
 
-    home.configFile = {
-      "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
-      "cava/config".source = "${configDir}/cava/config";
-    };
+      home.configFile = {
+        "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
+        "cava/config".source = "${configDir}/cava/config";
+      };
 
-    environment.shellAliases.pm = "pulsemixer";
+      environment.shellAliases.pm = "pulsemixer";
     }
 
     # PipeWire Configuration
