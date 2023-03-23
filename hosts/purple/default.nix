@@ -12,9 +12,9 @@
     theme.active = "dracula";
     desktop = {
       environments = {
-        bspwm.enable = true;
+        bspwm.enable = false;
         hyprland.enable = true;
-        kde-plasma.enable = true;
+        kde-plasma.enable = false;
       };
       backup.enable = true;
       clipboard.enable = true;
@@ -29,11 +29,12 @@
       fm.enable = true;
       mapping.enable = true;
       vscodium.enable = true;
+      geany.enable = true;
+      thonny.enable = true;
       apps = {
         anki.enable = true;
         blender.enable = true;
         calibre.enable = true;
-        ide.enable = true;
         ghostwriter.enable = true;
         godot.enable = true;
         gpa.enable = true;
@@ -51,7 +52,7 @@
         tor.enable = false;
       };
       communication = {
-        delta.enable = false;
+        delta.enable = true;
         discord.enable = true;
         jitsi.enable = false;
         matrix.enable = true;
@@ -144,7 +145,7 @@
       };
       pods = {
         languagetool.enable = true;
-        penpot.enable = true;
+        penpot.enable = false;
         scrutiny.enable = true;
         vaultwarden.enable = true;
       };
