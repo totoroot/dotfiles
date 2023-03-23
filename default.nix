@@ -70,6 +70,8 @@ with inputs;
     options = "--delete-older-than 30d";
   };
 
+  security.polkit.enable = true;
+
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
     unstable.cached-nix-shell
