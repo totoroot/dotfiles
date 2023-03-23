@@ -14,7 +14,9 @@
       environments = {
         bspwm.enable = true;
         hyprland.enable = true;
-        kde-plasma.enable = true;
+        plasma.enable = true;
+        xfce.enable = false;
+        lxqt.enable = false;
       };
       backup.enable = true;
       clipboard.enable = true;
