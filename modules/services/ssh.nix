@@ -9,9 +9,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs; [
-      sshpass
-    ];
+
+    programs.ssh.extraConfig = "IdentityFile ~/.ssh/${config.networking.hostName}";
 
     services.openssh = {
       enable = true;
@@ -20,6 +19,10 @@ in {
         passwordAuthentication = false;
       };
     };
+
+    user.packages = with pkgs; [
+      sshpass
+    ];
 
     user.openssh.authorizedKeys.keys =
       if config.user.name == "mathym"
