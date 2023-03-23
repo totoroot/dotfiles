@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./configuration.nix
     # ./home.nix
   ];
 
@@ -162,5 +161,62 @@
     };
   };
 
+  ## Local config
+  networking.hostName = "sangria";
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+  };
+
+  networking = {
+    # Advanced network management
+    networkmanager.enable = true;
+    # Enables wireless support via wpa_supplicant
+    wireless.enable = true;
+  };
+
+  # Set your time zone.
+  time.timeZone = "Europe/Vienna";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "de_AT.UTF-8";
+    LC_IDENTIFICATION = "de_AT.UTF-8";
+    LC_MEASUREMENT = "de_AT.UTF-8";
+    LC_MONETARY = "de_AT.UTF-8";
+    LC_NAME = "de_AT.UTF-8";
+    LC_NUMERIC = "de_AT.UTF-8";
+    LC_PAPER = "de_AT.UTF-8";
+    LC_TELEPHONE = "de_AT.UTF-8";
+    LC_TIME = "de_AT.UTF-8";
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "at";
+  };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Control fans more precisely
+  services.mbpfan = {
+    enable = true;
+    verbose = true;
+  };
+
+  # Smaller updates on stable
+  documentation.nixos.enable = false;
+
+  # Needed for some home-manager settings
   programs.dconf.enable = true;
 }
