@@ -8,13 +8,13 @@ let cfg = config.modules.hardware.disks;
 in {
   options.modules.hardware.disks = {
     enable = mkBoolOpt false;
-    zfs.enable = mkBoolOpt false;
-    ssd.enable = mkBoolOpt false;
-    # TODO automount.enable = mkBoolOpt false;
+    btrfs = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
+      services.udisks2.enable = true;
+
       programs.udevil.enable = true;
 
       services.smartd = {
@@ -29,12 +29,6 @@ in {
       environment.systemPackages = with pkgs; [
         # Mount exfat drives (macOS compatibility)
         exfat
-        # Utilities for the btrfs filesystem
-        btrfs-progs
-        # Creates and maintains the history of snapshots of btrfs filesystems
-        unstable.btrfs-snap
-        # Visualize the layout of a mounted btrfs
-        # btrfs-heatmap
         # Mount ntfs drives (Windows compatibility)
         ntfs3g
         # Non-destructive FAT16/FAT32 resizer
@@ -42,7 +36,7 @@ in {
         # Partitioning tool
         parted
         # Graphical disk usage utility
-        unstable.duf
+        duf
         # Drive health monitoring
         smartmontools
         # Tool to get/set ATA/SATA drive parameters under Linux
@@ -77,5 +71,22 @@ in {
         };
       };
     }
+
+    (mkIf cfg.btrfs {
+      services.btrfs.autoScrub = {
+        enable = true;
+        fileSystems = [ "/" ];
+        interval = "weekly";
+      };
+
+      environment.systemPackages = with pkgs; [
+        # Utilities for the btrfs filesystem
+        btrfs-progs
+        # Creates and maintains the history of snapshots of btrfs filesystems
+        btrfs-snap
+        # Visualize the layout of a mounted btrfs
+        btrfs-heatmap
+      ];
+    })
   ]);
 }
