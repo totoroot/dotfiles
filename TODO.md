@@ -23,6 +23,9 @@
 - Fix keyboardswitcher shell script
 - Install Dracula KDE theme with NixOS config
 - Switch to flake for Hyrland
+- Fix missing polkit agent (use Etcher to reproduce)
+- Install Plasma on purple
+- Install XFCE on purple
 
 ## In Progress
 
