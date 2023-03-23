@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.environments.kde-plasma;
+let cfg = config.modules.desktop.environments.plasma;
 in {
-  options.modules.desktop.environments.kde-plasma = {
+  options.modules.desktop.environments.plasma = {
     enable = mkBoolOpt false;
   };
 

@@ -13,16 +13,16 @@
       environments = {
         bspwm.enable = false;
         hyprland.enable = false;
-        plasma.enable = true;
-        xfce.enable = false;
+        plasma.enable = false;
         lxqt.enable = false;
+        xfce.enable = true;
       };
       backup.enable = false;
       clipboard.enable = false;
       documents.enable = false;
       fonts.enable = true;
       flatpak.enable = true;
-      geany.enable = true;
+      geany.enable = false;
       keepassxc.enable = false;
       kvantum.enable = false;
       mail.enable = true;
@@ -30,8 +30,8 @@
       screenshot.enable = false;
       fm.enable = true;
       mapping.enable = false;
-      thonny.enable = true;
-      vscodium.enable = true;
+      thonny.enable = false;
+      vscodium.enable = false;
       apps = {
         anki.enable = false;
         blender.enable = false;
@@ -40,8 +40,8 @@
         godot.enable = false;
         gpa.enable = false;
         gsmartcontrol.enable = false;
-        nextcloud.enable = true;
-        polish.enable = true;
+        nextcloud.enable = false;
+        polish.enable = false;
         rofi.enable = false;
         torrent.enable = false;
       };
@@ -54,11 +54,11 @@
       };
       communication = {
         delta.enable = false;
-        discord.enable = true;
-        jitsi.enable = true;
-        matrix.enable = true;
-        signal.enable = true;
-        telegram.enable = true;
+        discord.enable = false;
+        jitsi.enable = false;
+        matrix.enable = false;
+        signal.enable = false;
+        telegram.enable = false;
       };
       gaming = {
         retro.enable = false;
@@ -67,8 +67,8 @@
       media = {
         audio.enable = true;
         daw.enable = false;
-        graphics.enable = true;
-        kodi.enable = false;
+        graphics.enable = false;
+        kodi.enable = true;
         ncmpcpp.enable = false;
         video = {
           editing.enable = false;
@@ -92,14 +92,14 @@
       cc.enable = false;
       clojure.enable = false;
       common-lisp.enable = false;
-      db.enable = true;
+      db.enable = false;
       go.enable = false;
       java.enable = false;
       julia.enable = false;
       lua.enable = false;
       node.enable = false;
-      python.enable = true;
-      rust.enable = true;
+      python.enable = false;
+      rust.enable = false;
       scala.enable = false;
     };
     editors = {
@@ -113,27 +113,27 @@
       bluetooth.enable = true;
       disks.enable = false;
       fancontrol.enable = false;
-      image.enable = true;
-      keebs.enable = true;
-      mcus.enable = true;
+      image.enable = false;
+      keebs.enable = false;
+      mcus.enable = false;
       nvidia.enable = false;
       radeon.enable = false;
       printers.enable = true;
       sensors.enable = true;
       steamcon.enable = true;
-      wacom.enable = true;
+      wacom.enable = false;
     };
     shell = {
       archive.enable = true;
       borg.enable = true;
-      devops.enable = true;
-      direnv.enable = true;
+      devops.enable = false;
+      direnv.enable = false;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
       lf.enable = true;
-      aerc.enable = true;
-      pass.enable = true;
+      aerc.enable = false;
+      pass.enable = false;
       taskell.enable = false;
       zsh.enable = true;
       nu.enable = true;
@@ -145,20 +145,22 @@
         snowflake.enable = false;
       };
       pods = {
-        languagetool.enable = true;
+        languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
         vaultwarden.enable = false;
       };
       gitea.enable = false;
-      jellyfin.enable = false;
-      kdeconnect.enable = false;
+      jellyfin.enable = true;
+      kdeconnect.enable = true;
       k8s.enable = false;
       nginx.enable  = false;
-      vpn.enable = true;
+      vpn.enable = false;
       ssh.enable = true;
       syncthing.enable = true;
       transmission.enable = false;
     };
   };
+
+  programs.dconf.enable = true;
 }
