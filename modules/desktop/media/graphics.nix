@@ -35,7 +35,8 @@ in {
         # The GNU Image Manipulation Program
         gimp
         # Content-aware scaling in gimp
-        gimpPlugins.resynthesizer
+        # TODO currently broken
+        # gimpPlugins.resynthesizer
       ] else []) ++
 
       (if cfg.vector.enable then [
