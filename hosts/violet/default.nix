@@ -14,7 +14,9 @@
       environments = {
         bspwm.enable = true;
         hyprland.enable = false;
-        kde-plasma.enable = true;
+        plasma.enable = true;
+        lxqt.enable = false;
+        xfce.enable = true;
       };
       clipboard.enable = true;
       documents.enable = false;
@@ -27,11 +29,11 @@
       plank.enable = true;
       screenshot.enable = true;
       mapping.enable = false;
+      vscodium.enable = false;
       apps = {
         anki.enable = false;
         blender.enable = false;
         calibre.enable = false;
-        ide.enable = false;
         ghostwriter.enable = false;
         godot.enable = false;
         gpa.enable = false;
@@ -39,7 +41,6 @@
         nextcloud.enable = false;
         rofi.enable = true;
         torrent.enable = false;
-        vscodium.enable = false;
       };
       browsers = {
         default = "firefox";
@@ -176,11 +177,20 @@
   programs.dconf.enable = true;
 
   # Scale all elemnts
-  services.xserver.dpi = 350;
-  environment.variables = {
-    GDK_SCALE = "2";
-    GDK_DPI_SCALE = "0.5";
-    QT_SCALE_FACTOR = "2";
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-  };
+  services.xserver.dpi = 100;
+  # environment.variables = {
+    # GDK_SCALE = "2";
+    # GDK_DPI_SCALE = "0.5";
+    # QT_SCALE_FACTOR = "2";
+    # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  # };
+
+  # Auto-login user mathym
+  services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
+    [SeatDefaults]
+    autologin-user=mathym
+  '';
+
+  # Do not start a sulogin shell if mounting a filesystem fails
+  systemd.enableEmergencyMode = false;
 }
