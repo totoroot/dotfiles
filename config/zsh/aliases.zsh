@@ -17,7 +17,7 @@ alias mv='mv -v'
 alias mkdir='mkdir -p'
 alias wget='wget -c'
 alias cat='bat -Pp'
-alias search='grep -ir --exclude-dir=".git"'
+alias search='grep -ir --exclude-dir=".git" --exclude="*.html" --exclude="*.css" --exclude="*.scss" --exclude="*.js" --exclude="*.json"'
 alias find='fd'
 alias replace='sd'
 
