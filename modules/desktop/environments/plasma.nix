@@ -18,21 +18,17 @@ in {
           lightdm.enable = false;
         };
         # Enable KDE Plasma itself
-        desktopManager = {
-          plasma5 = {
-            enable = true;
-            # Exclude unnecessary KDE packages
-            excludePackages = with pkgs.libsForQt5; [
-              elisa
-              gwenview
-              okular
-              oxygen
-              khelpcenter
-              konsole
-            ];
-          };
-        };
+        desktopManager.plasma5.enable = true;
       };
     };
+    # Exclude unnecessary KDE packages
+    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+      elisa
+      gwenview
+      okular
+      oxygen
+      khelpcenter
+      konsole
+    ];
   };
 }
