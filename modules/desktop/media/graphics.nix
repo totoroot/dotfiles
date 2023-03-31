@@ -8,9 +8,9 @@ let cfg = config.modules.desktop.media.graphics;
 in {
   options.modules.desktop.media.graphics = {
     enable         = mkBoolOpt false;
-    raster.enable  = mkBoolOpt true;
-    photo.enable   = mkBoolOpt true;
-    vector.enable  = mkBoolOpt true;
+    raster.enable  = mkBoolOpt false;
+    photo.enable   = mkBoolOpt false;
+    vector.enable  = mkBoolOpt false;
     sprites.enable = mkBoolOpt false;
   };
 
