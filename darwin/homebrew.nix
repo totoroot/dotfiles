@@ -53,6 +53,7 @@
       "betterdisplay"
       # Multi-protocol storage browser
       "cyberduck"
+      "clickup"
       # Ungoogled Chromium
       "eloston-chromium"
       # System audio equalizer
@@ -102,34 +103,6 @@
       "vscodium"
       "xquartz"
       "webex"
-      # Utilities
-      # "macfuse" # file system utilities
-      # "android-studio"
-      # "blender"
-      # "calibre" # ebook management
-      # "darktable" # adobe lightroom
-      # "chromium"
-      # "firefox"
-      # "google-chrome"
-      # "google-drive"
-      # "meld" # folder differ
-      # "mixxx" # dj software
-      # "obs" # stream / recoding software
-      # "postman"
-      # "bloomrpc"
-      # "protonmail-bridge"
-      # "raspberry-pi-imager"
-      # "shottr" # screenshot tool
-      # "the-unarchiver"
-      # "tunnelblick" # vpn client
-      # "ubersicht"
-      # "unity-hub"
-      # "visual-studio-code"
-      # "vlc" # media player
-      # "vscodium"
-      # "mutify" # one click mute button
-      # "zoom"
-      # "mumble"
     ];
     taps = [
       # Default Taps

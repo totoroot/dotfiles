@@ -5,20 +5,31 @@
     ./homebrew.nix
   ];
 
+  users.users."matthias.thym" = {
+    name = "matthias.thym";
+    home = "/Users/matthias.thym";
+  };
+
   # Nix configuration ------------------------------------------------------------------------------
 
   nix = {
-    # settings = {
+    settings = {
       # binaryCaches = [ "https://cache.nixos.org/" ];
       # binaryCachePublicKeys = [
         # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       # ];
       # trustedUsers = [ "@admin" ];
-    # };
+      trusted-substituters = [ "https://devenv.cachix.org" ];
+    };
 
     # Enable experimental nix command and flakes
     extraOptions = ''
-      auto-optimise-store = true
+      # Linking issue: https://github.com/NixOS/nix/issues/7273
+      auto-optimise-store = false
+      # keep-outputs = true
+      # keep-derivations = true
+      # keep-failed = false
+      keep-going = true
       experimental-features = nix-command flakes
     '' + lib.optionalString (pkgs.system == "x86_64-darwin") ''
       extra-platforms = x86_64-darwin

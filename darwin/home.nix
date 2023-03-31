@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  home.stateVersion = "22.05";
+  home = {
+    username = "matthias.thym";
+    homeDirectory = "/Users/matthias.thym";
+    stateVersion = "22.11";
+  };
 
   imports = [
     ./packages.nix
@@ -50,5 +54,9 @@
 
   home.sessionVariables = {
     HOMEBREW_NO_INSTALL_CLEANUP = "TRUE";
+  };
+
+  home.file = {
+    ".zshrc".source = ../config/zsh/.zshrc;
   };
 }

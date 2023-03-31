@@ -11,9 +11,9 @@
     # Unified tool to manage your AWS services
     awscli
     # Next generation multi-platform command line experience for Azure
-    azure-cli
+    # azure-cli
     # A cat(1) clone with syntax highlighting and Git integration
-    # bat
+    bat
     # The uncompromising Python code formatter
     black
     # Create and view interactive cheatsheets on the command-line
@@ -57,7 +57,7 @@
     joshuto
     # High-level, high-performance, dynamic language for technical computing
     # julia-bin
-    kitty
+    # kitty
     # Kubernetes CLI
     krew
     # Customization of kubernetes YAML configurations
@@ -87,14 +87,14 @@
     # Review pull-requests on https://github.com/NixOS/nixpkgs
     nixpkgs-review
     # Git repository summary on your terminal
-    onefetch
+    # onefetch
     pandoc
     # podman
     podman-compose
     # A PDF processor written in Go
     pdfcpu
     # Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more
-    ripgrep-all
+    # ripgrep-all
     scala
     # Intuitive find & replace CLI (sed alternative)
     sd
@@ -117,21 +117,21 @@
     # Command-line tool to download videos from YouTube.com and other sites
     youtube-dl
     # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents - repo owner: kislyuk
-    yq
+    # yq
     # Portable command-line YAML processor - repo owner: mikefarah
-    # yq-go
+    yq-go
     # jetbrains.pycharm-professional
     helix
     # Shell script analysis tool
     shellcheck
     # Tools for the google cloud platform
-    google-cloud-sdk
+    # google-cloud-sdk
 
     # Python
     python310
     python310Packages.virtualenv
     python310Packages.pip
-    python310Packages.pip-tools
+    # python310Packages.pip-tools
     # A bug and style checker for Python
     python310Packages.pylint
     python310Packages.beautifulsoup4
