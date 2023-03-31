@@ -12,10 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # A feature-rich client for Matrix.org
       element-desktop
-      fractal
-      weechat
-      weechatScripts.weechat-matrix
+      # Desktop client for the Matrix protocol
+      nheko
     ];
   };
 }
