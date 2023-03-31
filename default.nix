@@ -16,6 +16,7 @@ with inputs;
 
   # Configure nix and nixpkgs
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+
   nix = {
     package = pkgs.unstable.nixVersions.stable;
     extraOptions = "experimental-features = nix-command flakes";
@@ -41,6 +42,7 @@ with inputs;
     };
     # useSandbox = true;
   };
+
   system.configurationRevision = mkIf (self ? rev) self.rev;
   system.stateVersion = "22.11";
 
@@ -53,9 +55,14 @@ with inputs;
   boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
 
   boot.loader = {
-    efi.canTouchEfiVariables = mkDefault true;
-    systemd-boot.configurationLimit = 10;
-    systemd-boot.enable = mkDefault true;
+    systemd-boot = {
+      enable = mkDefault true;
+      configurationLimit = 10;
+    };
+    efi = {
+      canTouchEfiVariables = mkDefault true;
+      efiSysMountPoint = mkDefault "/boot/efi";
+    };
   };
 
   # Suspend when power button is short-pressed
@@ -70,7 +77,16 @@ with inputs;
     options = "--delete-older-than 30d";
   };
 
-  security.polkit.enable = true;
+  # Do not start a sulogin shell if mounting a filesystem fails
+  systemd.enableEmergencyMode = false;
+
+  security.polkit = {
+    enable = true;
+    adminIdentities = [
+      "unix-group:wheel"
+      "unix-group:admin"
+    ];
+  };
 
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
@@ -78,6 +94,8 @@ with inputs;
     coreutils
     git
     vim
+    micro
+    curl
     wget
     gnumake
     unzip

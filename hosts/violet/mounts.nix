@@ -17,7 +17,4 @@
   swapDevices = [ {
     device = "/dev/disk/by-label/swap";
   } ];
-
-  # Do not start a sulogin shell if mounting a filesystem fails
-  systemd.enableEmergencyMode = false;
 }
