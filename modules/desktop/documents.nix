@@ -36,6 +36,8 @@ in {
       xfce.mousepad
       # GNU/Linux-friendly version of the Wacom Inkling SketchManager
       inklingreader
+      # Simple drawing application to create handwritten notes
+      rnote
     ];
   };
 }
