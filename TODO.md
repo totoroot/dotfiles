@@ -26,12 +26,13 @@
 - Fix missing polkit agent (use Etcher to reproduce)
 - Install Plasma on purple
 - Install XFCE on purple
-- Enable HDMI audio output on grape
 - Fix Docker and Git aliases sourcing problem
 - Install a proper diff tool
 - Fix home-manager issues with Trolltech.conf and gtk2 conf
-- Add WakeOnLan config for all hosts
+- Add WakeOnLAN config for all hosts
 - Add disk labels for sangria and grape and update mount configs
+- Fix dolphin no found error
+- ssh completion for kssh
 
 ## In Progress
 
@@ -45,3 +46,4 @@
 ## Completed
 
 - Unify audio modules
+- Enable HDMI audio output on grape
