@@ -1,4 +1,0 @@
-#+TITLE: Host Configurations
-
-* Systems
-+ purple
