@@ -26,6 +26,13 @@ in {
           };
         };
       };
+      # Use GNOME keyring for WiFi key management
+      gnome.gnome-keyring.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      # A dbus session bus service that is used to bring up authentication dialogs
+      polkit_gnome
+    ];
   };
 }

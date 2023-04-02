@@ -97,6 +97,8 @@ in {
       tofi
       # See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/sway.nix#L60
       qt5.qtwayland
+      # A dbus session bus service that is used to bring up authentication dialogs
+      polkit_gnome
     ];
 
 
@@ -136,8 +138,6 @@ in {
       NIXOS_OZONE_WL = "1";
     };
 
-    security.rtkit.enable = true;
-
     services = {
       dbus.enable = true;
       # Login manager configuration
@@ -152,6 +152,8 @@ in {
           default_session = initial_session;
         };
       };
+      # Use GNOME keyring for WiFi key management
+      gnome.gnome-keyring.enable = true;
     };
 
     # List of login environments for greetd
