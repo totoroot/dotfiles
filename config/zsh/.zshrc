@@ -1,4 +1,12 @@
-[ -d "$ZGEN_DIR" ] || git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
+if [ ! -d "$ZGEN_DIR" ]; then
+  if nc -zw1 ifconfig.me 443; then
+    git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
+  else
+    echo "No internet connectivity. Cannot initialize zgen"
+    exit 1
+  fi
+fi
+
 source $ZGEN_SOURCE
 if ! zgen saved; then
   echo "Initializing zgen"
