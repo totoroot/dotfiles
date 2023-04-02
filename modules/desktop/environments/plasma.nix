@@ -21,6 +21,10 @@ in {
         desktopManager.plasma5.enable = true;
       };
     };
+
+    # Enable KDE connect for all Plasma desktops
+    programs.kdeconnect.enable = true;
+
     # Exclude unnecessary KDE packages
     environment.plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
