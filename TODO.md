@@ -26,9 +26,15 @@
 - Fix missing polkit agent (use Etcher to reproduce)
 - Install Plasma on purple
 - Install XFCE on purple
+- Enable HDMI audio output on grape
+- Fix Docker and Git aliases sourcing problem
+- Install a proper diff tool
+- Fix home-manager issues with Trolltech.conf and gtk2 conf
+- Add WakeOnLan config for all hosts
 
 ## In Progress
 
+- zgen not being initialized when no internet connection
 - Fix rofi windowmenu
 - Enable screen sharing on Wayland
     - [ ] Install and configure pipewire
@@ -36,3 +42,5 @@
     - [ ] Test OBS screen recording
 
 ## Completed
+
+- Unify audio modules
