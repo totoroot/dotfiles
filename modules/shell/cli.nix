@@ -31,6 +31,10 @@ in {
       pstree
       # Collection of common network programs (including telnet, hostname, ifconfig)
       inetutils
+      # Utility for controlling network drivers and hardware
+      ethtool
+      # Implements Wake On LAN functionality in a small program
+      wol
       # Create/modify zip archives
       zip
       # Extract zip archives
