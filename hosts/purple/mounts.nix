@@ -33,9 +33,14 @@
       fsType = "sshfs";
       options = [
         # Filesystem options
-        "allow_other"          # for non-root access
-        "_netdev"              # this is a network fs
-        # "x-systemd.automount"  # mount on demand
+        # For non-root access
+        "allow_other"
+        # This is a network fs
+        "_netdev"
+        # Mount on demand
+        "x-systemd.automount"
+        # Prevent long "start job is running" wait times
+        "x-systemd.device-timeoup=1ms"
         "follow_symlinks"
         # SSH options
         # Handle connection drops
