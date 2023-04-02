@@ -15,8 +15,8 @@
         bspwm.enable = false;
         hyprland.enable = true;
         lxqt.enable = false;
-        plasma.enable = false;
-        xfce.enable = false;
+        plasma.enable = true;
+        xfce.enable = true;
       };
       backup.enable = true;
       clipboard.enable = true;
@@ -73,7 +73,7 @@
           raster.enable = true;
           vector.enable = true;
           photo.enable = true;
-          sprites.enable = true
+          sprites.enable = true;
         };
         kodi.enable = false;
         ncmpcpp.enable = false;
@@ -176,7 +176,7 @@
     ssh.startAgent = true;
   };
 
-  # NixOS service configuration 
+  # NixOS service configuration
   services = {
     openssh.startWhenNeeded = true;
     xserver = {
