@@ -12,7 +12,7 @@
       environments = {
         bspwm.enable = false;
         hyprland.enable = false;
-        plasma.enable = false;
+        plasma.enable = true;
         lxqt.enable = false;
         xfce.enable = true;
       };
@@ -162,8 +162,6 @@
   };
 
   ## Local config
-  networking.hostName = "sangria";
-
   boot.loader = {
     systemd-boot.enable = true;
     efi = {
@@ -173,10 +171,29 @@
   };
 
   networking = {
-    # Advanced network management
-    networkmanager.enable = true;
-    # Enables wireless support via wpa_supplicant
-    wireless.enable = true;
+    hostName = "sangria";
+    useDHCP = false;
+    networkmanager = {
+      enable = true;
+      wifi.scanRandMacAddress = false;
+    };
+  };
+
+  services = {
+    gnome.gnome-keyring.enable = true;
+    xserver = {
+      # Enable the X11 windowing system.
+      enable = true;
+      # Configure keymap in X11
+      layout = "at";
+    };
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    # Control fans on Mac mini more precisely
+    mbpfan = {
+      enable = true;
+      verbose = true;
+    };
   };
 
   # Set your time zone.
@@ -197,26 +214,14 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "at";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Control fans more precisely
-  services.mbpfan = {
-    enable = true;
-    verbose = true;
-  };
 
   # Smaller updates on stable
   documentation.nixos.enable = false;
 
-  # Needed for some home-manager settings
-  programs.dconf.enable = true;
+  programs = {
+    # Needed for some home-manager settings
+    dconf.enable = true;
+    # Manage GNOME keyring
+    # seahorse.enable = true;
+  };
 }
