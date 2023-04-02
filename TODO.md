@@ -31,6 +31,7 @@
 - Install a proper diff tool
 - Fix home-manager issues with Trolltech.conf and gtk2 conf
 - Add WakeOnLan config for all hosts
+- Add disk labels for sangria and grape and update mount configs
 
 ## In Progress
 
