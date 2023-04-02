@@ -2,8 +2,10 @@
 
 {
   imports = [
+    ../personal.nix
     ./hardware-configuration.nix
-    # ./home.nix
+    ./home.nix
+    ./mounts.nix
   ];
 
   modules = {
@@ -12,13 +14,14 @@
       environments = {
         bspwm.enable = false;
         hyprland.enable = false;
-        plasma.enable = true;
         lxqt.enable = false;
+        plasma.enable = true;
         xfce.enable = true;
       };
       backup.enable = false;
       clipboard.enable = false;
       documents.enable = false;
+      fm.enable = true;
       fonts.enable = true;
       flatpak.enable = true;
       geany.enable = false;
@@ -27,7 +30,6 @@
       mail.enable = true;
       plank.enable = false;
       screenshot.enable = false;
-      fm.enable = true;
       mapping.enable = false;
       thonny.enable = false;
       vscodium.enable = false;
@@ -66,7 +68,7 @@
       media = {
         audio.enable = true;
         daw.enable = false;
-        graphics.enable = false;
+        graphics.enable = true;
         kodi.enable = true;
         ncmpcpp.enable = false;
         video = {
@@ -110,7 +112,7 @@
     hardware = {
       audio.enable = true;
       bluetooth.enable = true;
-      disks.enable = false;
+      disks.enable = true;
       fancontrol.enable = false;
       image.enable = false;
       keebs.enable = false;
@@ -151,77 +153,49 @@
       };
       gitea.enable = false;
       jellyfin.enable = true;
-      kdeconnect.enable = true;
       k8s.enable = false;
       nginx.enable  = false;
-      vpn.enable = false;
+      vpn.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
       transmission.enable = false;
     };
   };
 
-  ## Local config
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-  };
-
-  networking = {
-    hostName = "sangria";
-    useDHCP = false;
-    networkmanager = {
-      enable = true;
-      wifi.scanRandMacAddress = false;
-    };
-  };
-
-  services = {
-    gnome.gnome-keyring.enable = true;
-    xserver = {
-      # Enable the X11 windowing system.
-      enable = true;
-      # Configure keymap in X11
-      layout = "at";
-    };
-    # Enable CUPS to print documents.
-    printing.enable = true;
-    # Control fans on Mac mini more precisely
-    mbpfan = {
-      enable = true;
-      verbose = true;
-    };
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Vienna";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_AT.UTF-8";
-    LC_IDENTIFICATION = "de_AT.UTF-8";
-    LC_MEASUREMENT = "de_AT.UTF-8";
-    LC_MONETARY = "de_AT.UTF-8";
-    LC_NAME = "de_AT.UTF-8";
-    LC_NUMERIC = "de_AT.UTF-8";
-    LC_PAPER = "de_AT.UTF-8";
-    LC_TELEPHONE = "de_AT.UTF-8";
-    LC_TIME = "de_AT.UTF-8";
-  };
-
-
-  # Smaller updates on stable
-  documentation.nixos.enable = false;
-
+  # NixOS program modules
   programs = {
     # Needed for some home-manager settings
     dconf.enable = true;
+    kdeconnect.enable = true;
+    ssh.startAgent = true;
     # Manage GNOME keyring
     # seahorse.enable = true;
   };
+
+  # NixOS service configuration
+  services = {
+    openssh.startWhenNeeded = true;
+    xserver = {
+      # Enable the X11 windowing system.
+      enable = true;
+      # Set Austrian as default layout
+      # Optionally set more keymaps and use them with bin/keymapswitcher
+      layout = "at, eu";
+    };
+  };
+
+    # NixOS networking configuration
+  networking = {
+    networkmanager = {
+      enable = true;
+      wifi = {
+        powersave = true;
+        scanRandMacAddress = false;
+      };
+    };
+  };
+
+  # Limit update size/frequency of rebuilds
+  # See https://mastodon.online/@nomeata/109915786344697931
+  documentation.nixos.enable = false;
 }

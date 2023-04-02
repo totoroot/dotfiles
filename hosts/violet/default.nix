@@ -2,10 +2,10 @@
 {
   imports = [
     ../personal.nix
-    ./hardware-configuration.nix
-    ./mounts.nix
-    ./home.nix
     ./backup.nix
+    ./hardware-configuration.nix
+    ./home.nix
+    ./mounts.nix
   ];
 
   ## Modules
@@ -14,16 +14,18 @@
       environments = {
         bspwm.enable = true;
         hyprland.enable = false;
-        plasma.enable = true;
         lxqt.enable = false;
+        plasma.enable = true;
         xfce.enable = true;
       };
+      backup.enable = true;
       clipboard.enable = true;
-      documents.enable = false;
+      documents.enable = true;
+      fm.enable = true;
       fonts.enable = true;
       flatpak.enable = false;
-      fm.enable = true;
-      keepassxc.enable = true;
+      geany.enable = false;
+      keepassxc.enable = false;
       kvantum.enable = false;
       mail.enable = true;
       plank.enable = true;
@@ -143,8 +145,7 @@
         vaultwarden.enable = false;
       };
       gitea.enable = false;
-      jellyfin.enable     = false;
-      kdeconnect.enable = true;
+      jellyfin.enable = false;
       k8s.enable = false;
       nginx.enable = false;
       vpn.enable = true;
@@ -155,10 +156,15 @@
     theme.active = "quack-hidpi";
   };
 
+  programs = {
+    dconf.enable = true;
+    kdeconnect.enable = true;
+    ssh.startAgent = true;
+  };
+
   ## Local config
-  programs.ssh.startAgent = true;
-  services.openssh.startWhenNeeded = true;
   networking.networkmanager.enable = true;
+  services.openssh.startWhenNeeded = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false
   # here. Per-interface useDHCP will be mandatory in the future, so this
@@ -174,8 +180,6 @@
     MAIN_MONITOR = "HDMI-A-0";
   };
 
-  programs.dconf.enable = true;
-
   # Scale all elemnts
   services.xserver.dpi = 100;
   # environment.variables = {
@@ -190,7 +194,4 @@
     [SeatDefaults]
     autologin-user=mathym
   '';
-
-  # Do not start a sulogin shell if mounting a filesystem fails
-  systemd.enableEmergencyMode = false;
 }

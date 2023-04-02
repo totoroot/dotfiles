@@ -14,7 +14,5 @@
     fsType = "ext4";
   };
 
-  swapDevices = [ {
-    device = "/dev/disk/by-label/swap";
-  } ];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 }

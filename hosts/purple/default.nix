@@ -14,30 +14,30 @@
       environments = {
         bspwm.enable = false;
         hyprland.enable = true;
+        lxqt.enable = false;
         plasma.enable = false;
         xfce.enable = false;
-        lxqt.enable = false;
       };
       backup.enable = true;
       clipboard.enable = true;
       documents.enable = true;
+      fm.enable = true;
       fonts.enable = true;
       flatpak.enable = true;
+      geany.enable = false;
       keepassxc.enable = true;
       kvantum.enable = true;
       mail.enable = true;
       plank.enable = true;
       screenshot.enable = true;
-      fm.enable = true;
       mapping.enable = true;
-      vscodium.enable = true;
-      geany.enable = true;
       thonny.enable = true;
+      vscodium.enable = true;
       apps = {
         anki.enable = true;
         blender.enable = true;
         calibre.enable = true;
-        ghostwriter.enable = true;
+        ghostwriter.enable = false;
         godot.enable = true;
         gpa.enable = true;
         gsmartcontrol.enable = true;
@@ -50,13 +50,13 @@
         default = "firefox";
         chromium.enable = true;
         firefox.enable = true;
-        lynx.enable = true;
+        lynx.enable = false;
         tor.enable = false;
       };
       communication = {
         delta.enable = true;
         discord.enable = true;
-        jitsi.enable = false;
+        jitsi.enable = true;
         matrix.enable = true;
         signal.enable = true;
         telegram.enable = true;
@@ -68,8 +68,14 @@
       media = {
         audio.enable = true;
         daw.enable = true;
-        graphics.enable = true;
-        kodi.enable = true;
+        graphics = {
+          enable = true;
+          raster.enable = true;
+          vector.enable = true;
+          photo.enable = true;
+          sprites.enable = true
+        };
+        kodi.enable = false;
         ncmpcpp.enable = false;
         video = {
           editing.enable = true;
@@ -90,21 +96,21 @@
       };
     };
     dev = {
-      cc.enable = true;
+      cc.enable = false;
       clojure.enable = false;
       common-lisp.enable = false;
       db.enable = true;
-      go.enable = true;
-      java.enable = true;
+      go.enable = false;
+      java.enable = false;
       julia.enable = true;
-      lua.enable = true;
+      lua.enable = false;
       node.enable = false;
       python.enable = true;
       rust.enable = true;
-      scala.enable = true;
+      scala.enable = false;
     };
     editors = {
-      default = "hx";
+      default = "micro";
       helix.enable = true;
       micro.enable = true;
       vim.enable = true;
@@ -113,7 +119,7 @@
       audio.enable = true;
       bluetooth.enable = true;
       disks.enable = true;
-      fancontrol.enable = true;
+      fancontrol.enable = false;
       image.enable = true;
       keebs.enable = true;
       mcus.enable = true;
@@ -153,37 +159,43 @@
       };
       gitea.enable = false;
       jellyfin.enable = false;
-      kdeconnect.enable = true;
       k8s.enable = true;
       nginx.enable  = false;
       vpn.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
-      transmission.enable     = false;
+      transmission.enable = false;
     };
   };
 
-  ## Local config
-  programs.ssh.startAgent = true;
-  services.openssh.startWhenNeeded = true;
-  networking.networkmanager.enable = true;
+  # NixOS program modules
+  programs = {
+    # Needed for some home-manager settings
+    dconf.enable = true;
+    kdeconnect.enable = true;
+    ssh.startAgent = true;
+  };
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false
-  # here. Per-interface useDHCP will be mandatory in the future, so this
-  # generated config replicates the default behaviour.
-  networking.useDHCP = false;
+  # NixOS service configuration 
+  services = {
+    openssh.startWhenNeeded = true;
+    xserver = {
+      # Set eurkey as default layout
+      # Optionally set more keymaps and use them with bin/keymapswitcher
+      layout = "eu, at";
+      # Force DPI to optimize for ultrawide screen
+      dpi = 200;
+    };
+  };
 
-  # Set eurkey as default layout
-  # Optionally set more keymaps and use them with bin/keymapswitcher
-  services.xserver.layout = "eu";
-
-  # Force DPI to optimize for ultrawide screen
-  services.xserver.dpi = 200;
+  # NixOS networking configuration
+  networking = {
+    networkmanager.enable = true;
+    useDHCP = false;
+  };
 
   # Set default monitor
   environment.variables = rec {
     MONITORS = ["HDMI-0" "DP-0"];
   };
-
-  programs.dconf.enable = true;
 }

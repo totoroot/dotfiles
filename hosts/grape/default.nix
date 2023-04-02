@@ -2,8 +2,10 @@
 
 {
   imports = [
+    ../personal.nix
     ./hardware-configuration.nix
-    # ./home.nix
+    ./home.nix
+    ./mounts.nix
   ];
 
   modules = {
@@ -12,13 +14,14 @@
       environments = {
         bspwm.enable = false;
         hyprland.enable = false;
+        lxqt.enable = false;
         plasma.enable = true;
         xfce.enable = false;
-        lxqt.enable = false;
       };
       backup.enable = false;
       clipboard.enable = false;
-      documents.enable = false;
+      documents.enable = true;
+      fm.enable = true;
       fonts.enable = true;
       flatpak.enable = true;
       geany.enable = true;
@@ -27,22 +30,21 @@
       mail.enable = true;
       plank.enable = false;
       screenshot.enable = false;
-      fm.enable = true;
       mapping.enable = false;
       thonny.enable = true;
       vscodium.enable = true;
       apps = {
-        anki.enable = false;
+        anki.enable = true;
         blender.enable = false;
         calibre.enable = false;
         ghostwriter.enable = false;
         godot.enable = false;
         gpa.enable = false;
-        gsmartcontrol.enable = false;
+        gsmartcontrol.enable = true;
         nextcloud.enable = true;
         polish.enable = true;
-        rofi.enable = false;
-        torrent.enable = false;
+        rofi.enable = true;
+        torrent.enable = true;
       };
       browsers = {
         default = "firefox";
@@ -52,7 +54,7 @@
         tor.enable = false;
       };
       communication = {
-        delta.enable = false;
+        delta.enable = true;
         discord.enable = true;
         jitsi.enable = true;
         matrix.enable = true;
@@ -66,7 +68,13 @@
       media = {
         audio.enable = true;
         daw.enable = false;
-        graphics.enable = true;
+        graphics = {
+          enable = true;
+          raster.enable = true;
+          vector.enable = true;
+          photo.enable = false;
+          sprites.enable = false;
+        };
         kodi.enable = false;
         ncmpcpp.enable = false;
         video = {
@@ -94,7 +102,7 @@
       db.enable = true;
       go.enable = false;
       java.enable = false;
-      julia.enable = false;
+      julia.enable = true;
       lua.enable = false;
       node.enable = false;
       python.enable = true;
@@ -110,7 +118,7 @@
     hardware = {
       audio.enable = true;
       bluetooth.enable = true;
-      disks.enable = false;
+      disks.enable = true;
       fancontrol.enable = false;
       image.enable = true;
       keebs.enable = true;
@@ -151,7 +159,6 @@
       };
       gitea.enable = false;
       jellyfin.enable = false;
-      kdeconnect.enable = false;
       k8s.enable = false;
       nginx.enable  = false;
       vpn.enable = true;
@@ -161,54 +168,36 @@
     };
   };
 
-  ## Local config
-  networking.hostName = "grape";
+  # NixOS program modules
+  programs = {
+    dconf.enable = true;
+    kdeconnect.enable = true;
+    ssh.startAgent = true;
+  };
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
+  # NixOS service configuration
+  services = {
+    openssh.startWhenNeeded = true;
+    xserver = {
+      # Enable the X11 windowing system.
+      enable = true;
+      # Set Austrian as default layout
+      # Optionally set more keymaps and use them with bin/keymapswitcher
+      layout = "at, eu";
+      # Enable touchpad support
+      libinput.enable = true;
     };
   };
 
+  # NixOS networking configuration
   networking = {
-    # Advanced network management
-    networkmanager.enable = true;
-    # Enables wireless support via wpa_supplicant
-    wireless.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = true;
+    };
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Vienna";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_AT.UTF-8";
-    LC_IDENTIFICATION = "de_AT.UTF-8";
-    LC_MEASUREMENT = "de_AT.UTF-8";
-    LC_MONETARY = "de_AT.UTF-8";
-    LC_NAME = "de_AT.UTF-8";
-    LC_NUMERIC = "de_AT.UTF-8";
-    LC_PAPER = "de_AT.UTF-8";
-    LC_TELEPHONE = "de_AT.UTF-8";
-    LC_TIME = "de_AT.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "at";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable touchpad support
-  services.xserver.libinput.enable = true;
-
+  # Limit update size/frequency of rebuilds
+  # See https://mastodon.online/@nomeata/109915786344697931
+  documentation.nixos.enable = false;
 }

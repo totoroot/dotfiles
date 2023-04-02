@@ -28,6 +28,4 @@
   powerManagement.cpuFreqGovernor = "powersave";
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  fonts.optimizeForVeryHighDPI = lib.mkDefault true;
 }
