@@ -24,13 +24,13 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager = {
-          url = "github:nix-community/home-manager";
-          inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     darwin = {
-         url = "github:lnl7/nix-darwin/master";
-         inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     devenv.url = "github:cachix/devenv/v0.6.2";
@@ -84,21 +84,21 @@
           inherit pkgs;
         };
 
-       # Configuration for NixOS hosts
+      # Configuration for NixOS hosts
       nixosConfigurations =
         mapHosts ./hosts {
           inherit system;
         };
 
       # Configuration for macOS using Nix and home-manager
-       darwinConfigurations = (
+      darwinConfigurations = (
         import ./darwin {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs home-manager darwin;
         }
       );
 
-       # Configuration for generic Linux distros using Nix and home-manager
+      # Configuration for generic Linux distros using Nix and home-manager
       homeConfigurations = (
         import ./generic-linux {
           inherit (nixpkgs) lib;
@@ -107,8 +107,6 @@
       );
 
       # Flake variables
-      # purple = self.nixosConfigurations.purple.activationPackage;
-      steamdeck = self.homeConfigurations.steamdeck.activationPackage;
-      defaultPackage.x86_64-linux = self.steamdeck;
+      purple = self.nixosConfigurations.purple.activationPackage;
     };
 }
