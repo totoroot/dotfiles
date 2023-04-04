@@ -181,7 +181,10 @@
       # Set Austrian as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
       layout = "at, eu";
-      displayManager.defaultSession = "xfce";
+      displayManager = {
+        defaultSession = "xfce";
+        sddm.enableHidpi = false;
+      };
     };
   };
 
