@@ -30,6 +30,9 @@ in {
       gnome.gnome-keyring.enable = true;
     };
 
+    # Unlock GNOME keyring when logged in via SDDM
+    security.pam.services.sddm.enableGnomeKeyring = true;
+
     environment.systemPackages = with pkgs; [
       # A dbus session bus service that is used to bring up authentication dialogs
       polkit_gnome

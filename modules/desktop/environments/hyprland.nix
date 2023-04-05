@@ -140,6 +140,7 @@ in {
 
     services = {
       dbus.enable = true;
+
       # Login manager configuration
       greetd = {
         enable = true;
@@ -152,9 +153,13 @@ in {
           default_session = initial_session;
         };
       };
+
       # Use GNOME keyring for WiFi key management
       gnome.gnome-keyring.enable = true;
     };
+
+    # Unlock GNOME keyring when logged in via SDDM
+    security.pam.services.sddm.enableGnomeKeyring = true;
 
     # List of login environments for greetd
     environment.etc."greetd/environments".text = ''
