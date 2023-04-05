@@ -8,7 +8,7 @@ in {
 
     # Enable automatic login for the default user
     services.xserver.displayManager.autoLogin = {
-      enable = true;
+      enable = mkDefault true;
       user = "mathym";
     };
 

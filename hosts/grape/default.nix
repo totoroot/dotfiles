@@ -152,7 +152,7 @@
         snowflake.enable = false;
       };
       pods = {
-        languagetool.enable = true;
+        languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
         vaultwarden.enable = false;
@@ -186,6 +186,13 @@
       layout = "at, eu";
       # Enable touchpad support
       libinput.enable = true;
+      # Use SDDM as display manager
+      displayManager.sddm = {
+        enable = true;
+        # Disable autologin for increased security on portable device
+        autoLogin = false;
+        theme = "Dracula";
+      };
     };
   };
 

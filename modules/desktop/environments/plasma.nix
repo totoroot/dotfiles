@@ -14,8 +14,9 @@ in {
         enable = true;
         # Display Manager for KDE Plasma
         displayManager = {
-          sddm.enable = true;
-          lightdm.enable = false;
+          # Make it rewritable in case Plasma should be installed
+          # but other display manager should be used
+          sddm.enable = mkDefault true;
         };
         # Enable KDE Plasma itself
         desktopManager.plasma5.enable = true;

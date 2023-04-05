@@ -156,42 +156,55 @@
     theme.active = "quack-hidpi";
   };
 
+  # NixOS program modules
   programs = {
+    # Needed for some home-manager settings
     dconf.enable = true;
     kdeconnect.enable = true;
     ssh.startAgent = true;
   };
-
-  ## Local config
-  networking.networkmanager.enable = true;
-  services.openssh.startWhenNeeded = true;
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false
-  # here. Per-interface useDHCP will be mandatory in the future, so this
-  # generated config replicates the default behaviour.
-  networking.useDHCP = false;
-
-  # Set eurkey as default layout
-  # Optionally set more keymaps and use them with bin/keymapswitcher
-  services.xserver.layout = "eu";
 
   # Set default monitor
   environment.variables = rec {
     MAIN_MONITOR = "HDMI-A-0";
   };
 
-  # Scale all elemnts
-  services.xserver.dpi = 100;
+  # NixOS service configuration
+  services = {
+    openssh.startWhenNeeded = true;
+    xserver = {
+      # Set eurkey as default layout
+      # Optionally set more keymaps and use them with bin/keymapswitcher
+      layout = "eu, at";
+      # Force DPI to optimize for ultrawide screen
+      dpi = 200;
+      displayManager = {
+        defaultSession= "plasma";
+        # Use SDDM as display manager
+        sddm = {
+          enable = true;
+          autoLogin = false;
+          theme = "Dracula";
+        };
+      };
+    };
+  };
+
+  # NixOS networking configuration
+  networking = {
+    networkmanager.enable = true;
+    useDHCP = false;
+  };
+
+  # Set default monitor
+  # environment.variables = rec {
+    # MAIN_MONITOR = "HDMI-A-0";
+  # };
+
   # environment.variables = {
     # GDK_SCALE = "2";
     # GDK_DPI_SCALE = "0.5";
     # QT_SCALE_FACTOR = "2";
     # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   # };
-
-  # Auto-login user mathym
-  services.xserver.displayManager.lightdm.greeters.mini.extraConfig = ''
-    [SeatDefaults]
-    autologin-user=mathym
-  '';
 }

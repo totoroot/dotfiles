@@ -139,20 +139,20 @@ in {
     };
 
     services = {
-      dbus.enable = true;
+      # dbus.enable = true;
 
       # Login manager configuration
-      greetd = {
-        enable = true;
-        settings = rec {
-          initial_session = {
-            command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
-            # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --time --asterisks --remember";
-            user = "mathym";
-          };
-          default_session = initial_session;
-        };
-      };
+      # greetd = {
+        # enable = true;
+        # settings = rec {
+          # initial_session = {
+            # command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
+            # # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --time --asterisks --remember";
+            # user = "mathym";
+          # };
+          # default_session = initial_session;
+        # };
+      # };
 
       # Use GNOME keyring for WiFi key management
       gnome.gnome-keyring.enable = true;
@@ -162,14 +162,10 @@ in {
     security.pam.services.sddm.enableGnomeKeyring = true;
 
     # List of login environments for greetd
-    environment.etc."greetd/environments".text = ''
-      Hyprland
-      plasmashell
-      zsh
-      bash
-      sh
-      nu
-    '';
+    # environment.etc."greetd/environments".text = ''
+      # Hyprland
+      # zsh
+    # '';
 
     home.configFile = {
       "hypr/hyprland.conf".source = "${configDir}/hypr/hyprland.conf";

@@ -185,6 +185,15 @@
       layout = "eu, at";
       # Force DPI to optimize for ultrawide screen
       dpi = 200;
+      displayManager = {
+        defaultSession= "plasma";
+        # Use SDDM as display manager
+        sddm = {
+          enable = true;
+          autoLogin = false;
+          theme = "Dracula";
+        };
+      };
     };
   };
 

@@ -183,7 +183,12 @@
       layout = "at, eu";
       displayManager = {
         defaultSession = "xfce";
-        sddm.enableHidpi = false;
+        sddm = {
+          enable = true;
+          autoLogin = true;
+          enableHidpi = false;
+          theme = "breeze";
+        };
       };
     };
   };
