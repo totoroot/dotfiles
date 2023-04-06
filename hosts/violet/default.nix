@@ -12,7 +12,7 @@
   modules = {
     desktop = {
       environments = {
-        bspwm.enable = true;
+        bspwm.enable = false;
         hyprland.enable = false;
         lxqt.enable = false;
         plasma.enable = true;
@@ -179,11 +179,11 @@
       # Force DPI to optimize for ultrawide screen
       dpi = 200;
       displayManager = {
+        autoLogin.enable = true;
         defaultSession= "plasma";
         # Use SDDM as display manager
         sddm = {
           enable = true;
-          autoLogin = false;
           theme = "Dracula";
         };
       };

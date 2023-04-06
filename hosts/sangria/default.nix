@@ -182,10 +182,10 @@
       # Optionally set more keymaps and use them with bin/keymapswitcher
       layout = "at, eu";
       displayManager = {
+        autoLogin.enable = true;
         defaultSession = "xfce";
         sddm = {
           enable = true;
-          autoLogin = true;
           enableHidpi = false;
           theme = "breeze";
         };

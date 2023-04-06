@@ -12,7 +12,7 @@
     theme.active = "dracula";
     desktop = {
       environments = {
-        bspwm.enable = false;
+        bspwm.enable = true;
         hyprland.enable = true;
         lxqt.enable = false;
         plasma.enable = true;
@@ -184,13 +184,13 @@
       # Optionally set more keymaps and use them with bin/keymapswitcher
       layout = "eu, at";
       # Force DPI to optimize for ultrawide screen
-      dpi = 200;
+      # dpi = 200;
       displayManager = {
+        autoLogin.enable = false;
         defaultSession= "plasma";
         # Use SDDM as display manager
         sddm = {
           enable = true;
-          autoLogin = false;
           theme = "Dracula";
         };
       };
@@ -204,7 +204,7 @@
   };
 
   # Set default monitor
-  environment.variables = rec {
-    MONITORS = ["HDMI-0" "DP-0"];
-  };
+  # environment.variables = rec {
+    # MONITORS = ["HDMI-0" "DP-0"];
+  # };
 }

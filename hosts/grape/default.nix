@@ -186,12 +186,15 @@
       layout = "at, eu";
       # Enable touchpad support
       libinput.enable = true;
-      # Use SDDM as display manager
-      displayManager.sddm = {
-        enable = true;
+      displayManager = {
         # Disable autologin for increased security on portable device
-        autoLogin = false;
-        theme = "Dracula";
+        autoLogin.enable = false;
+        defaultSession = "plasma";
+        # Use SDDM as display manager
+        sddm = {
+          enable = true;
+          theme = "Dracula";
+        };
       };
     };
   };
