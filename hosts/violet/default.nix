@@ -171,7 +171,6 @@
 
   # NixOS service configuration
   services = {
-    openssh.startWhenNeeded = true;
     xserver = {
       # Set eurkey as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher

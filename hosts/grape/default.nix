@@ -177,7 +177,6 @@
 
   # NixOS service configuration
   services = {
-    openssh.startWhenNeeded = true;
     xserver = {
       # Enable the X11 windowing system.
       enable = true;

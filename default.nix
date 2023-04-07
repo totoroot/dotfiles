@@ -60,15 +60,19 @@ with inputs;
       enable = mkDefault true;
       configurationLimit = mkDefault 10;
     };
-    efi = {
-      canTouchEfiVariables = mkDefault true;
-    };
+    efi.canTouchEfiVariables = mkDefault true;
   };
 
-  # Suspend when power button is short-pressed
-  services.logind.extraConfig = mkDefault ''
-    HandlePowerKey=suspend
-  '';
+  services = {
+    # Start a systemd service for each incoming SSH connection
+    openssh.startWhenNeeded = mkDefault true;
+    # Enable periodic SSD TRIM to extend life of mounted SSDs
+    fstrim.enable = mkDefault true;
+    # Suspend when power button is short-pressed
+    logind.extraConfig = mkDefault ''
+      HandlePowerKey=suspend
+    '';
+  };
 
   # Take out the garbage every once in a while
   nix.gc = {
