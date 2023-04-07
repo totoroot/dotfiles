@@ -1,3 +1,5 @@
+# NixOS/Nix system and user configuration for my private machines
+
 <a href="https://codeberg.org/totoroot/dotfiles">
     <img alt="Get it on Codeberg" src="https://get-it-on.codeberg.org/get-it-on-blue-on-white.png" height="88">
 </a>
