@@ -1,12 +1,10 @@
-# modules/desktop/apps/gsmartcontrol.nix
-
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.gsmartcontrol;
+let cfg = config.modules.desktop.gsmartcontrol;
 in {
-  options.modules.desktop.apps.gsmartcontrol = {
+  options.modules.desktop.gsmartcontrol = {
     enable = mkBoolOpt false;
   };
 

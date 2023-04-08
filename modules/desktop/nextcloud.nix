@@ -2,15 +2,16 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.ghostwriter;
+let cfg = config.modules.desktop.nextcloud;
 in {
-  options.modules.desktop.apps.ghostwriter = {
+  options.modules.desktop.nextcloud = {
     enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      ghostwriter
+      # Nextcloud desktop client
+      nextcloud-client
     ];
   };
 }

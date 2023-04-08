@@ -1,18 +1,17 @@
-# modules/desktop/apps/torrent.nix
-
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.torrent;
+let cfg = config.modules.desktop.blender;
 in {
-  options.modules.desktop.apps.torrent = {
+  options.modules.desktop.blender = {
     enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      deluge
+      # 3D Creation/Animation/Publishing System with HIP support
+      unstable.blender-hip
     ];
   };
 }

@@ -56,7 +56,7 @@ in {
 
       # Other dotfiles
       home.configFile = with config.modules; mkMerge [
-        (mkIf desktop.apps.rofi.enable {
+        (mkIf desktop.rofi.enable {
           "rofi/theme" = { source = ./config/rofi; recursive = true; };
         })
         (mkIf desktop.media.graphics.vector.enable {

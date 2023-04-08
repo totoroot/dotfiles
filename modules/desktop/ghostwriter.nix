@@ -2,15 +2,15 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.unity3d;
+let cfg = config.modules.desktop.ghostwriter;
 in {
-  options.modules.desktop.apps.unity3d = {
+  options.modules.desktop.ghostwriter = {
     enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      unity3d
+      ghostwriter
     ];
   };
 }

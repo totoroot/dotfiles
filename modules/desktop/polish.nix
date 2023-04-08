@@ -1,12 +1,10 @@
-# modules/desktop/apps/polish.nix
-
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.polish;
+let cfg = config.modules.desktop.polish;
 in {
-  options.modules.desktop.apps.polish = {
+  options.modules.desktop.polish = {
     enable = mkBoolOpt false;
   };
 

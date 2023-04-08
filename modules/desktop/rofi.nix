@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.rofi;
+let cfg = config.modules.desktop.rofi;
 in {
-  options.modules.desktop.apps.rofi = {
+  options.modules.desktop.rofi = {
     enable = mkBoolOpt false;
   };
 

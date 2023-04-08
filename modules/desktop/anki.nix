@@ -1,12 +1,10 @@
-# modules/desktop/apps/anki.nix
-
 { config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.anki;
+let cfg = config.modules.desktop.anki;
 in {
-  options.modules.desktop.apps.anki = {
+  options.modules.desktop.anki = {
     enable = mkBoolOpt false;
   };
 
