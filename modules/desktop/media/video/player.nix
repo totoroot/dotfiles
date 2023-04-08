@@ -22,7 +22,6 @@ in {
       vlc
     ];
 
-    
     home.configFile = {
       "mpv/mpv.conf".source = "${configDir}/mpv/mpv.conf";
     };

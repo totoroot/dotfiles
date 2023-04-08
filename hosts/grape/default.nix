@@ -80,7 +80,7 @@
         video = {
           editing.enable = false;
           player.enable = true;
-          recording.enable = false;
+          recording.enable = true;
           transcoding.enable = false;
         };
       };
