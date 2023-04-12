@@ -25,6 +25,8 @@ in {
       user.packages = with pkgs; [
         # PulseAudio Volume Control
         pavucontrol
+        # Pulseaudio command line mixer
+        pamixer
         # Audio visualizer
         cava
         # Virtual microphone device with noise supression for PulseAudio
