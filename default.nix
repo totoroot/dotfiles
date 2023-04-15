@@ -53,14 +53,15 @@ with inputs;
   fileSystems."/".device = mkDefault "/dev/disk/by-label/nixos";
 
   # Use the latest kernel by default
-  boot.kernelPackages = mkDefault pkgs.unstable.linuxPackages_latest;
-
-  boot.loader = {
-    systemd-boot = {
-      enable = mkDefault true;
-      configurationLimit = mkDefault 10;
+  boot = {
+    kernelPackages = mkDefault pkgs.unstable.linuxPackages_latest;
+    loader = {
+      systemd-boot = {
+        enable = mkDefault true;
+        configurationLimit = mkDefault 10;
+      };
+      efi.canTouchEfiVariables = mkDefault true;
     };
-    efi.canTouchEfiVariables = mkDefault true;
   };
 
   services = {
