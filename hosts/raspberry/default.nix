@@ -1,4 +1,4 @@
-{ ... }:
+{ config, home-manager, pkgs, ... }:
 
 {
   imports = [
@@ -24,14 +24,11 @@
     enableBashCompletion = true;
   };
 
-  # Preserve space by sacrificing documentation and history
-  documentation.nixos.enable = false;
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 30d";
-
   # Configure basic SSH access
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
+  services.openssh = {
+  	enable = true;
+  	settings.PermitRootLogin = "yes";
+  };
 
   users.users.mathym = {
   	isNormalUser = true;
@@ -48,7 +45,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   # Set stateVersion
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 
   services.avahi = {
   	enable = true;
@@ -61,11 +58,21 @@
 
   networking = {
   	hostName = "raspberry";
-
   	extraHosts = ''
   	  127.0.0.1 raspberry.local
   	'';
-
   	firewall.allowedTCPPorts = [ 22 80 ];
   };
+
+  # Limit update size/frequency of rebuilds
+  # Also preserve space on SD card
+  # See https://mastodon.online/@nomeata/109915786344697931
+  documentation.nixos = {
+  	enable = false;
+  	options.allowDocBook = false;
+  };
+
+  # nix.settings.max-jobs = 4;
+
+  home-manager.users.${config.user.name}.manual.manpages.enable = false;
 }

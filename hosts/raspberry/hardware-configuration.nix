@@ -22,11 +22,9 @@
         '';
       };
     };
-    # If you have a Raspberry Pi 2 or 3, pick this:
-    kernelPackages = pkgs.linuxPackages_latest;
     # A bunch of boot parameters needed for optimal runtime on RPi 3b+
     kernelParams = [ "cma=256M" ];
     # Clean /tmp on startup
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 }
