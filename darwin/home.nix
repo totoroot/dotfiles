@@ -58,5 +58,8 @@
 
   home.file = {
     ".zshrc".source = ../config/zsh/.zshrc;
+    # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac
+    "Library/Keyboard Layouts/EurKEY.keylayout".source = ../config/eurkey/EurKEY.keylayout;
+    "Library/Keyboard Layouts/EurKEY.icns".source = ../config/eurkey/EurKEY.icns;
   };
 }
