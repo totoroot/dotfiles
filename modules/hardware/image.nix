@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # An open source tool to create bootable USB drive for ISO/WIM/IMG/VHD(x)/EFI files
-      ventoy-bin
+      ventoy
       # Raspberry Pi Imaging Utility
       rpi-imager
       # Very minimal GUI app that can write compressed disk images to USB drives
