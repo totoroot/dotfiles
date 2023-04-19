@@ -7,8 +7,12 @@
 
   boot = {
     loader = {
-      # NixOS wants to enable GRUB by default
+      # Use the latest kernel
+      kernelPackages = pkgs.linuxPackages_latest;
+      # GRUB is enabled by default
       grub.enable = false;
+      # Enables the generation of /boot/extlinux/extlinux.conf
+      generic-extlinux-compatible.enable = true;
       # Config for Raspberry Pis
       raspberryPi = {
         enable = true;
@@ -22,8 +26,10 @@
         '';
       };
     };
-    # A bunch of boot parameters needed for optimal runtime on RPi 3b+
+    # A bunch of boot parameters needed for optimal runtime on RPi 3B+
     kernelParams = [ "cma=256M" ];
+    # Make the camera available as v4l device under /dev/video0
+    kernelModules = [ "bcm2835-v4l2" ];
     # Clean /tmp on startup
     tmp.cleanOnBoot = true;
   };

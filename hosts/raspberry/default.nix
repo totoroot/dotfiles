@@ -1,78 +1,40 @@
-{ config, home-manager, pkgs, ... }:
+# Config for Raspberry Pi 3B
+# Use this as /etc/nixos/configuration.nix for initial rebuild
+# Board-specific installation notes can be found here:
+# https://nixos.wiki/wiki/NixOS_on_ARM/Raspberry_Pi_3#Board-specific_installation_notes
+
+{ pkgs, ... }:
 
 {
   imports = [
-    ../personal.nix
     ./hardware-configuration.nix
     ./mounts.nix
-    ./home.nix
+    # Disable this before installing with dotfiles flake
+    ./pre-flake.nix
+    # Enable this before installing with dotfiles flake
+    # ../personal.nix
+    # ./home.nix
   ];
-
-  environment.systemPackages = with pkgs; [
-    libraspberrypi
-    micro
-    git
-    bat
-    helix
-    gotop
-  ];
-
-  programs.zsh = {
-    enable = true;
-    histSize = 10000;
-    enableCompletion = true;
-    enableBashCompletion = true;
-  };
-
-  # Configure basic SSH access
-  services.openssh = {
-  	enable = true;
-  	settings.PermitRootLogin = "yes";
-  };
-
-  users.users.mathym = {
-  	isNormalUser = true;
-  	home = "/home/mathym";
-  	password = "password";
-  	shell = pkgs.zsh;
-  	extraGroups = [ "wheel" "networkmanager" ];
-  	openssh.authorizedKeys.keys = [
-  		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6pxS+faVh8CTTHw2ZZwnm9s54xNpDC6RJzxg43452g mathym@purple"
-  	];
-  };
-
-  # Users in wheel group do not need password to execute sudo
-  security.sudo.wheelNeedsPassword = false;
 
   # Set stateVersion
   system.stateVersion = "22.11";
 
-  services.avahi = {
-  	enable = true;
-  	publish = {
-  	  enable = true;
-  	  addresses	= true;
-  	  workstation = true;
-  	};
-  };
+  environment.systemPackages = with pkgs; [
+    # Includes commands like `vcgencmd` to measure temperature and CPU frequency
+    libraspberrypi
+  ];
 
+  # Basic networking
   networking = {
-  	hostName = "raspberry";
-  	extraHosts = ''
-  	  127.0.0.1 raspberry.local
-  	'';
-  	firewall.allowedTCPPorts = [ 22 80 ];
+    hostName = "raspberry";
+    extraHosts = ''
+    127.0.0.1 raspberry.local
+    '';
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
   # Limit update size/frequency of rebuilds
   # Also preserve space on SD card
   # See https://mastodon.online/@nomeata/109915786344697931
-  documentation.nixos = {
-  	enable = false;
-  	options.allowDocBook = false;
-  };
-
-  # nix.settings.max-jobs = 4;
-
-  home-manager.users.${config.user.name}.manual.manpages.enable = false;
+  documentation.nixos.enable = false;
 }
