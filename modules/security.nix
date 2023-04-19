@@ -2,7 +2,7 @@
 
 {
   ## System security tweaks
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
   security.protectKernelImage = true;
 
   # Set sudo command timeout to 60 minutes
