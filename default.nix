@@ -52,8 +52,8 @@ with inputs;
   # hardware-configuration.nix or fileSystem config.
   fileSystems."/".device = mkDefault "/dev/disk/by-label/nixos";
 
-  # Use the latest kernel by default
   boot = {
+    # Use the latest kernel by default
     kernelPackages = mkDefault pkgs.unstable.linuxPackages_latest;
     loader = {
       systemd-boot = {
