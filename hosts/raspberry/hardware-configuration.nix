@@ -7,12 +7,12 @@
 
   boot = {
     loader = {
-      # Use the latest kernel
-      kernelPackages = pkgs.linuxPackages_latest;
       # GRUB is enabled by default
       grub.enable = false;
       # Enables the generation of /boot/extlinux/extlinux.conf
-      generic-extlinux-compatible.enable = true;
+      generic-extlinux-compatible.enable = false;
+      systemd-boot.enable = false;
+      efi.canTouchEfiVariables = false;
       # Config for Raspberry Pis
       raspberryPi = {
         enable = true;
@@ -26,6 +26,8 @@
         '';
       };
     };
+	# Use the latest kernel
+	kernelPackages = pkgs.linuxPackages_latest;
     # A bunch of boot parameters needed for optimal runtime on RPi 3B+
     kernelParams = [ "cma=256M" ];
     # Make the camera available as v4l device under /dev/video0

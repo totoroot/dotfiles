@@ -31,7 +31,7 @@
     # Enable root login
     settings.PermitRootLogin = "yes";
     # Start a systemd service for each incoming SSH connection
-    openssh.startWhenNeeded
+    openssh.startWhenNeeded = true;
   };
 
   # Set up defaults and SSH keys for my user

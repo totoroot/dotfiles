@@ -10,11 +10,40 @@
     ./hardware-configuration.nix
     ./mounts.nix
     # Disable this before installing with dotfiles flake
-    ./pre-flake.nix
+    # ./pre-flake.nix
     # Enable this before installing with dotfiles flake
-    # ../personal.nix
-    # ./home.nix
+    ../personal.nix
+    ./home.nix
   ];
+
+  modules = {
+    theme.active = "dracula";
+    editors = {
+       default = "micro";
+       helix.enable = true;
+       micro.enable = true;
+      vim.enable = true;
+    };
+    shell = {
+      archive.enable = true;
+      borg.enable = true;
+      devops.enable = false;
+      direnv.enable = false;
+      git.enable = true;
+      gnupg.enable = true;
+      iperf.enable = true;
+      lf.enable = true;
+      aerc.enable = false;
+      pass.enable = true;
+      taskell.enable = false;
+      zsh.enable = true;
+      nu.enable = true;
+      cli.enable = true;
+    };
+    services = {
+      ssh.enable = true;	
+    };
+  };
 
   # Set stateVersion
   system.stateVersion = "22.11";
@@ -37,4 +66,10 @@
   # Also preserve space on SD card
   # See https://mastodon.online/@nomeata/109915786344697931
   documentation.nixos.enable = false;
+
+  # NixOS networking configuration
+  networking = {
+    networkmanager.enable = true;
+    useDHCP = false;
+  };  
 }
