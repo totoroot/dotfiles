@@ -46,6 +46,12 @@ in {
       home.configFile = {
         "pulsemixer.cfg".source = "${configDir}/pulsemixer/pulsemixer.cfg";
         "cava/config".source = "${configDir}/cava/config";
+        "pipewire/pipewire.conf.d/combined-sink.conf".text = ''
+          # Create a combined output for simultaneous pipewire outputs
+          context.exec = [
+            { path = "pactl"  args = "load-module module-combine-sink" }
+          ]
+        '';
       };
 
       environment.shellAliases.pm = "pulsemixer";
