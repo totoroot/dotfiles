@@ -10,6 +10,7 @@
 
   ## Modules
   modules = {
+    theme.active = "dracula";
     desktop = {
       environments = {
         bspwm.enable = false;
@@ -152,7 +153,6 @@
       syncthing.enable = true;
       transmission.enable = false;
     };
-    theme.active = "quack-hidpi";
   };
 
   # NixOS program modules
