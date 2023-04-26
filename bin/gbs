@@ -15,7 +15,7 @@ echo "Setting branch origin" && git remote add origin git@codeberg.org:$1.git
 if [ -z "$2" ]; then
     echo "No upstream repo supplied as argument. Not setting branch upstream"
 else
-    echo "Setting branch upstream" && git remote add upstream git@github.com:$2.git
+    echo "Setting branch upstream" && git remote add upstream https://github.com/$2.git
 fi
 
 git fetch --all
