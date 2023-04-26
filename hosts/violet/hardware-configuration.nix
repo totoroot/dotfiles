@@ -19,7 +19,10 @@
       ];
       kernelModules = [ "dm-snapshot" ];
     };
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [
+      "kvm-amd"
+      "amdgpu"
+    ];
     extraModulePackages = [ ];
   };
 
