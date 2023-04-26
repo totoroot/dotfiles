@@ -21,13 +21,12 @@
 - Add keyboard layout in Plasma with config
 - Fix keyboardswitcher shell script
 - Switch to flake for Hyrland
+- Fix missing polkit agent (use Etcher to reproduce)
 - Fix Docker and Git aliases sourcing problem
 - Install a proper diff tool
-- Fix home-manager issues with Trolltech.conf and gtk2 conf
 - Add WakeOnLAN config for all hosts
 - Add disk labels for sangria and grape and update mount configs
 - Fix dolphin no found error on Hyprland
-- ssh completion for kssh
 
 ## In Progress
 
@@ -38,6 +37,7 @@
     - [ ] Install and configure pipewire
     - [ ] Disable pulseaudio
     - [ ] Test OBS screen recording
+- Fix home-manager issues with Trolltech.conf and gtk2 conf
 
 ## Completed
 
