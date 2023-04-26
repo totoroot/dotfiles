@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+REPO="$1"
+UPSTREAM="$2"
+
+if [ $# -eq 0 ]; then
+    echo "No repo string supplied as argument. Exiting."; exit 1
+fi
+
+echo "Removing branch origin" && git remote remove origin
+echo "Setting branch codeberg" && git remote add codeberg git@codeberg.org:$1.git
+echo "Setting branch github" && git remote add github git@github.com:$1.git
+echo "Setting branch origin" && git remote add origin git@codeberg.org:$1.git
+
+if [ -z "$2" ]; then
+    echo "No upstream repo supplied as argument. Not setting branch upstream"
+else
+    echo "Setting branch upstream" && git remote add upstream git@github.com:$2.git
+fi
+
+git fetch --all
