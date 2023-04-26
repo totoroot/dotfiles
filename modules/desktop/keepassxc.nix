@@ -18,7 +18,5 @@ in {
     home.configFile = {
       "keepassxc/keepassxc.ini".source = "${configDir}/keepassxc/keepassxc.ini";
     };
-
-    modules.shell.zsh.rcFiles = [ "${configDir}/keepassxc/aliases.zsh" ];
   };
 }
