@@ -13,7 +13,6 @@
 - Refine taskell keybindings
 - Refine keybindings for hyprland compositor
 - Install gparted
-    + There seems to be an issue with launching it on Wayland
 - Fix languagetool systemd errors
 - Fix rofi bookmarkmenu
 - Install screenshot utility on Wayland
@@ -21,21 +20,18 @@
 - Switch to flake for Hyprland
 - Add keyboard layout in Plasma with config
 - Fix keyboardswitcher shell script
-- Install Dracula KDE theme with NixOS config
 - Switch to flake for Hyrland
-- Fix missing polkit agent (use Etcher to reproduce)
-- Install Plasma on purple
-- Install XFCE on purple
 - Fix Docker and Git aliases sourcing problem
 - Install a proper diff tool
 - Fix home-manager issues with Trolltech.conf and gtk2 conf
 - Add WakeOnLAN config for all hosts
 - Add disk labels for sangria and grape and update mount configs
-- Fix dolphin no found error
+- Fix dolphin no found error on Hyprland
 - ssh completion for kssh
 
 ## In Progress
 
+- Fix missing polkit agent (use Etcher to reproduce)
 - zgen not being initialized when no internet connection
 - Fix rofi windowmenu
 - Enable screen sharing on Wayland
@@ -45,5 +41,8 @@
 
 ## Completed
 
+- Install Dracula KDE theme with NixOS config
+- Install Plasma on purple
+- Install XFCE on purple
 - Unify audio modules
 - Enable HDMI audio output on grape
