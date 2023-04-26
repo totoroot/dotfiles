@@ -1,24 +1,16 @@
 {...}:
 {
   home.file = {
-    # "archive/.use".text = "archive";
-    "books/.use".text = "books";
-    "dev/.use".text = "dev";
-    "documents/.use".text = "documents";
-    "dl/.use".text = "downloads";
-    "graphics/.use".text = "graphics";
-    "inbox/.use".text = "inbox";
-    "music/.use".text = "music";
-    "notes/.use".text = "notes";
-    "outbox/.use".text = "outbox";
-    # "photos/".source = "/mnt/photos";
-    "resources/.use".text = "resources";
-    "shared/.use".text = "shared";
-    # "shared/violet/".source = "/mnt/violet/";
-    "sync/.use".text = "sync";
-    "tmp/.use".text = "tmp";
-    "uni/.use".text = "uni";
-    # "zero/.use".text = "zero";
-    "trash/".source = "/home/mathym/.local/share/Trash/files/";
+    "Desktop/.use".text = "desktop";
+    "Dev/.use".text = "development";
+    "Downloads/.use".text = "downloads";
+    "Notes/".source = "/home/mathym/Sync/notes/";
+    "Pictures/.use".text = "photos and graphics";
+    "Public/.use".text = "shared files";
+    "Sync/.use".text = "synchronised files";
+    "Sync/notes.use".text = "notes";
+    "Temp/.use".text = "temporary files";
+    "Trash/".source = "/home/mathym/.local/share/Trash/files/";
+    "Videos/.use".text = "videos";
   };
 }
