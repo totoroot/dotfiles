@@ -1,6 +1,4 @@
-# modules/desktop/browsers/chromium.nix
 # I don't like Google. I don't like their browser. I don't like my RAM eaten up by its open-source variant. Sometimes I need it though.
-
 { options, config, lib, pkgs, ... }:
 
 with lib;
