@@ -6,11 +6,16 @@ alias -- -='cd -'
 alias q=exit
 alias clr=clear
 alias please='sudo '
-# alias rm='rm -I'
 alias purge='rm -rf'
+# Copy with permissions
 alias cp='rsync -a'
+# Copy compressed with permissions
 alias ccp='rsync -az'
+# Copy compressed with permissions and let you know about it
+alias vcp='rsync -azv'
+# Copy and show progress for each file
 alias pcp='rsync -azP'
+# Move and show progress for each file
 alias rcp='rsync -vaP --delete'
 alias rmirror='rsync -rtvu --delete'
 alias mv='mv -v'
