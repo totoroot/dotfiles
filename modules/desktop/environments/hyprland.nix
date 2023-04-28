@@ -173,7 +173,6 @@ in {
     home.configFile = {
       "hypr/hyprland.conf".source = "${configDir}/hypr/hyprland.conf";
       "mako/config".source = "${configDir}/mako/config";
-      # "pipewire/pipewire-pulse.conf".source = "${configDir}/pipewire/pipewire-pulse.conf";
     };
   };
 }
