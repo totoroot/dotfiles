@@ -67,7 +67,7 @@ in {
       environment = {
         shellAliases = {
           # Not interested in special devices
-          duf = "duf -only local";
+          duf = "duf -only local,fuse,network";
         };
       };
     }
