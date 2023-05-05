@@ -8,10 +8,6 @@
     aerc
     # Command line tools
     asciinema
-    # Unified tool to manage your AWS services
-    awscli
-    # Next generation multi-platform command line experience for Azure
-    # azure-cli
     # A cat(1) clone with syntax highlighting and Git integration
     bat
     # The uncompromising Python code formatter
@@ -26,8 +22,6 @@
     exiftool
     # A simple, fast and user-friendly alternative to find
     fd
-    # CLI client for Flux, the GitOps Kubernetes operator
-    fluxctl
     # A command-line fuzzy finder written in Go
     fzf
     # Program for making large letters out of ordinary text
@@ -47,8 +41,6 @@
     # go_1_19
     # Render markdown on the CLI, with pizzazz!
     glow
-    # Deploy Kubernetes Helm charts
-    helmfile
     # An interactive process viewer for Linux
     htop
     # A lightweight and flexible command-line JSON processor
@@ -57,19 +49,6 @@
     joshuto
     # High-level, high-performance, dynamic language for technical computing
     # julia-bin
-    # kitty
-    # Kubernetes CLI
-    krew
-    # Customization of kubernetes YAML configurations
-    kubectl
-    # Fast way to switch between clusters and namespaces
-    kubectx
-    # Validate your Kubernetes configuration files
-    kubeval
-    # A package manager for kubernetes
-    kubernetes-helm
-    # Package manager for kubectl plugins
-    kustomize
     # A simple terminal UI for both docker and docker-compose
     lazydocker
     # Simple terminal UI for git commands
@@ -95,7 +74,6 @@
     pdfcpu
     # Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more
     # ripgrep-all
-    scala
     # Intuitive find & replace CLI (sed alternative)
     sd
     # A command-line kanban board/task manager
@@ -127,30 +105,47 @@
     # Tools for the google cloud platform
     # google-cloud-sdk
 
-    # Python
+    ## Python
     python310
     python310Packages.virtualenv
     python310Packages.pip
-    # python310Packages.pip-tools
+    python310Packages.pip-tools
     # A bug and style checker for Python
     python310Packages.pylint
     python310Packages.beautifulsoup4
 
-    # Rust
-    cargo
-    rustc
-    rustfmt
+    # ## Rust
+    # cargo
+    # rustc
+    # rustfmt
 
+	# ## Kubernetes
+    # # Kubernetes CLI
+    # krew
+    # # Customization of Kubernetes YAML configurations
+    # kubectl
+    # # Fast way to switch between Kubernetes clusters and namespaces
+    # kubectx
+    # # Validate your Kubernetes configuration files
+    # kubeval
+    # # Package manager for kubectl plugins
+    # kustomize
+    # # Colorizes kubectl output
+    # kubecolor
+    # # A package manager for Kubernetes
+    # kubernetes-helm
+    # # Deploy Kubernetes Helm charts
+    # helmfile
+    # # CLI client for Flux, the GitOps Kubernetes operator
+    # fluxctl
+    
     # Vector graphics editor
     # inkscape-with-extensions
     # A terminal based graphical activity monitor inspired by gtop and vtop
     # gotop
-    # Colorizes kubectl output
-    kubecolor
     # Additional completion definitions for zsh
     # zsh-completions
     zsh
-    neovim-qt
   ];
 
   # # Create symlinks for home-manager packages in ~/Applications

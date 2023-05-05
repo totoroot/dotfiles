@@ -1,11 +1,11 @@
-{ lib, inputs, nixpkgs, home-manager, darwin, ...}:
+{ lib, inputs, nixpkgs, darwin, home-manager, ...}:
 
 let
   system = "x86_64-darwin";
-  user = "matthias.thym";
+  user = "mathym";
 in
 {
-  ATGRZM4052534A = darwin.lib.darwinSystem {
+  macbook = darwin.lib.darwinSystem {
     inherit system;
     specialArgs = { inherit user inputs; };
     modules = [

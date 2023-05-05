@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   homebrew = {
     enable = true;
     onActivation = {
@@ -24,14 +25,11 @@
       "kube-ps1"
       "micro"
       "nushell"
-      "openshift-cli"
       "qemu"
       "watch"
       "podman"
-      "pulumi"
       "ydiff"
       "trash-cli"
-      "jira-cli"
       "starship"
       # "helm"
       # "kubebuilder" # generating k8s controller
@@ -53,11 +51,8 @@
       "betterdisplay"
       # Multi-protocol storage browser
       "cyberduck"
-      "clickup"
       # Ungoogled Chromium
       "eloston-chromium"
-      # System audio equalizer
-      "eqmac"
       # Monitoring widget
       "eul"
       # Keyboard layout for Europeans, coders and translators
@@ -88,38 +83,30 @@
       "maccy"
       "macdown"
       "macs-fan-control"
-      "microsoft-teams"
-      "neovide"
+      "notion"
       "obs"
-      "obsidian"
-      "osxfuse"
-      "qownnotes"
+      # "osxfuse"
       "rectangle"
       "sensiblesidebuttons"
       "signal"
       # Don't quit apps accidentally with Cmd+Q
       "slowquitapps"
-      "superproductivity"
       "vscodium"
-      "xquartz"
       "webex"
+      "xquartz"
     ];
     taps = [
       # Default Taps
       "homebrew/bundle"
-      "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
-      "homebrew/core"
       "homebrew/services"
       "dteoh/sqa"
-      "grafana/grafana"
       "jakehilborn/jakehilborn"
       "koekeishiya/formulae"
       "muesli/tap"
       "stelligent/tap"
-      "ankitpokhrel/jira-cli"
     ];
   };
 }

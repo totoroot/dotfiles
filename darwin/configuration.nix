@@ -2,12 +2,12 @@
 
 {
   imports = [
-    ./homebrew.nix
+    ./brew.nix
   ];
 
-  users.users."matthias.thym" = {
-    name = "matthias.thym";
-    home = "/Users/matthias.thym";
+  users.users."mathym" = {
+    name = "mathym";
+    home = "/Users/mathym";
   };
 
   # Nix configuration ------------------------------------------------------------------------------
@@ -60,12 +60,13 @@
     remapCapsLockToEscape = true;
   };
 
+  environment.systemPackages = with pkgs; [
+   	# Firefox
+    # firefox-bin
+  ];
+
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
-
-  environment.systemPackages = with pkgs; [
-    # neovim-qt
-  ];
 
   # # Create symlinks for nix-darwin packages in ~/Applications
   # system.activationScripts.applications.text = pkgs.lib.mkForce (

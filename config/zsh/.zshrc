@@ -1,3 +1,7 @@
+export ZGEN_DIR=~/.zgen
+export ZGEN_SOURCE=~/.zgen/zgen.zsh
+export ZDOTDIR=~/.config/zsh
+
 if [ ! -d "$ZGEN_DIR" ]; then
   if nc -zw1 ifconfig.me 443; then
     git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
@@ -57,5 +61,5 @@ if [[ $TERM != dumb ]]; then
   autopair-init
 
   # If you have host-local configuration, this is where you'd put it
-  [ -f ~/.zshrc ] && source ~/.zshrc
+  [ -f ~/.mac-zshrc ] && source ~/.mac-zshrc
 fi

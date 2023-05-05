@@ -78,7 +78,6 @@
         { dotfiles = import ./.; }
         // mapModulesRec ./modules import;
 
-
       devShell.${system} =
         import ./shell.nix {
           inherit pkgs;
@@ -90,11 +89,11 @@
           inherit system;
         };
 
-      # Configuration for macOS using Nix and home-manager
+      # Configuration for macOS using Nix, nix-darwin and home-manager
       darwinConfigurations = (
         import ./darwin {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager darwin;
+          inherit inputs nixpkgs darwin home-manager;
         }
       );
 

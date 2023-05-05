@@ -2,8 +2,8 @@
 
 {
   home = {
-    username = "matthias.thym";
-    homeDirectory = "/Users/matthias.thym";
+    username = "mathym";
+    homeDirectory = "/Users/mathym";
     stateVersion = "22.11";
   };
 
@@ -38,6 +38,8 @@
     settings.show_program_path = true;
   };
 
+  programs.starship.enable = true;
+
   home.packages = with pkgs; [
     # Some basics
     coreutils
@@ -57,9 +59,9 @@
   };
 
   home.file = {
-    ".zshrc".source = ../config/zsh/.zshrc;
     # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac
     "Library/Keyboard Layouts/EurKEY.keylayout".source = ../config/eurkey/EurKEY.keylayout;
     "Library/Keyboard Layouts/EurKEY.icns".source = ../config/eurkey/EurKEY.icns;
+    "/Applications/kitty.app/Contents/Resources/kitty.icns".source = ../config/kitty/kitty-dark.icns;
   };
 }
