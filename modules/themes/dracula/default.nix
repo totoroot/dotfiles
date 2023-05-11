@@ -11,7 +11,7 @@ in {
     {
       modules = {
         theme = {
-          # wallpaper = mkDefault ./config/wallpaper.png;
+          wallpaper = mkDefault "$DOTFILES/config/wallpapers/quack.png";
           gtk = {
             theme       = "Dracula";
             iconTheme   = "Papirus";

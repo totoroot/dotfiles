@@ -56,8 +56,7 @@ for file in $XDG_CONFIG_HOME/bspwm/rc.d/*; do
 done
 
 # Source autostart scripts
-
-feh --bg-center $DOTFILES/modules/themes/quack/config/wallpaper.png
+feh --bg-center $DOTFILES/config/wallpapers/quack.png
 
 # workaround to autostart a couple daemons
 if ! pgrep mullvad > /dev/null; then
