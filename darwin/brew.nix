@@ -40,23 +40,25 @@
       # "yabai" # tiling window manager
     ];
     casks = [
+      "adobe-creative-cloud"
+      "microsoft-powerpoint"
       # Advanced file renaming utility
-      "a-better-finder-rename"
+      #"a-better-finder-rename"
       # Window switcher
       "alt-tab"
       # Better search menu than Spotlight
       "alfred"
       # Utility for writing image files
-      "balenaetcher"
-      "betterdisplay"
+      # "balenaetcher"
+      # "betterdisplay"
       # Multi-protocol storage browser
-      "cyberduck"
+      # "cyberduck"
       # Ungoogled Chromium
       "eloston-chromium"
       # Monitoring widget
       "eul"
       # Keyboard layout for Europeans, coders and translators
-      "eurkey"
+      # "eurkey"
       # "fig"
       "font-fira-code"
       "font-fira-mono"
@@ -69,20 +71,20 @@
       "gpg-suite"
       # Order, toggle and hide menu bar icons
       "hiddenbar"
-      "iterm2"
+      # "iterm2"
       # Tiny menu bar calendar
       "itsycal"
-      "julia"
-      # Keymap remap utility
+      # "julia"
+      # Keymap remap utilility
       "karabiner-elements"
       # Offline password manager with many features
-      "keepassxc"
+      # "keepassxc"
       "kitty"
       "krita"
       "libreoffice"
       "maccy"
-      "macdown"
-      "macs-fan-control"
+      # "macdown"
+      # "macs-fan-control"
       "notion"
       "obs"
       # "osxfuse"
@@ -102,11 +104,24 @@
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
       "homebrew/services"
+      # Slow quit apps on <Cmd> + <Q>
+      # https://github.com/dteoh/SlowQuitApps
       "dteoh/sqa"
+      # Manage external displays from the command line
+      # https://github.com/jakehilborn/displayplacer
       "jakehilborn/jakehilborn"
+      # Yabai tiling window manager for macOS
+      # https://github.com/koekeishiya/yabai
       "koekeishiya/formulae"
+      # Disk usage utility
+      # https://github.com/muesli/duf
       "muesli/tap"
+      # config-lint
+      # https://github.com/stelligent/config-lint
       "stelligent/tap"
+      # Automatically raise windows on hover
+      # https://github.com/sbmpost/AutoRaise
+      "dimentium/autoraise"
     ];
   };
 }
