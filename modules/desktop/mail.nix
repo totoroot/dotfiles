@@ -26,7 +26,7 @@ in {
       "thunderbird/profiles.ini".source = "${configDir}/thunderbird/profiles.ini";
       "thunderbird/installs.ini".source = "${configDir}/thunderbird/installs.ini";
       "thunderbird/signature-professional.html".source = "${configDir}/thunderbird/signature-professional.html";
-      "birdtray-config.json".source = "${configDir}/thunderbird/birdtray-config.json";
+      # "birdtray-config.json".source = "${configDir}/thunderbird/birdtray-config.json";
     };
   };
 }
