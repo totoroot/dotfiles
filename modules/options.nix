@@ -46,9 +46,9 @@ with lib.my;
       # files easily to my $HOME, but 'home-manager.users.mathym.home.file.*'
       # is much too long and harder to maintain, so I've made aliases in:
       #
-      #   home.file        ->  home-manager.users.mathym.home.file
-      #   home.configFile  ->  home-manager.users.mathym.home.xdg.configFile
-      #   home.dataFile    ->  home-manager.users.mathym.home.xdg.dataFile
+      #   home.file        ->  home-manager.users.$USER.home.file
+      #   home.configFile  ->  home-manager.users.$USER.home.xdg.configFile
+      #   home.dataFile    ->  home-manager.users.$USER.home.xdg.dataFile
       users.${config.user.name} = {
         home = {
           file = mkAliasDefinitions options.home.file;
