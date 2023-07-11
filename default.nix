@@ -41,11 +41,33 @@ with inputs;
       nixos.flake = nixos;
       nixpkgs.flake = nixos-unstable;
     };
+    # Take out the garbage every once in a while
+    gc = {
+      automatic = mkDefault true;
+      dates = mkDefault "weekly";
+      options = mkDefault "--delete-older-than 30d";
+    };
     # useSandbox = true;
   };
 
-  system.configurationRevision = mkIf (self ? rev) self.rev;
-  system.stateVersion = mkDefault "22.11";
+  system = {
+    stateVersion = mkDefault "23.05";
+    configurationRevision = mkIf (self ? rev) self.rev;
+    # Present information of what is being updated on nixos-rebuild
+    activationScripts.diff = {
+      supportsDryActivation = true;
+      # text = ''
+        # if [[ -e /run/current-system ]]; then
+          # ${pkgs.nix}/bin/nix store diff-closures /run/current-system "$systemConfig"
+        # fi
+      # '';
+      text = ''
+        if [[ -e /run/current-system ]]; then
+          ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+        fi
+      '';
+    };
+  };
 
   ## Some reasonable, global defaults
   # This is here to appease 'nix flake check' for generic hosts with no
@@ -75,13 +97,6 @@ with inputs;
     '';
   };
 
-  # Take out the garbage every once in a while
-  nix.gc = {
-    automatic = mkDefault true;
-    dates = mkDefault "weekly";
-    options = mkDefault "--delete-older-than 30d";
-  };
-
   # Do not start a sulogin shell if mounting a filesystem fails
   systemd.enableEmergencyMode = mkDefault false;
 
@@ -95,14 +110,15 @@ with inputs;
 
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
-    unstable.cached-nix-shell
+    cached-nix-shell
     coreutils
     git
-    vim
     micro
     curl
     wget
     gnumake
     unzip
+    # Needed for alternative diff activationScript
+    nvd
   ];
 }
