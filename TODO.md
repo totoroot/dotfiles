@@ -27,6 +27,7 @@
 - Add WakeOnLAN config for all hosts
 - Add disk labels for sangria and grape and update mount configs
 - Fix dolphin no found error on Hyprland
+- Fix Nextcloud Client window autoclose on Hyprland
 
 ## In Progress
 
