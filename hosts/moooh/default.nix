@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -18,11 +18,11 @@
         plasma.enable = true;
         xfce.enable = false;
       };
-      anki.enable = true;
+      anki.enable = false;
       backup.enable = false;
       blender.enable = false;
       calibre.enable = false;
-      clipboard.enable = false;
+      clipboard.enable = true;
       documents.enable = true;
       flatpak.enable = true;
       fm.enable = true;
@@ -31,18 +31,18 @@
       ghostwriter.enable = false;
       godot.enable = false;
       gpa.enable = false;
-      gsmartcontrol.enable = true;
+      gsmartcontrol.enable = false;
       keepassxc.enable = false;
       kvantum.enable = false;
       mail.enable = true;
       mapping.enable = false;
-      nextcloud.enable = true;
+      nextcloud.enable = false;
       plank.enable = false;
       polish.enable = true;
       rofi.enable = true;
-      screenshot.enable = false;
-      thonny.enable = true;
-      torrent.enable = true;
+      screenshot.enable = true;
+      thonny.enable = false;
+      torrent.enable = false;
       unity.enable = false;
       vscodium.enable = true;
       browsers = {
@@ -53,12 +53,12 @@
         tor.enable = false;
       };
       communication = {
-        delta.enable = true;
-        discord.enable = true;
-        jitsi.enable = true;
-        matrix.enable = true;
-        signal.enable = true;
-        telegram.enable = true;
+        delta.enable = false;
+        discord.enable = false;
+        jitsi.enable = false;
+        matrix.enable = false;
+        signal.enable = false;
+        telegram.enable = false;
       };
       gaming = {
         retro.enable = false;
@@ -89,9 +89,9 @@
         kitty.enable = true;
       };
       vm = {
-        qemu.enable = false;
+        qemu.enable = true;
         virtualbox.enable = false;
-        virt-manager.enable = false;
+        virt-manager.enable = true;
       };
     };
     dev = {
@@ -126,7 +126,7 @@
       radeon.enable = false;
       printers.enable = true;
       sensors.enable = true;
-      steamcon.enable = true;
+      steamcon.enable = false;
       wacom.enable = true;
     };
     shell = {
@@ -138,7 +138,7 @@
       gnupg.enable = true;
       iperf.enable = true;
       lf.enable = true;
-      aerc.enable = true;
+      aerc.enable = false;
       pass.enable = true;
       taskell.enable = false;
       zsh.enable = true;
@@ -154,15 +154,15 @@
         languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
-        vaultwarden.enable = false;
+        vaultwarden.enable = true;
       };
       gitea.enable = false;
       jellyfin.enable = false;
       k8s.enable = false;
       nginx.enable  = false;
-      vpn.enable = true;
+      vpn.enable = false;
       ssh.enable = true;
-      syncthing.enable = true;
+      syncthing.enable = false;
       transmission.enable = false;
     };
   };
@@ -204,6 +204,35 @@
       wifi.powersave = true;
     };
   };
+
+  services.gerrit = {
+    enable = true;
+    serverId = "372e82cb-0dfa-4692-932e-cd194af9a445";
+    listenAddress = "[::]:8020";
+    builtinPlugins = [
+      "codemirror-editor"
+      "commit-message-length-validator"
+      "delete-project"
+      "download-commands"
+      "gitiles"
+      "hooks"
+      "plugin-manager"
+      "replication"
+      "reviewnotes"
+      "singleusergroup"
+      "webhooks"
+    ];
+  };
+
+  user.packages = with pkgs; [
+    jetbrains.pycharm-community
+    jira-cli-go
+    slack
+    slack-term
+    usbutils
+    lshw
+    inxi
+  ];
 
   # Limit update size/frequency of rebuilds
   # See https://mastodon.online/@nomeata/109915786344697931
