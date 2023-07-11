@@ -22,23 +22,23 @@
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-	# Nix hardware tweaks
+	  # Nix hardware tweaks
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-	# User space configuration, dotfile and package management
+	  # User space configuration, dotfile and package management
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	# Darwin configuration and package managements
+	  # Darwin configuration and package managements
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	# Nix User Repository packages
-	# Add "nur.nixosModules.nur" to the host modules
+  	# Nix User Repository packages
+  	# Add "nur.nixosModules.nur" to the host modules
     nur.url = "github:nix-community/NUR";
 
   	# Official Hyprland flake
@@ -56,7 +56,7 @@
       inputs.home-manager.follows = "nixpkgs";
     };
 
-	# Development environments in seconds
+	  # Development environments in seconds
     devenv.url = "github:cachix/devenv/v0.6.2";
   };
 
