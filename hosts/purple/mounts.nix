@@ -57,6 +57,62 @@
         "loglevel=debug"
       ];
     };
+    "/mnt/photos" = {
+      device = "mathym@violet:/mnt/photos";
+      fsType = "sshfs";
+      options = [
+        # Filesystem options
+        # For non-root access
+        "allow_other"
+        # This is a network fs
+        "_netdev"
+        # Mount on demand
+        "x-systemd.automount"
+        # Prevent long "start job is running" wait times
+        "x-systemd.device-timeoup=1ms"
+        "follow_symlinks"
+        # SSH options
+        # Handle connection drops
+        "reconnect"
+        # Keep connections alive
+        "ServerAliveInterval=15"
+        "ServerAliveCountMax=3"
+        "IdentityFile=/home/mathym/.ssh/purple"
+        # Troubleshoot connection
+        # "sshfs_debug"
+        # Debugging options
+        "debug"
+        "loglevel=debug"
+      ];
+    };
+    # "/mnt/music" = {
+      # device = "mathym@violet:/mnt/music";
+      # fsType = "sshfs";
+      # options = [
+        # # Filesystem options
+        # # For non-root access
+        # "allow_other"
+        # # This is a network fs
+        # "_netdev"
+        # # Mount on demand
+        # "x-systemd.automount"
+        # # Prevent long "start job is running" wait times
+        # "x-systemd.device-timeoup=1ms"
+        # "follow_symlinks"
+        # # SSH options
+        # # Handle connection drops
+        # "reconnect"
+        # # Keep connections alive
+        # "ServerAliveInterval=15"
+        # "ServerAliveCountMax=3"
+        # "IdentityFile=/home/mathym/.ssh/purple"
+        # # Troubleshoot connection
+        # # "sshfs_debug"
+        # # Debugging options
+        # "debug"
+        # "loglevel=debug"
+      # ];
+    # };
   };
 
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
