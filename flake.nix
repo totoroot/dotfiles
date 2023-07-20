@@ -57,7 +57,7 @@
     };
 
 	  # Development environments in seconds
-    devenv.url = "github:cachix/devenv/v0.6.2";
+    devenv.url = "github:cachix/devenv/v0.6.3";
   };
 
   outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, nixos-hardware, home-manager, darwin, nur, hyprland, plasma-manager, devenv, ... }:
