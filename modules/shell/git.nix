@@ -11,9 +11,9 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       gitAndTools.gitFull
-      lazygit           # terminal ui for git
-      onefetch                       # git repo summary
-      unstable.gitlint  # git commit linter
+      lazygit
+      onefetch
+      gitlint
     ];
 
     home.configFile = {
