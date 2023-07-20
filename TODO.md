@@ -28,6 +28,8 @@
 - Add disk labels for sangria and grape and update mount configs
 - Fix dolphin no found error on Hyprland
 - Fix Nextcloud Client window autoclose on Hyprland
+- Make disk clone of raspberry and mulberry after successful boot into new generation
+- Fix random sleep issues on purple
 
 ## In Progress
 
