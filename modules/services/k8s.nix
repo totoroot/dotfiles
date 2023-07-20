@@ -23,13 +23,17 @@ in {
       # Translate docker-compose files into K8s resources
       kompose
       # Colorizes kubectl output
-      unstable.kubecolor
+      kubecolor
       # Tool that makes it easy to run Kubernetes locally
       minikube
     ];
 
+    # Set the K8s config location
     env.KUBECONFIG = "$XDG_CONFIG_HOME/k8s";
+    # This is needed to run installed plugins
+    env.PATH = [ "$HOME/.krew/bin" ];
 
+    # Source a bunch of aliases for handling K8s without getting finger cramps
     modules.shell.zsh.rcFiles = [ "${configDir}/k8s/aliases.zsh" ];
   };
 }
