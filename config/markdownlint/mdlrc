@@ -1,0 +1,2 @@
+# rulesets ["#{File.dirname(__FILE__)}/custom-rule-1.rb" "#{File.dirname(__FILE__)}/custom-rule-2.rb"]
+style "#{File.dirname(__FILE__)}/style.rb"

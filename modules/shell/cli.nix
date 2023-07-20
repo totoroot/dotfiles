@@ -100,6 +100,8 @@ in {
       tidy-viewer
       # Disk usage analyzer with an ncurses interface
       ncdu
+      # A tool to check markdown files and flag style issues
+      mdl
     ];
 
     user.extraGroups = [ "admin" ];
@@ -108,6 +110,10 @@ in {
       "gotop/gotop.conf".source = "${configDir}/gotop/gotop.conf";
       "btop/btop.conf".source = "${configDir}/btop/btop.conf";
       "cheat/conf.yml".source = "${configDir}/cheat/conf.yml";
+      "markdownlint" = {
+        recursive = true;
+        source = "${configDir}/markdownlint";
+      };
     };
 
     environment.shellAliases = {
@@ -116,6 +122,8 @@ in {
       rm = "trash";
       rst = "trash-restore";
       dui = "ncdu --color dark -rr -x --exclude .git";
+      mdl = "mdl -c ${configDir}/markdownlint/mdlrc";
+      markdownlint = "mdl -c ${configDir}/markdownlint/mdlrc";
     };
   };
 }
