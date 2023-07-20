@@ -41,7 +41,7 @@
       cli.enable = true;
     };
     services = {
-      ssh.enable = true;	
+      ssh.enable = true;
     };
   };
 
@@ -71,5 +71,5 @@
   networking = {
     networkmanager.enable = true;
     useDHCP = false;
-  };  
+  };
 }
