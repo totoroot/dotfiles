@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+TEMP_DIR="/tmp"
+GIT_DIR="$(pwd)"
+EMAIL_FILTER=""
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -t) TEMP_DIR="$2"; shift 2;;
+    -g) GIT_DIR="$2"; shift 2;;
+    -e) EMAIL_FILTER="$2"; shift 2;;
+
+    --tempdir=*) TEMP_DIR="${1#*=}"; shift 1;;
+    --gitdir=*) GIT_DIR="${1#*=}"; shift 1;;
+    --email=*) EMAIL_FILTER="${1#*=}"; shift 1;;
+    # --tempdir|--gitdir|--email) echo "$1 requires an argument" >&2; exit 1;;
+
+    -*) echo "Unknown option: $1" >&2; exit 1;;
+    *) handle_argument "$1"; shift 1;;
+  esac
+done
+
+
+# Generate a list of all Git commiters in this repository
+# grep for email addresses using filter variable
+# Put <> around every address
+git -C "$GIT_DIR" log --pretty="%ce" | sort -u | tr '[:upper:]' '[:lower:]' | uniq | grep "$EMAIL_FILTER" | sed 's/^/</;s/$/>/' > $TEMP_DIR/git-authors-email-addresses
+
+# Generate list of full names from email addresses
+cat $TEMP_DIR/git-authors-email-addresses | sed 's/^<\(.*\)>$/\1/' | cut -f1 | cut -f1 -d"@" | sed -e "s|\.| |g" | sed -E "s/[[:alnum:]_'-]+/\u&/g" > $TEMP_DIR/git-authors-names
+
+# Merge lists line-by-line with space as delimiter
+# Put quotes around each line
+paste -d " " $TEMP_DIR/git-authors-names $TEMP_DIR/git-authors-email-addresses | sed 's/^/"/;s/$/",/' | head -c -2 > $TEMP_DIR/git-authors
+
+cat $TEMP_DIR/git-authors
