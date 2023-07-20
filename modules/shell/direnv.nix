@@ -11,6 +11,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       direnv
+      nix-direnv
       devenv
     ];
     modules.shell.zsh.rcInit = ''eval "$(direnv hook zsh)"'';
