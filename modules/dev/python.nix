@@ -63,7 +63,8 @@ in {
     };
 
     environment.shellAliases = {
-      yamllint = "yamllint -c ~/${configDir}/yamllint/yamllint.yml";
+      yamllint = "yamllint -c $XDG_CONFIG_HOME/yamllint/yamllint.yml";
+      yl = "yamllint -c $XDG_CONFIG_HOME/yamllint/yamllint.yml";
     };
   };
 }
