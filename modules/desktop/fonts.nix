@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      # Highly customizable and minimal CLI font previewer 
+      # Highly customizable and minimal CLI font previewer
       fontpreview
       # Simple font management GUI for GTK desktop environments
       font-manager
@@ -23,7 +23,7 @@ in {
     fonts = {
       fontDir.enable = true;
       enableGhostscriptFonts = true;
-      fonts = with pkgs; [
+      packages = with pkgs; [
         ubuntu_font_family
         dejavu_fonts
         symbola
@@ -49,13 +49,13 @@ in {
         source-serif-pro
         corefonts
         vistafonts
-        unstable.comic-mono
+        comic-mono
       ];
     };
 
     fonts.fontconfig.defaultFonts = {
-      sansSerif = ["Fira Sans"];
-      monospace = ["Mononoki"];
+      sansSerif = [ "Fira Sans" ];
+      monospace = [ "Mononoki" ];
     };
   };
 }
