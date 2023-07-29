@@ -32,6 +32,16 @@
 - Fix "warning: optionsDocBook is deprecated since 23.11 and will be removed in 24.05"
 - Fix "warning: mdadm: Neither MAILADDR nor PROGRAM has been set. This will cause the `mdmon` service to crash."
 - Run ssh-setup script after install to add host key to Codeberg and update remote
+- Fix random sleep issues on purple
+- Add Firefox extension configs (uBlock Origin, Sidebery, uBlacklist etc.)
+- Disk setup with disko
+- Install diskonaut
+- Upgrade hosts to 23.05
+	- [x] purple
+	- [x] grape
+	- [ ] violet
+	- [ ] macbook
+	- [x] sangria
 
 ## In Progress
 
