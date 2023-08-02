@@ -35,5 +35,10 @@ in {
       khelpcenter
       konsole
     ];
+
+    # Install a calculator
+    environment.systemPackages = with pkgs.libsForQt5; [
+      kcalc
+    ];
   };
 }
