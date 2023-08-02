@@ -3,7 +3,7 @@
 {
   home.file = {
     "Desktop/.use".text = "desktop";
-    "Dev/.use".text = "development";
+    "Development/.use".text = "development";
     "Documents/.use".text = "documents";
     "Downloads/.use".text = "downloads";
     "Games/.use".text = "games";
