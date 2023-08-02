@@ -42,6 +42,7 @@
     };
     services = {
       ssh.enable = true;
+      clone-system-disk.enable = true;
     };
   };
 
