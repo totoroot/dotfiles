@@ -158,7 +158,7 @@
       };
       gitea.enable = false;
       jellyfin.enable = false;
-      k8s.enable = false;
+      k8s.enable = true;
       nginx.enable  = false;
       vpn.enable = false;
       ssh.enable = true;
@@ -197,6 +197,11 @@
     };
   };
 
+  # nix.settings = {
+    # cores = "";
+    # max-jobs = "";
+  # }
+
   # NixOS networking configuration
   networking = {
     networkmanager = {
@@ -225,14 +230,59 @@
   };
 
   user.packages = with pkgs; [
-    jetbrains.pycharm-community
     jira-cli-go
     slack
     slack-term
     usbutils
     lshw
     inxi
+    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    # cloud-sql-proxy
+    gcsfuse
+    postgresql
+    keepassxc
+    meld
+    delta
+    # Integrated Development Environment (IDE) by Jetbrains
+    jetbrains.pycharm-community
   ];
+
+  systemd.user.services."cloud-sql-proxy" = {
+    description = "Starts the Google Cloud SQL Proxy";
+    documentation = [
+      "https://handbook.smaxtec.com/product_docu/development_docu/how_to_guides/backend/Gcloud-Kubernetes-PostgreSQL/"
+      "https://cloud.google.com/sql/docs/sqlserver/connect-auth-proxy"
+    ];
+    # This should replace the script expression after
+    # https://github.com/NixOS/nixpkgs/pull/243947
+    # gets merged
+
+    # ${pkgs.cloud-sql-proxy}/bin/cloud-sql-proxy
+    script = ''
+      exec /home/mathym/.nix-profile/bin/cloud-sql-proxy cloud-sql-proxy "smaxtec-system:europe-west1:smaxtecdb-postgres-11-develop-system?address=127.0.0.1&port=5433" "smaxtec-system:europe-west1:smaxtecdb-postgres-11-develop-system?address=172.17.0.1&port=5433"
+    '';
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Restart = "always";
+      RestartSec = 2;
+    };
+  };
+
+  # home.env = {
+    # GCLOUD_PROJECT = "smaxtec-system";
+  # };
+
+  home.configFile = {
+    "git/work/config".text = ''
+      [user]
+          email = matthias.thym@smaxtec.com
+    '';
+  };
+
+  environment.shellAliases = {
+    pycharm = "pycharm-community";
+    pc = "pycharm-community";
+  };
 
   # Limit update size/frequency of rebuilds
   # See https://mastodon.online/@nomeata/109915786344697931
