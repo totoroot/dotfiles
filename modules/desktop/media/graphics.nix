@@ -42,7 +42,7 @@ in {
       (if cfg.vector.enable then [
         # Vector graphics editor
         # Install Inkscape from unstable to fix symbolic icons config issue present in version 1.1.x
-        unstable.inkscape-with-extensions
+        inkscape-with-extensions
       ] else []) ++
 
       (if cfg.photo.enable then [

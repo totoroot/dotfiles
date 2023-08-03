@@ -20,5 +20,7 @@ in {
       # Audio device and application capture for OBS Studio using PipeWire
       obs-studio-plugins.obs-pipewire-audio-capture
     ];
+
+    user.extraGroups = [ "video" ];
   };
 }

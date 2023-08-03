@@ -15,7 +15,7 @@ in {
       # The open-source Java Development Kit
       jdk
       # A build tool for Scala, Java and more
-      unstable.sbt
+      sbt
     ];
   };
 }

@@ -17,7 +17,7 @@ in {
       # Free 3D kart racing game
       superTuxKart
       # Multi-platform emulator frontend for libretro cores
-      unstable.retroarch
+      retroarch
     ];
 
   # Create directory for retro games

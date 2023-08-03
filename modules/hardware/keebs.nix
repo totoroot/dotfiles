@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      unstable.wally-cli
+      wally-cli
     ];
 
     # See https://github.com/zsa/wally/wiki for more info

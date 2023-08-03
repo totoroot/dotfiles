@@ -15,7 +15,7 @@ in {
       # Lightweight GUI email client
       # sylpheed
       # Full-featured email client
-      unstable.thunderbird
+      thunderbird
       # Mail system tray notification icon for Thunderbird
       birdtray
     ];

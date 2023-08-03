@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # High-level performance-oriented dynamical language for technical computing
-      unstable.julia-bin
+      julia-bin
       # A monospaced font for scientific and technical computing
       julia-mono
     ];

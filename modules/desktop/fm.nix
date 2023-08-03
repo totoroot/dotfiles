@@ -25,12 +25,12 @@ in {
       # Virtual filesystem support library
       gvfs
       # KDE file manager and accessories for displaying thumbnails, previews etc.
-      unstable.libsForQt5.dolphin
-      unstable.libsForQt5.dolphin-plugins
-      unstable.libsForQt5.kdegraphics-thumbnailers
-      unstable.libsForQt5.kio-extras
+      libsForQt5.dolphin
+      libsForQt5.dolphin-plugins
+      libsForQt5.kdegraphics-thumbnailers
+      libsForQt5.kio-extras
       # Tray application and Dolphin/Plasma integration for Syncthing
-      unstable.syncthingtray
+      syncthingtray
     ];
 
     home.configFile = {

@@ -18,9 +18,10 @@
   	# All flake references used to build this NixOS setup. These are dependencies.
 
   	# Nix packages
-    nixpkgs.url = "github:nixos/nixpkgs/master";
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
 
 	  # Nix hardware tweaks
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -60,7 +61,7 @@
     devenv.url = "github:cachix/devenv/v0.6.3";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, home-manager, darwin, devenv, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, nixpkgs-fork, home-manager, darwin, devenv, ... }:
     let
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
@@ -78,13 +79,15 @@
       };
       # Use different channels for installed packages for increased flexibility
       pkgs  = mkPkgs nixos [ self.overlay ];
-      unstable = mkPkgs nixos-unstable [];
+      unstable  = mkPkgs nixos-unstable [];
+      nixpkgs  = mkPkgs nixpkgs [];
+      fork = mkPkgs nixpkgs-fork [];
     in {
       lib = lib.my;
 
       overlay =
         _final: _prev: {
-          inherit unstable;
+          inherit unstable nixpkgs fork;
           # Add overlays for flakes
           user = self.packages.${system};
           devenv = devenv.packages.${system}.devenv;

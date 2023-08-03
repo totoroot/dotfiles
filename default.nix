@@ -19,11 +19,10 @@ with inputs;
   };
 
   nix = {
-    package = pkgs.unstable.nixVersions.stable;
+    package = pkgs.nixVersions.stable;
     extraOptions = "experimental-features = nix-command flakes";
     nixPath = [
       "nixpkgs=${nixos}"
-      "nixpkgs-unstable=${nixos-unstable}"
       "nixpkgs-overlays=${dotFilesDir}/overlays"
       "home-manager=${home-manager}"
       "dotfiles=${dotFilesDir}"
@@ -39,7 +38,7 @@ with inputs;
     };
     registry = {
       nixos.flake = nixos;
-      nixpkgs.flake = nixos-unstable;
+      nixpkgs.flake = nixpkgs;
     };
     # Take out the garbage every once in a while
     gc = {
@@ -76,7 +75,7 @@ with inputs;
 
   boot = {
     # Use the latest kernel by default
-    kernelPackages = mkDefault pkgs.unstable.linuxPackages_latest;
+    kernelPackages = mkDefault pkgs.linuxPackages_latest;
     loader = {
       systemd-boot = {
         enable = mkDefault true;

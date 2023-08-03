@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      unstable.flatpak
+      flatpak
     ];
 
     # Enable flatpak to install packages from flathub

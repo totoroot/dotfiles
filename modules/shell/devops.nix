@@ -13,19 +13,19 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Automation tool
-      unstable.ansible
+      ansible
       # Linter for ansible
-      unstable.ansible-lint
+      ansible-lint
       # Generate typed CustomResources from a Kubernetes CustomResourceDefinition
-      unstable.crd2pulumi
+      crd2pulumi
       # Python-based infrastructure automation
-      unstable.pyinfra
+      pyinfra
       # Cloud development platform that makes creating cloud programs easy and productive
-      unstable.pulumi-bin
+      pulumi-bin
       # Tool for building, changing, and versioning infrastructure
-      unstable.terraform
+      terraform
       # CLI tool to generate terraform files from existing infrastructure (reverse Terraform). Infrastructure to Code
-      unstable.terraformer
+      terraformer
     ];
   };
 }

@@ -67,6 +67,19 @@
     intel-media-driver
   ];
 
+  hardware.ipu6 = {
+    enable = true;
+    platform = "ipu6ep";
+  };
+
+  services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.fork.libfprint-2-tod1-broadcom;
+    };
+  };
+
   services.xserver.videoDrivers = [ "intel" ];
 
   services.tlp.enable = ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")

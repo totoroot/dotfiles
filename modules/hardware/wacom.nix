@@ -14,7 +14,7 @@ in
     services.xserver.wacom.enable = true;
     
     environment.systemPackages = with pkgs; [
-      unstable.libwacom
+      libwacom
     ];
     
     # Lock tablet to main display
