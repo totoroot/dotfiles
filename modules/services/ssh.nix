@@ -31,6 +31,6 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILplKT9yCU7in8VjPsxtxLZrhU8PajUJZascd0J4ILGv mathym@violet"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIT5s6+Feov4htIAeAuAa4VNqpXFuXVUf+jgnxQ7alqp mathym@grape"
       ]
-      else [];
+      else [ ];
   };
 }

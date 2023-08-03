@@ -26,8 +26,8 @@
         '';
       };
     };
-	# Use the latest kernel
-	kernelPackages = pkgs.linuxPackages_latest;
+    # Use the latest kernel
+    kernelPackages = pkgs.linuxPackages_latest;
     # A bunch of boot parameters needed for optimal runtime on RPi 3B+
     kernelParams = [ "cma=256M" ];
     # Make the camera available as v4l device under /dev/video0

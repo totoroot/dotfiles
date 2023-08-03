@@ -1,4 +1,4 @@
-{ lib, inputs, darwin, home-manager, ...}:
+{ lib, inputs, darwin, home-manager, ... }:
 
 let
   system = "x86_64-darwin";
@@ -10,7 +10,8 @@ in
     specialArgs = { inherit user inputs; };
     modules = [
       ./configuration.nix
-      home-manager.darwinModules.home-manager {
+      home-manager.darwinModules.home-manager
+      {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user; };

@@ -159,7 +159,7 @@
       gitea.enable = false;
       jellyfin.enable = false;
       k8s.enable = true;
-      nginx.enable  = false;
+      nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
@@ -185,7 +185,7 @@
       # dpi = 200;
       displayManager = {
         autoLogin.enable = false;
-        defaultSession= "plasma";
+        defaultSession = "plasma";
         # Use SDDM as display manager
         sddm = {
           enable = true;
@@ -203,6 +203,6 @@
 
   # Set default monitor
   # environment.variables = rec {
-    # MONITORS = ["HDMI-0" "DP-0"];
+  # MONITORS = ["HDMI-0" "DP-0"];
   # };
 }

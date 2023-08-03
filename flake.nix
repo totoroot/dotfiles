@@ -15,49 +15,49 @@
   description = "My Personal NixOS, Linux and Darwin System Flake Configuration";
 
   inputs = {
-  	# All flake references used to build this NixOS setup. These are dependencies.
+    # All flake references used to build this NixOS setup. These are dependencies.
 
-  	# Nix packages
+    # Nix packages
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/master";
     nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
 
-	  # Nix hardware tweaks
+    # Nix hardware tweaks
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-	  # User space configuration, dotfile and package management
+    # User space configuration, dotfile and package management
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	  # Darwin configuration and package managements
+    # Darwin configuration and package managements
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  	# Nix User Repository packages
-  	# Add "nur.nixosModules.nur" to the host modules
+    # Nix User Repository packages
+    # Add "nur.nixosModules.nur" to the host modules
     nur.url = "github:nix-community/NUR";
 
-  	# Official Hyprland flake
-  	# Add "hyprland.nixosModules.default" to the host modules
+    # Official Hyprland flake
+    # Add "hyprland.nixosModules.default" to the host modules
     hyprland = {
       url = "github:vaxerski/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  	# KDE Plasma user settings
-  	# Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports
+    # KDE Plasma user settings
+    # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
 
-	  # Development environments in seconds
+    # Development environments in seconds
     devenv.url = "github:cachix/devenv/v0.6.3";
   };
 
@@ -78,11 +78,12 @@
         overlays = extraOverlays ++ (attrValues self.overlays);
       };
       # Use different channels for installed packages for increased flexibility
-      pkgs  = mkPkgs nixos [ self.overlay ];
-      unstable  = mkPkgs nixos-unstable [];
-      nixpkgs  = mkPkgs nixpkgs [];
-      fork = mkPkgs nixpkgs-fork [];
-    in {
+      pkgs = mkPkgs nixos [ self.overlay ];
+      unstable = mkPkgs nixos-unstable [ ];
+      nixpkgs = mkPkgs nixpkgs [ ];
+      fork = mkPkgs nixpkgs-fork [ ];
+    in
+    {
       lib = lib.my;
 
       overlay =
@@ -98,7 +99,7 @@
 
       packages.${system} =
         mapModules ./packages
-          (p: pkgs.callPackage p {});
+          (p: pkgs.callPackage p { });
 
       nixosModules =
         { dotfiles = import ./.; }

@@ -7,10 +7,10 @@ with lib.my;
 let cfg = config.modules.desktop.media.graphics;
 in {
   options.modules.desktop.media.graphics = {
-    enable         = mkBoolOpt false;
-    raster.enable  = mkBoolOpt false;
-    photo.enable   = mkBoolOpt false;
-    vector.enable  = mkBoolOpt false;
+    enable = mkBoolOpt false;
+    raster.enable = mkBoolOpt false;
+    photo.enable = mkBoolOpt false;
+    vector.enable = mkBoolOpt false;
     sprites.enable = mkBoolOpt false;
   };
 
@@ -27,7 +27,7 @@ in {
         qimgv
         # Qt-based image viewer
         nomacs
-      ] else []) ++
+      ] else [ ]) ++
 
       (if cfg.raster.enable then [
         # Free and open source painting application
@@ -37,13 +37,13 @@ in {
         # Content-aware scaling in gimp
         # TODO currently broken
         # gimpPlugins.resynthesizer
-      ] else []) ++
+      ] else [ ]) ++
 
       (if cfg.vector.enable then [
         # Vector graphics editor
         # Install Inkscape from unstable to fix symbolic icons config issue present in version 1.1.x
         inkscape-with-extensions
-      ] else []) ++
+      ] else [ ]) ++
 
       (if cfg.photo.enable then [
         # Virtual lighttable and darkroom for photographers
@@ -52,12 +52,12 @@ in {
         hugin
         # Blends away the seams in a panoramic image mosaic using a multiresolution spline
         enblend-enfuse
-      ] else []) ++
+      ] else [ ]) ++
 
       (if cfg.sprites.enable then [
         # Animated sprite editor & pixel art tool
         aseprite
-      ] else []);
+      ] else [ ]);
 
     home.configFile = mkIf cfg.raster.enable {
       "GIMP/2.10" = { source = "${configDir}/gimp"; recursive = true; };

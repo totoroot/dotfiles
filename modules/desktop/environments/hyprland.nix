@@ -33,20 +33,23 @@ let
     name = "configure-gtk";
     destination = "/bin/configure-gtk";
     executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gesettings/schemas/${schema.name}";
-    in ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-      gesettings set $gnome_schema gtk-theme 'Adwaita'
+    text =
+      let
+        schema = pkgs.gsettings-desktop-schemas;
+        datadir = "${schema}/share/gesettings/schemas/${schema.name}";
+      in
+      ''
+        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+        gnome_schema=org.gnome.desktop.interface
+        gesettings set $gnome_schema gtk-theme 'Adwaita'
       '';
   };
   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
   hyprland = (import flake-compat {
     src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
   }).defaultNix;
-in {
+in
+{
   imports = [
     hyprland.nixosModules.default
   ];
@@ -57,8 +60,8 @@ in {
 
   config = mkIf cfg.enable {
     nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
     programs = {
@@ -122,23 +125,23 @@ in {
     services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
 
     # environment.sessionVariables = rec {
-      # CLUTTER_BACKEND = "wayland";
-      # XDG_SESSION_TYPE = "wayland";
-      # QT_QPA_PLATFORM = "wayland";
-      # SDL_VIDEODRIVER = "wayland";
-      # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      # MOZ_ENABLE_WAYLAND = "1";
-      # WLR_NO_HARDWARE_CURSORS = "1";
-      # WLR_BACKEND = "vulkan";
-      # # GDK_BACKEND = "wayland";
-      # XDG_SESSION_DESKTOP = "Hyprland";
-      # # QT_QPA_PLATFORMTHEME = "gtk2";
-      # # Fix for some Java AWT applications (e.g. Android Studio),
-      # # use this if they aren't displayed properly:
-      # _JAVA_AWT_WM_NONREPARENTING = "1";
-      # # Better Wayland support for Electron-based apps
-      # # https://discourse.nixos.org/t/partly-overriding-a-desktop-entry/20743/2?u=totoroot
-      # NIXOS_OZONE_WL = "1";
+    # CLUTTER_BACKEND = "wayland";
+    # XDG_SESSION_TYPE = "wayland";
+    # QT_QPA_PLATFORM = "wayland";
+    # SDL_VIDEODRIVER = "wayland";
+    # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    # MOZ_ENABLE_WAYLAND = "1";
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    # WLR_BACKEND = "vulkan";
+    # # GDK_BACKEND = "wayland";
+    # XDG_SESSION_DESKTOP = "Hyprland";
+    # # QT_QPA_PLATFORMTHEME = "gtk2";
+    # # Fix for some Java AWT applications (e.g. Android Studio),
+    # # use this if they aren't displayed properly:
+    # _JAVA_AWT_WM_NONREPARENTING = "1";
+    # # Better Wayland support for Electron-based apps
+    # # https://discourse.nixos.org/t/partly-overriding-a-desktop-entry/20743/2?u=totoroot
+    # NIXOS_OZONE_WL = "1";
     # };
 
     services = {
@@ -146,15 +149,15 @@ in {
 
       # Login manager configuration
       # greetd = {
-        # enable = true;
-        # settings = rec {
-          # initial_session = {
-            # command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
-            # # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --time --asterisks --remember";
-            # user = "mathym";
-          # };
-          # default_session = initial_session;
-        # };
+      # enable = true;
+      # settings = rec {
+      # initial_session = {
+      # command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
+      # # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland --time --asterisks --remember";
+      # user = "mathym";
+      # };
+      # default_session = initial_session;
+      # };
       # };
 
       # Use GNOME keyring for WiFi key management
@@ -166,8 +169,8 @@ in {
 
     # List of login environments for greetd
     # environment.etc."greetd/environments".text = ''
-      # Hyprland
-      # zsh
+    # Hyprland
+    # zsh
     # '';
 
     home.configFile = {

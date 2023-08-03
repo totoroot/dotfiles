@@ -178,7 +178,7 @@
       dpi = 200;
       displayManager = {
         autoLogin.enable = true;
-        defaultSession= "plasma";
+        defaultSession = "plasma";
         # Use SDDM as display manager
         sddm = {
           enable = true;
@@ -196,13 +196,13 @@
 
   # Set default monitor
   # environment.variables = rec {
-    # MAIN_MONITOR = "HDMI-A-0";
+  # MAIN_MONITOR = "HDMI-A-0";
   # };
 
   # environment.variables = {
-    # GDK_SCALE = "2";
-    # GDK_DPI_SCALE = "0.5";
-    # QT_SCALE_FACTOR = "2";
-    # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  # GDK_SCALE = "2";
+  # GDK_DPI_SCALE = "0.5";
+  # QT_SCALE_FACTOR = "2";
+  # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   # };
 }

@@ -6,7 +6,7 @@ let cfg = config.modules.editors.helix;
 in {
   options.modules.editors.helix = {
     enable = mkBoolOpt false;
-    desktop.enable  = mkBoolOpt true;
+    desktop.enable = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {

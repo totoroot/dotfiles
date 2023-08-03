@@ -3,24 +3,26 @@
 with lib;
 {
   networking.hosts =
-    let hostConfig = {
-          "192.168.8.1"   = [ "router" ];
-          "192.168.8.8"   = [ "printer" ];
-          "192.168.8.101" = [ "purple" ];
-          "192.168.8.102" = [ "violet" ];
-          "192.168.8.103" = [ "Lakka" ];
-          "192.168.8.104" = [ "phone" ];
-          "192.168.8.105" = [ "steamdeck" ];
-          "192.168.8.106" = [ "raspberry" ];
-          "192.168.8.107" = [ "grape" ];
-          "192.168.8.108" = [ "sangria" ];
-          "192.168.8.109" = [ "mulberry" ];
-          "192.168.8.253" = [ "phone-work" ];
-          "192.168.8.254" = [ "notebook-work" ];
-        };
-        hosts = flatten (attrValues hostConfig);
-        hostName = config.networking.hostName;
-    in mkIf (builtins.elem hostName hosts) hostConfig;
+    let
+      hostConfig = {
+        "192.168.8.1" = [ "router" ];
+        "192.168.8.8" = [ "printer" ];
+        "192.168.8.101" = [ "purple" ];
+        "192.168.8.102" = [ "violet" ];
+        "192.168.8.103" = [ "Lakka" ];
+        "192.168.8.104" = [ "phone" ];
+        "192.168.8.105" = [ "steamdeck" ];
+        "192.168.8.106" = [ "raspberry" ];
+        "192.168.8.107" = [ "grape" ];
+        "192.168.8.108" = [ "sangria" ];
+        "192.168.8.109" = [ "mulberry" ];
+        "192.168.8.253" = [ "phone-work" ];
+        "192.168.8.254" = [ "notebook-work" ];
+      };
+      hosts = flatten (attrValues hostConfig);
+      hostName = config.networking.hostName;
+    in
+    mkIf (builtins.elem hostName hosts) hostConfig;
 
   ## Location config -- since Vienna is my 127.0.0.1
   time.timeZone = mkDefault "Europe/Vienna";
@@ -44,5 +46,5 @@ with lib;
   location = (if config.time.timeZone == "Europe/Vienna" then {
     latitude = 47.064;
     longitude = 15.428;
-  } else {});
+  } else { });
 }

@@ -19,9 +19,9 @@
   modules = {
     theme.active = "dracula";
     editors = {
-       default = "micro";
-       helix.enable = true;
-       micro.enable = true;
+      default = "micro";
+      helix.enable = true;
+      micro.enable = true;
       vim.enable = true;
     };
     shell = {
@@ -57,7 +57,7 @@
   networking = {
     hostName = "mulberry";
     extraHosts = ''
-    127.0.0.1 mulberry.local
+      127.0.0.1 mulberry.local
     '';
     firewall.allowedTCPPorts = [ 22 ];
   };

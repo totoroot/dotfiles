@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      rustup    # toolchain installer
+      rustup # toolchain installer
     ];
 
     env.RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
@@ -27,9 +27,9 @@ in {
     env.PATH = [ "$CARGO_HOME/bin" ];
 
     environment.shellAliases = {
-      rs  = "rustc";
+      rs = "rustc";
       rsp = "rustup";
-      ca  = "cargo";
+      ca = "cargo";
     };
   };
 }

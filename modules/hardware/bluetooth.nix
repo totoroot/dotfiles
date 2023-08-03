@@ -2,9 +2,11 @@
 
 with lib;
 with lib.my;
-let hwCfg = config.modules.hardware;
-    cfg = hwCfg.bluetooth;
-in {
+let
+  hwCfg = config.modules.hardware;
+  cfg = hwCfg.bluetooth;
+in
+{
   options.modules.hardware.bluetooth = {
     enable = mkBoolOpt false;
     audio.enable = mkBoolOpt true;
@@ -26,7 +28,7 @@ in {
         # support, so it must be selected here.
         # Also install bluetooth cli tools to make it usable.
         # Enable additional codecs
-        extraModules = [];
+        extraModules = [ ];
       };
 
       hardware.bluetooth.settings = {

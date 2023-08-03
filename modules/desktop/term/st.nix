@@ -20,7 +20,7 @@ in {
     '';
 
     user.packages = with pkgs; [
-      xst  # st + nice-to-have extensions
+      xst # st + nice-to-have extensions
       (makeDesktopItem {
         name = "xst";
         desktopName = "Suckless Terminal";

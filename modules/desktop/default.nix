@@ -21,11 +21,11 @@ in {
         assertion =
           let srv = config.services;
           in srv.xserver.enable ||
-             srv.sway.enable ||
-             !(anyAttrs
-               (_n: v: isAttrs v &&
-                      anyAttrs (_n: v: isAttrs v && v.enable))
-               cfg);
+            srv.sway.enable ||
+            !(anyAttrs
+              (_n: v: isAttrs v &&
+                anyAttrs (_n: v: isAttrs v && v.enable))
+              cfg);
         message = "Can't enable a desktop app without a desktop environment";
       }
     ];

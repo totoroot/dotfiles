@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot = {
@@ -83,7 +84,7 @@
   services.xserver.videoDrivers = [ "intel" ];
 
   services.tlp.enable = ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
-                                         || !config.services.power-profiles-daemon.enable);
+    || !config.services.power-profiles-daemon.enable);
 
   services.fstrim.enable = true;
 

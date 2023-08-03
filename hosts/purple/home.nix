@@ -1,4 +1,4 @@
-{ config, home-manager, ...}:
+{ config, home-manager, ... }:
 
 {
   home.file = {

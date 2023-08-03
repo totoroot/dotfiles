@@ -4,22 +4,23 @@ with lib;
 with lib.my;
 {
   options = with types; {
-    user = mkOpt attrs {};
+    user = mkOpt attrs { };
 
     home = {
-      file          = mkOpt' attrs {} "Files to place directly in $HOME";
-      configFile    = mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
-      dataFile      = mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
-      dconfSettings = mkOpt' attrs {} "Configuration of dconf settings";
+      file = mkOpt' attrs { } "Files to place directly in $HOME";
+      configFile = mkOpt' attrs { } "Files to place in $XDG_CONFIG_HOME";
+      dataFile = mkOpt' attrs { } "Files to place in $XDG_DATA_HOME";
+      dconfSettings = mkOpt' attrs { } "Configuration of dconf settings";
     };
 
     env = mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
       apply = mapAttrs
-        (_n: v: if isList v
-               then concatMapStringsSep ":" (x: toString x) v
-               else (toString v));
-      default = {};
+        (_n: v:
+          if isList v
+          then concatMapStringsSep ":" (x: toString x) v
+          else (toString v));
+      default = { };
       description = "TODO";
     };
   };
@@ -31,8 +32,8 @@ with lib.my;
       extraGroups = [ "wheel" ];
       isNormalUser = true;
       name = let name = builtins.getEnv "USER"; in
-             if elem name [ "" "root" ]
-             then "mathym" else name;
+        if elem name [ "" "root" ]
+        then "mathym" else name;
       uid = 1000;
     };
 
@@ -58,7 +59,7 @@ with lib.my;
         };
         xdg = {
           configFile = mkAliasDefinitions options.home.configFile;
-          dataFile   = mkAliasDefinitions options.home.dataFile;
+          dataFile = mkAliasDefinitions options.home.dataFile;
         };
         dconf = {
           settings = mkAliasDefinitions options.home.dconfSettings;

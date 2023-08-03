@@ -16,7 +16,7 @@
     settings = {
       # binaryCaches = [ "https://cache.nixos.org/" ];
       # binaryCachePublicKeys = [
-        # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       # ];
       # trustedUsers = [ "@admin" ];
       trusted-substituters = [ "https://devenv.cachix.org" ];
@@ -61,7 +61,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-   	# Firefox
+    # Firefox
     # firefox-bin
   ];
 
@@ -70,14 +70,14 @@
 
   # # Create symlinks for nix-darwin packages in ~/Applications
   # system.activationScripts.applications.text = pkgs.lib.mkForce (
-    # ''
-      # echo "setting up ~/Applications..." >&2
-      # rm -rf ~/Applications/NixDarwin
-      # mkdir -p ~/Applications/NixDarwin
-      # for app in $(find ${config.system.build.applications}/Applications -maxdepth 1 -type l); do
-        # src="$(/usr/bin/stat -f%Y "$app")"
-        # cp -r "$src" ~/Applications/NixDarwin
-      # done
-    # ''
+  # ''
+  # echo "setting up ~/Applications..." >&2
+  # rm -rf ~/Applications/NixDarwin
+  # mkdir -p ~/Applications/NixDarwin
+  # for app in $(find ${config.system.build.applications}/Applications -maxdepth 1 -type l); do
+  # src="$(/usr/bin/stat -f%Y "$app")"
+  # cp -r "$src" ~/Applications/NixDarwin
+  # done
+  # ''
   # );
 }

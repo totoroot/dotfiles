@@ -19,8 +19,8 @@ in {
       # Fast and modern static website engine
       hugo
     ];
-    env.GOPATH  = "$HOME/.go";
-    env.GOBIN   = "$HOME/.go/bin";
-    env.PATH    = [ "$GOBIN" ];
+    env.GOPATH = "$HOME/.go";
+    env.GOBIN = "$HOME/.go/bin";
+    env.PATH = [ "$GOBIN" ];
   };
 }

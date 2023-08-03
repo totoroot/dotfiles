@@ -15,8 +15,8 @@ in {
         exts.pass-otp
         exts.pass-genphrase
       ] ++ (if config.modules.shell.gnupg.enable
-            then [ exts.pass-tomb ]
-            else [])))
+      then [ exts.pass-tomb ]
+      else [ ])))
     ];
     env.PASSWORD_STORE_DIR = cfg.passwordStoreDir;
   };

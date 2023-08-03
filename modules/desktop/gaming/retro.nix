@@ -20,7 +20,7 @@ in {
       retroarch
     ];
 
-  # Create directory for retro games
+    # Create directory for retro games
     home.file = {
       "games/retro/.use".text = "retro games";
     };

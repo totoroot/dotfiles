@@ -119,7 +119,7 @@
     # rustc
     # rustfmt
 
-	# ## Kubernetes
+    # ## Kubernetes
     # # Kubernetes CLI
     # krew
     # # Customization of Kubernetes YAML configurations
@@ -138,7 +138,7 @@
     # helmfile
     # # CLI client for Flux, the GitOps Kubernetes operator
     # fluxctl
-    
+
     # Vector graphics editor
     # inkscape-with-extensions
     # A terminal based graphical activity monitor inspired by gtop and vtop
@@ -150,23 +150,23 @@
 
   # # Create symlinks for home-manager packages in ~/Applications
   # home.activation = {
-    # copyApplications = let
-      # apps = pkgs.buildEnv {
-        # name = "home-manager-applications";
-        # paths = config.home.packages;
-        # pathsToLink = "/Applications";
-      # };
-    # in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      # baseDir="$HOME/Applications/HomeManager"
-      # if [ -d "$baseDir" ]; then
-        # rm -rf "$baseDir"
-      # fi
-      # mkdir -p "$baseDir"
-      # for appFile in ${apps}/Applications/*; do
-        # target="$baseDir/$(basename "$appFile")"
-        # $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-        # $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-      # done
-    # '';
+  # copyApplications = let
+  # apps = pkgs.buildEnv {
+  # name = "home-manager-applications";
+  # paths = config.home.packages;
+  # pathsToLink = "/Applications";
+  # };
+  # in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  # baseDir="$HOME/Applications/HomeManager"
+  # if [ -d "$baseDir" ]; then
+  # rm -rf "$baseDir"
+  # fi
+  # mkdir -p "$baseDir"
+  # for appFile in ${apps}/Applications/*; do
+  # target="$baseDir/$(basename "$appFile")"
+  # $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
+  # $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
+  # done
+  # '';
   # };
 }

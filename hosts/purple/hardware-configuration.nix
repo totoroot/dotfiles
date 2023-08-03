@@ -18,9 +18,9 @@
         "uas"
         "sd_mod"
       ];
-      kernelModules = [];
+      kernelModules = [ ];
     };
-    extraModulePackages = [];
+    extraModulePackages = [ ];
     kernelModules = [
       "kvm-amd"
       "coretemp"

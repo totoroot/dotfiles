@@ -18,7 +18,8 @@ let
     # Check whether host is idling
     echo "$load_1 < $load_15" | ${pkgs.bc}/bin/bc -l
   '';
-in {
+in
+{
   options.modules.services.clone-system-disk = {
     enable = mkBoolOpt false;
   };

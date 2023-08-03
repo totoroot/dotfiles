@@ -6,7 +6,7 @@ let cfg = config.modules.editors.vim;
 in {
   options.modules.editors.vim = {
     enable = mkBoolOpt false;
-    desktop.enable  = mkBoolOpt true;
+    desktop.enable = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {
@@ -15,12 +15,12 @@ in {
         editorconfig-core-c
         # Vim text editor fork focused on extensibility and agility
         neovim
-      ] else []) ++
+      ] else [ ]) ++
 
       (if cfg.desktop.enable then [
         # Simple graphical user interface for Neovim
         neovide
-      ] else []);
+      ] else [ ]);
 
     # This is for non-neovim, so it loads my nvim config
     # env.VIMINIT = "let \\$MYVIMRC='\\$XDG_CONFIG_HOME/nvim/init.vim' | source \\$MYVIMRC";

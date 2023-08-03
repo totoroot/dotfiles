@@ -19,9 +19,9 @@
   modules = {
     theme.active = "dracula";
     editors = {
-       default = "micro";
-       helix.enable = true;
-       micro.enable = true;
+      default = "micro";
+      helix.enable = true;
+      micro.enable = true;
       vim.enable = true;
     };
     shell = {
@@ -58,7 +58,7 @@
   networking = {
     hostName = "raspberry";
     extraHosts = ''
-    127.0.0.1 raspberry.local
+      127.0.0.1 raspberry.local
     '';
     firewall.allowedTCPPorts = [ 22 ];
   };

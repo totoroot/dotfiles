@@ -159,7 +159,7 @@
       gitea.enable = false;
       jellyfin.enable = false;
       k8s.enable = true;
-      nginx.enable  = false;
+      nginx.enable = false;
       vpn.enable = false;
       ssh.enable = true;
       syncthing.enable = false;
@@ -198,8 +198,8 @@
   };
 
   # nix.settings = {
-    # cores = "";
-    # max-jobs = "";
+  # cores = "";
+  # max-jobs = "";
   # }
 
   # NixOS networking configuration
@@ -236,7 +236,7 @@
     usbutils
     lshw
     inxi
-    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     # cloud-sql-proxy
     gcsfuse
     postgresql
@@ -269,7 +269,7 @@
   };
 
   # home.env = {
-    # GCLOUD_PROJECT = "smaxtec-system";
+  # GCLOUD_PROJECT = "smaxtec-system";
   # };
 
   home.configFile = {

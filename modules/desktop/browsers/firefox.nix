@@ -8,14 +8,14 @@ in {
     enable = mkBoolOpt false;
     profileName = mkOpt types.str config.user.name;
 
-    settings = mkOpt' (attrsOf (oneOf [ bool int str ])) {} ''
+    settings = mkOpt' (attrsOf (oneOf [ bool int str ])) { } ''
       Firefox preferences to set in <filename>user.js</filename>
     '';
     extraConfig = mkOpt' lines "" ''
       Extra lines to add to <filename>user.js</filename>
     '';
 
-    userChrome  = mkOpt' lines "" "CSS Styles for Firefox's interface";
+    userChrome = mkOpt' lines "" "CSS Styles for Firefox's interface";
     userContent = mkOpt' lines "" "Global CSS Styles for websites";
   };
 
@@ -134,7 +134,7 @@ in {
         '';
 
         "${cfgPath}/${cfg.profileName}.default/user.js" =
-          mkIf (cfg.settings != {} || cfg.extraConfig != "") {
+          mkIf (cfg.settings != { } || cfg.extraConfig != "") {
             text = ''
               ${concatStrings (mapAttrsToList (name: value: ''
                 user_pref("${name}", ${builtins.toJSON value});

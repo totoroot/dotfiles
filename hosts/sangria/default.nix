@@ -153,7 +153,7 @@
       gitea.enable = false;
       jellyfin.enable = true;
       k8s.enable = false;
-      nginx.enable  = false;
+      nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
@@ -191,7 +191,7 @@
     };
   };
 
-    # NixOS networking configuration
+  # NixOS networking configuration
   networking = {
     networkmanager = {
       enable = true;

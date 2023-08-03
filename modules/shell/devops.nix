@@ -7,7 +7,7 @@ with lib.my;
 let cfg = config.modules.shell.devops;
 in {
   options.modules.shell.devops = {
-    enable  = mkBoolOpt false;
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {

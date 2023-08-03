@@ -13,13 +13,13 @@ in {
         theme = {
           # wallpaper = mkDefault "$DOTFILES/config/wallpapers/nord.png";
           gtk = {
-            theme       = "Nord";
-            iconTheme   = "Papirus";
+            theme = "Nord";
+            iconTheme = "Papirus";
             cursorTheme = "Nord-cursors";
           };
         };
 
-        shell.zsh.rcFiles  = [ ./config/zsh/prompt.zsh ];
+        shell.zsh.rcFiles = [ ./config/zsh/prompt.zsh ];
         desktop.browsers = {
           firefox.userChrome = concatMapStringsSep "\n" readFile [
             ./config/firefox/userChrome.css
@@ -49,8 +49,8 @@ in {
       };
 
       fonts.fontconfig.defaultFonts = {
-        sansSerif = ["Fira Sans"];
-        monospace = ["Mononoki"];
+        sansSerif = [ "Fira Sans" ];
+        monospace = [ "Mononoki" ];
       };
 
 

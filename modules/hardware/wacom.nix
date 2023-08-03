@@ -12,11 +12,11 @@ in
   config = mkIf cfg.enable {
     # Works for my Wacom Intuos Pro Medium on NixOS 20.09
     services.xserver.wacom.enable = true;
-    
+
     environment.systemPackages = with pkgs; [
       libwacom
     ];
-    
+
     # Lock tablet to main display
     system.userActivationScripts.wacom = ''
       if xinput list --id-only "Wacom Intuos Pro M Pen stylus" 2>&1 >/dev/null; then

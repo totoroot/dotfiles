@@ -65,7 +65,7 @@ in {
           killer = "/run/current-system/systemd/bin/systemctl suspend";
           killtime = 30;
           # extraOptions = [
-            # "-detectsleep"
+          # "-detectsleep"
           # ];
         };
         windowManager.bspwm.enable = true;

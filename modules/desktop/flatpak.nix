@@ -17,7 +17,7 @@ in {
 
     # Enable flatpak to install packages from flathub
     services.flatpak.enable = true;
-    
+
     # Enable portal for xdg files for packages installed with flatpak
     xdg.portal = {
       enable = true;

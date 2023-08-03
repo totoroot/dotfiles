@@ -9,8 +9,8 @@
 
   ## Modules
   modules = {
-    desktop = {};
-    dev = {};
+    desktop = { };
+    dev = { };
     editors = {
       default = "micro";
       vim.enable = true;
@@ -38,7 +38,7 @@
       lf.enable = true;
       aerc.enable = false;
       pass.enable = false;
-      taskell.enable  = false;
+      taskell.enable = false;
       zsh.enable = true;
       cli.enable = true;
     };
@@ -48,12 +48,12 @@
       jellyfin.enable = false;
       kdeconnect.enable = false;
       k8s.enable = true;
-      nginx.enable  = false;
+      nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;
       tor.enable = true;
       syncthing.enable = true;
-      transmission.enable     = false;
+      transmission.enable = false;
     };
   };
 
