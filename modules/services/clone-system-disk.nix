@@ -5,9 +5,9 @@ with lib.my;
 let
   cfg = config.modules.services.clone-system-disk;
   unitName = "clone-system-disk";
-  targetDisk = "/dev/sda";
   sourceDisk = "/dev/mmcblk0";
-  cloneCommand = "dd if=/dev/mmcblk0 bs=8M conv=noerror,sync | pv | sudo dd of=/dev/sda";
+  targetDisk = "/dev/sda";
+  cloneCommand = "dd if=${sourceDisk} bs=8M conv=noerror,sync | pv | sudo dd of=${targetDisk}";
   idleCheckScript = ''
     #!/usr/bin/env sh
 
@@ -38,7 +38,7 @@ in {
         ExecStart = ''
           ${cloneCommand}
         '';
-        RequiresMountsFor = "/dev/sda /dev/mmcblk0";
+        RequiresMountsFor = "${sourceDisk} ${targetDisk}";
       };
     };
   };
