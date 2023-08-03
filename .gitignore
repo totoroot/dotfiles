@@ -5,3 +5,9 @@ config/aerc/accounts.conf
 config/ssh/
 
 secrets
+
+# Devenv
+.direnv*
+.devenv*
+devenv.local.nix
+.pre-commit-config.yaml
