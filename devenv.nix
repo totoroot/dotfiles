@@ -19,6 +19,7 @@
   pre-commit = {
     hooks = {
       deadnix.enable = true;
+      nixpkgs-fmt.enable = true;
       markdownlint.enable = false;
       shellcheck.enable = true;
     };
