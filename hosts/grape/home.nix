@@ -1,10 +1,10 @@
 { ... }:
 {
   home.file = {
-    "dev/.use".text = "development";
-    "dls/.use".text = "downloads";
-    "nts/".source = "/home/mathym/sync/notes/";
-    "tmp/.use".text = "temporary files";
-    "trash/".source = "/home/mathym/.local/share/Trash/files/";
+    "Development/.use".text = "development";
+    "Downloads/.use".text = "downloads";
+    "Notes/".source = "/home/mathym/Sync/notes/";
+    "Temporary/.use".text = "temporary files";
+    "Trash/".source = "/home/mathym/.local/share/Trash/files/";
   };
 }

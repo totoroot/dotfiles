@@ -1,4 +1,4 @@
-{ options, config, inputs, lib, pkgs, hyprland, ... }:
+{ options, config, lib, pkgs, ... }:
 
 with lib;
 with lib.my;

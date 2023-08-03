@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   services.syncthing = {
     # Overrides any devices added or deleted through the WebUI

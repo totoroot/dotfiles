@@ -2,8 +2,7 @@
 
 with lib;
 with lib.my;
-let system = "x86_64-linux";
-in {
+{
   mkHost = path: attrs @ { system ? system, ... }:
     nixosSystem {
       inherit system;
@@ -13,13 +12,13 @@ in {
           nixpkgs.pkgs = pkgs;
           networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
         }
-        (filterAttrs (n: v: !elem n [ "system" ]) attrs)
+        (filterAttrs (n: _v: !elem n [ "system" ]) attrs)
         ../.
         (import path)
       ];
     };
 
-  mapHosts = dir: attrs @ { system ? system, ... }:
+  mapHosts = dir: attrs @ { ... }:
     mapModules dir
       (hostPath: mkHost hostPath attrs);
 }

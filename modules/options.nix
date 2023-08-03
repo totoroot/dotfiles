@@ -16,7 +16,7 @@ with lib.my;
     env = mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
       apply = mapAttrs
-        (n: v: if isList v
+        (_n: v: if isList v
                then concatMapStringsSep ":" (x: toString x) v
                else (toString v));
       default = {};

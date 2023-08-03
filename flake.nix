@@ -60,16 +60,15 @@
     devenv.url = "github:cachix/devenv/v0.6.3";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, nixos-hardware, home-manager, darwin, nur, hyprland, plasma-manager, devenv, ... }:
+  outputs = inputs @ { self, nixpkgs, nixos, nixos-unstable, home-manager, darwin, devenv, ... }:
     let
-      inherit (builtins) baseNameOf;
-      inherit (lib) nixosSystem mkIf removeSuffix attrNames attrValues;
-      inherit (lib.my) dotFilesDir mapModules mapModulesRec mapHosts;
+      inherit (lib) attrValues;
+      inherit (lib.my) mapModules mapModulesRec mapHosts;
 
       system = "x86_64-linux";
 
       lib = nixos.lib.extend
-        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
+        (self: _super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
 
       mkPkgs = pkgs: extraOverlays: import pkgs {
         inherit system;
@@ -84,7 +83,7 @@
       lib = lib.my;
 
       overlay =
-        final: prev: {
+        _final: _prev: {
           inherit unstable;
           # Add overlays for flakes
           user = self.packages.${system};

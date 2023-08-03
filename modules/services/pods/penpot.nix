@@ -1,7 +1,7 @@
 # Based on penpot's docker-compose.yaml example
 # https://github.com/penpot/penpot/blob/main/docker/images/docker-compose.yaml
 
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, ... }:
 
 with lib;
 with lib.my;

@@ -3,7 +3,7 @@
 # For testing or building software on other OSes. If I find out how to get macOS
 # on qemu/libvirt I'd be happy to leave virtualbox behind.
 
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, ... }:
 
 with lib;
 with lib.my;

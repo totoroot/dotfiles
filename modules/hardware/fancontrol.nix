@@ -1,6 +1,6 @@
 # modules/hardware/fancontrol.nix
 
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, ... }:
 
 with lib;
 with lib.my;

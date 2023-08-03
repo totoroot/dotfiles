@@ -1,6 +1,6 @@
 # modules/themes/quack/default.nix --- a regal dracula-inspired theme
 
-{ options, config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 with lib.my;

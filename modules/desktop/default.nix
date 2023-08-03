@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -14,7 +14,7 @@ in {
 
     assertions = [
       {
-        assertion = (countAttrs (n: v: n == "enable" && value) cfg) < 2;
+        assertion = (countAttrs (n: _v: n == "enable" && value) cfg) < 2;
         message = "Can't have more than one desktop environment enabled at a time";
       }
       {
@@ -23,8 +23,8 @@ in {
           in srv.xserver.enable ||
              srv.sway.enable ||
              !(anyAttrs
-               (n: v: isAttrs v &&
-                      anyAttrs (n: v: isAttrs v && v.enable))
+               (_n: v: isAttrs v &&
+                      anyAttrs (_n: v: isAttrs v && v.enable))
                cfg);
         message = "Can't enable a desktop app without a desktop environment";
       }

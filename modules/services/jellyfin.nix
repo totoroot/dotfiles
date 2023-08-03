@@ -1,6 +1,6 @@
 # Finally, a decent open alternative to Plex!
 
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, ... }:
 
 with lib;
 with lib.my;
