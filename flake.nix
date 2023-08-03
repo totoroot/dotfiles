@@ -61,7 +61,7 @@
     devenv.url = "github:cachix/devenv/v0.6.3";
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, nixpkgs-fork, home-manager, darwin, devenv, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs-fork, home-manager, darwin, devenv, ... }:
     let
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
