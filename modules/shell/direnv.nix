@@ -15,5 +15,7 @@ in {
       devenv
     ];
     modules.shell.zsh.rcInit = ''eval "$(direnv hook zsh)"'';
+
+    env.DIRENV_LOG_FORMAT = "";
   };
 }
