@@ -5,7 +5,11 @@
 
   packages = with pkgs; [
     git
+    # Packages for hooks
     deadnix
+    mdl
+    nixpkgs-fmt
+    shellcheck
   ];
 
   scripts.greeting.exec = "echo $GREET";
@@ -19,8 +23,8 @@
   pre-commit = {
     hooks = {
       deadnix.enable = true;
-      nixpkgs-fmt.enable = true;
       markdownlint.enable = false;
+      nixpkgs-fmt.enable = true;
       shellcheck.enable = true;
     };
     settings = {
