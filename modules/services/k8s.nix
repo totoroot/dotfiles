@@ -16,9 +16,15 @@ in {
       krew
       # Utility to quickly switch between K8s clusters (kubectx) and namespaces (kubens)
       kubectx
+      # Customization of K8s YAML configurations
+      kustomize
       # Package manager for K8s charts
       kubernetes-helm
-      # Deploy helm charts to defferent environments with ease
+      # Helm plugin that shows a diff
+      kubernetes-helmPlugins.helm-diff
+      # Helm plugin that helps manage secrets
+      kubernetes-helmPlugins.helm-secrets
+      # Deploy helm charts to different environments with ease
       helmfile
       # Translate docker-compose files into K8s resources
       kompose
@@ -26,6 +32,8 @@ in {
       kubecolor
       # Tool that makes it easy to run Kubernetes locally
       minikube
+      # Kubernetes CLI To Manage Your Clusters In Style
+      k9s
     ];
 
     # Set the K8s config location
@@ -35,5 +43,10 @@ in {
 
     # Source a bunch of aliases for handling K8s without getting finger cramps
     modules.shell.zsh.rcFiles = [ "${configDir}/k8s/aliases.zsh" ];
+
+    home.configFile = {
+      "k9s/config.yml".source = "${configDir}/k9s/config.yml";
+      "k9s/skin.yml".source = "${configDir}/k9s/skin.yml";
+    };
   };
 }

@@ -1,0 +1,51 @@
+k9s:
+  refreshRate: 2
+  maxConnRetry: 5
+  enableMouse: false
+  headless: false
+  logoless: false
+  crumbsless: false
+  readOnly: false
+  noExitOnCtrlC: false
+  noIcons: false
+  skipLatestRevCheck: false
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: 300
+    fullScreenLogs: false
+    textWrap: false
+    showTime: false
+  currentContext: gke_raw-data-logger-394910_europe-west1-d_radar
+  currentCluster: gke_raw-data-logger-394910_europe-west1-d_radar
+  clusters:
+    gke_raw-data-logger-394910_europe-west1-d_radar:
+      namespace:
+        active: kafka
+        lockFavorites: false
+        favorites:
+        - all
+        - kafka
+        - default
+      view:
+        active: crds
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+  thresholds:
+    cpu:
+      critical: 90
+      warn: 70
+    memory:
+      critical: 90
+      warn: 70
+  screenDumpDir: /tmp/k9s-screens-mathym
