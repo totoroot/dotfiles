@@ -63,6 +63,10 @@ in {
       speedread
       # Download manager (not only for youtube)
       yt-dlp
+      # A modern watch command
+      viddy
+      # Shell history with encrypted synchronisation between machines
+      atuin
 
       ## Fetch programs
       # Fast, highly customizable system info script
@@ -114,6 +118,7 @@ in {
         recursive = true;
         source = "${configDir}/markdownlint";
       };
+      "viddy.toml".source = "${configDir}/viddy/viddy.toml";
     };
 
     environment.shellAliases = {
@@ -124,6 +129,8 @@ in {
       dui = "ncdu --color dark -rr -x --exclude .git";
       mdl = "mdl -c ${configDir}/markdownlint/mdlrc";
       markdownlint = "mdl -c ${configDir}/markdownlint/mdlrc";
+      vd = "(){viddy -d -n 1 --shell zsh  \"$(which $1 | cut -d' ' -f 4-)\${@:2}\";}";
+      colorpick = "print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o";
     };
   };
 }
