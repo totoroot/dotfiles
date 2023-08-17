@@ -37,8 +37,6 @@ alias ccd='(){ mkdir -p "$1"; cd "$1";}'
 alias clipin='xclip -sel clip -i'
 alias clipout='xclip -sel clip -o'
 
-alias colorpick="print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o"
-
 # ugly yet beautiful...hacky for sure
 alias nixdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
 alias nixinst='(){ nix-env -iA nixos.$1 ;}'
