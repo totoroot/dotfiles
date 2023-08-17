@@ -59,6 +59,9 @@
 
     # Development environments in seconds
     devenv.url = "github:cachix/devenv/v0.6.3";
+
+    # Graphical App Store for Nix/NixOS
+    nix-software-center.url = "github:vlinkz/nix-software-center";
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs-fork, home-manager, darwin, devenv, ... }:
