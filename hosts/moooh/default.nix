@@ -274,6 +274,8 @@
 
   home.configFile = {
     "git/work/config".text = ''
+      [core]
+          sshCommand = ssh -i ~/.ssh/work -F /dev/null
       [user]
           email = matthias.thym@smaxtec.com
     '';
