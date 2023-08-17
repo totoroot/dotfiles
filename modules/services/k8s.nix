@@ -48,5 +48,10 @@ in {
       "k9s/config.yml".source = "${configDir}/k9s/config.yml";
       "k9s/skin.yml".source = "${configDir}/k9s/skin.yml";
     };
+
+    environment.shellAliases = {
+      hf = "helmfile";
+      hfi = "helmfile --interactive";
+    };
   };
 }
