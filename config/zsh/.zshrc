@@ -61,5 +61,5 @@ if [[ $TERM != dumb ]]; then
   autopair-init
 
   # If you have host-local configuration, this is where you'd put it
-  [ -f ~/.mac-zshrc ] && source ~/.mac-zshrc
+  [ -f ~/.zshrc ] && source ~/.zshrc
 fi
