@@ -122,7 +122,7 @@
     shell = {
       archive.enable = true;
       borg.enable = true;
-      direnv.enable = true;
+      devenv.enable = true;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;

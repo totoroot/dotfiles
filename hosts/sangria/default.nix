@@ -127,7 +127,7 @@
       archive.enable = true;
       borg.enable = true;
       devops.enable = false;
-      direnv.enable = false;
+      devenv.enable = false;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;

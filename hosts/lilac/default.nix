@@ -31,7 +31,7 @@
       archive.enable = false;
       borg.enable = true;
       clipboard.enable = false;
-      direnv.enable = false;
+      devenv.enable = false;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
