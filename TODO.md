@@ -41,6 +41,7 @@
     - [ ] Disable pulseaudio
     - [ ] Test OBS screen recording
 - Fix home-manager issues with Trolltech.conf and gtk2 conf
+- Replace zgen with zgenom
 
 ## Completed
 
