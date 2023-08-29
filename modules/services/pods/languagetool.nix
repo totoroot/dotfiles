@@ -13,7 +13,7 @@ in {
       backend = "docker";
       containers."languagetool" = {
         autoStart = true;
-        image = "erikvl87/languagetool:5.8";
+        image = "erikvl87/languagetool:6.1";
         ports = [
           "8081:8010"
         ];
@@ -25,7 +25,7 @@ in {
           # Minimal Java heap size
           Java_Xms = "256m";
           # Maximum Java heap size
-          Java_Xmx = "1g";
+          Java_Xmx = "2g";
         };
       };
     };
