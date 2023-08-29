@@ -16,11 +16,11 @@ if ! zgen saved; then
   echo "Initializing zgen"
   zgen load hlissner/zsh-autopair autopair.zsh
   zgen load zsh-users/zsh-history-substring-search
-  zgen load zdharma/history-search-multi-word
+  zgen load zdharma/history-search-multi-word main
   zgen load zsh-users/zsh-completions src
   zgen load junegunn/fzf shell
   export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true && zgen load trystan2k/zsh-tab-title
-  [ -z "$SSH_CONNECTION" ] && zgen load zdharma/fast-syntax-highlighting
+  [ -z "$SSH_CONNECTION" ] && zgen load zdharma/fast-syntax-highlighting main
   zgen save
 fi
 
