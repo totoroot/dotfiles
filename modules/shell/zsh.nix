@@ -62,8 +62,8 @@ in {
     env = {
       ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
       ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
-      ZGEN_DIR = "$XDG_DATA_HOME/zsh";
-      ZGEN_SOURCE = "$ZGEN_DIR/zgen.zsh";
+      ZGENOM_DIR = "$XDG_DATA_HOME/zsh";
+      ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
       FZF_DEFAULT_OPTS = "--reverse --ansi --inline-info --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4";
     };
 
@@ -91,6 +91,6 @@ in {
       '';
     };
 
-    system.userActivationScripts.cleanupZgen = "rm -fv $XDG_CACHE_HOME/zsh/*";
+    system.userActivationScripts.cleanupZgenom = "rm -fv $XDG_CACHE_HOME/zsh/*";
   };
 }

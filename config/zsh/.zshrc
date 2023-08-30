@@ -1,27 +1,27 @@
-export ZGEN_DIR=~/.zgen
-export ZGEN_SOURCE=~/.zgen/zgen.zsh
+export ZGENOM_DIR=~/.zgenom
+export ZGENOM_SOURCE=~/.zgenom/zgenom.zsh
 export ZDOTDIR=~/.config/zsh
 
-if [ ! -d "$ZGEN_DIR" ]; then
+if [ ! -d "$ZGENOM_DIR" ]; then
   if nc -zw1 ifconfig.me 443; then
-    git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
+    git clone https://github.com/jandamm/zgenom "$ZGENOM_DIR"
   else
-    echo "No internet connectivity. Cannot initialize zgen"
+    echo "No internet connectivity. Cannot initialize zgenom"
     exit 1
   fi
 fi
 
-source $ZGEN_SOURCE
-if ! zgen saved; then
-  echo "Initializing zgen"
-  zgen load hlissner/zsh-autopair autopair.zsh
-  zgen load zsh-users/zsh-history-substring-search
-  zgen load zdharma/history-search-multi-word main
-  zgen load zsh-users/zsh-completions src
-  zgen load junegunn/fzf shell
-  export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true && zgen load trystan2k/zsh-tab-title
-  [ -z "$SSH_CONNECTION" ] && zgen load zdharma/fast-syntax-highlighting main
-  zgen save
+source $ZGENOM_SOURCE
+if ! zgenom saved; then
+  echo "Initializing zgenom"
+  zgenom load hlissner/zsh-autopair autopair.zsh
+  zgenom load zsh-users/zsh-history-substring-search
+  zgenom load zdharma/history-search-multi-word main
+  zgenom load zsh-users/zsh-completions src
+  zgenom load junegunn/fzf shell
+  export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true && zgenom load trystan2k/zsh-tab-title
+  [ -z "$SSH_CONNECTION" ] && zgenom load zdharma/fast-syntax-highlighting main
+  zgenom save
 fi
 
 source $ZDOTDIR/config.zsh

@@ -41,7 +41,6 @@
     - [ ] Disable pulseaudio
     - [ ] Test OBS screen recording
 - Fix home-manager issues with Trolltech.conf and gtk2 conf
-- Replace zgen with zgenom
 
 ## Completed
 
@@ -50,3 +49,4 @@
 - Install XFCE on purple
 - Unify audio modules
 - Enable HDMI audio output on grape
+- Replace zgen with zgenom

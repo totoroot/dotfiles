@@ -25,7 +25,7 @@ In case you need help getting started with NixOS and want to use these dotfiles 
 
 | | |
 |-|-|
-| **Shell:** | zsh + zgen |
+| **Shell:** | zsh + zgenom |
 | **DM:** | lightdm + lightdm-mini-greeter |
 | **WM:** | bspwm + polybar |
 | **Editor:** | [micro] (and occasionally nvim) |
