@@ -23,8 +23,6 @@ alias mkdir='mkdir -p'
 alias wget='wget -c'
 alias cat='bat -Pp'
 alias search='grep -ir --exclude-dir=".git" --exclude="*.html" --exclude="*.css" --exclude="*.scss" --exclude="*.js" --exclude="*.json" --exclude="~/.config/dotfiles/config/eurkey/*"'
-alias find='fd'
-alias replace='sd'
 
 alias cdd='cd $XDG_CONFIG_HOME/dotfiles'
 alias cds='cd /etc/nixos'
