@@ -81,7 +81,7 @@ in {
       # Matrix effect
       gomatrix
       # Freakin rainbow terminal effect
-      lolcat
+      clolcat
       # Data encryption effect
       nms
       # Cli PDF processor
@@ -130,6 +130,7 @@ in {
       mdl = "mdl -c ${configDir}/markdownlint/mdlrc";
       markdownlint = "mdl -c ${configDir}/markdownlint/mdlrc";
       vd = "(){viddy -d -n 1 --shell zsh  \"$(which $1 | cut -d' ' -f 4-)\${@:2}\";}";
+      lolcat = "clolcat";
       colorpick = "print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o";
     };
   };

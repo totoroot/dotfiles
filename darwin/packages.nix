@@ -56,7 +56,7 @@
     # A terminal file manager written in Go and heavily inspired by ranger
     lf
     # A rainbow version of cat
-    lolcat
+    clolcat
     # Modern and intuitive terminal-based text editor
     micro
     # General-purpose media player, fork of MPlayer and mplayer2
