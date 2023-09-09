@@ -56,7 +56,7 @@
         delta.enable = false;
         discord.enable = false;
         jitsi.enable = false;
-        matrix.enable = false;
+        matrix.enable = true;
         signal.enable = false;
         telegram.enable = false;
       };
