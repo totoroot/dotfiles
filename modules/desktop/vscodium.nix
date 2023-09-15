@@ -37,6 +37,8 @@ in {
           tomoki1207.pdf
           # See Git Blame info in status bar
           waderyan.gitblame
+          # Hard wrap
+          stkb.rewrap
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
           name = "vscode-reveal";
           publisher = "evilz";
