@@ -17,7 +17,7 @@
     # Command line tool for transferring files with URL syntax
     curl
     # Replacement for 'ls' written in Rust
-    exa
+    eza
     # A tool to read, write and edit EXIF meta information
     exiftool
     # A simple, fast and user-friendly alternative to find

@@ -44,7 +44,7 @@ in {
       # cat(1) clone with syntax highlighting and Git integration
       bat
       # Replacement for 'ls' written in Rust
-      exa
+      eza
       # Quick command-line access to files and directories for POSIX shells
       fasd
       # Intuitive sed alternative
