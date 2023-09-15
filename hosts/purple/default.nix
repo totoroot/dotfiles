@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -194,6 +194,10 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    usbutils
+  ];
 
   # NixOS networking configuration
   networking = {
