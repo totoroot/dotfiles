@@ -16,11 +16,11 @@ if ! zgenom saved; then
   echo "Initializing zgenom"
   zgenom load hlissner/zsh-autopair autopair.zsh
   zgenom load zsh-users/zsh-history-substring-search
-  zgenom load zdharma/history-search-multi-word main
+  zgenom load totoroot/history-search-multi-word
   zgenom load zsh-users/zsh-completions src
   zgenom load junegunn/fzf shell
   export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true && zgenom load trystan2k/zsh-tab-title
-  [ -z "$SSH_CONNECTION" ] && zgenom load zdharma/fast-syntax-highlighting main
+  [ -z "$SSH_CONNECTION" ] && zgenom load totoroot/fast-syntax-highlighting
   zgenom save
 fi
 
