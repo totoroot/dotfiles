@@ -17,6 +17,8 @@
         "sd_mod"
         "thunderbolt"
         "vmd"
+        "aesni_intel"
+        "cryptd"
       ];
       kernelModules = [
         "dm-snapshot"
