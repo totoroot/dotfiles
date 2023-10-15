@@ -80,6 +80,7 @@ with inputs;
       systemd-boot = {
         enable = mkDefault true;
         configurationLimit = mkDefault 10;
+        consoleMode = mkDefault "auto";
       };
       efi.canTouchEfiVariables = mkDefault true;
     };
