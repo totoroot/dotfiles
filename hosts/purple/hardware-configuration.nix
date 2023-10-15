@@ -17,9 +17,18 @@
         "usbhid"
         "uas"
         "sd_mod"
+        "cryptd"
       ];
-      kernelModules = [ ];
+      kernelModules = [ "dm-snapshot" ];
+      luks.devices = {
+        "home" = {
+          device = "/dev/disk/by-uuid/914272cf-c2ab-41ff-8bd6-2c0dc0bed305";
+          preLVM = true;
+        };
+      };
+      supportedFilesystems = [ "btrfs" ];
     };
+    supportedFilesystems = [ "btrfs" ];
     extraModulePackages = [ ];
     kernelModules = [
       "kvm-amd"

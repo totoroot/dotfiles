@@ -20,71 +20,71 @@
       fsType = "vfat";
     };
     "/home" = {
-      device = "/dev/disk/by-label/home";
-      fsType = "ext4";
-      options = [ "noatime" ];
+      device = "/dev/disk/by-uuid/1f70506a-3629-473e-8bf3-b5033ce42450";
+      fsType = "btrfs";
+      options = [ "noatime" "recovery" ];
     };
     "/mnt/backup" = {
       device = "/dev/disk/by-label/backup";
       fsType = "ext4";
       options = [ "noatime" ];
     };
-    "/mnt/violet" = {
-      device = "mathym@violet:";
-      fsType = "sshfs";
-      options = [
-        # Filesystem options
-        # For non-root access
-        "allow_other"
-        # This is a network fs
-        "_netdev"
-        # Mount on demand
-        "x-systemd.automount"
-        # Prevent long "start job is running" wait times
-        "x-systemd.device-timeoup=1ms"
-        "follow_symlinks"
-        # SSH options
-        # Handle connection drops
-        "reconnect"
-        # Keep connections alive
-        "ServerAliveInterval=15"
-        "ServerAliveCountMax=3"
-        "IdentityFile=/home/mathym/.ssh/purple"
-        # Troubleshoot connection
-        # "sshfs_debug"
-        # Debugging options
-        "debug"
-        "loglevel=debug"
-      ];
-    };
-    "/mnt/photos" = {
-      device = "mathym@violet:/mnt/photos";
-      fsType = "sshfs";
-      options = [
-        # Filesystem options
-        # For non-root access
-        "allow_other"
-        # This is a network fs
-        "_netdev"
-        # Mount on demand
-        "x-systemd.automount"
-        # Prevent long "start job is running" wait times
-        "x-systemd.device-timeoup=1ms"
-        "follow_symlinks"
-        # SSH options
-        # Handle connection drops
-        "reconnect"
-        # Keep connections alive
-        "ServerAliveInterval=15"
-        "ServerAliveCountMax=3"
-        "IdentityFile=/home/mathym/.ssh/purple"
-        # Troubleshoot connection
-        # "sshfs_debug"
-        # Debugging options
-        "debug"
-        "loglevel=debug"
-      ];
-    };
+    # "/mnt/violet" = {
+    #   device = "mathym@violet:";
+    #   fsType = "sshfs";
+    #   options = [
+    #     # Filesystem options
+    #     # For non-root access
+    #     "allow_other"
+    #     # This is a network fs
+    #     "_netdev"
+    #     # Mount on demand
+    #     "x-systemd.automount"
+    #     # Prevent long "start job is running" wait times
+    #     "x-systemd.device-timeoup=1ms"
+    #     "follow_symlinks"
+    #     # SSH options
+    #     # Handle connection drops
+    #     "reconnect"
+    #     # Keep connections alive
+    #     "ServerAliveInterval=15"
+    #     "ServerAliveCountMax=3"
+    #     "IdentityFile=/home/mathym/.ssh/purple"
+    #     # Troubleshoot connection
+    #     # "sshfs_debug"
+    #     # Debugging options
+    #     "debug"
+    #     "loglevel=debug"
+    #   ];
+    # };
+    # "/mnt/photos" = {
+    #   device = "mathym@violet:/mnt/photos";
+    #   fsType = "sshfs";
+    #   options = [
+    #     # Filesystem options
+    #     # For non-root access
+    #     "allow_other"
+    #     # This is a network fs
+    #     "_netdev"
+    #     # Mount on demand
+    #     "x-systemd.automount"
+    #     # Prevent long "start job is running" wait times
+    #     "x-systemd.device-timeoup=1ms"
+    #     "follow_symlinks"
+    #     # SSH options
+    #     # Handle connection drops
+    #     "reconnect"
+    #     # Keep connections alive
+    #     "ServerAliveInterval=15"
+    #     "ServerAliveCountMax=3"
+    #     "IdentityFile=/home/mathym/.ssh/purple"
+    #     # Troubleshoot connection
+    #     # "sshfs_debug"
+    #     # Debugging options
+    #     "debug"
+    #     "loglevel=debug"
+    #   ];
+    # };
     # "/mnt/music" = {
     # device = "mathym@violet:/mnt/music";
     # fsType = "sshfs";
