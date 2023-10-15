@@ -15,9 +15,9 @@ in {
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         # OpenCL ICD definition for AMD GPUs using the ROCm stack
-        rocm-opencl-icd
+        rocmPackages.clr.icd
         # OpenCL runtime for AMD GPUs, part of the ROCm stack
-        rocm-opencl-runtime
+        rocmPackages.clr
         # AMD Open Source Driver For Vulkan
         amdvlk
         # Hardware-accelerated video playpack
@@ -45,17 +45,15 @@ in {
       # Application to read current clocks of AMD Radeon cards
       radeon-profile
       # ROCm Application for Reporting System Info
-      rocminfo
+      rocmPackages.rocminfo
       # System management interface for AMD GPUs supported by ROCm
-      rocm-smi
+      rocmPackages.rocm-smi
       # Platform runtime for ROCm
-      rocm-runtime
-      # OpenCL runtime for AMD GPUs, part of the ROCm stack
-      rocm-opencl-runtime
+      rocmPackages.rocm-runtime
       # CMake modules for common build tasks for the ROCm stack
-      rocm-cmake
+      rocmPackages.rocm-cmake
       # Radeon open compute thunk interface
-      rocm-thunk
+      rocmPackages.rocm-thunk
     ];
   };
 }
