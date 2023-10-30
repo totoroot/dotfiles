@@ -4,7 +4,7 @@ export ZDOTDIR=~/.config/zsh
 
 if [ ! -d "$ZGENOM_DIR" ]; then
   if nc -zw1 ifconfig.me 443; then
-    git clone https://github.com/jandamm/zgenom "$ZGENOM_DIR"
+    git clone https://github.com/jandamm/zgenom.git "$ZGENOM_DIR"
   else
     echo "No internet connectivity. Cannot initialize zgenom"
     exit 1
