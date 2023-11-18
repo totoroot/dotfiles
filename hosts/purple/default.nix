@@ -12,7 +12,7 @@
     theme.active = "dracula";
     desktop = {
       environments = {
-        bspwm.enable = true;
+        bspwm.enable = false;
         hyprland.enable = true;
         lxqt.enable = false;
         plasma.enable = true;
