@@ -48,7 +48,7 @@
   };
 
   # Set stateVersion
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 
   environment.systemPackages = with pkgs; [
     # Includes commands like `vcgencmd` to measure temperature and CPU frequency
