@@ -10,21 +10,9 @@
       # GRUB is enabled by default
       grub.enable = false;
       # Enables the generation of /boot/extlinux/extlinux.conf
-      generic-extlinux-compatible.enable = false;
+      generic-extlinux-compatible.enable = true;
       systemd-boot.enable = false;
       efi.canTouchEfiVariables = false;
-      # Config for Raspberry Pis
-      raspberryPi = {
-        enable = true;
-        version = 3;
-        uboot = {
-          enable = true;
-          configurationLimit = 10;
-        };
-        firmwareConfig = ''
-          gpu_mem=256
-        '';
-      };
     };
     # Use the latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
