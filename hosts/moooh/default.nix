@@ -130,20 +130,21 @@
       wacom.enable = true;
     };
     shell = {
+      aerc.enable = false;
       archive.enable = true;
       borg.enable = true;
-      devops.enable = true;
+      cli.enable = true;
       devenv.enable = true;
+      devops.enable = true;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
       lf.enable = true;
-      aerc.enable = false;
+      nu.enable = true;
       pass.enable = true;
       taskell.enable = false;
+      utilities.enable = true;
       zsh.enable = true;
-      nu.enable = true;
-      cli.enable = true;
     };
     services = {
       containerization.enable = true;

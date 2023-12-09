@@ -28,19 +28,20 @@
       wacom.enable = false;
     };
     shell = {
+      aerc.enable = false;
       archive.enable = false;
       borg.enable = true;
+      cli.enable = false;
       clipboard.enable = false;
       devenv.enable = false;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
       lf.enable = true;
-      aerc.enable = false;
       pass.enable = false;
       taskell.enable = false;
+      utilities.enable = true;
       zsh.enable = true;
-      cli.enable = true;
     };
     services = {
       containers.enable = true;

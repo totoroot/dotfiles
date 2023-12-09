@@ -120,18 +120,19 @@
       wacom.enable = true;
     };
     shell = {
+      aerc.enable = true;
       archive.enable = true;
       borg.enable = true;
+      cli.enable = true;
       devenv.enable = true;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
       lf.enable = true;
-      aerc.enable = true;
       pass.enable = true;
       taskell.enable = true;
+      utilities.enable = true;
       zsh.enable = true;
-      cli.enable = true;
     };
     services = {
       containerization.enable = true;

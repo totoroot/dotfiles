@@ -25,20 +25,21 @@
       vim.enable = true;
     };
     shell = {
+      aerc.enable = false;
       archive.enable = true;
       borg.enable = true;
-      devops.enable = false;
+      cli.enable = false;
       devenv.enable = false;
+      devops.enable = false;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
       lf.enable = true;
-      aerc.enable = false;
+      nu.enable = true;
       pass.enable = true;
       taskell.enable = false;
+      utilities.enable = true;
       zsh.enable = true;
-      nu.enable = true;
-      cli.enable = true;
     };
     services = {
       ssh.enable = true;

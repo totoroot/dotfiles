@@ -10,9 +10,6 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      ## System utilities
-      # Command line tool for the desktop trash can
-      trash-cli
       # Create and view interactive cheatsheets
       cheat
       # Graphical activity monitor
@@ -35,10 +32,6 @@ in {
       ethtool
       # Implements Wake On LAN functionality in a small program
       wol
-      # Create/modify zip archives
-      zip
-      # Extract zip archives
-      unzip
       # Metadata tool
       exiftool
       # Multi-protocol download utility
@@ -49,7 +42,7 @@ in {
       light
       # X11 color picker
       colorpicker
-      # small utility to create JSON objects
+      # Small utility to create JSON objects
       jo
       # Faster implementation of the lightweight JSON processor
       gojq
@@ -67,33 +60,6 @@ in {
       viddy
       # Shell history with encrypted synchronisation between machines
       atuin
-
-      ## Fetch programs
-      # Fast, highly customizable system info script
-      neofetch
-      # Fetch written in posix shell without any external commands
-      fet-sh
-      # Pretty system information tool written in POSIX sh
-      pfetch
-      # Yet another *nix distro fetching program, but less complex
-      disfetch
-      ## Other fun stuff
-      # Matrix effect
-      gomatrix
-      # Freakin rainbow terminal effect
-      clolcat
-      # Data encryption effect
-      nms
-      # Cli PDF processor
-      pdfcpu
-      # Code statistics
-      tokei
-      # Corrects fuckups in console
-      thefuck
-      # Network discovery utility
-      nmap
-      # Animated pipes terminal screensaver
-      pipes
       # Conversion between markup formats
       pandoc
       # Shell script analysis tool
@@ -106,6 +72,33 @@ in {
       ncdu
       # A tool to check markdown files and flag style issues
       mdl
+      # Cli PDF processor
+      pdfcpu
+      # Code statistics
+      tokei
+
+      ## Fetch programs
+      # Fast, highly customizable system info script
+      neofetch
+      # Fetch written in posix shell without any external commands
+      fet-sh
+      # Pretty system information tool written in POSIX sh
+      pfetch
+      # Yet another *nix distro fetching program, but less complex
+      disfetch
+
+      ## Other fun stuff
+      # Matrix effect
+      gomatrix
+      # Freakin rainbow terminal effect
+      clolcat
+      # Data encryption effect
+      nms
+      # Corrects fuckups in console
+      thefuck
+      # Network discovery utility
+      pipes
+
     ];
 
     user.extraGroups = [ "admin" ];
