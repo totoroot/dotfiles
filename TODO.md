@@ -29,9 +29,9 @@
 - Fix dolphin no found error on Hyprland
 - Fix Nextcloud Client window autoclose on Hyprland
 - Make disk clone of raspberry and mulberry after successful boot into new generation
-- Fix random sleep issues on purple
 - Fix "warning: optionsDocBook is deprecated since 23.11 and will be removed in 24.05"
 - Fix "warning: mdadm: Neither MAILADDR nor PROGRAM has been set. This will cause the `mdmon` service to crash."
+- Run ssh-setup script after install to add host key to Codeberg and update remote
 
 ## In Progress
 
@@ -46,6 +46,7 @@
 
 ## Completed
 
+- Fix random sleep issues on purple (due to picom)
 - Install Dracula KDE theme with NixOS config
 - Install Plasma on purple
 - Install XFCE on purple
