@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./home.nix
+    ./mounts.nix
   ];
 
   modules = {

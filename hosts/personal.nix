@@ -18,6 +18,7 @@ with lib;
         "192.168.8.109" = [ "mulberry" ];
         "192.168.8.253" = [ "phone-work" ];
         "192.168.8.254" = [ "notebook-work" ];
+        "93.177.65.164" = [ "jam" ];
       };
       hosts = flatten (attrValues hostConfig);
       hostName = config.networking.hostName;
