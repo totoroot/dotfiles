@@ -7,7 +7,7 @@ let
   unitName = "clone-system-disk";
   sourceDisk = "/dev/mmcblk0";
   targetDisk = "/dev/sda";
-  cloneCommand = "dd if=${sourceDisk} bs=8M conv=noerror,sync | pv | sudo dd of=${targetDisk}";
+  cloneCommand = "dd if=${sourceDisk} bs=8M conv=noerror,sync | ${pkgs.pv}/bin/pv | dd of=${targetDisk}";
   idleCheckScript = ''
     #!/usr/bin/env sh
 
@@ -30,15 +30,15 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStartPre = ''
-          if ! ${idleCheckScript} ; then
+        ExecStartPre = [(pkgs.writeShellScript "check-idle" ''
+          if [[ ! ${idleCheckScript} ]]; then
             echo "Host is busy, not starting service"
             exit 1
           fi
-        '';
-        ExecStart = ''
+        '')];
+        ExecStart = [(pkgs.writeShellScript "clone-disk" ''
           ${cloneCommand}
-        '';
+        '')];
         RequiresMountsFor = "${sourceDisk} ${targetDisk}";
       };
     };
