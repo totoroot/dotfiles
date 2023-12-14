@@ -121,7 +121,7 @@
       fancontrol.enable = false;
       image.enable = true;
       keebs.enable = true;
-      mcus.enable = true;
+      mcus.enable = false;
       nvidia.enable = false;
       radeon.enable = false;
       printers.enable = true;
@@ -164,6 +164,7 @@
       vpn.enable = false;
       ssh.enable = true;
       syncthing.enable = false;
+      tailscale.enable = true;
       transmission.enable = false;
     };
   };

@@ -11,6 +11,10 @@ if [ ! -d "$ZGENOM_DIR" ]; then
   fi
 fi
 
+export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
+export ZSH_TAB_TITLE_ONLY_FOLDER=true
+export ZSH_TAB_TITLE_CONCAT_FOLDER_PROCESS=true
+
 source $ZGENOM_SOURCE
 if ! zgenom saved; then
   echo "Initializing zgenom"
@@ -19,7 +23,7 @@ if ! zgenom saved; then
   zgenom load totoroot/history-search-multi-word
   zgenom load zsh-users/zsh-completions src
   zgenom load junegunn/fzf shell
-  export ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true && zgenom load trystan2k/zsh-tab-title
+  zgenom load trystan2k/zsh-tab-title
   [ -z "$SSH_CONNECTION" ] && zgenom load totoroot/fast-syntax-highlighting
   zgenom save
 fi

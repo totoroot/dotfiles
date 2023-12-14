@@ -98,7 +98,8 @@ in {
       thefuck
       # Network discovery utility
       pipes
-
+      # A fast, async, stream-based link checker written in Rust
+      lychee
     ];
 
     user.extraGroups = [ "admin" ];

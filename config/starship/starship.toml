@@ -8,6 +8,8 @@ $git_status\
 $cmd_duration\
 $line_break\
 $python\
+$kubernetes\
+$package\
 $character"""
 
 [directory]
@@ -26,7 +28,7 @@ style = "bright-black"
 format = "[[( ⊙ $untracked $modified $staged $renamed $deleted $conflicted)](218) ($ahead_behind$stashed)]($style)"
 style = "cyan"
 conflicted = "⁈"
-untracked = "⊕"
+untracked = "?"
 modified = "⊚"
 staged = "ᐃ"
 renamed = "ᐁ"
@@ -41,6 +43,27 @@ style = "bright-black"
 format = "[$duration]($style) "
 style = "yellow"
 
+[package]
+disabled = false
+symbol = '📦'
+format = '$symbol $version'
+
 [python]
-format = "[$virtualenv]($style) "
+disabled = false
+symbol = '🐍'
+format = "$symbol [$virtualenv]($style) "
 style = "bright-black"
+
+[kubernetes]
+disabled = false
+symbol = '⛵'
+format = '$symbol [$namespace](purple) on [$context](blue) '
+# detect_files = ['.k8s']
+[kubernetes.context_aliases]
+'gke_dev-smaxtec-system_europe-west1-d_dev-cluster' = 'dev'
+'gke_smaxtec-system_europe-west1-d_kuhbernetes1' = 'kuhbernetes1'
+'gke_smaxtec-system_europe-west1-d_pants' = 'pants'
+'gke_smaxtec-system_europe-west1-d_pins' = 'pins'
+'gke_raw-data-logger-394910_europe-west1-d_radar' = 'radar'
+'gke_dev-smaxtec-system_europe-west1-d_smaxtec-simulator' = 'simulator'
+[kubernetes.user_aliases]

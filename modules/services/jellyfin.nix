@@ -1,5 +1,3 @@
-# Finally, a decent open alternative to Plex!
-
 { options, config, lib, ... }:
 
 with lib;
@@ -11,11 +9,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.jellyfin.enable = true;
-
-    networking.firewall = {
-      allowedTCPPorts = [ 8096 ];
-      allowedUDPPorts = [ 8096 ];
+    services = {
+      jellyfin = {
+        enable = true;
+        openFirewall = true;
+      };
+      jellyseerr.enable = true;
     };
 
     user.extraGroups = [ "jellyfin" ];

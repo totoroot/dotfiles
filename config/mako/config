@@ -19,7 +19,8 @@ max-history=8
 # on-button-middle=
 on-button-right=dismiss
 ### Action triggered with notification; useful for playing notification sounds
-on-notify=exec mpv --no-video $DOTFILES/config/mako/quack.mp3
+# paplay --volume takes 0...65536 as argument -> 52429 -> 80%
+on-notify=exec paplay $DOTFILES/config/mako/bell.mp3 --volume 52429
 
 [urgency=low]
 border-color=#bd93f9

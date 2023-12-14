@@ -47,13 +47,19 @@ If you've never before installed NixOS, make sure to read through the [official 
 
 2. Boot into the installer.
 
+3. Create the mount directories with `mkdir -p /mnt/boot`.
+
 3. Do your partitions and mount your root to `/mnt`. I recommend first doing `sudo su` for ease of use. Be careful with those labels though.
 
-5. Run `nixos-generate-config --root /mnt` to produce the default `configuration.nix` and `hardware-configuration.nix`.
+4. Check whether everything is mounted correctly by running `lsblk`. Check disk labels by running `blkid`.
 
-4. Make sure you've got a working network connection and clone the repo with `git clone https://codeberg.org/totoroot/dotfiles /mnt/etc/nixos`.
+4. Install `git` with `nix-env -iA nixos.git`.
 
-6. In case this fails, `git` might not be installed. Run `nix-env -iA nixos.git` to install and repeat step 4.
+5. Make sure you've got a working network connection and clone the repo with `git clone https://codeberg.org/totoroot/dotfiles /mnt/etc/nixos`.
+
+6. Think of a good name for your new host and create a directory for it with `mkdir -p /mnt/etc/nixos/hosts/<new-host>`.
+
+5. Run `nixos-generate-config --root /mnt/etc/nixos/hosts/<new-host>` to produce the default `configuration.nix` and `hardware-configuration.nix`.
 
 7. For a new host enter the cloned repo and duplicate an existing configuration (`cd nixos && cp -r hosts/purple hosts/<new-host>`) and make adjustments with `nano hosts/<new-host>/default.nix`.
 
@@ -63,7 +69,7 @@ If you've never before installed NixOS, make sure to read through the [official 
 
 9. Add nixPkgs channel and install flakes `nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && nix-channel --update && nix-env -iA nixpkgs.nixFlakes`.
 
-10. Install NixOS with configuration for host "purple" `nixos-install --root /mnt --flake /mnt/etc/nixos#purple`.
+10. Install NixOS with configuration for host "purple" `nixos-install --root /mnt --flake /mnt/etc/nixos#<new-host> --impure`.
 
 11. Reboot!
 

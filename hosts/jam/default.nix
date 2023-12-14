@@ -31,7 +31,12 @@
       zsh.enable = true;
     };
     services = {
+      headscale.enable = true;
+      homepage.enable = true;
+      nginx.enable = true;
       ssh.enable = true;
+      uptime-kuma.enable = true;
+      tailscale.enable = true;
     };
   };
 
@@ -67,5 +72,8 @@
       address = "fe80::1";
       interface = "ens3";
     };
+    nameservers = [
+      "9.9.9.9"
+    ];
   };
 }

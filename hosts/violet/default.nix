@@ -37,8 +37,9 @@
       kvantum.enable = false;
       mail.enable = true;
       mapping.enable = false;
-      nextcloud.enable = false;
+      nextcloud.enable = true;
       plank.enable = true;
+      polish.enable = true;
       rofi.enable = true;
       screenshot.enable = true;
       torrent.enable = false;
@@ -102,7 +103,7 @@
       scala.enable = false;
     };
     editors = {
-      default = "hx";
+      default = "micro";
       helix.enable = true;
       micro.enable = true;
       vim.enable = true;
@@ -130,31 +131,36 @@
       iperf.enable = true;
       lf.enable = true;
       pass.enable = true;
-      taskell.enable = true;
+      taskell.enable = false;
       utilities.enable = true;
       zsh.enable = true;
     };
     services = {
       containerization.enable = true;
-      containers = {
-        snowflake.enable = true;
-      };
+      snowflake.enable = true;
       pods = {
+        home-assistant.enable = true;
         languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
-        vaultwarden.enable = false;
       };
       gitea.enable = false;
-      jellyfin.enable = false;
+      grafana.enable = true;
+      jellyfin.enable = true;
       k8s.enable = false;
       nginx.enable = false;
-      vpn.enable = true;
+      vaultwarden.enable = true;
+      vpn.enable = false;
+      postgresql.enable = true;
+      recipes.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
+      tailscale.enable = true;
       transmission.enable = false;
     };
   };
+
+  system.stateVersion = "23.11";
 
   # NixOS program modules
   programs = {
@@ -164,9 +170,15 @@
     ssh.startAgent = true;
   };
 
-  # Set default monitor
-  environment.variables = rec {
-    MAIN_MONITOR = "HDMI-A-0";
+  # NixOS networking configuration
+  networking = {
+    networkmanager.enable = true;
+    useDHCP = false;
+    # Allow local network access
+    # firewall.extraCommands = ''
+    #   iptables -A nixos-fw -p tcp --source 192.168.8.0/24 --dport 0:9999 -j nixos-fw-accept
+    #   iptables -A nixos-fw -p udp --source 192.168.8.0/24 --dport 0:9999 -j nixos-fw-accept
+    # '';
   };
 
   # NixOS service configuration
@@ -176,7 +188,7 @@
       # Optionally set more keymaps and use them with bin/keymapswitcher
       layout = "eu, at";
       # Force DPI to optimize for ultrawide screen
-      dpi = 200;
+      # dpi = 200;
       displayManager = {
         autoLogin.enable = true;
         defaultSession = "plasma";
@@ -187,12 +199,6 @@
         };
       };
     };
-  };
-
-  # NixOS networking configuration
-  networking = {
-    networkmanager.enable = true;
-    useDHCP = false;
   };
 
   # Set default monitor

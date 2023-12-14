@@ -13,7 +13,7 @@ in {
       # Modern, hackable, featureful, OpenGL based terminal emulator
       kitty
       # Graphical pdf (and epub, cbz, ...) reader that works inside the kitty terminal
-      termpdfpy
+      # termpdfpy
     ];
 
     home.configFile = {

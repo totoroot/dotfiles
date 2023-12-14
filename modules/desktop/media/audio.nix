@@ -15,7 +15,7 @@ in {
       # Terminal-based music player, library, and streaming audio server
       musikcube
       # Small, fast and powerful console music player
-      cmus
+      # cmus
       # Modern music player for GNOME
       lollypop
       # Official MusicBrainz music tagger

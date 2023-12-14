@@ -55,34 +55,17 @@
     libraspberrypi
   ];
 
-  services = {
-    home-assistant = {
-      enable = true;
-      configDir = "/var/lib/home-assistant";
-      extraComponents = [
-        esphome
-        homeassistant
-      ]
-        };
-    };
+  # Basic networking
+  networking = {
+    hostName = "raspberry";
+    extraHosts = ''
+      127.0.0.1 raspberry.local
+    '';
+    firewall.allowedTCPPorts = [ 22 ];
+  };
 
-    # Basic networking
-    networking = {
-      hostName = "raspberry";
-      extraHosts = ''
-        127.0.0.1 raspberry.local
-      '';
-      firewall.allowedTCPPorts = [ 22 ];
-    };
-
-    # Limit update size/frequency of rebuilds
-    # Also preserve space on SD card
-    # See https://mastodon.online/@nomeata/109915786344697931
-    documentation.nixos.enable = false;
-
-    # NixOS networking configuration
-    networking = {
-      networkmanager.enable = true;
-      useDHCP = false;
-    };
-  }
+  # Limit update size/frequency of rebuilds
+  # Also preserve space on SD card
+  # See https://mastodon.online/@nomeata/109915786344697931
+  documentation.nixos.enable = false;
+}

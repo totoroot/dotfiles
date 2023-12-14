@@ -26,6 +26,9 @@ in {
       terraform
       # CLI tool to generate terraform files from existing infrastructure (reverse Terraform). Infrastructure to Code
       terraformer
+      # Like cURL, but for gRPC: Command-line tool for interacting with gRPC servers
+      grpcurl
+      google-cloud-bigtable-tool
     ];
   };
 }

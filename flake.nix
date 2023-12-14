@@ -20,7 +20,7 @@
     # Nix packages
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
 
     # Nix hardware tweaks

@@ -16,9 +16,9 @@ in {
         image = "ghcr.io/analogj/scrutiny:master-omnibus";
         ports = [
           # scrutiny webapp
-          "8097:8080"
+          "9080:8080"
           # InfluxDB admin panel
-          "8096:8086"
+          "9081:8086"
         ];
         volumes = [
           "/var/cache/scrutiny/config:/opt/scrutiny/config"
@@ -33,8 +33,6 @@ in {
           "--device=/dev/nvme0"
           "--device=/dev/nvme1"
           "--device=/dev/sda"
-          "--device=/dev/sdb"
-          "--device=/dev/sdc"
         ];
       };
     };

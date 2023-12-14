@@ -21,9 +21,9 @@ in {
       # Package manager for K8s charts
       kubernetes-helm
       # Helm plugin that shows a diff
-      kubernetes-helmPlugins.helm-diff
+      #kubernetes-helmPlugins.helm-diff
       # Helm plugin that helps manage secrets
-      kubernetes-helmPlugins.helm-secrets
+      #kubernetes-helmPlugins.helm-secrets
       # Deploy helm charts to different environments with ease
       helmfile
       # Translate docker-compose files into K8s resources
