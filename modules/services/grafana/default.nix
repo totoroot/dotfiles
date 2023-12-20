@@ -67,6 +67,20 @@ in
             enabledCollectors = [ "systemd" ];
           };
         };
+        scrapeConfigs = [
+          {
+            job_name = "fail2ban jam";
+            static_configs = [{
+              targets = [ "100.64.0.5:9191" ];
+            }];
+          }
+          {
+            job_name = "node";
+            static_configs = [{
+              targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+            }];
+          }
+        ];
       };
 
       loki = {
