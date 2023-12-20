@@ -25,6 +25,9 @@ let
         - ::1
         - 100.64.0.5
         - fd7a:115c:a1e0::5
+      use_x_forwarded_for: true
+      ip_ban_enabled: true
+      login_attempts_threshold: 10
 
     # Home configuration
     homeassistant:
@@ -74,7 +77,9 @@ in
       home-assistant = {
         image = "ghcr.io/home-assistant/home-assistant:${version}";
         volumes = [
-          "${home-assistant-config}:/config/configuration.yaml"
+          # "${home-assistant-config}:/config/configuration.yaml"
+          "/var/lib/home-assistant:/config"
+          "/etc/localtime:/etc/localtime:ro"
         ];
         extraOptions = [
           "--device=/dev/ttyUSB0"
