@@ -30,9 +30,6 @@ in {
           "SYS_RAWIO"
           "--cap-add"
           "SYS_ADMIN"
-          "--device=/dev/nvme0"
-          "--device=/dev/nvme1"
-          "--device=/dev/sda"
         ];
       };
     };
