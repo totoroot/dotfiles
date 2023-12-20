@@ -11,10 +11,11 @@ let
 
   jellyfinPort = 8096;
   grafanaPort = 3000;
-  prometheusPort = 7500;
+  prometheusPort = 9090;
   lokiPort = 3100;
   vaultwardenPort = 8222;
   hassPort = 7901;
+  scrutinyPort = 9080;
 in
 {
   options.modules.services.nginx = {
@@ -80,6 +81,14 @@ in
             proxyWebsockets = true;
           };
         };
+        "festplatten.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString scrutinyPort}";
+            proxyWebsockets = true;
+          };
+        };
         "hass.${domain}" = {
           enableACME = true;
           forceSSL = true;
@@ -122,6 +131,9 @@ in
           email = "${adminEmail}";
         };
         "vault.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "festplatten.${domain}" = {
           email = "${adminEmail}";
         };
         "hass.${domain}" = {
