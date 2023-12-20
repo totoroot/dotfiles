@@ -16,8 +16,8 @@
         bspwm.enable = false;
         hyprland.enable = false;
         lxqt.enable = false;
-        plasma.enable = true;
-        xfce.enable = true;
+        plasma.enable = false;
+        xfce.enable = false;
       };
       anki.enable = false;
       backup.enable = true;
@@ -181,35 +181,35 @@
     # '';
   };
 
-  # NixOS service configuration
-  services = {
-    xserver = {
-      # Set eurkey as default layout
-      # Optionally set more keymaps and use them with bin/keymapswitcher
-      layout = "eu, at";
-      # Force DPI to optimize for ultrawide screen
-      # dpi = 200;
-      displayManager = {
-        autoLogin.enable = true;
-        defaultSession = "plasma";
-        # Use SDDM as display manager
-        sddm = {
-          enable = true;
-          theme = "Dracula";
-        };
-      };
-    };
-  };
-
-  # Set default monitor
-  # environment.variables = rec {
-  # MAIN_MONITOR = "HDMI-A-0";
-  # };
-
-  # environment.variables = {
-  # GDK_SCALE = "2";
-  # GDK_DPI_SCALE = "0.5";
-  # QT_SCALE_FACTOR = "2";
-  # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-  # };
+  #   # NixOS service configuration
+  #   services = {
+  #     xserver = {
+  #       # Set eurkey as default layout
+  #       # Optionally set more keymaps and use them with bin/keymapswitcher
+  #       layout = "eu, at";
+  #       # Force DPI to optimize for ultrawide screen
+  #       # dpi = 200;
+  #       displayManager = {
+  #         autoLogin.enable = true;
+  #         defaultSession = "plasma";
+  #         # Use SDDM as display manager
+  #         sddm = {
+  #           enable = true;
+  #           theme = "Dracula";
+  #         };
+  #       };
+  #     };
+  #   };
+  #
+  #   # Set default monitor
+  #   environment.variables = rec {
+  #   MAIN_MONITOR = "HDMI-A-0";
+  #   };
+  #
+  #   environment.variables = {
+  #     GDK_SCALE = "2";
+  #     GDK_DPI_SCALE = "0.5";
+  #     QT_SCALE_FACTOR = "2";
+  #     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  #   };
 }
