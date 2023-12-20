@@ -31,6 +31,7 @@
       zsh.enable = true;
     };
     services = {
+      fail2ban.enable = true;
       headscale.enable = true;
       homepage.enable = true;
       nginx.enable = true;

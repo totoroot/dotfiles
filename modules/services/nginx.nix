@@ -25,6 +25,9 @@ in
     services.nginx = {
       enable = true;
 
+      # Enable the NGINX status page
+      statusPage = true;
+
       # Use recommended settings
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
