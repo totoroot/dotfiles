@@ -14,7 +14,7 @@ let
   prometheusPort = 9090;
   lokiPort = 3100;
   vaultwardenPort = 8222;
-  hassPort = 7901;
+  hassPort = 8123;
   scrutinyPort = 9080;
 in
 {
