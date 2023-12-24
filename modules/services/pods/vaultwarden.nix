@@ -15,10 +15,10 @@ in {
         autoStart = true;
         image = "vaultwarden/server:latest";
         ports = [
-          "8082:8082"
+          "8222:8082"
         ];
         volumes = [
-          "/var/cache/vaultwarden/data:/data"
+          "/var/cache/vaultwarden:/data"
         ];
         environment = {
           WEBSOCKET_ENABLED = "true";

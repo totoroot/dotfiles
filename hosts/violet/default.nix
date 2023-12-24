@@ -117,8 +117,8 @@
       nvidia.enable = false;
       printers.enable = true;
       sensors.enable = true;
-      steamcon.enable = true;
-      wacom.enable = true;
+      steamcon.enable = false;
+      wacom.enable = false;
     };
     shell = {
       aerc.enable = true;
@@ -143,13 +143,14 @@
         languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
+        vaultwarden.enable = true;
       };
       gitea.enable = false;
       grafana.enable = true;
       jellyfin.enable = true;
       k8s.enable = false;
       nginx.enable = false;
-      vaultwarden.enable = true;
+      vaultwarden.enable = false;
       vpn.enable = false;
       postgresql.enable = true;
       recipes.enable = true;
