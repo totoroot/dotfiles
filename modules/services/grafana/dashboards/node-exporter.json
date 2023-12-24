@@ -12407,8 +12407,8 @@
       "30d"
     ]
   },
-  "timezone": "browser",
-  "title": "Node Exporter Full",
+  "timezone": "",
+  "title": "Node Exporter",
   "uid": "rYdddlPWk",
   "version": 1
 }

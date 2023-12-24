@@ -38,6 +38,164 @@
           "color": {
             "mode": "thresholds"
           },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "Down"
+                },
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "Up"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 203,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "f2b_up{instance=~\"$instance\"}",
+          "interval": "",
+          "legendFormat": "Up ({{instance}})",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Fail2Ban Up",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 204,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "f2b_errors{instance=~\"$instance\"}",
+          "interval": "",
+          "legendFormat": "{{type}} ({{instance}})",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Fail2Ban Exporter Errors",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "custom": {
             "align": "auto",
             "cellOptions": {
@@ -75,7 +233,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 5
       },
       "id": 206,
       "options": {
@@ -99,11 +257,11 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f2b_config_jail_max_retries{instance=~\"$instance\"}",
+          "expr": "f2b_config_jail_max_retries{instance=~\"$instance\", jail=~\"$jail\"}",
           "format": "table",
           "instant": true,
           "interval": "",
-          "legendFormat": "{{jail}}",
+          "legendFormat": "__auto",
           "refId": "A"
         },
         {
@@ -113,7 +271,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f2b_config_jail_ban_time{instance=~\"$instance\"}",
+          "expr": "f2b_config_jail_ban_time{instance=~\"$instance\", jail=~\"$jail\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -128,7 +286,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f2b_config_jail_find_time{instance=~\"$instance\"}",
+          "expr": "f2b_config_jail_find_time{instance=~\"$instance\", jail=~\"$jail\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -255,7 +413,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 6
+        "y": 11
       },
       "id": 190,
       "options": {
@@ -281,7 +439,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "f2b_jail_failed_total{instance=~\"$instance\"}",
+          "expr": "f2b_jail_failed_total{instance=~\"$instance\", jail=~\"$jail\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{jail}} ({{instance}})",
@@ -294,7 +452,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -352,7 +513,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 11
       },
       "id": 191,
       "options": {
@@ -378,7 +539,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "f2b_jail_banned_total{instance=~\"$instance\"}",
+          "expr": "f2b_jail_banned_total{instance=~\"$instance\", jail=~\"$jail\"}",
           "interval": "",
           "legendFormat": "{{jail}} ({{instance}})",
           "range": true,
@@ -390,7 +551,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -448,7 +612,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 19
       },
       "id": 208,
       "options": {
@@ -474,7 +638,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "f2b_jail_failed_current{instance=~\"$instance\"}",
+          "expr": "f2b_jail_failed_current{instance=~\"$instance\", jail=~\"$jail\"}",
           "interval": "",
           "legendFormat": "{{jail}} ({{instance}})",
           "range": true,
@@ -486,7 +650,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -544,7 +711,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 19
       },
       "id": 209,
       "options": {
@@ -570,7 +737,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "f2b_jail_banned_current{instance=~\"$instance\"}",
+          "expr": "f2b_jail_banned_current{instance=~\"$instance\", jail=~\"$jail\"}",
           "interval": "",
           "legendFormat": "{{jail}} ({{instance}})",
           "range": true,
@@ -578,206 +745,6 @@
         }
       ],
       "title": "Fail2Ban Bans (Current)",
-      "transparent": true,
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 22
-      },
-      "id": 203,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "f2b_up{instance=~\"$instance\"}",
-          "interval": "",
-          "legendFormat": "Up ({{instance}})",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Fail2Ban Up",
-      "transparent": true,
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 22
-      },
-      "id": 204,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "f2b_errors{instance=~\"$instance\"}",
-          "interval": "",
-          "legendFormat": "{{type}} ({{instance}})",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Fail2Ban Exporter Errors",
       "transparent": true,
       "type": "timeseries"
     }
@@ -789,9 +756,17 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "100.64.0.5:9191",
-          "value": "100.64.0.5:9191"
+          "selected": true,
+          "text": [
+            "100.64.0.5:9191"
+          ],
+          "value": [
+            "100.64.0.5:9191"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
         },
         "definition": "f2b_up",
         "description": "Select which instance(s) to show",
@@ -810,17 +785,50 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "f2b_jail_failed_total",
+        "description": "Select which jail(s) to show",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Jail",
+        "multi": true,
+        "name": "jail",
+        "options": [],
+        "query": {
+          "qryType": 4,
+          "query": "f2b_jail_failed_total",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.*jail=\"([^\"]+)\"/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Fail2ban",
   "uid": "cTkH9AT7z",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
