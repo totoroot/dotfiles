@@ -76,6 +76,7 @@
       vaultwarden.enable = false;
       vpn.enable = false;
       postgresql.enable = true;
+      prometheus.enable = true;
       recipes.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
