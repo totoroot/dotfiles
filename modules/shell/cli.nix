@@ -60,8 +60,6 @@ in {
       viddy
       # Shell history with encrypted synchronisation between machines
       atuin
-      # Conversion between markup formats
-      pandoc
       # Shell script analysis tool
       shellcheck
       # HTML validator and 'tidier'
@@ -76,6 +74,8 @@ in {
       pdfcpu
       # Code statistics
       tokei
+      # Small, fast and powerful console music player
+      cmus
 
       ## Fetch programs
       # Fast, highly customizable system info script
@@ -86,6 +86,20 @@ in {
       pfetch
       # Yet another *nix distro fetching program, but less complex
       disfetch
+
+      ## Communication tools
+      # Command-line and dbus interface for communicating with the Signal messaging service
+      signal-cli
+
+      ## Document tools
+      # Conversion between markup formats
+      pandoc
+      # Tools for rendering web pages to PDF or images
+      wkhtmltopdf
+      # PDF processor
+      pdfcpu
+      # Utility to search text in PDF files
+      pdfgrep
 
       ## Other fun stuff
       # Matrix effect
