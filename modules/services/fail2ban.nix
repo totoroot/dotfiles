@@ -1,4 +1,4 @@
-{ config, options, lib, ... }:
+{ config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -11,9 +11,25 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.etc = {
+      # Define an action that will trigger a Ntfy push notification upon the issue of every new ban
+      "fail2ban/action.d/ntfy.conf".text = ''
+        [Definition]
+        # Needed to avoid receiving a new notification after every restart
+        norestored = true
+        actionban = curl -H "Title: <ip> has been banned" -d "<name> jail has banned <ip> from accessing $(hostname) after <failures> attempts of hacking the system." https://ntfy.sh/JamFail2banNotifications
+      '';
+      "fail2ban/filter.d/nginx-probing.conf".text = ''
+        [Definition]
+        failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
+      '';
+    };
+
     services.fail2ban = {
       enable = true;
-      extraPackages = [];
+      # Needed to ban on IPv4 and IPv6 for all ports
+      extraPackages = [ pkgs.ipset ];
+      banaction = "iptables-ipset-proto6-allports";
       # Ban IP after 5 failures
       maxretry = 5;
       ignoreIP = [
@@ -35,23 +51,23 @@ in
         overalljails = true;
       };
       jails = {
-        # apache-nohome-iptables.settings = {
-        #   # Block an IP address if it accesses a non-existent
-        #   # home directory more than 5 times in 10 minutes,
-        #   # since that indicates that it's scanning.
-        #   filter = "apache-nohome";
-        #   action = ''iptables-multiport[name=HTTP, port="http,https"]'';
-        #   logpath = "/var/log/httpd/error_log*";
-        #   backend = "auto";
+        # Maximum 6 failures in 600 seconds
+        "nginx-probing" = ''
+          enabled = true
+          filter = nginx-probing
+          logpath = /var/log/nginx/access.log
+          backend = auto
+          maxretry = 5
+          findtime = 600
+        '';
+        # nginx-req-limit.settings = {
+        #   enabled = true;
+        #   filter = "nginx-req-limit";
+        #   action = ''iptables-multiport[name=ReqLimit, port="http,https", protocol=tcp]'';
+        #   logpath = "/var/log/nginx/*error.log";
         #   findtime = 600;
-        #   bantime  = 600;
+        #   bantime = 600;
         #   maxretry = 5;
-        # };
-        # dovecot.settings = {
-        #   # block IPs which failed to log-in
-        #   # aggressive mode add blocking for aborted connections
-        #   filter = "dovecot[mode=aggressive]";
-        #   maxretry = 3;
         # };
       };
     };
