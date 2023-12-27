@@ -35,6 +35,7 @@
       headscale.enable = true;
       homepage.enable = true;
       nginx.enable = true;
+      ntfy.enable = true;
       ssh.enable = true;
       uptime-kuma.enable = true;
       tailscale.enable = true;
