@@ -76,12 +76,44 @@
       vaultwarden.enable = false;
       vpn.enable = false;
       postgresql.enable = true;
-      prometheus.enable = true;
       recipes.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
       tailscale.enable = true;
       transmission.enable = false;
+      prometheus = {
+        enable = true;
+        exporters = {
+          node.enable = true;
+          systemd.enable = true;
+          statsd.enable = true;
+          blackbox.enable = true;
+          nginx.enable = false;
+          nginxlog.enable = false;
+        };
+        # Targets for the Prometheus Blackbox exporter
+        # TODO Set targets for Uptime Kuma and Blackbox exporter
+        blackboxTargets = [
+          # thym.at
+          "https://thym.at"
+          "https://matthias.thym.at"
+          "https://matthias.thym.at/de"
+          "https://blog.thym.at"
+          "https://nextcloud.thym.at"
+          "https://cloud.thym.at"
+          # nixos.at
+          "https://nixos.at"
+          # überwachungsbehör.de (utf-8 translated)
+          "https://uptime.xn--berwachungsbehr-mtb1g.de"
+          "https://grafana.xn--berwachungsbehr-mtb1g.de"
+          "https://headscale.xn--berwachungsbehr-mtb1g.de"
+          "https://jellyfin.xn--berwachungsbehr-mtb1g.de"
+          "https://liebes.xn--berwachungsbehr-mtb1g.de"
+          "https://benachrichtigungs.xn--berwachungsbehr-mtb1g.de"
+          "https://prometheus.xn--berwachungsbehr-mtb1g.de"
+          "https://passwort.xn--berwachungsbehr-mtb1g.de"
+        ];
+      };
     };
   };
 
