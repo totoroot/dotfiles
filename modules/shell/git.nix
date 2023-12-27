@@ -14,6 +14,7 @@ in {
       lazygit
       onefetch
       gitlint
+      delta
     ];
 
     home.configFile = {
