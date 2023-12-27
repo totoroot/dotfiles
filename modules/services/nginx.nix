@@ -9,6 +9,10 @@ let
   adminEmail = "admin@thym.at";
   server = "100.64.0.3";
 
+  # jam
+  uptimePort = 4042;
+  ntfyPort = 6780;
+  # violet
   jellyfinPort = 8096;
   grafanaPort = 3000;
   prometheusPort = 9090;
@@ -16,6 +20,7 @@ let
   vaultwardenPort = 8222;
   hassPort = 8123;
   scrutinyPort = 9080;
+  recipePort = 8491;
 in
 {
   options.modules.services.nginx = {
@@ -36,11 +41,37 @@ in
       recommendedTlsSettings = true;
 
       virtualHosts = {
+        # jam
         "liebes.${domain}" = {
           enableACME = true;
           forceSSL = true;
           root = "/var/www/liebe";
         };
+        "benachrichtigungs.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:${toString ntfyPort}";
+            proxyWebsockets = true;
+          };
+        };
+        "headscale.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:${toString config.services.headscale.port}";
+            proxyWebsockets = true;
+          };
+        };
+        "uptime.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:${toString uptimePort}";
+            proxyWebsockets = true;
+          };
+        };
+        # violet
         "jellyfin.${domain}" = {
           enableACME = true;
           forceSSL = true;
@@ -73,7 +104,7 @@ in
             proxyWebsockets = true;
           };
         };
-        "vault.${domain}" = {
+        "passwort.${domain}" = {
           enableACME = true;
           forceSSL = true;
           locations."/" = {
@@ -86,6 +117,14 @@ in
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://${server}:${toString scrutinyPort}";
+            proxyWebsockets = true;
+          };
+        };
+        "rezept.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString recipePort}";
             proxyWebsockets = true;
           };
         };
@@ -118,6 +157,17 @@ in
         "liebes.${domain}" = {
           email = "${adminEmail}";
         };
+        # jam
+        "benachrichtigungs.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "headscale.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "uptime.${domain}" = {
+          email = "${adminEmail}";
+        };
+        # violet
         "jellyfin.${domain}" = {
           email = "${adminEmail}";
         };
@@ -130,10 +180,13 @@ in
         "loki.${domain}" = {
           email = "${adminEmail}";
         };
-        "vault.${domain}" = {
+        "passwort.${domain}" = {
           email = "${adminEmail}";
         };
         "festplatten.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "rezept.${domain}" = {
           email = "${adminEmail}";
         };
         "hass.${domain}" = {

@@ -38,22 +38,6 @@ in
           ];
         };
       };
-      nginx.virtualHosts."headscale.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://localhost:${toString config.services.headscale.port}";
-          proxyWebsockets = true;
-        };
-      };
-    };
-
-    security.acme = {
-      certs = {
-        "headscale.xn--berwachungsbehr-mtb1g.de" = {
-          email = "admin@thym.at";
-        };
-      };
     };
 
     user.extraGroups = [ "headscale" ];
