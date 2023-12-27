@@ -78,4 +78,38 @@
       "9.9.9.9"
     ];
   };
+
+  services.prometheus.exporters = {
+    node = {
+      enable = true;
+      # 9100
+      openFirewall = true;
+    };
+    blackbox = {
+      enable = false;
+      # configFile = {};
+      # 9115
+      openFirewall = true;
+    };
+    systemd = {
+      enable = true;
+      # 9558
+      openFirewall = true;
+    };
+    statsd = {
+      enable = true;
+      # 9102
+      openFirewall = true;
+    };
+    nginx = {
+      enable = true;
+      # 9113
+      openFirewall = true;
+    };
+    nginxlog = {
+      enable = true;
+      # 9117
+      openFirewall = true;
+    };
+  };
 }
