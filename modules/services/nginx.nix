@@ -21,6 +21,7 @@ let
   hassPort = 8123;
   scrutinyPort = 9080;
   recipePort = 8491;
+  adguardPort = 3300;
 in
 {
   options.modules.services.nginx = {
@@ -128,6 +129,14 @@ in
             proxyWebsockets = true;
           };
         };
+        "anzeigen.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString adguardPort}";
+            proxyWebsockets = true;
+          };
+        };
         "hass.${domain}" = {
           enableACME = true;
           forceSSL = true;
@@ -187,6 +196,9 @@ in
           email = "${adminEmail}";
         };
         "rezept.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "anzeigen.${domain}" = {
           email = "${adminEmail}";
         };
         "hass.${domain}" = {

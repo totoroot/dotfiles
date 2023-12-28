@@ -2,11 +2,15 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.adguard;
-in {
+let
+  cfg = config.modules.services.adguard;
+  adguardHTTPPort = 3300;
+  adguardDNSPort = 3301;
+  domain = "xn--berwachungsbehr-mtb1g.de";
+in
+{
   options.modules.services.adguard = {
     enable = mkBoolOpt false;
-    adguardPort = 3300;
   };
 
   config = mkIf cfg.enable {
@@ -16,7 +20,10 @@ in {
       mutableSettings = true;
       settings = {
         bind_host = "0.0.0.0";
-        bind_port = adguardPort;
+        bind_port = adguardDNSPort;
+        http = {
+          address = "0.0.0.0:${toString adguardHTTPPort}";
+        };
       };
     };
   };
