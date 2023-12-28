@@ -45,7 +45,7 @@
           node.enable = true;
           systemd.enable = true;
           statsd.enable = true;
-          blackbox.enable = true;
+          blackbox.enable = false;
           nginx.enable = true;
           nginxlog.enable = true;
         };
