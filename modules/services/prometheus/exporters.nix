@@ -22,8 +22,7 @@ in {
         enable = true;
         port = 9100;
         openFirewall = false;
-        enabledCollectors = [ "systemd" ];
-        extraFlags = [ "--collector.textfile.directory=/etc/nix" ];
+        # extraFlags = [ "--collector.textfile.directory=/etc/nix" ];
       };
 
       systemd = mkIf cfg.systemd.enable {
