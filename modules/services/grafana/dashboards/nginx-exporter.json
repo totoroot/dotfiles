@@ -468,7 +468,10 @@
   ],
   "refresh": "5s",
   "schemaVersion": 38,
-  "tags": [],
+  "tags": [
+    "prometheus",
+    "nginx"
+  ],
   "templating": {
     "list": [
       {

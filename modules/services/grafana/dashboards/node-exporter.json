@@ -12246,7 +12246,12 @@
   "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "prometheus",
+    "node",
+    "system",
+    "stats"
+  ],
   "templating": {
     "list": [
       {
