@@ -9,6 +9,20 @@ in
 {
   options.modules.services.prometheus = {
     enable = mkBoolOpt false;
+
+    blackboxTargets = mkOption {
+      type = types.listOf types.str;
+      default = [ "https://thym.at" ];
+      example = [ "https://github.com" ];
+      description = "Targets to monitor with the Blackbox exporter";
+    };
+
+    jsonTargets = mkOption {
+      type = types.listOf types.str;
+      default = [ "" ];
+      example = [ "" ];
+      description = "Targets to probe with the JSON exporter";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -31,6 +45,35 @@ in
         }
         {
           job_name = "blackbox";
+          scrape_interval = "2m";
+          metrics_path = "/probe";
+          params = { module = [ "http_2xx" ]; };
+          static_configs = [{ targets = cfg.blackboxTargets; }];
+          relabel_configs = [
+            {
+              source_labels = [ "__address__" ];
+              target_label = "__param_target";
+            }
+            {
+              source_labels = [ "__param_target" ];
+              target_label = "target";
+            }
+            {
+              target_label = "__address__";
+              # Blackbox exporter's real hostname:port
+              replacement = "127.0.0.1:9115";
+            }
+            {
+              source_labels = [ "__param_target" ];
+              # Create domain label
+              target_label = "domain";
+              regex = "^https:\/\/(?:[-a-z0-9]+\.)?([-a-z0-9]+\.(?:at|de))(?:(?:\/|$))";
+              replacement = "$1";
+            }
+          ];
+        }
+        {
+          job_name = "blackbox-exporter";
           static_configs = [{
             targets = [ "127.0.0.1:9115" "100.64.0.5:9115" ];
           }];
