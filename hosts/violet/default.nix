@@ -68,6 +68,7 @@
         scrutiny.enable = true;
         vaultwarden.enable = true;
       };
+      adguard.enable = true;
       gitea.enable = false;
       grafana.enable = true;
       jellyfin.enable = true;
