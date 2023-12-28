@@ -95,7 +95,7 @@ in {
       # Conversion between markup formats
       pandoc
       # Tools for rendering web pages to PDF or images
-      wkhtmltopdf
+      # wkhtmltopdf
       # PDF processor
       pdfcpu
       # Utility to search text in PDF files
