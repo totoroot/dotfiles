@@ -95,6 +95,7 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString prometheusPort}";
             proxyWebsockets = true;
+            basicAuthFile = "/var/secrets/prometheus";
           };
         };
         "loki.${domain}" = {
@@ -111,6 +112,7 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString vaultwardenPort}";
             proxyWebsockets = true;
+            # basicAuthFile = "/var/secrets/vaultwarden";
           };
         };
         "festplatten.${domain}" = {
@@ -119,6 +121,7 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString scrutinyPort}";
             proxyWebsockets = true;
+            basicAuthFile = "/var/secrets/scrutiny";
           };
         };
         "rezept.${domain}" = {
@@ -135,6 +138,7 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString adguardPort}";
             proxyWebsockets = true;
+            basicAuthFile = "/var/secrets/adguard";
           };
         };
         "hass.${domain}" = {
