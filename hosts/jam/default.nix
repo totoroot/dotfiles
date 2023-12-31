@@ -48,6 +48,8 @@
           blackbox.enable = false;
           nginx.enable = true;
           nginxlog.enable = true;
+          fail2ban.enable = true;
+          adguard.enable = false;
         };
       };
     };

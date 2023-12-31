@@ -71,26 +71,5 @@ in
         # };
       };
     };
-
-    systemd.services."fail2ban-exporter" = {
-      enable = true;
-      description = "Fail2ban metric exporter for Prometheus";
-      documentation = [ "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/blob/main/README.md" ];
-      wantedBy = [ "multi-user.target" ];
-      requires = [ "network-online.target" ];
-      after = [ "network-online.target" ];
-      serviceConfig = {
-        # See this example
-        # https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/blob/main/_examples/systemd/fail2ban_exporter.service?ref_type=heads
-        ExecStart = "/home/mathym/fail2ban-exporter/fail2ban_exporter";
-        Restart = "on-failure";
-        RestartSec = 5;
-        NoNewPrivileges = true;
-        User = "root";
-        Group = "root";
-      };
-    };
-
-    networking.firewall.allowedTCPPorts = [ 9191 ];
   };
 }

@@ -91,6 +91,8 @@
           blackbox.enable = true;
           nginx.enable = false;
           nginxlog.enable = false;
+          fail2ban.enable = false;
+          adguard.enable = true;
         };
         # Targets for the Prometheus Blackbox exporter
         # TODO Set targets for Uptime Kuma and Blackbox exporter

@@ -14,6 +14,8 @@ in {
     blackbox.enable = mkBoolOpt false;
     nginx.enable = mkBoolOpt false;
     nginxlog.enable = mkBoolOpt false;
+    fail2ban.enable = mkBoolOpt false;
+    adguard.enable = mkBoolOpt false;
   };
 
   config = {
@@ -76,6 +78,43 @@ in {
       };
     };
 
+    systemd.services = {
+      "fail2ban-exporter" = mkIf cfg.fail2ban.enable {
+        enable = true;
+        description = "Fail2ban metric exporter for Prometheus";
+        documentation = [ "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/blob/main/README.md" ];
+        wantedBy = [ "multi-user.target" ];
+        requires = [ "network-online.target" ];
+        after = [ "network-online.target" ];
+        serviceConfig = {
+          # See this example
+          # https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/blob/main/_examples/systemd/fail2ban_exporter.service?ref_type=heads
+          ExecStart = "/sbin/fail2ban-exporter";
+          Restart = "on-failure";
+          RestartSec = 5;
+          NoNewPrivileges = true;
+          User = "root";
+          Group = "root";
+        };
+      };
+      "adguard-exporter" = mkIf cfg.adguard.enable {
+        enable = true;
+        description = "AdGuard metric exporter for Prometheus";
+        documentation = [ "https://github.com/totoroot/adguard-exporter/blob/master/README.md" ];
+        wantedBy = [ "multi-user.target" ];
+        requires = [ "network-online.target" ];
+        after = [ "network-online.target" ];
+        serviceConfig = {
+          ExecStart = "/sbin/adguard-exporter";
+          Restart = "on-failure";
+          RestartSec = 5;
+          NoNewPrivileges = true;
+          User = "root";
+          Group = "root";
+        };
+      };
+    };
+
     # Open firewall ports on the tailscale0 interface
     networking.firewall.interfaces.tailscale0.allowedTCPPorts =
       lib.optional cfg.node.enable config.services.prometheus.exporters.node.port
@@ -83,6 +122,8 @@ in {
       ++ lib.optional cfg.statsd.enable config.services.prometheus.exporters.statsd.port
       ++ lib.optional cfg.blackbox.enable config.services.prometheus.exporters.blackbox.port
       ++ lib.optional cfg.nginx.enable config.services.prometheus.exporters.nginx.port
-      ++ lib.optional cfg.nginxlog.enable config.services.prometheus.exporters.nginxlog.port;
+      ++ lib.optional cfg.nginxlog.enable config.services.prometheus.exporters.nginxlog.port
+      ++ lib.optional cfg.fail2ban.enable 9191
+      ++ lib.optional cfg.adguard.enable 9617;
   };
 }
