@@ -21,7 +21,8 @@ let
   hassPort = 8123;
   scrutinyPort = 9080;
   recipePort = 8491;
-  adguardPort = 3300;
+  adguardHTTPPort = 3300;
+  adguardDNSPort = 3301;
 in
 {
   options.modules.services.nginx = {
@@ -136,9 +137,18 @@ in
           enableACME = true;
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://${server}:${toString adguardPort}";
+            proxyPass = "http://${server}:${toString adguardHTTPPort}";
             proxyWebsockets = true;
             basicAuthFile = "/var/secrets/adguard";
+          };
+        };
+        "dns.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString adguardDNSPort}";
+            proxyWebsockets = true;
+            # basicAuthFile = "/var/secrets/adguard";
           };
         };
         "hass.${domain}" = {
@@ -203,6 +213,9 @@ in
           email = "${adminEmail}";
         };
         "anzeigen.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "dns.${domain}" = {
           email = "${adminEmail}";
         };
         "hass.${domain}" = {
