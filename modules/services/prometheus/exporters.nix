@@ -105,7 +105,7 @@ in {
         requires = [ "network-online.target" ];
         after = [ "network-online.target" ];
         serviceConfig = {
-          ExecStart = "/sbin/adguard-exporter";
+          ExecStart = "/sbin/adguard-exporter/adguard-exporter -adguard_hostname 127.0.0.1 -adguard_port 3300  -log_limit 10000";
           Restart = "on-failure";
           RestartSec = 5;
           NoNewPrivileges = true;

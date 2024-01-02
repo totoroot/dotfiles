@@ -114,6 +114,12 @@ in
             targets = [ "100.64.0.5:9095" ];
           }];
         }
+        {
+          job_name = "adguard";
+          static_configs = [{
+            targets = [ "127.0.0.1:9617" ];
+          }];
+        }
       ];
     };
   };
