@@ -30,14 +30,16 @@ in
           datasources.settings.datasources = [
             {
               name = "Prometheus";
-              isDefault = true;
               type = "prometheus";
               url = "https://prometheus.${domain}";
+              isDefault = true;
+              editable = true;
             }
             {
               name = "Loki";
               type = "loki";
               url = "https://loki.${domain}";
+              editable = true;
             }
           ];
           dashboards.settings.providers = [
