@@ -22,7 +22,7 @@ let
   scrutinyPort = 9080;
   recipePort = 8491;
   adguardHTTPPort = 3300;
-  adguardDNSPort = 3301;
+  adguardDNSPort = 53;
 in
 {
   options.modules.services.nginx = {
@@ -148,7 +148,6 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString adguardDNSPort}";
             proxyWebsockets = true;
-            # basicAuthFile = "/var/secrets/adguard";
           };
         };
         "hass.${domain}" = {
