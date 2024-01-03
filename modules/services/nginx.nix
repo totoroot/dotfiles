@@ -24,6 +24,7 @@ let
   recipePort = 8491;
   adguardHTTPPort = 3300;
   adguardDNSPort = 53;
+  changedetectionPort = 5002;
 in
 {
   options.modules.services.nginx = {
@@ -181,6 +182,15 @@ in
             '';
           };
         };
+        "website.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString changedetectionPort}";
+            proxyWebsockets = true;
+            basicAuthFile = "/var/secrets/changedetection";
+          };
+        };
       };
     };
 
@@ -237,6 +247,9 @@ in
           email = "${adminEmail}";
         };
         "hass.${domain}" = {
+          email = "${adminEmail}";
+        };
+        "website.${domain}" = {
           email = "${adminEmail}";
         };
       };

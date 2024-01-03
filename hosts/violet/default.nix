@@ -69,6 +69,7 @@
         vaultwarden.enable = true;
       };
       adguard.enable = true;
+      changedetection.enable = true;
       gitea.enable = false;
       grafana.enable = true;
       jellyfin.enable = true;
