@@ -10,6 +10,7 @@ let
   server = "100.64.0.3";
 
   # jam
+  homepagePort = 8082;
   uptimePort = 4042;
   ntfyPort = 6780;
   # violet
@@ -48,6 +49,14 @@ in
           enableACME = true;
           forceSSL = true;
           root = "/var/www/liebe";
+        };
+        "${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:${toString homepagePort}";
+            proxyWebsockets = true;
+          };
         };
         "benachrichtigungs.${domain}" = {
           enableACME = true;
@@ -183,6 +192,9 @@ in
     security.acme = {
       acceptTerms = mkDefault true;
       certs = {
+        "${domain}" = {
+          email = "${adminEmail}";
+        };
         "liebes.${domain}" = {
           email = "${adminEmail}";
         };

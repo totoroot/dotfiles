@@ -4,8 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.homepage;
-  domain = "xn--berwachungsbehr-mtb1g.de";
-  port = 8082;
+  homepagePort = 8082;
 in
 {
   options.modules.services.homepage = {
@@ -13,24 +12,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    services = {
-      homepage-dashboard = {
-        enable = true;
-        listenPort = port;
-        openFirewall = true;
-      };
-
-      nginx.virtualHosts."${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://localhost:${toString port}";
-          proxyWebsockets = true;
-        };
-      };
+    services.homepage-dashboard = {
+      enable = true;
+      listenPort = homepagePort;
     };
-
-    security.acme.certs."${domain}".email = "admin@thym.at";
 
     environment.systemPackages = [ config.services.homepage-dashboard.package ];
   };
