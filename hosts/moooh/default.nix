@@ -148,13 +148,7 @@
     };
     services = {
       containerization.enable = true;
-      containers = {
-        snowflake.enable = false;
-      };
       pods = {
-        languagetool.enable = false;
-        penpot.enable = false;
-        scrutiny.enable = true;
         vaultwarden.enable = true;
       };
       gitea.enable = false;
