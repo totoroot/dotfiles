@@ -20,7 +20,7 @@ in {
     env.DIRENV_LOG_FORMAT = "";
 
     environment.shellAliases = {
-      dsh = "devenv shell";
+      dsh = "devenv shell zsh";
       dup = "devenv update";
     };
   };
