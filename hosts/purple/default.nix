@@ -152,10 +152,10 @@
         snowflake.enable = false;
       };
       pods = {
-        languagetool.enable = true;
+        languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
-        vaultwarden.enable = true;
+        vaultwarden.enable = false;
       };
       gitea.enable = false;
       jellyfin.enable = false;
@@ -201,14 +201,10 @@
     usbutils
   ];
 
-  # NixOS networking configuration
-  networking = {
-    networkmanager.enable = true;
-    useDHCP = false;
-  };
-
-  # Set default monitor
-  # environment.variables = rec {
-  # MONITORS = ["HDMI-0" "DP-0"];
-  # };
+  virtualisation.oci-containers.containers."scrutiny".extraOptions = [
+    "--device=/dev/nvme0n1"
+    "--device=/dev/nvme1n1"
+    "--device=/dev/sda"
+    "--device=/dev/sdb"
+  ];
 }
