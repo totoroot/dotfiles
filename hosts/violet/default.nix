@@ -146,8 +146,6 @@
     "--device=/dev/sda"
     "--device=/dev/sdb"
     "--device=/dev/sdc"
-    "--device=/dev/sdd"
-    "--device=/dev/sde"
   ];
 
   #   # NixOS service configuration
