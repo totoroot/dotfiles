@@ -82,6 +82,7 @@
       ssh.enable = true;
       syncthing.enable = true;
       tailscale.enable = true;
+      time-machine.enable = true;
       transmission.enable = false;
       prometheus = {
         enable = true;
@@ -146,37 +147,25 @@
     "--device=/dev/sda"
     "--device=/dev/sdb"
     "--device=/dev/sdc"
+    "--device=/dev/sdd"
+    "--device=/dev/sde"
+    "--device=/dev/sdf"
+    "--device=/dev/sdg"
   ];
 
-  #   # NixOS service configuration
-  #   services = {
-  #     xserver = {
-  #       # Set eurkey as default layout
-  #       # Optionally set more keymaps and use them with bin/keymapswitcher
-  #       layout = "eu, at";
-  #       # Force DPI to optimize for ultrawide screen
-  #       # dpi = 200;
-  #       displayManager = {
-  #         autoLogin.enable = true;
-  #         defaultSession = "plasma";
-  #         # Use SDDM as display manager
-  #         sddm = {
-  #           enable = true;
-  #           theme = "Dracula";
-  #         };
-  #       };
-  #     };
-  #   };
-  #
-  #   # Set default monitor
-  #   environment.variables = rec {
-  #   MAIN_MONITOR = "HDMI-A-0";
-  #   };
-  #
-  #   environment.variables = {
-  #     GDK_SCALE = "2";
-  #     GDK_DPI_SCALE = "0.5";
-  #     QT_SCALE_FACTOR = "2";
-  #     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-  #   };
+  # macOS Time Machine configuration
+  services.netatalk.settings = {
+    "Time Machine Vika" = {
+      "time machine" = "yes";
+      path = "/mnt/tmvika";
+      "valid users" = "vika";
+    };
+    "Time Machine Mara" = {
+      "time machine" = "yes";
+      path = "/mnt/tmmara";
+      "valid users" = "mara";
+    };
+  };
+
+  boot.swraid.enable = true;
 }
