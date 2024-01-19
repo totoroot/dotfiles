@@ -31,6 +31,10 @@ in {
         exfat
         # Mount ntfs drives (Windows compatibility)
         ntfs3g
+        # BTRFS
+        btrfs-progs
+        # XFS
+        xfsprogs
         # Non-destructive FAT16/FAT32 resizer
         fatresize
         # Partitioning tool
