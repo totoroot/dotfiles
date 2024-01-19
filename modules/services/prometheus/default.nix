@@ -5,6 +5,8 @@ with lib.my;
 let
   cfg = config.modules.services.prometheus;
   domain = "xn--berwachungsbehr-mtb1g.de";
+  jam-tailscale-ip = "100.64.0.1";
+  purple-tailscale-ip = "100.64.0.2";
 in
 {
   options.modules.services.prometheus = {
@@ -40,7 +42,7 @@ in
         {
           job_name = "node";
           static_configs = [{
-            targets = [ "127.0.0.1:9100" "100.64.0.5:9100" ];
+            targets = [ "127.0.0.1:9100" "${jam-tailscale-ip}:9100" "${purple-tailscale-ip}:9100" ];
           }];
         }
         {
@@ -75,43 +77,49 @@ in
         {
           job_name = "blackbox-exporter";
           static_configs = [{
-            targets = [ "127.0.0.1:9115" "100.64.0.5:9115" ];
+            targets = [ "127.0.0.1:9115" "${jam-tailscale-ip}:9115" ];
           }];
         }
         {
           job_name = "systemd";
           static_configs = [{
-            targets = [ "127.0.0.1:9558" "100.64.0.5:9558" ];
+            targets = [ "127.0.0.1:9558" "${jam-tailscale-ip}:9558" "${purple-tailscale-ip}:9558" ];
           }];
         }
         {
           job_name = "statsd";
           static_configs = [{
-            targets = [ "127.0.0.1:9102" "100.64.0.5:9102" ];
+            targets = [ "127.0.0.1:9102" "${jam-tailscale-ip}:9102" "${purple-tailscale-ip}:9102" ];
+          }];
+        }
+        {
+          job_name = "smartctl";
+          static_configs = [{
+            targets = [ "127.0.0.1:9633" "${purple-tailscale-ip}:9633" ];
           }];
         }
         {
           job_name = "nginx";
           static_configs = [{
-            targets = [ "100.64.0.5:9113" ];
+            targets = [ "${jam-tailscale-ip}:9113" ];
           }];
         }
         {
           job_name = "nginxlog";
           static_configs = [{
-            targets = [ "100.64.0.5:9117" ];
+            targets = [ "${jam-tailscale-ip}:9117" ];
           }];
         }
         {
           job_name = "fail2ban";
           static_configs = [{
-            targets = [ "100.64.0.5:9191" ];
+            targets = [ "${jam-tailscale-ip}:9191" ];
           }];
         }
         {
           job_name = "ntfy";
           static_configs = [{
-            targets = [ "100.64.0.5:9095" ];
+            targets = [ "${jam-tailscale-ip}:9095" ];
           }];
         }
         {
@@ -119,6 +127,27 @@ in
           static_configs = [{
             targets = [ "127.0.0.1:9617" ];
           }];
+        }
+        {
+          job_name = "fritzbox";
+          static_configs = [{
+            targets = [ "127.0.0.1:9134" ];
+          }];
+        }
+        {
+          job_name = "speedtest";
+          static_configs = [{
+            targets = [ "127.0.0.1:9862" ];
+          }];
+        }
+        {
+          job_name = "home-assistant";
+          scrape_interval = "60s";
+          scheme = "http";
+          static_configs = [{
+            targets = [ "127.0.0.1:8123" ];
+          }];
+          metrics_path = "/api/prometheus";
         }
       ];
     };

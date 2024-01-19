@@ -166,6 +166,15 @@
       syncthing.enable = true;
       tailscale.enable = true;
       transmission.enable = false;
+      prometheus = {
+        enable = false;
+        exporters = {
+          node.enable = true;
+          systemd.enable = true;
+          statsd.enable = true;
+          smartctl.enable = true;
+        };
+      };
     };
   };
 

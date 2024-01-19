@@ -19,7 +19,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 20,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -76,7 +75,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 24,
         "x": 0,
         "y": 0
@@ -105,7 +104,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "homeassistant_switch_state",
+          "expr": "homeassistant_switch_state{friendly_name=~\".*Switch\"}",
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
@@ -172,7 +171,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 8
       },
       "id": 3,
       "options": {
@@ -265,7 +264,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 13
       },
       "id": 4,
       "options": {
@@ -314,6 +313,8 @@
             "mode": "continuous-RdYlGr"
           },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -331,7 +332,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 19
       },
       "id": 5,
       "options": {
@@ -346,9 +347,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -356,14 +358,14 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "homeassistant_sensor_battery_percent{friendly_name!=\"FP5 Battery level\"}",
+          "expr": "avg by (friendly_name) (homeassistant_sensor_battery_percent{friendly_name!=\"FP5 Battery level\"})",
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Sensor Battery Levels",
+      "title": "Battery Levels",
       "transparent": true,
       "type": "gauge"
     },
@@ -399,11 +401,12 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 25
       },
       "id": 6,
       "options": {
         "displayMode": "gradient",
+        "maxVizHeight": 300,
         "minVizHeight": 10,
         "minVizWidth": 0,
         "namePlacement": "auto",
@@ -416,9 +419,10 @@
           "values": false
         },
         "showUnfilled": true,
+        "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -438,7 +442,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [
     "home-assistant",
     "sensors",
@@ -455,6 +459,6 @@
   "timezone": "",
   "title": "Home Assistant",
   "uid": "f5d63a6c-40b5-470d-b378-b751581f8675",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }

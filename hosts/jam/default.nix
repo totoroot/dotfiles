@@ -45,11 +45,14 @@
           node.enable = true;
           systemd.enable = true;
           statsd.enable = true;
+          smartctl.enable = false;
           blackbox.enable = false;
           nginx.enable = true;
           nginxlog.enable = true;
           fail2ban.enable = true;
           adguard.enable = false;
+          fritzbox.enable = false;
+          speedtest.enable = false;
         };
       };
     };

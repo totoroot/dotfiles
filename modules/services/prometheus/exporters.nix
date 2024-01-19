@@ -4,18 +4,24 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.prometheus.exporters;
-in {
+let
+  cfg = config.modules.services.prometheus.exporters;
+  fritzbox-local-ip = "192.168.0.1";
+in
+{
   options.modules.services.prometheus.exporters = {
     # Only the node exporter should be enabled by default
     node.enable = mkBoolOpt true;
     systemd.enable = mkBoolOpt false;
     statsd.enable = mkBoolOpt false;
+    smartctl.enable = mkBoolOpt false;
     blackbox.enable = mkBoolOpt false;
     nginx.enable = mkBoolOpt false;
     nginxlog.enable = mkBoolOpt false;
     fail2ban.enable = mkBoolOpt false;
     adguard.enable = mkBoolOpt false;
+    fritzbox.enable = mkBoolOpt false;
+    speedtest.enable = mkBoolOpt false;
   };
 
   config = {
@@ -23,26 +29,27 @@ in {
       node = mkIf cfg.node.enable {
         enable = true;
         port = 9100;
-        openFirewall = false;
         # extraFlags = [ "--collector.textfile.directory=/etc/nix" ];
       };
 
       systemd = mkIf cfg.systemd.enable {
         enable = true;
         port = 9558;
-        openFirewall = false;
       };
 
       statsd = mkIf cfg.statsd.enable {
         enable = true;
         port = 9102;
-        openFirewall = false;
+      };
+
+      smartctl = mkIf cfg.smartctl.enable {
+        enable = true;
+        port = 9633;
       };
 
       blackbox = mkIf cfg.blackbox.enable {
         enable = true;
         port = 9115;
-        openFirewall = false;
         configFile = pkgs.writeTextFile {
           name = "blackbox-exporter-config";
           text = ''
@@ -84,8 +91,6 @@ in {
         description = "Fail2ban metric exporter for Prometheus";
         documentation = [ "https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/blob/main/README.md" ];
         wantedBy = [ "multi-user.target" ];
-        requires = [ "network-online.target" ];
-        after = [ "network-online.target" ];
         serviceConfig = {
           # See this example
           # https://gitlab.com/hectorjsmith/fail2ban-prometheus-exporter/-/blob/main/_examples/systemd/fail2ban_exporter.service?ref_type=heads
@@ -102,10 +107,39 @@ in {
         description = "AdGuard metric exporter for Prometheus";
         documentation = [ "https://github.com/totoroot/adguard-exporter/blob/master/README.md" ];
         wantedBy = [ "multi-user.target" ];
-        requires = [ "network-online.target" ];
-        after = [ "network-online.target" ];
         serviceConfig = {
-          ExecStart = "/sbin/adguard-exporter/adguard-exporter -adguard_hostname 127.0.0.1 -adguard_port 3300  -log_limit 10000";
+          ExecStart = "/sbin/adguard-exporter -adguard_hostname 127.0.0.1 -adguard_port 3300  -log_limit 10000";
+          Restart = "on-failure";
+          RestartSec = 5;
+          NoNewPrivileges = true;
+          User = "root";
+          Group = "root";
+        };
+      };
+      "fritzbox-exporter" = mkIf cfg.fritzbox.enable {
+        enable = true;
+        description = "FRITZ!Box metric exporter for Prometheus";
+        documentation = [ "https://github.com/sberk42/fritzbox_exporter/blob/master/README.md" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          # See this example
+          # https://github.com/sberk42/fritzbox_exporter/blob/master/systemd/fritzbox_exporter.service
+          ExecStart = "/sbin/fritzbox-exporter -gateway-url http://${fritzbox-local-ip}:49000 -metrics-file /var/lib/fritzbox-exporter/metrics.json -lua-metrics-file /var/lib/fritzbox-exporter/metrics-lua.json -listen-address 127.0.0.1:9134";
+          EnvironmentFile = "/var/secrets/fritzbox-exporter.env";
+          Restart = "on-failure";
+          RestartSec = 5;
+          NoNewPrivileges = true;
+          User = "root";
+          Group = "root";
+        };
+      };
+      "speedtest-exporter" = mkIf cfg.speedtest.enable {
+        enable = true;
+        description = "Speedtest Prometheus Exporter exposing results from speedtest.net";
+        documentation = [ "https://github.com/danopstech/speedtest_exporter/blob/main/README.md" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          ExecStart = "/sbin/speedtest-exporter -port 9862"; # -server_id 15152";
           Restart = "on-failure";
           RestartSec = 5;
           NoNewPrivileges = true;
@@ -120,10 +154,13 @@ in {
       lib.optional cfg.node.enable config.services.prometheus.exporters.node.port
       ++ lib.optional cfg.systemd.enable config.services.prometheus.exporters.systemd.port
       ++ lib.optional cfg.statsd.enable config.services.prometheus.exporters.statsd.port
+      ++ lib.optional cfg.smartctl.enable config.services.prometheus.exporters.smartctl.port
       ++ lib.optional cfg.blackbox.enable config.services.prometheus.exporters.blackbox.port
       ++ lib.optional cfg.nginx.enable config.services.prometheus.exporters.nginx.port
       ++ lib.optional cfg.nginxlog.enable config.services.prometheus.exporters.nginxlog.port
       ++ lib.optional cfg.fail2ban.enable 9191
-      ++ lib.optional cfg.adguard.enable 9617;
+      ++ lib.optional cfg.adguard.enable 9617
+      ++ lib.optional cfg.fritzbox.enable 9134
+      ++ lib.optional cfg.speedtest.enable 9862;
   };
 }

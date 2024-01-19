@@ -89,11 +89,14 @@
           node.enable = true;
           systemd.enable = true;
           statsd.enable = true;
+          smartctl.enable = true;
           blackbox.enable = true;
           nginx.enable = false;
           nginxlog.enable = false;
           fail2ban.enable = false;
           adguard.enable = true;
+          fritzbox.enable = true;
+          speedtest.enable = false;
         };
         # Targets for the Prometheus Blackbox exporter
         # TODO Set targets for Uptime Kuma and Blackbox exporter
@@ -121,8 +124,6 @@
     };
   };
 
-  system.stateVersion = "23.11";
-
   # NixOS program modules
   programs = {
     # Needed for some home-manager settings
@@ -134,7 +135,6 @@
   # NixOS networking configuration
   networking = {
     networkmanager.enable = true;
-    useDHCP = false;
     # Allow local network access
     # firewall.extraCommands = ''
     #   iptables -A nixos-fw -p tcp --source 192.168.8.0/24 --dport 0:9999 -j nixos-fw-accept
