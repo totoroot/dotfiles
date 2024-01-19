@@ -21,8 +21,6 @@
     home.file = {
       "Notes/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/Sync/notes/";
       "Trash/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/.local/share/Trash/files/";
-      "Pictures/photos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/photos/";
-      "Music".source = config.lib.file.mkOutOfStoreSymlink "/mnt/music/";
     };
   };
 }
