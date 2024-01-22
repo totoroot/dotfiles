@@ -20,7 +20,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 20204,
   "graphTooltip": 0,
-  "id": 26,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -101,9 +100,9 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "smartctl_device_smart_status",
+          "expr": "smartctl_device_smart_status{instance=~\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -200,8 +199,8 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "pluginVersion": "10.2.3",
@@ -212,8 +211,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "smartctl_device_temperature",
+          "editorMode": "code",
+          "expr": "smartctl_device_temperature{instance=~\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -301,8 +300,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "smartctl_device_critical_warning",
+          "editorMode": "code",
+          "expr": "smartctl_device_critical_warning{instance=~\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -382,8 +381,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "smartctl_device_error_log_count",
+          "editorMode": "code",
+          "expr": "smartctl_device_error_log_count{instance=~\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -468,7 +467,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "smartctl_device_media_errors",
+          "expr": "smartctl_device_media_errors{instance=~\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -538,7 +537,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "smartctl_device_power_on_seconds",
+          "expr": "smartctl_device_power_on_seconds{instance=~\"$instance\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -607,8 +606,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "smartctl_device_power_cycle_count",
+          "editorMode": "code",
+          "expr": "smartctl_device_power_cycle_count{instance=~\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -630,7 +629,40 @@
     "smartctl"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "127.0.0.1:9633"
+          ],
+          "value": [
+            "127.0.0.1:9633"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "label_values(smartctl_version,instance)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Instance",
+        "multi": true,
+        "name": "instance",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(smartctl_version,instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -640,6 +672,6 @@
   "timezone": "",
   "title": "S.M.A.R.T.",
   "uid": "f8f249a0-be78-41b1-97fe-8d0a92a71b93",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
