@@ -72,8 +72,8 @@
       esphome.enable = true;
       gitea.enable = false;
       grafana.enable = true;
-      jellyfin.enable = true;
       home-assistant.enable = true;
+      jellyfin.enable = false;
       k8s.enable = false;
       nginx.enable = false;
       vaultwarden.enable = false;
