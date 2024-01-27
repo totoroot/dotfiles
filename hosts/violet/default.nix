@@ -158,12 +158,12 @@
   services.netatalk.settings = {
     "Time Machine Vika" = {
       "time machine" = "yes";
-      path = "/mnt/tmvika";
+      path = "/mnt/time-machine-vika";
       "valid users" = "vika";
     };
     "Time Machine Mara" = {
       "time machine" = "yes";
-      path = "/mnt/tmmara";
+      path = "/mnt/time-machine-mara";
       "valid users" = "mara";
     };
   };

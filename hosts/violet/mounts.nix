@@ -17,14 +17,22 @@
     "/mnt/clone" = {
       device = "/dev/disk/by-label/clone";
       fsType = "ext4";
+      options = [ "noatime" "recovery" ];
     };
-    "/mnt/photos" = {
-      device = "/dev/disk/by-label/photos";
-      fsType = "ext4";
+    "/mnt/backup-grape" = {
+      device = "/dev/disk/by-label/bugrape";
+      fsType = "btrfs";
+      options = [ "noatime" "recovery" ];
     };
-    "/mnt/music" = {
-      device = "/dev/disk/by-label/music";
-      fsType = "ext4";
+    "/mnt/time-machine-vika" = {
+      device = "/dev/disk/by-label/tmvika";
+      fsType = "xfs";
+      options = [ "noatime" "recovery" ];
+    };
+    "/mnt/time-machine-mara" = {
+      device = "/dev/disk/by-label/tmmara";
+      fsType = "xfs";
+      options = [ "noatime" "recovery" ];
     };
   };
 
