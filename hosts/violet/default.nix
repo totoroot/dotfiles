@@ -69,6 +69,7 @@
       };
       adguard.enable = true;
       changedetection.enable = true;
+      esphome.enable = true;
       gitea.enable = false;
       grafana.enable = true;
       jellyfin.enable = true;
