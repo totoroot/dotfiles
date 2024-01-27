@@ -35,7 +35,7 @@ in
       ignoreIP = [
         # Whitelist some subnets
         # Local subnet
-        "192.168.8.0/24"
+        "192.168.0.0/24"
         # Tailscale subnet
         "100.64.0.0/24"
       ];
