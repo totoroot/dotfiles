@@ -62,7 +62,6 @@
       containerization.enable = true;
       snowflake.enable = true;
       pods = {
-        home-assistant.enable = true;
         languagetool.enable = false;
         penpot.enable = false;
         scrutiny.enable = true;
@@ -73,6 +72,7 @@
       gitea.enable = false;
       grafana.enable = true;
       jellyfin.enable = true;
+      home-assistant.enable = true;
       k8s.enable = false;
       nginx.enable = false;
       vaultwarden.enable = false;
