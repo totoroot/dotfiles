@@ -229,6 +229,139 @@
         "x": 0,
         "y": 12
       },
+      "id": 13,
+      "panels": [],
+      "title": "Air Quality",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "2.5µm particulate matter concentration as a measure of air quality",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 150,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 13
+              },
+              {
+                "color": "orange",
+                "value": 35
+              },
+              {
+                "color": "dark-orange",
+                "value": 56
+              },
+              {
+                "color": "dark-red",
+                "value": 86
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "homeassistant_sensor_pm25_u0xb5g_per_mu0xb3",
+          "instant": false,
+          "legendFormat": "{{friendly_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Air Quality",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
       "id": 9,
       "panels": [],
       "title": "Power",
@@ -261,7 +394,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 22
       },
       "id": 8,
       "options": {
@@ -362,7 +495,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 29
       },
       "id": 7,
       "options": {
@@ -405,7 +538,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 44
       },
       "id": 11,
       "panels": [],
@@ -467,7 +600,7 @@
         "h": 9,
         "w": 18,
         "x": 0,
-        "y": 36
+        "y": 45
       },
       "id": 2,
       "options": {
@@ -536,7 +669,7 @@
         "h": 9,
         "w": 6,
         "x": 18,
-        "y": 36
+        "y": 45
       },
       "id": 6,
       "options": {
@@ -606,7 +739,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 54
       },
       "id": 5,
       "options": {
@@ -655,7 +788,7 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
