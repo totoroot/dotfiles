@@ -19,7 +19,7 @@
         xfce.enable = false;
       };
       anki.enable = true;
-      backup.enable = false;
+      backup.enable = true;
       blender.enable = false;
       calibre.enable = false;
       clipboard.enable = false;
