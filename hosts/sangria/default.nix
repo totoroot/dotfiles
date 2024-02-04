@@ -178,7 +178,7 @@
       enable = true;
       # Set Austrian as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
-      layout = "at, eu";
+      xkb.layout = "at, eu";
       displayManager = {
         autoLogin.enable = true;
         defaultSession = "xfce";

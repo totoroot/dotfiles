@@ -191,7 +191,7 @@
     xserver = {
       # Set eurkey as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
-      layout = "eu, at";
+      xkb.layout = "eu, at";
       # Force DPI to optimize for ultrawide screen
       # dpi = 200;
       displayManager = {

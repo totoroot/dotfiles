@@ -192,7 +192,7 @@
       enable = true;
       # Set Austrian as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
-      layout = "at, eu";
+      xkb.layout = "at, eu";
       # Enable touchpad support
       libinput.enable = true;
       displayManager = {
