@@ -95,7 +95,7 @@ in
       # Highly customizable Wayland bar for Sway and Wlroots based compositors
       waybar
       # A lightweight Wayland notification daemon
-      mako
+      # mako
       # Tiny dynamic menu for Wayland
       tofi
       # See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/sway.nix#L60
@@ -175,7 +175,7 @@ in
 
     home.configFile = {
       "hypr/hyprland.conf".source = "${configDir}/hypr/hyprland.conf";
-      "mako/config".source = "${configDir}/mako/config";
+      # "mako/config".source = "${configDir}/mako/config";
     };
   };
 }
