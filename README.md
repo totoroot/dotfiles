@@ -4,7 +4,7 @@
     <img alt="Get it on Codeberg" src="https://get-it-on.codeberg.org/get-it-on-blue-on-white.png" height="88">
 </a>
 
-[![NixOS 23.05](https://img.shields.io/badge/NixOS-23.05-blue.svg?style=flat&logo=NixOS&logoColor=white)](https://nixos.org)
+[![NixOS 24.05](https://img.shields.io/badge/NixOS-24.11-blue.svg?style=flat&logo=NixOS&logoColor=white)](https://nixos.org)
 
 [![Commit activity](https://img.shields.io/github/commit-activity/m/totoroot/dotfiles?style=flat)](https://codeberg.org/totoroot/dotfiles/activity/monthly)
 [![Latest commit](https://img.shields.io/github/last-commit/totoroot/dotfiles/main?label=Latest%20Commit&style=flat)](https://codeberg.org/totoroot/dotfiles/commits/branch/main)
@@ -38,42 +38,70 @@ In case you need help getting started with NixOS and want to use these dotfiles 
 
 If you've never before installed NixOS, make sure to read through the [official installation guide](https://nixos.wiki/wiki/NixOS_Installation_Guide). This quick start guide is based on the [installation instructions in the official NixOS manual](https://nixos.org/manual/nixos/stable/index.html#ch-installation) so you might want to skim over them as well before getting started.
 
+Also, if you run into any issues, especially when trying to follow the installation instructions and you get stuck, please open an issue either [on Codeberg](https://codeberg.org/totoroot/dotfiles/issues/new) or [on GitHub](https://github.com/totoroot/dotfiles/issues/new).
 
 ## Quick start
+
+### Using the minimal installer image
 
 1. Yoink the minimal ISO image of [NixOS from the official download page][nixos].
 
 2. Verify integrity of the ISO image and flash to boot medium.
 
-2. Boot into the installer.
+3. Boot into the installer.
 
-3. Create the mount directories with `mkdir -p /mnt/boot`.
+4. Create the mount directories with `mkdir -p /mnt/boot`.
 
-3. Do your partitions and mount your root to `/mnt`. I recommend first doing `sudo su` for ease of use. Be careful with those labels though.
+5. Do your partitions and mount your root to `/mnt`. I recommend first doing `sudo su` for ease of use. Be careful with those labels though.
 
-4. Check whether everything is mounted correctly by running `lsblk`. Check disk labels by running `blkid`.
+6. Check whether everything is mounted correctly by running `lsblk`. Check disk labels by running `blkid`.
 
 4. Install `git` with `nix-env -iA nixos.git`.
 
-5. Make sure you've got a working network connection and clone the repo with `git clone https://codeberg.org/totoroot/dotfiles /mnt/etc/nixos`.
+5. Make sure you've got a working, stable network connection as it will be needed for installing/rebuilding the system's configuration.
 
-6. Think of a good name for your new host and create a directory for it with `mkdir -p /mnt/etc/nixos/hosts/<new-host>`.
+### Using the graphical installer image
 
-5. Run `nixos-generate-config --root /mnt/etc/nixos/hosts/<new-host>` to produce the default `configuration.nix` and `hardware-configuration.nix`.
+1. Install NixOS following the [official instructions for graphical installation](https://nixos.org/manual/nixos/stable/#sec-installation-graphical) according to your needs (encryption, partioning etc.).
+  Since most of my hosts use KDE Plasma as a desktop environment at the moment, it makes sense to use the KDE Plasma image, so that the first rebuild will not take as long.
+  For most platforms, this should work without any issues with the default configuration. You should not have to configure much before installing NixOS.
 
-7. For a new host enter the cloned repo and duplicate an existing configuration (`cd nixos && cp -r hosts/purple hosts/<new-host>`) and make adjustments with `nano hosts/<new-host>/default.nix`.
+2. Reboot your system and boot into your system's first generation.
 
-8. Get rid of the default configuration with `rm /mnt/configuration.nix` and override the hardware configuration in the cloned repo for your host with `cp /mnt/hardware-configuration.nix /mnt/etc/nixos/hosts/<new-host>/`.
+3. Open a terminal. If you used the KDE Plasma image, launch Konsole.
 
-    For a different partitioning scheme make sure to change the hardware-configuration with `nano hosts/<new-host>/hardware-configuration.nix`.
+### Continuing with the install/rebuild
 
-9. Add nixPkgs channel and install flakes `nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && nix-channel --update && nix-env -iA nixpkgs.nixFlakes`.
+6. Clone the dotfiles to any directory in your home directory. I prefer putting it alongside other dotfiles in `~/.config/`.
+  `git clone https://codeberg.org/totoroot/dotfiles ~/.config/dotfiles`
 
-10. Install NixOS with configuration for host "purple" `nixos-install --root /mnt --flake /mnt/etc/nixos#<new-host> --impure`.
+7. Look through available configurations in the `hosts` directory. Every host subdirectory includes a little README, that should help you figure out, which host configuration you could base your configuration on.
+  For a desktop PC look at `purple`, for a server look at `violet`, for a notebook look at `grape`.
 
-11. Reboot!
+8. Once you found a configuration you like, copy its directory and think of a good name for your new host. Then run `cp -r ~/.config/dotfiles/hosts/grape ~/.config/dotfiles/hosts/<new-host>`.
+
+9. Overwrite the hardware configuration file in the copied directory with a new one.
+  Run `sudo nixos-generate-config --show-hardware-config > ~/.config/dotfiles/hosts/<new-host>/hardware-configuration.nix`
+
+10. In case you want to make adjustments to the configuration, do it now.
+
+11. Check whether the partitioning scheme in  `~/.config/dotfiles/hosts/<new-host>/hardware-configuration.nix` is correct.
+
+12. Add nixpkgs channel and install flakes `nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && nix-channel --update && nix-env -iA nixpkgs.nixFlakes`.
+
+13. In case you have already installed with the graphical installer and rebooted, rebuild your system with the following command.
+  `nixos-rebuild boot --flake /mnt/etc/nixos#<new-host> --impure`
+
+13. In case you haven't yet installed, run the installer with the following command:
+  `nixos-install --root /mnt --flake /mnt/etc/nixos#<new-host> --impure`
+
+14. Reboot!
 
 ## Management
+
+Since Nix tooling can be confusing, I'm occasionally using [hlissner's](https://github.com/hlissner) wrapper `hey`.
+
+For example to rebuild your system using the flake, run `hey re` instead of `nixos-rebuild switch --flake /mnt/etc/nixos#<host> --impure`.
 
 And I say, `bin/hey`. [What's going on?](http://hemansings.com/)
 
