@@ -38,7 +38,6 @@ with inputs;
     };
     registry = {
       nixos.flake = nixos;
-      nixpkgs.flake = nixpkgs;
     };
     # Take out the garbage every once in a while
     gc = {
