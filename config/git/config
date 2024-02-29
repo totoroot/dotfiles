@@ -13,16 +13,18 @@
     prune=true
 [diff]
 	tool = meld
-    diffcolorMove = default
+    colorMoved = default
 [interactive]
     diffFilter = delta --color-only
 [merge]
     conflictstyle = diff3
 [delta]
     theme = Dracula
+    # Use n and N to move between diff sections
     navigate = true
     side-by-side = true
 [core]
+    pager = delta
     whitespace = trailing-space
 [github]
     user = totoroot

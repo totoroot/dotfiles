@@ -10,10 +10,15 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Distributed version control system
       gitAndTools.gitFull
+      # Simple terminal UI for Git
       lazygit
+      # Git repository summary on your terminal
       onefetch
+      # Linting for your Git commit messages
       gitlint
+      # A syntax-highlighting pager for Git
       delta
     ];
 
