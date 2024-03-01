@@ -13,13 +13,18 @@ in {
       xserver = {
         enable = true;
         # Display Manager for KDE Plasma
-        displayManager = {
+        displayManager.sddm = {
           # Make it rewritable in case Plasma should be installed
           # but other display manager should be used
-          sddm.enable = mkDefault true;
+          enable = mkDefault true;
+          # Use Wayland Session by default
+          wayland.enable = mkDefault true;
         };
         # Enable KDE Plasma itself
-        desktopManager.plasma5.enable = true;
+        desktopManager.plasma6 = {
+          enable = true;
+          enableQt5Integration = true;
+        };
       };
     };
 
@@ -27,7 +32,7 @@ in {
     programs.kdeconnect.enable = true;
 
     # Exclude unnecessary KDE packages
-    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    environment.plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
       gwenview
       okular
@@ -37,7 +42,7 @@ in {
     ];
 
     # Install a calculator
-    environment.systemPackages = with pkgs.libsForQt5; [
+    environment.systemPackages = with pkgs.kdePackages; [
       kcalc
     ];
   };
