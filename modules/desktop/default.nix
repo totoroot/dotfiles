@@ -55,7 +55,7 @@ in {
       # Light-weight image viewer
       feh
       # SVG-based Qt5 theme engine plus a config tool and extra themes
-      libsForQt5.qtstyleplugin-kvantum
+      kdePackages.qtstyleplugin-kvantum
     ];
 
     ## Apps/Services

@@ -25,10 +25,10 @@ in {
       # Virtual filesystem support library
       gvfs
       # KDE file manager and accessories for displaying thumbnails, previews etc.
-      libsForQt5.dolphin
-      libsForQt5.dolphin-plugins
-      libsForQt5.kdegraphics-thumbnailers
-      libsForQt5.kio-extras
+      kdePackages.dolphin
+      kdePackages.dolphin-plugins
+      kdePackages.kdegraphics-thumbnailers
+      kdePackages.kio-extras
       # Tray application and Dolphin/Plasma integration for Syncthing
       syncthingtray
     ];
