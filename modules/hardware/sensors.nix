@@ -9,6 +9,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = [ pkgs.lm_sensors ];
+    environment.systemPackages = with pkgs; [
+      # Tools for reading hardware sensors
+      lm_sensors
+      # A tool that reads information about your system's hardware from the BIOS according to the SMBIOS/DMI standard
+      dmidecode
+    ];
   };
 }
