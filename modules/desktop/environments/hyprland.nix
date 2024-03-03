@@ -81,7 +81,7 @@ in
       # Core Wayland window system code and protocol
       egl-wayland
       # ElKowars wacky widgets
-      eww-wayland
+      eww
       # Window switcher, run dialog and dmenu replacement for Wayland
       rofi-wayland
       # Command-line copy/paste utilities for Wayland
