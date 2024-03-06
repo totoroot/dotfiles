@@ -39,7 +39,7 @@ in {
       zsh
       # ZSH completions for Nix, NixOS, and NixOps
       nix-zsh-completions
-      # Fish shell history-substring-search for Zsh
+      # Fish shell history-substring-search for ZSH
       zsh-history-substring-search
     ];
 

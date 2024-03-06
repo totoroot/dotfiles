@@ -114,6 +114,8 @@ in {
       pipes
       # A fast, async, stream-based link checker written in Rust
       lychee
+      # A fast cd command that learns your habits
+      zoxide
     ];
 
     user.extraGroups = [ "admin" ];
