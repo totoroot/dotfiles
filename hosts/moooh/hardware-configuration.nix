@@ -37,6 +37,7 @@
     kernelModules = [
       "kvm-intel"
       "1915"
+      "v4l2loopback"
     ];
     kernelParams = [
       # needed for Intel Iris Xe
