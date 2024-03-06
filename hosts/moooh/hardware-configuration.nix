@@ -102,8 +102,6 @@
     };
   };
 
-  services.xserver.videoDrivers = [ "intel" ];
-
   services.fstrim.enable = true;
 
   environment.variables = {
