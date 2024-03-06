@@ -60,7 +60,25 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = "powersave";
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+    cpuFreqGovernor = "powersave";
+  };
+
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
 
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
@@ -84,9 +102,6 @@
   };
 
   services.xserver.videoDrivers = [ "intel" ];
-
-  services.tlp.enable = ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
-    || !config.services.power-profiles-daemon.enable);
 
   services.fstrim.enable = true;
 
