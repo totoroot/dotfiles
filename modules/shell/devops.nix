@@ -17,17 +17,20 @@ in {
       # Linter for ansible
       ansible-lint
       # Generate typed CustomResources from a Kubernetes CustomResourceDefinition
-      crd2pulumi
+      # crd2pulumi
       # Python-based infrastructure automation
       pyinfra
       # Cloud development platform that makes creating cloud programs easy and productive
-      pulumi-bin
+      # pulumi-bin
       # Tool for building, changing, and versioning infrastructure
-      terraform
+      # terraform
       # CLI tool to generate terraform files from existing infrastructure (reverse Terraform). Infrastructure to Code
-      terraformer
+      # terraformer
       # Like cURL, but for gRPC: Command-line tool for interacting with gRPC servers
       grpcurl
+      # Tool for building, changing, and versioning infrastructure
+      opentofu
+      # Google Cloud Bigtable Tool
       google-cloud-bigtable-tool
     ];
   };
