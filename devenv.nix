@@ -22,15 +22,13 @@
 
   pre-commit = {
     hooks = {
-      deadnix.enable = true;
-      markdownlint.enable = false;
+      deadnix = {
+        enable = true;
+        settings.hidden = true;
+      };
+      mdl.enable = true;
       nixpkgs-fmt.enable = true;
       shellcheck.enable = true;
-    };
-    settings = {
-      deadnix = {
-        hidden = true;
-      };
     };
   };
 }

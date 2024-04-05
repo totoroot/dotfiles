@@ -58,7 +58,7 @@
     };
 
     # Development environments in seconds
-    devenv.url = "github:cachix/devenv/python-rewrite";
+    devenv.url = "github:cachix/devenv/latest";
 
     # Graphical App Store for Nix/NixOS
     nix-software-center.url = "github:vlinkz/nix-software-center";
