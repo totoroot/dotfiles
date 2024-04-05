@@ -285,6 +285,25 @@
     pc = "pycharm-community";
   };
 
+  systemd.services.nix-daemon.environment.TMPDIR = "/mnt/tmp";
+
+  nix = {
+    buildMachines = [{
+      hostName = "purple";
+      system = "x86_64-linux";
+      protocol = "ssh-ng";
+      maxJobs = 8;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      mandatoryFeatures = [ "big-parallel" ];
+    }];
+    distributedBuilds = true;
+    # Optional. Useful when the builder has a faster internet connection than yours
+    extraOptions = ''
+      	  builders-use-substitutes = true
+      	'';
+  };
+
   # Limit update size/frequency of rebuilds
   # See https://mastodon.online/@nomeata/109915786344697931
   documentation.nixos.enable = false;
