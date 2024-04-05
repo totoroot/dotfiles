@@ -16,7 +16,7 @@
         hyprland.enable = true;
         lxqt.enable = false;
         plasma.enable = true;
-        xfce.enable = true;
+        xfce.enable = false;
       };
       anki.enable = true;
       backup.enable = true;
