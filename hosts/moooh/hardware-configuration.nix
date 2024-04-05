@@ -37,7 +37,6 @@
     kernelModules = [
       "kvm-intel"
       "1915"
-      "v4l2loopback"
     ];
     kernelParams = [
       # needed for Intel Iris Xe
@@ -89,16 +88,11 @@
     intel-media-driver
   ];
 
-  hardware.ipu6 = {
-    enable = false;
-    platform = "ipu6ep";
-  };
-
   services.fprintd = {
-    enable = true;
+    enable = false;
     tod = {
-      enable = true;
-      driver = pkgs.fork.libfprint-2-tod1-broadcom;
+      enable = false;
+      # driver = pkgs.fork.libfprint-2-tod1-broadcom;
     };
   };
 
