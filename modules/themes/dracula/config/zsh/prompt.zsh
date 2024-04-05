@@ -64,7 +64,18 @@ prompt_init() {
     fi
   fi
 
-  RPROMPT='%F{blue}%~%F{magenta}${vcs_info_msg_0_}$(prompt_git_dirty)%f'
+  # devenv shell
+  if [[ ${name} = "devenv-shell-env" ]]; then
+    SHELL_SYMBOL="%F{cyan}❆͐  "
+  # nix-shell
+  elif [[ ${name} = "shell" ]]; then
+    SHELL_SYMBOL="%F{blue}❆͐  "
+  else
+  # standard
+    SHELL_SYMBOL=""
+  fi
+
+  RPROMPT='${SHELL_SYMBOL}%F{blue}%~%F{magenta}${vcs_info_msg_0_}$(prompt_git_dirty)%f'
   PROMPT='%F{magenta}${prompt_username}%f${PROMPT_SYMBOL:-$ }%f'
 }
 
