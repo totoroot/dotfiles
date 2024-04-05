@@ -53,7 +53,7 @@
         tor.enable = false;
       };
       communication = {
-        delta.enable = false;
+        delta.enable = true;
         discord.enable = false;
         jitsi.enable = false;
         matrix.enable = true;
@@ -155,7 +155,7 @@
       jellyfin.enable = false;
       k8s.enable = true;
       nginx.enable = false;
-      vpn.enable = false;
+      vpn.enable = true;
       ssh.enable = true;
       syncthing.enable = false;
       tailscale.enable = true;
@@ -172,6 +172,7 @@
 
   # NixOS service configuration
   services = {
+    thermald.enable = true;
     xserver = {
       # Enable the X11 windowing system.
       enable = true;
@@ -241,6 +242,8 @@
     delta
     # Integrated Development Environment (IDE) by Jetbrains
     jetbrains.pycharm-community
+    # To Do List / Time Tracker with Jira Integration
+    super-productivity
   ];
 
   systemd.user.services."cloud-sql-proxy" = {
