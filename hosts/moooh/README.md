@@ -7,14 +7,16 @@ Yes, I'm running NixOS as my daily driver at work. Yes, it's been very stable fo
 
 ## Hardware Details
 
-For hardware details of the Lenovo T470, see [this page](https://www.notebookcheck.net/Lenovo-ThinkPad-T470-Core-i5-Full-HD-Notebook-Review.198130.0.html).
+For hardware details of the Dell Latitude 7440, see [this page](https://www.notebookcheck.net/Dell-Latitude-7440-laptop-review-Beating-the-Latitude-9440-in-some-key-areas.732719.0.html).
+
+For information support on Linux support, best consult [this page on the Arch Wiki](https://wiki.archlinux.org/title/Dell_Latitude_7440).
 
 The model I have, has the following specifications:
 
-  - **CPU**: [Intel Core i5-7300U](https://ark.intel.com/content/www/us/en/ark/products/97472/intel-core-i57300u-processor-3m-cache-up-to-3-50-ghz.html)
-  - **RAM**: 2 x 8GB SK Hynix DDR4 Synchronous Unbuffered (2133MT/s)
-  - **Disk**: Samsung PM961 NVMe PCIe M.2 256GB
-
+- **CPU**: [Intel Core i7-1370P](https://ark.intel.com/content/www/us/en/ark/products/232146/intel-core-i7-1370p-processor-24m-cache-up-to-5-20-ghz.html)
+  14 Cores - 20 Threads - 5.2 GHz Boost Clock
+- **RAM**: 8 x 4 GB LPDDR5 Row Of Chips (6400MT/s)
+- **Disk**: Micron 2450 NVMe 1024GB
 
 ## Configuration
 
