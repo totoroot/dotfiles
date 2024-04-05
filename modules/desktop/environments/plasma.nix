@@ -20,11 +20,11 @@ in {
           # Use Wayland Session by default
           wayland.enable = mkDefault true;
         };
-        # Enable KDE Plasma itself
-        desktopManager.plasma6 = {
-          enable = true;
-          enableQt5Integration = true;
-        };
+      };
+      # Enable KDE Plasma itself
+      desktopManager.plasma6 = {
+        enable = true;
+        enableQt5Integration = true;
       };
     };
 
