@@ -58,7 +58,7 @@
         discord.enable = false;
         jitsi.enable = false;
         matrix.enable = true;
-        signal.enable = false;
+        signal.enable = true;
         telegram.enable = false;
       };
       gaming = {
