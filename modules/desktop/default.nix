@@ -7,7 +7,7 @@ in {
   config = mkIf config.services.xserver.enable {
 
     # Enable automatic login for the default user
-    services.xserver.displayManager.autoLogin = {
+    services.displayManager.autoLogin = {
       enable = mkDefault true;
       user = "mathym";
     };

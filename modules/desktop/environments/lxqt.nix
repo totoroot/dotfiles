@@ -10,13 +10,11 @@ in {
 
   config = mkIf cfg.enable {
     services = {
+      displayManager.sddm.enable = true;
       xserver = {
+        displayManager.lightdm.enable = false;
         enable = true;
         # Display Manager for LXQt
-        displayManager = {
-          sddm.enable = true;
-          lightdm.enable = false;
-        };
         # Enable LXQt itself
         desktopManager.lxqt.enable = true;
       };

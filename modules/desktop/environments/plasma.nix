@@ -10,16 +10,16 @@ in {
 
   config = mkIf cfg.enable {
     services = {
+      # Display Manager for KDE Plasma
+      displayManager.sddm = {
+        # Make it rewritable in case Plasma should be installed
+        # but other display manager should be used
+        enable = mkDefault true;
+        # Use Wayland Session by default
+        wayland.enable = mkDefault true;
+      };
       xserver = {
         enable = true;
-        # Display Manager for KDE Plasma
-        displayManager.sddm = {
-          # Make it rewritable in case Plasma should be installed
-          # but other display manager should be used
-          enable = mkDefault true;
-          # Use Wayland Session by default
-          wayland.enable = mkDefault true;
-        };
       };
       # Enable KDE Plasma itself
       desktopManager.plasma6 = {

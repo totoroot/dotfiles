@@ -187,24 +187,24 @@
 
   # NixOS service configuration
   services = {
+    # Enable touchpad support
+    libinput.enable = true;
+    displayManager = {
+      # Disable autologin for increased security on portable device
+      autoLogin.enable = false;
+      defaultSession = "plasma";
+      # Use SDDM as display manager
+      sddm = {
+        enable = true;
+        theme = "Dracula";
+      };
+    };
     xserver = {
       # Enable the X11 windowing system.
       enable = true;
       # Set Austrian as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
       xkb.layout = "at, eu";
-      # Enable touchpad support
-      libinput.enable = true;
-      displayManager = {
-        # Disable autologin for increased security on portable device
-        autoLogin.enable = false;
-        defaultSession = "plasma";
-        # Use SDDM as display manager
-        sddm = {
-          enable = true;
-          theme = "Dracula";
-        };
-      };
     };
   };
 

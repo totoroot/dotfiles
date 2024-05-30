@@ -10,13 +10,11 @@ in {
 
   config = mkIf cfg.enable {
     services = {
+      # Display Manager for XFCE
+      displayManager.sddm.enable = true;
       xserver = {
         enable = true;
-        # Display Manager for XFCE
-        displayManager = {
-          sddm.enable = true;
-          lightdm.enable = false;
-        };
+        displayManager.lightdm.enable = false;
         # Enable XFCE and its modules itself
         desktopManager = {
           xfce = {
