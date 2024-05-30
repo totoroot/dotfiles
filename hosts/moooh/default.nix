@@ -23,6 +23,7 @@
       blender.enable = false;
       calibre.enable = false;
       clipboard.enable = true;
+      datadog.enable = true;
       documents.enable = true;
       flatpak.enable = true;
       fm.enable = true;
