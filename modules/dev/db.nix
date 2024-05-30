@@ -20,7 +20,7 @@ in {
       # Python SQL toolkit and Object Relational Mapper
       python310Packages.sqlalchemy
       # Universal SQL Client for developers, DBA and analysts
-      dbeaver
+      dbeaver-bin
       # Self-contained, serverless, zero-configuration, transactional SQL database engine
       sqlite
       # Python CLI utility and library for manipulating SQLite databases
