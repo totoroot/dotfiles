@@ -22,6 +22,8 @@ in {
       lazydocker
       # Top-like interface for container metrics
       ctop
+      # A tool for exploring each layer in a docker image
+      dive
     ];
 
     env.DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";

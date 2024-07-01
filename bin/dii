@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Docker Image Inspector
+# Use this to get the approximate Dockerfile for an existing Docker image
+
+# Extract information from layers
+docker history --no-trunc --format "{{.CreatedBy}}" "$1" |
+# Reverse the file
+tac |
+# Change /bin/(ba)?sh calls to RUN
+sed 's,^\(|3.*\)\?/bin/\(ba\)\?sh -c,RUN,' |
+# Remove RUN #(nop) calls for ENV,LABEL...
+sed 's,^RUN #(nop) *,,' |
+# Pretty print multi command lines following Docker best practices
+sed 's,  *&&  *, \\\n \&\& ,g'
