@@ -21,7 +21,8 @@
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
+    # nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
+    nixpkgs-fork.url = "github:pitkling/nixpkgs/libfprint-2-tod1-broadcom";
 
     # Nix hardware tweaks
     nixos-hardware.url = "github:nixos/nixos-hardware";
