@@ -33,9 +33,9 @@ in {
       # Simple .odt to .txt converter
       odt2txt
       # Graphical pdf (and epub, cbz, ...) reader that works inside the kitty terminal
-      # termpdfpy
+      termpdfpy
       # Fast, easy and free BitTorrent client
-      transmission
+      # transmission_4
       # Utility for RAR archives
       unrar
       # Extraction utility for archives compressed in .zip format
