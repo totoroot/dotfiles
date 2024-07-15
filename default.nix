@@ -90,10 +90,6 @@ with inputs;
     openssh.startWhenNeeded = mkDefault true;
     # Enable periodic SSD TRIM to extend life of mounted SSDs
     fstrim.enable = mkDefault true;
-    # Suspend when power button is short-pressed
-    logind.extraConfig = mkDefault ''
-      HandlePowerKey=suspend
-    '';
   };
 
   # Do not start a sulogin shell if mounting a filesystem fails
