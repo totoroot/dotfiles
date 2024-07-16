@@ -82,7 +82,7 @@
 
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     vaapiIntel
     libvdpau-va-gl
     intel-media-driver
@@ -99,6 +99,6 @@
   services.fstrim.enable = true;
 
   environment.variables = {
-    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+    VDPAU_DRIVER = lib.mkIf config.hardware.graphics.enable (lib.mkDefault "va_gl");
   };
 }

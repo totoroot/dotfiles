@@ -9,8 +9,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    hardware.graphics.enable = true;
     hardware.opengl = {
-      enable = true;
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
