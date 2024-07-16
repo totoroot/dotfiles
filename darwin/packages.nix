@@ -93,7 +93,7 @@
     # A linter for YAML files
     yamllint
     # Command-line tool to download videos from YouTube.com and other sites
-    youtube-dl
+    youtube-dlp
     # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents - repo owner: kislyuk
     # yq
     # Portable command-line YAML processor - repo owner: mikefarah

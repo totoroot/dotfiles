@@ -4,8 +4,11 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.media.audio;
-in {
+let
+  cfg = config.modules.desktop.media.audio;
+  lollypopWithoutYT = pkgs.lollypop.override { youtubeSupport = false; };
+in
+{
   options.modules.desktop.media.audio = {
     enable = mkBoolOpt false;
   };
@@ -15,9 +18,9 @@ in {
       # Terminal-based music player, library, and streaming audio server
       musikcube
       # Modern music player for GNOME
-      lollypop
+      lollypopWithoutYT
       # Official MusicBrainz music tagger
-      picard
+      # picard
     ];
 
     home.dconfSettings = {
