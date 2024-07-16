@@ -10,6 +10,10 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # A utility that combines the usability of The Silver Searcher with the raw speed of grep
+      ripgrep
+      # Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more
+      ripgrep-all
       # Create and view interactive cheatsheets
       cheat
       # Graphical activity monitor
@@ -78,14 +82,12 @@ in {
       cmus
 
       ## Fetch programs
-      # Fast, highly customizable system info script
-      neofetch
-      # Fetch written in posix shell without any external commands
-      fet-sh
-      # Pretty system information tool written in POSIX sh
-      pfetch
-      # Yet another *nix distro fetching program, but less complex
-      disfetch
+      # neofetch with pride flags <3
+      hyfetch
+      # Pretty system information tool written in Rust
+      pfetch-rs
+      # neofetch but for IP addresses
+      ipfetch
 
       ## Communication tools
       # Command-line and dbus interface for communicating with the Signal messaging service
@@ -94,12 +96,8 @@ in {
       ## Document tools
       # Conversion between markup formats
       pandoc
-      # Tools for rendering web pages to PDF or images
-      # wkhtmltopdf
       # PDF processor
       pdfcpu
-      # Utility to search text in PDF files
-      pdfgrep
 
       ## Other fun stuff
       # Matrix effect
