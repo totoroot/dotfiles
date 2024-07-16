@@ -41,7 +41,7 @@ in
         fi
 
         # Otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up --login-server https://headscale.xn--berwachungsbehr-mtb1g.de
+        ${tailscale}/bin/tailscale up --reset --login-server https://headscale.xn--berwachungsbehr-mtb1g.de
       '';
     };
 
