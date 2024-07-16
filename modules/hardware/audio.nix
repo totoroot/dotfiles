@@ -12,9 +12,6 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      # Enable ALSA sound
-      sound.enable = true;
-
       # RealtimeKit system service provides
       # realtime scheduling priority to user processes on demand
       # Required by the audio server
