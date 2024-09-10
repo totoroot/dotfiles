@@ -62,7 +62,7 @@ format = '$symbol [$namespace](purple) on [$context](blue) '
 [kubernetes.context_aliases]
 'gke_dev-smaxtec-system_europe-west1-d_dev-cluster' = 'dev'
 'gke_smaxtec-system_europe-west1-d_kuhbernetes1' = 'kuhbernetes1'
-'gke_smaxtec-system_europe-west1-d_pants' = 'pants'
+'gke_smaxtec-system_europe-west1-d_kuhbernetes' = 'kuhbernetes'
 'gke_smaxtec-system_europe-west1-d_pins' = 'pins'
 'gke_raw-data-logger-394910_europe-west1-d_radar' = 'radar'
 'gke_dev-smaxtec-system_europe-west1-d_smaxtec-simulator' = 'simulator'
