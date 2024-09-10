@@ -38,8 +38,6 @@ in {
       black
       # Linter for yaml files
       yamllint
-      # Check websites for broken links
-      linkchecker
     ];
 
     env.IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
