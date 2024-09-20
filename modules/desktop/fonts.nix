@@ -29,7 +29,7 @@ in {
         symbola
         noto-fonts
         carlito
-        emojione
+        # emojione
         fira
         fira-code
         fira-code-symbols

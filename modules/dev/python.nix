@@ -12,28 +12,28 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python310
-      python310Packages.pip
+      python3
+      python3Packages.pip
       # pip update helpers
-      python310Packages.pipdate
-      python310Packages.virtualenv
-      python310Packages.pytest-virtualenv
-      python310Packages.virtualenv-clone
-      python310Packages.tox
-      python310Packages.ipython
-      python310Packages.setuptools
-      python310Packages.pylint
-      python310Packages.requests
+      python3Packages.pipdate
+      python3Packages.virtualenv
+      python3Packages.pytest-virtualenv
+      python3Packages.virtualenv-clone
+      python3Packages.tox
+      python3Packages.ipython
+      python3Packages.setuptools
+      python3Packages.pylint
+      python3Packages.requests
       # Python dependency management and packaging made easy
-      python310Packages.poetry-core
+      python3Packages.poetry-core
       # Jupyter lab environment notebook server extension
-      # python310Packages.jupyterlab
+      # python3Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
-      # python310Packages.jupytext
+      # python3Packages.jupytext
       # Scientific tools for Python
-      python310Packages.numpy
+      python3Packages.numpy
       # Python Data Analysis Library
-      python310Packages.pandas
+      python3Packages.pandas
       # Uncompromising Python code formatter
       black
       # Linter for yaml files

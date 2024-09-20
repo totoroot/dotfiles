@@ -26,6 +26,7 @@
 [core]
     pager = delta
     whitespace = trailing-space
+    excludesFile = ~/.config/git/ignore
 [github]
     user = totoroot
 [rebase]

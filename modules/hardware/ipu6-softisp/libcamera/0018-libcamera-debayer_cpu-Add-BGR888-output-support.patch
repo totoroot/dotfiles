@@ -1,0 +1,125 @@
+From b835b2c90785ee02bc98888bf165713d16c24cc4 Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Mon, 18 Dec 2023 19:21:07 +0100
+Subject: [PATCH 18/25] libcamera: debayer_cpu: Add BGR888 output support
+
+BGR888 is RGB888 with the red and blue pixels swapped, adjust
+the debayering to swap the red and blue pixels in the bayer pattern
+to add support for writing formats::BGR888.
+
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+Tested-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org> # sc8280xp Lenovo x13s
+Tested-by: Pavel Machek <pavel@ucw.cz>
+---
+ .../internal/software_isp/debayer_cpu.h       |  1 +
+ src/libcamera/software_isp/debayer_cpu.cpp    | 43 ++++++++++++++++---
+ 2 files changed, 39 insertions(+), 5 deletions(-)
+
+diff --git a/include/libcamera/internal/software_isp/debayer_cpu.h b/include/libcamera/internal/software_isp/debayer_cpu.h
+index 1147b368..bdeab7c0 100644
+--- a/include/libcamera/internal/software_isp/debayer_cpu.h
++++ b/include/libcamera/internal/software_isp/debayer_cpu.h
+@@ -133,6 +133,7 @@ private:
+ 	unsigned int lineBufferIndex_;
+ 	unsigned int x_shift_; /* Offset of 0/1 applied to window_.x */
+ 	bool enableInputMemcpy_;
++	bool swapRedBlueGains_;
+ 	float gamma_correction_;
+ 	int measuredFrames_;
+ 	int64_t frameProcessTime_;
+diff --git a/src/libcamera/software_isp/debayer_cpu.cpp b/src/libcamera/software_isp/debayer_cpu.cpp
+index 7b7623b7..0edea4d3 100644
+--- a/src/libcamera/software_isp/debayer_cpu.cpp
++++ b/src/libcamera/software_isp/debayer_cpu.cpp
+@@ -245,7 +245,7 @@ int DebayerCpu::getInputConfig(PixelFormat inputFormat, DebayerInputConfig &conf
+ 		config.bpp = (bayerFormat.bitDepth + 7) & ~7;
+ 		config.patternSize.width = 2;
+ 		config.patternSize.height = 2;
+-		config.outputFormats = std::vector<PixelFormat>({ formats::RGB888 });
++		config.outputFormats = std::vector<PixelFormat>({ formats::RGB888, formats::BGR888 });
+ 		return 0;
+ 	}
+ 
+@@ -255,7 +255,7 @@ int DebayerCpu::getInputConfig(PixelFormat inputFormat, DebayerInputConfig &conf
+ 		config.bpp = 10;
+ 		config.patternSize.width = 4; /* 5 bytes per *4* pixels */
+ 		config.patternSize.height = 2;
+-		config.outputFormats = std::vector<PixelFormat>({ formats::RGB888 });
++		config.outputFormats = std::vector<PixelFormat>({ formats::RGB888, formats::BGR888 });
+ 		return 0;
+ 	}
+ 
+@@ -266,7 +266,7 @@ int DebayerCpu::getInputConfig(PixelFormat inputFormat, DebayerInputConfig &conf
+ 
+ int DebayerCpu::getOutputConfig(PixelFormat outputFormat, DebayerOutputConfig &config)
+ {
+-	if (outputFormat == formats::RGB888) {
++	if (outputFormat == formats::RGB888 || outputFormat == formats::BGR888) {
+ 		config.bpp = 24;
+ 		return 0;
+ 	}
+@@ -302,12 +302,41 @@ int DebayerCpu::setupStandardBayerOrder(BayerFormat::Order order)
+ 	return 0;
+ }
+ 
+-/* TODO: this ignores outputFormat since there is only 1 supported outputFormat for now */
+-int DebayerCpu::setDebayerFunctions(PixelFormat inputFormat, [[maybe_unused]] PixelFormat outputFormat)
++int DebayerCpu::setDebayerFunctions(PixelFormat inputFormat, PixelFormat outputFormat)
+ {
+ 	BayerFormat bayerFormat =
+ 		BayerFormat::fromPixelFormat(inputFormat);
+ 
++	swapRedBlueGains_ = false;
++
++	switch (outputFormat) {
++	case formats::RGB888:
++		break;
++	case formats::BGR888:
++		/* Swap R and B in bayer order to generate BGR888 instead of RGB888 */
++		swapRedBlueGains_ = true;
++
++		switch (bayerFormat.order) {
++		case BayerFormat::BGGR:
++			bayerFormat.order = BayerFormat::RGGB;
++			break;
++		case BayerFormat::GBRG:
++			bayerFormat.order = BayerFormat::GRBG;
++			break;
++		case BayerFormat::GRBG:
++			bayerFormat.order = BayerFormat::GBRG;
++			break;
++		case BayerFormat::RGGB:
++			bayerFormat.order = BayerFormat::BGGR;
++			break;
++		default:
++			goto invalid_fmt;
++		}
++		break;
++	default:
++		goto invalid_fmt;
++	}
++
+ 	x_shift_ = 0;
+ 
+ 	if ((bayerFormat.bitDepth == 8 || bayerFormat.bitDepth == 10 || bayerFormat.bitDepth == 12) &&
+@@ -355,6 +384,7 @@ int DebayerCpu::setDebayerFunctions(PixelFormat inputFormat, [[maybe_unused]] Pi
+ 		}
+ 	}
+ 
++invalid_fmt:
+ 	LOG(Debayer, Error) << "Unsupported input output format combination";
+ 	return -EINVAL;
+ }
+@@ -594,6 +624,9 @@ void DebayerCpu::process(FrameBuffer *input, FrameBuffer *output, DebayerParams
+ 		gamma_correction_ = params.gamma;
+ 	}
+ 
++	if (swapRedBlueGains_)
++		std::swap(params.gainR, params.gainB);
++
+ 	for (int i = 0; i < 256; i++) {
+ 		int idx;
+ 
+-- 
+2.43.0
+

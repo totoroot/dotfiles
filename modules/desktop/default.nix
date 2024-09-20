@@ -34,7 +34,7 @@ in {
       # Nix software center
       inputs.nix-software-center.packages.${system}.nix-software-center
       # Fallback icon themes
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       # A style to bend Qt applications to look like they belong into GNOME Shell
       adwaita-qt
       # Default fallback theme used by implementations of the icon theme specification

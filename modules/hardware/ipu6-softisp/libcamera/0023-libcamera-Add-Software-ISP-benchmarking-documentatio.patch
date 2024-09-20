@@ -1,0 +1,130 @@
+From 26e96232c314f9d34f6ee3be365c04918967084e Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Mon, 22 Jan 2024 17:18:00 +0100
+Subject: [PATCH 23/25] libcamera: Add "Software ISP benchmarking"
+ documentation
+
+Add a "Software ISP benchmarking" documentation section which describes
+the performance/power consumption measurements used during
+the Software ISP's development.
+
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ Documentation/index.rst                     |  1 +
+ Documentation/meson.build                   |  1 +
+ Documentation/software-isp-benchmarking.rst | 82 +++++++++++++++++++++
+ 3 files changed, 84 insertions(+)
+ create mode 100644 Documentation/software-isp-benchmarking.rst
+
+diff --git a/Documentation/index.rst b/Documentation/index.rst
+index 63fac72d..5442ae75 100644
+--- a/Documentation/index.rst
++++ b/Documentation/index.rst
+@@ -24,3 +24,4 @@
+    Lens driver requirements <lens_driver_requirements>
+    Python Bindings <python-bindings>
+    Camera Sensor Model <camera-sensor-model>
++   SoftwareISP Benchmarking <software-isp-benchmarking>
+diff --git a/Documentation/meson.build b/Documentation/meson.build
+index 7a58fec8..3872e0a8 100644
+--- a/Documentation/meson.build
++++ b/Documentation/meson.build
+@@ -80,6 +80,7 @@ if sphinx.found()
+         'lens_driver_requirements.rst',
+         'python-bindings.rst',
+         'sensor_driver_requirements.rst',
++        'software-isp-benchmarking.rst',
+        '../README.rst',
+     ]
+ 
+diff --git a/Documentation/software-isp-benchmarking.rst b/Documentation/software-isp-benchmarking.rst
+new file mode 100644
+index 00000000..738c8c65
+--- /dev/null
++++ b/Documentation/software-isp-benchmarking.rst
+@@ -0,0 +1,82 @@
++.. SPDX-License-Identifier: CC-BY-SA-4.0
++
++.. _software-isp-benchmarking:
++
++Software ISP benchmarking
++=========================
++
++The Software ISP is paricular sensitive to performance regressions
++therefor it is a good idea to always benchmark the Software ISP
++before and after making changes to it and ensure that there are
++no performance regressions.
++
++DebayerCpu class builtin benchmark
++----------------------------------
++
++The DebayerCpu class has a builtin benchmark. This benchmark
++measures the time spend on processing (collecting statistics
++and debayering) only, it does not measure the time spend on
++capturing or outputting the frames.
++
++The builtin benchmark always runs. So this can be used by simply
++running "cam" or "qcam" with a pipeline using the Software ISP.
++
++When it runs it will skip measuring the first 30 frames to
++allow the caches and the CPU temperature (turbo-ing) to warm-up
++and then it measures 30 fps and shows the total and per frame
++processing time using an info level log message:
++
++.. code-block::
++
++   INFO Debayer debayer_cpu.cpp:907 Processed 30 frames in 244317us, 8143 us/frame
++
++To get stable measurements it is advised to disable any other processes which
++may cause significant CPU usage (e.g. disable wifi, bluetooth and browsers).
++When possible it is also advisable to disable CPU turbo-ing and
++frequency-scaling.
++
++For example when benchmarking on a Lenovo ThinkPad X1 Yoga Gen 8, with
++the charger plugged in, the CPU can be fixed to run at 2 GHz using:
++
++.. code-block::
++
++   sudo x86_energy_perf_policy --turbo-enable 0
++   sudo cpupower frequency-set -d 2GHz -u 2GHz
++
++with these settings the builtin bench reports a processing time of ~7.8ms/frame
++on this laptop for FHD SGRBG10 (unpacked) bayer data.
++
++Measuring power consumption
++---------------------------
++
++Since the Software ISP is often used on mobile devices it is also
++important to measure power consumption and ensure that that does
++not regress.
++
++For example to measure power consumption on a Lenovo ThinkPad X1 Yoga Gen 8
++it needs to be running on battery and it should be configured with its
++platform-profile (/sys/firmware/acpi/platform_profile) set to balanced and
++with its default turbo and frequency-scaling behavior to match real world usage.
++
++Then start qcam to capture a FHD picture at 30 fps and position the qcam window
++so that it is fully visible. After this run the following command to monitor
++the power consumption:
++
++.. code-block::
++
++   watch -n 10 cat /sys/class/power_supply/BAT0/power_now /sys/class/hwmon/hwmon6/fan?_input
++
++Note this not only measures the power consumption in ųW it also monitors
++the speed of this laptop's 2 fans. This is important because depending on
++the ambient temperature the 2 fans may spin up while testing and this
++will cause an additional power consumption of approx. 0.5W messing up
++the measurement.
++
++After starting qcam + the watch command let the laptop sit without using
++it for 2 minutes for the readings to stabilize. Then check that the fans
++have not turned on and manually take a couple of consecutive power readings
++and avarage these.
++
++On the example Lenovo ThinkPad X1 Yoga Gen 8 laptop this results in
++a measured power consumption of approx. 13W while running qcam versus
++approx. 4-5W while setting idle with its OLED panel on.
+-- 
+2.43.0
+

@@ -1,0 +1,237 @@
+From e03beabbad83c4c283c7f1c2c4798b6c3e2eaf06 Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Tue, 19 Dec 2023 11:16:26 +0100
+Subject: [PATCH 20/25] libcamera: Add support for IGIG_GBGR_IGIG_GRGB bayer
+ order DNU
+
+The ov01a1s sensor has the following bayer pattern (4x4 tile repeating):
+
+IGIG
+GBGR
+IGIG
+GRGB
+
+Add support for this PixelFormat to libcamera.
+
+Do Not Upstream, first the include/linux/media-bus-format.h and
+include/linux/videodev2.h changes need to land in the upstream kernel.
+
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ include/libcamera/internal/bayer_format.h |  3 ++-
+ include/linux/drm_fourcc.h                |  2 ++
+ include/linux/media-bus-format.h          |  4 +++-
+ include/linux/videodev2.h                 |  3 +++
+ src/libcamera/bayer_format.cpp            |  5 +++++
+ src/libcamera/camera_sensor.cpp           |  3 +++
+ src/libcamera/formats.cpp                 | 20 ++++++++++++++++++++
+ src/libcamera/formats.yaml                |  5 +++++
+ src/libcamera/v4l2_pixelformat.cpp        |  4 ++++
+ src/libcamera/v4l2_subdevice.cpp          |  1 +
+ 10 files changed, 48 insertions(+), 2 deletions(-)
+
+diff --git a/include/libcamera/internal/bayer_format.h b/include/libcamera/internal/bayer_format.h
+index 78ba3969..e77106c3 100644
+--- a/include/libcamera/internal/bayer_format.h
++++ b/include/libcamera/internal/bayer_format.h
+@@ -27,7 +27,8 @@ public:
+ 		GBRG = 1,
+ 		GRBG = 2,
+ 		RGGB = 3,
+-		MONO = 4
++		MONO = 4,
++		IGIG_GBGR_IGIG_GRGB = 5,
+ 	};
+ 
+ 	enum class Packing : uint16_t {
+diff --git a/include/linux/drm_fourcc.h b/include/linux/drm_fourcc.h
+index 1496e097..750ae8c9 100644
+--- a/include/linux/drm_fourcc.h
++++ b/include/linux/drm_fourcc.h
+@@ -405,6 +405,8 @@ extern "C" {
+ #define DRM_FORMAT_SGRBG10	fourcc_code('B', 'A', '1', '0')
+ #define DRM_FORMAT_SGBRG10	fourcc_code('G', 'B', '1', '0')
+ #define DRM_FORMAT_SBGGR10	fourcc_code('B', 'G', '1', '0')
++/* Mixed 10 bit bayer + ir pixel pattern found on Omnivision ov01a1s */
++#define DRM_FORMAT_SIGIG_GBGR_IGIG_GRGB10 fourcc_code('O', 'V', '1', 'S')
+ 
+ /* 12-bit Bayer formats */
+ #define DRM_FORMAT_SRGGB12	fourcc_code('R', 'G', '1', '2')
+diff --git a/include/linux/media-bus-format.h b/include/linux/media-bus-format.h
+index 0dfc11ee..c5fbda0e 100644
+--- a/include/linux/media-bus-format.h
++++ b/include/linux/media-bus-format.h
+@@ -112,7 +112,7 @@
+ #define MEDIA_BUS_FMT_YUV16_1X48		0x202a
+ #define MEDIA_BUS_FMT_UYYVYY16_0_5X48		0x202b
+ 
+-/* Bayer - next is	0x3021 */
++/* Bayer - next is 0x3022 */
+ #define MEDIA_BUS_FMT_SBGGR8_1X8		0x3001
+ #define MEDIA_BUS_FMT_SGBRG8_1X8		0x3013
+ #define MEDIA_BUS_FMT_SGRBG8_1X8		0x3002
+@@ -145,6 +145,8 @@
+ #define MEDIA_BUS_FMT_SGBRG16_1X16		0x301e
+ #define MEDIA_BUS_FMT_SGRBG16_1X16		0x301f
+ #define MEDIA_BUS_FMT_SRGGB16_1X16		0x3020
++/* Mixed bayer + ir pixel pattern found on ov01a1s */
++#define MEDIA_BUS_FMT_SIGIG_GBGR_IGIG_GRGB10_1X10 0x3021
+ 
+ /* JPEG compressed formats - next is	0x4002 */
+ #define MEDIA_BUS_FMT_JPEG_1X8			0x4001
+diff --git a/include/linux/videodev2.h b/include/linux/videodev2.h
+index bfb315d6..13c6c9d3 100644
+--- a/include/linux/videodev2.h
++++ b/include/linux/videodev2.h
+@@ -678,6 +678,9 @@ struct v4l2_pix_format {
+ #define V4L2_PIX_FMT_SGBRG16 v4l2_fourcc('G', 'B', '1', '6') /* 16  GBGB.. RGRG.. */
+ #define V4L2_PIX_FMT_SGRBG16 v4l2_fourcc('G', 'R', '1', '6') /* 16  GRGR.. BGBG.. */
+ #define V4L2_PIX_FMT_SRGGB16 v4l2_fourcc('R', 'G', '1', '6') /* 16  RGRG.. GBGB.. */
++	/* 10bit mixed bayer + ir pixel pattern found on ov01a1s */
++#define V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10  v4l2_fourcc('O', 'V', '1', 'S') /* unpacked */
++#define V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10P v4l2_fourcc('O', 'V', '1', 'P') /* packed */
+ 
+ /* HSV formats */
+ #define V4L2_PIX_FMT_HSV24 v4l2_fourcc('H', 'S', 'V', '3')
+diff --git a/src/libcamera/bayer_format.cpp b/src/libcamera/bayer_format.cpp
+index 3bf15fb4..ae227540 100644
+--- a/src/libcamera/bayer_format.cpp
++++ b/src/libcamera/bayer_format.cpp
+@@ -108,6 +108,8 @@ const std::map<BayerFormat, Formats, BayerFormatComparator> bayerToFormat{
+ 		{ formats::SGRBG10, V4L2PixelFormat(V4L2_PIX_FMT_SGRBG10) } },
+ 	{ { BayerFormat::RGGB, 10, BayerFormat::Packing::None },
+ 		{ formats::SRGGB10, V4L2PixelFormat(V4L2_PIX_FMT_SRGGB10) } },
++	{ { BayerFormat::IGIG_GBGR_IGIG_GRGB, 10, BayerFormat::Packing::None },
++		{ formats::SIGIG_GBGR_IGIG_GRGB10, V4L2PixelFormat(V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10) } },
+ 	{ { BayerFormat::BGGR, 10, BayerFormat::Packing::CSI2 },
+ 		{ formats::SBGGR10_CSI2P, V4L2PixelFormat(V4L2_PIX_FMT_SBGGR10P) } },
+ 	{ { BayerFormat::GBRG, 10, BayerFormat::Packing::CSI2 },
+@@ -116,6 +118,8 @@ const std::map<BayerFormat, Formats, BayerFormatComparator> bayerToFormat{
+ 		{ formats::SGRBG10_CSI2P, V4L2PixelFormat(V4L2_PIX_FMT_SGRBG10P) } },
+ 	{ { BayerFormat::RGGB, 10, BayerFormat::Packing::CSI2 },
+ 		{ formats::SRGGB10_CSI2P, V4L2PixelFormat(V4L2_PIX_FMT_SRGGB10P) } },
++	{ { BayerFormat::IGIG_GBGR_IGIG_GRGB, 10, BayerFormat::Packing::CSI2 },
++		{ formats::SIGIG_GBGR_IGIG_GRGB10_CSI2P, V4L2PixelFormat(V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10P) } },
+ 	{ { BayerFormat::BGGR, 10, BayerFormat::Packing::IPU3 },
+ 		{ formats::SBGGR10_IPU3, V4L2PixelFormat(V4L2_PIX_FMT_IPU3_SBGGR10) } },
+ 	{ { BayerFormat::GBRG, 10, BayerFormat::Packing::IPU3 },
+@@ -193,6 +197,7 @@ const std::unordered_map<unsigned int, BayerFormat> mbusCodeToBayer{
+ 	{ MEDIA_BUS_FMT_SGBRG10_1X10, { BayerFormat::GBRG, 10, BayerFormat::Packing::None } },
+ 	{ MEDIA_BUS_FMT_SGRBG10_1X10, { BayerFormat::GRBG, 10, BayerFormat::Packing::None } },
+ 	{ MEDIA_BUS_FMT_SRGGB10_1X10, { BayerFormat::RGGB, 10, BayerFormat::Packing::None } },
++	{ MEDIA_BUS_FMT_SIGIG_GBGR_IGIG_GRGB10_1X10, { BayerFormat::IGIG_GBGR_IGIG_GRGB, 10, BayerFormat::Packing::None } },
+ 	{ MEDIA_BUS_FMT_SBGGR12_1X12, { BayerFormat::BGGR, 12, BayerFormat::Packing::None } },
+ 	{ MEDIA_BUS_FMT_SGBRG12_1X12, { BayerFormat::GBRG, 12, BayerFormat::Packing::None } },
+ 	{ MEDIA_BUS_FMT_SGRBG12_1X12, { BayerFormat::GRBG, 12, BayerFormat::Packing::None } },
+diff --git a/src/libcamera/camera_sensor.cpp b/src/libcamera/camera_sensor.cpp
+index 0ef78d9c..f19f72ea 100644
+--- a/src/libcamera/camera_sensor.cpp
++++ b/src/libcamera/camera_sensor.cpp
+@@ -510,6 +510,9 @@ int CameraSensor::initProperties()
+ 		case BayerFormat::MONO:
+ 			cfa = properties::draft::MONO;
+ 			break;
++		case BayerFormat::IGIG_GBGR_IGIG_GRGB:
++			cfa = properties::draft::RGB;
++			break;
+ 		}
+ 
+ 		properties_.set(properties::draft::ColorFilterArrangement, cfa);
+diff --git a/src/libcamera/formats.cpp b/src/libcamera/formats.cpp
+index 447e6238..aef7d598 100644
+--- a/src/libcamera/formats.cpp
++++ b/src/libcamera/formats.cpp
+@@ -599,6 +599,16 @@ const std::map<PixelFormat, PixelFormatInfo> pixelFormatInfo{
+ 		.pixelsPerGroup = 2,
+ 		.planes = {{ { 4, 1 }, { 0, 0 }, { 0, 0 } }},
+ 	} },
++	{ formats::SIGIG_GBGR_IGIG_GRGB10, {
++		.name = "SIGIG_GBGR_IGIG_GRGB10",
++		.format = formats::SIGIG_GBGR_IGIG_GRGB10,
++		.v4l2Formats = { V4L2PixelFormat(V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10), },
++		.bitsPerPixel = 10,
++		.colourEncoding = PixelFormatInfo::ColourEncodingRAW,
++		.packed = false,
++		.pixelsPerGroup = 4,
++		.planes = {{ { 4, 1 }, { 0, 0 }, { 0, 0 } }},
++	} },
+ 	{ formats::SBGGR10_CSI2P, {
+ 		.name = "SBGGR10_CSI2P",
+ 		.format = formats::SBGGR10_CSI2P,
+@@ -639,6 +649,16 @@ const std::map<PixelFormat, PixelFormatInfo> pixelFormatInfo{
+ 		.pixelsPerGroup = 4,
+ 		.planes = {{ { 5, 1 }, { 0, 0 }, { 0, 0 } }},
+ 	} },
++	{ formats::SIGIG_GBGR_IGIG_GRGB10_CSI2P, {
++		.name = "SIGIG_GBGR_IGIG_GRGB10_CSI2P",
++		.format = formats::SIGIG_GBGR_IGIG_GRGB10_CSI2P,
++		.v4l2Formats = { V4L2PixelFormat(V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10P), },
++		.bitsPerPixel = 10,
++		.colourEncoding = PixelFormatInfo::ColourEncodingRAW,
++		.packed = true,
++		.pixelsPerGroup = 4,
++		.planes = {{ { 4, 1 }, { 0, 0 }, { 0, 0 } }},
++	} },
+ 	{ formats::SBGGR12, {
+ 		.name = "SBGGR12",
+ 		.format = formats::SBGGR12,
+diff --git a/src/libcamera/formats.yaml b/src/libcamera/formats.yaml
+index 539ac0b3..0786a900 100644
+--- a/src/libcamera/formats.yaml
++++ b/src/libcamera/formats.yaml
+@@ -100,6 +100,8 @@ formats:
+       fourcc: DRM_FORMAT_SGBRG10
+   - SBGGR10:
+       fourcc: DRM_FORMAT_SBGGR10
++  - SIGIG_GBGR_IGIG_GRGB10:
++      fourcc: DRM_FORMAT_SIGIG_GBGR_IGIG_GRGB10
+ 
+   - SRGGB12:
+       fourcc: DRM_FORMAT_SRGGB12
+@@ -144,6 +146,9 @@ formats:
+   - SBGGR10_CSI2P:
+       fourcc: DRM_FORMAT_SBGGR10
+       mod: MIPI_FORMAT_MOD_CSI2_PACKED
++  - SIGIG_GBGR_IGIG_GRGB10_CSI2P:
++      fourcc: DRM_FORMAT_SIGIG_GBGR_IGIG_GRGB10
++      mod: MIPI_FORMAT_MOD_CSI2_PACKED
+ 
+   - SRGGB12_CSI2P:
+       fourcc: DRM_FORMAT_SRGGB12
+diff --git a/src/libcamera/v4l2_pixelformat.cpp b/src/libcamera/v4l2_pixelformat.cpp
+index 5551c62e..53078d99 100644
+--- a/src/libcamera/v4l2_pixelformat.cpp
++++ b/src/libcamera/v4l2_pixelformat.cpp
+@@ -153,6 +153,8 @@ const std::map<V4L2PixelFormat, V4L2PixelFormat::Info> vpf2pf{
+ 		{ formats::SGRBG10, "10-bit Bayer GRGR/BGBG" } },
+ 	{ V4L2PixelFormat(V4L2_PIX_FMT_SRGGB10),
+ 		{ formats::SRGGB10, "10-bit Bayer RGRG/GBGB" } },
++	{ V4L2PixelFormat(V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10),
++		{ formats::SIGIG_GBGR_IGIG_GRGB10, "10-bit Bayer GRGB/IGIG/GBGR/IGIG" } },
+ 	{ V4L2PixelFormat(V4L2_PIX_FMT_SBGGR10P),
+ 		{ formats::SBGGR10_CSI2P, "10-bit Bayer BGBG/GRGR Packed" } },
+ 	{ V4L2PixelFormat(V4L2_PIX_FMT_SGBRG10P),
+@@ -161,6 +163,8 @@ const std::map<V4L2PixelFormat, V4L2PixelFormat::Info> vpf2pf{
+ 		{ formats::SGRBG10_CSI2P, "10-bit Bayer GRGR/BGBG Packed" } },
+ 	{ V4L2PixelFormat(V4L2_PIX_FMT_SRGGB10P),
+ 		{ formats::SRGGB10_CSI2P, "10-bit Bayer RGRG/GBGB Packed" } },
++	{ V4L2PixelFormat(V4L2_PIX_FMT_SIGIG_GBGR_IGIG_GRGB10P),
++		{ formats::SIGIG_GBGR_IGIG_GRGB10_CSI2P, "10-bit Bayer GRGB/IGIG/GBGR/IGIG Packed" } },
+ 	{ V4L2PixelFormat(V4L2_PIX_FMT_SBGGR12),
+ 		{ formats::SBGGR12, "12-bit Bayer BGBG/GRGR" } },
+ 	{ V4L2PixelFormat(V4L2_PIX_FMT_SGBRG12),
+diff --git a/src/libcamera/v4l2_subdevice.cpp b/src/libcamera/v4l2_subdevice.cpp
+index 15e8206a..4ad37aaf 100644
+--- a/src/libcamera/v4l2_subdevice.cpp
++++ b/src/libcamera/v4l2_subdevice.cpp
+@@ -128,6 +128,7 @@ const std::map<uint32_t, V4L2SubdeviceFormatInfo> formatInfoMap = {
+ 	{ MEDIA_BUS_FMT_SGBRG10_1X10, { 10, "SGBRG10_1X10", PixelFormatInfo::ColourEncodingRAW } },
+ 	{ MEDIA_BUS_FMT_SGRBG10_1X10, { 10, "SGRBG10_1X10", PixelFormatInfo::ColourEncodingRAW } },
+ 	{ MEDIA_BUS_FMT_SRGGB10_1X10, { 10, "SRGGB10_1X10", PixelFormatInfo::ColourEncodingRAW } },
++	{ MEDIA_BUS_FMT_SIGIG_GBGR_IGIG_GRGB10_1X10, { 10, "SIGIG_GBGR_IGIG_GRGB10_1X10", PixelFormatInfo::ColourEncodingRAW } },
+ 	{ MEDIA_BUS_FMT_SBGGR12_1X12, { 12, "SBGGR12_1X12", PixelFormatInfo::ColourEncodingRAW } },
+ 	{ MEDIA_BUS_FMT_SGBRG12_1X12, { 12, "SGBRG12_1X12", PixelFormatInfo::ColourEncodingRAW } },
+ 	{ MEDIA_BUS_FMT_SGRBG12_1X12, { 12, "SGRBG12_1X12", PixelFormatInfo::ColourEncodingRAW } },
+-- 
+2.43.0
+

@@ -10,7 +10,10 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      # Free and Open Source 2D and 3D game engine
       godot_4
+      # Free and Open Source 2D sprite editor
+      pixelorama
     ];
   };
 }

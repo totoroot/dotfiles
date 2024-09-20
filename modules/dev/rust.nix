@@ -19,7 +19,8 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      rustup # toolchain installer
+      # Rust toolchain installer
+      rustup
     ];
 
     env.RUSTUP_HOME = "$XDG_DATA_HOME/rustup";

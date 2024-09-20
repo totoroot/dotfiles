@@ -19,7 +19,7 @@ in {
       # Generate typed CustomResources from a Kubernetes CustomResourceDefinition
       # crd2pulumi
       # Python-based infrastructure automation
-      pyinfra
+      # pyinfra
       # Cloud development platform that makes creating cloud programs easy and productive
       # pulumi-bin
       # Tool for building, changing, and versioning infrastructure
