@@ -26,6 +26,7 @@
 [core]
     pager = delta
     whitespace = trailing-space
+    excludesFile = ~/.config/git/ignore
 [github]
     user = totoroot
 [rebase]
@@ -50,6 +51,8 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     clean = git-lfs clean -- %f
+[advice]
+    addEmptyPathspec = false
 [url "https://github.com/"]
     insteadOf = gh:
 [url "git@github.com:totoroot/"]

@@ -15,7 +15,7 @@ in {
       # A feature-rich client for Matrix.org
       # element-desktop
       # Desktop client for the Matrix protocol
-      nheko
+      # nheko
     ];
   };
 }

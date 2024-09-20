@@ -14,16 +14,23 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs;
       (if cfg.enable then [
-        archiver # interpreter for the AWK programming language
-        unrar # extraction utility for RAR archives
-        gzip # GNU zip compression program
-        unzip # extraction utility for ZIP archives
-        dpkg # package manager (Debian, Ubuntu etc.)
-        rpm # package manager (openSUSE, Fedora etc.)
+        # Easily create & extract archives, and compress & decompress files of various formats
+        archiver
+        # Extraction utility for RAR archives
+        unrar
+        # GNU zip compression program
+        gzip
+        # Extraction utility for ZIP archives
+        unzip
+        # Package manager (Debian, Ubuntu etc.)
+        dpkg
+        # Package manager (openSUSE, Fedora etc.)
+        rpm
       ] else [ ]) ++
 
       (if cfg.desktop.enable then [
-        xarchive # GTK front-end for command line archiving tools
+        # Archive manager for the GNOME desktop environment
+        file-roller
       ] else [ ]);
   };
 }

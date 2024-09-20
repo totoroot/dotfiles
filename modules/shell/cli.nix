@@ -45,7 +45,8 @@ in {
       # Control display brightness from command line
       light
       # X11 color picker
-      colorpicker
+      # error: 'colorpicker' has been removed due to lack of maintenance upstream. Consider using 'xcolor', 'gcolor3', 'eyedropper' or 'gpick' instead
+      # colorpicker
       # Small utility to create JSON objects
       jo
       # Faster implementation of the lightweight JSON processor
@@ -98,6 +99,8 @@ in {
       pandoc
       # PDF processor
       pdfcpu
+      # Render markdown on the CLI
+      glow
 
       ## Other fun stuff
       # Matrix effect
@@ -137,9 +140,9 @@ in {
       dui = "ncdu --color dark -rr -x --exclude .git";
       mdl = "mdl -c ${configDir}/markdownlint/mdlrc";
       markdownlint = "mdl -c ${configDir}/markdownlint/mdlrc";
-      vd = "(){viddy -d -n 1 --shell zsh  \"$(which $1 | cut -d' ' -f 4-)\${@:2}\";}";
+      vd = "(){viddy -d -n 1 --shell zsh \"$(which $1 | cut -d' ' -f 4-)\${@:2}\";}";
       lolcat = "clolcat";
-      colorpick = "print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o";
+      # colorpick = "print '\nPicking color in 5 seconds...\n' && sleep 5 && colorpicker --short --one-shot | tr -d '\n' | xclip -sel clip && xclip -sel clip -o";
     };
   };
 }

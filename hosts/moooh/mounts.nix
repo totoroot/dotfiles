@@ -14,12 +14,24 @@
       device = "/dev/disk/by-uuid/d6dc0534-2a5c-4b5c-8091-cdca463c8439";
       fsType = "ext4";
     };
-
     "/boot/efi" = {
       device = "/dev/disk/by-uuid/2572-BEF2";
       fsType = "vfat";
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/a60888cd-ccee-4438-a7ac-bad7cb84a120"; }];
+  swapDevices = [
+    # {
+    #   device = "/dev/disk/by-uuid/a60888cd-ccee-4438-a7ac-bad7cb84a120";
+    # }
+    {
+      device = "/var/lib/swapfile";
+      size = 64 * 1024;
+    }
+  ];
+
+  boot = {
+    resumeDevice = "/dev/disk/by-uuid/d6dc0534-2a5c-4b5c-8091-cdca463c8439";
+    kernelParams = [ "resume_offset=101861376" ];
+  };
 }

@@ -19,7 +19,7 @@ with inputs;
   };
 
   nix = {
-    package = pkgs.nixVersions.stable;
+    package = pkgs.lix;
     extraOptions = "experimental-features = nix-command flakes";
     nixPath = [
       "nixpkgs=${nixos}"
@@ -62,6 +62,7 @@ with inputs;
       text = ''
         if [[ -e /run/current-system ]]; then
           ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+          /run/current-system/sw/bin/nixos-reedsreboot
         fi
       '';
     };
@@ -85,6 +86,11 @@ with inputs;
     };
   };
 
+  # Let's you run AppImages directly binfmt and appimage-run
+  # Available since NixOS 24.05
+  # See https://nixos.wiki/wiki/Appimage for more information
+  programs.appimage.binfmt = true;
+
   services = {
     # Start a systemd service for each incoming SSH connection
     openssh.startWhenNeeded = mkDefault true;
@@ -94,6 +100,8 @@ with inputs;
 
   # Do not start a sulogin shell if mounting a filesystem fails
   systemd.enableEmergencyMode = mkDefault false;
+
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   security.polkit = {
     enable = true;

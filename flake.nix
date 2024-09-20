@@ -22,7 +22,7 @@
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
-    nixpkgs-fork.url = "github:pitkling/nixpkgs/libfprint-2-tod1-broadcom";
+    # nixpkgs-fork.url = "github:pitkling/nixpkgs/libfprint-2-tod1-broadcom";
 
     # Nix hardware tweaks
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -50,6 +50,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # YES!!! https://lix.systems/
+    lix = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # https://github.com/thefossguy/nixos-needsreboot
+    nixos-needsreboot = {
+      url = "github:thefossguy/nixos-needsreboot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # KDE Plasma user settings
     # Add "inputs.plasma-manager.homeManagerModules.plasma-manager" to the home-manager.users.${user}.imports
     plasma-manager = {
@@ -65,7 +77,7 @@
     nix-software-center.url = "github:vlinkz/nix-software-center";
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs-fork, home-manager, darwin, devenv, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, devenv, lix, nixos-needsreboot, ... }:
     let
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
@@ -85,17 +97,17 @@
       pkgs = mkPkgs nixos [ self.overlay ];
       unstable = mkPkgs nixos-unstable [ ];
       nixpkgs = mkPkgs nixpkgs [ ];
-      fork = mkPkgs nixpkgs-fork [ ];
     in
     {
       lib = lib.my;
 
       overlay =
         _final: _prev: {
-          inherit unstable nixpkgs fork;
+          inherit unstable nixpkgs;
           # Add overlays for flakes
           user = self.packages.${system};
           devenv = devenv.packages.${system}.devenv;
+          nixos-needsreboot = nixos-needsreboot.packages.${system}.nixos-needsreboot;
         };
 
       overlays =

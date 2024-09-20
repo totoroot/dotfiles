@@ -32,8 +32,10 @@ in {
       kubecolor
       # Tool that makes it easy to run Kubernetes locally
       minikube
-      # Kubernetes CLI To Manage Your Clusters In Style
+      # Kubernetes CLI To manage your clusters in style
       k9s
+      # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents
+      yq
     ];
 
     # Set the K8s config location
@@ -52,6 +54,21 @@ in {
     environment.shellAliases = {
       hf = "helmfile";
       hfi = "helmfile --interactive";
+      # Based on https://sbulav.github.io/kubernetes/using-fzf-with-kubectl/
+      kyq = ''(){
+        kubectl get $@ -o yaml > /tmp/kyq.yaml; echo "" | fzf --print-query \
+                                                              --preview-window=right,60% \
+                                                              --preview "yq .{q} /tmp/kyq.yaml -y | bat --language yaml --color=always --style=numbers";
+      }'';
+      kf = ''(){
+        kubectl get $@ -o name | fzf --print-query \
+                                     --preview-window=right,60% \
+                                     --preview "kubectl get {} -o yaml | bat --language yaml --color=always --style=numbers" \
+                                     --header "Press <Ctrl>-<R> to reload, <Ctrl>-<E> to edit, <Enter> to view in micro." \
+                                     --bind "ctrl-r:reload(kubectl get $@ -o name)" \
+                                     --bind "ctrl-e:execute(kubectl edit {+})" \
+                                     --bind "enter:execute(kubectl get {+} -o yaml | micro -filetype yaml)";
+      }'';
     };
   };
 }

@@ -38,7 +38,7 @@ in {
           # Plugin for OBS Studio to move source to a new position during scene transition
           obs-move-transition
           # Plugin for OBS Studio to add a Transition Table to the tools menu
-          obs-transition-table
+          # obs-transition-table
           # OBS Studio plugin to make sources available to record via a filter
           obs-source-record
         ];

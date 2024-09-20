@@ -35,7 +35,6 @@ Thumbs.db
 .svn
 .git
 .swp
-.idea
 .*.swp
 *~
 .tags
@@ -54,6 +53,8 @@ config.codekit
 *.dll
 *.pyc
 
-# VSCode #
-##########
+# Editors, IDEs etc. #
+######################
 .vscode
+.idea
+.zed

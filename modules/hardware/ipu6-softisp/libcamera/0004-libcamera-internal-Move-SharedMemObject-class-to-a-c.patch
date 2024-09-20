@@ -1,0 +1,57 @@
+From 006a4a31a6803e92ec67f48b66da2cdff8b2f6ab Mon Sep 17 00:00:00 2001
+From: Andrey Konovalov <andrey.konovalov@linaro.org>
+Date: Sun, 29 Oct 2023 15:56:48 +0300
+Subject: [PATCH 04/25] libcamera: internal: Move SharedMemObject class to a
+ common directory
+
+Move SharedMemObject class out of RPi namespace and put it into
+include/libcamera/internal so that everyone could use it.
+
+Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+Tested-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org> # sc8280xp Lenovo x13s
+Tested-by: Pavel Machek <pavel@ucw.cz>
+---
+ include/libcamera/internal/meson.build                        | 1 +
+ .../common => include/libcamera/internal}/shared_mem_object.h | 4 ----
+ 2 files changed, 1 insertion(+), 4 deletions(-)
+ rename {src/libcamera/pipeline/rpi/common => include/libcamera/internal}/shared_mem_object.h (98%)
+
+diff --git a/include/libcamera/internal/meson.build b/include/libcamera/internal/meson.build
+index 33eb0fb3..5807dfd9 100644
+--- a/include/libcamera/internal/meson.build
++++ b/include/libcamera/internal/meson.build
+@@ -39,6 +39,7 @@ libcamera_internal_headers = files([
+     'process.h',
+     'pub_key.h',
+     'request.h',
++    'shared_mem_object.h',
+     'source_paths.h',
+     'sysfs.h',
+     'v4l2_device.h',
+diff --git a/src/libcamera/pipeline/rpi/common/shared_mem_object.h b/include/libcamera/internal/shared_mem_object.h
+similarity index 98%
+rename from src/libcamera/pipeline/rpi/common/shared_mem_object.h
+rename to include/libcamera/internal/shared_mem_object.h
+index aa56c220..bfb639ee 100644
+--- a/src/libcamera/pipeline/rpi/common/shared_mem_object.h
++++ b/include/libcamera/internal/shared_mem_object.h
+@@ -19,8 +19,6 @@
+ 
+ namespace libcamera {
+ 
+-namespace RPi {
+-
+ template<class T>
+ class SharedMemObject
+ {
+@@ -123,6 +121,4 @@ private:
+ 	T *obj_;
+ };
+ 
+-} /* namespace RPi */
+-
+ } /* namespace libcamera */
+-- 
+2.43.0
+

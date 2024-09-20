@@ -25,7 +25,7 @@ in {
         # Pulseaudio command line mixer
         pamixer
         # Audio visualizer
-        cava
+        # cava
         # Virtual microphone device with noise supression for PulseAudio
         noisetorch
         (makeDesktopItem {

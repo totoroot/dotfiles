@@ -1,11 +1,83 @@
 theme = "dracula"
 
 [keys.normal]
+# Colemak DH remappings
+n="move_char_left"
+e="move_line_down"
+i="move_line_up"
+o="move_char_right"
+
+h="insert_mode"
+H="insert_at_line_start"
+
+l="open_below"
+L="open_above"
+
+k="move_next_word_end"
+K="move_next_long_word_end"
+
+j="search_next"
+J="search_prev"
+
+# Adjustments to get used to helix
 "A-left" = "move_prev_word_start"
 "A-right" = "move_next_word_start"
-"A-s" = ":write"
+
 "A-w" = ":buffer-close"
 "A-q" = ":quit"
 
+[keys.normal.g]
+n="goto_line_start"
+o="goto_line_end"
+
+[keys.normal.space.w]
+n="jump_view_left"
+e="jump_view_down"
+i="jump_view_up"
+o="jump_view_right"
+
+[keys.normal.C-w]
+n="jump_view_left"
+e="jump_view_down"
+E="join_selections"
+"A-E"="join_selections_space"
+
+i="jump_view_up"
+I="keep_selections"
+"A-I"="remove_selections"
+
+o="jump_view_right"
+
 [keys.insert]
+# Maps Alt-X to enter normal mode
+"A-x" = "normal_mode"
+# Adjustments to get used to helix
 "A-s" = ["normal_mode", ":write", "insert_mode"]
+"A-w" = ["normal_mode", ":buffer-close"]
+"A-q" = ["normal_mode", ":quit"]
+
+[keys.select]
+n="move_char_left"
+e="move_line_down"
+i="move_line_up"
+o="move_char_right"
+
+h="insert_mode"
+H="insert_at_line_start"
+
+l="open_below"
+L="open_above"
+
+k="move_next_word_end"
+K="move_next_long_word_end"
+
+j="search_next"
+J="search_prev"
+
+[keys.normal.z]
+e="scroll_down"
+i="scroll_up"
+
+[keys.normal.Z]
+e="scroll_down"
+i="scroll_up"

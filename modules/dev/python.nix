@@ -12,28 +12,29 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python310
-      python310Packages.pip
+      python312
+      python313
+      python312Packages.pip
       # pip update helpers
-      python310Packages.pipdate
-      python310Packages.virtualenv
-      python310Packages.pytest-virtualenv
-      python310Packages.virtualenv-clone
-      python310Packages.tox
-      python310Packages.ipython
-      python310Packages.setuptools
-      python310Packages.pylint
-      python310Packages.requests
+      python312Packages.pipdate
+      python312Packages.virtualenv
+      python312Packages.pytest-virtualenv
+      python312Packages.virtualenv-clone
+      python312Packages.tox
+      python312Packages.ipython
+      python312Packages.setuptools
+      python312Packages.pylint
+      python312Packages.requests
       # Python dependency management and packaging made easy
-      python310Packages.poetry-core
+      python312Packages.poetry-core
       # Jupyter lab environment notebook server extension
-      # python310Packages.jupyterlab
+      # python312Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
-      # python310Packages.jupytext
+      # python312Packages.jupytext
       # Scientific tools for Python
-      python310Packages.numpy
+      python312Packages.numpy
       # Python Data Analysis Library
-      python310Packages.pandas
+      python312Packages.pandas
       # Uncompromising Python code formatter
       black
       # Linter for yaml files
@@ -50,6 +51,7 @@ in {
     env.JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
 
     environment.shellAliases = {
+      python = "python3.13";
       py = "python";
       po = "poetry";
       ipy = "ipython --no-banner";

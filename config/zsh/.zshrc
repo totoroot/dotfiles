@@ -25,6 +25,7 @@ if ! zgenom saved; then
   zgenom load junegunn/fzf shell
   zgenom load trystan2k/zsh-tab-title
   zgenom load chisui/zsh-nix-shell
+  zgenom load atuinsh/atuin
   [ -z "$SSH_CONNECTION" ] && zgenom load totoroot/fast-syntax-highlighting
   zgenom save
 fi

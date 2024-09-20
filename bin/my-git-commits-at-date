@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+if $(fd --hidden --no-ignore '^.git$' --type d --maxdepth 1 -q); then
+    repos="."
+else
+    repos=$(fd --hidden --no-ignore '^.git$' --type d --base-directory ${2:-.} | sed 's|/.git/||g')
+fi
+
+for repo in $repos; do
+    echo -e "\e[35mCommits in repository \e[36m$repo\e[0m\e[35m:"
+    git -C $repo log --date=format-local:'%Y-%m-%d %H:%M:%S' --pretty='format:%C(yellow)%h %C(blue)%ad %Creset%s%C(cyan)' --decorate --after="$1 0:00" --before="$1 23:59" --author "$(git config user.name)"
+    echo ""
+done

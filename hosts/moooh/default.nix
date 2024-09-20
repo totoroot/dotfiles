@@ -28,11 +28,11 @@
       flatpak.enable = true;
       fm.enable = true;
       fonts.enable = true;
-      geany.enable = true;
       ghostwriter.enable = false;
       godot.enable = false;
       gpa.enable = false;
       gsmartcontrol.enable = false;
+      ides.enable = true;
       keepassxc.enable = false;
       kvantum.enable = false;
       mail.enable = true;
@@ -42,7 +42,6 @@
       polish.enable = true;
       rofi.enable = true;
       screenshot.enable = true;
-      thonny.enable = false;
       torrent.enable = false;
       unity.enable = false;
       vscodium.enable = true;
@@ -54,7 +53,7 @@
         tor.enable = false;
       };
       communication = {
-        delta.enable = true;
+        delta.enable = false;
         discord.enable = false;
         jitsi.enable = false;
         matrix.enable = true;
@@ -180,15 +179,9 @@
       # Disable autologin for increased security on portable device
       autoLogin.enable = false;
       defaultSession = "plasma";
-      # Use SDDM as display manager
-      sddm = {
-        enable = true;
-        theme = "Dracula";
-      };
+      sddm.theme = "Dracula";
     };
     xserver = {
-      # Enable the X11 windowing system.
-      enable = true;
       # Set Austrian as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
       xkb.layout = "at, eu";
@@ -208,24 +201,25 @@
     };
   };
 
-  services.gerrit = {
-    enable = true;
-    serverId = "372e82cb-0dfa-4692-932e-cd194af9a445";
-    listenAddress = "[::]:8020";
-    builtinPlugins = [
-      "codemirror-editor"
-      "commit-message-length-validator"
-      "delete-project"
-      "download-commands"
-      "gitiles"
-      "hooks"
-      "plugin-manager"
-      "replication"
-      "reviewnotes"
-      "singleusergroup"
-      "webhooks"
-    ];
-  };
+  # Enable Gerrit Code Review locally
+  # services.gerrit = {
+  #   enable = true;
+  #   serverId = "372e82cb-0dfa-4692-932e-cd194af9a445";
+  #   listenAddress = "[::]:8020";
+  #   builtinPlugins = [
+  #     "codemirror-editor"
+  #     "commit-message-length-validator"
+  #     "delete-project"
+  #     "download-commands"
+  #     "gitiles"
+  #     "hooks"
+  #     "plugin-manager"
+  #     "replication"
+  #     "reviewnotes"
+  #     "singleusergroup"
+  #     "webhooks"
+  #   ];
+  # };
 
   user.packages = with pkgs; [
     jira-cli-go
@@ -242,7 +236,7 @@
     meld
     delta
     # Integrated Development Environment (IDE) by Jetbrains
-    jetbrains.pycharm-community
+    jetbrains.pycharm-community-bin
     # To Do List / Time Tracker with Jira Integration
     super-productivity
   ];
@@ -282,8 +276,8 @@
   };
 
   environment.shellAliases = {
-    pycharm = "pycharm-community";
-    pc = "pycharm-community";
+    pycharm = "pycharm-community -Dsun.java2d.uiScale.enabled=false";
+    pc = "pycharm-community -Dsun.java2d.uiScale.enabled=false";
   };
 
   systemd.services.nix-daemon.environment.TMPDIR = "/mnt/tmp";

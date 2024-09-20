@@ -1,0 +1,95 @@
+From 9bec33e5c7e6765734eeef2d22d7f7f65dee2264 Mon Sep 17 00:00:00 2001
+From: Hans de Goede <hdegoede@redhat.com>
+Date: Tue, 19 Dec 2023 15:45:51 +0100
+Subject: [PATCH 24/25] ov01a1s HACK
+
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+---
+ src/libcamera/camera_sensor.cpp            | 6 ++++++
+ src/libcamera/software_isp/debayer_cpu.cpp | 8 ++++++++
+ src/libcamera/software_isp/swstats_cpu.cpp | 5 +++++
+ 3 files changed, 19 insertions(+)
+
+diff --git a/src/libcamera/camera_sensor.cpp b/src/libcamera/camera_sensor.cpp
+index f19f72ea..7ad4b9ef 100644
+--- a/src/libcamera/camera_sensor.cpp
++++ b/src/libcamera/camera_sensor.cpp
+@@ -34,6 +34,9 @@
+ 
+ namespace libcamera {
+ 
++// HACK HACK
++bool is_ov01a1s = false;
++
+ LOG_DEFINE_CATEGORY(CameraSensor)
+ 
+ /**
+@@ -426,6 +429,9 @@ int CameraSensor::initProperties()
+ 	model_ = subdev_->model();
+ 	properties_.set(properties::Model, utils::toAscii(model_));
+ 
++	if (model_ == "ov01a1s")
++		is_ov01a1s = true;
++
+ 	/* Generate a unique ID for the sensor. */
+ 	int ret = generateId();
+ 	if (ret)
+diff --git a/src/libcamera/software_isp/debayer_cpu.cpp b/src/libcamera/software_isp/debayer_cpu.cpp
+index 41c8805f..b6393925 100644
+--- a/src/libcamera/software_isp/debayer_cpu.cpp
++++ b/src/libcamera/software_isp/debayer_cpu.cpp
+@@ -23,6 +23,8 @@
+ 
+ namespace libcamera {
+ 
++extern bool is_ov01a1s;
++
+ DebayerCpu::DebayerCpu(std::unique_ptr<SwStatsCpu> stats)
+ 	: stats_(std::move(stats)), gamma_correction_(1.0)
+ {
+@@ -471,6 +473,9 @@ int DebayerCpu::getInputConfig(PixelFormat inputFormat, DebayerInputConfig &conf
+ 	BayerFormat bayerFormat =
+ 		BayerFormat::fromPixelFormat(inputFormat);
+ 
++	if (is_ov01a1s)
++		bayerFormat.order = BayerFormat::IGIG_GBGR_IGIG_GRGB;
++
+ 	if ((bayerFormat.bitDepth == 8 || bayerFormat.bitDepth == 10 || bayerFormat.bitDepth == 12) &&
+ 	    bayerFormat.packing == BayerFormat::Packing::None &&
+ 	    isStandardBayerOrder(bayerFormat.order)) {
+@@ -548,6 +553,9 @@ int DebayerCpu::setDebayerFunctions(PixelFormat inputFormat, PixelFormat outputF
+ 	BayerFormat bayerFormat =
+ 		BayerFormat::fromPixelFormat(inputFormat);
+ 
++	if (is_ov01a1s)
++		bayerFormat.order = BayerFormat::IGIG_GBGR_IGIG_GRGB;
++
+ 	swapRedBlueGains_ = false;
+ 
+ 	switch (outputFormat) {
+diff --git a/src/libcamera/software_isp/swstats_cpu.cpp b/src/libcamera/software_isp/swstats_cpu.cpp
+index 96e21be5..503ce799 100644
+--- a/src/libcamera/software_isp/swstats_cpu.cpp
++++ b/src/libcamera/software_isp/swstats_cpu.cpp
+@@ -19,6 +19,8 @@
+ 
+ namespace libcamera {
+ 
++extern bool is_ov01a1s;
++
+ SwStatsCpu::SwStatsCpu()
+ 	: SwStats()
+ {
+@@ -301,6 +303,9 @@ int SwStatsCpu::configure(const StreamConfiguration &inputCfg)
+ 	BayerFormat bayerFormat =
+ 		BayerFormat::fromPixelFormat(inputCfg.pixelFormat);
+ 
++	if (is_ov01a1s)
++		bayerFormat.order = BayerFormat::IGIG_GBGR_IGIG_GRGB;
++
+ 	startFrame_ = (SwStats::statsVoidFn)&SwStatsCpu::resetStats;
+ 	finishFrame_ = (SwStats::statsVoidFn)&SwStatsCpu::finishStats;
+ 
+-- 
+2.43.0
+

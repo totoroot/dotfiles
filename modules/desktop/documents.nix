@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Comprehensive, professional-quality productivity suite, a variant of openoffice.org
-      libreoffice-fresh
+      libreoffice-qt6-still
       # PDF to ODT/ODS converter
       pdf2odt
       # Highly customizable and functional PDF viewer

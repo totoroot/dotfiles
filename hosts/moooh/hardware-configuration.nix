@@ -67,17 +67,20 @@
   };
 
   services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
+    # Failed assertions:
+    # - You have set services.power-profiles-daemon.enable = true;
+    # which conflicts with services.auto-cpufreq.enable = true;
+    enable = false;
+    # settings = {
+    #   battery = {
+    #     governor = "powersave";
+    #     turbo = "never";
+    #   };
+    #   charger = {
+    #     governor = "performance";
+    #     turbo = "auto";
+    #   };
+    # };
   };
 
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
@@ -89,10 +92,11 @@
   ];
 
   services.fprintd = {
-    enable = false;
+    enable = true;
+    package = pkgs.fprintd-tod;
     tod = {
-      enable = false;
-      # driver = pkgs.fork.libfprint-2-tod1-broadcom;
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-broadcom;
     };
   };
 

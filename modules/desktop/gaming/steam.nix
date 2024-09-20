@@ -14,7 +14,7 @@ in {
     {
       # I avoid programs.steam.enable because it installs another steam binary,
       # which the xdesktop package invokes, instead of my steam shims below.
-      hardware.opengl.enable = true;
+      hardware.graphics.enable = true;
       hardware.opengl.driSupport32Bit = true;
       hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
 

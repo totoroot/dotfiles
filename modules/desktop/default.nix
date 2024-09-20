@@ -34,7 +34,7 @@ in {
       # Nix software center
       inputs.nix-software-center.packages.${system}.nix-software-center
       # Fallback icon themes
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       # A style to bend Qt applications to look like they belong into GNOME Shell
       adwaita-qt
       # Default fallback theme used by implementations of the icon theme specification
@@ -50,6 +50,8 @@ in {
       xdo
       # X input and window management tool
       xdotool
+      # Generic Linux command-line automation tool
+      ydotool
       # Simple X image viewer (dependency fontpreview)
       sxiv
       # Light-weight image viewer
@@ -110,6 +112,9 @@ in {
       # GTK2_RC_FILES must be available to the display manager.
       export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
     '';
+
+    # Add user to group ydotool to make ydotoold system service usable
+    user.extraGroups = [ "ydotool" ];
 
     # Clean up leftovers, as much as we can
     system.userActivationScripts.cleanupHome = ''

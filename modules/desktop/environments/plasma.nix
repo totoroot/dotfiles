@@ -16,11 +16,13 @@ in {
         # but other display manager should be used
         enable = mkDefault true;
         # Use Wayland Session by default
-        wayland.enable = mkDefault true;
+        wayland = {
+          enable = mkDefault true;
+          # Use KWin instead of weston
+          compositor = "kwin";
+        };
       };
-      xserver = {
-        enable = true;
-      };
+      xserver.enable = true;
       # Enable KDE Plasma itself
       desktopManager.plasma6 = {
         enable = true;
@@ -41,9 +43,11 @@ in {
       konsole
     ];
 
-    # Install a calculator
     environment.systemPackages = with pkgs.kdePackages; [
+      # Calculator
       kcalc
+      # Color picker
+      kcolorchooser
     ];
   };
 }

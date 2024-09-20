@@ -189,6 +189,10 @@
 
   # NixOS service configuration
   services = {
+    # Suspend when power button is short-pressed
+    logind.extraConfig = mkDefault ''
+      HandlePowerKey=suspend
+    '';
     xserver = {
       # Set eurkey as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
