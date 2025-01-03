@@ -19,12 +19,12 @@ in
         port = 8888;
         settings = {
           server_url = "https://headscale.${domain}";
-          dns_config = {
+          dns = {
             override_local_dns = true;
-            baseDomain = "${domain}";
+            base_domain = "clients.${domain}";
             magic_dns = true;
-            domains = [ "headscale.${domain}" ];
-            nameservers = [
+            search_domains = [ "headscale.${domain}" ];
+            nameservers.global = [
               # No CloudFlare
               "9.9.9.9"
             ];
