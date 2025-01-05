@@ -40,7 +40,6 @@ in {
       okular
       oxygen
       khelpcenter
-      konsole
     ];
 
     environment.systemPackages = with pkgs.kdePackages; [
