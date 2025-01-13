@@ -52,19 +52,30 @@ with inputs;
     stateVersion = mkDefault "23.05";
     configurationRevision = mkIf (self ? rev) self.rev;
     # Present information of what is being updated on nixos-rebuild
-    activationScripts.diff = {
-      supportsDryActivation = true;
-      # text = ''
-      # if [[ -e /run/current-system ]]; then
-      # ${pkgs.nix}/bin/nix store diff-closures /run/current-system "$systemConfig"
-      # fi
-      # '';
-      text = ''
-        if [[ -e /run/current-system ]]; then
-          ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
-          /run/current-system/sw/bin/nixos-reedsreboot
-        fi
-      '';
+    activationScripts = {
+      diff = {
+        supportsDryActivation = true;
+        # text = ''
+        # if [[ -e /run/current-system ]]; then
+        # ${pkgs.nix}/bin/nix store diff-closures /run/current-system "$systemConfig"
+        # fi
+        # '';
+        text = ''
+          if [[ -e /run/current-system ]]; then
+            echo -e "\e[36mPackage version diffs:\e[0m"
+            ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+          fi
+        '';
+      };
+      needsreboot = {
+        supportsDryActivation = true;
+        text = ''
+          if [[ -e /run/current-system ]]; then
+            echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
+            /run/current-system/sw/bin/nixos-needsreboot
+          fi
+        '';
+      };
     };
   };
 
@@ -123,5 +134,6 @@ with inputs;
     unzip
     # Needed for alternative diff activationScript
     nvd
+    inputs.nixos-needsreboot.packages.${system}.default
   ];
 }
