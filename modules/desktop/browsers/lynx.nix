@@ -1,4 +1,4 @@
-# modules/browser/lynx.nix
+# modules/desktop/browsers/lynx.nix
 
 { options, config, lib, pkgs, ... }:
 

@@ -56,6 +56,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # https://github.com/thefossguy/nixos-needsreboot
     nixos-needsreboot = {
       url = "github:thefossguy/nixos-needsreboot";
@@ -71,13 +76,19 @@
     };
 
     # Development environments in seconds
-    devenv.url = "github:cachix/devenv/latest";
+    devenv = {
+      url = "github:cachix/devenv/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Graphical App Store for Nix/NixOS
-    nix-software-center.url = "github:vlinkz/nix-software-center";
+    nix-software-center = {
+      url = "github:ljubitje/nix-software-center";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, devenv, lix, nixos-needsreboot, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, devenv, ... }:
     let
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
@@ -107,7 +118,6 @@
           # Add overlays for flakes
           user = self.packages.${system};
           devenv = devenv.packages.${system}.devenv;
-          nixos-needsreboot = nixos-needsreboot.packages.${system}.nixos-needsreboot;
         };
 
       overlays =
