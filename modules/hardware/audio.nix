@@ -74,7 +74,7 @@ in {
 
     # PulseAudio Sound Server Configuration (legacy)
     (mkIf cfg.pulseaudio {
-      hardware.pulseaudio = {
+      services.pulseaudio = {
         enable = true;
         # HACK Prevents ~/.esd_auth files by disabling the esound protocol module
         #      for pulseaudio, which I likely don't need. Is there a better way?
@@ -88,7 +88,7 @@ in {
                 sed -i -e 's|load-module module-esound-protocol-unix|# ...|' "$out/default.pa"
               '';
           in
-          mkIf config.hardware.pulseaudio.enable
+          mkIf config.services.pulseaudio.enable
             "${paConfigFile}/default.pa";
       };
 

@@ -16,7 +16,7 @@ in {
       # which the xdesktop package invokes, instead of my steam shims below.
       hardware.graphics.enable = true;
       hardware.opengl.driSupport32Bit = true;
-      hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
+      hardware.pulseaudio.support32Bit = config.services.pulseaudio.enable;
 
       user.packages = with pkgs; [
         # Get steam to keep its garbage out of $HOME
