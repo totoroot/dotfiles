@@ -15,11 +15,11 @@ in {
       # X screenshot utility
       maim
       # Selection tool for screenshot scripts
-      hacksaw
+      # hacksaw
       # Powerful yet simple to use screenshot software
       flameshot
       # KDE Plasma screenshot tool
-      spectacle
+      kdePackages.spectacle
       # Grab images from a Wayland compositor
       grim
       # Select a region in a Wayland compositor

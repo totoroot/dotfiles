@@ -99,7 +99,7 @@ in
       # Tiny dynamic menu for Wayland
       tofi
       # See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/sway.nix#L60
-      qt5.qtwayland
+      qt6.qtwayland
       # A dbus session bus service that is used to bring up authentication dialogs
       polkit_gnome
     ];

@@ -15,7 +15,7 @@ in {
     user.packages = with pkgs;
       (if cfg.enable then [
         # Easily create & extract archives, and compress & decompress files of various formats
-        archiver
+        # archiver
         # Extraction utility for RAR archives
         unrar
         # GNU zip compression program

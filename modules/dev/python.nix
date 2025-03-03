@@ -55,7 +55,7 @@ in {
       py = "python";
       po = "poetry";
       ipy = "ipython --no-banner";
-      ipylab = "ipython --pylab=qt5 --no-banner";
+      ipylab = "ipython --pylab=qt6 --no-banner";
     };
 
     home.configFile = {
