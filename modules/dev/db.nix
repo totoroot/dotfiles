@@ -12,13 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python310
-      # Scientific tools for Python
-      python310Packages.numpy
-      # Python Data Analysis Library
-      python310Packages.pandas
-      # Python SQL toolkit and Object Relational Mapper
-      python310Packages.sqlalchemy
       # Universal SQL Client for developers, DBA and analysts
       dbeaver-bin
       # Self-contained, serverless, zero-configuration, transactional SQL database engine

@@ -12,29 +12,34 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      python312
       python313
-      python312Packages.pip
+      # Extremely fast Python package installer and resolver, written in Rust
+      uv
+      # Extremely fast Python linter
+      ruff
+      python313Packages.pip
       # pip update helpers
-      python312Packages.pipdate
-      python312Packages.virtualenv
-      python312Packages.pytest-virtualenv
-      python312Packages.virtualenv-clone
-      python312Packages.tox
-      python312Packages.ipython
-      python312Packages.setuptools
-      python312Packages.pylint
-      python312Packages.requests
+      python313Packages.pipdate
+      python313Packages.virtualenv
+      # python313Packages.pytest-virtualenv
+      # python313Packages.virtualenv-
+      python313Packages.tox
+      python313Packages.ipython
+      python313Packages.setuptools
+      python313Packages.pylint
+      python313Packages.requests
       # Python dependency management and packaging made easy
-      python312Packages.poetry-core
+      python313Packages.poetry-core
       # Jupyter lab environment notebook server extension
-      # python312Packages.jupyterlab
+      python313Packages.jupyterlab
       # # Jupyter notebooks as Markdown documents, Julia, Python or R scripts
-      # python312Packages.jupytext
+      python313Packages.jupytext
       # Scientific tools for Python
-      python312Packages.numpy
+      python313Packages.numpy
       # Python Data Analysis Library
-      python312Packages.pandas
+      python313Packages.pandas
+      # Python SQL toolkit and Object Relational Mapper
+      python313Packages.sqlalchemy
       # Uncompromising Python code formatter
       black
       # Linter for yaml files
@@ -51,7 +56,6 @@ in {
     env.JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
 
     environment.shellAliases = {
-      python = "python3.13";
       py = "python";
       po = "poetry";
       ipy = "ipython --no-banner";
