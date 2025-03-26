@@ -59,7 +59,7 @@
   };
 
   # Set stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "25.05";
 
   # Limit update size/frequency of rebuilds
   # Also preserve space on disk
@@ -69,21 +69,21 @@
   # NixOS networking configuration
   networking = {
     networkmanager.enable = false;
-    useDHCP = false;
+    useDHCP = true;
     interfaces."ens3" = {
       useDHCP = false;
       ipv4.addresses = [{
-        address = "93.177.65.164";
-        prefixLength = 22;
+        address = "45.83.104.124";
+        prefixLength = 24;
       }];
       ipv6.addresses = [{
-        address = "2a03:4000:38:df::";
+        address = "2a03:4000:46:a49::";
         prefixLength = 64;
       }];
     };
     defaultGateway =
       {
-        address = "93.177.64.1";
+        address = "45.83.104.1";
         interface = "ens3";
       };
     defaultGateway6 = {

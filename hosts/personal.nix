@@ -5,7 +5,7 @@ with lib;
   networking.hosts =
     let
       hostConfig = {
-        "93.177.65.164" = [ "jam" ];
+        "45.83.104.124" = [ "jam" ];
 
         "192.168.0.1" = [ "white" ];
         "192.168.0.2" = [ "purple" ];
