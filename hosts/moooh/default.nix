@@ -37,7 +37,7 @@
       kvantum.enable = false;
       mail.enable = true;
       mapping.enable = false;
-      nextcloud.enable = false;
+      nextcloud.enable = true;
       plank.enable = false;
       polish.enable = true;
       rofi.enable = true;
@@ -100,7 +100,7 @@
       clojure.enable = false;
       common-lisp.enable = false;
       db.enable = true;
-      go.enable = false;
+      go.enable = true;
       java.enable = false;
       julia.enable = true;
       lua.enable = false;
@@ -149,9 +149,6 @@
     };
     services = {
       containerization.enable = true;
-      pods = {
-        vaultwarden.enable = true;
-      };
       gitea.enable = false;
       jellyfin.enable = false;
       k8s.enable = true;
@@ -187,6 +184,20 @@
       # Optionally set more keymaps and use them with bin/keymapswitcher
       xkb.layout = "at, eu";
     };
+    ddccontrol.enable = true;
+
+    # Just run `sudo ocsinventory-agent -i --nosoftware -s https://sxhw.smaxtec-animalcare.com/ocsinventory -l "" -t ""` every once in a while
+
+    # ocsinventory-agent = {
+    #   enable = true;
+    #   settings = {
+    #     debug = true;
+    #     server = "https://sxhw.smaxtec-animalcare.com/ocsinventory";
+    #     # local = "/var/lib/ocsinventory-agent/reports";
+    #     ca = "/var/lib/ocsinventory-agent/cacert.pem";
+    #   };
+    #   interval = "monthly";
+    # };
   };
 
   # nix.settings = {
@@ -299,6 +310,56 @@
       	  builders-use-substitutes = true
       	'';
   };
+
+  environment.systemPackages = with pkgs; [
+    # Create a FHS environment by command `fhs`, so we can run non-nixpkgs packages in NixOS!
+    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+      pkgs.buildFHSEnv (base // {
+      name = "fhs";
+      targetPkgs = pkgs:
+        # pkgs.buildFHSEnv provides just a minimal FHS environment and lacks
+        # a lot of basic packages necessary for many common software
+        # Add other depnedencies below if the FHS should have them already installed
+        (base.targetPkgs pkgs) ++ (with pkgs; [
+          pkg-config
+          ncurses
+        ]
+      );
+      profile = "export FHS=1";
+      runScript = "zsh";
+      extraOutputsToInstall = ["dev"];
+    }))
+  ];
+
+# Printer sharing
+# See https://nixos.wiki/wiki/Samba#Printer_sharing
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    package = pkgs.sambaFull;
+    settings = {
+      global = {
+        "load printers" = "yes";
+        "printing" = "cups";
+        "printcap name" = "cups";
+      };
+      "printers" = {
+        "comment" = "All Printers";
+        "path" = "/var/spool/samba";
+        "public" = "yes";
+        "browseable" = "yes";
+        # to allow user 'guest account' to print.
+        "guest ok" = "yes";
+        "writable" = "no";
+        "printable" = "yes";
+        "create mode" = 0700;
+      };
+    };
+  };
+  systemd.tmpfiles.rules = [
+      "d /var/spool/samba 1777 root root -"
+  ];
 
   # Limit update size/frequency of rebuilds
   # See https://mastodon.online/@nomeata/109915786344697931

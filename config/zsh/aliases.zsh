@@ -36,12 +36,11 @@ alias clipin='xclip -sel clip -i'
 alias clipout='xclip -sel clip -o'
 
 # ugly yet beautiful...hacky for sure
-alias nixdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
-alias nixinst='(){ nix-env -iA nixos.$1 ;}'
-alias nixviewinst='nix-env --query --installed'
-alias nixrm='nix-env --uninstall'
+# alias nixdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
+alias nixinst='(){ nix profile install nixpkgs#$1 ;}'
+# alias nixviewinst='nix-env --query --installed'
+# alias nixrm='nix-env --uninstall'
 alias nixfix='sudo nix-store --verify --check-contents --repair'
-alias nixup='sudo nixos-rebuild switch --flake .#purple --option pure-eval no'
 alias nixedit='(){ $EDITOR $(fd $1)/default.nix ;}'
 
 # edit zshrc

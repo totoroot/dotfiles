@@ -30,5 +30,11 @@ in
         source = "${configDir}/printers";
       };
     };
+
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
 }

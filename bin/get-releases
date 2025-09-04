@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git ls-remote --refs --sort="version:refname" --tags $1 | cut -d/ -f3- | tac

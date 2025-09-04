@@ -20,7 +20,7 @@
 
   languages.nix.enable = true;
 
-  pre-commit = {
+  git-hooks = {
     hooks = {
       deadnix = {
         enable = true;
@@ -30,5 +30,10 @@
       nixpkgs-fmt.enable = true;
       shellcheck.enable = true;
     };
+  };
+
+  scripts = {
+    nixup.exec = "sudo nixos-rebuild switch --flake .#$(hostname) --impure";
+    nixupC2.exec = "sudo nixos-rebuild switch --flake .#$(hostname) --impure --max-jobs 2 --cores 2";
   };
 }

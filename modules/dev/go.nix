@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # The Go Programming language
-      go_1_18
+      go
       # Collection of tools and libraries for working with Go code, including linters and static analysis
       go-tools
       # Fast and modern static website engine

@@ -52,7 +52,8 @@
 
     # YES!!! https://lix.systems/
     lix = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

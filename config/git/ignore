@@ -58,3 +58,7 @@ config.codekit
 .vscode
 .idea
 .zed
+
+# SonarQube scan directory #
+############################
+.scannerwork

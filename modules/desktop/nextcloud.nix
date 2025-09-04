@@ -13,5 +13,21 @@ in {
       # Nextcloud desktop client
       nextcloud-client
     ];
+
+    services.davfs2 = {
+      enable = true;
+      settings = {
+        globalSection = {
+          use_locks = true;
+        };
+        sections = {
+          "/home/mathym/Desktop/nextcloud-matthias-webdav" = {
+            gui_optimize = true;
+          };
+        };
+      };
+    };
+
+    user.extraGroups = [ "davfs2" ];
   };
 }

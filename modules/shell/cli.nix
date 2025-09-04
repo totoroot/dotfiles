@@ -110,7 +110,8 @@ in {
       # Data encryption effect
       nms
       # Corrects fuckups in console
-      thefuck
+      # 'thefuck' has been removed due to lack of maintenance upstream and incompatible with python 3.12+. Consider using 'pay-respects' instead
+      # thefuck
       # Network discovery utility
       pipes
       # A fast, async, stream-based link checker written in Rust

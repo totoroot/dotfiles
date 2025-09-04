@@ -39,6 +39,8 @@ in {
           waderyan.gitblame
           # Hard wrap
           stkb.rewrap
+          # SonarQube linting extension
+          sonarsource.sonarlint-vscode
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
           name = "vscode-reveal";
           publisher = "evilz";

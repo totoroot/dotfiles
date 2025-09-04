@@ -5,8 +5,6 @@
   environment.systemPackages = with pkgs; [
     # Mount remote directories over SSH
     sshfs
-    # Mount WebDAV shares
-    davfs2
   ];
 
   fileSystems = {

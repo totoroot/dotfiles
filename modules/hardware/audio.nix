@@ -65,7 +65,28 @@ in {
         };
         pulse.enable = true;
         jack.enable = true;
+        # The following is reuqired for AirPlay discovery on the network
+        # See here for more information
+        # https://wiki.nixos.org/wiki/PipeWire#AirPlay/RAOP_configuration
+        raopOpenFirewall = true;
+        # Opens UDP ports 6001-6002
+        extraConfig.pipewire = {
+          "10-airplay" = {
+            "context.modules" = [
+              {
+                name = "libpipewire-module-raop-discover";
+                # increase the buffer size if you get dropouts/glitches
+                # args = {
+                #   "raop.latency.ms" = 500;
+                # };
+              }
+            ];
+          };
+        };
       };
+      # Needed for Airplay discovery too
+      services.avahi.enable = true;
+
       user.packages = with pkgs; [
         # Audio effects for PipeWire applications
         easyeffects
