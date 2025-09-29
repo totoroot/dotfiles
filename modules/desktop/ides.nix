@@ -13,7 +13,7 @@ in {
       # High-performance, multiplayer code editor from the creators of Atom and Tree-sitter
       zed-editor
       # Python IDE for beginners
-      thonny
+      # thonny
       # Small and lightweight IDE
       geany
     ];

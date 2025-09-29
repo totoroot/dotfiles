@@ -18,7 +18,7 @@ in {
     user.packages = with pkgs; [
       (writeScriptBin "rofi" ''
         #!${stdenv.shell}
-        exec ${pkgs.rofi-wayland}/bin/rofi -terminal xst -m -1 "$@"
+        exec ${pkgs.rofi}/bin/rofi -terminal xst -m -1 "$@"
       '')
 
       # For rapidly test changes to rofi's stylesheets

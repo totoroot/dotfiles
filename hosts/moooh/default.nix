@@ -313,53 +313,55 @@
 
   environment.systemPackages = with pkgs; [
     # Create a FHS environment by command `fhs`, so we can run non-nixpkgs packages in NixOS!
-    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+    (
+      let base = pkgs.appimageTools.defaultFhsEnvArgs; in
       pkgs.buildFHSEnv (base // {
-      name = "fhs";
-      targetPkgs = pkgs:
-        # pkgs.buildFHSEnv provides just a minimal FHS environment and lacks
-        # a lot of basic packages necessary for many common software
-        # Add other depnedencies below if the FHS should have them already installed
-        (base.targetPkgs pkgs) ++ (with pkgs; [
-          pkg-config
-          ncurses
-        ]
-      );
-      profile = "export FHS=1";
-      runScript = "zsh";
-      extraOutputsToInstall = ["dev"];
-    }))
+        name = "fhs";
+        targetPkgs = pkgs:
+          # pkgs.buildFHSEnv provides just a minimal FHS environment and lacks
+          # a lot of basic packages necessary for many common software
+          # Add other depnedencies below if the FHS should have them already installed
+          (base.targetPkgs pkgs) ++ (with pkgs; [
+            pkg-config
+            ncurses
+          ]
+          );
+        profile = "export FHS=1";
+        runScript = "zsh";
+        extraOutputsToInstall = [ "dev" ];
+      })
+    )
   ];
 
-# Printer sharing
-# See https://nixos.wiki/wiki/Samba#Printer_sharing
-  services.samba = {
-    enable = true;
-    securityType = "user";
-    openFirewall = true;
-    package = pkgs.sambaFull;
-    settings = {
-      global = {
-        "load printers" = "yes";
-        "printing" = "cups";
-        "printcap name" = "cups";
-      };
-      "printers" = {
-        "comment" = "All Printers";
-        "path" = "/var/spool/samba";
-        "public" = "yes";
-        "browseable" = "yes";
-        # to allow user 'guest account' to print.
-        "guest ok" = "yes";
-        "writable" = "no";
-        "printable" = "yes";
-        "create mode" = 0700;
-      };
-    };
-  };
-  systemd.tmpfiles.rules = [
-      "d /var/spool/samba 1777 root root -"
-  ];
+  # Printer sharing
+  # See https://nixos.wiki/wiki/Samba#Printer_sharing
+  # services.samba = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   package = pkgs.samba;
+  #   settings = {
+  #     global = {
+  #       "load printers" = "yes";
+  #       "printing" = "CUPS";
+  #       "printcap name" = "cups";
+  #       "security" = "user";
+  #     };
+  #     "printers" = {
+  #       "comment" = "All Printers";
+  #       "path" = "/var/spool/samba";
+  #       "public" = "yes";
+  #       "browseable" = "yes";
+  #       # to allow user 'guest account' to print.
+  #       "guest ok" = "yes";
+  #       "writable" = "no";
+  #       "printable" = "yes";
+  #       "create mode" = 0700;
+  #     };
+  #   };
+  # };
+  # systemd.tmpfiles.rules = [
+  #   "d /var/spool/samba 1777 root root -"
+  # ];
 
   # Limit update size/frequency of rebuilds
   # See https://mastodon.online/@nomeata/109915786344697931

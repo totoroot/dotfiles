@@ -82,8 +82,8 @@ in
       egl-wayland
       # ElKowars wacky widgets
       eww
-      # Window switcher, run dialog and dmenu replacement for Wayland
-      rofi-wayland
+      # Window switcher, run dialog and dmenu
+      rofi
       # Command-line copy/paste utilities for Wayland
       wl-clipboard
       # xrandr clone for wlroots compositors

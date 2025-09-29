@@ -34,9 +34,10 @@ in {
     modules.shell.zsh.rcFiles = [ "${configDir}/docker/aliases.zsh" ];
 
     # For misbehaving containers that delay shutdowns and reboots
-    systemd.extraConfig = ''
-      DefaultTimeoutStopSec=10s
-    '';
+    # TODO - The option definition `systemd.extraConfig' in `/nix/store/1lci8fdzlpzbwa3gkh8zgpxryjrwn250-source' no longer has any effect; please remove it. Use systemd.settings.Manager instead.
+    # systemd.extraConfig = ''
+    #   DefaultTimeoutStopSec=10s
+    # '';
 
     virtualisation = {
       docker = {

@@ -42,7 +42,8 @@ in {
       ];
       system.userActivationScripts.setupSteamDir = ''mkdir -p "${cfg.libDir}"'';
 
-      # better for steam proton games
+      # Better for steam proton games
+      # TODO - The option definition `systemd.extraConfig' in `/nix/store/1lci8fdzlpzbwa3gkh8zgpxryjrwn250-source' no longer has any effect; please remove it. Use systemd.settings.Manager instead.
       systemd.extraConfig = "DefaultLimitNOFILE=1048576";
     }
 
