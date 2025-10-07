@@ -31,8 +31,6 @@ in {
     ];
 
     environment.systemPackages = with pkgs; [
-      # Nix software center
-      inputs.nix-software-center.packages.${system}.nix-software-center
       # Fallback icon themes
       adwaita-icon-theme
       # A style to bend Qt applications to look like they belong into GNOME Shell

@@ -81,12 +81,6 @@
       url = "github:cachix/devenv/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Graphical App Store for Nix/NixOS
-    nix-software-center = {
-      url = "github:ljubitje/nix-software-center";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, devenv, ... }:
