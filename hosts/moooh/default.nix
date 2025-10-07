@@ -51,7 +51,6 @@
         firefox.enable = true;
         lynx.enable = false;
         tor.enable = false;
-        zen.enable = true;
       };
       communication = {
         delta.enable = false;

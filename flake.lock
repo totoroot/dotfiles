@@ -822,8 +822,7 @@
         "nixos-unstable": "nixos-unstable",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
-        "plasma-manager": "plasma-manager",
-        "zen-browser": "zen-browser"
+        "plasma-manager": "plasma-manager"
       }
     },
     "systems": {
@@ -927,26 +926,6 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-        "type": "github"
-      }
-    },
-    "zen-browser": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1758600385,
-        "narHash": "sha256-lRK96/otQ9JAkrjYFkK8sKloujhZ+eS3RFFerMdEKAg=",
-        "owner": "youwen5",
-        "repo": "zen-browser-flake",
-        "rev": "8fdac24a43e541c644ea26b48ff886533d367155",
-        "type": "github"
-      },
-      "original": {
-        "owner": "youwen5",
-        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

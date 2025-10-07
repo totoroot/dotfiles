@@ -57,11 +57,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # https://github.com/thefossguy/nixos-needsreboot
     nixos-needsreboot = {
       url = "github:thefossguy/nixos-needsreboot";
