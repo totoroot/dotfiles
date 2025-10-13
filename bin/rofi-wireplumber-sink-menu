@@ -3,7 +3,6 @@
 # rofi_bin="wofi -dmenu -i -theme theme/sinkmenu.rasi"
 rofi_bin="tofi --fuzzy-match true"
 
-#  Get array of hyprland windows/clients and select window with rofi
 selected="$(wpctl status \
     | sed -n '/Audio/,/Video/p' \
     | sed -n '/Sinks/,/Sink endpoints/p' \

@@ -43,13 +43,6 @@
     # Add "nur.nixosModules.nur" to the host modules
     nur.url = "github:nix-community/NUR";
 
-    # Official Hyprland flake
-    # Add "hyprland.nixosModules.default" to the host modules
-    hyprland = {
-      url = "github:vaxerski/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # YES!!! https://lix.systems/
     lix = {
       # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`

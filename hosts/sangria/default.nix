@@ -13,7 +13,6 @@
     desktop = {
       environments = {
         bspwm.enable = false;
-        hyprland.enable = false;
         lxqt.enable = false;
         plasma.enable = true;
         xfce.enable = true;
