@@ -11,7 +11,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Distributed version control system
-      gitAndTools.gitFull
+      gitFull
       # Simple terminal UI for Git
       lazygit
       # Git repository summary on your terminal
