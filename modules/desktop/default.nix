@@ -37,25 +37,6 @@ in {
       adwaita-qt
       # Default fallback theme used by implementations of the icon theme specification
       hicolor-icon-theme
-      # QPlatformTheme for a better Qt application inclusion in GNOME
-      qgnomeplatform
-    ];
-
-    user.packages = with pkgs; [
-      # Access X clipboard from console
-      xclip
-      # Perform elementary actions on X windows
-      xdo
-      # X input and window management tool
-      xdotool
-      # Generic Linux command-line automation tool
-      ydotool
-      # Simple X image viewer (dependency fontpreview)
-      sxiv
-      # Light-weight image viewer
-      feh
-      # SVG-based Qt5 theme engine plus a config tool and extra themes
-      kdePackages.qtstyleplugin-kvantum
     ];
 
     ## Apps/Services
