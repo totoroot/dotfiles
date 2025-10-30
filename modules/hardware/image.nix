@@ -17,7 +17,8 @@ in {
       # https://github.com/ventoy/Ventoy/issues/3224
       # ventoy
       # Raspberry Pi Imaging Utility
-      rpi-imager
+      # TODO fix failed build
+      # rpi-imager
       # Very minimal GUI app that can write compressed disk images to USB drives
       usbimager
       # Etcher is marked as insecure on NixOS...see https://github.com/NixOS/nixpkgs/issues/153537#issuecomment-1115961395

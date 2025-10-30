@@ -115,7 +115,9 @@ in {
       # Network discovery utility
       pipes
       # A fast, async, stream-based link checker written in Rust
-      lychee
+      # TODO wait for fixed hash mismatch
+      # https://github.com/NixOS/nixpkgs/pull/456776
+      # lychee
       # A fast cd command that learns your habits
       zoxide
     ];
