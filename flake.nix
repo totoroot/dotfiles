@@ -63,15 +63,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
     };
-
-    # Development environments in seconds
-    devenv = {
-      url = "github:cachix/devenv/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, devenv, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:
     let
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
@@ -100,7 +94,6 @@
           inherit unstable nixpkgs;
           # Add overlays for flakes
           user = self.packages.${system};
-          devenv = devenv.packages.${system}.devenv;
         };
 
       overlays =
@@ -140,8 +133,5 @@
           inherit inputs nixpkgs home-manager;
         }
       );
-
-      # Flake variables
-      purple = self.nixosConfigurations.purple.activationPackage;
     };
 }
