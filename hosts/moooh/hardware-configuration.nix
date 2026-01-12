@@ -120,33 +120,37 @@ in
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" "noatime" ];
+      fsType = "ext4";
     };
-    "/home" = {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
-    };
-    "/nix" = {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
-    "/persist" = {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=persist" "compress=zstd" "noatime" ];
-      neededForBoot = true;
-    };
-    "/var/log" = {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=log" "compress=zstd" "noatime" ];
-      # Needed for correct log order
-      neededForBoot = true;
-    };
-    "/boot/efi" = {
+    # "/" = {
+    #   device = "/dev/disk/by-label/nixos";
+    #   fsType = "btrfs";
+    #   options = [ "subvol=root" "compress=zstd" "noatime" ];
+    # };
+    # "/home" = {
+    #   device = "/dev/disk/by-label/nixos";
+    #   fsType = "btrfs";
+    #   options = [ "subvol=home" "compress=zstd" "noatime" ];
+    # };
+    # "/nix" = {
+    #   device = "/dev/disk/by-label/nixos";
+    #   fsType = "btrfs";
+    #   options = [ "subvol=nix" "compress=zstd" "noatime" ];
+    # };
+    # "/persist" = {
+    #   device = "/dev/disk/by-label/nixos";
+    #   fsType = "btrfs";
+    #   options = [ "subvol=persist" "compress=zstd" "noatime" ];
+    #   neededForBoot = true;
+    # };
+    # "/var/log" = {
+    #   device = "/dev/disk/by-label/nixos";
+    #   fsType = "btrfs";
+    #   options = [ "subvol=log" "compress=zstd" "noatime" ];
+    #   # Needed for correct log order
+    #   neededForBoot = true;
+    # };
+    "/boot" = {
       device = "${boot_device_uuid}";
       fsType = "vfat";
     };
