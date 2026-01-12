@@ -51,7 +51,7 @@
     loader = {
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
+        efiSysMountPoint = "/boot";
       };
       systemd-boot = {
         enable = true;
@@ -100,7 +100,7 @@
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
   hardware.graphics.extraPackages = with pkgs; [
-    vaapiIntel
+    intel-vaapi-driver
     libvdpau-va-gl
     intel-media-driver
   ];

@@ -24,7 +24,7 @@ in {
       fontDir.enable = true;
       enableGhostscriptFonts = true;
       packages = with pkgs; [
-        ubuntu_font_family
+        ubuntu-classic
         dejavu_fonts
         symbola
         noto-fonts
@@ -48,7 +48,7 @@ in {
         source-sans-pro
         source-serif-pro
         corefonts
-        vistafonts
+        vista-fonts
         comic-mono
       ];
     };

@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      firefox-wayland
+      firefox
       (makeDesktopItem {
         name = "datadog";
         desktopName = "Datadog";
