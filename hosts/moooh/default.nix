@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ../personal.nix
+    ./disks.nix
     ./hardware-configuration.nix
+    ../personal.nix
     # ./home.nix
-    ./mounts.nix
   ];
 
   modules = {
