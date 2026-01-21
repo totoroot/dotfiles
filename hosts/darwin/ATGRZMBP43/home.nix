@@ -10,8 +10,13 @@ in
   };
 
   imports = [
-    ./packages.nix
-    ./fonts.nix
+	./fonts.nix
+	./packages.nix
+    ../../../modules/home/unfree-packages.nix
+    ../../../modules/home/home-manager-applications-fix.nix
+    ../../../modules/home/kitty.nix
+    ../../../modules/home/micro.nix
+    ../../../modules/home/zsh.nix
   ];
 
   # programs.zsh = {
@@ -78,9 +83,10 @@ in
 
   home.file = {
     # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac
-    "Library/Keyboard Layouts/EurKEY.keylayout".source = ../config/eurkey/EurKEY.keylayout;
-    "Library/Keyboard Layouts/EurKEY.icns".source = ../config/eurkey/EurKEY.icns;
-    "/Applications/kitty.app/Contents/Resources/kitty.icns".source = ../config/kitty/kitty-dark.icns;
+    "Library/Keyboard Layouts/EurKEY.keylayout".source = ../../../config/eurkey/EurKEY.keylayout;
+    "Library/Keyboard Layouts/EurKEY.icns".source = ../../../config/eurkey/EurKEY.icns;
+	# Cute icon for kitty terminal emulator
+    "Applications/kitty.app/Contents/Resources/kitty.icns".source = ../../../config/kitty/kitty-dark.icns;
   };
 
   # home.file =
@@ -98,5 +104,5 @@ in
   #             force = true;
   #         };
   #         }) (listFilesRecursive dir ""));
-  #   in toHomeFiles ../config;
+  #   in toHomeFiles ../../../config;
 }

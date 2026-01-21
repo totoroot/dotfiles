@@ -44,8 +44,6 @@
       #"a-better-finder-rename"
       # Window switcher
       "alt-tab"
-      # Better search menu than Spotlight
-      "alfred"
       # Utility for writing image files
       # "balenaetcher"
       # "betterdisplay"
@@ -53,8 +51,6 @@
       # "cyberduck"
       # Ungoogled Chromium
       "ungoogled-chromium"
-      # Monitoring widget
-      "eul"
       # Keyboard layout for Europeans, coders and translators
       "eurkey"
       # "fig"

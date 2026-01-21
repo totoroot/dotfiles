@@ -1,3 +1,4 @@
+# nix-darwin configuration
 { lib, pkgs, ... }:
 
 {
@@ -49,9 +50,6 @@
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
 
-  # Fonts
-  # fonts.fontDir.enable = true;
-
   # Keyboard
   system.keyboard = {
     enableKeyMapping = true;
@@ -60,17 +58,4 @@
 
   # Add ability to used TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
-
-  # # Create symlinks for nix-darwin packages in ~/Applications
-  # system.activationScripts.applications.text = pkgs.lib.mkForce (
-  # ''
-  # echo "setting up ~/Applications..." >&2
-  # rm -rf ~/Applications/NixDarwin
-  # mkdir -p ~/Applications/NixDarwin
-  # for app in $(find ${config.system.build.applications}/Applications -maxdepth 1 -type l); do
-  # src="$(/usr/bin/stat -f%Y "$app")"
-  # cp -r "$src" ~/Applications/NixDarwin
-  # done
-  # ''
-  # );
 }

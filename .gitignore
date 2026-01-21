@@ -11,3 +11,6 @@ secrets
 .devenv*
 devenv.local.nix
 .pre-commit-config.yaml
+
+.cache
+.nix-cache

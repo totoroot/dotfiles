@@ -1,6 +1,13 @@
 { pkgs, ... }:
 
 {
+  modules.home.unfreePackages = {
+    enable = true;
+    packageNames = [
+      "orbstack"
+    ];
+  };
+
   home.packages = with pkgs; [
     # Radically simple IT automation
     # ansible
@@ -146,6 +153,8 @@
     codex
     # AI coding agent built for the terminal
     opencode
+
+    orbstack
   ];
 
   # # Create symlinks for home-manager packages in ~/Applications

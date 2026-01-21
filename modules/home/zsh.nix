@@ -1,10 +1,14 @@
 { config, options, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.modules.shell.zsh;
-in {
-  options.modules.shell.zsh = with types; {
-    enable = mkBoolOpt false;
+with lib.my;
+let
+  cfg = config.modules.home.zsh;
+  dotfiles = "/Users/matthias.thym/.config/dotfiles";
+in
+{
+  options.modules.home.zsh = with types; {
+    enable = mkBoolOpt true;
 
     aliases = mkOpt (attrsOf (either str path)) { };
 
@@ -22,19 +26,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    users.defaultUserShell = pkgs.zsh;
-
     programs.zsh = {
       enable = true;
       enableCompletion = true;
       # I init completion myself, because enableGlobalCompInit initializes it
       # too soon, which means commands initialized later in my config won't get
       # completion, and running compinit twice is slow.
-      enableGlobalCompInit = false;
-      promptInit = "";
+      completionInit = "";
     };
 
-    user.packages = with pkgs; [
+    home.packages = with pkgs; [
       zsh
       # ZSH completions for Nix, NixOS, and NixOps
       nix-zsh-completions
@@ -42,16 +43,19 @@ in {
       zsh-history-substring-search
     ];
 
-    env = {
+    home.sessionVariables = {
       ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
       ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
       ZGENOM_DIR = "$XDG_DATA_HOME/zsh";
       ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
     };
 
-    home.configFile = {
+    xdg.configFile = {
       # Write it recursively so other modules can write files to it
-      "zsh" = { source = "${configDir}/zsh"; recursive = true; };
+      "zsh" = {
+      	source = "${configDir}/zsh";
+      	recursive = true;
+      };
 
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
       # Because extraInit generates those files in /etc/profile, and mine just
@@ -73,6 +77,6 @@ in {
       '';
     };
 
-    system.userActivationScripts.cleanupZgenom = "rm -fv $XDG_CACHE_HOME/zsh/*";
+    # home.activation.cleanupZgenom = "rm -fv $XDG_CACHE_HOME/zsh/*";
   };
 }
