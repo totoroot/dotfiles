@@ -15,7 +15,7 @@ in {
       # GTK3 & python based GUI for Syncthing
       # syncthing-gtk # Currently broken
       # Simple backups based on borg
-      pika-backup
+      # pika-backup
       # Desktop Backup Client for Borg
       vorta
     ];

@@ -15,7 +15,6 @@ in {
 
   config = {
     user.packages = with pkgs; [
-      (mkIf cfg.ps1.enable pcsxr)
       (mkIf cfg.ps2.enable pcsx2)
       (mkIf cfg.ds.enable desmume)
       (mkIf

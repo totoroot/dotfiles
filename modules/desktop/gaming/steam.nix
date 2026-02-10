@@ -14,9 +14,12 @@ in {
     {
       # I avoid programs.steam.enable because it installs another steam binary,
       # which the xdesktop package invokes, instead of my steam shims below.
-      hardware.graphics.enable = true;
-      hardware.opengl.driSupport32Bit = true;
-      hardware.pulseaudio.support32Bit = config.services.pulseaudio.enable;
+      hardware.graphics = {
+      	enable = true;
+        enable32Bit = true;
+      };
+
+      services.pulseaudio.support32Bit = config.services.pulseaudio.enable;
 
       user.packages = with pkgs; [
         # Get steam to keep its garbage out of $HOME
@@ -27,7 +30,7 @@ in {
         # for running GOG and humble bundle games
         (writeScriptBin "steam-run" ''
           #!${stdenv.shell}
-          HOME="${cfg.libDir}" exec ${steam-run-native}/bin/steam-run "$@"
+          HOME="${cfg.libDir}" exec ${steam-run}/bin/steam-run "$@"
         '')
         # Add a desktop entry
         (makeDesktopItem {
@@ -44,7 +47,7 @@ in {
 
       # Better for steam proton games
       # TODO - The option definition `systemd.extraConfig' in `/nix/store/1lci8fdzlpzbwa3gkh8zgpxryjrwn250-source' no longer has any effect; please remove it. Use systemd.settings.Manager instead.
-      systemd.extraConfig = "DefaultLimitNOFILE=1048576";
+      # systemd.extraConfig = "DefaultLimitNOFILE=1048576";
     }
 
     (mkIf cfg.hardware.enable {

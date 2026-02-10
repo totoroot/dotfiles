@@ -56,7 +56,9 @@ in {
 
       (if cfg.sprites.enable then [
         # Animated sprite editor & pixel art tool
-        aseprite
+        # TODO currently broken
+        # See https://github.com/NixOS/nixpkgs/issues/445447
+        # aseprite
       ] else [ ]);
 
     home.configFile = mkIf cfg.raster.enable {

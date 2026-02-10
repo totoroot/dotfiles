@@ -11,7 +11,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # 3D Creation/Animation/Publishing System with HIP support
-      blender-hip
+      blender
     ];
   };
 }

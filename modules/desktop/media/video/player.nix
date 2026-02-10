@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # A complete, cross-platform solution to record, convert and stream audio and video
-      ffmpeg_4
+      ffmpeg_6-full
       # General-purpose media player, fork of MPlayer and mplayer2
       mpv
       # A mpc-like control interface for mpv

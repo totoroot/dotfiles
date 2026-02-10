@@ -15,14 +15,11 @@ in {
       # Classic 2D jump'n run sidescroller game
       superTux
       # Free 3D kart racing game
-      superTuxKart
+      # TODO currently broken
+      # See https://github.com/NixOS/nixpkgs/issues/445447
+      # superTuxKart
       # Multi-platform emulator frontend for libretro cores
       retroarch
     ];
-
-    # Create directory for retro games
-    home.file = {
-      "games/retro/.use".text = "retro games";
-    };
   };
 }

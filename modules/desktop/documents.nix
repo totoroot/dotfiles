@@ -17,9 +17,9 @@ in {
       # PDF to ODT/ODS converter
       pdf2odt
       # Highly customizable and functional PDF viewer
-      zathura
+      # zathura
       # Advanced PDF viewer for forms and annotated documents
-      qpdfview
+      # qpdfview
       # Presenter console with multi-monitor support for PDF files
       pdfpc
       # OCR tool for scanned PDFs
@@ -27,9 +27,10 @@ in {
       # Handwriting notetaking software with PDF annotation support
       xournalpp
       # Simple GUI text editor
-      xfce.mousepad
+      mousepad
       # GNU/Linux-friendly version of the Wacom Inkling SketchManager
-      inklingreader
+      # TODO Fix broken package
+      # inklingreader
       # Simple drawing application to create handwritten notes
       rnote
     ];

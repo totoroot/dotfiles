@@ -12,7 +12,9 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      handbrake
+      # FIXME https://github.com/NixOS/nixpkgs/issues/484121
+      # Tool for converting video files and ripping DVDs
+      # handbrake
     ];
   };
 }

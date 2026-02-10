@@ -46,6 +46,8 @@ in {
       kcalc
       # Color picker
       kcolorchooser
+      # KWin script for ultrawide layouts
+      kzones
     ];
   };
 }
