@@ -18,7 +18,7 @@ if [[ ! -f "$env_file" ]]; then
 fi
 
 if ! grep -q "^${token_var}=" "$env_file"; then
-  token="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 48)"
+  token="$(od -An -N32 -tx1 /dev/urandom | tr -d ' \n' | head -c 48)"
   echo "${token_var}=${token}" >>"$env_file"
   echo "Added ${token_var} to ${env_file}"
 else
