@@ -9,27 +9,20 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.graphics.enable = true;
-    hardware.opengl = {
-      driSupport = true;
-      driSupport32Bit = true;
+    hardware.graphics = {
+      enable = true;
       extraPackages = with pkgs; [
         # OpenCL ICD definition for AMD GPUs using the ROCm stack
         rocmPackages.clr.icd
         # OpenCL runtime for AMD GPUs, part of the ROCm stack
         rocmPackages.clr
-        # AMD Open Source Driver For Vulkan
-        amdvlk
         # Hardware-accelerated video playpack
         # VDPAU driver for the VAAPI library
-        vaapiVdpau
+        libva-vdpau-driver
         # VDPAU driver with OpenGL/VAAPI backend
         libvdpau-va-gl
         # Tool to query the Video Decode and Presentation API for Unix (VDPAU) abilities of the system
         vdpauinfo
-      ];
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
       ];
     };
 
@@ -53,7 +46,8 @@ in {
       # CMake modules for common build tasks for the ROCm stack
       rocmPackages.rocm-cmake
       # Radeon open compute thunk interface
-      rocmPackages.rocm-thunk
+      # error: 'rocm-thunk' has been removed. It's now part of the ROCm runtime.
+      # rocmPackages.rocm-thunk
     ];
   };
 }
