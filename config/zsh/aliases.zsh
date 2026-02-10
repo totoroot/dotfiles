@@ -48,7 +48,7 @@ alias zshconfig="$EDITOR ~/.zshrc"
 # source zshrc
 alias zshsource="source ~/.zshrc"
 # alias to scan wireless network for connected devices
-alias scan="sudo nmap -sn 192.168.8.0/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
+alias scan="sudo nmap -sn $(ip route | grep -m1 default | awk '{print $3}')/24| sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
 # find largest files in directory
 alias ducks="sudo du -cks -- * | sort -rn | head"
 # rm EXIF data from images in directory
