@@ -70,7 +70,7 @@
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
 
-      system = "x86_64-linux";
+      system = "aarch64-linux";
 
       lib = nixos.lib.extend
         (self: _super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
