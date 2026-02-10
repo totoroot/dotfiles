@@ -21,5 +21,7 @@
     };
   };
 
+  boot.resumeDevice = "/dev/disk/by-uuid/975bd5f2-5c61-4c56-b04d-3b389c9420cb";
+
   swapDevices = [{ device = "/dev/disk/by-uuid/ebbb2a31-a8dd-4690-af49-8753bd3d72b3"; }];
 }

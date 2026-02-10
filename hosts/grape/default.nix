@@ -26,7 +26,7 @@
       flatpak.enable = true;
       fm.enable = true;
       fonts.enable = true;
-      geany.enable = true;
+      ides.enable = true;
       ghostwriter.enable = false;
       godot.enable = false;
       gpa.enable = false;
@@ -40,7 +40,6 @@
       polish.enable = true;
       rofi.enable = true;
       screenshot.enable = false;
-      thonny.enable = true;
       torrent.enable = true;
       unity.enable = false;
       vscodium.enable = true;
@@ -183,6 +182,8 @@
     kdeconnect.enable = true;
     ssh.startAgent = true;
   };
+
+  user.extraGroups = [ "dialout" ];
 
   # NixOS service configuration
   services = {
