@@ -4,7 +4,7 @@ set -euo pipefail
 key_dir="/var/lib/sops-nix"
 host="$(hostname -s)"
 key_file="${key_dir}/${host}.txt"
-ssh_key="${HOME}/.ssh/${host}"
+ssh_key="/home/${SUDO_USER:-$USER}/.ssh/${host}"
 
 if [[ -f "$key_file" ]]; then
   echo "sops-nix age key already exists at ${key_file}"
