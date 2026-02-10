@@ -43,12 +43,8 @@
     # Add "nur.nixosModules.nur" to the host modules
     nur.url = "github:nix-community/NUR";
 
-    # # YES!!! https://lix.systems/
-    # lix = {
-    #   # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
-    #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.94.0.tar.gz";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    # YES!!! https://lix.systems/
+    # Using Lix from nixpkgs (no flake input required).
 
     # https://github.com/thefossguy/nixos-needsreboot
     nixos-needsreboot = {

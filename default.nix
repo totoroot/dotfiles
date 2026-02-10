@@ -48,6 +48,16 @@ with inputs;
     # useSandbox = true;
   };
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      inherit (prev.lixPackageSets.stable)
+        nixpkgs-review
+        nix-eval-jobs
+        nix-fast-build
+        colmena;
+    })
+  ];
+
   system = {
     stateVersion = mkDefault "23.05";
     configurationRevision = mkIf (self ? rev) self.rev;
