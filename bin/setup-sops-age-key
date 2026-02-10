@@ -5,11 +5,25 @@ key_dir="/var/lib/sops-nix"
 host="$(hostname -s)"
 key_file="${key_dir}/${host}.txt"
 ssh_key="/home/${SUDO_USER:-$USER}/.ssh/${host}"
+repo_root="$(cd "$(dirname "$0")/.." && pwd)"
+secrets_file="${repo_root}/secrets/${host}.yaml"
 
 if [[ -f "$key_file" ]]; then
   echo "sops-nix age key already exists at ${key_file}"
   echo "Public key:"
-  rg -n "public key:" "$key_file" || true
+  if rg -n "public key:" "$key_file" >/dev/null 2>&1; then
+    rg -n "public key:" "$key_file" || true
+  else
+    echo "  (generated via ssh-to-age; run: sudo age-keygen -y ${key_file})"
+  fi
+  if [[ ! -f "$secrets_file" ]]; then
+    cat >"$secrets_file" <<'EOF'
+# Add host secrets here, e.g.
+# my-service:
+#   env: "..."
+EOF
+    echo "Created stub secrets file: ${secrets_file}"
+  fi
   exit 0
 fi
 
@@ -22,13 +36,31 @@ mkdir -p "$key_dir"
 
 if [[ -f "$ssh_key" ]]; then
   ssh-to-age -private-key < "$ssh_key" > "$key_file"
+  used_ssh_to_age="true"
 else
   echo "Host SSH key not found at ${ssh_key}. Falling back to age-keygen."
   age-keygen -o "$key_file"
+  used_ssh_to_age="false"
 fi
 
 chmod 600 "$key_file"
 
 echo "Generated sops-nix age key at ${key_file}"
 echo "Public key:"
-rg -n "public key:" "$key_file" || true
+if [[ "${used_ssh_to_age}" == "true" ]]; then
+  echo "  (generated via ssh-to-age; run: sudo age-keygen -y ${key_file})"
+else
+  rg -n "public key:" "$key_file" || true
+fi
+
+if [[ ! -f "$secrets_file" ]]; then
+  cat >"$secrets_file" <<'EOF'
+# Add host secrets here, e.g.
+# my-service:
+#   env: "..."
+EOF
+  echo "Created stub secrets file: ${secrets_file}"
+fi
+
+echo "Encrypt the secrets file like this:"
+echo "  sops --encrypt --age \"age1...${host^^}_PUBLIC_KEY...\" -i ${secrets_file}"
