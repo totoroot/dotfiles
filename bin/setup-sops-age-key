@@ -4,6 +4,7 @@ set -euo pipefail
 key_dir="/var/lib/sops-nix"
 host="$(hostname -s)"
 key_file="${key_dir}/${host}.txt"
+ssh_key="${HOME}/.ssh/${host}"
 
 if [[ -f "$key_file" ]]; then
   echo "sops-nix age key already exists at ${key_file}"
@@ -18,7 +19,14 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 mkdir -p "$key_dir"
-age-keygen -o "$key_file"
+
+if [[ -f "$ssh_key" ]]; then
+  ssh-to-age -private-key < "$ssh_key" > "$key_file"
+else
+  echo "Host SSH key not found at ${ssh_key}. Falling back to age-keygen."
+  age-keygen -o "$key_file"
+fi
+
 chmod 600 "$key_file"
 
 echo "Generated sops-nix age key at ${key_file}"

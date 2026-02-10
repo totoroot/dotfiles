@@ -144,6 +144,7 @@ with inputs;
     wget
     gnumake
     unzip
+    ssh-to-age
     # Needed for alternative diff activationScript
     nvd
     inputs.nixos-needsreboot.packages.${system}.default
