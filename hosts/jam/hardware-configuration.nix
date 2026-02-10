@@ -24,6 +24,9 @@
     extraModulePackages = [ ];
   };
 
+  # virtualisation.qemu.guestAgent.enable = true;
+  services.qemuGuest.enable = true;
+
   powerManagement.cpuFreqGovernor = "performance";
 
   swapDevices = [ ];

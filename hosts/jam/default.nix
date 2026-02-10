@@ -1,5 +1,7 @@
 { ... }:
-
+let
+  domain = "xn--berwachungsbehr-mtb1g.de";
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -34,11 +36,27 @@
       fail2ban.enable = true;
       headscale.enable = true;
       homepage.enable = true;
+      nextcloud.enable = true;
+      mailserver.enable = true;
       nginx.enable = true;
+      goaccess = {
+        enable = true;
+        logFilePath = "/var/log/nginx/access.log";
+        logFileFormat = "COMBINED";
+        enableNginx = true;
+        nginxEnableSSL = true;
+        serverHost = "zugriffs.${domain}";
+        serverPath = "";
+        userName = "goaccess";
+      };
       ntfy.enable = true;
+      # TODO Figure out build failure for n8n
+      n8n.enable = false;
+      plausible.enable = false;
       ssh.enable = true;
       uptime-kuma.enable = true;
       tailscale.enable = true;
+      vaultwarden.enable = true;
       prometheus = {
         enable = false;
         exporters = {
@@ -55,11 +73,13 @@
           speedtest.enable = false;
         };
       };
+      webmail.enable = true;
+      wordpress.enable = false;
     };
   };
 
   # Set stateVersion
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   # Limit update size/frequency of rebuilds
   # Also preserve space on disk
@@ -94,4 +114,6 @@
       "9.9.9.9"
     ];
   };
+
+  users.users.goaccess.extraGroups = [ "nginx" ];
 }
