@@ -15,12 +15,12 @@ in
   config = mkIf cfg.enable {
     services.vaultwarden = {
       enable = true;
-      dbBackend = "postgresql";
+      # dbBackend = "postgresql";
       # backupDir = ;
       config = {
-        domain = "https://vault.${domain}";
+        domain = "https://passwort.${domain}";
         signupsAllowed = false;
-        databaseUrl = "postgresql://vaultwarden@%2Frun%2Fpostgresql/vaultwarden";
+        # databaseUrl = "postgresql://vaultwarden@%2Frun%2Fpostgresql/vaultwarden";
         websocketAddress = "0.0.0.0";
         # websocketPort = vaultwardenPort;
         rocketAddress = "0.0.0.0";
@@ -28,8 +28,6 @@ in
         rocketLog = "critical";
       };
     };
-
-    networking.firewall.allowedTCPPorts = [ vaultwardenPort ];
 
     environment.systemPackages = [ config.services.vaultwarden.package ];
   };

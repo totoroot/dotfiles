@@ -22,6 +22,7 @@ in
       datastorePath = "/var/lib/changedetection";
       listenAddress = "0.0.0.0";
       baseURL = "website.${domain}";
+      environmentFile = "/var/secrets/changedetection.env";
     };
 
     users = {
