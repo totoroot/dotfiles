@@ -15,7 +15,7 @@ in {
         # Make it rewritable in case Plasma should be installed
         # but other display manager should be used
         enable = mkDefault true;
-        package = mkDefault pkgs.kdePackages.sddm;
+        package = mkForce pkgs.kdePackages.sddm;
         # Use Wayland Session by default
         wayland = {
           enable = mkDefault true;
