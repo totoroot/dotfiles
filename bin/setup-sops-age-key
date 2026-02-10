@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+key_dir="/var/lib/sops-nix"
+host="$(hostname -s)"
+key_file="${key_dir}/${host}.txt"
+
+if [[ -f "$key_file" ]]; then
+  echo "sops-nix age key already exists at ${key_file}"
+  echo "Public key:"
+  rg -n "public key:" "$key_file" || true
+  exit 0
+fi
+
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root (writes to ${key_dir})."
+  exit 1
+fi
+
+mkdir -p "$key_dir"
+age-keygen -o "$key_file"
+chmod 600 "$key_file"
+
+echo "Generated sops-nix age key at ${key_file}"
+echo "Public key:"
+rg -n "public key:" "$key_file" || true

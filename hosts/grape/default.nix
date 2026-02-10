@@ -9,6 +9,10 @@
   ];
 
   modules = {
+    nix.secrets = {
+      enable = true;
+      defaultFile = "${toString ../secrets}/grape.yaml";
+    };
     nix.atticCache = {
       enableClient = true;
       host = "purple-ts";

@@ -6,7 +6,9 @@ with inputs;
 {
   imports =
     # I use home-manager to deploy files to $HOME; little else
-    [ home-manager.nixosModules.home-manager ]
+    [ home-manager.nixosModules.home-manager
+      inputs.sops-nix.nixosModules.sops
+    ]
     # All my personal modules
     ++ (mapModulesRec' (toString ./modules) import);
 
