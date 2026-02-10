@@ -19,7 +19,7 @@ with inputs;
   };
 
   nix = {
-    package = pkgs.lix;
+    package = pkgs.lixPackageSets.stable.lix;
     extraOptions = "experimental-features = nix-command flakes";
     nixPath = [
       "nixpkgs=${nixos}"

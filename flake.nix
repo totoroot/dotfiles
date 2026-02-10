@@ -43,12 +43,12 @@
     # Add "nur.nixosModules.nur" to the host modules
     nur.url = "github:nix-community/NUR";
 
-    # YES!!! https://lix.systems/
-    lix = {
-      # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # # YES!!! https://lix.systems/
+    # lix = {
+    #   # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
+    #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.94.0.tar.gz";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # https://github.com/thefossguy/nixos-needsreboot
     nixos-needsreboot = {
@@ -62,6 +62,11 @@
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
