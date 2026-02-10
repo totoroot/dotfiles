@@ -9,6 +9,17 @@
   ];
 
   modules = {
+    nix.atticCache = {
+      enableServer = true;
+      enableClient = true;
+      enableWatcher = true;
+      host = "purple-ts";
+      port = 8080;
+      # Set to the public key for your cache, e.g. "cache-name:BASE64"
+      publicKey = null;
+      # Add ATTIC_SERVER_TOKEN_* secrets here (see attic docs)
+      environmentFile = "/etc/atticd.env";
+    };
     theme.active = "dracula";
     desktop = {
       environments = {

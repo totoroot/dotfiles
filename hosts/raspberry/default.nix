@@ -17,12 +17,26 @@
   ];
 
   modules = {
+    nix.atticCache = {
+      enableClient = true;
+      host = "purple-ts";
+      port = 8080;
+      # Set to your cache public key, e.g. "cache-name:BASE64"
+      publicKey = null;
+    };
     nix.remoteBuilder = {
       enable = true;
       host = "purple";
       user = "builder";
       systems = [ "aarch64-linux" ];
       enableCheck = true;
+    };
+    nix.atticCache = {
+      enableClient = true;
+      host = "purple-ts";
+      port = 8080;
+      # Set to the public key for your cache, e.g. "cache-name:BASE64"
+      publicKey = null;
     };
     theme.active = "dracula";
     editors = {
