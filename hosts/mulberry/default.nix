@@ -17,6 +17,13 @@
   ];
 
   modules = {
+    nix.remoteBuilder = {
+      enable = true;
+      host = "purple";
+      user = "builder";
+      systems = [ "aarch64-linux" ];
+      enableCheck = true;
+    };
     theme.active = "dracula";
     editors = {
       default = "micro";

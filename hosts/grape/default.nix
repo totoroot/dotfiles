@@ -9,6 +9,13 @@
   ];
 
   modules = {
+    nix.remoteBuilder = {
+      enable = true;
+      host = "purple";
+      user = "builder";
+      systems = [ "x86_64-linux" ];
+      enableCheck = true;
+    };
     theme.active = "dracula";
     desktop = {
       environments = {
