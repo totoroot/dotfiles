@@ -5,7 +5,7 @@ with lib.my;
 let
   cfg = config.modules.services.home-assistant;
   port = 7901;
-  version = "2023.12.2";
+  version = "2026.1";
 in
 {
   options.modules.services.home-assistant = {
@@ -20,11 +20,16 @@ in
           # "${home-assistant-config}:/config/configuration.yaml"
           "/var/lib/home-assistant:/config"
           "/etc/localtime:/etc/localtime:ro"
+          "/run/dbus:/run/dbus:ro"
         ];
         extraOptions = [
           "--device=/dev/ttyUSB0"
+          "--device=/dev/bus/usb"
           # TODO Replace this with port mapping
           "--network=host"
+          # Needed for Bluetooth to work
+          "--cap-add=NET_ADMIN"
+          "--cap-add=NET_RAW"
         ];
         ports = [
           "${toString port}:${toString port}"

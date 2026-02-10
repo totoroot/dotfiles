@@ -7,6 +7,7 @@ let
   domain = "xn--berwachungsbehr-mtb1g.de";
   jam-tailscale-ip = "100.64.0.1";
   purple-tailscale-ip = "100.64.0.2";
+  grape-tailscale-ip = "100.64.0.4";
 in
 {
   options.modules.services.prometheus = {
@@ -42,7 +43,7 @@ in
         {
           job_name = "node";
           static_configs = [{
-            targets = [ "127.0.0.1:9100" "${jam-tailscale-ip}:9100" "${purple-tailscale-ip}:9100" ];
+            targets = [ "127.0.0.1:9100" "${jam-tailscale-ip}:9100" "${purple-tailscale-ip}:9100" "${grape-tailscale-ip}:9100" ];
           }];
         }
         {
@@ -83,19 +84,19 @@ in
         {
           job_name = "systemd";
           static_configs = [{
-            targets = [ "127.0.0.1:9558" "${jam-tailscale-ip}:9558" "${purple-tailscale-ip}:9558" ];
+            targets = [ "127.0.0.1:9558" "${jam-tailscale-ip}:9558" "${purple-tailscale-ip}:9558" "${grape-tailscale-ip}:9558" ];
           }];
         }
         {
           job_name = "statsd";
           static_configs = [{
-            targets = [ "127.0.0.1:9102" "${jam-tailscale-ip}:9102" "${purple-tailscale-ip}:9102" ];
+            targets = [ "127.0.0.1:9102" "${jam-tailscale-ip}:9102" "${purple-tailscale-ip}:9102" "${grape-tailscale-ip}:9102" ];
           }];
         }
         {
           job_name = "smartctl";
           static_configs = [{
-            targets = [ "127.0.0.1:9633" "${purple-tailscale-ip}:9633" ];
+            targets = [ "127.0.0.1:9633" "${purple-tailscale-ip}:9633" "${grape-tailscale-ip}:9633" ];
           }];
         }
         {
@@ -148,6 +149,11 @@ in
             targets = [ "127.0.0.1:8123" ];
           }];
           metrics_path = "/api/prometheus";
+          authorization = {
+            type = "Bearer";
+            credentials = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhMjJlODQzMzJmNDk0ODlhODA2MDVkYzQwZDFiYmQ0MiIsImlhdCI6MTcwNDIxODA2MywiZXhwIjoyMDE5NTc4MDYzfQ.wZxLQAHVhfFBtfYxRNYRhdiisk5KexfQRorK3783ASE";
+            # credentials_file = "/var/secrets/prometheus-home-assistant.token";
+          };
         }
       ];
     };

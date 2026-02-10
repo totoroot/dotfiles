@@ -1,4 +1,4 @@
-{ pkgs, options, config, lib, ... }:
+{ options, config, lib, ... }:
 
 with lib;
 with lib.my;
@@ -15,8 +15,7 @@ in
     services = {
       postgresql = {
         enable = true;
-        package = pkgs.postgresql_16;
-        port = postgresqlPort;
+        settings.port = postgresqlPort;
         ensureDatabases = [
           "vaultwarden"
           "hass"
@@ -38,7 +37,7 @@ in
       postgresqlBackup.enable = true;
     };
 
-    networking.firewall.allowedTCPPorts = [ config.services.postgresql.port ];
+    networking.firewall.allowedTCPPorts = [ config.services.postgresql.settings.port ];
 
     environment.systemPackages = [ config.services.postgresql.package ];
   };

@@ -22,11 +22,7 @@ in
     services.adguardhome = {
       enable = true;
       mutableSettings = true;
-      settings = {
-        http = {
-          address = "0.0.0.0:${toString adguardHTTPPort}";
-        };
-      };
+      port = adguardHTTPPort;
     };
 
     # For troubleshooting DNS
