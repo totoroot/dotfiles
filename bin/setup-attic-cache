@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+host="$(hostname -s)"
+cache_name="${1:-purple-cache}"
+port="${2:-5129}"
+env_file="/etc/atticd.env"
+token_var="ATTIC_SERVER_TOKEN_${cache_name//-/_}"
+
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root (writes ${env_file})."
+  exit 1
+fi
+
+if [[ ! -f "$env_file" ]]; then
+  touch "$env_file"
+  chmod 600 "$env_file"
+fi
+
+if ! grep -q "^${token_var}=" "$env_file"; then
+  token="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 48)"
+  echo "${token_var}=${token}" >>"$env_file"
+  echo "Added ${token_var} to ${env_file}"
+else
+  token="$(grep "^${token_var}=" "$env_file" | head -n1 | cut -d= -f2-)"
+  echo "${token_var} already present in ${env_file}"
+fi
+
+echo
+echo "Next steps (run as your user):"
+echo "1) Rebuild the server (purple) so atticd picks up ${env_file}:"
+echo "   sudo nixos-rebuild switch --flake .#${host} --impure"
+echo
+echo "2) Login and create cache:"
+echo "   attic login ${cache_name} http://purple-ts:${port} ${token}"
+echo "   attic cache create ${cache_name}"
+echo
+echo "3) Get the public key for Nix clients:"
+echo "   attic cache info ${cache_name}"
+echo "   # Copy \"Public Key\" into modules.nix.atticCache.publicKey"
