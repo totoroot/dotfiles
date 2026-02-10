@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.esphome;
-  version = "2026.1";
+  version = "latest";
   port = 6052;
 in
 {
@@ -25,8 +25,7 @@ in
           "/etc/localtime:/etc/localtime:ro"
         ];
         # extraOptions = [
-        # "--device=/dev/ttyUSB0"
-        # "--device=/dev/ttyACM0"
+        #   "--device=/dev/ttyUSB1"
         # ];
         environment = {
           ESPHOME_DASHBOARD_USE_PING = "true";
@@ -34,8 +33,6 @@ in
         autoStart = true;
       };
     };
-
-    user.extraGroups = [ "dialout" ];
 
     systemd.services.docker-esphome.serviceConfig = {
       User = "mathym";
