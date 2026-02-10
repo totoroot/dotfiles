@@ -5,13 +5,22 @@ with lib;
   networking.hosts =
     let
       hostConfig = {
+        # Public IP Main VPS
         "45.83.104.124" = [ "jam" ];
 
-        "192.168.0.1" = [ "white" ];
-        "192.168.0.2" = [ "purple" ];
-        "192.168.0.3" = [ "violet" ];
-        "192.168.0.4" = [ "grape" ];
-        "192.168.0.5" = [ "fp5" ];
+        # Wifi Router
+        "10.0.0.1" = [ "white" ];
+        # Desktop PC
+        "10.0.0.2" = [ "purple" ];
+        # Home Server
+        "10.0.0.3" = [ "violet" ];
+        # Private Notebook
+        "10.0.0.4" = [ "grape" ];
+        # Smartphone
+        "10.0.0.5" = [ "fp5" ];
+        # Mac mini
+        "10.0.0.6" = [ "wine" ];
+
         "192.168.0.20" = [ "black" ];
         "193.30.121.17" = [ "phlox" ];
 
@@ -20,6 +29,7 @@ with lib;
         "100.64.0.3" = [ "violet-ts" ];
         "100.64.0.4" = [ "grape-ts" ];
         "100.64.0.5" = [ "fp5-ts" ];
+        # "100.64.0.6" = [ "wine-ts" ];
 
         # "192.168.0.4" = [ "printer" ];
         # "192.168.8.103" = [ "Lakka" ];

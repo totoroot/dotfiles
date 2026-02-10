@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
@@ -26,7 +26,7 @@
       flatpak.enable = true;
       fm.enable = true;
       fonts.enable = true;
-      geany.enable = false;
+      ides.enable = true;
       ghostwriter.enable = false;
       godot.enable = true;
       gpa.enable = true;
@@ -40,7 +40,6 @@
       polish.enable = true;
       rofi.enable = true;
       screenshot.enable = true;
-      thonny.enable = true;
       torrent.enable = true;
       unity.enable = true;
       vscodium.enable = true;
@@ -123,7 +122,7 @@
       mcus.enable = true;
       nvidia.enable = false;
       radeon.enable = true;
-      rgb.enable = true;
+      rgb.enable = false;
       printers.enable = true;
       sensors.enable = true;
       steamcon.enable = true;
@@ -189,23 +188,23 @@
   # NixOS service configuration
   services = {
     # Suspend when power button is short-pressed
-    logind.extraConfig = mkDefault ''
-      HandlePowerKey=suspend
-    '';
+    logind.settings.Login = {
+      HandlePowerKey = "suspend";
+    };
     xserver = {
       # Set eurkey as default layout
       # Optionally set more keymaps and use them with bin/keymapswitcher
       xkb.layout = "eu, at";
       # Force DPI to optimize for ultrawide screen
       # dpi = 200;
-      displayManager = {
-        autoLogin.enable = false;
-        defaultSession = "plasma";
-        # Use SDDM as display manager
-        sddm = {
-          enable = true;
-          theme = "Dracula";
-        };
+    };
+    displayManager = {
+      autoLogin.enable = false;
+      defaultSession = "plasma";
+      # Use SDDM as display manager
+      sddm = {
+        enable = true;
+        theme = "Dracula";
       };
     };
     resolved.enable = true;
@@ -228,4 +227,7 @@
     "--device=/dev/sda"
     "--device=/dev/sdb"
   ];
+
+  # To be able to use ttyUSB etc.
+  user.extraGroups = [ "dialout" ];
 }

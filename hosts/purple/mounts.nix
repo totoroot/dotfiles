@@ -20,9 +20,9 @@
       fsType = "vfat";
     };
     "/home" = {
-      device = "/dev/disk/by-uuid/1f70506a-3629-473e-8bf3-b5033ce42450";
+      device = "/dev/disk/by-label/home";
       fsType = "btrfs";
-      options = [ "noatime" "recovery" ];
+      options = [ "noatime" ];
     };
     "/mnt/backup" = {
       device = "/dev/disk/by-label/backup";
