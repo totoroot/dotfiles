@@ -151,7 +151,6 @@
     "--device=/dev/sdd"
     "--device=/dev/sde"
     "--device=/dev/sdf"
-    "--device=/dev/sdg"
   ];
 
   # macOS Time Machine configuration
