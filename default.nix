@@ -145,6 +145,8 @@ with inputs;
     gnumake
     unzip
     ssh-to-age
+    age
+    sops
     # Needed for alternative diff activationScript
     nvd
     inputs.nixos-needsreboot.packages.${system}.default
