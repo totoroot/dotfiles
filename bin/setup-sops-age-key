@@ -11,11 +11,7 @@ secrets_file="${repo_root}/secrets/${host}.yaml"
 if [[ -f "$key_file" ]]; then
   echo "sops-nix age key already exists at ${key_file}"
   echo "Public key:"
-  if rg -n "public key:" "$key_file" >/dev/null 2>&1; then
-    rg -n "public key:" "$key_file" || true
-  else
-    echo "  (generated via ssh-to-age; run: sudo age-keygen -y ${key_file})"
-  fi
+  sudo age-keygen -y "$key_file"
   if [[ ! -f "$secrets_file" ]]; then
     cat >"$secrets_file" <<'EOF'
 # Add host secrets here, e.g.
@@ -47,11 +43,7 @@ chmod 600 "$key_file"
 
 echo "Generated sops-nix age key at ${key_file}"
 echo "Public key:"
-if [[ "${used_ssh_to_age}" == "true" ]]; then
-  echo "  (generated via ssh-to-age; run: sudo age-keygen -y ${key_file})"
-else
-  rg -n "public key:" "$key_file" || true
-fi
+sudo age-keygen -y "$key_file"
 
 if [[ ! -f "$secrets_file" ]]; then
   cat >"$secrets_file" <<'EOF'
