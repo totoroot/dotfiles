@@ -12,13 +12,21 @@ with lib.my;
           nixpkgs.pkgs = pkgs;
           networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
         }
-        (filterAttrs (n: _v: !elem n [ "system" ]) attrs)
+        (filterAttrs (n: _v: !elem n [ "system" "systems" ]) attrs)
         ../.
         (import path)
       ];
     };
 
-  mapHosts = dir: attrs @ { ... }:
+  mapHosts = dir: attrs @ { systems ? { }, ... }:
     mapModules dir
-      (hostPath: mkHost hostPath attrs);
+      (hostPath:
+        let
+          name = removeSuffix ".nix" (baseNameOf hostPath);
+          hostSystem =
+            if systems ? name
+            then systems.${name}
+            else attrs.system;
+        in
+        mkHost hostPath (attrs // { system = hostSystem; }));
 }

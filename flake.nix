@@ -120,7 +120,11 @@
       # Configuration for NixOS hosts
       nixosConfigurations =
         mapHosts ./hosts {
-          inherit system;
+          system = "x86_64-linux";
+          systems = {
+            raspberry = "aarch64-linux";
+            mulberry = "aarch64-linux";
+          };
         };
 
       # Configuration for macOS using Nix, nix-darwin and home-manager
