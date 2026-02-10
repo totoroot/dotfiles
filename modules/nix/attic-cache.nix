@@ -17,7 +17,7 @@ in
 
     port = mkOption {
       type = types.port;
-      default = 8080;
+      default = 5129;
       description = "Attic server port.";
     };
 
