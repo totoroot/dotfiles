@@ -11,7 +11,7 @@ let
 in
 {
 
-  imports = [
+  imports = lib.optionals cfg.enable [
     # (pkgs.fetchFromGitLab {
     #   owner = "simple-nixos-mailserver";
     #   repo = "nixos-mailserver";
