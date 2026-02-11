@@ -35,13 +35,13 @@ in
 
     storagePath = mkOption {
       type = types.str;
-      default = "/var/lib/attic/storage";
+      default = "/var/lib/atticd/storage";
       description = "Local storage path for Attic NARs/chunks.";
     };
 
     databaseUrl = mkOption {
       type = types.str;
-      default = "sqlite:///var/lib/attic/atticd.db?mode=rwc";
+      default = "sqlite:///var/lib/atticd/atticd.db?mode=rwc";
       description = "Database URL for Attic.";
     };
 
