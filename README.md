@@ -210,6 +210,14 @@ attic cache info purple-cache
 
 Copy the "Public Key" into `modules.nix.atticCache.publicKey` on clients.
 
+To manually push the current system to the cache:
+
+```
+attic push purple-cache /run/current-system
+```
+
+This is not necessary if the watcher is enabled on purple.
+
 ### Remote builders (purple)
 
 Purple is the remote builder. Hosts can enable it with:
