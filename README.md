@@ -185,6 +185,65 @@ Mimeapps can be set in `modules/xdg.nix`.
   + [What helped me figure out generators (for npm, yarn, python and haskell)](https://myme.no/posts/2020-01-26-nixos-for-development.html)
   + [What y'all will need when Nix drives you to drink.](https://www.youtube.com/watch?v=Eni9PPPPBpg)
 
+## Infrastructure
+
+### Attic cache (purple)
+
+Attic is used as the local binary cache. Purple acts as the server and clients point to it over Tailscale.
+
+On purple:
+
+```
+sudo bin/setup-attic-cache purple-cache 5129
+sudo nixos-rebuild switch --flake .#purple --impure
+sudo atticd-atticadm make-token \
+  --sub admin \
+  --validity "10 years" \
+  --pull "*" \
+  --push "*" \
+  --delete "*" \
+  --create-cache "*"
+attic login purple-cache http://purple-ts:5129 <JWT>
+attic cache create purple-cache
+attic cache info purple-cache
+```
+
+Copy the "Public Key" into `modules.nix.atticCache.publicKey` on clients.
+
+### Remote builders (purple)
+
+Purple is the remote builder. Hosts can enable it with:
+
+```
+modules.nix.remoteBuilder = {
+  enable = true;
+  host = "purple";
+  user = "builder";
+  systems = [ "x86_64-linux" ]; # or "aarch64-linux" if purple supports it
+};
+```
+
+### sops-nix (age)
+
+Secrets are managed with sops-nix. Generate a host key:
+
+```
+sudo bin/setup-sops-age-key
+sudo age-keygen -y /var/lib/sops-nix/$(hostname -s).txt
+```
+
+Create the encrypted secrets file:
+
+```
+sops --encrypt --age "age1...HOST_PUBLIC_KEY..." -i secrets/<host>.yaml
+```
+
+Then reference secrets in host configs:
+
+```
+sops.secrets."my-service/env".path = "/var/secrets/my-service.env";
+```
+
 
 [micro]: https://micro-editor.github.io
 [kitty]: https://sw.kovidgoyal.net/kitty/
