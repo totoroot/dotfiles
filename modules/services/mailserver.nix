@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, ... }:
+{ config, pkgs, options, lib, inputs, ... }:
 
 with lib;
 with lib.my;
@@ -11,17 +11,18 @@ let
 in
 {
 
-  imports = [
+  imports = lib.optionals cfg.enable [
+    inputs.nixos-mailserver.nixosModules.default
     # (pkgs.fetchFromGitLab {
     #   owner = "simple-nixos-mailserver";
     #   repo = "nixos-mailserver";
     #   rev = "master";
     #   hash = "";
     # })
-    (builtins.fetchTarball {
-      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-      sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
-    })
+    # (builtins.fetchTarball {
+    #   url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
+    #   sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
+    # })
     # (builtins.fetchTarball {
     #   # Pick a release version you are interested in and set its hash, e.g.
     #   url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-${release}/nixos-mailserver-nixos-${release}.tar.gz";
