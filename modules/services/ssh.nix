@@ -33,6 +33,7 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINbvZOQhvooGSNuIIQdXMrNa7zyJ6PsYFKzDAMAEMR9x mathym@moooh"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIM4s1vs6qTSdS8L2/fX9X5sLv4ux/klkkV2MINSgwjq mathym@macbook"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUo3+2QqXRZDM9qT/cvixgLspgtsbdiXxFqx53dN2Gx mathym@wine"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFlY9nUgPjYiWGIGw0S0HTuSVMhSPSJt2zN9Y21XD72 matthias.thym@ATGRZMBP43"
       ]
       else [ ];
   };
