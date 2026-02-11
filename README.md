@@ -252,6 +252,28 @@ Then reference secrets in host configs:
 sops.secrets."my-service/env".path = "/var/secrets/my-service.env";
 ```
 
+### Headscale (jam) / Tailscale tailnet
+
+To add a new node to the tailnet via headscale on `jam`:
+
+1. Create a pre-auth key on jam:
+
+```
+sudo headscale preauthkeys create --user <user> --reusable --expiration 24h
+```
+
+2. On the new host, join using the key:
+
+```
+sudo tailscale up --login-server https://<jam-domain-or-ip>:443 --authkey <PREAUTH_KEY>
+```
+
+3. Verify the node shows up:
+
+```
+sudo headscale nodes list
+```
+
 
 [micro]: https://micro-editor.github.io
 [kitty]: https://sw.kovidgoyal.net/kitty/
