@@ -12,7 +12,7 @@
     nix.atticCache = {
       enableServer = true;
       enableClient = true;
-      enableWatcher = true;
+      enableWatcher = false;
       host = "purple-ts";
       port = 5129;
       # Set to the public key for your cache, e.g. "cache-name:BASE64"
