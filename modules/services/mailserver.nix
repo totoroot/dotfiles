@@ -11,7 +11,7 @@ let
 in
 {
 
-  imports = lib.optionals cfg.enable [
+  imports = [
     # (pkgs.fetchFromGitLab {
     #   owner = "simple-nixos-mailserver";
     #   repo = "nixos-mailserver";
@@ -35,7 +35,9 @@ in
     enable = mkBoolOpt false;
   };
 
-  config = mkIf cfg.enable {
+  config = {
+    mailserver.enableNixpkgsReleaseCheck = mkDefault false;
+  } // mkIf cfg.enable {
     mailserver = {
       enable = true;
       stateVersion = 3;
