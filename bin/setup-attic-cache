@@ -5,7 +5,7 @@ host="$(hostname -s)"
 cache_name="${1:-purple-cache}"
 port="${2:-5129}"
 env_file="/etc/atticd.env"
-token_var="ATTIC_SERVER_TOKEN_HS256_SECRET_BASE64"
+token_var="ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64"
 
 if [[ $EUID -ne 0 ]]; then
   echo "This script must be run as root (writes ${env_file})."
@@ -18,7 +18,7 @@ if [[ ! -f "$env_file" ]]; then
 fi
 
 if ! grep -q "^${token_var}=" "$env_file"; then
-  token="$(dd if=/dev/urandom bs=32 count=1 2>/dev/null | base64 -w0)"
+  token="$(openssl genrsa -traditional 4096 | base64 -w0)"
   echo "${token_var}=${token}" >>"$env_file"
   echo "Added ${token_var} to ${env_file}"
 else
@@ -31,10 +31,19 @@ echo "Next steps (run as your user):"
 echo "1) Rebuild the server (purple) so atticd picks up ${env_file}:"
 echo "   sudo nixos-rebuild switch --flake .#${host} --impure"
 echo
-echo "2) Login and create cache:"
-echo "   attic login ${cache_name} http://purple-ts:${port} ${token}"
+echo "2) Create an admin JWT token (server-side):"
+echo "   sudo atticd-atticadm make-token \\"
+echo "     --sub admin \\"
+echo "     --validity \"10 years\" \\"
+echo "     --pull \"*\" \\"
+echo "     --push \"*\" \\"
+echo "     --delete \"*\" \\"
+echo "     --create-cache \"*\""
+echo
+echo "3) Login and create cache:"
+echo "   attic login ${cache_name} http://purple-ts:${port} <JWT_FROM_STEP_2>"
 echo "   attic cache create ${cache_name}"
 echo
-echo "3) Get the public key for Nix clients:"
+echo "4) Get the public key for Nix clients:"
 echo "   attic cache info ${cache_name}"
 echo "   # Copy \"Public Key\" into modules.nix.atticCache.publicKey"
