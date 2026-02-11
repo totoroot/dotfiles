@@ -18,7 +18,7 @@
       host = "purple-ts";
       port = 5129;
       # Set to your cache public key, e.g. "cache-name:BASE64"
-      publicKey = null;
+      publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
     };
     nix.remoteBuilder = {
       enable = true;

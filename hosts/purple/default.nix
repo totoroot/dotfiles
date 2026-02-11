@@ -16,7 +16,7 @@
       host = "purple-ts";
       port = 5129;
       # Set to the public key for your cache, e.g. "cache-name:BASE64"
-      publicKey = null;
+      publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
       # Add ATTIC_SERVER_TOKEN_* secrets here (see attic docs)
       environmentFile = "/etc/atticd.env";
     };
