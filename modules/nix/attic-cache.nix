@@ -15,6 +15,12 @@ in
       description = "Hostname (or Tailscale name) of the Attic server.";
     };
 
+    cacheName = mkOption {
+      type = types.str;
+      default = "purple-cache";
+      description = "Attic cache name used in the binary cache endpoint.";
+    };
+
     port = mkOption {
       type = types.port;
       default = 5129;
@@ -84,7 +90,10 @@ in
     (mkIf cfg.enableClient {
       nix.settings = mkMerge [
         {
-          substituters = [ "http://${cfg.host}:${toString cfg.port}" "https://cache.nixos.org/" ];
+          substituters = [
+            "http://${cfg.host}:${toString cfg.port}/${cfg.cacheName}"
+            "https://cache.nixos.org/"
+          ];
         }
         (mkIf (cfg.publicKey != null) {
           trusted-public-keys = [ cfg.publicKey ];
