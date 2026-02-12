@@ -16,6 +16,10 @@ in
     ../../../modules/home/home-manager-applications-fix.nix
     ../../../modules/home/kitty.nix
     ../../../modules/home/micro.nix
+    ../../../modules/home/nushell.nix
+    ../../../modules/home/kubernetes.nix
+    ../../../modules/home/trash.nix
+    ../../../modules/home/viddy.nix
     ../../../modules/home/zsh.nix
   ];
 
@@ -80,6 +84,8 @@ in
 	  ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
 	};
   };
+  modules.home.trash.enable = true;
+  modules.home.kubernetes.enable = true;
 
   home.file = {
     # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac
