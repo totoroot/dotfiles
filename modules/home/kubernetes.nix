@@ -38,7 +38,7 @@ in
       # Kubernetes CLI to manage your clusters in style
       k9s
       # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents
-      yq
+      yq-go
     ];
 
     home.sessionVariables = {
