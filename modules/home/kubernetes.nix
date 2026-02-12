@@ -40,7 +40,7 @@ in
     ];
 
     home.sessionVariables = {
-      KUBECONFIG = "$XDG_CONFIG_HOME/k8s";
+      KUBECONFIG = "$HOME/.config/k8s/config";
     };
 
     home.sessionPath = [
