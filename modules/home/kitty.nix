@@ -8,7 +8,7 @@ let
 in
 {
   options.modules.home.kitty = {
-    enable = mkBoolOpt true;
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {

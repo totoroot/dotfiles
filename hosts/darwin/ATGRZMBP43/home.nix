@@ -84,8 +84,18 @@ in
 	  ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
 	};
   };
-  modules.home.trash.enable = true;
+  modules.home.atuin.enable = true;
+  modules.home.duf.enable = true;
+  modules.home.git.enable = true;
+  modules.home.gitlab-cli.enable = true;
+  modules.home.kitty.enable = true;
   modules.home.kubernetes.enable = true;
+  modules.home.micro.enable = true;
+  modules.home.nushell.enable = true;
+  modules.home.trash.enable = true;
+  modules.home.unfreePackages.enable = true;
+  modules.home.viddy.enable = true;
+  modules.home.zsh.enable = true;
 
   home.file = {
     # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac

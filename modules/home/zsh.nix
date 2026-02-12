@@ -8,7 +8,7 @@ let
 in
 {
   options.modules.home.zsh = with types; {
-    enable = mkBoolOpt true;
+    enable = mkBoolOpt false;
 
     aliases = mkOpt (attrsOf (either str path)) { };
 

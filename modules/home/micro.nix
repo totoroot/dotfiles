@@ -13,7 +13,7 @@ let
   };
 in {
   options.modules.home.micro = {
-    enable = mkBoolOpt true;
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
