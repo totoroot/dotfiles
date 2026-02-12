@@ -17,8 +17,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # Kubernetes CLI
-      kubectl
       # Package manager for kubectl plugins
       krew
       # Utility to quickly switch between K8s clusters (kubectx) and namespaces (kubens)
