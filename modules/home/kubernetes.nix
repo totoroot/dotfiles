@@ -35,6 +35,8 @@ in
       minikube
       # Kubernetes CLI to manage your clusters in style
       k9s
+      # CLI client for Flux (GitOps)
+      fluxcd
       # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents
       yq-go
     ];
