@@ -116,7 +116,7 @@
         { dotfiles = import ./.; }
         // mapModulesRec ./modules import;
 
-      devShells.${system} =
+      devShells.${system}.default =
         import ./shell.nix {
           inherit pkgs;
         };
