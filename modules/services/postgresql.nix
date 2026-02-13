@@ -39,6 +39,8 @@ in
 
     networking.firewall.allowedTCPPorts = [ config.services.postgresql.settings.port ];
 
-    environment.systemPackages = [ config.services.postgresql.package ];
+    environment.systemPackages =
+      [ config.services.postgresql.package ]
+      ++ (with config.services.postgresql.package.pkgs; [ postgis ]);
   };
 }
