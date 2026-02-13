@@ -56,5 +56,10 @@ in
         };
       };
     };
+
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "admin@xn--berwachungsbehr-mtb1g.de";
+    };
   };
 }
