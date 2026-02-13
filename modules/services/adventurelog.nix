@@ -13,8 +13,11 @@ in
     enable = mkBoolOpt false;
   };
 
+  imports = lib.optionals cfg.enable [
+    inputs.adventurelog.nixosModules.adventurelog
+  ];
+
   config = mkIf cfg.enable {
-    imports = [ inputs.adventurelog.nixosModules.adventurelog ];
 
     services.adventurelog = {
       enable = true;
