@@ -34,6 +34,7 @@ in
         inputs.adventurelog.packages.${pkgs.system}.adventurelog-frontend.overrideAttrs (_: {
           src = "${inputs.adventurelog-src}/frontend";
         });
+      backend.port = 2000;
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
