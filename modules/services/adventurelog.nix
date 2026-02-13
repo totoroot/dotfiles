@@ -13,7 +13,7 @@ in
     enable = mkBoolOpt false;
   };
 
-  imports = lib.optionals cfg.enable [
+  imports = [
     inputs.adventurelog.nixosModules.adventurelog
   ];
 
