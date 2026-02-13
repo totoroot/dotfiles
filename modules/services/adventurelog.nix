@@ -58,6 +58,8 @@ in
     };
 
     services.postgresql.package = lib.mkForce pkgs.postgresql_16;
+    services.postgresql.extraPlugins =
+      lib.mkForce [ config.services.postgresql.package.pkgs.postgis ];
 
     security.acme = {
       acceptTerms = true;
