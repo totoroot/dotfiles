@@ -78,6 +78,10 @@
       url = "git+https://codeberg.org/totoroot/adventurelog-flake.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    adventurelog-src = {
+      url = "github:seanmorley15/AdventureLog";
+      flake = false;
+    };
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:

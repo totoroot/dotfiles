@@ -26,8 +26,12 @@ in
 
     services.adventurelog = {
       enable = true;
-      backend.package = inputs.adventurelog.packages.${pkgs.system}.adventurelog-backend;
-      frontend.package = inputs.adventurelog.packages.${pkgs.system}.adventurelog-frontend;
+      backend.package = pkgs.callPackage "${inputs.adventurelog}/nix/packages/backend.nix" {
+        srcRoot = inputs.adventurelog-src;
+      };
+      frontend.package = pkgs.callPackage "${inputs.adventurelog}/nix/packages/frontend.nix" {
+        srcRoot = inputs.adventurelog-src;
+      };
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
