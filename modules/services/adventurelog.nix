@@ -18,6 +18,9 @@ in
   ];
 
   config = mkIf cfg.enable {
+    nixpkgs.overlays = [
+      inputs.adventurelog.overlays.default
+    ];
 
     services.adventurelog = {
       enable = true;
