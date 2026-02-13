@@ -1,4 +1,4 @@
-{ options, config, lib, inputs, ... }:
+{ options, config, lib, inputs, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -7,6 +7,8 @@ let
   domain = "xn--berwachungsbehr-mtb1g.de";
   backendHost = "reise-api.${domain}";
   frontendHost = "reise.${domain}";
+  adventurelogPkgs = inputs.adventurelog.packages.${pkgs.system} or { };
+  adventurelogBackend = adventurelogPkgs.backend or adventurelogPkgs.default or null;
 in
 {
   options.modules.services.adventurelog = {
@@ -26,7 +28,10 @@ in
       enable = true;
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
-      backend.staticDir = "${config.services.adventurelog.package}/share/adventurelog/static";
+      backend.staticDir =
+        if adventurelogBackend != null
+        then "${adventurelogBackend}/share/adventurelog/static"
+        else null;
       frontend.origin = "https://${frontendHost}";
       nginx.enable = true;
       nginx.hostName = backendHost;
