@@ -82,7 +82,7 @@ in
           RestartSec = 5;
         };
         script = ''
-          exec ${pkgs.attic-client}/bin/attic watch-store --url http://${cfg.host}:${toString cfg.port}
+          exec ${pkgs.attic-client}/bin/attic watch-store ${cfg.cacheName}
         '';
       };
     })
