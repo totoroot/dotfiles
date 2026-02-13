@@ -221,6 +221,40 @@
     resolved.enable = true;
   };
 
+  systemd.services.ssh-suspend-inhibit = {
+    description = "Block suspend while SSH sessions are active";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "sshd.service" ];
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
+      RestartSec = 5;
+      ExecStart = pkgs.writeShellScript "ssh-suspend-inhibit" ''
+        set -euo pipefail
+
+        has_ssh_session() {
+          ${pkgs.systemd}/bin/loginctl list-sessions --no-legend | ${pkgs.gawk}/bin/awk '{print $1}' | while read -r sid; do
+            if ${pkgs.systemd}/bin/loginctl show-session "$sid" -p Service -p Remote | ${pkgs.gnugrep}/bin/grep -q '^Service=sshd$' && \
+               ${pkgs.systemd}/bin/loginctl show-session "$sid" -p Remote | ${pkgs.gnugrep}/bin/grep -q '^Remote=yes$'; then
+              return 0
+            fi
+          done
+          return 1
+        }
+
+        while true; do
+          if has_ssh_session; then
+            ${pkgs.systemd}/bin/systemd-inhibit --what=sleep --mode=block \
+              --who=ssh-sessions --why="Active SSH session" \
+              ${pkgs.coreutils}/bin/sleep 5
+          else
+            ${pkgs.coreutils}/bin/sleep 5
+          fi
+        done
+      '';
+    };
+  };
+
   networking = {
     networkmanager.enable = true;
     useNetworkd = true;
