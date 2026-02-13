@@ -26,6 +26,7 @@ in
       enable = true;
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
+      backend.staticDir = "${config.services.adventurelog.package}/share/adventurelog/static";
       frontend.origin = "https://${frontendHost}";
       nginx.enable = true;
       nginx.hostName = backendHost;
