@@ -67,6 +67,11 @@
       url = "git+https://codeberg.org/totoroot/rcat.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    adventurelog = {
+      url = "git+https://codeberg.org/totoroot/adventurelog-flake.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:

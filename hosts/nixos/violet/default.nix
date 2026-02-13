@@ -60,6 +60,7 @@
     };
     services = {
       containerization.enable = true;
+      adventurelog.enable = true;
       snowflake.enable = true;
       pods = {
         languagetool.enable = false;
