@@ -90,9 +90,10 @@ in
     (mkIf cfg.enableClient {
       nix.settings = mkMerge [
         {
-          substituters = [
+          substituters = lib.mkForce [
             "http://${cfg.host}:${toString cfg.port}/${cfg.cacheName}"
             "https://cache.nixos.org/"
+            "https://nix-community.cachix.org"
           ];
         }
         (mkIf (cfg.publicKey != null) {
