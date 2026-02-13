@@ -27,6 +27,6 @@ in
       "aerc.conf"
       "filters"
       "templates"
-      ]
+      ];
   };
 }
