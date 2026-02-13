@@ -26,12 +26,14 @@ in
 
     services.adventurelog = {
       enable = true;
-      backend.package = pkgs.callPackage "${inputs.adventurelog}/nix/packages/backend.nix" {
-        srcRoot = inputs.adventurelog-src;
-      };
-      frontend.package = pkgs.callPackage "${inputs.adventurelog}/nix/packages/frontend.nix" {
-        srcRoot = inputs.adventurelog-src;
-      };
+      backend.package =
+        inputs.adventurelog.packages.${pkgs.system}.adventurelog-backend.overrideAttrs (_: {
+          src = "${inputs.adventurelog-src}/backend/server";
+        });
+      frontend.package =
+        inputs.adventurelog.packages.${pkgs.system}.adventurelog-frontend.overrideAttrs (_: {
+          src = "${inputs.adventurelog-src}/frontend";
+        });
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
