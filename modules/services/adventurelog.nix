@@ -58,12 +58,17 @@ in
     };
 
     services.postgresql.package = lib.mkForce pkgs.postgresql_16;
-    services.postgresql.extraPlugins =
+    services.postgresql.extensions =
       lib.mkForce [ config.services.postgresql.package.pkgs.postgis ];
 
     security.acme = {
       acceptTerms = true;
       defaults.email = "admin@xn--berwachungsbehr-mtb1g.de";
     };
+
+    systemd.services.adventurelog-backend.wants = [ "network-online.target" ];
+    systemd.services.adventurelog-backend.after = [ "network-online.target" ];
+    systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
+    systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
   };
 }
