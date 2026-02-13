@@ -70,5 +70,6 @@ in
     systemd.services.adventurelog-backend.after = [ "network-online.target" ];
     systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
     systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
+    systemd.services.adventurelog-backend.serviceConfig.StateDirectory = "adventurelog";
   };
 }
