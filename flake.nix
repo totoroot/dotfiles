@@ -123,7 +123,7 @@
 
       # Configuration for NixOS hosts
       nixosConfigurations =
-        mapHosts ./hosts/nixos {
+        mapHosts ./hosts {
           inherit system;
         };
 
