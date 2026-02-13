@@ -22,7 +22,6 @@
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs-fork.url = "github:totoroot/nixpkgs/master";
-    # nixpkgs-fork.url = "github:pitkling/nixpkgs/libfprint-2-tod1-broadcom";
 
     # Nix hardware tweaks
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -44,17 +43,15 @@
     nur.url = "github:nix-community/NUR";
 
     # YES!!! https://lix.systems/
-    # Using Lix from nixpkgs (no flake input required).
+    lix = {
+      # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-2.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # https://github.com/thefossguy/nixos-needsreboot
     nixos-needsreboot = {
       url = "github:thefossguy/nixos-needsreboot";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Simple NixOS Mailserver
-    nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -66,8 +63,8 @@
       inputs.home-manager.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    rcat = {
+      url = "git+https://codeberg.org/totoroot/rcat.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -77,7 +74,7 @@
       inherit (lib) attrValues;
       inherit (lib.my) mapModules mapModulesRec mapHosts;
 
-      system = builtins.currentSystem;
+      system = "x86_64-linux";
 
       lib = nixos.lib.extend
         (self: _super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
@@ -121,21 +118,18 @@
 
       # Configuration for NixOS hosts
       nixosConfigurations =
-        mapHosts ./hosts {
-          system = "x86_64-linux";
-          systems = {
-            raspberry = "aarch64-linux";
-            mulberry = "aarch64-linux";
-          };
+        mapHosts ./hosts/nixos {
+          inherit system;
         };
 
       # Configuration for macOS using Nix, nix-darwin and home-manager
-      darwinConfigurations = (
-        import ./darwin {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs darwin home-manager;
-        }
-      );
+      darwinConfigurations =
+        mapHosts ./hosts/darwin {
+          builder = darwin.lib.darwinSystem;
+          system = "aarch64-darwin";
+          useGlobalPkgs = false;
+          includeDotfilesModule = false;
+        };
 
       # Configuration for generic Linux distros using Nix and home-manager
       homeConfigurations = (
