@@ -26,6 +26,8 @@ in
 
     services.adventurelog = {
       enable = true;
+      backend.package = inputs.adventurelog.packages.${pkgs.system}.adventurelog-backend;
+      frontend.package = inputs.adventurelog.packages.${pkgs.system}.adventurelog-frontend;
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
