@@ -60,6 +60,13 @@ in
     services.postgresql.package = lib.mkForce pkgs.postgresql_16;
     services.postgresql.extensions =
       lib.mkForce [ config.services.postgresql.package.pkgs.postgis ];
+    services.postgresql.ensureDatabases = lib.mkAfter [ "adventurelog" ];
+    services.postgresql.ensureUsers = lib.mkAfter [
+      {
+        name = "adventurelog";
+        ensureDBOwnership = true;
+      }
+    ];
 
     security.acme = {
       acceptTerms = true;
@@ -75,5 +82,22 @@ in
     systemd.tmpfiles.rules = [
       "d /var/lib/adventurelog/media 0750 adventurelog adventurelog -"
     ];
+
+    systemd.services.adventurelog-postgis = {
+      description = "Ensure PostGIS extension for AdventureLog";
+      after = [ "postgresql.service" ];
+      requires = [ "postgresql.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = "postgres";
+        Group = "postgres";
+      };
+      script = ''
+        ${config.services.postgresql.package}/bin/psql \
+          --dbname=adventurelog \
+          --command "CREATE EXTENSION IF NOT EXISTS postgis;"
+      '';
+    };
   };
 }
