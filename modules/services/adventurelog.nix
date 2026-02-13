@@ -28,10 +28,6 @@ in
       enable = true;
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
-      backend.staticDir =
-        if adventurelogBackend != null
-        then "${adventurelogBackend}/share/adventurelog/static"
-        else null;
       frontend.origin = "https://${frontendHost}";
       nginx.enable = true;
       nginx.hostName = backendHost;
