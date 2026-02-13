@@ -42,6 +42,12 @@
     # Add "nur.nixosModules.nur" to the host modules
     nur.url = "github:nix-community/NUR";
 
+    # Secrets management
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # YES!!! https://lix.systems/
     lix = {
       # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
