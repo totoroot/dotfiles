@@ -57,6 +57,8 @@ in
       };
     };
 
+    services.postgresql.package = lib.mkForce pkgs.postgresql_16;
+
     security.acme = {
       acceptTerms = true;
       defaults.email = "admin@xn--berwachungsbehr-mtb1g.de";
