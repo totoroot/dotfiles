@@ -22,7 +22,7 @@ in
 
     maxJobs = mkOption {
       type = types.int;
-      default = 8;
+      default = 12;
       description = "Max jobs to run on the remote builder.";
     };
 
