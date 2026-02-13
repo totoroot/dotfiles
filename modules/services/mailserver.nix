@@ -8,11 +8,18 @@ let
   domain = "xn--berwachungsbehr-mtb1g.de";
   praxisDomain = "grueneis-psychologie.at";
   release = "25.05";
+  mailserverModule =
+    if inputs ? nixos-mailserver
+    then inputs.nixos-mailserver.nixosModules.default
+    else (builtins.fetchTarball {
+      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
+      sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
+    });
 in
 {
 
   imports = [
-    inputs.nixos-mailserver.nixosModules.default
+    mailserverModule
     # (pkgs.fetchFromGitLab {
     #   owner = "simple-nixos-mailserver";
     #   repo = "nixos-mailserver";
