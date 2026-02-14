@@ -91,7 +91,7 @@ in
       nix.settings = mkMerge [
         {
           connect-timeout = 1;
-          timeout = 5;
+          download-attempts = 1;
           substituters = lib.mkForce [
             "http://${cfg.host}:${toString cfg.port}/${cfg.cacheName}"
             "https://cache.nixos.org/"
