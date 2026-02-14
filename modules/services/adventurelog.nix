@@ -36,9 +36,10 @@ in
           src = "${inputs.adventurelog-src}/frontend";
         });
       backend.port = 2000;
-      backend.publicUrl = "https://${frontendHost}/api";
+      backend.publicUrl = "https://${frontendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
+      frontend.publicServerUrl = "https://${frontendHost}/api";
       nginx.enable = true;
       nginx.hostName = backendHost;
       database.createLocally = true;
