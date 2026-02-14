@@ -351,7 +351,7 @@ in
     };
 
     security.acme = {
-      acceptTerms = mkDefault true;
+      acceptTerms = true;
       defaults.email = "${adminEmail}";
     };
 
@@ -359,12 +359,14 @@ in
       email = adminEmail;
       webroot = "/var/lib/acme/acme-challenge";
       group = "nginx";
+      server = "https://acme-v02.api.letsencrypt.org/directory";
     };
 
     security.acme.certs."reise-api.${domain}" = {
       email = adminEmail;
       webroot = "/var/lib/acme/acme-challenge";
       group = "nginx";
+      server = "https://acme-v02.api.letsencrypt.org/directory";
     };
   };
 }
