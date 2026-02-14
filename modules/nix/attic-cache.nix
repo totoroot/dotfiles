@@ -90,6 +90,8 @@ in
     (mkIf cfg.enableClient {
       nix.settings = mkMerge [
         {
+          connect-timeout = 1;
+          timeout = 5;
           substituters = lib.mkForce [
             "http://${cfg.host}:${toString cfg.port}/${cfg.cacheName}"
             "https://cache.nixos.org/"
