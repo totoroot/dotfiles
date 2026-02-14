@@ -184,6 +184,9 @@ in
             };
             "/auth/" = {
               proxyPass = "http://${violetTs}:2000";
+              extraConfig = ''
+                proxy_set_header Referer https://reise.${domain};
+              '';
             };
             "/csrf/" = {
               proxyPass = "http://${violetTs}:2000";
