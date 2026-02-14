@@ -70,6 +70,8 @@ in
     systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
     systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
     systemd.services.adventurelog-backend.serviceConfig.StateDirectory = "adventurelog";
+    systemd.services.adventurelog-frontend.serviceConfig.Environment =
+      [ "NODE_OPTIONS=--disable-write-xor-execute" ];
 
     systemd.tmpfiles.rules = [
       "d /var/lib/adventurelog/media 0750 adventurelog adventurelog -"
