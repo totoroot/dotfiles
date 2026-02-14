@@ -353,14 +353,12 @@ in
       email = adminEmail;
       webroot = "/var/lib/acme/acme-challenge";
       group = "nginx";
-      useACME = true;
     };
 
     security.acme.certs."reise-api.${domain}" = {
       email = adminEmail;
       webroot = "/var/lib/acme/acme-challenge";
       group = "nginx";
-      useACME = true;
     };
   };
 }
