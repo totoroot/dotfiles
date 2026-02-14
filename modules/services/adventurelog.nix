@@ -38,6 +38,7 @@ in
       backend.port = 2000;
       backend.publicUrl = "https://${frontendHost}";
       backend.frontendUrl = "https://${frontendHost}";
+      frontend.port = 2104;
       frontend.origin = "https://${frontendHost}";
       frontend.publicServerUrl = "https://${frontendHost}/api";
       nginx.enable = true;
