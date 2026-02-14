@@ -51,21 +51,45 @@ in
       virtualHosts.${backendHost} = {
         enableACME = true;
         forceSSL = true;
+        extraConfig = ''
+          auth_basic off;
+          auth_request off;
+        '';
       };
       virtualHosts.${frontendHost} = {
         enableACME = true;
         forceSSL = true;
+        extraConfig = ''
+          auth_basic off;
+          auth_request off;
+        '';
         locations = {
           "/" = {
+            extraConfig = ''
+              auth_basic off;
+              auth_request off;
+            '';
             proxyPass = "http://${config.services.adventurelog.frontend.host}:${toString config.services.adventurelog.frontend.port}";
           };
           "/api/" = {
+            extraConfig = ''
+              auth_basic off;
+              auth_request off;
+            '';
             proxyPass = "http://${config.services.adventurelog.backend.host}:${toString config.services.adventurelog.backend.port}";
           };
           "/media/" = {
+            extraConfig = ''
+              auth_basic off;
+              auth_request off;
+            '';
             proxyPass = "http://${config.services.adventurelog.backend.host}:${toString config.services.adventurelog.backend.port}";
           };
           "/static/" = {
+            extraConfig = ''
+              auth_basic off;
+              auth_request off;
+            '';
             proxyPass = "http://${config.services.adventurelog.backend.host}:${toString config.services.adventurelog.backend.port}";
           };
         };
