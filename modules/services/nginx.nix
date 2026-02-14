@@ -16,6 +16,7 @@ let
   adminEmail = "admin@thym.at";
 
   server = "100.64.0.3";
+  violetTs = "violet-ts";
 
   # jam
   homepagePort = 8082;
@@ -165,6 +166,32 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString lokiPort}";
             proxyWebsockets = true;
+          };
+        };
+        "reise.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations = {
+            "/" = {
+              proxyPass = "http://${violetTs}:2104";
+              proxyWebsockets = true;
+            };
+            "/api/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/media/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/static/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+          };
+        };
+        "reise-api.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${violetTs}:2000";
           };
         };
         "passwort.${domain}" = {
