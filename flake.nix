@@ -79,7 +79,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     adventurelog-src = {
-      url = "github:seanmorley15/AdventureLog";
+      url = "github:totoroot/AdventureLog";
       flake = false;
     };
   };
