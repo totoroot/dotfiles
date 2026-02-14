@@ -40,9 +40,11 @@ in
           src = "${inputs.adventurelog-src}/frontend";
         });
       backend.port = 2000;
+      backend.host = "0.0.0.0";
       backend.publicUrl = "https://${frontendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.port = 2104;
+      frontend.host = "0.0.0.0";
       frontend.origin = "https://${frontendHost}";
       frontend.publicServerUrl = "https://${frontendHost}/api";
       nginx.enable = true;
