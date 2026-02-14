@@ -1,4 +1,4 @@
-{ options, config, lib, inputs, pkgs, ... }:
+{ options, config, lib, inputs, ... }:
 
 with lib;
 with lib.my;
@@ -7,35 +7,21 @@ let
   domain = "xn--berwachungsbehr-mtb1g.de";
   backendHost = "reise-api.${domain}";
   frontendHost = "reise.${domain}";
-  adventurelogPkgs = inputs.adventurelog.packages.${pkgs.system} or { };
-  adventurelogBackend = adventurelogPkgs.backend or adventurelogPkgs.default or null;
 in
 {
   options.modules.services.adventurelog = {
     enable = mkBoolOpt false;
   };
 
-  imports = [
+  imports = lib.optionals cfg.enable [
     inputs.adventurelog.nixosModules.adventurelog
   ];
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [
-      inputs.adventurelog.overlays.default
-    ];
 
     services.adventurelog = {
       enable = true;
-      backend.package =
-        inputs.adventurelog.packages.${pkgs.system}.adventurelog-backend.overrideAttrs (_: {
-          src = "${inputs.adventurelog-src}/backend/server";
-        });
-      frontend.package =
-        inputs.adventurelog.packages.${pkgs.system}.adventurelog-frontend.overrideAttrs (_: {
-          src = "${inputs.adventurelog-src}/frontend";
-        });
-      backend.port = 2000;
-      backend.publicUrl = "https://${backendHost}";
+      backend.publicUrl = "https://${frontendHost}/api";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
       nginx.enable = true;
@@ -52,30 +38,21 @@ in
       virtualHosts.${frontendHost} = {
         enableACME = true;
         forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://${config.services.adventurelog.frontend.host}:${toString config.services.adventurelog.frontend.port}";
+        locations = {
+          "/" = {
+            proxyPass = "http://${config.services.adventurelog.frontend.host}:${toString config.services.adventurelog.frontend.port}";
+          };
+          "/api/" = {
+            proxyPass = "http://${config.services.adventurelog.backend.host}:${toString config.services.adventurelog.backend.port}";
+          };
+          "/media/" = {
+            proxyPass = "http://${config.services.adventurelog.backend.host}:${toString config.services.adventurelog.backend.port}";
+          };
+          "/static/" = {
+            proxyPass = "http://${config.services.adventurelog.backend.host}:${toString config.services.adventurelog.backend.port}";
+          };
         };
       };
     };
-
-    services.postgresql.package = lib.mkForce pkgs.postgresql_16;
-
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "admin@xn--berwachungsbehr-mtb1g.de";
-    };
-
-    systemd.services.adventurelog-backend.wants = [ "network-online.target" ];
-    systemd.services.adventurelog-backend.after = [ "network-online.target" ];
-    systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
-    systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
-    systemd.services.adventurelog-backend.serviceConfig.StateDirectory = "adventurelog";
-    systemd.services.adventurelog-frontend.serviceConfig.Environment =
-      [ "NODE_OPTIONS=--disable-write-xor-execute" ];
-
-    systemd.tmpfiles.rules = [
-      "d /var/lib/adventurelog/media 0750 adventurelog adventurelog -"
-    ];
-
   };
 }
