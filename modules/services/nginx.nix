@@ -16,7 +16,6 @@ let
   adminEmail = "admin@thym.at";
 
   server = "100.64.0.3";
-  violetTs = "violet-ts";
 
   # jam
   homepagePort = 8082;
@@ -35,6 +34,8 @@ let
   adguardDNSPort = 53;
   esphomePort = 6052;
   changedetectionPort = 5002;
+  adventurelogFrontendPort = 2104;
+  adventurelogBackendPort = 2000;
 in
 {
   options.modules.services.nginx = {
@@ -173,38 +174,43 @@ in
           forceSSL = true;
           locations = {
             "/" = {
-              proxyPass = "http://${violetTs}:2104";
+              proxyPass = "http://${server}:${toString adventurelogFrontendPort}";
+              recommendedProxySettings = true;
               proxyWebsockets = true;
             };
             "=/api" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
             };
             "/api/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
             };
             "/auth/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
               extraConfig = ''
                 proxy_set_header Referer https://reise.${domain};
               '';
             };
             "/csrf/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
             "/public-url/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
             "/invitations/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
             "/accounts/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
             "/media/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
             "/static/" = {
-              proxyPass = "http://${violetTs}:2000";
+              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
           };
         };
@@ -212,7 +218,7 @@ in
           enableACME = true;
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://${violetTs}:2000";
+            proxyPass = "http://${server}:${toString adventurelogBackendPort}";
           };
         };
         "passwort.${domain}" = {
