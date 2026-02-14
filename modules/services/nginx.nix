@@ -176,7 +176,25 @@ in
               proxyPass = "http://${violetTs}:2104";
               proxyWebsockets = true;
             };
+            "=/api" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
             "/api/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/auth/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/csrf/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/public-url/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/invitations/" = {
+              proxyPass = "http://${violetTs}:2000";
+            };
+            "/accounts/" = {
               proxyPass = "http://${violetTs}:2000";
             };
             "/media/" = {
