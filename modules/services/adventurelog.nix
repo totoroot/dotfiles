@@ -20,6 +20,10 @@ in
   ];
 
   config = mkIf cfg.enable {
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+      config.services.adventurelog.backend.port
+      config.services.adventurelog.frontend.port
+    ];
 
     nixpkgs.overlays = [
       inputs.adventurelog.overlays.default
