@@ -27,5 +27,9 @@ in
 
     services.postgresql.package = lib.mkForce pkgs.postgresql_16;
 
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+      config.services.adventurelog.backend.port
+      config.services.adventurelog.frontend.port
+    ];
   };
 }
