@@ -7,8 +7,6 @@ let
   domain = "xn--berwachungsbehr-mtb1g.de";
   backendHost = "reise-api.${domain}";
   frontendHost = "reise.${domain}";
-  adventurelogPkgs = inputs.adventurelog.packages.${pkgs.system} or { };
-  adventurelogBackend = adventurelogPkgs.backend or adventurelogPkgs.default or null;
 in
 {
   options.modules.services.adventurelog = {
@@ -59,6 +57,7 @@ in
     systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
     systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
     systemd.services.adventurelog-backend.serviceConfig.StateDirectory = "adventurelog";
+    systemd.services.adventurelog-frontend.serviceConfig.MemoryDenyWriteExecute = false;
 
     systemd.tmpfiles.rules = [
       "d /var/lib/adventurelog/media 0750 adventurelog adventurelog -"
