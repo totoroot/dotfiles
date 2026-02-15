@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+host="$(hostname)"
+flake_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+target_host="$host"
+force_host=0
+args=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --host)
+      shift
+      target_host="${1:-}"
+      ;;
+    --force-host)
+      force_host=1
+      ;;
+    *)
+      args+=("$1")
+      ;;
+  esac
+  shift || true
+done
+
+if [[ -z "$target_host" ]]; then
+  echo "Error: --host requires a value" >&2
+  exit 1
+fi
+
+if [[ $force_host -ne 1 && "$target_host" != "$host" ]]; then
+  echo "Refusing to rebuild: host is $host (expected $target_host)." >&2
+  echo "Use --force-host to override." >&2
+  exit 1
+fi
+
+if [[ ${#args[@]} -eq 0 ]]; then
+  args=("switch")
+fi
+
+exec sudo nixos-rebuild --impure --flake "${flake_root}#${target_host}" "${args[@]}"
