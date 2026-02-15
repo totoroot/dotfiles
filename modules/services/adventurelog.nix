@@ -46,7 +46,7 @@ in
       frontend.port = 2104;
       frontend.host = "0.0.0.0";
       frontend.origin = "https://${frontendHost}";
-      frontend.publicServerUrl = "http://0.0.0.0:${toString services.adventurelog.backend.port}";
+      frontend.publicServerUrl = "http://0.0.0.0:2000";
       nginx.enable = true;
       nginx.hostName = backendHost;
       database.createLocally = true;
