@@ -18,35 +18,11 @@ in
   ];
 
   config = mkIf cfg.enable {
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
-      config.services.adventurelog.backend.port
-      config.services.adventurelog.frontend.port
-    ];
-
-    nixpkgs.overlays = [
-      inputs.adventurelog.overlays.default
-    ];
-
     services.adventurelog = {
       enable = true;
-      backend.package =
-        inputs.adventurelog.packages.${pkgs.system}.adventurelog-backend.overrideAttrs (_: {
-          src = "${inputs.adventurelog-src}/backend/server";
-        });
-      frontend.package =
-        inputs.adventurelog.packages.${pkgs.system}.adventurelog-frontend.overrideAttrs (_: {
-          src = "${inputs.adventurelog-src}/frontend";
-        });
-      backend.port = 2000;
-      backend.host = "0.0.0.0";
-      backend.publicUrl = "https://${frontendHost}";
-      backend.frontendUrl = "https://${frontendHost}";
-      frontend.port = 2104;
-      frontend.host = "0.0.0.0";
-      frontend.origin = "https://${frontendHost}";
-      frontend.publicServerUrl = "http://0.0.0.0:2000";
       nginx.enable = true;
       nginx.hostName = backendHost;
+      nginx.frontendHostName = frontendHost;
       database.createLocally = true;
     };
 
@@ -57,7 +33,6 @@ in
     systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
     systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
     systemd.services.adventurelog-backend.serviceConfig.StateDirectory = "adventurelog";
-    systemd.services.adventurelog-frontend.serviceConfig.MemoryDenyWriteExecute = false;
 
     systemd.tmpfiles.rules = [
       "d /var/lib/adventurelog/media 0750 adventurelog adventurelog -"
