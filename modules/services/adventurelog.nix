@@ -59,6 +59,7 @@ in
     systemd.services.adventurelog-frontend.wants = [ "network-online.target" ];
     systemd.services.adventurelog-frontend.after = [ "network-online.target" ];
     systemd.services.adventurelog-backend.serviceConfig.StateDirectory = "adventurelog";
+    systemd.services.adventurelog-frontend.serviceConfig.MemoryDenyWriteExecute = false;
 
     systemd.tmpfiles.rules = [
       "d /var/lib/adventurelog/media 0750 adventurelog adventurelog -"
