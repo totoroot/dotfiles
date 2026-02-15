@@ -5,7 +5,6 @@ with lib.my;
 let
   cfg = config.modules.services.adventurelog;
   domain = "xn--berwachungsbehr-mtb1g.de";
-  backendHost = "reise-api.${domain}";
   frontendHost = "reise.${domain}";
 in
 {
@@ -21,7 +20,7 @@ in
     services.adventurelog = {
       enable = true;
       nginx.enable = true;
-      nginx.hostName = backendHost;
+      nginx.hostName = frontendHost;
       nginx.frontendHostName = frontendHost;
       database.createLocally = true;
     };
