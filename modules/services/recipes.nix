@@ -18,7 +18,9 @@ in
       address = "recipes.${domain}";
       port = port;
       # https://raw.githubusercontent.com/vabene1111/recipes/master/.env.template
-      extraConfig = { };
+      extraConfig = {
+        MEDIA_ROOT = "/var/lib/tandoor-recipes/media";
+      };
     };
 
     environment.systemPackages = [ config.services.tandoor-recipes.package ];
