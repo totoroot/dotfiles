@@ -34,8 +34,7 @@ let
   adguardDNSPort = 53;
   esphomePort = 6052;
   changedetectionPort = 5002;
-  adventurelogFrontendPort = 2104;
-  adventurelogBackendPort = 2000;
+  adventurelogPort = 2104;
 in
 {
   options.modules.services.nginx = {
@@ -174,43 +173,9 @@ in
           forceSSL = true;
           locations = {
             "/" = {
-              proxyPass = "http://${server}:${toString adventurelogFrontendPort}";
+              proxyPass = "http://${server}:${toString adventurelogPort}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
-            };
-            "=/api" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-            };
-            "/api/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-            };
-            "/auth/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-              extraConfig = ''
-                proxy_set_header Referer https://reise.${domain};
-              '';
-            };
-            "/csrf/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-            };
-            "/public-url/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-            };
-            "/invitations/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-            };
-            "/accounts/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-            };
-            "/media/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
-            };
-            "/static/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
             };
           };
         };
