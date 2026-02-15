@@ -73,6 +73,7 @@
       zsh.enable = true;
     };
     services = {
+      adventurelog.enable = true;
       containerization.enable = true;
       snowflake.enable = true;
       pods = {
@@ -110,8 +111,8 @@
           nginx.enable = false;
           nginxlog.enable = false;
           fail2ban.enable = false;
-          adguard.enable = true;
-          fritzbox.enable = true;
+          adguard.enable = false;
+          fritzbox.enable = false;
           speedtest.enable = false;
         };
         # Targets for the Prometheus Blackbox exporter
@@ -167,19 +168,19 @@
     "--device=/dev/sdf"
   ];
 
-  # macOS Time Machine configuration
-  services.netatalk.settings = {
-    "Time Machine Vika" = {
-      "time machine" = "yes";
-      path = "/mnt/time-machine-vika";
-      "valid users" = "vika";
-    };
-    "Time Machine Mara" = {
-      "time machine" = "yes";
-      path = "/mnt/time-machine-mara";
-      "valid users" = "mara";
-    };
-  };
+  # # macOS Time Machine configuration
+  # services.netatalk.settings = {
+  #   "Time Machine Vika" = {
+  #     "time machine" = "yes";
+  #     path = "/mnt/time-machine-vika";
+  #     "valid users" = "vika";
+  #   };
+  #   "Time Machine Mara" = {
+  #     "time machine" = "yes";
+  #     path = "/mnt/time-machine-mara";
+  #     "valid users" = "mara";
+  #   };
+  # };
 
   boot.swraid.enable = true;
 }
