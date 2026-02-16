@@ -4,7 +4,6 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.zsh;
-  dotfilesConfigDir = "${config.xdg.configHome}/dotfiles/config";
 in
 {
   options.modules.home.zsh = with types; {
@@ -46,6 +45,20 @@ in
       zoxide
     ];
 
+
+    # XDG_CONFIG_HOME
+    #     Where user-specific configurations should be written (analogous to /etc).
+    #     Should default to $HOME/.config.
+    # XDG_CACHE_HOME
+    #     Where user-specific non-essential (cached) data should be written (analogous to /var/cache).
+    #     Should default to $HOME/.cache.
+    # XDG_DATA_HOME
+    #     Where user-specific data files should be written (analogous to /usr/share).
+    #     Should default to $HOME/.local/share.
+    # XDG_STATE_HOME
+    #     Where user-specific state files should be written (analogous to /var/lib).
+    #     Should default to $HOME/.local/state.
+
     home.sessionVariables = {
       ZDOTDIR = "${config.home.homeDirectory}/.config/zsh/";
       ZSH_CACHE = "${config.home.homeDirectory}/.local/cache/zsh";
@@ -53,13 +66,11 @@ in
       ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
     };
 
-    modules.home.configSymlinks.enable = true;
-    modules.home.configSymlinks.sourceDir = dotfilesConfigDir;
-    modules.home.configSymlinks.destination = ".config";
     modules.home.configSymlinks.entries =
       (map (name: "zsh/${name}") [
         "aliases.zsh"
         "completion.zsh"
+        "completions"
         "config.zsh"
         "extract.zsh"
         "keybinds.zsh"
@@ -69,19 +80,6 @@ in
       ]);
 
     home.file = {
-      ".zshenv".text = ''
-        export XDG_CONFIG_HOME="$HOME/.config"
-        export XDG_CACHE_HOME="$HOME/.cache"
-        export XDG_DATA_HOME="$HOME/.local/share"
-        export XDG_STATE_HOME="$HOME/.local/state"
-
-        export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-        export ZSH_CACHE="$XDG_CACHE_HOME/zsh"
-        export ZGENOM_DIR="$XDG_DATA_HOME/zsh"
-        export ZGENOM_SOURCE="$ZGENOM_DIR/zgenom.zsh"
-      '';
-      ".zshenv".force = true;
-
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
       # Because extraInit generates those files in /etc/profile, and mine just
       # write the files to ~/.config/zsh; where it's easier to edit and tweak
