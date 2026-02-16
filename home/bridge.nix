@@ -12,7 +12,6 @@
     ./modules/git.nix
     ./modules/gitlab-cli.nix
     ./modules/helix.nix
-    ./modules/home-manager-applications-fix.nix
     ./modules/kitty.nix
     ./modules/kubernetes.nix
     ./modules/lf.nix

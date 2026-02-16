@@ -11,6 +11,7 @@ in
 
   imports = [
     ./packages.nix
+    ../../../home/modules/home-manager-applications-fix.nix
     ../../../home/bridge.nix
   ];
 
@@ -34,6 +35,7 @@ in
   };
 
   modules.home = {
+    unfreePackages.enable = true;
     atuin.enable = true;
     duf.enable = true;
     git.enable = true;
@@ -42,15 +44,11 @@ in
     helix.enable = true;
     kitty.enable = true;
     kubernetes.enable = true;
+    lf.enable = true;
     micro.enable = true;
     nushell.enable = true;
     trash.enable = true;
-    unfreePackages.enable = true;
     viddy.enable = true;
-    vim = {
-      enable = true;
-      desktop.enable = false;
-    };
     zsh.enable = true;
   };
 
