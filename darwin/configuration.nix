@@ -5,10 +5,13 @@
     ./brew.nix
   ];
 
-  users.users."mathym" = {
-    name = "mathym";
-    home = "/Users/mathym";
+  users.users."matthias.thym" = {
+    name = "matthias.thym";
+    home = "/Users/matthias.thym";
   };
+
+  system.primaryUser = "matthias.thym";
+  system.stateVersion = 6;
 
   # Nix configuration ------------------------------------------------------------------------------
 
@@ -41,15 +44,10 @@
       interval = { Day = 7; };
       options = "--delete-older-than 30d";
     };
-
-    configureBuildUsers = true;
   };
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # Fonts
   # fonts.fontDir.enable = true;
@@ -60,13 +58,8 @@
     remapCapsLockToEscape = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    # Firefox
-    # firefox-bin
-  ];
-
   # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # # Create symlinks for nix-darwin packages in ~/Applications
   # system.activationScripts.applications.text = pkgs.lib.mkForce (

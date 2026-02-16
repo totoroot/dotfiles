@@ -1,11 +1,11 @@
 { lib, inputs, darwin, home-manager, ... }:
 
 let
-  system = "x86_64-darwin";
-  user = "mathym";
+  system = "aarch64-darwin";
+  user = "matthias.thym";
 in
 {
-  macbook = darwin.lib.darwinSystem {
+  ATGRZMBP43 = darwin.lib.darwinSystem {
     inherit system;
     specialArgs = { inherit user inputs; };
     modules = [

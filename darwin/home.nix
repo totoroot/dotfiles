@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  configDir = "$HOME/.config";
+in
 {
   home = {
-    username = "mathym";
-    homeDirectory = "/Users/mathym";
-    stateVersion = "22.11";
+    username = "matthias.thym";
+    stateVersion = "25.11";
   };
 
   imports = [
@@ -12,16 +14,16 @@
     ./fonts.nix
   ];
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    # enableAutosuggestions = true;
-    initExtraBeforeCompInit = ''
-      fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions \
-              "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions \
-              "${config.home.profileDirectory}"/share/zsh/vendor-completions)
-    '';
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   enableCompletion = true;
+  #   # enableAutosuggestions = true;
+  #   initExtraBeforeCompInit = ''
+  #     fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions \
+  #             "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions \
+  #             "${config.home.profileDirectory}"/share/zsh/vendor-completions)
+  #   '';
+  # };
 
   # Direnv, load and unload environment variables depending on the current directory.
   # https://direnv.net
@@ -58,10 +60,43 @@
     HOMEBREW_NO_INSTALL_CLEANUP = "TRUE";
   };
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    # I init completion myself, because enableGlobalCompInit initializes it
+    # too soon, which means commands initialized later in my config won't get
+    # completion, and running compinit twice is slow.
+    # enableGlobalCompInit = false;
+    # promptInit = "";
+	sessionVariables = {
+	  ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+	  ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
+	  ZGENOM_DIR = "$XDG_DATA_HOME/zsh";
+	  ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
+	};
+  };
+
   home.file = {
     # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac
     "Library/Keyboard Layouts/EurKEY.keylayout".source = ../config/eurkey/EurKEY.keylayout;
     "Library/Keyboard Layouts/EurKEY.icns".source = ../config/eurkey/EurKEY.icns;
     "/Applications/kitty.app/Contents/Resources/kitty.icns".source = ../config/kitty/kitty-dark.icns;
   };
+
+  # home.file =
+  #   with pkgs; let
+  #     listFilesRecursive = dir: acc: lib.flatten (lib.mapAttrsToList
+  #       (k: v: if v == "regular" then "${acc}${k}" else listFilesRecursive dir "${acc}${k}/")
+  #       (builtins.readDir "${dir}/${acc}"));
+  #
+  #     toHomeFiles = dir:
+  #       builtins.listToAttrs
+  #         (map (x: {
+  #         	name = ".config/${x}";
+  #         	value = {
+  #             source = "${dir}/${x}";
+  #             force = true;
+  #         };
+  #         }) (listFilesRecursive dir ""));
+  #   in toHomeFiles ../config;
 }
