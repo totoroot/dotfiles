@@ -36,6 +36,7 @@ let
   changedetectionPort = 5002;
   adventurelogPort = 2104;
   adventurelogBackendPort = 2000;
+  adventurelogBackendProxyPort = 2026;
 in
 {
   options.modules.services.nginx = {
@@ -185,7 +186,7 @@ in
           forceSSL = true;
           locations = {
             "/" = {
-              proxyPass = "http://${server}:${toString adventurelogBackendPort}";
+              proxyPass = "http://${server}:${toString adventurelogBackendProxyPort}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
             };

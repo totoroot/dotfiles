@@ -20,7 +20,10 @@ in
   config = mkIf cfg.enable {
     services.adventurelog = {
       enable = true;
-      nginx.enable = false;
+      nginx.enable = true;
+      nginx.port = 2026;
+      nginx.hostName = backendHost;
+      nginx.frontendHostName = frontendHost;
       backend.publicUrl = "https://${backendHost}";
       backend.frontendUrl = "https://${frontendHost}";
       frontend.origin = "https://${frontendHost}";
@@ -31,8 +34,7 @@ in
     services.postgresql.package = lib.mkForce pkgs.postgresql_16;
 
     networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
-      config.services.adventurelog.backend.port
-      config.services.adventurelog.frontend.port
+      config.services.adventurelog.nginx.port
     ];
   };
 }
