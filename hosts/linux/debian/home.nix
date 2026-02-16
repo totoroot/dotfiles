@@ -2,11 +2,7 @@
 
 {
   imports = [
-    ../../../home/modules/unfree-packages.nix
-    ../../../home/modules/kitty.nix
-    ../../../home/modules/micro.nix
-    ../../../home/modules/git.nix
-    ../../../home/modules/zsh.nix
+    ../../../home/modules
   ];
 
   home = {
