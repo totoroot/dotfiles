@@ -37,6 +37,8 @@ in
       k9s
       # CLI client for Flux (GitOps)
       fluxcd
+      # Sealed Secrets CLI
+      kubeseal
       # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents
       yq-go
     ];
