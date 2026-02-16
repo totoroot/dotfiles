@@ -4,6 +4,8 @@
   imports = [
     ./modules/aerc.nix
     ./modules/atuin.nix
+    ./modules/archive.nix
+    ./modules/borg.nix
     ./modules/config-symlinks.nix
     ./modules/duf.nix
     ./modules/fonts.nix
@@ -13,8 +15,10 @@
     ./modules/home-manager-applications-fix.nix
     ./modules/kitty.nix
     ./modules/kubernetes.nix
+    ./modules/lf.nix
     ./modules/micro.nix
     ./modules/nushell.nix
+    ./modules/pass.nix
     ./modules/trash.nix
     ./modules/unfree-packages.nix
     ./modules/viddy.nix
