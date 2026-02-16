@@ -15,6 +15,9 @@ in
   config = mkIf cfg.enable {
     modules.home.configSymlinks.enable = true;
     modules.home.configSymlinks.force = true;
+    home.activation.ensureAtuinDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p "$XDG_CONFIG_HOME/atuin"
+    '';
     home.packages = with pkgs; [
       # Replacement for a shell history which records additional commands
       # context with optional encrypted synchronization between machines
