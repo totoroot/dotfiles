@@ -6,6 +6,7 @@ let
   cfg = config.modules.services.adventurelog;
   domain = "xn--berwachungsbehr-mtb1g.de";
   frontendHost = "reise.${domain}";
+  backendHost = "reise-api.${domain}";
 in
 {
   options.modules.services.adventurelog = {
@@ -19,9 +20,11 @@ in
   config = mkIf cfg.enable {
     services.adventurelog = {
       enable = true;
-      nginx.enable = true;
-      nginx.hostName = frontendHost;
-      nginx.frontendHostName = frontendHost;
+      nginx.enable = false;
+      backend.publicUrl = "https://${backendHost}";
+      backend.frontendUrl = "https://${frontendHost}";
+      frontend.origin = "https://${frontendHost}";
+      frontend.publicServerUrl = "https://${backendHost}";
       database.createLocally = true;
     };
 
