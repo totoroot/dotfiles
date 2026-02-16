@@ -13,6 +13,7 @@ in
   imports = [ ./config-symlinks.nix ];
 
   config = mkIf cfg.enable {
+    modules.home.configSymlinks.enable = true;
     home.packages = with pkgs; [
       # Replacement for a shell history which records additional commands
       # context with optional encrypted synchronization between machines

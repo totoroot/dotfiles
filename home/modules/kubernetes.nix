@@ -16,6 +16,7 @@ in
   ];
 
   config = mkIf cfg.enable {
+    modules.home.configSymlinks.enable = true;
     home.packages = with pkgs; [
       # Package manager for kubectl plugins
       krew

@@ -13,6 +13,7 @@ in
   imports = [ ./config-symlinks.nix ];
 
   config = mkIf cfg.enable {
+    modules.home.configSymlinks.enable = true;
     home.packages = with pkgs; [
       # Modern shell written in Rust
       nushell
