@@ -4,19 +4,16 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.micro;
-  configFile = name: {
-    inherit name;
-    value = {
-      source = "${configDir}/micro/${name}";
-      force = true;
-    };
-  };
 in {
   options.modules.home.micro = {
     enable = mkBoolOpt false;
   };
 
+  imports = [ ./config-symlinks.nix ];
+
   config = mkIf cfg.enable {
+    modules.home.configSymlinks.enable = true;
+
     home.packages = with pkgs; [
       # Modern and intuitive terminal-based text editor
       micro
@@ -31,13 +28,14 @@ in {
     #   };
     # };
 
-    xdg.configFile = builtins.listToAttrs (map configFile [
-      "settings.json"
-      "bindings.json"
-      "init.lua"
-      "syntax"
-      "colorschemes"
-      "plug"
-    ]);
+    modules.home.configSymlinks.entries =
+      map (name: "micro/${name}") [
+        "settings.json"
+        "bindings.json"
+        "init.lua"
+        "syntax"
+        "colorschemes"
+        "plug"
+      ];
   };
 }
