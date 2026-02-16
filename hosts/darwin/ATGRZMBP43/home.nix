@@ -12,7 +12,15 @@ in
   imports = [
 	./fonts.nix
 	./packages.nix
-    ../../../home/modules
+    ../../../home/modules/unfree-packages.nix
+    ../../../home/modules/home-manager-applications-fix.nix
+    ../../../home/modules/kitty.nix
+    ../../../home/modules/micro.nix
+    ../../../home/modules/nushell.nix
+    ../../../home/modules/kubernetes.nix
+    ../../../home/modules/trash.nix
+    ../../../home/modules/viddy.nix
+    ../../../home/modules/zsh.nix
   ];
 
   # programs.zsh = {
