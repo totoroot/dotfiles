@@ -4,8 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.zsh;
-  dotfilesDir = "${config.xdg.configHome}/dotfiles";
-  dotfilesConfigDir = "${dotfilesDir}/config";
+  dotfilesConfigDir = "${config.xdg.configHome}/dotfiles/config";
 in
 {
   options.modules.home.zsh = with types; {
@@ -27,6 +26,19 @@ in
   };
 
   config = mkIf cfg.enable {
+    modules.home.configSymlinks.enable = true;
+    modules.home.configSymlinks.sourceDir = dotfilesConfigDir;
+    modules.home.configSymlinks.destination = ".config";
+    modules.home.configSymlinks.entries = [
+      "zsh/.zshrc"
+      "zsh/.zshenv"
+      "zsh/aliases.zsh"
+      "zsh/completion.zsh"
+      "zsh/config.zsh"
+      "zsh/extract.zsh"
+      "zsh/keybinds.zsh"
+    ];
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
