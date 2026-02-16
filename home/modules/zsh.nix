@@ -69,6 +69,18 @@ in
       ]);
 
     home.file = {
+      ".zshenv".text = ''
+        export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
+        export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"
+        export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
+        export XDG_STATE_HOME="''${XDG_STATE_HOME:-$HOME/.local/state}"
+
+        export ZDOTDIR="''${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
+        export ZSH_CACHE="''${ZSH_CACHE:-$XDG_CACHE_HOME/zsh}"
+        export ZGENOM_DIR="''${ZGENOM_DIR:-$XDG_DATA_HOME/zsh}"
+        export ZGENOM_SOURCE="''${ZGENOM_SOURCE:-$ZGENOM_DIR/zgenom.zsh}"
+      '';
+
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
       # Because extraInit generates those files in /etc/profile, and mine just
       # write the files to ~/.config/zsh; where it's easier to edit and tweak
