@@ -60,7 +60,6 @@ in
       (map (name: "zsh/${name}") [
         "aliases.zsh"
         "completion.zsh"
-        "completions"
         "config.zsh"
         "extract.zsh"
         "keybinds.zsh"

@@ -38,5 +38,6 @@ zle -N history-beginning-search-backward-then-append
 bindkey -M viins '^x^l' history-beginning-search-backward-then-append
 
 # Open current prompt in external editor on <Ctrl> + <E>
-autoload -Uz edit-command-line; zle -N edit-command-line
+autoload -Uz edit-command-line
+zle -N edit-command-line
 bindkey '^E' edit-command-line

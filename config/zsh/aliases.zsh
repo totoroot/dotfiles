@@ -21,7 +21,6 @@ alias rmirror='rsync -rtvu --delete'
 alias mv='mv -v'
 alias mkdir='mkdir -p'
 alias wget='wget -c'
-alias cat='bat -Pp'
 alias search='grep -ir --exclude-dir=".git" --exclude="*.html" --exclude="*.css" --exclude="*.scss" --exclude="*.js" --exclude="*.json" --exclude="~/.config/dotfiles/config/eurkey/*"'
 
 alias cdd='cd $XDG_CONFIG_HOME/dotfiles'
@@ -42,14 +41,13 @@ alias nixinst='(){ nix profile install nixpkgs#$1 ;}'
 # alias nixrm='nix-env --uninstall'
 alias nixfix='sudo nix-store --verify --check-contents --repair'
 alias nixedit='(){ $EDITOR $(fd $1)/default.nix ;}'
-alias nrs='nrswitch'
 
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"
 # source zshrc
 alias zshsource="source ~/.zshrc"
 # alias to scan wireless network for connected devices
-alias scan="sudo nmap -sn $(ip route | grep -m1 default | awk '{print $3}')/24| sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
+alias scan="sudo nmap -sn 192.168.8.0/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
 # find largest files in directory
 alias ducks="sudo du -cks -- * | sort -rn | head"
 # rm EXIF data from images in directory
@@ -59,25 +57,49 @@ alias sc=systemctl
 alias ssc='sudo systemctl'
 alias sn="systemctl suspend"
 
+# Never use plain ls
 alias ls="ls --color=auto --hyperlink=auto"
 alias l="ls -1"
 alias lg="ls -1 -g"
 
-if command -v exa >/dev/null; then
-  alias exa="exa --group-directories-first";
-  alias lsc="exa";
-  alias lsd="exa -s date";
-  alias lc="exa -l";
-  alias ll="exa -lg";
-  alias la="LC_COLLATE=C exa -la";
+# Because some modern things are just better
+if command -v eza >/dev/null; then
+  alias eza="eza --group-directories-first";
+  alias lsc="eza";
+  alias lsd="eza -s date";
+  alias lc="eza -l";
+  alias ll="eza -lg";
+  alias la="LC_COLLATE=C eza -la";
 fi
 
-autoload -U zmv
 
+# bat - cat but with syntax highlighting
+if command -v bat >/dev/null; then
+  alias cat='bat -Pp';
+fi
+
+
+# zmv - advanced batch rename/move
+autoload -Uz zmv
+
+# Usage examples
+# zmv '(*).log' '$1.txt'           # Rename .log to .txt
+# zmv -w '*.log' '*.txt'           # Same thing, simpler syntax
+# zmv -n '(*).log' '$1.txt'        # Dry run (preview changes)
+# zmv -i '(*).log' '$1.txt'        # Interactive mode (confirm each)
+
+# Helpful aliases for zmv
+alias zcp='zmv -C'  # Copy with patterns
+alias zln='zmv -L'  # Link with patterns
+
+
+# Create directory and jump right in
 take() {
   mkdir "$1" && cd "$1";
 }; compdef take=mkdir
 
+
+# Open ZSH man page in pager and find pattern
 zman() {
   PAGER="less -g -I -s '+/^       "$1"'" man zshall;
 }

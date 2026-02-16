@@ -1,9 +1,9 @@
-[user]
-    name = Matthias Thym
-    email = git@thym.at
-    signingkey = C1B257DC8E8CFCC4
-[commit]
-    gpgsign = false
+# Use different commit email addresses for private and work contributions
+[includeIf "gitdir:~/Development/private/"]
+    path = ~/.config/git/workconfig
+[includeIf "gitdir:~/Development/work/"]
+    path = ~/.config/git/workconfig
+
 [init]
     defaultBranch = main
 [pull]
@@ -11,6 +11,7 @@
     autostash=true
 [fetch]
     prune=true
+
 [diff]
 	tool = meld
     colorMoved = default
@@ -53,21 +54,3 @@
     clean = git-lfs clean -- %f
 [advice]
     addEmptyPathspec = false
-[url "https://github.com/"]
-    insteadOf = gh:
-[url "git@github.com:totoroot/"]
-    insteadOf = gh:/
-[url "https://codeberg.org/"]
-    insteadOf = cb:
-[url "git@codeberg.org:totoroot/"]
-    insteadOf = cb:/
-[url "https://gitlab.com/"]
-    insteadOf = gl:
-[url "https://gist.github.com/"]
-    insteadOf = gist:
-[url "https://bitbucket.org/"]
-    insteadOf = bb:
-[url "https://git.thym.at"]
-    insteadOf = gogs:
-[includeIf "gitdir:~/Development/work/"]
-    path = ~/.config/git/work/config

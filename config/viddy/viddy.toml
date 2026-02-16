@@ -1,4 +1,5 @@
 [general]
+no_shell = false
 shell = "zsh"
 shell_options = ""
 

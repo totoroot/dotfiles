@@ -1,0 +1,9 @@
+[user]
+    name = Matthias Thym
+    email = matthias.thym@smaxtec.com
+[commit]
+    gpgsign = false
+[core]
+    sshCommand = "ssh -i ~/.ssh/ATGRZMBP43"
+[url "git@gitlab.com:"]
+    insteadOf = https://gitlab.com/
