@@ -10,7 +10,7 @@ let
     name = "${cfg.destination}/${relativePath}";
     value.source =
       config.lib.file.mkOutOfStoreSymlink "${cfg.sourceDir}/${relativePath}";
-    force = true;
+    force = cfg.force;
     recursive = true;
   };
 in
@@ -34,6 +34,8 @@ in
         "kitty/kitty.conf"
       ];
     };
+
+    force = mkOpt types.bool false;
   };
 
   config = mkIf (cfg.enable && cfg.entries != [ ]) {
