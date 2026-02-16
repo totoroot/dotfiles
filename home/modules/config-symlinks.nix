@@ -8,10 +8,12 @@ let
 
   mkEntry = relativePath: {
     name = "${cfg.destination}/${relativePath}";
-    value.source =
-      config.lib.file.mkOutOfStoreSymlink "${cfg.sourceDir}/${relativePath}";
-    force = cfg.force;
-    recursive = true;
+    value = {
+      source =
+        config.lib.file.mkOutOfStoreSymlink "${cfg.sourceDir}/${relativePath}";
+      force = cfg.force;
+      recursive = true;
+    };
   };
 in
 {
