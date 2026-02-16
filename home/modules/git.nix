@@ -15,6 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     modules.home.configSymlinks.enable = true;
+    modules.home.configSymlinks.force = true;
 
     home.packages = with pkgs; [
       # Distributed version control system
