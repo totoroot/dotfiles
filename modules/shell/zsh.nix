@@ -1,7 +1,6 @@
 { config, options, pkgs, lib, ... }:
 
 with lib;
-with lib.my;
 let cfg = config.modules.shell.zsh;
 in {
   options.modules.shell.zsh = with types; {
