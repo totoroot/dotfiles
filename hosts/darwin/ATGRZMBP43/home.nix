@@ -39,6 +39,7 @@ in
     git.enable = true;
     gitlab-cli.enable = true;
     fonts.enable = true;
+    helix.enable = true;
     kitty.enable = true;
     kubernetes.enable = true;
     micro.enable = true;
@@ -46,6 +47,10 @@ in
     trash.enable = true;
     unfreePackages.enable = true;
     viddy.enable = true;
+    vim = {
+      enable = true;
+      desktop.enable = false;
+    };
     zsh.enable = true;
   };
 
