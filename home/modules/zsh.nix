@@ -52,11 +52,8 @@ in
     };
 
     xdg.configFile = {
-      # Write it recursively so other modules can write files to it
-      "zsh" = {
-      	source = "${dotfilesConfigDir}/zsh";
-      	recursive = true;
-      };
+      # Keep ~/.config/zsh writable for tools that drop completions at runtime.
+      # Only manage the explicit files we control.
 
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
       # Because extraInit generates those files in /etc/profile, and mine just
