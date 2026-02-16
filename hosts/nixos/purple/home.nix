@@ -18,6 +18,18 @@
   };
 
   home-manager.users.${config.user.name} = { config, ... }: {
+    imports = [
+      ../../../home/bridge.nix
+    ];
+
+    modules.home = {
+      git.enable = true;
+      kitty.enable = true;
+      micro.enable = true;
+      unfreePackages.enable = true;
+      zsh.enable = true;
+    };
+
     home.file = {
       "Notes/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/Sync/notes/";
       "Trash/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/.local/share/Trash/files/";
