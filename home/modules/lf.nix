@@ -14,6 +14,8 @@ in
 
   config = mkIf cfg.enable {
     modules.home.configSymlinks.enable = true;
+    modules.home.unfreePackages.enable = true;
+    modules.home.unfreePackages.packageNames = mkBefore [ "unrar" ];
 
     home.packages = with pkgs; [
       # Terminal file manager written in Go and heavily inspired by ranger
