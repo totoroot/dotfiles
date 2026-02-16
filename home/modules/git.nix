@@ -20,6 +20,7 @@ in {
     home.packages = with pkgs; [
       # Distributed version control system
       gitFull
+      # Git extension for versioning large files
       git-lfs
       # Simple terminal UI for Git
       lazygit
