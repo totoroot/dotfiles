@@ -14,6 +14,8 @@ in {
   ];
 
   config = mkIf cfg.enable {
+    modules.home.configSymlinks.enable = true;
+
     home.packages = with pkgs; [
       # Distributed version control system
       gitFull
