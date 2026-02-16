@@ -1,9 +1,14 @@
-{ pkgs, ... }:
-
+{ pkgs, inputs, ... }:
+let
+  gdk = pkgs.google-cloud-sdk.withExtraComponents( with pkgs.google-cloud-sdk.components; [
+    gke-gcloud-auth-plugin
+  ]);
+in
 {
   modules.home.unfreePackages = {
     enable = true;
     packageNames = [
+      "rectangle-pro"
       "orbstack"
     ];
   };
@@ -12,9 +17,9 @@
     # Radically simple IT automation
     # ansible
     # Opinionated terminal GUI client
-    aerc
+    # aerc
     # Command line tools
-    asciinema
+    # asciinema
     # A cat(1) clone with syntax highlighting and Git integration
     bat
     # The uncompromising Python code formatter
@@ -29,23 +34,12 @@
     exiftool
     # A simple, fast and user-friendly alternative to find
     fd
+    # GNU Find Utilities, the basic directory searching utilities of the GNU operating system
+    findutils
     # A command-line fuzzy finder written in Go
     fzf
     # Program for making large letters out of ordinary text
-    figlet
-    # Distributed version control system
-    git
-    # Linting for your git commit messages
-    gitlint
-    # A bash-tool to store your private data inside a git repository
-    git-secret
-    # Prevents you from committing secrets and credentials into git repositories
-    git-secrets
-    # A git pull replacement that rebases all local branches when pulling
-    git-up
-    # The Go Programming language
-    # go
-    # go_1_19
+    # figlet
     # Render markdown on the CLI, with pizzazz!
     glow
     # An interactive process viewer for Linux
@@ -57,24 +51,22 @@
     # High-level, high-performance, dynamic language for technical computing
     # julia-bin
     # A simple terminal UI for both docker and docker-compose
-    lazydocker
+    # lazydocker
     # Simple terminal UI for git commands
-    lazygit
+    # lazygit
     # A terminal file manager written in Go and heavily inspired by ranger
     lf
     # A rainbow version of cat
     clolcat
-    # Modern and intuitive terminal-based text editor
-    micro
     # General-purpose media player, fork of MPlayer and mplayer2
     mpv
     # A fast, highly customizable system info script
-    neofetch
+    # neofetch
     # Review pull-requests on https://github.com/NixOS/nixpkgs
     nixpkgs-review
-    # Git repository summary on your terminal
-    # onefetch
-    pandoc
+    # Modern shell written in Rust
+    nushell
+    # pandoc
     # podman
     podman-compose
     # A PDF processor written in Go
@@ -104,7 +96,46 @@
     # Shell script analysis tool
     shellcheck
     # Tools for the google cloud platform
-    # google-cloud-sdk
+    gdk
+    # Small and lightweight IDE
+    geany
+    # The GNU Image Manipulation Program
+    # gimp
+    # Open-source IDE for exploring and testing APIs
+    bruno
+    # Go Programming language
+    go
+  	# View colored, incremental diff in workspace or from stdin with side by side and auto pager support (Was "cdiff")
+  	ydiff
+
+    ## Useful nix related tools
+    cachix # adding/managing alternative binary caches hosted by Cachix
+    # comma # run software from without installing it
+    niv # easy dependency management for nix projects
+
+    ## GNU/Linux Compatibility
+    # GNU sed, a batch stream editor
+    gnused
+    # GNU implementation of the `tar' archiver
+  	gnutar
+  	# GNU Transport Layer Security Library
+  	gnutls
+  	# GNU implementation of the Awk programming language
+  	gawk
+
+    ## macOS Extensions
+    # Simple clipboard manager for macOS
+    maccy
+    # Move and resize windows in macOS using keyboard shortcuts or snap areas
+    rectangle-pro
+    # Tiny menu bar calendar
+	  itsycal
+    # Keymap remap utilility
+    karabiner-elements
+  	# Windows alt-tab on macOS
+  	alt-tab-macos
+  	# Automatically raise and focus a window when hovering over it with the mouse
+  	autoraise
 
     ## Python
     python313
@@ -143,10 +174,7 @@
     # Vector graphics editor
     # inkscape-with-extensions
     # A terminal based graphical activity monitor inspired by gtop and vtop
-    # gotop
-    # Additional completion definitions for zsh
-    # zsh-completions
-    zsh
+    gotop
 
 	# AI Agents (urgggghh!!)
 	# Lightweight coding agent that runs in your terminal
@@ -155,6 +183,11 @@
     opencode
 
     orbstack
+    # Open source source code editor developed by Microsoft for Windows, Linux and macOS (VS Code without MS branding/telemetry/licensing)
+    vscodium
+
+    # rcat from flake
+    inputs.rcat.packages.${pkgs.system}.default
   ];
 
   # # Create symlinks for home-manager packages in ~/Applications
