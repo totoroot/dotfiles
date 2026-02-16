@@ -78,10 +78,6 @@
     sd
     # A command-line kanban board/task manager
     # taskell
-    # Tool for building, changing, and versioning infrastructure
-    terraform
-    # Magnificent app which corrects your previous console command
-    thefuck
     # Command to produce a depth indented directory listing
     tree
     # An archive unpacker program
@@ -92,8 +88,6 @@
     wget
     # A linter for YAML files
     yamllint
-    # Command-line tool to download videos from YouTube.com and other sites
-    youtube-dlp
     # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents - repo owner: kislyuk
     # yq
     # Portable command-line YAML processor - repo owner: mikefarah
@@ -106,13 +100,13 @@
     # google-cloud-sdk
 
     ## Python
-    python310
-    python310Packages.virtualenv
-    python310Packages.pip
-    python310Packages.pip-tools
+    python313
+    python313Packages.virtualenv
+    python313Packages.pip
+    python313Packages.pip-tools
     # A bug and style checker for Python
-    python310Packages.pylint
-    python310Packages.beautifulsoup4
+    python313Packages.pylint
+    python313Packages.beautifulsoup4
 
     # ## Rust
     # cargo
@@ -146,6 +140,12 @@
     # Additional completion definitions for zsh
     # zsh-completions
     zsh
+
+	# AI Agents (urgggghh!!)
+	# Lightweight coding agent that runs in your terminal
+    codex
+    # AI coding agent built for the terminal
+    opencode
   ];
 
   # # Create symlinks for home-manager packages in ~/Applications
