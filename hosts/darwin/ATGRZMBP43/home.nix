@@ -12,15 +12,7 @@ in
   imports = [
 	./fonts.nix
 	./packages.nix
-    ../../../home/modules/unfree-packages.nix
-    ../../../home/modules/home-manager-applications-fix.nix
-    ../../../home/modules/kitty.nix
-    ../../../home/modules/micro.nix
-    ../../../home/modules/nushell.nix
-    ../../../home/modules/kubernetes.nix
-    ../../../home/modules/trash.nix
-    ../../../home/modules/viddy.nix
-    ../../../home/modules/zsh.nix
+    ../../../home/bridge.nix
   ];
 
   # programs.zsh = {
@@ -84,18 +76,20 @@ in
 	  ZGENOM_SOURCE = "$ZGENOM_DIR/zgenom.zsh";
 	};
   };
-  modules.home.atuin.enable = true;
-  modules.home.duf.enable = true;
-  modules.home.git.enable = true;
-  modules.home.gitlab-cli.enable = true;
-  modules.home.kitty.enable = true;
-  modules.home.kubernetes.enable = true;
-  modules.home.micro.enable = true;
-  modules.home.nushell.enable = true;
-  modules.home.trash.enable = true;
-  modules.home.unfreePackages.enable = true;
-  modules.home.viddy.enable = true;
-  modules.home.zsh.enable = true;
+  modules.home = {
+    atuin.enable = true;
+    duf.enable = true;
+    git.enable = true;
+    gitlab-cli.enable = true;
+    kitty.enable = true;
+    kubernetes.enable = true;
+    micro.enable = true;
+    nushell.enable = true;
+    trash.enable = true;
+    unfreePackages.enable = true;
+    viddy.enable = true;
+    zsh.enable = true;
+  };
 
   home.file = {
     # Downloaded from https://github.com/jonasdiemer/EurKEY-Mac
