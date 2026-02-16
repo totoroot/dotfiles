@@ -6,12 +6,12 @@ with lib.my;
 let
   cfg = config.modules.home.configSymlinks;
 
-  mkEntry = relativePath: {
-    name = "${cfg.destination}/${relativePath}";
+  mkEntry = set: relativePath: {
+    name = "${set.destination}/${relativePath}";
     value = {
       source =
-        config.lib.file.mkOutOfStoreSymlink "${cfg.sourceDir}/${relativePath}";
-      force = cfg.force;
+        config.lib.file.mkOutOfStoreSymlink "${set.sourceDir}/${relativePath}";
+      force = set.force;
       recursive = true;
     };
   };
@@ -38,9 +38,27 @@ in
     };
 
     force = mkOpt types.bool false;
+
+    sets = mkOption {
+      type = with types; listOf (submodule ({ ... }: {
+        options = {
+          sourceDir = mkOpt types.str configDir;
+          destination = mkOpt types.str ".config";
+          entries = mkOpt (listOf types.str) [ ];
+          force = mkOpt types.bool false;
+        };
+      }));
+      default = [ ];
+      description = "Multiple config symlink sets with independent destinations.";
+    };
   };
 
-  config = mkIf (cfg.enable && cfg.entries != [ ]) {
-    home.file = builtins.listToAttrs (map mkEntry cfg.entries);
+  config = mkIf cfg.enable {
+    home.file =
+      if cfg.sets != [ ]
+      then
+        builtins.listToAttrs (lib.flatten (map (set: map (mkEntry set) set.entries) cfg.sets))
+      else
+        builtins.listToAttrs (map (mkEntry cfg) cfg.entries);
   };
 }

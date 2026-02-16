@@ -54,19 +54,27 @@ in
     };
 
     modules.home.configSymlinks.enable = true;
-    modules.home.configSymlinks.sourceDir = dotfilesConfigDir;
-    modules.home.configSymlinks.destination = ".config";
-    modules.home.configSymlinks.entries =
-      (map (name: "zsh/${name}") [
-        "aliases.zsh"
-        "completion.zsh"
-        "config.zsh"
-        "extract.zsh"
-        "keybinds.zsh"
-        "prompt.zsh"
-        ".zshrc"
-        # ".zshenv"
-      ]);
+    modules.home.configSymlinks.sets = [
+      {
+        sourceDir = dotfilesConfigDir;
+        destination = ".config";
+        entries =
+          (map (name: "zsh/${name}") [
+            "aliases.zsh"
+            "completion.zsh"
+            "config.zsh"
+            "extract.zsh"
+            "keybinds.zsh"
+            "prompt.zsh"
+            ".zshrc"
+          ]);
+      }
+      {
+        sourceDir = dotfilesConfigDir;
+        destination = ".";
+        entries = [ "zsh/.zshenv" ];
+      }
+    ];
 
     home.file = {
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
