@@ -12,7 +12,7 @@ in
   home-manager = {
     useGlobalPkgs = false;
     useUserPackages = true;
-    extraSpecialArgs = { inherit user; };
+    extraSpecialArgs = { inherit user inputs; };
     users.${user} = import ./home.nix;
   };
 }
