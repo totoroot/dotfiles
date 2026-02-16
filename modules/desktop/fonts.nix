@@ -24,23 +24,14 @@ in {
       fontDir.enable = true;
       enableGhostscriptFonts = true;
       packages = with pkgs; [
-        ubuntu-classic
         dejavu_fonts
         symbola
         noto-fonts
-        carlito
         # emojione
         fira
-        fira-code
         fira-code-symbols
-        fira-mono
-        mononoki
-        julia-mono
-        jetbrains-mono
         siji
         font-awesome
-        hack-font
-        lato
         source-code-pro
         source-han-mono
         source-han-sans
@@ -49,7 +40,6 @@ in {
         source-serif-pro
         corefonts
         vista-fonts
-        comic-mono
       ];
     };
 

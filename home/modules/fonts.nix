@@ -28,6 +28,12 @@ in
       mononoki
       # Free programming font with cursive italics and ligatures
       victor-mono
+      # Legible monospace font that looks like Comic Sans
+      comic-mono
+      # Sans-serif font metric-compatible with Microsoft Calibri
+      carlito
+      # Ubuntu Classic font
+      ubuntu-classic
     ];
   };
 }
