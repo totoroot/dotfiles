@@ -6,6 +6,7 @@
     ./modules/atuin.nix
     ./modules/config-symlinks.nix
     ./modules/duf.nix
+    ./modules/fonts.nix
     ./modules/git.nix
     ./modules/gitlab-cli.nix
     ./modules/home-manager-applications-fix.nix

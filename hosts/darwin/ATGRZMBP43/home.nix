@@ -10,8 +10,7 @@ in
   };
 
   imports = [
-	./fonts.nix
-	./packages.nix
+    ./packages.nix
     ../../../home/bridge.nix
   ];
 
@@ -25,23 +24,6 @@ in
   #             "${config.home.profileDirectory}"/share/zsh/vendor-completions)
   #   '';
   # };
-
-  # Direnv, load and unload environment variables depending on the current directory.
-  # https://direnv.net
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.direnv.enable
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  # Htop
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable
-  programs.htop = {
-    enable = true;
-    settings.show_program_path = true;
-  };
-
-  programs.starship.enable = true;
 
   home.packages = with pkgs; [
     # Some basics
@@ -59,6 +41,7 @@ in
 
   home.sessionVariables = {
     HOMEBREW_NO_INSTALL_CLEANUP = "TRUE";
+    EDITOR = "micro";
   };
 
   programs.zsh = {
@@ -81,6 +64,7 @@ in
     duf.enable = true;
     git.enable = true;
     gitlab-cli.enable = true;
+    fonts.enable = true;
     kitty.enable = true;
     kubernetes.enable = true;
     micro.enable = true;
@@ -97,6 +81,8 @@ in
     "Library/Keyboard Layouts/EurKEY.icns".source = ../../../config/eurkey/EurKEY.icns;
 	# Cute icon for kitty terminal emulator
     "Applications/kitty.app/Contents/Resources/kitty.icns".source = ../../../config/kitty/kitty-dark.icns;
+    # Silence last login messages in terminal
+    ".hushlogin".text = "";
   };
 
   # home.file =
