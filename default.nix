@@ -61,7 +61,7 @@ with inputs;
   ];
 
   system = {
-    stateVersion = mkDefault "23.05";
+    stateVersion = mkDefault "25.11";
     configurationRevision = mkIf (self ? rev) self.rev;
     # Present information of what is being updated on nixos-rebuild
     activationScripts = {
