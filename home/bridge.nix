@@ -16,6 +16,7 @@
     ./modules/kubernetes.nix
     ./modules/lf.nix
     ./modules/micro.nix
+    ./modules/networking.nix
     ./modules/nushell.nix
     ./modules/pass.nix
     ./modules/trash.nix

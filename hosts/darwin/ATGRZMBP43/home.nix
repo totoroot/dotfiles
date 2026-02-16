@@ -10,16 +10,14 @@ in
   };
 
   imports = [
-    ./packages.nix
     ../../../home/modules/home-manager-applications-fix.nix
     ../../../home/bridge.nix
+    ./packages.nix
   ];
 
   home.packages = with pkgs; [
     # Some basics
     coreutils
-    curl
-    wget
     # Useful nix related tools
     cachix # adding/managing alternative binary caches hosted by Cachix
     # comma # run software from without installing it
