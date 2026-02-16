@@ -3,7 +3,7 @@
 with lib;
 with lib.my;
 let
-  cfg = config.modules.shell.aerc;
+  cfg = config.modules.home.aerc;
 in
 {
   options.modules.home.aerc = {

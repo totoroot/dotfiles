@@ -9,4 +9,11 @@ in
       ./steamdeck/home.nix
     ];
   };
+
+  debian = home-manager.lib.homeManagerConfiguration {
+    pkgs = nixpkgs.legacyPackages.${system};
+    modules = [
+      ./debian/home.nix
+    ];
+  };
 }

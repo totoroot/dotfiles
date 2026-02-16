@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.kitty;
-  dotfiles = "/Users/matthias.thym/.config/dotfiles";
+  dotfilesDir = "${config.xdg.configHome}/dotfiles";
 in
 {
   options.modules.home.kitty = {
@@ -18,9 +18,9 @@ in
 
     home.file = {
       ".config/kitty/kitty.conf".source =
-        config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config/kitty/kitty.conf";
+        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/kitty/kitty.conf";
       ".config/kitty/open-actions.conf".source =
-        config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config/kitty/open-actions.conf";
+        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/kitty/open-actions.conf";
     };
 
     programs.zsh.shellAliases = {

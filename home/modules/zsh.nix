@@ -4,7 +4,8 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.zsh;
-  dotfiles = "/Users/matthias.thym/.config/dotfiles";
+  dotfilesDir = "${config.xdg.configHome}/dotfiles";
+  dotfilesConfigDir = "${dotfilesDir}/config";
 in
 {
   options.modules.home.zsh = with types; {
@@ -53,7 +54,7 @@ in
     xdg.configFile = {
       # Write it recursively so other modules can write files to it
       "zsh" = {
-      	source = "${configDir}/zsh";
+      	source = "${dotfilesConfigDir}/zsh";
       	recursive = true;
       };
 
