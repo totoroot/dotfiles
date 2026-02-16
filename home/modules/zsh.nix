@@ -80,6 +80,7 @@ in
         export ZGENOM_DIR="''${ZGENOM_DIR:-$XDG_DATA_HOME/zsh}"
         export ZGENOM_SOURCE="''${ZGENOM_SOURCE:-$ZGENOM_DIR/zgenom.zsh}"
       '';
+      ".zshenv".force = true;
 
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
       # Because extraInit generates those files in /etc/profile, and mine just
