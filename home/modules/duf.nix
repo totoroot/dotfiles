@@ -3,7 +3,7 @@
 with lib;
 with lib.my;
 let
-  cfg = config.modules.home.viddy;
+  cfg = config.modules.home.duf;
 in
 {
   options.modules.home.duf = with types; {
