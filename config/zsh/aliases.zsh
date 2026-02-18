@@ -41,6 +41,7 @@ alias nixinst='(){ nix profile install nixpkgs#$1 ;}'
 # alias nixrm='nix-env --uninstall'
 alias nixfix='sudo nix-store --verify --check-contents --repair'
 alias nixedit='(){ $EDITOR $(fd $1)/default.nix ;}'
+alias rs='rswitch'
 
 # edit zshrc
 alias zshconfig="$EDITOR ~/.zshrc"

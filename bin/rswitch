@@ -38,4 +38,8 @@ if [[ ${#args[@]} -eq 0 ]]; then
   args=("switch")
 fi
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  exec sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake "${flake_root}#${target_host}" --impure
+fi
+
 exec sudo nixos-rebuild --impure --flake "${flake_root}#${target_host}" "${args[@]}"
