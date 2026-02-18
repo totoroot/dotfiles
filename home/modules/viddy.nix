@@ -23,9 +23,9 @@ in
         "viddy.toml"
       ];
 
-    home.shellAliases = {
-      # vd = "(){viddy -d -n 1 --shell zsh \"$(which $1 | cut -d' ' -f 4-)\${@:2}\";}";
-      vd = "(){viddy -d -n 1 \"$*\"}";
-    };
+    # vd = "(){viddy -d -n 1 --shell zsh \"$(which $1 | cut -d' ' -f 4-)\${@:2}\";}";
+    modules.home.zsh.rcInit = mkAfter ''
+      alias vd='(){viddy -d -n 1 "$*"}'
+    '';
   };
 }

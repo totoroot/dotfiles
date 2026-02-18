@@ -17,9 +17,9 @@ in
       duf
     ];
 
-    home.shellAliases = {
+    modules.home.zsh.rcInit = mkAfter ''
       # Not interested in special devices
-      duf = "duf -only local,fuse,network";
-    };
+      alias duf="duf -only local,fuse,network"
+    '';
   };
 }
