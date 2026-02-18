@@ -6,9 +6,9 @@ let
   cfg = config.modules.home.nushell;
 in
 {
-  options.modules.home.nushell = {
+  options.modules.home.nushell = with types; {
     enable = mkBoolOpt false;
-    plugins = mkOpt (listOf types.package) [ ];
+    plugins = mkOpt (listOf package) [ ];
   };
 
   imports = [ ./config-symlinks.nix ];
@@ -23,10 +23,6 @@ in
       formats
       # Nushell plugin to query JSON, XML, and various web data
       query
-      # Nushell plugin for easily converting between common units
-      units
-      # Nushell plugin to list system network interfaces
-      net
     ];
 
     home.packages = with pkgs; [
