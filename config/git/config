@@ -1,6 +1,8 @@
 # Use different commit email addresses for private and work contributions
 [includeIf "gitdir:~/Development/private/"]
     path = ~/.config/git/privateconfig
+[includeIf "gitdir:~/.config/dotfiles/"]
+    path = ~/.config/git/privateconfig
 [includeIf "gitdir:~/Development/work/"]
     path = ~/.config/git/workconfig
 
