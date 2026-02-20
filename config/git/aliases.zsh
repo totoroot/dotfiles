@@ -62,7 +62,7 @@ alias gp='git push'
 alias gpb='() {
     git push --set-upstream origin $(git branch --show-current)
 }'
-alias gpf!='git push --force'
+alias gpf!='git push --force-with-lease'
 alias gpl='git pull --rebase --autostash'
 # Prune local branches
 alias gprlb='git fetch -p ; git branch -r | awk "{print $1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print $1}" | xargs git branch -d'
