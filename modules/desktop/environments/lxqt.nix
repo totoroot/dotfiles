@@ -10,7 +10,10 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-      displayManager.sddm.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        extraPackages = [ pkgs.sddmThemes.dracula ];
+      };
       xserver = {
         displayManager.lightdm.enable = false;
         enable = true;

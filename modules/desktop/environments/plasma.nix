@@ -16,6 +16,7 @@ in {
         # but other display manager should be used
         enable = mkDefault true;
         package = mkForce pkgs.kdePackages.sddm;
+        extraPackages = [ pkgs.sddmThemes.dracula ];
         # Use Wayland Session by default
         wayland = {
           enable = mkDefault true;

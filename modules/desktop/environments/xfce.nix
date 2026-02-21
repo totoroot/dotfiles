@@ -11,7 +11,10 @@ in {
   config = mkIf cfg.enable {
     services = {
       # Display Manager for XFCE
-      displayManager.sddm.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        extraPackages = [ pkgs.sddmThemes.dracula ];
+      };
       xserver = {
         enable = true;
         displayManager.lightdm.enable = false;
