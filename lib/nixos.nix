@@ -34,11 +34,12 @@ let
       extraModules ? [ ],
       includeDotfilesModule ? true,
       libOverride ? lib,
-      pkgs ? pkgs,
+      pkgs ? null,
       useGlobalPkgs ? true,
       ...
     }:
     let
+      _ = assert (!useGlobalPkgs) || pkgs != null; null;
       moduleFromAttrs = filterAttrs (n: _v: !(elem n reservedAttrs)) attrs;
       modules =
         [

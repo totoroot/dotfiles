@@ -141,7 +141,7 @@
       # Configuration for NixOS hosts
       nixosConfigurations =
         mapHosts ./hosts/nixos {
-          inherit system;
+          inherit system pkgs;
         };
 
       # Configuration for macOS using Nix, nix-darwin and home-manager
