@@ -29,6 +29,7 @@
     package = pkgs.lixPackageSets.latest.lix;
 
     settings = {
+      nix-path = [ ];
       substituters = [
         "https://cache.nixos.org/"
         "https://devenv.cachix.org"
