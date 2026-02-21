@@ -1,8 +1,11 @@
 { inputs, lib, pkgs, ... }:
 
 with lib;
-with lib.my;
 let
+  moduleLib = import ./modules.nix {
+    inherit lib;
+    self.attrs = import ./attrs.nix { inherit lib; self = { }; };
+  };
   reservedAttrs = [
     "builder"
     "extraModules"
@@ -61,7 +64,7 @@ in
   mapHosts =
     dir:
     attrs @ { builder ? nixosSystem, systems ? { }, ... }:
-    mapModules dir (hostPath:
+    moduleLib.mapModules dir (hostPath:
       let
         name = removeSuffix ".nix" (baseNameOf hostPath);
         hostSystem =
