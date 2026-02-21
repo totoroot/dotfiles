@@ -5,6 +5,7 @@ with lib.my;
 {
   options = with types; {
     user = mkOpt attrs { };
+    modules.home-manager = mkOpt attrs { };
 
     home = {
       file = mkOpt' attrs { } "Files to place directly in $HOME";
@@ -39,7 +40,9 @@ with lib.my;
 
     # Install user packages to /etc/profiles instead. Necessary for
     # nixos-rebuild build-vm to work.
-    home-manager = {
+    home-manager = mkMerge [
+      (mkAliasDefinitions options.modules.home-manager)
+      {
       useUserPackages = true;
 
       # I only need a subset of home-manager's capabilities. That is, access to
@@ -65,7 +68,8 @@ with lib.my;
           settings = mkAliasDefinitions options.home.dconfSettings;
         };
       };
-    };
+      }
+    ];
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
 
