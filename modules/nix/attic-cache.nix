@@ -39,6 +39,12 @@ in
       description = "Environment file containing ATTIC_SERVER_TOKEN_* secrets.";
     };
 
+    clientTokenEnvVar = mkOption {
+      type = types.str;
+      default = "ATTIC_CLIENT_TOKEN";
+      description = "Environment variable name holding the Attic client token.";
+    };
+
     storagePath = mkOption {
       type = types.str;
       default = "/var/lib/atticd/storage";
@@ -75,19 +81,49 @@ in
 
       systemd.services.attic-watch-store = mkIf cfg.enableWatcher {
         description = "Attic watch-store uploader";
-        after = [ "atticd.service" ];
+        after = [ "atticd.service" "attic-client-config.service" ];
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Restart = "always";
           RestartSec = 5;
         };
         script = ''
-          exec ${pkgs.attic-client}/bin/attic watch-store ${cfg.cacheName}
+          exec ${pkgs.attic-client}/bin/attic --config /etc/attic/attic-client.toml watch-store ${cfg.cacheName}
         '';
       };
     })
 
     (mkIf cfg.enableClient {
+      systemd.services.attic-client-config = {
+        description = "Generate Attic client config";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          EnvironmentFile = cfg.environmentFile;
+        };
+        script = ''
+          set -euo pipefail
+          token_var="${cfg.clientTokenEnvVar}"
+          token_value="${!token_var:-}"
+          if [ -z "$token_value" ]; then
+            echo "Missing ${cfg.clientTokenEnvVar} in ${cfg.environmentFile}" >&2
+            exit 1
+          fi
+          install -d /etc/attic
+          cat > /etc/attic/attic-client.toml <<EOF
+[server.${cfg.cacheName}]
+url = "http://${cfg.host}:${toString cfg.port}"
+token = "$token_value"
+
+[cache.${cfg.cacheName}]
+server = "${cfg.cacheName}"
+${optionalString (cfg.publicKey != null) "publicKey = \"${cfg.publicKey}\""}
+EOF
+        '';
+      };
+
       nix.settings = mkMerge [
         {
           connect-timeout = 1;
