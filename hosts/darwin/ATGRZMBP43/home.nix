@@ -32,6 +32,10 @@ in
     EDITOR = "micro";
   };
 
+  home.sessionPath = [
+    "$HOME/.config/dotfiles/bin"
+  ];
+
   modules.home = {
     unfreePackages.enable = true;
     atuin.enable = true;
@@ -45,6 +49,11 @@ in
     lf.enable = true;
     micro.enable = true;
     nushell.enable = true;
+    sshHosts = {
+      enable = true;
+      defaultUser = "mathym";
+      defaultIdentityFile = "~/.ssh/private";
+    };
     trash.enable = true;
     viddy.enable = true;
     zsh.enable = true;

@@ -26,6 +26,7 @@
       git.enable = true;
       kitty.enable = true;
       micro.enable = true;
+      sshHosts.enable = true;
       unfreePackages.enable = true;
       zsh.enable = true;
     };
