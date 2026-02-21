@@ -35,12 +35,15 @@ alias clipin='xclip -sel clip -i'
 alias clipout='xclip -sel clip -o'
 
 # ugly yet beautiful...hacky for sure
-# alias nixdeps='(){ nix-env -iA nixos.$1 --dry-run ;}'
-alias nixinst='(){ nix profile install nixpkgs#$1 ;}'
-# alias nixviewinst='nix-env --query --installed'
-# alias nixrm='nix-env --uninstall'
+alias nixdeps='(){ nix profile install --dry-run nixpkgs#$1 ;}'
+alias nixadd='(){ nix profile install nixpkgs#$1 ;}'
+alias nixrm='(){nix profile remove #1}'
+alias nixrun='(){nix run nixpkgs#1}'
 alias nixfix='sudo nix-store --verify --check-contents --repair'
 alias nixedit='(){ $EDITOR $(fd $1)/default.nix ;}'
+alias nd='nix develop -c zsh'
+
+# Platform-agnostic rebuild switch scipt in ~/.config/dotfiles/bin
 alias rs='rswitch'
 
 # edit zshrc
@@ -48,7 +51,7 @@ alias zshconfig="$EDITOR ~/.zshrc"
 # source zshrc
 alias zshsource="source ~/.zshrc"
 # alias to scan wireless network for connected devices
-alias scan="sudo nmap -sn 192.168.8.0/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
+alias scan="sudo nmap -sn $(route -n get default | rg 'gateway' | awk '{print $2}')/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
 # find largest files in directory
 alias ducks="sudo du -cks -- * | sort -rn | head"
 # rm EXIF data from images in directory
