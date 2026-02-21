@@ -121,7 +121,7 @@ in
           export XDG_CONFIG_HOME=/root/.config
           install -d /root/.config/attic
           if [ ! -f /root/.config/attic/config.toml ]; then
-            printf '%s\n' "$token_value" | ${pkgs.attic-client}/bin/attic login "http://${cfg.clientHost}:${toString cfg.port}"
+            printf '%s\n' "$token_value" | ${pkgs.attic-client}/bin/attic login "${cfg.cacheName}" "http://${cfg.clientHost}:${toString cfg.port}"
           fi
         '';
       };
