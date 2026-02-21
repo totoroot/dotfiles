@@ -86,9 +86,10 @@ in
         serviceConfig = {
           Restart = "always";
           RestartSec = 5;
+          Environment = [ "ATTIC_CONFIG=/etc/attic/attic-client.toml" ];
         };
         script = ''
-          exec ${pkgs.attic-client}/bin/attic --config /etc/attic/attic-client.toml watch-store ${cfg.cacheName}
+          exec ${pkgs.attic-client}/bin/attic watch-store ${cfg.cacheName}
         '';
       };
     })
