@@ -233,12 +233,12 @@
         set -euo pipefail
 
         has_ssh_session() {
-          ${pkgs.systemd}/bin/loginctl list-sessions --no-legend | ${pkgs.gawk}/bin/awk '{print $1}' | while read -r sid; do
+          while read -r sid; do
             if ${pkgs.systemd}/bin/loginctl show-session "$sid" -p Service -p Remote | ${pkgs.gnugrep}/bin/grep -q '^Service=sshd$' && \
                ${pkgs.systemd}/bin/loginctl show-session "$sid" -p Remote | ${pkgs.gnugrep}/bin/grep -q '^Remote=yes$'; then
               return 0
             fi
-          done
+          done < <(${pkgs.systemd}/bin/loginctl list-sessions --no-legend | ${pkgs.gawk}/bin/awk '{print $1}')
           return 1
         }
 
