@@ -55,6 +55,7 @@ in
   config = mkIf cfg.enable {
     programs.ssh.enable = true;
     programs.ssh.enableDefaultConfig = false;
+    programs.ssh.includes = [ "~/.ssh/config.local" ];
     programs.ssh.matchBlocks = mkMerge [
       {
         "*" = {
