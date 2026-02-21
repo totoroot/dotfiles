@@ -19,6 +19,7 @@
     ./modules/networking.nix
     ./modules/nushell.nix
     ./modules/pass.nix
+    ./modules/ssh-hosts.nix
     ./modules/trash.nix
     ./modules/unfree-packages.nix
     ./modules/viddy.nix
