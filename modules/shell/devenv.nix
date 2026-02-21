@@ -15,7 +15,7 @@ in {
       nix-direnv
     ];
 
-    modules.shell.zsh.rcInit = ''eval "$(direnv hook zsh)"'';
+    modules.home.zsh.rcInit = ''eval "$(direnv hook zsh)"'';
 
     env.DIRENV_LOG_FORMAT = "";
 
