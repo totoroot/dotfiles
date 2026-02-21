@@ -15,6 +15,12 @@ in
       description = "Hostname (or Tailscale name) of the Attic server.";
     };
 
+    clientHost = mkOption {
+      type = types.str;
+      default = "127.0.0.1";
+      description = "Hostname used by the Attic client to reach the server.";
+    };
+
     cacheName = mkOption {
       type = types.str;
       default = "purple-cache";
@@ -115,7 +121,7 @@ in
           install -d /etc/attic
           cat > /etc/attic/attic-client.toml <<EOF
 [server.${cfg.cacheName}]
-url = "http://${cfg.host}:${toString cfg.port}"
+url = "http://${cfg.clientHost}:${toString cfg.port}"
 token = "$token_value"
 
 [cache.${cfg.cacheName}]
