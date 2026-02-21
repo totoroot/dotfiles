@@ -42,7 +42,13 @@ prompt_init() {
   zle-keymap-select() {
     case $KEYMAP in
       vicmd)      PROMPT_SYMBOL="%F{green}« " ;;
-      main|viins) PROMPT_SYMBOL="%(?.%F{magenta}.%F{yellow})λ " ;;
+      main|viins)
+        if [[ -n "${IN_NIX_SHELL:-}" ]]; then
+          PROMPT_SYMBOL="%(?.%F{magenta}.%F{yellow})❄ "
+        else
+          PROMPT_SYMBOL="%(?.%F{magenta}.%F{yellow})λ "
+        fi
+        ;;
     esac
     zle reset-prompt
     zle -R
