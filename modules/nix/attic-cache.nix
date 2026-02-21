@@ -106,7 +106,7 @@ in
         script = ''
           set -euo pipefail
           token_var="${cfg.clientTokenEnvVar}"
-          token_value="${!token_var:-}"
+          token_value="$(${pkgs.runtimeShell} -c "printf '%s' \"\${!token_var}\"")"
           if [ -z "$token_value" ]; then
             echo "Missing ${cfg.clientTokenEnvVar} in ${cfg.environmentFile}" >&2
             exit 1
