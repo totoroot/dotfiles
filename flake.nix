@@ -86,13 +86,16 @@
 
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:
     let
-      inherit (lib) attrValues;
-      inherit (lib.my) mapModules mapModulesRec mapHosts;
-
       system = "x86_64-linux";
 
-      lib = nixos.lib.extend
-        (self: _super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
+      baseLib = nixos.lib;
+      inherit (baseLib) attrValues;
+
+      moduleLib = import ./lib/modules.nix {
+        lib = baseLib;
+        self.attrs = import ./lib/attrs.nix { lib = baseLib; self = { }; };
+      };
+      inherit (moduleLib) mapModules mapModulesRec;
 
       mkPkgs = pkgs: extraOverlays: import pkgs {
         inherit system;
@@ -104,6 +107,10 @@
       pkgs = mkPkgs nixos [ self.overlay ];
       unstable = mkPkgs nixos-unstable [ ];
       nixpkgs = mkPkgs nixpkgs [ ];
+
+      lib = nixos.lib.extend
+        (self: _super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
+      inherit (lib.my) mapHosts;
     in
     {
       lib = lib.my;
