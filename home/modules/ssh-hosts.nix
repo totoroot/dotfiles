@@ -1,4 +1,4 @@
-{ config, options, lib, ... }:
+{ config, options, lib, pkgs, ... }:
 
 with lib;
 let
@@ -35,7 +35,11 @@ in
     };
     defaultIdentityFile = mkOption {
       type = nullOr str;
-      default = null;
+      default =
+        let
+          hostName = lib.attrsets.attrByPath [ "networking" "hostName" ] null config;
+        in
+        if pkgs.stdenv.isLinux && hostName != null then "~/.ssh/${hostName}" else null;
     };
 
     entries = mkOption {
