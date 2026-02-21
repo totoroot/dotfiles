@@ -1,7 +1,6 @@
 { config, options, lib, ... }:
 
 with lib;
-with lib.my;
 let
   cfg = config.modules.home.sshHosts;
   inherit (lib) filterAttrs mapAttrs;
@@ -28,20 +27,29 @@ let
 in
 {
   options.modules.home.sshHosts = with types; {
-    enable = mkBoolOpt false;
+    enable = mkEnableOption "ssh host aliases";
 
-    defaultUser = mkOpt (nullOr str) null;
-    defaultIdentityFile = mkOpt (nullOr str) null;
+    defaultUser = mkOption {
+      type = nullOr str;
+      default = null;
+    };
+    defaultIdentityFile = mkOption {
+      type = nullOr str;
+      default = null;
+    };
 
-    entries = mkOpt (attrsOf (submodule ({ ... }: {
+    entries = mkOption {
+      type = attrsOf (submodule ({ ... }: {
       options = {
-        host = mkOpt (nullOr str) null;
-        user = mkOpt (nullOr str) null;
-        identityFile = mkOpt (nullOr str) null;
-        port = mkOpt (nullOr int) null;
-        extraOptions = mkOpt (attrsOf str) { };
+        host = mkOption { type = nullOr str; default = null; };
+        user = mkOption { type = nullOr str; default = null; };
+        identityFile = mkOption { type = nullOr str; default = null; };
+        port = mkOption { type = nullOr int; default = null; };
+        extraOptions = mkOption { type = attrsOf str; default = { }; };
       };
-    }))) { };
+    }));
+      default = { };
+    };
   };
 
   config = mkIf cfg.enable {
