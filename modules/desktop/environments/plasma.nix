@@ -16,7 +16,12 @@ in {
         # but other display manager should be used
         enable = mkDefault true;
         package = mkForce pkgs.kdePackages.sddm;
-        extraPackages = [ pkgs.sddmThemes.dracula ];
+        extraPackages = let
+          sddmDracula =
+            lib.attrByPath [ "sddm-theme-dracula" ] null pkgs
+            or (lib.attrByPath [ "sddmThemes" "dracula" ] null pkgs);
+        in
+        lib.optional (sddmDracula != null) sddmDracula;
         # Use Wayland Session by default
         wayland = {
           enable = mkDefault true;

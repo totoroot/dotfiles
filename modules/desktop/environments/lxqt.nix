@@ -12,7 +12,12 @@ in {
     services = {
       displayManager.sddm = {
         enable = true;
-        extraPackages = [ pkgs.sddmThemes.dracula ];
+        extraPackages = let
+          sddmDracula =
+            lib.attrByPath [ "sddm-theme-dracula" ] null pkgs
+            or (lib.attrByPath [ "sddmThemes" "dracula" ] null pkgs);
+        in
+        lib.optional (sddmDracula != null) sddmDracula;
       };
       xserver = {
         displayManager.lightdm.enable = false;
