@@ -15,8 +15,9 @@ in {
         enable = true;
         extraPackages = let
           sddmDracula =
-            lib.attrsets.attrByPath [ "sddm-theme-dracula" ] null pkgs
-            or (lib.attrsets.attrByPath [ "sddmThemes" "dracula" ] null pkgs);
+            if pkgs ? sddm-theme-dracula then pkgs.sddm-theme-dracula
+            else if pkgs ? sddmThemes && pkgs.sddmThemes ? dracula then pkgs.sddmThemes.dracula
+            else null;
         in
         lib.optional (sddmDracula != null) sddmDracula;
       };
