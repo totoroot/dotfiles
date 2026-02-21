@@ -31,7 +31,8 @@ in {
 
     user.extraGroups = [ "docker" ];
 
-    modules.home.zsh.rcFiles = [ "${configDir}/docker/aliases.zsh" ];
+    home-manager.users.${config.user.name}.modules.home.zsh.rcFiles =
+      [ "${configDir}/docker/aliases.zsh" ];
 
     # For misbehaving containers that delay shutdowns and reboots
     # TODO - The option definition `systemd.extraConfig' in `/nix/store/1lci8fdzlpzbwa3gkh8zgpxryjrwn250-source' no longer has any effect; please remove it. Use systemd.settings.Manager instead.

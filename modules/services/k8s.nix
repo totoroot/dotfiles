@@ -44,7 +44,8 @@ in {
     env.PATH = [ "$HOME/.krew/bin" ];
 
     # Source a bunch of aliases for handling K8s without getting finger cramps
-    modules.home.zsh.rcFiles = [ "${configDir}/k8s/aliases.zsh" ];
+    home-manager.users.${config.user.name}.modules.home.zsh.rcFiles =
+      [ "${configDir}/k8s/aliases.zsh" ];
 
     home.configFile = {
       "k9s/config.yml".source = "${configDir}/k9s/config.yml";
