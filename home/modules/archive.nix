@@ -8,7 +8,7 @@ in
 {
   options.modules.home.archive = {
     enable = mkBoolOpt false;
-    desktop.enable = mkBoolOpt true;
+    desktop.enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
