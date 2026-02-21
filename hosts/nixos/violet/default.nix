@@ -27,8 +27,6 @@
     };
     editors = {
       default = "micro";
-      helix.enable = true;
-      micro.enable = true;
       vim.enable = true;
     };
     hardware = {
@@ -44,19 +42,11 @@
       wacom.enable = false;
     };
     shell = {
-      aerc.enable = true;
-      archive.enable = true;
-      borg.enable = true;
       cli.enable = true;
       devenv.enable = true;
-      git.enable = true;
       gnupg.enable = true;
-      iperf.enable = true;
-      lf.enable = true;
-      pass.enable = true;
       taskell.enable = false;
       utilities.enable = true;
-      zsh.enable = true;
     };
     services = {
       containerization.enable = true;
@@ -75,7 +65,6 @@
       grafana.enable = true;
       home-assistant.enable = true;
       jellyfin.enable = false;
-      k8s.enable = false;
       nginx.enable = false;
       vaultwarden.enable = false;
       vpn.enable = false;

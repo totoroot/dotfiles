@@ -14,6 +14,27 @@
   };
 
   home-manager.users.${config.user.name} = { config, ... }: {
+    imports = [
+      ../../../home/bridge.nix
+    ];
+
+    modules.home = {
+      unfreePackages.enable = true;
+      archive.enable = true;
+      atuin.enable = true;
+      borg.enable = true;
+      duf.enable = true;
+      git.enable = true;
+      helix.enable = true;
+      lf.enable = true;
+      micro.enable = true;
+      nushell.enable = true;
+      sshHosts.enable = true;
+      trash.enable = true;
+      viddy.enable = true;
+      zsh.enable = true;
+    };
+
     home.file = {
       "Notes/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/Sync/notes/";
       "Pictures/photos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/photos/";
