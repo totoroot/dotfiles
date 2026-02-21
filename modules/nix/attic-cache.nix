@@ -87,12 +87,11 @@ in
 
       systemd.services.attic-watch-store = mkIf cfg.enableWatcher {
         description = "Attic watch-store uploader";
-        after = [ "atticd.service" "attic-client-config.service" ];
+        after = [ "atticd.service" "attic-client-login.service" ];
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Restart = "always";
           RestartSec = 5;
-          Environment = [ "ATTIC_CONFIG=/etc/attic/attic-client.toml" ];
         };
         script = ''
           exec ${pkgs.attic-client}/bin/attic watch-store ${cfg.cacheName}
@@ -101,8 +100,8 @@ in
     })
 
     (mkIf cfg.enableClient {
-      systemd.services.attic-client-config = {
-        description = "Generate Attic client config";
+      systemd.services.attic-client-login = {
+        description = "Login Attic client";
         wantedBy = [ "multi-user.target" ];
         after = [ "network.target" ];
         serviceConfig = {
@@ -118,16 +117,12 @@ in
             echo "Missing ${cfg.clientTokenEnvVar} in ${cfg.environmentFile}" >&2
             exit 1
           fi
-          install -d /etc/attic
-          cat > /etc/attic/attic-client.toml <<EOF
-[server.${cfg.cacheName}]
-url = "http://${cfg.clientHost}:${toString cfg.port}"
-token = "$token_value"
-
-[cache.${cfg.cacheName}]
-server = "${cfg.cacheName}"
-${optionalString (cfg.publicKey != null) "publicKey = \"${cfg.publicKey}\""}
-EOF
+          export HOME=/root
+          export XDG_CONFIG_HOME=/root/.config
+          install -d /root/.config/attic
+          if [ ! -f /root/.config/attic/config.toml ]; then
+            printf '%s\n' "$token_value" | ${pkgs.attic-client}/bin/attic login "http://${cfg.clientHost}:${toString cfg.port}"
+          fi
         '';
       };
 
