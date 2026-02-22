@@ -23,6 +23,10 @@ in
     fritzbox.enable = mkBoolOpt false;
     speedtest.enable = mkBoolOpt false;
     postgres.enable = mkBoolOpt false;
+    tailscale.enable = mkBoolOpt false;
+    wireguard.enable = mkBoolOpt false;
+    process.enable = mkBoolOpt false;
+    nextcloud.enable = mkBoolOpt false;
   };
 
   config = {
@@ -89,6 +93,26 @@ in
         enable = true;
         port = 9187;
         dataSourceName = "postgresql:///postgres?host=/run/postgresql";
+      };
+
+      tailscale = mkIf cfg.tailscale.enable {
+        enable = true;
+        port = 9101;
+      };
+
+      wireguard = mkIf cfg.wireguard.enable {
+        enable = true;
+        port = 9586;
+      };
+
+      process = mkIf cfg.process.enable {
+        enable = true;
+        port = 9256;
+      };
+
+      nextcloud = mkIf cfg.nextcloud.enable {
+        enable = true;
+        port = 9205;
       };
     };
 
@@ -169,6 +193,10 @@ in
       ++ lib.optional cfg.adguard.enable 9617
       ++ lib.optional cfg.fritzbox.enable 9134
       ++ lib.optional cfg.speedtest.enable 9862
-      ++ lib.optional cfg.postgres.enable config.services.prometheus.exporters.postgres.port;
+      ++ lib.optional cfg.postgres.enable config.services.prometheus.exporters.postgres.port
+      ++ lib.optional cfg.tailscale.enable config.services.prometheus.exporters.tailscale.port
+      ++ lib.optional cfg.wireguard.enable config.services.prometheus.exporters.wireguard.port
+      ++ lib.optional cfg.process.enable config.services.prometheus.exporters.process.port
+      ++ lib.optional cfg.nextcloud.enable config.services.prometheus.exporters.nextcloud.port;
   };
 }
