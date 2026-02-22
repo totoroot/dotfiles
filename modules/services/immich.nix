@@ -55,14 +55,12 @@ in
     };
 
     systemd.services."docker-immich-server".serviceConfig = {
-      User = "immich";
       Group = "docker";
       StateDirectory = "immich";
       StateDirectoryMode = "0750";
     };
 
     systemd.services."docker-immich-machine-learning".serviceConfig = {
-      User = "immich";
       Group = "docker";
       StateDirectory = "immich-ml";
       StateDirectoryMode = "0750";
