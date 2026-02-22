@@ -12,7 +12,7 @@
       enableServer = true;
       enableClient = true;
       enableWatcher = true;
-      host = "purple-ts";
+      host = "localhost";
       port = 5129;
       # Set to the public key for your cache, e.g. "cache-name:BASE64"
       publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
@@ -94,7 +94,6 @@
       term = {
         default = "kitty";
         st.enable = true;
-        kitty.enable = true;
       };
       vm = {
         qemu.enable = true;
@@ -118,8 +117,6 @@
     };
     editors = {
       default = "micro";
-      helix.enable = true;
-      micro.enable = true;
       vim.enable = true;
     };
     hardware = {
@@ -139,21 +136,12 @@
       wacom.enable = true;
     };
     shell = {
-      aerc.enable = true;
-      archive.enable = true;
-      borg.enable = true;
       cli.enable = true;
       devenv.enable = true;
       devops.enable = true;
-      git.enable = true;
       gnupg.enable = true;
-      iperf.enable = true;
-      lf.enable = true;
-      nu.enable = true;
-      pass.enable = true;
       taskell.enable = false;
       utilities.enable = true;
-      zsh.enable = true;
     };
     services = {
       containerization.enable = true;
@@ -168,7 +156,6 @@
       };
       gitea.enable = false;
       jellyfin.enable = false;
-      k8s.enable = true;
       nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;
@@ -212,10 +199,7 @@
       autoLogin.enable = false;
       defaultSession = "plasma";
       # Use SDDM as display manager
-      sddm = {
-        enable = true;
-        theme = "Dracula";
-      };
+      sddm.enable = true;
     };
     resolved.enable = true;
   };
@@ -298,11 +282,22 @@
     ];
 
     modules.home = {
-      git.enable = true;
-      kitty.enable = true;
-      micro.enable = true;
-      sshHosts.enable = true;
       unfreePackages.enable = true;
+      archive.enable = true;
+      atuin.enable = true;
+      borg.enable = true;
+      duf.enable = true;
+      fonts.enable = true;
+      git.enable = true;
+      helix.enable = true;
+      kitty.enable = true;
+      kubernetes.enable = true;
+      lf.enable = true;
+      micro.enable = true;
+      nushell.enable = true;
+      sshHosts.enable = true;
+      trash.enable = true;
+      viddy.enable = true;
       zsh.enable = true;
     };
 
