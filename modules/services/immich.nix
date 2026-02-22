@@ -20,8 +20,8 @@ in
       pgPkgs = config.services.postgresql.package.pkgs;
     in [
       {
-        assertion = !config.modules.services.postgresql.enable || lib.hasAttr "pgvecto-rs" pgPkgs;
-        message = "Immich requires pgvecto-rs (vectors.so). Add it to the PostgreSQL package set.";
+        assertion = !config.modules.services.postgresql.enable || lib.hasAttr "vectorchord" pgPkgs;
+        message = "Immich requires vectorchord support (vchord.so). Add the vectorchord PostgreSQL extension package.";
       }
     ];
 
@@ -37,8 +37,8 @@ in
         host = "127.0.0.1";
         port = 5432;
         createDB = false;
-        enableVectors = true;
-        enableVectorChord = false;
+        enableVectors = false;
+        enableVectorChord = true;
         passwordFile = "/var/secrets/immich-db.password";
       };
       redis = {
@@ -62,7 +62,7 @@ in
         ensureDBOwnership = true;
       }];
       extraPlugins = mkAfter [
-        (config.services.postgresql.package.pkgs."pgvecto-rs")
+        (config.services.postgresql.package.pkgs.vectorchord)
       ];
     };
 
