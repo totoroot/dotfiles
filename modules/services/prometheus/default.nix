@@ -14,7 +14,7 @@ let
   mkTargets = port: map (ip: "${ip}:${toString port}") hostIps;
   mkTargetsFor = port: names:
     let
-      hosts = names or [ ];
+      hosts = if names == null then [ ] else names;
     in
     if hosts == [ ] then mkTargets port
     else map (name: "${hostToIp.${name}}:${toString port}") hosts;
@@ -63,7 +63,7 @@ in
         {
           job_name = "node";
           static_configs = [{
-            targets = [ "127.0.0.1:9100" ] ++ mkTargetsFor 9100 cfg.scrapeHosts.node;
+            targets = [ "127.0.0.1:9100" ] ++ mkTargetsFor 9100 (if cfg.scrapeHosts ? node then cfg.scrapeHosts.node else null);
           }];
         }
         {
@@ -98,67 +98,67 @@ in
         {
           job_name = "blackbox-exporter";
           static_configs = [{
-            targets = [ "127.0.0.1:9115" ] ++ mkTargetsFor 9115 cfg.scrapeHosts.blackbox;
+            targets = [ "127.0.0.1:9115" ] ++ mkTargetsFor 9115 (if cfg.scrapeHosts ? blackbox then cfg.scrapeHosts.blackbox else null);
           }];
         }
         {
           job_name = "systemd";
           static_configs = [{
-            targets = [ "127.0.0.1:9558" ] ++ mkTargetsFor 9558 cfg.scrapeHosts.systemd;
+            targets = [ "127.0.0.1:9558" ] ++ mkTargetsFor 9558 (if cfg.scrapeHosts ? systemd then cfg.scrapeHosts.systemd else null);
           }];
         }
         {
           job_name = "statsd";
           static_configs = [{
-            targets = [ "127.0.0.1:9102" ] ++ mkTargetsFor 9102 cfg.scrapeHosts.statsd;
+            targets = [ "127.0.0.1:9102" ] ++ mkTargetsFor 9102 (if cfg.scrapeHosts ? statsd then cfg.scrapeHosts.statsd else null);
           }];
         }
         {
           job_name = "smartctl";
           static_configs = [{
-            targets = [ "127.0.0.1:9633" ] ++ mkTargetsFor 9633 cfg.scrapeHosts.smartctl;
+            targets = [ "127.0.0.1:9633" ] ++ mkTargetsFor 9633 (if cfg.scrapeHosts ? smartctl then cfg.scrapeHosts.smartctl else null);
           }];
         }
         {
           job_name = "nginx";
           static_configs = [{
-            targets = mkTargetsFor 9113 cfg.scrapeHosts.nginx;
+            targets = mkTargetsFor 9113 (if cfg.scrapeHosts ? nginx then cfg.scrapeHosts.nginx else null);
           }];
         }
         {
           job_name = "nginxlog";
           static_configs = [{
-            targets = mkTargetsFor 9117 cfg.scrapeHosts.nginxlog;
+            targets = mkTargetsFor 9117 (if cfg.scrapeHosts ? nginxlog then cfg.scrapeHosts.nginxlog else null);
           }];
         }
         {
           job_name = "fail2ban";
           static_configs = [{
-            targets = mkTargetsFor 9191 cfg.scrapeHosts.fail2ban;
+            targets = mkTargetsFor 9191 (if cfg.scrapeHosts ? fail2ban then cfg.scrapeHosts.fail2ban else null);
           }];
         }
         {
           job_name = "ntfy";
           static_configs = [{
-            targets = mkTargetsFor 9095 cfg.scrapeHosts.ntfy;
+            targets = mkTargetsFor 9095 (if cfg.scrapeHosts ? ntfy then cfg.scrapeHosts.ntfy else null);
           }];
         }
         {
           job_name = "adguard";
           static_configs = [{
-            targets = [ "127.0.0.1:9617" ] ++ mkTargetsFor 9617 cfg.scrapeHosts.adguard;
+            targets = [ "127.0.0.1:9617" ] ++ mkTargetsFor 9617 (if cfg.scrapeHosts ? adguard then cfg.scrapeHosts.adguard else null);
           }];
         }
         {
           job_name = "fritzbox";
           static_configs = [{
-            targets = [ "127.0.0.1:9134" ] ++ mkTargetsFor 9134 cfg.scrapeHosts.fritzbox;
+            targets = [ "127.0.0.1:9134" ] ++ mkTargetsFor 9134 (if cfg.scrapeHosts ? fritzbox then cfg.scrapeHosts.fritzbox else null);
           }];
         }
         {
           job_name = "speedtest";
           static_configs = [{
-            targets = [ "127.0.0.1:9862" ] ++ mkTargetsFor 9862 cfg.scrapeHosts.speedtest;
+            targets = [ "127.0.0.1:9862" ] ++ mkTargetsFor 9862 (if cfg.scrapeHosts ? speedtest then cfg.scrapeHosts.speedtest else null);
           }];
         }
         {
@@ -166,7 +166,7 @@ in
           scrape_interval = "60s";
           scheme = "http";
           static_configs = [{
-            targets = [ "127.0.0.1:8123" ] ++ mkTargetsFor 8123 cfg.scrapeHosts.homeAssistant;
+            targets = [ "127.0.0.1:8123" ] ++ mkTargetsFor 8123 (if cfg.scrapeHosts ? homeAssistant then cfg.scrapeHosts.homeAssistant else null);
           }];
           metrics_path = "/api/prometheus";
           authorization = {
