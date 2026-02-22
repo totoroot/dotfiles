@@ -29,6 +29,7 @@ let
   lokiPort = 3100;
   hassPort = 8123;
   scrutinyPort = 9080;
+  immichPort = 2283;
   recipePort = 8491;
   adguardHTTPPort = 3300;
   adguardDNSPort = 53;
@@ -167,6 +168,14 @@ in
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://${server}:${toString lokiPort}";
+            proxyWebsockets = true;
+          };
+        };
+        "foto.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString immichPort}";
             proxyWebsockets = true;
           };
         };
