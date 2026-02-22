@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: attic-client-token <subject> [validity] [--push]
+
+Creates an Attic client token with pull (and optionally push) access.
+
+Examples:
+  attic-client-token jam-client
+  attic-client-token jam-client 2y
+  attic-client-token jam-client 1y --push
+EOF
+}
+
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+  usage
+  exit 0
+fi
+
+subject="${1:-}"
+validity="${2:-1y}"
+push="false"
+
+if [ -z "${subject}" ]; then
+  usage
+  exit 1
+fi
+
+if [ "${3:-}" = "--push" ] || [ "${2:-}" = "--push" ]; then
+  push="true"
+fi
+
+config_path="$(
+  systemctl cat atticd --no-pager 2>/dev/null \
+    | sed -n 's/^ExecStart=.*-f \\([^ ]*\\) .*/\\1/p'
+)"
+
+if [ -z "$config_path" ] || [ ! -f "$config_path" ]; then
+  echo "Could not find attic server config from systemd ExecStart." >&2
+  exit 1
+fi
+
+export ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64="$(
+  sed -n 's/^ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64=//p' /etc/atticd.env
+)"
+
+if [ -z "${ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64:-}" ]; then
+  echo "Missing ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64 in /etc/atticd.env" >&2
+  exit 1
+fi
+
+args=(
+  -f "$config_path"
+  --sub "$subject"
+  --validity "$validity"
+  --pull "purple-cache"
+)
+
+if [ "$push" = "true" ]; then
+  args+=(--push "purple-cache")
+fi
+
+exec atticd-atticadm make-token "${args[@]}"
