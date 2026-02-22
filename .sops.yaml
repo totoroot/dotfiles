@@ -8,3 +8,7 @@ creation_rules:
     key_groups:
       - age:
           - age1q6zer66s7z9wt3lurfvj695lwvs2tked57jhthc7q6vyn69ftp4qfyg0jl
+  - path_regex: secrets/purple\.ya?ml
+    key_groups:
+      - age:
+          - age1p93rjkfr50y6etyza75umhj2xer4tx3ny50plcwx07sm68euldvq4f6rkn
