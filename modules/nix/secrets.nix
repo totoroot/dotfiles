@@ -6,7 +6,7 @@ let
 in
 {
   options.modules.nix.secrets = {
-    enable = mkEnableOption "sops-nix secrets management";
+    enable = mkEnableOption "sops-nix secrets management" // { default = true; };
 
     defaultFile = mkOption {
       type = with types; nullOr str;
