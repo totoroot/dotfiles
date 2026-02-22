@@ -16,6 +16,15 @@ in
   };
 
   config = mkIf cfg.enable {
+    assertions = let
+      pgPkgs = config.services.postgresql.package.pkgs;
+    in [
+      {
+        assertion = !config.modules.services.postgresql.enable || lib.hasAttr "pgvecto-rs" pgPkgs;
+        message = "Immich requires pgvecto-rs (vectors.so). Add it to the PostgreSQL package set.";
+      }
+    ];
+
     services.immich = {
       enable = true;
       host = "0.0.0.0";
@@ -28,7 +37,7 @@ in
         host = "127.0.0.1";
         port = 5432;
         createDB = false;
-        enableVectors = false;
+        enableVectors = true;
         enableVectorChord = false;
         passwordFile = "/var/secrets/immich-db.password";
       };
@@ -52,6 +61,9 @@ in
         name = "immich";
         ensureDBOwnership = true;
       }];
+      extraPlugins = mkAfter [
+        (config.services.postgresql.package.pkgs."pgvecto-rs")
+      ];
     };
 
     networking.firewall.interfaces.tailscale0.allowedTCPPorts =
