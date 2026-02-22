@@ -38,3 +38,7 @@ Supported keys: `node`, `blackbox`, `systemd`, `statsd`, `smartctl`, `nginx`,
 - `speedtest`: Speedtest exporter (custom exporter service)
 - `homeAssistant`: Home Assistant `/api/prometheus` endpoint
 - `blackbox`: Blackbox exporter itself (probe gateway)
+- `tailscale`: Tailscale exporter
+- `wireguard`: WireGuard exporter
+- `process`: Process exporter (per-process stats)
+- `nextcloud`: Nextcloud exporter
