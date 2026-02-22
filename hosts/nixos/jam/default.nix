@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   domain = "xn--berwachungsbehr-mtb1g.de";
 in
@@ -9,43 +9,31 @@ in
   ];
 
   modules = {
-    nix.atticCache = {
-      enableClient = true;
-      host = "purple-ts";
-      port = 5129;
-      # Set to your cache public key, e.g. "cache-name:BASE64"
-      publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
-      environmentFile = "/etc/atticd.env";
-    };
-    nix.remoteBuilder = {
-      enable = true;
-      host = "purple";
-      user = "builder";
-      systems = [ "x86_64-linux" ];
-      enableCheck = true;
+    nix = {
+      secrets.enable = true;
+      atticCache = {
+        enableClient = true;
+        host = "purple-ts";
+        port = 5129;
+        # Set to your cache public key, e.g. "cache-name:BASE64"
+        publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
+        environmentFile = "/etc/atticd.env";
+      };
+      remoteBuilder = {
+        enable = true;
+        host = "purple";
+        user = "builder";
+        systems = [ "x86_64-linux" ];
+        enableCheck = true;
+      };
     };
     theme.active = "dracula";
     editors = {
       default = "micro";
-      helix.enable = true;
-      micro.enable = true;
       vim.enable = true;
     };
     shell = {
-      aerc.enable = false;
-      archive.enable = true;
-      borg.enable = true;
-      cli.enable = false;
-      devenv.enable = false;
-      devops.enable = false;
-      git.enable = true;
-      gnupg.enable = true;
-      iperf.enable = true;
-      lf.enable = true;
-      nu.enable = false;
-      pass.enable = true;
       utilities.enable = true;
-      zsh.enable = true;
     };
     services = {
       fail2ban.enable = true;
@@ -88,7 +76,7 @@ in
           speedtest = [ "jam" "violet"];
           homeAssistant = [ "violet" ];
           postgres = [ "jam" "violet" ];
-          postgres = [ "jam" ];
+          immich = [ "violet" ];
         };
         exporters = {
           node.enable = true;
@@ -100,7 +88,7 @@ in
           nginxlog.enable = true;
           fail2ban.enable = true;
           postgres.enable = true;
-          speedtest.enable = true;
+          speedtest.enable = false;
         };
       };
       webmail.enable = true;
@@ -108,25 +96,41 @@ in
     };
   };
 
-  sops.secrets.attic-client-env = {
-    sopsFile = ../../secrets/jam.yaml;
-    format = "yaml";
-    key = "ATTIC_CLIENT_TOKEN";
-    path = "/etc/atticd.env";
-    owner = "root";
-    mode = "0400";
+
+  services.prometheus.exporters.nextcloud = {
+    tokenFile = "/var/secrets/nextcloud-exporter.token";
+    url = "https:/cloud.thym.at";
   };
 
-  sops.secrets.nextcloud-exporter-token = {
-    sopsFile = ../../secrets/jam.yaml;
-    format = "yaml";
-    key = "NEXTCLOUD_EXPORTER_TOKEN";
-    path = "/var/secrets/nextcloud-exporter.token";
-    owner = "root";
-    mode = "0400";
-  };
+  sops = {
+    age.keyFile = "/var/lib/sops-nix/jam.txt";
+    useSystemdActivation = true;
+    secrets = {
+      attic-client-env = {
+        sopsFile = builtins.path {
+          path = ../../../secrets/jam.yaml;
+          name = "jam-secrets";
+        };
+        format = "yaml";
+        key = "ATTICD_ENV";
+        path = "/etc/atticd.env";
+        owner = "root";
+        mode = "0400";
+      };
+      nextcloud-exporter-token = {
+        sopsFile = builtins.path {
+          path = ../../../secrets/jam.yaml;
+          name = "jam-secrets";
+        };
+        format = "yaml";
+        key = "NEXTCLOUD_EXPORTER_TOKEN";
+        path = "/var/secrets/nextcloud-exporter.token";
+        owner = "nextcloud-exporter";
+        group = "nextcloud-exporter";
+        mode = "0400";
+      };
+    };
 
-  services.prometheus.exporters.nextcloud.tokenFile = "/var/secrets/nextcloud-exporter.token";
 
   # Set stateVersion
   system.stateVersion = "25.11";
@@ -175,7 +179,6 @@ in
 
     modules.home = {
       unfreePackages.enable = true;
-      archive.enable = true;
       atuin.enable = true;
       borg.enable = true;
       duf.enable = true;
