@@ -33,6 +33,8 @@ in
       completionInit = "";
     };
 
+    users.users.mathym.shell = pkgs.zsh;
+
     home.packages = with pkgs; [
       zsh
       # Additional completion definitions for zsh
