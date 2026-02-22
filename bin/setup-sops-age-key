@@ -7,11 +7,33 @@ key_file="${key_dir}/${host}.txt"
 ssh_key="/home/${SUDO_USER:-$USER}/.ssh/${host}"
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 secrets_file="${repo_root}/secrets/${host}.yaml"
+sops_yaml="${repo_root}/.sops.yaml"
 
 if [[ -f "$key_file" ]]; then
   echo "sops-nix age key already exists at ${key_file}"
   echo "Public key:"
-  sudo age-keygen -y "$key_file"
+  public_key="$(sudo age-keygen -y "$key_file")"
+  echo "$public_key"
+  if [[ ! -f "$sops_yaml" ]]; then
+    cat >"$sops_yaml" <<EOF
+creation_rules:
+  - path_regex: secrets/${host}\\.ya?ml
+    key_groups:
+      - age:
+          - ${public_key}
+EOF
+    echo "Created ${sops_yaml} for this host."
+  else
+    if ! grep -q "${public_key}" "$sops_yaml"; then
+      cat >>"$sops_yaml" <<EOF
+  - path_regex: secrets/${host}\\.ya?ml
+    key_groups:
+      - age:
+          - ${public_key}
+EOF
+      echo "Added ${host} rule to ${sops_yaml}."
+    fi
+  fi
   if [[ ! -f "$secrets_file" ]]; then
     cat >"$secrets_file" <<'EOF'
 # Add host secrets here, e.g.
@@ -20,6 +42,7 @@ if [[ -f "$key_file" ]]; then
 EOF
     echo "Created stub secrets file: ${secrets_file}"
   fi
+  echo "Edit with: sops ${secrets_file}"
   exit 0
 fi
 
@@ -43,7 +66,8 @@ chmod 600 "$key_file"
 
 echo "Generated sops-nix age key at ${key_file}"
 echo "Public key:"
-sudo age-keygen -y "$key_file"
+public_key="$(sudo age-keygen -y "$key_file")"
+echo "$public_key"
 
 if [[ ! -f "$secrets_file" ]]; then
   cat >"$secrets_file" <<'EOF'
@@ -54,5 +78,25 @@ EOF
   echo "Created stub secrets file: ${secrets_file}"
 fi
 
-echo "Encrypt the secrets file like this:"
-echo "  sops --encrypt --age \"age1...${host^^}_PUBLIC_KEY...\" -i ${secrets_file}"
+if [[ ! -f "$sops_yaml" ]]; then
+  cat >"$sops_yaml" <<EOF
+creation_rules:
+  - path_regex: secrets/${host}\\.ya?ml
+    key_groups:
+      - age:
+          - ${public_key}
+EOF
+  echo "Created ${sops_yaml} for this host."
+else
+  if ! grep -q "${public_key}" "$sops_yaml"; then
+    cat >>"$sops_yaml" <<EOF
+  - path_regex: secrets/${host}\\.ya?ml
+    key_groups:
+      - age:
+          - ${public_key}
+EOF
+    echo "Added ${host} rule to ${sops_yaml}."
+  fi
+fi
+
+echo "Edit with: sops ${secrets_file}"
