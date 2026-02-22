@@ -33,7 +33,6 @@ in
       completionInit = "";
     };
 
-    users.users.mathym.shell = pkgs.zsh;
 
     home.packages = with pkgs; [
       zsh
