@@ -17,22 +17,19 @@ in {
           greeterBin =
             if pkgs ? sddm-unwrapped then "${pkgs.sddm-unwrapped}/bin/sddm-greeter"
             else "${pkgs.sddm}/bin/sddm-greeter";
-          patchTheme = pkg:
-            if pkg ? overrideAttrs then
-              pkg.overrideAttrs (old: {
-                postPatch = (old.postPatch or "") + ''
-                  for f in $(find . -name theme.conf); do
-                    sed -i "s|/nix/store/.*/bin/sddm-greeter|${greeterBin}|g" "$f"
-                  done
-                '';
-              })
-            else pkg;
           sddmDraculaRaw =
             if pkgs ? sddm-theme-dracula then pkgs.sddm-theme-dracula
             else if pkgs ? sddmThemes && pkgs.sddmThemes ? dracula then pkgs.sddmThemes.dracula
             else null;
           sddmDracula =
-            if sddmDraculaRaw != null then patchTheme sddmDraculaRaw else null;
+            if sddmDraculaRaw != null then
+              pkgs.runCommand "sddm-theme-dracula-patched" { } ''
+                cp -r ${sddmDraculaRaw} $out
+                chmod -R u+w $out
+                find $out -name theme.conf -exec \
+                  sed -i "s|/nix/store/.*/bin/sddm-greeter|${greeterBin}|g" {} \;
+              ''
+            else null;
         in
         lib.optional (sddmDracula != null) sddmDracula;
       };
