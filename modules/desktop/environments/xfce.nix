@@ -14,9 +14,7 @@ in {
       displayManager.sddm = {
         enable = true;
         extraPackages = let
-          greeterBin =
-            if pkgs ? sddm-unwrapped then "${pkgs.sddm-unwrapped}/bin/sddm-greeter"
-            else "${pkgs.sddm}/bin/sddm-greeter";
+          greeterBin = "${pkgs.kdePackages.sddm}/bin/sddm-greeter";
           sddmDraculaRaw =
             if pkgs ? sddm-theme-dracula then pkgs.sddm-theme-dracula
             else if pkgs ? sddmThemes && pkgs.sddmThemes ? dracula then pkgs.sddmThemes.dracula
