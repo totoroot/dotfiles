@@ -91,6 +91,7 @@
           fail2ban.enable = false;
           adguard.enable = true;
           fritzbox.enable = true;
+          postgres.enable = true;
           speedtest.enable = false;
         };
         # Targets for the Prometheus Blackbox exporter
