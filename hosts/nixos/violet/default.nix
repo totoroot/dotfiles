@@ -71,6 +71,7 @@
       vaultwarden.enable = false;
       vpn.enable = false;
       postgresql.enable = true;
+      postgresql.pgweb.enable = true;
       recipes.enable = true;
       immich.enable = true;
       ssh.enable = true;

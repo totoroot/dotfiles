@@ -301,6 +301,26 @@
         "type": "github"
       }
     },
+    "pgweb": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771798277,
+        "narHash": "sha256-pn9I1GcCKkEnZRdGVYKh1nzQuEPB/KYdoG/yjVl+dB4=",
+        "ref": "refs/heads/main",
+        "rev": "10392259629b5c9308e8bffebdda2aea9fd2ba8a",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://codeberg.org/totoroot/pgweb-flake.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/totoroot/pgweb-flake.git"
+      }
+    },
     "plasma-manager": {
       "inputs": {
         "home-manager": [
@@ -357,6 +377,7 @@
         "nixos-unstable": "nixos-unstable",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
+        "pgweb": "pgweb",
         "plasma-manager": "plasma-manager",
         "rcat": "rcat",
         "sops-nix": "sops-nix"

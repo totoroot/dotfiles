@@ -82,6 +82,12 @@
       url = "github:totoroot/AdventureLog";
       flake = false;
     };
+
+    pgweb = {
+      url = "git+https://codeberg.org/totoroot/pgweb-flake.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:
