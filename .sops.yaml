@@ -1,5 +1,10 @@
-  creation_rules:
-    - path_regex: secrets/jam\.ya?ml
-      key_groups:
-        - age:
-            - age182t5p08xxdq72lxaxr66txspete3wahnlcfv96vq7svgl395g4lsusc8ut
+---
+creation_rules:
+  - path_regex: secrets/jam\.ya?ml
+    key_groups:
+      - age:
+          - age182t5p08xxdq72lxaxr66txspete3wahnlcfv96vq7svgl395g4lsusc8ut
+  - path_regex: secrets/violet\.ya?ml
+    key_groups:
+      - age:
+          - age1q6zer66s7z9wt3lurfvj695lwvs2tked57jhthc7q6vyn69ftp4qfyg0jl
