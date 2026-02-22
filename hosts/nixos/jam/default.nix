@@ -109,7 +109,7 @@ in
   };
 
   sops.secrets.attic-client-env = {
-    sopsFile = "${lib.my.paths.dotFilesDir}/secrets/jam.yaml";
+    sopsFile = ../../secrets/jam.yaml;
     format = "yaml";
     key = "ATTIC_CLIENT_TOKEN";
     path = "/etc/atticd.env";
@@ -118,7 +118,7 @@ in
   };
 
   sops.secrets.nextcloud-exporter-token = {
-    sopsFile = "${lib.my.paths.dotFilesDir}/secrets/jam.yaml";
+    sopsFile = ../../secrets/jam.yaml;
     format = "yaml";
     key = "NEXTCLOUD_EXPORTER_TOKEN";
     path = "/var/secrets/nextcloud-exporter.token";
