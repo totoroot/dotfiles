@@ -37,7 +37,7 @@ in
         host = "127.0.0.1";
         port = 5432;
         createDB = false;
-        enableVectors = false;
+        enableVectors = true;
         enableVectorChord = true;
         passwordFile = "/var/secrets/immich-db.password";
       };
@@ -63,6 +63,7 @@ in
       }];
       extensions = mkAfter [
         (config.services.postgresql.package.pkgs.vectorchord)
+        (config.services.postgresql.package.pkgs.pgvecto-rs)
       ];
     };
 
