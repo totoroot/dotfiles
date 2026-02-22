@@ -78,7 +78,7 @@
       time-machine.enable = true;
       transmission.enable = false;
       prometheus = {
-        enable = true;
+        enable = false;
         exporters = {
           node.enable = true;
           systemd.enable = true;
