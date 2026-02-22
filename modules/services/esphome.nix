@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.esphome;
-  version = "latest";
+  version = "2026.2";
   port = 6052;
 in
 {
@@ -21,7 +21,7 @@ in
           "${toString port}:${toString port}"
         ];
         volumes = [
-          "/var/cache/esphome/config:/config"
+          "/var/lib/esphome/config:/config"
           "/etc/localtime:/etc/localtime:ro"
         ];
         # extraOptions = [
@@ -37,8 +37,8 @@ in
     systemd.services.docker-esphome.serviceConfig = {
       User = "mathym";
       Group = "docker";
-      CacheDirectory = "esphome";
-      CacheDirectoryMode = "0750";
+      StateDirectory = "esphome";
+      StateDirectoryMode = "0750";
     };
 
     # See https://github.com/NixOS/nixpkgs/issues/275679 for more information of why I'm not using the NixOS esphome module for now
