@@ -11,13 +11,27 @@ in {
   config = mkIf cfg.enable {
     services = {
       # Display Manager for KDE Plasma
-      displayManager.sddm = {
+      displayManager.sddm = let
+        sddmBase = pkgs.kdePackages.sddm;
+        sddmWithGreeter = pkgs.runCommand "sddm-with-greeter" { } ''
+          cp -r ${sddmBase} $out
+          chmod -R u+w $out
+          if [ ! -x "$out/bin/sddm-greeter" ]; then
+            for candidate in "$out/libexec/sddm-greeter" "$out/lib/sddm/sddm-greeter"; do
+              if [ -x "$candidate" ]; then
+                ln -s "$candidate" "$out/bin/sddm-greeter"
+                break
+              fi
+            done
+          fi
+        '';
+      in {
         # Make it rewritable in case Plasma should be installed
         # but other display manager should be used
         enable = mkDefault true;
-        package = mkForce pkgs.kdePackages.sddm;
+        package = mkForce sddmWithGreeter;
         extraPackages = let
-          greeterBin = "${pkgs.kdePackages.sddm}/bin/sddm-greeter";
+          greeterBin = "${sddmWithGreeter}/bin/sddm-greeter";
           sddmDraculaRaw =
             if pkgs ? sddm-theme-dracula then pkgs.sddm-theme-dracula
             else if pkgs ? sddmThemes && pkgs.sddmThemes ? dracula then pkgs.sddmThemes.dracula
