@@ -61,7 +61,7 @@ in
         name = "immich";
         ensureDBOwnership = true;
       }];
-      extraPlugins = mkAfter [
+      extensions = mkAfter [
         (config.services.postgresql.package.pkgs.vectorchord)
       ];
     };
