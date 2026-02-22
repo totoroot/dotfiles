@@ -17,7 +17,7 @@ let
       hosts = if names == null then [ ] else names;
     in
     if hosts == [ ] then mkTargets port
-    else map (name: "${hostToIp.${name}}:${toString port}") hosts;
+    else map (name: "${hostToIp.${name} or name}:${toString port}") hosts;
 in
 {
   options.modules.services.prometheus = {
