@@ -27,6 +27,15 @@ in
     wireguard.enable = mkBoolOpt false;
     process.enable = mkBoolOpt false;
     nextcloud.enable = mkBoolOpt false;
+    immich = {
+      enable = mkBoolOpt false;
+      host = mkOpt types.str "127.0.0.1";
+      port = mkOpt types.port 2283;
+      exporterPort = mkOpt types.port 8000;
+      logLevel = mkOpt types.str "INFO";
+      metricsPrefix = mkOpt types.str "immich";
+      envFile = mkOpt (types.nullOr types.str) null;
+    };
   };
 
   config = {
@@ -116,6 +125,26 @@ in
       };
     };
 
+    virtualisation.oci-containers = mkIf cfg.immich.enable {
+      backend = "docker";
+      containers."prometheus-immich-exporter" = {
+        image = "friendlyfriend/prometheus-immich-exporter:latest";
+        ports = [
+          "${toString cfg.immich.exporterPort}:${toString cfg.immich.exporterPort}"
+        ];
+        environment = {
+          IMMICH_HOST = cfg.immich.host;
+          IMMICH_PORT = toString cfg.immich.port;
+          IMMICH_API_TOKEN = "";
+          EXPORTER_PORT = toString cfg.immich.exporterPort;
+          EXPORTER_LOG_LEVEL = cfg.immich.logLevel;
+          METRICS_PREFIX = cfg.immich.metricsPrefix;
+        };
+        environmentFiles = lib.optional (cfg.immich.envFile != null) cfg.immich.envFile;
+        autoStart = true;
+      };
+    };
+
     systemd.services = {
       "fail2ban-exporter" = mkIf cfg.fail2ban.enable {
         enable = true;
@@ -197,6 +226,7 @@ in
       ++ lib.optional cfg.tailscale.enable config.services.prometheus.exporters.tailscale.port
       ++ lib.optional cfg.wireguard.enable config.services.prometheus.exporters.wireguard.port
       ++ lib.optional cfg.process.enable config.services.prometheus.exporters.process.port
-      ++ lib.optional cfg.nextcloud.enable config.services.prometheus.exporters.nextcloud.port;
+      ++ lib.optional cfg.nextcloud.enable config.services.prometheus.exporters.nextcloud.port
+      ++ lib.optional cfg.immich.enable cfg.immich.exporterPort;
   };
 }

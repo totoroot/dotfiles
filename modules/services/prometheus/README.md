@@ -42,3 +42,4 @@ Supported keys: `node`, `blackbox`, `systemd`, `statsd`, `smartctl`, `nginx`,
 - `wireguard`: WireGuard exporter
 - `process`: Process exporter (per-process stats)
 - `nextcloud`: Nextcloud exporter
+- `immich`: Immich exporter (custom container)
