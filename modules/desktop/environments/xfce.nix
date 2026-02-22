@@ -24,7 +24,7 @@ in {
               pkgs.runCommand "sddm-theme-dracula-patched" { } ''
                 cp -r ${sddmDraculaRaw} $out
                 chmod -R u+w $out
-                find $out -name theme.conf -exec \
+                find $out -type f -exec \
                   sed -i "s|/nix/store/.*/bin/sddm-greeter|${greeterBin}|g" {} \;
               ''
             else null;
