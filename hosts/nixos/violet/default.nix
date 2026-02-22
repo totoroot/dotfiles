@@ -64,7 +64,7 @@
         openFirewall = true;
       };
       gitea.enable = false;
-      grafana.enable = true;
+      grafana.enable = false;
       home-assistant.enable = true;
       jellyfin.enable = false;
       nginx.enable = false;

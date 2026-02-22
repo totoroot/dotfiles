@@ -72,8 +72,9 @@ in
       uptime-kuma.enable = true;
       tailscale.enable = true;
       vaultwarden.enable = true;
+      grafana.enable = true;
       prometheus = {
-        enable = false;
+        enable = true;
         exporters = {
           node.enable = true;
           systemd.enable = true;
@@ -85,6 +86,7 @@ in
           fail2ban.enable = true;
           adguard.enable = false;
           fritzbox.enable = false;
+          postgres.enable = false;
           speedtest.enable = false;
         };
       };

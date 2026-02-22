@@ -141,7 +141,7 @@ in
           enableACME = true;
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://${server}:${toString grafanaPort}";
+            proxyPass = "http://localhost:${toString grafanaPort}";
             proxyWebsockets = true;
           };
         };
@@ -149,7 +149,7 @@ in
           enableACME = true;
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://${server}:${toString prometheusPort}";
+            proxyPass = "http://localhost:${toString prometheusPort}";
             proxyWebsockets = true;
             basicAuthFile = "/var/secrets/prometheus";
           };
