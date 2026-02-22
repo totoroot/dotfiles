@@ -65,8 +65,6 @@ in
         userName = "goaccess";
       };
       ntfy.enable = true;
-      # TODO Figure out build failure for n8n
-      n8n.enable = false;
       plausible.enable = false;
       ssh.enable = true;
       uptime-kuma.enable = true;
@@ -75,19 +73,34 @@ in
       grafana.enable = true;
       prometheus = {
         enable = true;
+        scrapeHosts = {
+          node = [ "jam" "purple" "violet" "grape" "raspberry" "mulberry" "sangria" ];
+          systemd = [ "jam" "purple" "grape" ];
+          statsd = [ "jam" "purple" "grape" ];
+          smartctl = [ "purple" "violet" "grape" ];
+          nginx = [ "jam" ];
+          nginxlog = [ "jam" ];
+          fail2ban = [ "jam" ];
+          ntfy = [ "jam" ];
+          nextcloud = [ "jam" ];
+          adguard = [ "violet" ];
+          tailscale = [ "jam" "purple" "violet" "grape" ];
+          speedtest = [ "jam" "violet"];
+          homeAssistant = [ "violet" ];
+          postgres = [ "jam" "violet" ];
+          postgres = [ "jam" ];
+        };
         exporters = {
           node.enable = true;
           systemd.enable = true;
           statsd.enable = true;
-          smartctl.enable = false;
-          blackbox.enable = false;
+          blackbox.enable = true;
+          nextcloud.enable = true;
           nginx.enable = true;
           nginxlog.enable = true;
           fail2ban.enable = true;
-          adguard.enable = false;
-          fritzbox.enable = false;
-          postgres.enable = false;
-          speedtest.enable = false;
+          postgres.enable = true;
+          speedtest.enable = true;
         };
       };
       webmail.enable = true;
