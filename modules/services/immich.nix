@@ -25,6 +25,14 @@ in
       # settings.server.externalDomain = "https://${domain}";
     };
 
+    services.postgresql = mkIf config.modules.services.postgresql.enable {
+      ensureDatabases = mkAfter [ "immich" ];
+      ensureUsers = mkAfter [{
+        name = "immich";
+        ensureDBOwnership = true;
+      }];
+    };
+
     networking.firewall.interfaces.tailscale0.allowedTCPPorts =
       mkIf cfg.openFirewall [ port ];
   };
