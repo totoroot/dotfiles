@@ -15,6 +15,7 @@ in
       port = 5129;
       # Set to your cache public key, e.g. "cache-name:BASE64"
       publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
+      environmentFile = "/etc/atticd.env";
     };
     nix.remoteBuilder = {
       enable = true;
@@ -90,6 +91,15 @@ in
       webmail.enable = true;
       wordpress.enable = false;
     };
+  };
+
+  sops.secrets.attic-client-env = {
+    sopsFile = ./secrets/jam.yaml;
+    format = "yaml";
+    key = "ATTIC_CLIENT_TOKEN";
+    path = "/etc/atticd.env";
+    owner = "root";
+    mode = "0400";
   };
 
   # Set stateVersion
