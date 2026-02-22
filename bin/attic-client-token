@@ -19,6 +19,12 @@ if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
   exit 0
 fi
 
+if [ "${EUID:-$(id -u)}" -ne 0 ]; then
+  exec sudo -E "$0" "$@"
+fi
+
+cd /
+
 subject="${1:-}"
 validity="${2:-1y}"
 push="false"
