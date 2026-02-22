@@ -117,6 +117,17 @@ in
     mode = "0400";
   };
 
+  sops.secrets.nextcloud-exporter-token = {
+    sopsFile = "${lib.my.paths.dotFilesDir}/secrets/jam.yaml";
+    format = "yaml";
+    key = "NEXTCLOUD_EXPORTER_TOKEN";
+    path = "/var/secrets/nextcloud-exporter.token";
+    owner = "root";
+    mode = "0400";
+  };
+
+  services.prometheus.exporters.nextcloud.tokenFile = "/var/secrets/nextcloud-exporter.token";
+
   # Set stateVersion
   system.stateVersion = "25.11";
 
