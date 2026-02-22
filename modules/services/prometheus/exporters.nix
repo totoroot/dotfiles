@@ -22,6 +22,7 @@ in
     adguard.enable = mkBoolOpt false;
     fritzbox.enable = mkBoolOpt false;
     speedtest.enable = mkBoolOpt false;
+    postgres.enable = mkBoolOpt false;
   };
 
   config = {
@@ -82,6 +83,14 @@ in
         enable = true;
         port = 9117;
         openFirewall = false;
+      };
+
+      postgres = mkIf cfg.postgres.enable {
+        enable = true;
+        port = 9187;
+        dataSourceNames = [
+          "postgresql:///postgres?host=/run/postgresql"
+        ];
       };
     };
 
@@ -161,6 +170,7 @@ in
       ++ lib.optional cfg.fail2ban.enable 9191
       ++ lib.optional cfg.adguard.enable 9617
       ++ lib.optional cfg.fritzbox.enable 9134
-      ++ lib.optional cfg.speedtest.enable 9862;
+      ++ lib.optional cfg.speedtest.enable 9862
+      ++ lib.optional cfg.postgres.enable config.services.prometheus.exporters.postgres.port;
   };
 }
