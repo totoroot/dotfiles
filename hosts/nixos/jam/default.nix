@@ -130,6 +130,7 @@ in
         mode = "0400";
       };
     };
+  };
 
 
   # Set stateVersion
