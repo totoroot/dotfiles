@@ -24,6 +24,7 @@ in
   config = mkIf cfg.enable {
     sops = {
       age.keyFile = cfg.ageKeyFile;
+      useSystemdActivation = true;
     } // (mkIf (cfg.defaultFile != null) {
       defaultSopsFile = cfg.defaultFile;
     });
