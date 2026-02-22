@@ -8,7 +8,7 @@ let
   port = 6052;
 in
 {
-  options.modules.services.esphome = {
+  options.modules.services.esphome = with types; {
     enable = mkBoolOpt false;
     environment = mkOpt (attrsOf str) { };
     openFirewall = mkBoolOpt true;
