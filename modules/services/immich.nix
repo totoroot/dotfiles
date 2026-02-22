@@ -28,6 +28,8 @@ in
         host = "127.0.0.1";
         port = 5432;
         createDB = false;
+        enableVectors = false;
+        enableVectorChord = false;
         passwordFile = "/var/secrets/immich-db.password";
       };
       redis = {
