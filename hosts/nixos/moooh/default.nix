@@ -5,7 +5,6 @@
     ./disks.nix
     ./hardware-configuration.nix
     ../personal.nix
-    # ./home.nix
   ];
 
   modules = {
@@ -364,4 +363,36 @@
   # Limit update size/frequency of rebuilds
   # See https://mastodon.online/@nomeata/109915786344697931
   documentation.nixos.enable = false;
+
+
+  home.file = {
+    "dev/.use".text = "development";
+    "dls/.use".text = "downloads";
+    "nts/".source = "/home/mathym/sync/notes/";
+    "tmp/.use".text = "temporary files";
+    "trash/".source = "/home/mathym/.local/share/Trash/files/";
+  };
+
+  home-manager.users.${config.user.name} = { config, ... }: {
+    imports = [
+      ../../../home/bridge.nix
+    ];
+
+    modules.home = {
+      unfreePackages.enable = true;
+      archive.enable = true;
+      atuin.enable = true;
+      borg.enable = true;
+      duf.enable = true;
+      git.enable = true;
+      helix.enable = true;
+      lf.enable = true;
+      micro.enable = true;
+      nushell.enable = true;
+      sshHosts.enable = true;
+      trash.enable = true;
+      viddy.enable = true;
+      zsh.enable = true;
+    };
+  };
 }

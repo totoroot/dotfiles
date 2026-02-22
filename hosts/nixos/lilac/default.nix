@@ -3,7 +3,6 @@
   imports = [
     ../personal.nix
     ./hardware-configuration.nix
-    ./home.nix
     ./backup.nix
   ];
 
@@ -71,4 +70,38 @@
   # Set eurkey as default layout
   # Optionally set more keymaps and use them with bin/keymapswitcher
   services.xserver.layout = "eu";
+
+
+  home.file = {
+    "dev/.use".text = "dev";
+    "downloads/.use".text = "downloads";
+    "notes/.use".text = "notes";
+    "resources/.use".text = "resources";
+    "shared/.use".text = "shared";
+    "tmp/.use".text = "tmp";
+    ".trash/.use".text = "trash";
+  };
+
+  home-manager.users.${config.user.name} = { config, ... }: {
+    imports = [
+      ../../../home/bridge.nix
+    ];
+
+    modules.home = {
+      unfreePackages.enable = true;
+      archive.enable = true;
+      atuin.enable = true;
+      borg.enable = true;
+      duf.enable = true;
+      git.enable = true;
+      helix.enable = true;
+      lf.enable = true;
+      micro.enable = true;
+      nushell.enable = true;
+      sshHosts.enable = true;
+      trash.enable = true;
+      viddy.enable = true;
+      zsh.enable = true;
+    };
+  };
 }
