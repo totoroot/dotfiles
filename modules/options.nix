@@ -1,4 +1,4 @@
-{ config, options, lib, home-manager, ... }:
+{ config, options, lib, home-manager, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -72,6 +72,8 @@ with lib.my;
     ];
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
+    programs.zsh.enable = mkIf pkgs.stdenv.isLinux true;
+    users.users.${config.user.name}.shell = mkIf pkgs.stdenv.isLinux pkgs.zsh;
 
     nix = let users = [ "root" config.user.name ]; in {
       settings = {
