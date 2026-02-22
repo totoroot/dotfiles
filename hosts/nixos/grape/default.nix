@@ -211,10 +211,7 @@
       autoLogin.enable = false;
       defaultSession = "plasma";
       # Use SDDM as display manager
-      sddm = {
-        enable = true;
-        theme = "Dracula";
-      };
+      sddm.enable = true;
     };
     xserver = {
       # Enable the X11 windowing system.
