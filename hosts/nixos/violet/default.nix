@@ -72,6 +72,7 @@
       vpn.enable = false;
       postgresql.enable = true;
       recipes.enable = true;
+      immich.enable = true;
       ssh.enable = true;
       syncthing.enable = true;
       tailscale.enable = true;
@@ -89,7 +90,7 @@
           nginxlog.enable = false;
           fail2ban.enable = false;
           adguard.enable = true;
-          fritzbox.enable = true;
+          fritzbox.enable = false;
           postgres.enable = true;
           immich = {
             enable = true;
@@ -148,7 +149,6 @@
     "--device=/dev/sdd"
     "--device=/dev/sde"
     "--device=/dev/sdf"
-    "--device=/dev/sdg"
   ];
 
   # macOS Time Machine configuration
@@ -209,12 +209,45 @@
     };
   };
 
-  sops.secrets.immich-exporter-env = {
-    sopsFile = ../../secrets/violet.yaml;
-    format = "yaml";
-    key = "IMMICH_API_TOKEN";
-    path = "/var/secrets/immich-exporter.env";
-    owner = "root";
-    mode = "0400";
+  sops = {
+    age.keyFile = "/var/lib/sops-nix/violet.txt";
+    useSystemdActivation = true;
+    secrets = {
+      attic-client-env = {
+        sopsFile = builtins.path {
+          path = ../../../secrets/violet.yaml;
+          name = "violet-secrets";
+        };
+        format = "yaml";
+        key = "ATTICD_ENV";
+        path = "/etc/atticd.env";
+        owner = "root";
+        mode = "0400";
+      };
+      immich-exporter-env = {
+        sopsFile = builtins.path {
+          path = ../../../secrets/violet.yaml;
+          name = "violet-secrets";
+        };
+        format = "yaml";
+        key = "IMMICH_API_TOKEN";
+        path = "/var/secrets/immich-exporter.env";
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+      immich-db = {
+        sopsFile = builtins.path {
+          path = ../../../secrets/violet.yaml;
+          name = "violet-secrets";
+        };
+        format = "yaml";
+        key = "DB_PASSWORD";
+        path = "/var/secrets/immich";
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+    };
   };
 }

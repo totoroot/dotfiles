@@ -35,7 +35,7 @@ in
             REDIS_PORT = "6379";
           };
           environmentFiles = [
-            "/var/secrets/immich-db.password"
+            "/var/secrets/immich"
           ];
           autoStart = true;
         };
