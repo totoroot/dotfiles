@@ -28,6 +28,7 @@ in
         host = "127.0.0.1";
         port = 5432;
         createDB = false;
+        passwordFile = "/var/secrets/immich-db.password";
       };
       redis = {
         enable = true;
