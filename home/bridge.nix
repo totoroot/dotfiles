@@ -20,6 +20,7 @@
     ./modules/nushell.nix
     ./modules/pass.nix
     ./modules/ssh-hosts.nix
+    ./modules/sops.nix
     ./modules/trash.nix
     ./modules/unfree-packages.nix
     ./modules/viddy.nix
