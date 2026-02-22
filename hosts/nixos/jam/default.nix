@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
   domain = "xn--berwachungsbehr-mtb1g.de";
 in
