@@ -91,6 +91,10 @@
           adguard.enable = true;
           fritzbox.enable = true;
           postgres.enable = true;
+          immich = {
+            enable = true;
+            envFile = "/var/secrets/immich-exporter.env";
+          };
           speedtest.enable = false;
         };
         # Targets for the Prometheus Blackbox exporter
@@ -203,5 +207,14 @@
       "Pictures/photos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/photos/";
       "Trash/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/.local/share/Trash/files/";
     };
+  };
+
+  sops.secrets.immich-exporter-env = {
+    sopsFile = ../../secrets/violet.yaml;
+    format = "yaml";
+    key = "IMMICH_API_TOKEN";
+    path = "/var/secrets/immich-exporter.env";
+    owner = "root";
+    mode = "0400";
   };
 }
