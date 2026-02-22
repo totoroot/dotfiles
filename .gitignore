@@ -2,10 +2,6 @@ result
 
 config/aerc/accounts.conf
 
-config/ssh/
-
-.sops.yaml
-
 # Devenv
 .direnv*
 .devenv*
