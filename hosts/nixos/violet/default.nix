@@ -60,7 +60,10 @@
       };
       adguard.enable = true;
       changedetection.enable = true;
-      esphome.enable = true;
+      esphome = {
+        enable = true;
+        openFirewall = true;
+      };
       gitea.enable = false;
       grafana.enable = true;
       home-assistant.enable = true;
