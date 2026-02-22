@@ -10,6 +10,8 @@ in
 {
   options.modules.services.esphome = {
     enable = mkBoolOpt false;
+    environment = mkOpt (attrsOf str) { };
+    openFirewall = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {
@@ -29,7 +31,7 @@ in
         # ];
         environment = {
           ESPHOME_DASHBOARD_USE_PING = "true";
-        };
+        } // cfg.environment;
         autoStart = true;
       };
     };
@@ -53,6 +55,7 @@ in
 
     environment.systemPackages = [ config.services.esphome.package ];
 
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ config.services.esphome.port ];
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts =
+      mkIf cfg.openFirewall [ config.services.esphome.port ];
   };
 }
