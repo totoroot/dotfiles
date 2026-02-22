@@ -4,7 +4,6 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.immich;
-  domain = "foto.xn--berwachungsbehr-mtb1g.de";
   port = 2283;
   storagePath = "/var/lib/immich";
 in
@@ -16,38 +15,57 @@ in
   };
 
   config = mkIf cfg.enable {
-    assertions = let
-      pgPkgs = config.services.postgresql.package.pkgs;
-    in [
-      {
-        assertion = !config.modules.services.postgresql.enable || lib.hasAttr "vectorchord" pgPkgs;
-        message = "Immich requires vectorchord support (vchord.so). Add the vectorchord PostgreSQL extension package.";
-      }
-    ];
+    virtualisation.oci-containers = {
+      backend = "docker";
+      containers = {
+        immich-server = {
+          image = "ghcr.io/immich-app/immich-server:release";
+          ports = [ "${toString port}:2283" ];
+          volumes = [
+            "${cfg.storagePath}:/usr/src/app/upload"
+            "/etc/localtime:/etc/localtime:ro"
+          ];
+          environment = {
+            IMMICH_PORT = "2283";
+            DB_HOSTNAME = "127.0.0.1";
+            DB_PORT = "5432";
+            DB_USERNAME = "immich";
+            DB_DATABASE_NAME = "immich";
+            REDIS_HOSTNAME = "127.0.0.1";
+            REDIS_PORT = "6379";
+          };
+          environmentFiles = [
+            "/var/secrets/immich-db.password"
+          ];
+          autoStart = true;
+        };
 
-    services.immich = {
-      enable = true;
-      host = "0.0.0.0";
-      port = port;
-      mediaLocation = cfg.storagePath;
-      database = {
-        enable = true;
-        name = "immich";
-        user = "immich";
-        host = "127.0.0.1";
-        port = 5432;
-        createDB = false;
-        enableVectors = true;
-        enableVectorChord = true;
-        passwordFile = "/var/secrets/immich-db.password";
+        immich-machine-learning = {
+          image = "ghcr.io/immich-app/immich-machine-learning:release";
+          volumes = [
+            "${cfg.storagePath}/ml:/cache"
+            "/etc/localtime:/etc/localtime:ro"
+          ];
+          environment = {
+            IMMICH_MACHINE_LEARNING_PORT = "3003";
+          };
+          autoStart = true;
+        };
       };
-      redis = {
-        enable = true;
-        host = "127.0.0.1";
-        port = 6379;
-      };
-      # TODO: add reverse proxy config and external domain when needed
-      # settings.server.externalDomain = "https://${domain}";
+    };
+
+    systemd.services."docker-immich-server".serviceConfig = {
+      User = "immich";
+      Group = "docker";
+      StateDirectory = "immich";
+      StateDirectoryMode = "0750";
+    };
+
+    systemd.services."docker-immich-machine-learning".serviceConfig = {
+      User = "immich";
+      Group = "docker";
+      StateDirectory = "immich-ml";
+      StateDirectoryMode = "0750";
     };
 
     services.redis.servers.immich = {
@@ -61,11 +79,6 @@ in
         name = "immich";
         ensureDBOwnership = true;
       }];
-      extensions = mkAfter [
-        (config.services.postgresql.package.pkgs.vectorchord)
-        (config.services.postgresql.package.pkgs.pgvecto-rs)
-      ];
-      settings.shared_preload_libraries = [ "vchord.so" "vectors.so"];
     };
 
     networking.firewall.interfaces.tailscale0.allowedTCPPorts =
