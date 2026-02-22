@@ -15,7 +15,7 @@ in {
         # Make it rewritable in case Plasma should be installed
         # but other display manager should be used
         enable = mkDefault true;
-        package = mkForce pkgs.kdePackages.sddm;
+        package = mkForce pkgs.sddm;
         extraPackages = let
           sddmDracula =
             if pkgs ? sddm-theme-dracula then pkgs.sddm-theme-dracula
