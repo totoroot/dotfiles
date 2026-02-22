@@ -34,7 +34,7 @@ fi
 
 config_path="$(
   systemctl cat atticd --no-pager 2>/dev/null \
-    | sed -n 's/^ExecStart=.*-f \\([^ ]*\\) .*/\\1/p'
+    | sed -n 's/^ExecStart=.*-f \\([^ ]*\\).*/\\1/p'
 )"
 
 if [ -z "$config_path" ] || [ ! -f "$config_path" ]; then
