@@ -142,6 +142,7 @@
       nixosConfigurations =
         mapHosts ./hosts/nixos {
           inherit system pkgs;
+          extraModules = [ inputs.sops-nix.nixosModules.sops ];
         };
 
       # Configuration for macOS using Nix, nix-darwin and home-manager
