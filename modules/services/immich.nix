@@ -21,8 +21,18 @@ in
       host = "0.0.0.0";
       port = port;
       mediaLocation = cfg.storagePath;
+      redis = {
+        enable = true;
+        host = "127.0.0.1";
+        port = 6379;
+      };
       # TODO: add reverse proxy config and external domain when needed
       # settings.server.externalDomain = "https://${domain}";
+    };
+
+    services.redis.servers.immich = {
+      enable = true;
+      port = 6379;
     };
 
     services.postgresql = mkIf config.modules.services.postgresql.enable {
