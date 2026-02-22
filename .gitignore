@@ -4,7 +4,7 @@ config/aerc/accounts.conf
 
 config/ssh/
 
-secrets
+.sops.yaml
 
 # Devenv
 .direnv*
