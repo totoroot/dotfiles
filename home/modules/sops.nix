@@ -14,7 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ sops sops-age ];
+    home.packages = with pkgs; [ sops age ];
     modules.home.zsh.rcInit = ''
       sops() { SOPS_AGE_KEY_FILE="${keyFile}" TERM=xterm SOPS_EDITOR="micro" command sops "$@"; }
       sops-edit() { SOPS_AGE_KEY_FILE="${keyFile}" TERM=xterm SOPS_EDITOR="micro" command sops "$@"; }
