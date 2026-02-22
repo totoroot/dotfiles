@@ -65,6 +65,7 @@ in
         (config.services.postgresql.package.pkgs.vectorchord)
         (config.services.postgresql.package.pkgs.pgvecto-rs)
       ];
+      settings.shared_preload_libraries = [ "vchord.so" "vectors.so"];
     };
 
     networking.firewall.interfaces.tailscale0.allowedTCPPorts =
