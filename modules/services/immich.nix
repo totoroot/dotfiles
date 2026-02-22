@@ -21,6 +21,14 @@ in
       host = "0.0.0.0";
       port = port;
       mediaLocation = cfg.storagePath;
+      database = {
+        enable = true;
+        name = "immich";
+        user = "immich";
+        host = "127.0.0.1";
+        port = 5432;
+        createDB = false;
+      };
       redis = {
         enable = true;
         host = "127.0.0.1";
