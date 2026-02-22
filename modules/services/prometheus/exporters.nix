@@ -88,9 +88,7 @@ in
       postgres = mkIf cfg.postgres.enable {
         enable = true;
         port = 9187;
-        dataSourceNames = [
-          "postgresql:///postgres?host=/run/postgresql"
-        ];
+        dataSourceName = "postgresql:///postgres?host=/run/postgresql";
       };
     };
 
