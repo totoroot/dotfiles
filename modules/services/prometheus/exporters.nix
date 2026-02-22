@@ -31,7 +31,7 @@ in
       enable = mkBoolOpt false;
       host = mkOpt types.str "127.0.0.1";
       port = mkOpt types.port 2283;
-      exporterPort = mkOpt types.port 8000;
+      exporterPort = mkOpt types.port 8780;
       logLevel = mkOpt types.str "INFO";
       metricsPrefix = mkOpt types.str "immich";
       envFile = mkOpt (types.nullOr types.str) null;
