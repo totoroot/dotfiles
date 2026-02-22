@@ -135,7 +135,7 @@
   # NixOS networking configuration
   networking = {
     networkmanager.enable = true;
-    interfaces.enp7s0.wakeOnLan.enable = true;
+    interfaces.enp9s0.wakeOnLan.enable = true;
     # Allow local network access
     # firewall.extraCommands = ''
     #   iptables -A nixos-fw -p tcp --source 192.168.8.0/24 --dport 0:9999 -j nixos-fw-accept

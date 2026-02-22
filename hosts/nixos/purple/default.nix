@@ -241,8 +241,7 @@
   networking = {
     networkmanager.enable = true;
     useNetworkd = true;
-    useDHCP = false;
-    interfaces.enp7s0.useDHCP = true;
+    interfaces.enp7s0.wakeOnLan.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
