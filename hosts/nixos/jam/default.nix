@@ -94,7 +94,7 @@ in
   };
 
   sops.secrets.attic-client-env = {
-    sopsFile = ./secrets/jam.yaml;
+    sopsFile = "${lib.my.paths.dotFilesDir}/secrets/jam.yaml";
     format = "yaml";
     key = "ATTIC_CLIENT_TOKEN";
     path = "/etc/atticd.env";
