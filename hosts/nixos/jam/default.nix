@@ -6,6 +6,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./mounts.nix
+    ./secrets.nix
   ];
 
   modules = {
@@ -101,49 +102,6 @@ in
     tokenFile = "/var/secrets/nextcloud-exporter.token";
     url = "https:/cloud.thym.at";
   };
-
-  sops = {
-    age.keyFile = "/var/lib/sops-nix/jam.txt";
-    useSystemdActivation = true;
-    secrets = {
-      attic-client-env = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/jam.yaml;
-          name = "jam-secrets";
-        };
-        format = "yaml";
-        key = "ATTICD_ENV";
-        path = "/etc/atticd.env";
-        owner = "root";
-        mode = "0400";
-      };
-      nextcloud-exporter-token = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/jam.yaml;
-          name = "jam-secrets";
-        };
-        format = "yaml";
-        key = "NEXTCLOUD_EXPORTER_TOKEN";
-        path = "/var/secrets/nextcloud-exporter.token";
-        owner = "nextcloud-exporter";
-        group = "nextcloud-exporter";
-        mode = "0400";
-      };
-      prometheus-home-assistant-api-token = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/jam.yaml;
-          name = "jam-secrets";
-        };
-        format = "yaml";
-        key = "PROMETHEUS_HOME_ASSISTANT_API_TOKEN";
-        path = "/var/secrets/prometheus-home-assistant-api.token";
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
-    };
-  };
-
 
   # Set stateVersion
   system.stateVersion = "25.11";
