@@ -1,44 +1,33 @@
 { config, lib, ... }:
 
+let
+  secretsFile = builtins.path {
+    path = ../../../secrets/jam.yaml;
+    name = "jam-secrets";
+  };
+  mkSecret = { key, path, owner ? "root", group ? "root", mode ? "0400", format ? "yaml" }: {
+    sopsFile = secretsFile;
+    inherit key path owner mode format;
+  } // lib.optionalAttrs (group != null) { inherit group; };
+in
 {
   sops = {
     age.keyFile = "/var/lib/sops-nix/jam.txt";
     useSystemdActivation = true;
     secrets = {
-      attic-client-env = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/jam.yaml;
-          name = "jam-secrets";
-        };
-        format = "yaml";
+      attic-client-env = mkSecret {
         key = "ATTICD_ENV";
         path = "/etc/atticd.env";
-        owner = "root";
-        mode = "0400";
       };
-      nextcloud-exporter-token = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/jam.yaml;
-          name = "jam-secrets";
-        };
-        format = "yaml";
+      nextcloud-exporter-token = mkSecret {
         key = "NEXTCLOUD_EXPORTER_TOKEN";
         path = "/var/secrets/nextcloud-exporter.token";
         owner = "nextcloud-exporter";
         group = "nextcloud-exporter";
-        mode = "0400";
       };
-      prometheus-home-assistant-token = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/jam.yaml;
-          name = "jam-secrets";
-        };
-        format = "yaml";
+      prometheus-home-assistant-token = mkSecret {
         key = "PROMETHEUS_HOME_ASSISTANT_TOKEN";
         path = "/var/secrets/prometheus-home-assistant.token";
-        owner = "root";
-        group = "root";
-        mode = "0400";
       };
     };
   };
