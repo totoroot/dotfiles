@@ -62,6 +62,7 @@ in
       grafana.enable = true;
       prometheus = {
         enable = true;
+        homeAssistantApiTokenFile = "/var/secrets/prometheus-home-assistant-api.token";
         scrapeHosts = {
           node = [ "jam" "purple" "violet" "grape" "raspberry" "mulberry" "sangria" ];
           systemd = [ "jam" "purple" "grape" ];

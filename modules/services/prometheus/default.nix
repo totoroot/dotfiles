@@ -44,6 +44,13 @@ in
       };
       description = "Per-job host list (hostnames from hosts/ips.nix) for scrape targets. Empty = all hosts.";
     };
+
+    homeAssistantApiTokenFile = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      example = "/var/secrets/prometheus-home-assistant-api.token";
+      description = "Optional bearer token file for the Home Assistant /api/prometheus scrape.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -173,9 +180,9 @@ in
             targets = mkTargetsFor 8123 (if cfg.scrapeHosts ? homeAssistant then cfg.scrapeHosts.homeAssistant else null);
           }];
           metrics_path = "/api/prometheus";
-          authorization = {
+          authorization = mkIf (cfg.homeAssistantApiTokenFile != null) {
             type = "Bearer";
-            credentials_file = "/var/secrets/prometheus-home-assistant-api.token";
+            credentials_file = cfg.homeAssistantApiTokenFile;
           };
         }
       ];
