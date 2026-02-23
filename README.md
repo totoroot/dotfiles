@@ -252,6 +252,10 @@ Then reference secrets in host configs:
 sops.secrets."my-service/env".path = "/var/secrets/my-service.env";
 ```
 
+Note: sops secrets are installed at activation time. Any config checks that run
+at build time (e.g. Prometheus `checkConfig`) cannot read `/var/secrets` yet and
+may need to be disabled or adjusted to avoid missing-file errors.
+
 ### Headscale (jam) / Tailscale tailnet
 
 To add a new node to the tailnet via headscale on `jam`:
