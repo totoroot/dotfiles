@@ -129,14 +129,14 @@ in
         group = "nextcloud-exporter";
         mode = "0400";
       };
-      prometheus-home-assistant-token = {
+      prometheus-home-assistant-api-token = {
         sopsFile = builtins.path {
           path = ../../../secrets/jam.yaml;
           name = "jam-secrets";
         };
         format = "yaml";
-        key = "PROMETHEUS_HOME_ASSISTANT_TOKEN";
-        path = "/var/secrets/prometheus-home-assistant.token";
+        key = "PROMETHEUS_HOME_ASSISTANT_API_TOKEN";
+        path = "/var/secrets/prometheus-home-assistant-api.token";
         owner = "root";
         group = "root";
         mode = "0400";

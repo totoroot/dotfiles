@@ -175,7 +175,7 @@ in
           metrics_path = "/api/prometheus";
           authorization = {
             type = "Bearer";
-            credentials_file = "/var/secrets/prometheus-home-assistant.token";
+            credentials_file = "/var/secrets/prometheus-home-assistant-api.token";
           };
         }
       ];
