@@ -169,6 +169,9 @@
   };
 
   boot.swraid.enable = true;
+  boot.kernelModules = [
+    "nct6775"
+  ];
 
 
   home.file = {
