@@ -24,6 +24,9 @@ in
   config = mkIf cfg.enable {
     sops = {
       age.keyFile = cfg.ageKeyFile;
+      # Note: sops secrets are installed at activation time. Any config checks
+      # that run during build (e.g. services.prometheus.checkConfig) cannot
+      # read secrets from /var/secrets yet and may need to be disabled.
       useSystemdActivation = true;
     } // (mkIf (cfg.defaultFile != null) {
       defaultSopsFile = cfg.defaultFile;
