@@ -101,7 +101,7 @@ in
 
   services.prometheus.exporters.nextcloud = {
     tokenFile = "/var/secrets/nextcloud-exporter.token";
-    url = "https:/cloud.thym.at";
+    url = "https://cloud.thym.at";
   };
 
   # Set stateVersion
