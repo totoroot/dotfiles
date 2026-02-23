@@ -160,6 +160,12 @@ in
           }];
         }
         {
+          job_name = "nextcloud";
+          static_configs = [{
+            targets = [ "127.0.0.1:9205" ] ++ mkTargetsFor 9205 (if cfg.scrapeHosts ? nextcloud then cfg.scrapeHosts.nextcloud else null);
+          }];
+        }
+        {
           job_name = "home-assistant";
           scrape_interval = "60s";
           scheme = "http";
