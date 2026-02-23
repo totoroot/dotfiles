@@ -212,4 +212,9 @@
     };
   };
 
+  # Allow Prometheus on jam to scrape the Home Assistant API on violet
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+    8123
+  ];
+
 }
