@@ -20,6 +20,9 @@ in
           http_addr = "0.0.0.0";
           http_port = 3000;
         };
+        settings.security.secret_key = mkDefault (
+          builtins.hashString "sha256" config.networking.hostName
+        );
         settings."auth.anonymous" = {
           enabled = true;
           org_role = "Editor";
