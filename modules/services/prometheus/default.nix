@@ -61,7 +61,7 @@ in
         {
           job_name = "node";
           static_configs = [{
-            targets = [ "127.0.0.1:9100" ] ++ mkTargetsFor 9100 (if cfg.scrapeHosts ? node then cfg.scrapeHosts.node else null);
+            targets = mkTargetsFor 9100 (if cfg.scrapeHosts ? node then cfg.scrapeHosts.node else null);
           }];
         }
         {
@@ -96,25 +96,25 @@ in
         {
           job_name = "blackbox-exporter";
           static_configs = [{
-            targets = [ "127.0.0.1:9115" ] ++ mkTargetsFor 9115 (if cfg.scrapeHosts ? blackbox then cfg.scrapeHosts.blackbox else null);
+            targets = mkTargetsFor 9115 (if cfg.scrapeHosts ? blackbox then cfg.scrapeHosts.blackbox else null);
           }];
         }
         {
           job_name = "systemd";
           static_configs = [{
-            targets = [ "127.0.0.1:9558" ] ++ mkTargetsFor 9558 (if cfg.scrapeHosts ? systemd then cfg.scrapeHosts.systemd else null);
+            targets = mkTargetsFor 9558 (if cfg.scrapeHosts ? systemd then cfg.scrapeHosts.systemd else null);
           }];
         }
         {
           job_name = "statsd";
           static_configs = [{
-            targets = [ "127.0.0.1:9102" ] ++ mkTargetsFor 9102 (if cfg.scrapeHosts ? statsd then cfg.scrapeHosts.statsd else null);
+            targets = mkTargetsFor 9102 (if cfg.scrapeHosts ? statsd then cfg.scrapeHosts.statsd else null);
           }];
         }
         {
           job_name = "smartctl";
           static_configs = [{
-            targets = [ "127.0.0.1:9633" ] ++ mkTargetsFor 9633 (if cfg.scrapeHosts ? smartctl then cfg.scrapeHosts.smartctl else null);
+            targets = mkTargetsFor 9633 (if cfg.scrapeHosts ? smartctl then cfg.scrapeHosts.smartctl else null);
           }];
         }
         {
@@ -144,25 +144,25 @@ in
         {
           job_name = "adguard";
           static_configs = [{
-            targets = [ "127.0.0.1:9617" ] ++ mkTargetsFor 9617 (if cfg.scrapeHosts ? adguard then cfg.scrapeHosts.adguard else null);
+            targets = mkTargetsFor 9617 (if cfg.scrapeHosts ? adguard then cfg.scrapeHosts.adguard else null);
           }];
         }
         {
           job_name = "fritzbox";
           static_configs = [{
-            targets = [ "127.0.0.1:9134" ] ++ mkTargetsFor 9134 (if cfg.scrapeHosts ? fritzbox then cfg.scrapeHosts.fritzbox else null);
+            targets = mkTargetsFor 9134 (if cfg.scrapeHosts ? fritzbox then cfg.scrapeHosts.fritzbox else null);
           }];
         }
         {
           job_name = "speedtest";
           static_configs = [{
-            targets = [ "127.0.0.1:9862" ] ++ mkTargetsFor 9862 (if cfg.scrapeHosts ? speedtest then cfg.scrapeHosts.speedtest else null);
+            targets = mkTargetsFor 9862 (if cfg.scrapeHosts ? speedtest then cfg.scrapeHosts.speedtest else null);
           }];
         }
         {
           job_name = "nextcloud";
           static_configs = [{
-            targets = [ "127.0.0.1:9205" ] ++ mkTargetsFor 9205 (if cfg.scrapeHosts ? nextcloud then cfg.scrapeHosts.nextcloud else null);
+            targets = mkTargetsFor 9205 (if cfg.scrapeHosts ? nextcloud then cfg.scrapeHosts.nextcloud else null);
           }];
         }
         {
@@ -170,7 +170,7 @@ in
           scrape_interval = "60s";
           scheme = "http";
           static_configs = [{
-            targets = [ "127.0.0.1:8123" ] ++ mkTargetsFor 8123 (if cfg.scrapeHosts ? homeAssistant then cfg.scrapeHosts.homeAssistant else null);
+            targets = mkTargetsFor 8123 (if cfg.scrapeHosts ? homeAssistant then cfg.scrapeHosts.homeAssistant else null);
           }];
           metrics_path = "/api/prometheus";
           authorization = {
