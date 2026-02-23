@@ -28,6 +28,8 @@ in
       prometheus-home-assistant-api-token = mkSecret {
         key = "PROMETHEUS_HOME_ASSISTANT_API_TOKEN";
         path = "/var/secrets/prometheus-home-assistant-api.token";
+        group = "prometheus";
+        mode = "0440";
       };
     };
   };
