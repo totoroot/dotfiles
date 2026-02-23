@@ -57,6 +57,7 @@ in
     services.prometheus = {
       enable = true;
       webExternalUrl = "https://prometheus.${domain}";
+      checkConfig = mkIf (cfg.homeAssistantApiTokenFile != null) false;
       enableReload = true;
       exporters = {
         node = {
