@@ -25,9 +25,9 @@ in
         owner = "nextcloud-exporter";
         group = "nextcloud-exporter";
       };
-      prometheus-home-assistant-token = mkSecret {
+      prometheus-home-assistant-api-token = mkSecret {
         key = "PROMETHEUS_HOME_ASSISTANT_API_TOKEN";
-        path = "/var/secrets/prometheus-home-assistant.token";
+        path = "/var/secrets/prometheus-home-assistant-api.token";
       };
     };
   };
