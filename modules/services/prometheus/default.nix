@@ -169,6 +169,7 @@ in
         }
         {
           job_name = "nextcloud";
+          scrape_interval = "10m";
           static_configs = [{
             targets = mkTargetsFor 9205 (if cfg.scrapeHosts ? nextcloud then cfg.scrapeHosts.nextcloud else null);
           }];
