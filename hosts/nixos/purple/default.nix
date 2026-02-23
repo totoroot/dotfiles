@@ -5,6 +5,7 @@
     ../personal.nix
     ./hardware-configuration.nix
     ./mounts.nix
+    ./secrets.nix
   ];
 
   modules = {
@@ -273,24 +274,6 @@
     "Sync/notes.use".text = "notes";
     "Temp/.use".text = "temporary files";
     "Videos/.use".text = "videos";
-  };
-
-  sops = {
-    age.keyFile = "/var/lib/sops-nix/purple.txt";
-    useSystemdActivation = true;
-    secrets = {
-      attic-client-env = {
-        sopsFile = builtins.path {
-          path = ../../../secrets/purple.yaml;
-          name = "purple-secrets";
-        };
-        format = "yaml";
-        key = "ATTICD_ENV";
-        path = "/etc/atticd.env";
-        owner = "root";
-        mode = "0400";
-      };
-    };
   };
 
   home-manager.users.${config.user.name} = { config, ... }: {
