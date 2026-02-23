@@ -6,17 +6,15 @@ let
   cfg = config.modules.services.prometheus;
   domain = "xn--berwachungsbehr-mtb1g.de";
   hostsByIp = import ../../../hosts/ips.nix;
-  hostIps = builtins.attrNames hostsByIp;
   hostToIp =
     lib.foldl' (acc: ip:
       acc // lib.listToAttrs (map (name: { inherit name; value = ip; }) hostsByIp.${ip})
-    ) { } hostIps;
-  mkTargets = port: map (ip: "${ip}:${toString port}") hostIps;
+    ) { } (builtins.attrNames hostsByIp);
   mkTargetsFor = port: names:
     let
       hosts = if names == null then [ ] else names;
     in
-    if hosts == [ ] then mkTargets port
+    if hosts == [ ] then [ ]
     else map (name: "${hostToIp.${name} or name}:${toString port}") hosts;
 in
 {
