@@ -102,6 +102,7 @@ in
         enable = true;
         port = 9187;
         dataSourceName = "postgresql:///postgres?host=/run/postgresql";
+        extraFlags = [ "--config.file=/etc/postgres_exporter.yml" ];
       };
 
       tailscale = mkIf cfg.tailscale.enable {
@@ -123,6 +124,10 @@ in
         enable = true;
         port = 9205;
       };
+    };
+
+    environment.etc = lib.mkIf cfg.postgres.enable {
+      "postgres_exporter.yml".text = "";
     };
 
     virtualisation.oci-containers = mkIf cfg.immich.enable {

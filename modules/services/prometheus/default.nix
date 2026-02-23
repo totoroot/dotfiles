@@ -168,6 +168,12 @@ in
           }];
         }
         {
+          job_name = "postgres";
+          static_configs = [{
+            targets = mkTargetsFor 9187 (if cfg.scrapeHosts ? postgres then cfg.scrapeHosts.postgres else null);
+          }];
+        }
+        {
           job_name = "nextcloud";
           scrape_interval = "10m";
           static_configs = [{
