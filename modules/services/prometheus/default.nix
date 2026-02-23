@@ -175,8 +175,7 @@ in
           metrics_path = "/api/prometheus";
           authorization = {
             type = "Bearer";
-            credentials = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhMjJlODQzMzJmNDk0ODlhODA2MDVkYzQwZDFiYmQ0MiIsImlhdCI6MTcwNDIxODA2MywiZXhwIjoyMDE5NTc4MDYzfQ.wZxLQAHVhfFBtfYxRNYRhdiisk5KexfQRorK3783ASE";
-            # credentials_file = "/var/secrets/prometheus-home-assistant.token";
+            credentials_file = "/var/secrets/prometheus-home-assistant.token";
           };
         }
       ];
