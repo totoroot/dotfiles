@@ -41,5 +41,10 @@ Supported keys: `node`, `blackbox`, `systemd`, `statsd`, `smartctl`, `nginx`,
 - `tailscale`: Tailscale exporter
 - `wireguard`: WireGuard exporter
 - `process`: Process exporter (per-process stats)
-- `nextcloud`: Nextcloud exporter
+- `nextcloud`: Nextcloud exporter. Generate and set the serverinfo token on the Nextcloud host:
+  ```
+  TOKEN=$(openssl rand -hex 32)
+  sudo -u nextcloud /run/current-system/sw/bin/nextcloud-occ \
+      config:app:set serverinfo token --value "$TOKEN"
+  ```
 - `immich`: Immich exporter (custom container)
