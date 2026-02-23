@@ -2161,7 +2161,12 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 42,
-  "tags": [],
+  "tags": [
+    "postgres",
+    "postgresql"
+    "databases"
+    "prometheus"
+  ],
   "templating": {
     "list": [
       {
