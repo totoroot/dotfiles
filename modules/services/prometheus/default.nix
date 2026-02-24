@@ -173,6 +173,13 @@ in
             targets = mkTargetsFor 9187 (if cfg.scrapeHosts ? postgres then cfg.scrapeHosts.postgres else null);
           }];
         }
+        (mkIf (config.services.endlessh-go.enable && config.services.endlessh-go.prometheus.enable) {
+          job_name = "endlessh-go";
+          static_configs = [{
+            targets = mkTargetsFor config.services.endlessh-go.prometheus.port
+              (if cfg.scrapeHosts ? endlesshGo then cfg.scrapeHosts.endlesshGo else null);
+          }];
+        })
         {
           job_name = "nextcloud";
           scrape_interval = "10m";

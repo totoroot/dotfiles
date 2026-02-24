@@ -78,6 +78,7 @@ in
           speedtest = [ "localhost" "violet-ts"];
           homeAssistant = [ "violet-ts" ];
           postgres = [ "localhost" "violet-ts" ];
+          endlesshGo = [ "localhost" ];
           immich = [ "violet-ts" ];
         };
         exporters = {
@@ -96,6 +97,22 @@ in
       webmail.enable = true;
       wordpress.enable = false;
     };
+  };
+
+  services.endlessh-go = {
+    enable = true;
+    listenAddress = "0.0.0.0";
+    port = 22;
+    openFirewall = true;
+    prometheus = {
+      enable = true;
+    };
+  };
+
+  services.openssh = {
+    enable = true;
+    ports = [ 21042 ];
+    openFirewall = true;
   };
 
 
