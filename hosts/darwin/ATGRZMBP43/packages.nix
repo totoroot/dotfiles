@@ -5,6 +5,10 @@ let
   ]);
 in
 {
+  modules.home.zsh.rcInit = mkAfter ''
+    alias excod='tail -n2 $(ls -t ~/.codex/sessions/*/*/*/*.jsonl | head -n1) | jq -r '"'"'select(.payload.content) |.payload.content[0].text'"'"' | kitten clipboard'
+  '';
+
   modules.home.unfreePackages = {
     enable = true;
     packageNames = [
@@ -176,8 +180,8 @@ in
     # A terminal based graphical activity monitor inspired by gtop and vtop
     gotop
 
-	# AI Agents (urgggghh!!)
-	# Lightweight coding agent that runs in your terminal
+  	# AI Agents (urgggghh!!)
+  	# Lightweight coding agent that runs in your terminal
     codex
     # AI coding agent built for the terminal
     opencode
@@ -189,26 +193,4 @@ in
     # rcat from flake
     inputs.rcat.packages.${pkgs.system}.default
   ];
-
-  # # Create symlinks for home-manager packages in ~/Applications
-  # home.activation = {
-  # copyApplications = let
-  # apps = pkgs.buildEnv {
-  # name = "home-manager-applications";
-  # paths = config.home.packages;
-  # pathsToLink = "/Applications";
-  # };
-  # in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  # baseDir="$HOME/Applications/HomeManager"
-  # if [ -d "$baseDir" ]; then
-  # rm -rf "$baseDir"
-  # fi
-  # mkdir -p "$baseDir"
-  # for appFile in ${apps}/Applications/*; do
-  # target="$baseDir/$(basename "$appFile")"
-  # $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-  # $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-  # done
-  # '';
-  # };
 }
