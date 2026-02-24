@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -z "${GITHUB_TOKEN:-}" ]; then
+  echo "GITHUB_TOKEN is not set." >&2
+  exit 1
+fi
+
+file_path="${1:-}"
+if [ -z "$file_path" ]; then
+  printf "File to publish: "
+  read -r file_path
+fi
+if [ -z "$file_path" ] || [ ! -f "$file_path" ]; then
+  echo "File not found: $file_path" >&2
+  exit 1
+fi
+
+printf "Gist description: "
+read -r description
+
+export FILE_PATH="$file_path"
+export GIST_DESC="$description"
+
+python3 - <<'PY' | curl -sS -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" -d @- https://api.github.com/gists
+import json, pathlib, os, sys
+
+file_path = os.environ.get("FILE_PATH", "")
+desc = os.environ.get("GIST_DESC", "")
+
+if not file_path:
+    print("Missing file path", file=sys.stderr)
+    sys.exit(1)
+
+p = pathlib.Path(file_path)
+if not p.is_file():
+    print(f"File not found: {file_path}", file=sys.stderr)
+    sys.exit(1)
+
+payload = {
+    "public": True,
+    "description": desc,
+    "files": {
+        p.name: {
+            "content": p.read_text()
+        }
+    }
+}
+print(json.dumps(payload))
+PY
