@@ -6,6 +6,7 @@ let
 in
 {
   modules.home.zsh.rcInit = lib.mkAfter ''
+    # Copy the most recent Codex session reply to the clipboard.
     alias excod='tail -n2 $(ls -t ~/.codex/sessions/*/*/*/*.jsonl | head -n1) | jq -r '"'"'select(.payload.content) |.payload.content[0].text'"'"' | kitten clipboard'
   '';
 
