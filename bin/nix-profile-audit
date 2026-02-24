@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Audit nix profile entries: list binaries from nix profile that are also
+# available elsewhere on PATH, print a markdown table (rendered by glow if
+# installed), then optionally remove profile entries whose tools are all
+# available from other paths.
+
+export PROFILE_JSON
+PROFILE_JSON="$(nix profile list --json)"
+
+tmp="$(mktemp --suffix=.md)"
+ids_tmp="$(mktemp)"
+export IDS_TMP="$ids_tmp"
+python3 - <<'PY' >"$tmp"
+import json, os, subprocess, sys
+
+profile = json.loads(os.environ['PROFILE_JSON'])
+rows = []
+removable_ids = []
+
+user = os.environ.get("USER", "")
+extra_dirs = []
+if user:
+    extra_dirs.append(f"/etc/profiles/per-user/{user}/bin")
+    extra_dirs.append(f"/nix/var/nix/profiles/per-user/{user}/profile/bin")
+extra_dirs.append("/run/current-system/sw/bin")
+extra_dirs.append("/nix/var/nix/profiles/default/bin")
+
+profile_bin_dirs = []
+if user:
+    profile_bin_dirs.append(f"/nix/var/nix/profiles/per-user/{user}/profile/bin")
+profile_bin_dirs.append(os.path.expanduser("~/.nix-profile/bin"))
+
+
+def is_exec_file(path: str) -> bool:
+    return os.path.isfile(path) and os.access(path, os.X_OK)
+
+
+def normalize_dir(path: str) -> str:
+    try:
+        return os.path.realpath(path)
+    except OSError:
+        return path
+
+
+def path_candidates(name: str):
+    candidates = []
+    for d in os.environ.get("PATH", "").split(os.pathsep) + extra_dirs:
+        if not d:
+            continue
+        p = os.path.join(d, name)
+        if is_exec_file(p):
+            candidates.append(p)
+    return candidates
+
+
+profile_bin_dirs = list({normalize_dir(d) for d in profile_bin_dirs})
+
+
+for entry_key, entry in profile.get('elements', {}).items():
+    entry_id = entry.get('id') or entry_key
+    store_paths = entry.get('storePaths', [])
+    if not store_paths:
+        continue
+    # collect binaries from store paths that are actually on PATH
+    bins = []
+    seen = set()
+    for sp in store_paths:
+        bin_dir = os.path.join(sp, "bin")
+        if not os.path.isdir(bin_dir):
+            continue
+        for name in os.listdir(bin_dir):
+            p = os.path.join(bin_dir, name)
+            if not is_exec_file(p):
+                continue
+            try:
+                target = os.path.realpath(p)
+            except OSError:
+                continue
+            key = (name, target)
+            if key in seen:
+                continue
+            candidates = path_candidates(name)
+            if not candidates:
+                continue
+            seen.add(key)
+            bins.append((name, p, target))
+
+    if not bins:
+        continue
+
+    entry_all_have_alt = True
+    for name, profile_path, target in sorted(bins):
+        candidates = path_candidates(name)
+        alt_path = ''
+        for c in candidates:
+            c_dir = normalize_dir(os.path.dirname(c))
+            if c_dir in profile_bin_dirs:
+                continue
+            alt_path = c
+            break
+        found_elsewhere = bool(alt_path)
+        if not found_elsewhere:
+            entry_all_have_alt = False
+        rows.append([
+            str(entry_id),
+            name,
+            target,
+            alt_path if alt_path else '—',
+            'yes' if found_elsewhere else 'no',
+        ])
+
+    if entry_all_have_alt:
+        removable_ids.append(entry_id)
+
+print("| package name | binary | profile path | alternate path | found elsewhere |")
+print("|---:|------|--------------|------------|-----------------|" )
+for r in rows:
+    print("| {} | {} | {} | {} | {} |".format(*r))
+
+if not removable_ids:
+    print("\nNo profile entries appear removable (every tool lacks an alternate path).")
+    sys.exit(0)
+
+print("\nEntries with all tools found elsewhere:")
+print(" " + " ".join(str(x) for x in removable_ids))
+
+with open(os.environ["IDS_TMP"], "w") as f:
+    f.write(" ".join(str(x) for x in removable_ids))
+PY
+
+
+if command -v glow >/dev/null 2>&1; then
+  glow -w 0 "$tmp"
+else
+  cat "$tmp"
+fi
+
+ids="$(cat "$ids_tmp" 2>/dev/null || true)"
+rm -f "$tmp" "$ids_tmp"
+
+if [ -z "$ids" ]; then
+  exit 0
+fi
+
+printf "Remove these entries from the profile? [y/N] "
+read -r resp
+resp="${resp,,}"
+if [ "$resp" = "y" ] || [ "$resp" = "yes" ]; then
+  echo "" && echo "Running: nix profile remove $ids"
+  nix profile remove $ids
+fi
