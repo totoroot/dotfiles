@@ -13,6 +13,13 @@ let
           (attrNames defaultHostConfig);
     in
     listToAttrs pairs;
+  jamPort = 21042;
+  defaultEntriesWithPorts =
+    defaultEntries
+    // {
+      jam = (defaultEntries.jam or { host = "jam"; }) // { port = jamPort; };
+      "jam-ts" = (defaultEntries."jam-ts" or { host = "jam-ts"; }) // { port = jamPort; };
+    };
   mkMatchBlock = name: hostCfg:
     let
       user = hostCfg.user or cfg.defaultUser;
@@ -74,7 +81,7 @@ in
           };
         };
       }
-      (mapAttrs mkMatchBlock (defaultEntries // cfg.entries))
+      (mapAttrs mkMatchBlock (defaultEntriesWithPorts // cfg.entries))
     ];
   };
 }
