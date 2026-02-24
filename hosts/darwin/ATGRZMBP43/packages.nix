@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents( with pkgs.google-cloud-sdk.components; [
     gke-gcloud-auth-plugin
   ]);
 in
 {
-  modules.home.zsh.rcInit = mkAfter ''
+  modules.home.zsh.rcInit = lib.mkAfter ''
     alias excod='tail -n2 $(ls -t ~/.codex/sessions/*/*/*/*.jsonl | head -n1) | jq -r '"'"'select(.payload.content) |.payload.content[0].text'"'"' | kitten clipboard'
   '';
 
