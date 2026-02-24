@@ -107,6 +107,9 @@ in
     prometheus = {
       enable = true;
     };
+    extraOptions = [
+      "-geoip_supplier=ip-api"
+    ];
   };
 
   services.openssh = {
