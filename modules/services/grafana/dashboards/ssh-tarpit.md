@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 46,
+  "id": 0,
   "links": [
     {
       "asDropdown": false,
@@ -950,105 +950,92 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
+          "links": [],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#96D98D",
+                "color": "green",
                 "value": 0
               }
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Last Connection"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "IP"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "search ARIN",
+                    "url": "https://search.arin.net/rdap/?query=${__data.fields.IP}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Trapped Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 4,
         "w": 12,
         "x": 0,
         "y": 7
       },
-      "id": 48,
+      "id": 50,
       "options": {
-        "basemap": {
-          "config": {},
-          "name": "Layer 0",
-          "type": "default"
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
         },
-        "controls": {
-          "mouseWheelZoom": false,
-          "showAttribution": false,
-          "showDebug": false,
-          "showMeasure": false,
-          "showScale": false,
-          "showZoom": true
-        },
-        "layers": [
-          {
-            "config": {
-              "color": {
-                "field": "Connections",
-                "fixed": "dark-green"
-              },
-              "fillOpacity": 0.4,
-              "shape": "circle",
-              "showLegend": false,
-              "size": {
-                "field": "Connections",
-                "fixed": 5,
-                "max": 10,
-                "min": 2
-              },
-              "style": {
-                "color": {
-                  "field": "Connections",
-                  "fixed": "dark-green"
-                },
-                "size": {
-                  "field": "Connections",
-                  "fixed": 5,
-                  "max": 9,
-                  "min": 2
-                },
-                "text": {
-                  "field": "location (lastNotNull) (lastNotNull)",
-                  "fixed": "",
-                  "mode": "fixed"
-                }
-              }
-            },
-            "location": {
-              "geohash": "Geohash",
-              "mode": "geohash"
-            },
-            "name": "Layer 1",
-            "type": "markers"
-          }
-        ],
-        "tooltip": {
-          "mode": "details"
-        },
-        "view": {
-          "allLayers": true,
-          "id": "zero",
-          "lat": 0,
-          "lon": 0,
-          "noRepeat": false,
-          "zoom": 1
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "12.3.3",
       "targets": [
@@ -1058,15 +1045,67 @@
             "uid": "-- Dashboard --"
           },
           "panelId": 36,
-          "refId": "A"
+          "refId": "A",
+          "withTransforms": false
         }
       ],
-      "title": "Locations",
+      "title": "Maximum desperation",
       "transformations": [
         {
-          "id": "filterByRefId",
+          "id": "filterByValue",
           "options": {
-            "include": "Seen"
+            "filters": [
+              {
+                "config": {
+                  "id": "greaterOrEqual",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Value #Seen"
+              },
+              {
+                "config": {
+                  "id": "greaterOrEqual",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Value #Trapped"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Seen",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Value #Seen"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Trapped",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Value #Trapped"
+              ],
+              "reducer": "sum"
+            }
           }
         },
         {
@@ -1080,10 +1119,19 @@
                     "value": 0
                   }
                 },
-                "fieldName": "Value #Seen"
+                "fieldName": "Seen"
+              },
+              {
+                "config": {
+                  "id": "greaterOrEqual",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Trapped"
               }
             ],
-            "match": "any",
+            "match": "all",
             "type": "include"
           }
         },
@@ -1091,25 +1139,51 @@
           "id": "groupBy",
           "options": {
             "fields": {
-              "Value #Seen": {
+              "Seen": {
                 "aggregations": [
                   "sum"
                 ],
                 "operation": "aggregate"
               },
-              "geohash": {
+              "Time": {
                 "aggregations": [
-                  "lastNotNull"
+                  "max"
                 ],
-                "operation": "groupby"
+                "operation": "aggregate"
               },
-              "location": {
+              "Trapped": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "country": {
                 "aggregations": [
                   "lastNotNull"
                 ],
                 "operation": "aggregate"
+              },
+              "ip": {
+                "aggregations": [],
+                "operation": "groupby"
               }
             }
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "ip"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
           }
         },
         {
@@ -1117,19 +1191,23 @@
           "options": {
             "excludeByName": {},
             "indexByName": {
-              "Value #geo (lastNotNull) (sum)": 2,
-              "geohash (lastNotNull)": 0,
-              "location (lastNotNull) (lastNotNull)": 1
+              "Seen (sum)": 3,
+              "Time (max)": 0,
+              "Trapped (sum)": 4,
+              "country (lastNotNull)": 2,
+              "ip": 1
             },
             "renameByName": {
-              "Value #Seen (sum)": "Connections",
-              "geohash": "Geohash",
-              "location (lastNotNull)": "Location"
+              "Seen (sum)": "Connections",
+              "Time (max)": "Last Connection",
+              "Trapped (sum)": "Trapped Time",
+              "country (lastNotNull)": "Country",
+              "ip": "IP"
             }
           }
         }
       ],
-      "type": "geomap"
+      "type": "stat"
     },
     {
       "datasource": {
@@ -1219,9 +1297,9 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 12,
         "w": 12,
-        "x": 12,
+        "x": 0,
         "y": 11
       },
       "id": 49,
@@ -1231,8 +1309,8 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": true,
-            "displayName": "Trapped Time"
+            "desc": false,
+            "displayName": "Last Connection"
           }
         ]
       },
@@ -1406,6 +1484,192 @@
         }
       ],
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#96D98D",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 48,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": false,
+          "showAttribution": false,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "color": {
+                "field": "Connections",
+                "fixed": "dark-green"
+              },
+              "fillOpacity": 0.4,
+              "shape": "circle",
+              "showLegend": false,
+              "size": {
+                "field": "Connections",
+                "fixed": 5,
+                "max": 10,
+                "min": 2
+              },
+              "style": {
+                "color": {
+                  "field": "Connections",
+                  "fixed": "dark-green"
+                },
+                "size": {
+                  "field": "Connections",
+                  "fixed": 5,
+                  "max": 9,
+                  "min": 2
+                },
+                "text": {
+                  "field": "location (lastNotNull) (lastNotNull)",
+                  "fixed": "",
+                  "mode": "fixed"
+                }
+              }
+            },
+            "location": {
+              "geohash": "Geohash",
+              "mode": "geohash"
+            },
+            "name": "Layer 1",
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "zero",
+          "lat": 0,
+          "lon": 0,
+          "noRepeat": false,
+          "zoom": 1
+        }
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 36,
+          "refId": "A"
+        }
+      ],
+      "title": "Locations",
+      "transformations": [
+        {
+          "id": "filterByRefId",
+          "options": {
+            "include": "Seen"
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greaterOrEqual",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Value #Seen"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value #Seen": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "geohash": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "groupby"
+              },
+              "location": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Value #geo (lastNotNull) (sum)": 2,
+              "geohash (lastNotNull)": 0,
+              "location (lastNotNull) (lastNotNull)": 1
+            },
+            "renameByName": {
+              "Value #Seen (sum)": "Connections",
+              "geohash": "Geohash",
+              "location (lastNotNull)": "Location"
+            }
+          }
+        }
+      ],
+      "type": "geomap"
     }
   ],
   "preload": false,
@@ -1508,6 +1772,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "SSH Tarpit",
-  "uid": "ATIxYkO7kp",
-  "version": 1
+  "uid": "ATIxYkO7k",
+  "version": 4
 }
