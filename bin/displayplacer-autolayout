@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+displayplacer_bin="/opt/homebrew/bin/displayplacer"
+if ! command -v "$displayplacer_bin" >/dev/null 2>&1; then
+  displayplacer_bin="$(command -v displayplacer || true)"
+fi
+if [ -z "${displayplacer_bin:-}" ]; then
+  exit 0
+fi
+
+state_file="/tmp/displayplacer-layout-state"
+internal_id="37D8832A-2D66-02CA-B9F7-8F30A301B230"
+
+internal_enabled="$("$displayplacer_bin" list | awk -v id="$internal_id" '
+  $0 ~ "Persistent screen id: " id {in=1}
+  in && $0 ~ "Enabled: true" {print "true"; exit}
+  in && $0 ~ "Persistent screen id:" && $0 !~ id {in=0}
+  END { }
+')"
+
+if [ "$internal_enabled" = "true" ]; then
+  desired_state="with-internal"
+  cmd=(
+    "$displayplacer_bin"
+    "id:12D094C6-867B-4D11-AB5D-58E342724CB6 res:2560x1440 hz:75 color_depth:8 enabled:true scaling:off origin:(0,0) degree:0"
+    "id:3C2EF224-226C-408C-A709-A5F54A0E6BEE res:2560x1440 hz:75 color_depth:8 enabled:true scaling:off origin:(2560,0) degree:0"
+    "id:37D8832A-2D66-02CA-B9F7-8F30A301B230 res:1512x982 hz:120 color_depth:8 enabled:true scaling:on origin:(-1512,458) degree:0"
+  )
+else
+  desired_state="external-only"
+  cmd=(
+    "$displayplacer_bin"
+    "id:12D094C6-867B-4D11-AB5D-58E342724CB6 res:2560x1440 hz:75 color_depth:8 enabled:true scaling:off origin:(0,0) degree:0"
+    "id:3C2EF224-226C-408C-A709-A5F54A0E6BEE res:2560x1440 hz:75 color_depth:8 enabled:true scaling:off origin:(2560,0) degree:0"
+  )
+fi
+
+if [ -f "$state_file" ] && [ "$(cat "$state_file")" = "$desired_state" ]; then
+  exit 0
+fi
+
+"${cmd[@]}"
+echo "$desired_state" > "$state_file"

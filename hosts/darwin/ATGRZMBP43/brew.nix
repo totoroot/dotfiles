@@ -16,6 +16,7 @@
       "kube-ps1"
       "qemu"
       "podman"
+      "displayplacer"
     ];
     casks = [
       # Advanced file renaming utility
