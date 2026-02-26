@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 {
   homebrew = {
     enable = true;
@@ -45,4 +45,12 @@
      HOMEBREW_NO_UPDATE_REPORT_FORMULAE = "TRUE";
      HOMEBREW_NO_UPDATE_REPORT_CASKS = "TRUE";
   };
+
+  environment.systemPath = lib.mkAfter [
+    "/opt/homebrew/bin"
+  ];
+
+  home-manager.users.${config.system.primaryUser}.programs.zsh.initExtra = ''
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  '';
 }
