@@ -5,15 +5,15 @@ let
   ]);
 in
 {
-  modules.home.zsh.rcInit = lib.mkAfter ''
-    # Copy the most recent Codex session reply to the clipboard.
-    vibe(){ tail -n2 $(ls -t ~/.codex/sessions/*/*/*/*.jsonl | head -n1) | jq -r 'select(.payload.content) |.payload.content[0].text' | kitten clipboard; }
-  '';
+  # modules.home.zsh.rcInit = lib.mkAfter ''
+  #   # Copy the most recent Codex session reply to the clipboard.
+  #   vibe(){ tail -n2 $(ls -t ~/.codex/sessions/*/*/*/*.jsonl | head -n1) | jq -r 'select(.payload.content) |.payload.content[0].text' | kitten clipboard; }
+  # '';
 
   modules.home.unfreePackages = {
     enable = true;
     packageNames = [
-      "rectangle-pro"
+      # "rectangle-pro"
       "orbstack"
     ];
   };
@@ -132,7 +132,8 @@ in
     # Simple clipboard manager for macOS
     maccy
     # Move and resize windows in macOS using keyboard shortcuts or snap areas
-    rectangle-pro
+    # rectangle-pro
+    rectangle
     # Tiny menu bar calendar
 	  itsycal
     # Keymap remap utilility
@@ -183,7 +184,7 @@ in
 
   	# AI Agents (urgggghh!!)
   	# Lightweight coding agent that runs in your terminal
-    codex
+    # codex
     # AI coding agent built for the terminal
     opencode
 
@@ -193,5 +194,7 @@ in
 
     # rcat from flake
     inputs.rcat.packages.${pkgs.system}.default
+
+    llmfit
   ];
 }
