@@ -23,6 +23,11 @@ in
         [Definition]
         failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
       '';
+      # SSH invalid-user jail (ban any user != mathym).
+      # "fail2ban/filter.d/sshd-invalid-user.conf".text = ''
+      #   [Definition]
+      #   failregex = ^%(__prefix_line)sInvalid user (?!mathym\b).*$\n            ^%(__prefix_line)sFailed password for invalid user (?!mathym\b).*$\n            ^%(__prefix_line)sFailed publickey for invalid user (?!mathym\b).*$\n            ^%(__prefix_line)sUser not known to the underlying authentication module for user (?!mathym\b).*$\n      #   ignoreregex =
+      # '';
     };
 
     services.fail2ban = {
@@ -60,6 +65,15 @@ in
           maxretry = 5
           findtime = 600
         '';
+        # SSH invalid-user jail (ban any user != mathym).
+        # "sshd-invalid-user" = ''
+        #   enabled = true
+        #   filter = sshd-invalid-user
+        #   backend = systemd
+        #   journalmatch = _SYSTEMD_UNIT=sshd.service
+        #   maxretry = 1
+        #   findtime = 600
+        # '';
         # nginx-req-limit.settings = {
         #   enabled = true;
         #   filter = "nginx-req-limit";
