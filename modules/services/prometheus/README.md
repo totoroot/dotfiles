@@ -47,4 +47,13 @@ Supported keys: `node`, `blackbox`, `systemd`, `statsd`, `smartctl`, `nginx`,
   sudo -u nextcloud /run/current-system/sw/bin/nextcloud-occ \
       config:app:set serverinfo token --value "$TOKEN"
   ```
+- `postgres`: Postgres exporter. Create a minimal read-only role for the exporter:
+  ```
+  sudo -u postgres psql <<'SQL'
+  CREATE ROLE "postgres-exporter" WITH LOGIN;
+  GRANT pg_monitor TO "postgres-exporter";
+  SQL
+  ```
+  If you run Postgres as non-superuser (e.g. managed DB/RDS), create the user
+  explicitly and grant `pg_monitor` (or `pg_read_all_stats` on older setups).
 - `immich`: Immich exporter (custom container)
