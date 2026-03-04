@@ -42,10 +42,13 @@ in
       kubeseal
       # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents
       yq-go
+      # Clean up Kubernetes yaml and json output to make it readable
+      kubectl-neat
     ];
 
     home.sessionVariables = {
       KUBECONFIG = "$HOME/.config/k8s/config";
+      K9S_CONFIG_DIR = "$HOME/.config/k9s";
     };
 
     home.sessionPath = [
