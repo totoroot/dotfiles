@@ -1,9 +1,10 @@
 k9s:
+  skin: dracula
   refreshRate: 2
   maxConnRetry: 5
   enableMouse: false
   headless: false
-  logoless: false
+  logoless: true
   crumbsless: false
   readOnly: false
   noExitOnCtrlC: false
