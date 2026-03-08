@@ -218,8 +218,22 @@
     description = "Assemble md0 after LUKS unlock";
     wantedBy = [ "multi-user.target" ];
     after = [ "luks-open-quad.service" ];
+    requires = [ "luks-open-quad.service" ];
     serviceConfig.Type = "oneshot";
-    script = "/run/current-system/sw/bin/mdadm --assemble --scan";
+    script = ''
+      set -euo pipefail
+      for dev in /dev/mapper/luks-disk1 /dev/mapper/luks-disk2 /dev/mapper/luks-disk3 /dev/mapper/luks-disk4; do
+        if [[ ! -b "$dev" ]]; then
+          echo "Missing $dev; skipping mdadm assemble."
+          exit 0
+        fi
+      done
+      /run/current-system/sw/bin/mdadm --assemble /dev/md0 \
+        /dev/mapper/luks-disk1 \
+        /dev/mapper/luks-disk2 \
+        /dev/mapper/luks-disk3 \
+        /dev/mapper/luks-disk4
+    '';
   };
 
   systemd.services.lvm-activate-quad = {
