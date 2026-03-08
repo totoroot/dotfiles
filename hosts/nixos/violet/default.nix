@@ -154,6 +154,10 @@
     "--device=/dev/sdf"
   ];
 
+  environment.systemPackages = with pkgs; [
+    mdadm
+  ];
+
   # macOS Time Machine configuration
   services.netatalk.settings = {
     "Time Machine Vika" = {
@@ -215,7 +219,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "luks-open-quad.service" ];
     serviceConfig.Type = "oneshot";
-    script = "${pkgs.mdadm}/bin/mdadm --assemble --scan";
+    script = "/run/current-system/sw/bin/mdadm --assemble --scan";
   };
 
   systemd.services.lvm-activate-quad = {
@@ -223,7 +227,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "mdadm-assemble-quad.service" ];
     serviceConfig.Type = "oneshot";
-    script = "${pkgs.lvm2}/bin/vgchange -ay";
+    script = "/run/current-system/sw/bin/vgchange -ay";
   };
 
 
