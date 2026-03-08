@@ -5,9 +5,9 @@ let
     path = ../../../secrets/violet.yaml;
     name = "violet-secrets";
   };
-  mkSecret = { key, path, owner ? "root", group ? "root", mode ? "0400", format ? "yaml", neededForBoot ? false }: {
+  mkSecret = { key, path, owner ? "root", group ? "root", mode ? "0400", format ? "yaml" }: {
     sopsFile = secretsFile;
-    inherit key path owner mode format neededForBoot;
+    inherit key path owner mode format;
   } // lib.optionalAttrs (group != null) { inherit group; };
 in
 {
@@ -23,7 +23,6 @@ in
         key = "QUAD_LUKS_KEY";
         path = "/run/secrets/luks-key";
         mode = "0400";
-        neededForBoot = true;
       };
       immich-exporter-env = mkSecret {
         key = "IMMICH_API_TOKEN";
