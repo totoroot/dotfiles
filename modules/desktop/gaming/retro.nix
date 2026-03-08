@@ -13,11 +13,9 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       # Classic 2D jump'n run sidescroller game
-      superTux
+      supertux
       # Free 3D kart racing game
-      # TODO currently broken
-      # See https://github.com/NixOS/nixpkgs/issues/445447
-      # superTuxKart
+      supertuxkart
       # Multi-platform emulator frontend for libretro cores
       retroarch
     ];
