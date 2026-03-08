@@ -29,10 +29,10 @@ in
       };
     };
 
-    # Open firewall for netatalk
-    # TODO Only open the port for local network
-    networking.firewall.allowedTCPPorts = [
-      548
-    ];
+    # Open firewall for netatalk (local network only)
+    networking.firewall.extraCommands = ''
+      iptables -A nixos-fw -p tcp --source 10.0.0.0/24 --dport 548 -j nixos-fw-accept
+      iptables -A nixos-fw -p udp --source 10.0.0.0/24 --dport 5353 -j nixos-fw-accept
+    '';
   };
 }
