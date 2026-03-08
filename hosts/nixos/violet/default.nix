@@ -134,6 +134,10 @@
     ssh.startAgent = true;
   };
 
+  users.users."matthias.thym" = {
+    isNormalUser = true;
+  };
+
   # NixOS networking configuration
   networking = {
     networkmanager.enable = true;
