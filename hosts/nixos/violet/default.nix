@@ -203,7 +203,7 @@
     };
   };
   boot.initrd.secrets = {
-    "/etc/crypto_keyfile.bin" = config.sops.secrets.luks-key.path;
+    "/etc/crypto_keyfile.bin" = "/etc/crypto_keyfile.bin";
   };
 
 

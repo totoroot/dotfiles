@@ -18,3 +18,5 @@ My most beautiful and beefy server. Still the same motherboard as when we starte
   - LUKS array uses a single shared keyfile with initrd unlock; mapper names are `luks-disk1..4` for consistency.
   - Keyfile secret name: `QUAD_LUKS_KEY` in `secrets/violet.yaml` (YAML `|-` to avoid trailing newline).
   - Optional TPM2 unlock: see TODO.md for enrollment commands and notes about re-enrolling after motherboard changes.
+  - Current approach: unencrypted keyfile at `/etc/crypto_keyfile.bin` (fallback) + TPM2 unlock slots enrolled on each disk.
+  - Nix config assumes keyfile exists at `/etc/crypto_keyfile.bin` and embeds it into initrd.
