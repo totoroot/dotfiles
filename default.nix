@@ -79,15 +79,17 @@ with inputs;
           fi
         '';
       };
-      needsreboot = {
-        supportsDryActivation = true;
-        text = ''
-          if [[ -e /run/current-system ]]; then
-            echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
-            /run/current-system/sw/bin/nixos-needsreboot
-          fi
-        '';
-      };
+      # Disabled temporarily because nixos-needsreboot fails during activation
+      # and breaks nixos-rebuild test/switch on violet.
+      # needsreboot = {
+      #   supportsDryActivation = true;
+      #   text = ''
+      #     if [[ -e /run/current-system ]]; then
+      #       echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
+      #       /run/current-system/sw/bin/nixos-needsreboot
+      #     fi
+      #   '';
+      # };
     };
   };
 

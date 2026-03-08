@@ -31,6 +31,20 @@
 - Make disk clone of raspberry and mulberry after successful boot into new generation
 - Fix "warning: optionsDocBook is deprecated since 23.11 and will be removed in 24.05"
 - Fix "warning: mdadm: Neither MAILADDR nor PROGRAM has been set. This will cause the `mdmon` service to crash."
+- Re-enable `needsreboot` activation hook after fixing nixos-needsreboot failure on violet
+- Violet: optional TPM2 unlock for LUKS array (keep keyfile fallback)
+    + Keyfile secret: `QUAD_LUKS_KEY` in `secrets/violet.yaml` (YAML `|-` to avoid trailing newline).
+    + Prereqs: confirm TPM2 device present (`/dev/tpmrm0`).
+    - [ ] Enroll TPM for each LUKS device (default PCRs):
+          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/f9c857dc-b812-47e2-ba29-57a28a54aec5
+          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/a3e9833a-7895-4433-829c-b8e433312174
+          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/cdf77a2a-f0c4-4a25-b6a2-e9b8c732c5bb
+          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/c0dbea84-1277-413d-81fb-78e873ec385b
+    - [ ] Rebuild + reboot and verify auto-unlock via TPM:
+          nixos-rebuild switch
+          reboot
+          lsblk -f
+    - [ ] If motherboard changes or TPM reset: re-enroll or fall back to keyfile.
 - Run ssh-setup script after install to add host key to Codeberg and update remote
 - Fix random sleep issues on purple
 - Add Firefox extension configs (uBlock Origin, Sidebery, uBlacklist etc.)
