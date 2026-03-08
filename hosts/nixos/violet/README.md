@@ -20,3 +20,4 @@ My most beautiful and beefy server. Still the same motherboard as when we starte
   - Optional TPM2 unlock: see TODO.md for enrollment commands and notes about re-enrolling after motherboard changes.
   - Current approach: unencrypted keyfile at `/etc/crypto_keyfile.bin` (fallback) + TPM2 unlock slots enrolled on each disk.
   - Nix config assumes keyfile exists at `/etc/crypto_keyfile.bin` and embeds it into initrd.
+  - Not using sops-nix for initrd key: sops-nix installs secrets at activation time, which happens after initrd is built. Without the documented `nixos-rebuild test` workaround, initrd cannot embed secrets reliably. To avoid fragile boot flows, the keyfile is kept outside sops.
