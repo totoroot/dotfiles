@@ -160,15 +160,15 @@
 
   # macOS Time Machine configuration
   services.netatalk.settings = {
-    "Time Machine Vika" = {
+    "Time Machine Wine" = {
       "time machine" = "yes";
-      path = "/mnt/time-machine-vika";
-      "valid users" = "vika";
+      path = "/mnt/time-machine-wine";
+      "valid users" = "mathym";
     };
-    "Time Machine Mara" = {
+    "Time Machine ATGRZMBP43" = {
       "time machine" = "yes";
-      path = "/mnt/time-machine-mara";
-      "valid users" = "mara";
+      path = "/mnt/time-machine-atgrzmbp43";
+      "valid users" = "matthias.thym";
     };
   };
 
