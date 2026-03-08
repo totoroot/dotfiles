@@ -182,12 +182,6 @@ in
     # A terminal based graphical activity monitor inspired by gtop and vtop
     gotop
 
-  	# AI Agents (urgggghh!!)
-  	# Lightweight coding agent that runs in your terminal
-    # codex
-    # AI coding agent built for the terminal
-    opencode
-
     orbstack
     # Open source source code editor developed by Microsoft for Windows, Linux and macOS (VS Code without MS branding/telemetry/licensing)
     vscodium

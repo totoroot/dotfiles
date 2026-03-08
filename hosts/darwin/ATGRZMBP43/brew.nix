@@ -25,7 +25,7 @@
       "ungoogled-chromium"
       "gimp"
       # Offline AI chat tool
-	    "jan"
+	    # "jan"
       # Keyboard layout for Europeans, coders and translators
       "eurkey"
       "gpg-suite"
@@ -37,7 +37,7 @@
       "sensiblesidebuttons"
       "xquartz"
       "lunar"
-      "spotify"
+      # "spotify"
     ];
     taps = [];
   };
@@ -50,7 +50,7 @@
     "/opt/homebrew/bin"
   ];
 
-  home-manager.users.${config.system.primaryUser}.programs.zsh.initExtra = ''
+  home-manager.users.${config.system.primaryUser}.programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"
   '';
 }
