@@ -235,6 +235,12 @@
     serviceConfig.Type = "oneshot";
     script = ''
       set -euo pipefail
+      if [[ -e /dev/md0 ]]; then
+        exit 0
+      fi
+      if [[ -r /proc/mdstat ]] && grep -q '^md0 ' /proc/mdstat; then
+        exit 0
+      fi
       for dev in /dev/mapper/luks-disk1 /dev/mapper/luks-disk2 /dev/mapper/luks-disk3 /dev/mapper/luks-disk4; do
         if [[ ! -b "$dev" ]]; then
           echo "Missing $dev; skipping mdadm assemble."
