@@ -197,6 +197,15 @@
         exit 0
       fi
 
+      decoded_keyfile="$keyfile"
+      tmp_keyfile=""
+      if ${pkgs.coreutils}/bin/base64 -d "$keyfile" > /dev/null 2>&1; then
+        tmp_keyfile="$(mktemp /run/quad-luks-key.XXXXXX)"
+        ${pkgs.coreutils}/bin/base64 -d "$keyfile" > "$tmp_keyfile"
+        chmod 0400 "$tmp_keyfile"
+        decoded_keyfile="$tmp_keyfile"
+      fi
+
       unlock() {
         local name="$1"
         local uuid="$2"
@@ -204,13 +213,17 @@
           exit 0
         fi
         ${pkgs.cryptsetup}/bin/cryptsetup luksOpen \
-          "/dev/disk/by-uuid/$uuid" "$name" --key-file "$keyfile" || true
+          "/dev/disk/by-uuid/$uuid" "$name" --key-file "$decoded_keyfile" || true
       }
 
       unlock "luks-disk1" "f9c857dc-b812-47e2-ba29-57a28a54aec5"
       unlock "luks-disk2" "a3e9833a-7895-4433-829c-b8e433312174"
       unlock "luks-disk3" "cdf77a2a-f0c4-4a25-b6a2-e9b8c732c5bb"
       unlock "luks-disk4" "c0dbea84-1277-413d-81fb-78e873ec385b"
+
+      if [[ -n "$tmp_keyfile" ]]; then
+        rm -f "$tmp_keyfile"
+      fi
     '';
   };
 
