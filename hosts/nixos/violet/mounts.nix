@@ -17,7 +17,7 @@
     "/mnt/clone" = {
       device = "/dev/disk/by-label/clone";
       fsType = "ext4";
-      options = [ "noatime" "recovery" "nofail" "x-systemd.device-timeout=5s" ];
+      options = [ "noatime" "nofail" "x-systemd.device-timeout=5s" ];
     };
     "/mnt/backup-grape" = {
       device = "/dev/disk/by-label/bugrape";
