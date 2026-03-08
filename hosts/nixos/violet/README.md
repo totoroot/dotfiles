@@ -13,3 +13,8 @@ My most beautiful and beefy server. Still the same motherboard as when we starte
   - **Power Supply**: BeQuiet SFX Power 3 300W
   - **Case**: Jonsbo N1
   - **System Fans**: Noctua Redux
+
+## Storage Notes
+  - LUKS array uses a single shared keyfile with initrd unlock; mapper names are `luks-disk1..4` for consistency.
+  - Keyfile secret name: `QUAD_LUKS_KEY` in `secrets/violet.yaml` (YAML `|-` to avoid trailing newline).
+  - Optional TPM2 unlock: see TODO.md for enrollment commands and notes about re-enrolling after motherboard changes.

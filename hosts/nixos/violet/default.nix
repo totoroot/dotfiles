@@ -181,21 +181,25 @@
       device = "/dev/disk/by-uuid/f9c857dc-b812-47e2-ba29-57a28a54aec5";
       keyFile = "/etc/crypto_keyfile.bin";
       preLVM = true;
+      crypttabExtraOpts = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
     luks-disk2 = {
       device = "/dev/disk/by-uuid/a3e9833a-7895-4433-829c-b8e433312174";
       keyFile = "/etc/crypto_keyfile.bin";
       preLVM = true;
+      crypttabExtraOpts = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
     luks-disk3 = {
       device = "/dev/disk/by-uuid/cdf77a2a-f0c4-4a25-b6a2-e9b8c732c5bb";
       keyFile = "/etc/crypto_keyfile.bin";
       preLVM = true;
+      crypttabExtraOpts = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
     luks-disk4 = {
       device = "/dev/disk/by-uuid/c0dbea84-1277-413d-81fb-78e873ec385b";
       keyFile = "/etc/crypto_keyfile.bin";
       preLVM = true;
+      crypttabExtraOpts = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
   };
   boot.initrd.secrets = {
