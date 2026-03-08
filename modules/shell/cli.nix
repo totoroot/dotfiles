@@ -42,8 +42,6 @@ in {
       aria2
       # Control media players from command line
       playerctl
-      # Control display brightness from command line
-      light
       # X11 color picker
       # error: 'colorpicker' has been removed due to lack of maintenance upstream. Consider using 'xcolor', 'gcolor3', 'eyedropper' or 'gpick' instead
       # colorpicker
