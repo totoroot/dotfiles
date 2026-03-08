@@ -164,14 +164,14 @@
 
   # macOS Time Machine configuration
   services.netatalk.settings = {
-    "Time Machine Wine" = {
+    "Time Machine Thistle" = {
       "time machine" = "yes";
-      path = "/mnt/time-machine-wine";
+      path = "/mnt/time-machine-thistle";
       "valid users" = "mathym";
     };
-    "Time Machine ATGRZMBP43" = {
+    "Time Machine Work" = {
       "time machine" = "yes";
-      path = "/mnt/time-machine-atgrzmbp43";
+      path = "/mnt/time-machine-work";
       "valid users" = "matthias.thym";
     };
   };

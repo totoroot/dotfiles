@@ -24,13 +24,13 @@
       fsType = "btrfs";
       options = [ "noatime" "recovery" ];
     };
-    "/mnt/time-machine-vika" = {
-      device = "/dev/disk/by-label/tmvika";
+    "/mnt/time-machine-thistle" = {
+      device = "/dev/disk/by-label/tmthistle";
       fsType = "xfs";
       options = [ "noatime" "recovery" ];
     };
-    "/mnt/time-machine-mara" = {
-      device = "/dev/disk/by-label/tmmara";
+    "/mnt/time-machine-work" = {
+      device = "/dev/disk/by-label/work";
       fsType = "xfs";
       options = [ "noatime" "recovery" ];
     };
