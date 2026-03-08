@@ -77,6 +77,19 @@
     };
   };
 
+  launchd.user.agents.ollama-serve = {
+    serviceConfig = {
+      ProgramArguments = [
+        "${pkgs.ollama}/bin/ollama"
+        "serve"
+      ];
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardErrorPath = "/tmp/ollama-serve.err";
+      StandardOutPath = "/tmp/ollama-serve.out";
+    };
+  };
+
   # Keyboard
   system.keyboard = {
     enableKeyMapping = true;

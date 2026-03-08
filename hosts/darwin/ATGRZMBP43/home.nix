@@ -47,6 +47,7 @@ in
     kitty.enable = true;
     kubernetes.enable = true;
     lf.enable = true;
+    llm.enable = true;
     micro.enable = true;
     nushell.enable = true;
     sshHosts = {

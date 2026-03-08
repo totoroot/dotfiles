@@ -15,6 +15,7 @@
     ./modules/kitty.nix
     ./modules/kubernetes.nix
     ./modules/lf.nix
+    ./modules/llm.nix
     ./modules/micro.nix
     ./modules/networking.nix
     ./modules/nushell.nix
