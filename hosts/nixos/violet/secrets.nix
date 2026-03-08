@@ -19,6 +19,11 @@ in
         key = "ATTICD_ENV";
         path = "/etc/atticd.env";
       };
+      luks-key = mkSecret {
+        key = "QUAD_LUKS_KEY";
+        path = "/etc/crypto_keyfile.bin";
+        mode = "0400";
+      };
       immich-exporter-env = mkSecret {
         key = "IMMICH_API_TOKEN";
         path = "/var/secrets/immich-exporter.env";
