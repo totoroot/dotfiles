@@ -23,6 +23,7 @@ in
         key = "QUAD_LUKS_KEY";
         path = "/etc/crypto_keyfile.bin";
         mode = "0400";
+        neededForBoot = true;
       };
       immich-exporter-env = mkSecret {
         key = "IMMICH_API_TOKEN";

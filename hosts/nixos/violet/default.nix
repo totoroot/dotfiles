@@ -199,7 +199,7 @@
     };
   };
   boot.initrd.secrets = {
-    "/etc/crypto_keyfile.bin" = "/etc/crypto_keyfile.bin";
+    "/etc/crypto_keyfile.bin" = "/run/secrets/luks-key";
   };
 
 
