@@ -5,9 +5,9 @@ let
     path = ../../../secrets/violet.yaml;
     name = "violet-secrets";
   };
-  mkSecret = { key, path, owner ? "root", group ? "root", mode ? "0400", format ? "yaml" }: {
+  mkSecret = { key, path, owner ? "root", group ? "root", mode ? "0400", format ? "yaml", neededForBoot ? false }: {
     sopsFile = secretsFile;
-    inherit key path owner mode format;
+    inherit key path owner mode format neededForBoot;
   } // lib.optionalAttrs (group != null) { inherit group; };
 in
 {
@@ -21,7 +21,7 @@ in
       };
       luks-key = mkSecret {
         key = "QUAD_LUKS_KEY";
-        path = "/etc/crypto_keyfile.bin";
+        path = "/run/secrets/luks-key";
         mode = "0400";
         neededForBoot = true;
       };
