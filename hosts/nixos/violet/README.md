@@ -21,6 +21,13 @@ My most beautiful and beefy server. Still the same motherboard as when we starte
   - Current approach: sops-nix installs the key at `/run/secrets/quad-luks-key` post-boot. A systemd oneshot unlocks the disks, assembles mdadm, and activates LVM so boot never blocks on missing disks.
   - Initrd no longer embeds the keyfile to avoid fragile build-time secret handling.
 
+## Photos and Media Storage
+Photos live on `/dev/sde1` encrypted with LUKS as `photos-crypt`, formatted as btrfs and mounted at `/mnt/photos`. This is the only location where photos are stored; it is encrypted at rest and intended to be accessed directly by Immich. Daily btrfs snapshots from `/mnt/photos` are meant to be sent to `/mnt/photos-backup`, which is an LVM LV on the RAID10 array (`quad/photos-backup`) formatted as btrfs.
+
+Jellyfin media is stored on the RAID10 array in the `quad/media` LV, formatted as btrfs and mounted at `/mnt/media`. This is not backed up, but benefits from RAID10 redundancy for availability. Both `/mnt/photos-backup` and `/mnt/media` are defined declaratively in `hosts/nixos/violet/mounts.nix` and created manually via `lvcreate` + `mkfs.btrfs`.
+
+The LUKS unlock for `/dev/sde1` happens post‑boot in the `luks-open-disks` systemd oneshot, alongside the RAID member disks. This avoids blocking boot while still bringing the encrypted photos volume online automatically once secrets are available.
+
 ## RAID Notes
 - Capacity: with four 10TB disks, RAID10 and RAID6 both yield 50% usable capacity. There is no space advantage for RAID6 at this disk count.
 - Rebuild behavior: RAID10 rebuilds are faster and less stressful because they copy from a mirror partner, while RAID6 rebuilds must reconstruct parity across all disks, which is slower and more I/O intensive.
