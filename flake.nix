@@ -140,8 +140,33 @@
         // mapModulesRec ./modules import;
 
       devShells.${system}.default =
-        import ./shell.nix {
-          inherit pkgs;
+        let
+          nixBin =
+            pkgs.writeShellScriptBin "nix" ''
+              ${pkgs.nixVersions.stable}/bin/nix --option experimental-features "nix-command flakes" "$@"
+            '';
+        in
+        pkgs.mkShell {
+          buildInputs = with pkgs; [
+            git
+            gnupg
+            nix-zsh-completions
+            deadnix
+            mdl
+            nixpkgs-fmt
+            shellcheck
+            nixfmt
+            ripgrep
+            fd
+            jq
+            nixBin
+          ];
+          GREET = "Welcome to the development shell for totoroot's dotfiles";
+          shellHook = ''
+            export DOTFILES="$(pwd)"
+            export PATH="$DOTFILES/bin:$PATH"
+            echo "$GREET"
+          '';
         };
 
       # Configuration for NixOS hosts
