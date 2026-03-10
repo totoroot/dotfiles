@@ -116,8 +116,6 @@ in {
       # TODO wait for fixed hash mismatch
       # https://github.com/NixOS/nixpkgs/pull/456776
       # lychee
-      # A fast cd command that learns your habits
-      zoxide
     ];
 
     user.extraGroups = [ "admin" ];
