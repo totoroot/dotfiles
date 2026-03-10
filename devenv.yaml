@@ -1,7 +1,0 @@
----
-
-inputs:
-  nixpkgs:
-    url: github:NixOS/nixpkgs/nixpkgs-unstable
-  pre-commit:
-    url: github:totoroot/git-hooks.nix/main
