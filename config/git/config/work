@@ -4,6 +4,6 @@
 [commit]
     gpgsign = false
 [core]
-    sshCommand = "ssh -i ~/.ssh/ATGRZMBP43"
+    sshCommand = "ssh -i ~/.ssh/work"
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/

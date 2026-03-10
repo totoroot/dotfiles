@@ -35,15 +35,13 @@ in {
     ];
 
     programs.git.includes = {
-      path = "${configDir}/git/config";
+      path = "${configDir}/git/config/default";
     };
 
     modules.home.configSymlinks.entries =
       (map (name: "git/${name}") [
-        "config"
+        "config/"
         "ignore"
-        "workconfig"
-        "privateconfig"
       ]) ++
       (map (name: "gitlint/${name}") [
         "default.ini"

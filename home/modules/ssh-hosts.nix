@@ -36,6 +36,11 @@ in
   options.modules.home.sshHosts = with types; {
     enable = mkEnableOption "ssh host aliases";
 
+    hostName = mkOption {
+      type = nullOr str;
+      default = null;
+      description = "Explicit hostname for non-NixOS hosts (required on generic Linux and darwin).";
+    };
     defaultUser = mkOption {
       type = nullOr str;
       default = null;
@@ -83,5 +88,21 @@ in
       }
       (mapAttrs mkMatchBlock (defaultEntriesWithPorts // cfg.entries))
     ];
+
+    home.file.".config/git/config/ssh".text =
+      let
+        hostName =
+          lib.findFirst
+            (v: v != null && v != "")
+            null
+            [
+              cfg.hostName
+              (lib.attrsets.attrByPath [ "networking" "hostName" ] null config)
+            ];
+      in
+      lib.optionalString (hostName != null) ''
+        [core]
+            sshCommand = "ssh -i ~/.ssh/${hostName}"
+      '';
   };
 }

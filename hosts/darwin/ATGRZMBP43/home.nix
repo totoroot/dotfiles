@@ -53,6 +53,7 @@ in
     nushell.enable = true;
     sshHosts = {
       enable = true;
+      hostName = "ATGRZMBP43";
       defaultUser = "mathym";
       defaultIdentityFile = "~/.ssh/private";
     };
