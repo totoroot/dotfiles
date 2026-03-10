@@ -44,6 +44,21 @@
       fsType = "btrfs";
       options = [ "noatime" "compress=zstd" ];
     };
+    "/mnt/backup-violet" = {
+      device = "/dev/disk/by-label/violet-backup";
+      fsType = "btrfs";
+      options = [ "noatime" "compress=zstd" ];
+    };
+    "/mnt/backup-jam" = {
+      device = "/dev/disk/by-label/jam-backup";
+      fsType = "btrfs";
+      options = [ "noatime" "compress=zstd" ];
+    };
+    "/mnt/backup-grape" = {
+      device = "/dev/disk/by-label/grape-backup";
+      fsType = "btrfs";
+      options = [ "noatime" "compress=zstd" ];
+    };
   };
 
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
