@@ -69,27 +69,29 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.ssh.enable = true;
-    programs.ssh.enableDefaultConfig = false;
-    programs.ssh.includes = [ "~/.ssh/config.local" ];
-    programs.ssh.matchBlocks = mkMerge [
-      {
-        "*" = {
-          serverAliveInterval = 30;
-          serverAliveCountMax = 4;
-          identitiesOnly = true;
-          controlMaster = "auto";
-          controlPersist = "10m";
-          controlPath = "~/.ssh/cm-%r@%h:%p";
-          extraOptions = {
-            StrictHostKeyChecking = "accept-new";
+    programs.ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+      includes = [ "~/.ssh/config.local" ];
+      matchBlocks = mkMerge [
+        {
+          "*" = {
+            serverAliveInterval = 30;
+            serverAliveCountMax = 4;
+            identitiesOnly = true;
+            controlMaster = "auto";
+            controlPersist = "10m";
+            controlPath = "~/.ssh/cm-%r@%h:%p";
+            extraOptions = {
+              StrictHostKeyChecking = "accept-new";
+            };
           };
-        };
-      }
-      (mapAttrs mkMatchBlock (defaultEntriesWithPorts // cfg.entries))
-    ];
+        }
+        (mapAttrs mkMatchBlock (defaultEntriesWithPorts // cfg.entries))
+      ];
+    };
 
-    home.file.".config/git/config/ssh".text =
+    home.file.".config/git/includes/ssh".text =
       let
         hostName =
           lib.findFirst

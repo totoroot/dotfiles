@@ -5,4 +5,4 @@
 [commit]
     gpgsign = false
 [include]
-    path = ~/.config/git/config/ssh
+    path = ~/.config/git/includes/ssh

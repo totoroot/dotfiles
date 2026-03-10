@@ -1,10 +1,10 @@
 # Use different commit email addresses for private and work contributions
 [includeIf "gitdir:~/Development/private/"]
-    path = ~/.config/git/config/private
+    path = ~/.config/git/includes/private
 [includeIf "gitdir:~/.config/dotfiles/"]
-    path = ~/.config/git/config/private
+    path = ~/.config/git/includes/private
 [includeIf "gitdir:~/Development/work/"]
-    path = ~/.config/git/config/work
+    path = ~/.config/git/includes/work
 
 [init]
     defaultBranch = main

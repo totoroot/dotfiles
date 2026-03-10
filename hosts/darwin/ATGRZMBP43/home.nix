@@ -55,7 +55,6 @@ in
       enable = true;
       hostName = "ATGRZMBP43";
       defaultUser = "mathym";
-      defaultIdentityFile = "~/.ssh/private";
     };
     trash.enable = true;
     viddy.enable = true;
