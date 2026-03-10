@@ -255,41 +255,20 @@
   };
 
 
-  ## SMB Share for Time Machine Backups ##
-  services = {
-    samba = {
-      settings = {
-        "time-machine-thisle" = {
-          "path" = "/mnt/time-machine-thisle";
-          "valid users" = "samba";
-          "public" = "no";
-          "writeable" = "yes";
-          "force user" = "samba";
-          # Below are the most imporant for macOS compatibility
-          # Change the above to suit your needs
-          "fruit:aapl" = "yes";
-          "fruit:time machine" = "yes";
-          "vfs objects" = "catia fruit streams_xattr";
-        };
-        "time-machine-work" = {
-          "path" = "/mnt/time-machine-work";
-          "valid users" = "samba";
-          "public" = "no";
-          "writeable" = "yes";
-          "force user" = "samba";
-          # Below are the most imporant for macOS compatibility
-          # Change the above to suit your needs
-          "fruit:aapl" = "yes";
-          "fruit:time machine" = "yes";
-          "vfs objects" = "catia fruit streams_xattr";
-        };
-      };
-    };
-  };
-
-  systemd.tmpfiles.rules = [
-    "d /mnt/time-machine-thistle 0755 samba users"
-    "d /mnt/time-machine-work 0755 samba users"
+  modules.services.time-machine.shares = [
+    {
+      name = "time-machine-thistle";
+      path = "/mnt/time-machine-thistle";
+      user = "mathym";
+      createUser = false;
+    }
+    {
+      name = "time-machine-work";
+      path = "/mnt/time-machine-work";
+      user = "matthias.thym";
+      createUser = true;
+      systemUser = true;
+    }
   ];
 
 
