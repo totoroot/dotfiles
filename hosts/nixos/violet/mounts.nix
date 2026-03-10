@@ -22,12 +22,12 @@
     "/mnt/time-machine-thistle" = {
       device = "/dev/disk/by-label/tmthistle";
       fsType = "xfs";
-      options = [ "noatime" "recovery" ];
+      options = [ "noatime" ];
     };
     "/mnt/time-machine-work" = {
       device = "/dev/disk/by-label/work";
       fsType = "xfs";
-      options = [ "noatime" "recovery" ];
+      options = [ "noatime" ];
     };
     "/mnt/photos" = {
       device = "/dev/disk/by-label/photos";
