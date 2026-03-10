@@ -26,6 +26,8 @@ Photos live on `/dev/sde1` encrypted with LUKS as `photos-crypt`, formatted as b
 
 Jellyfin media is stored on the RAID10 array in the `quad/media` LV, formatted as btrfs and mounted at `/mnt/media`. This is not backed up, but benefits from RAID10 redundancy for availability. Both `/mnt/photos-backup` and `/mnt/media` are defined declaratively in `hosts/nixos/violet/mounts.nix` and created manually via `lvcreate` + `mkfs.btrfs`.
 
+Additional backup LVs on the RAID10 array are created manually and mounted declaratively: `quad/violet-backup` → `/mnt/backup-violet`, `quad/jam-backup` → `/mnt/backup-jam`, and `quad/grape-backup` → `/mnt/backup-grape`. All are btrfs and intended for system backups from those hosts.
+
 The LUKS unlock for `/dev/sde1` happens post‑boot in the `luks-open-disks` systemd oneshot, alongside the RAID member disks. This avoids blocking boot while still bringing the encrypted photos volume online automatically once secrets are available.
 
 ## RAID Notes
