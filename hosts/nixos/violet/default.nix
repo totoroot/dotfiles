@@ -80,6 +80,7 @@
       tailscale.enable = true;
       time-machine.enable = true;
       transmission.enable = false;
+      ollama.enable = true;
       prometheus = {
         enable = false;
         exporters = {
@@ -132,10 +133,6 @@
     dconf.enable = true;
     kdeconnect.enable = true;
     ssh.startAgent = true;
-  };
-
-  users.users."matthias.thym" = {
-    isNormalUser = true;
   };
 
   # NixOS networking configuration
@@ -320,7 +317,9 @@
       git.enable = true;
       helix.enable = true;
       lf.enable = true;
+      llm.enable = true;
       micro.enable = true;
+      modernShell.enable = true;
       nushell.enable = true;
       sshHosts.enable = true;
       trash.enable = true;
@@ -329,6 +328,15 @@
     };
 
     home.file = {
+      "Desktop/.use".text = "desktop";
+      "Dev/.use".text = "development";
+      "Downloads/.use".text = "downloads";
+      "Pictures/.use".text = "photos and graphics";
+      "Public/.use".text = "shared files";
+      "Sync/.use".text = "synchronised files";
+      "Sync/notes/.use".text = "notes";
+      "Temp/.use".text = "temporary files";
+      "Videos/.use".text = "videos";
       "Notes/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/Sync/notes/";
       "Pictures/photos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/photos/";
       "Trash/".source = config.lib.file.mkOutOfStoreSymlink "/home/mathym/.local/share/Trash/files/";
