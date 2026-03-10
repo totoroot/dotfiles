@@ -123,7 +123,15 @@ in
             isSystemUser = share.systemUser;
             isNormalUser = mkIf (!share.systemUser) true;
             createHome = false;
+            group = share.group;
           };
+        }) (builtins.filter (share: share.createUser) cfg.shares));
+
+    users.groups =
+      builtins.listToAttrs
+        (map (share: {
+          name = share.group;
+          value = { };
         }) (builtins.filter (share: share.createUser) cfg.shares));
 
     # Open firewall for SMB + mDNS

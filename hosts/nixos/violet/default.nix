@@ -266,6 +266,7 @@
       name = "time-machine-work";
       path = "/mnt/time-machine-work";
       user = "matthias.thym";
+      group = "matthias.thym";
       createUser = true;
       systemUser = true;
     }
