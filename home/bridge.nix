@@ -9,6 +9,7 @@
     ./modules/config-symlinks.nix
     ./modules/duf.nix
     ./modules/modern-shell.nix
+    ./modules/devenv.nix
     ./modules/fonts.nix
     ./modules/git.nix
     ./modules/gitlab-cli.nix
