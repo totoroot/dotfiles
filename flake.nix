@@ -93,6 +93,7 @@
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:
     let
       system = "x86_64-linux";
+      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
 
       baseLib = nixos.lib;
       inherit (baseLib) attrValues;
@@ -139,35 +140,42 @@
         { dotfiles = import ./.; }
         // mapModulesRec ./modules import;
 
-      devShells.${system}.default =
-        let
-          nixBin =
-            pkgs.writeShellScriptBin "nix" ''
-              ${pkgs.nixVersions.stable}/bin/nix --option experimental-features "nix-command flakes" "$@"
-            '';
-        in
-        pkgs.mkShell {
-          buildInputs = with pkgs; [
-            git
-            gnupg
-            nix-zsh-completions
-            deadnix
-            mdl
-            nixpkgs-fmt
-            shellcheck
-            nixfmt
-            ripgrep
-            fd
-            jq
-            nixBin
-          ];
-          GREET = "Welcome to the development shell for totoroot's dotfiles";
-          shellHook = ''
-            export DOTFILES="$(pwd)"
-            export PATH="$DOTFILES/bin:$PATH"
-            echo "$GREET"
-          '';
-        };
+      devShells =
+        baseLib.genAttrs supportedSystems (sys:
+          let
+            pkgsFor = import nixos {
+              system = sys;
+              config.allowUnfree = true;
+            };
+            nixBin =
+              pkgsFor.writeShellScriptBin "nix" ''
+                ${pkgsFor.nixVersions.stable}/bin/nix --option experimental-features "nix-command flakes" "$@"
+              '';
+          in
+          {
+            default = pkgsFor.mkShell {
+              buildInputs = with pkgsFor; [
+                git
+                gnupg
+                nix-zsh-completions
+                deadnix
+                mdl
+                nixpkgs-fmt
+                shellcheck
+                nixfmt
+                ripgrep
+                fd
+                jq
+                nixBin
+              ];
+              GREET = "Welcome to the development shell for totoroot's dotfiles";
+              shellHook = ''
+                export DOTFILES="$(pwd)"
+                export PATH="$DOTFILES/bin:$PATH"
+                echo "$GREET"
+              '';
+            };
+          });
 
       # Configuration for NixOS hosts
       nixosConfigurations =
