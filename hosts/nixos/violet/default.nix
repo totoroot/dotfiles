@@ -268,17 +268,43 @@
   };
 
 
-  home.file = {
-    "Desktop/.use".text = "desktop";
-    "Dev/.use".text = "development";
-    "Downloads/.use".text = "downloads";
-    "Pictures/.use".text = "photos and graphics";
-    "Public/.use".text = "shared files";
-    "Sync/.use".text = "synchronised files";
-    "Sync/notes/.use".text = "notes";
-    "Temp/.use".text = "temporary files";
-    "Videos/.use".text = "videos";
+  ## SMB Share for Time Machine Backups ##
+  services = {
+    samba = {
+      settings = {
+        "time-machine-thisle" = {
+          "path" = "/mnt/time-machine-thisle";
+          "valid users" = "samba";
+          "public" = "no";
+          "writeable" = "yes";
+          "force user" = "samba";
+          # Below are the most imporant for macOS compatibility
+          # Change the above to suit your needs
+          "fruit:aapl" = "yes";
+          "fruit:time machine" = "yes";
+          "vfs objects" = "catia fruit streams_xattr";
+        };
+        "time-machine-work" = {
+          "path" = "/mnt/time-machine-work";
+          "valid users" = "samba";
+          "public" = "no";
+          "writeable" = "yes";
+          "force user" = "samba";
+          # Below are the most imporant for macOS compatibility
+          # Change the above to suit your needs
+          "fruit:aapl" = "yes";
+          "fruit:time machine" = "yes";
+          "vfs objects" = "catia fruit streams_xattr";
+        };
+      };
+    };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /mnt/time-machine-thistle 0755 samba users"
+    "d /mnt/time-machine-work 0755 samba users"
+  ];
+
 
   home-manager.users.${config.user.name} = { config, ... }: {
     imports = [
