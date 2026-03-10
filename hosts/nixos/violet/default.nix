@@ -159,27 +159,17 @@
     mdadm
   ];
 
-  # macOS Time Machine configuration
-  services.netatalk.settings = {
-    "Time Machine Thistle" = {
-      "time machine" = "yes";
-      path = "/mnt/time-machine-thistle";
-      "valid users" = "mathym";
+  boot = {
+    swraid = {
+      enable = true;
+      mdadmConf = ''
+        ARRAY /dev/md/0 metadata=1.2 UUID=2fe76889:ac8b610a:0fef524e:553f1eaf
+      '';
     };
-    "Time Machine Work" = {
-      "time machine" = "yes";
-      path = "/mnt/time-machine-work";
-      "valid users" = "matthias.thym";
-    };
+    kernelModules = [
+      "nct6775"
+    ];
   };
-
-  boot.swraid.enable = true;
-  boot.swraid.mdadmConf = ''
-    ARRAY /dev/md/0 metadata=1.2 UUID=2fe76889:ac8b610a:0fef524e:553f1eaf
-  '';
-  boot.kernelModules = [
-    "nct6775"
-  ];
 
   systemd.services.luks-open-quad = {
     description = "Unlock LUKS array members for quad (post-boot)";
