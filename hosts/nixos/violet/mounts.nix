@@ -29,17 +29,17 @@
       fsType = "xfs";
       options = [ "noatime" "recovery" ];
     };
-    fileSystems."/mnt/photos" = {
+    "/mnt/photos" = {
       device = "/dev/disk/by-label/photos";
       fsType = "btrfs";
       options = [ "noatime" "compress=zstd" ];
     };
-    fileSystems."/mnt/photos-backup" = {
+    "/mnt/photos-backup" = {
       device = "/dev/disk/by-label/photos-backup";
       fsType = "btrfs";
       options = [ "noatime" "compress=zstd" ];
     };
-    fileSystems."/mnt/media" = {
+    "/mnt/media" = {
       device = "/dev/disk/by-label/media";
       fsType = "btrfs";
       options = [ "noatime" "compress=zstd" ];
