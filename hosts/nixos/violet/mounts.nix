@@ -19,11 +19,6 @@
       fsType = "ext4";
       options = [ "noatime" "nofail" "x-systemd.device-timeout=5s" ];
     };
-    "/mnt/backup-grape" = {
-      device = "/dev/disk/by-label/bugrape";
-      fsType = "btrfs";
-      options = [ "noatime" "recovery" ];
-    };
     "/mnt/time-machine-thistle" = {
       device = "/dev/disk/by-label/tmthistle";
       fsType = "xfs";
