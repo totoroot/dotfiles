@@ -170,8 +170,8 @@
     ];
   };
 
-  systemd.services.luks-open-quad = {
-    description = "Unlock LUKS array members for quad (post-boot)";
+  systemd.services.luks-open-disks = {
+    description = "Unlock LUKS disks (post-boot)";
     wantedBy = [ "multi-user.target" ];
     wants = [ "sops-install-secrets.service" ];
     after = [ "sops-install-secrets.service" ];
@@ -210,6 +210,7 @@
       unlock "luks-disk2" "a3e9833a-7895-4433-829c-b8e433312174"
       unlock "luks-disk3" "cdf77a2a-f0c4-4a25-b6a2-e9b8c732c5bb"
       unlock "luks-disk4" "c0dbea84-1277-413d-81fb-78e873ec385b"
+      unlock "photos-crypt" "af2ade3b-8488-47e3-b0f1-bc9569ad7e81"
 
       if [[ -n "$tmp_keyfile" ]]; then
         rm -f "$tmp_keyfile"
@@ -220,8 +221,8 @@
   systemd.services.mdadm-assemble-quad = {
     description = "Assemble md0 after LUKS unlock";
     wantedBy = [ "multi-user.target" ];
-    after = [ "luks-open-quad.service" ];
-    requires = [ "luks-open-quad.service" ];
+    after = [ "luks-open-disks.service" ];
+    requires = [ "luks-open-disks.service" ];
     serviceConfig.Type = "oneshot";
     script = ''
       set -euo pipefail
