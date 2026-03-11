@@ -32,6 +32,10 @@ in
         key = "DB_PASSWORD";
         path = "/var/secrets/immich";
       };
+      paperless-admin = mkSecret {
+        key = "PAPERLESS_ADMIN_PASSWORD";
+        path = "/var/secrets/paperless";
+      };
     };
   };
 }
