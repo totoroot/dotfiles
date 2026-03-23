@@ -149,7 +149,6 @@
       archive.enable = true;
       borg.enable = true;
       cli.enable = true;
-      devenv.enable = true;
       devops.enable = true;
       git.enable = true;
       gnupg.enable = true;
@@ -253,6 +252,7 @@
       archive.enable = true;
       atuin.enable = true;
       borg.enable = true;
+      devenv.enable = true;
       duf.enable = true;
       git.enable = true;
       helix.enable = true;

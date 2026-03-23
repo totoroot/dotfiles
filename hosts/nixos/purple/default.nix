@@ -138,7 +138,6 @@
     };
     shell = {
       cli.enable = true;
-      devenv.enable = true;
       devops.enable = true;
       gnupg.enable = true;
       taskell.enable = false;
@@ -269,6 +268,7 @@
       archive.enable = true;
       atuin.enable = true;
       borg.enable = true;
+      devenv.enable = true;
       duf.enable = true;
       fonts.enable = true;
       git.enable = true;

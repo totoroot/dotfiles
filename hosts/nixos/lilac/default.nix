@@ -32,7 +32,6 @@
       borg.enable = true;
       cli.enable = false;
       clipboard.enable = false;
-      devenv.enable = false;
       git.enable = true;
       gnupg.enable = true;
       iperf.enable = true;
