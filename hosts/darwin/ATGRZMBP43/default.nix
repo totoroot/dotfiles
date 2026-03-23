@@ -6,6 +6,7 @@ in
 {
   imports = [
     inputs.home-manager.darwinModules.home-manager
+    ../../../modules/darwin/containers.nix
     ./configuration.nix
   ];
 

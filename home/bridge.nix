@@ -10,6 +10,7 @@
     ./modules/duf.nix
     ./modules/modern-shell.nix
     ./modules/devenv.nix
+    ./modules/containers.nix
     ./modules/fonts.nix
     ./modules/git.nix
     ./modules/gitlab-cli.nix

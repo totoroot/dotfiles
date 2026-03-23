@@ -65,6 +65,9 @@
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
 
+  modules.darwin.containers.enable = true;
+
+
   launchd.user.agents.displayplacer-layout = {
     serviceConfig = {
       ProgramArguments = [

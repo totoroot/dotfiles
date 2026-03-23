@@ -39,6 +39,7 @@ in
   modules.home = {
     unfreePackages.enable = true;
     atuin.enable = true;
+    containers.enable = true;
     duf.enable = true;
     git.enable = true;
     gitlab-cli.enable = true;
