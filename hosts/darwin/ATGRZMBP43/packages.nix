@@ -14,7 +14,7 @@ in
     enable = true;
     packageNames = [
       # "rectangle-pro"
-      "orbstack"
+      # "orbstack"
     ];
   };
 
@@ -25,24 +25,16 @@ in
     # aerc
     # Command line tools
     # asciinema
-    # A cat(1) clone with syntax highlighting and Git integration
-    bat
     # The uncompromising Python code formatter
     black
     # Create and view interactive cheatsheets on the command-line
     cheat
     # Command line tool for transferring files with URL syntax
     curl
-    # Replacement for 'ls' written in Rust
-    eza
     # A tool to read, write and edit EXIF meta information
     exiftool
-    # A simple, fast and user-friendly alternative to find
-    fd
     # GNU Find Utilities, the basic directory searching utilities of the GNU operating system
     findutils
-    # A command-line fuzzy finder written in Go
-    fzf
     # Program for making large letters out of ordinary text
     # figlet
     # Render markdown on the CLI, with pizzazz!
@@ -69,8 +61,6 @@ in
     # neofetch
     # Review pull-requests on https://github.com/NixOS/nixpkgs
     nixpkgs-review
-    # Modern shell written in Rust
-    nushell
     # pandoc
     # podman
     podman-compose
@@ -78,8 +68,6 @@ in
     pdfcpu
     # Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more
     # ripgrep-all
-    # Intuitive find & replace CLI (sed alternative)
-    sd
     # A command-line kanban board/task manager
     # taskell
     # Command to produce a depth indented directory listing
@@ -107,7 +95,7 @@ in
     # The GNU Image Manipulation Program
     # gimp
     # Open-source IDE for exploring and testing APIs
-    bruno
+    # bruno
     # Go Programming language
     go
   	# View colored, incremental diff in workspace or from stdin with side by side and auto pager support (Was "cdiff")
@@ -132,7 +120,6 @@ in
     # Simple clipboard manager for macOS
     maccy
     # Move and resize windows in macOS using keyboard shortcuts or snap areas
-    # rectangle-pro
     rectangle
     # Tiny menu bar calendar
 	  itsycal
@@ -182,7 +169,6 @@ in
     # A terminal based graphical activity monitor inspired by gtop and vtop
     gotop
 
-    orbstack
     # Open source source code editor developed by Microsoft for Windows, Linux and macOS (VS Code without MS branding/telemetry/licensing)
     vscodium
 

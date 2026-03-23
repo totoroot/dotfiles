@@ -37,7 +37,9 @@
       "sensiblesidebuttons"
       "xquartz"
       "lunar"
-      # "spotify"
+      "kitty"
+      "inkscape"
+      "siyuan"
     ];
     taps = [];
   };
