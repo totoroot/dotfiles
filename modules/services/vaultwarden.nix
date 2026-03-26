@@ -44,6 +44,17 @@ in
   };
 
   config = mkIf cfg.enable {
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "vaultwarden" ];
+      ensureUsers = [
+        {
+          name = "vaultwarden";
+          ensureDBOwnership = true;
+        }
+      ];
+    };
+
     services.vaultwarden = {
       enable = true;
       dbBackend = "postgresql";
