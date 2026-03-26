@@ -33,7 +33,7 @@ in
       };
       vaultwarden-database-url = mkSecret {
         key = "VAULTWARDEN_DATABASE_URL";
-        path = "/var/secrets/vaultwarden/env";
+        path = "/var/secrets/vaultwarden-db.env";
         owner = "vaultwarden";
         group = "vaultwarden";
         mode = "0400";

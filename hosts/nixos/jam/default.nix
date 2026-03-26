@@ -59,7 +59,7 @@ in
       uptime-kuma.enable = true;
       tailscale.enable = true;
       vaultwarden.enable = true;
-      vaultwarden.databaseUrlFile = "/var/secrets/vaultwarden/env";
+      vaultwarden.databaseUrlFile = "/var/secrets/vaultwarden-db.env";
       vaultwarden.smtp = {
         host = "127.0.0.1";
         port = 25;
