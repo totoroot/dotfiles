@@ -6,6 +6,30 @@ let
   cfg = config.modules.services.nextcloud;
   domain = "thym.at";
   adminEmail = "admin@thym.at";
+  nextcloudPackage = pkgs.nextcloud32;
+  baseAppNames = [
+    "bookmarks"
+    "calendar"
+    "contacts"
+    "cookbook"
+    "cospend"
+    "deck"
+    "files_automatedtagging"
+    "forms"
+    "groupfolders"
+    "mail"
+    "music"
+    "news"
+    "notes"
+    "onlyoffice"
+    "polls"
+    "qownnotesapi"
+    "richdocuments"
+    "tasks"
+    "whiteboard"
+  ];
+  optionalAppNames = lib.optionals (lib.versionOlder nextcloudPackage.version "33") [ "memories" ];
+  selectedAppNames = baseAppNames ++ optionalAppNames;
 in
 {
   options.modules.services.nextcloud = {
@@ -24,8 +48,8 @@ in
         enable = true;
         hostName = "cloud.${domain}";
 
-         # Need to manually increment with every major upgrade.
-        package = pkgs.nextcloud32;
+        # Need to manually increment with every major upgrade.
+        package = nextcloudPackage;
 
         # Let NixOS install and configure the database automatically.
         database.createLocally = true;
@@ -39,10 +63,13 @@ in
 
         autoUpdateApps.enable = true;
         extraAppsEnable = true;
-        extraApps = with config.services.nextcloud.package.packages.apps; {
+        extraApps =
+          let
+            appPackages = config.services.nextcloud.package.packages.apps;
+          in
+          lib.genAttrs selectedAppNames (name: builtins.getAttr name appPackages);
           # List of apps we want to install and are already packaged in
           # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-          inherit bookmarks calendar contacts cookbook cospend deck files_automatedtagging forms groupfolders mail memories music news notes onlyoffice polls qownnotesapi richdocuments tasks whiteboard;
           # phonetrack = pkgs.fetchNextcloudApp {
           #   name = "phonetrack";
           #   sha256 = "0qf366vbahyl27p9mshfma1as4nvql6w75zy2zk5xwwbp343vsbc";
