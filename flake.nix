@@ -140,6 +140,9 @@
         { dotfiles = import ./.; }
         // mapModulesRec ./modules import;
 
+      darwinModules =
+        mapModulesRec ./hosts/darwin/modules import;
+
       devShells =
         baseLib.genAttrs supportedSystems (sys:
           let
