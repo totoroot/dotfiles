@@ -59,6 +59,15 @@ in
       uptime-kuma.enable = true;
       tailscale.enable = true;
       vaultwarden.enable = true;
+      vaultwarden.smtp = {
+        host = "127.0.0.1";
+        port = 25;
+        security = "off";
+        from = "admin@xn--berwachungsbehr-mtb1g.de";
+        fromName = "Vaultwarden Admin";
+        username = null;
+        passwordFile = null;
+      };
       grafana.enable = true;
       prometheus = {
         enable = true;
