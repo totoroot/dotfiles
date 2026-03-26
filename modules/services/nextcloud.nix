@@ -68,15 +68,14 @@ in
             appPackages = config.services.nextcloud.package.packages.apps;
           in
           lib.genAttrs selectedAppNames (name: builtins.getAttr name appPackages);
-          # List of apps we want to install and are already packaged in
-          # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-          # phonetrack = pkgs.fetchNextcloudApp {
-          #   name = "phonetrack";
-          #   sha256 = "0qf366vbahyl27p9mshfma1as4nvql6w75zy2zk5xwwbp343vsbc";
-          #   url = "https://gitlab.com/eneiluj/phonetrack-oc/-/wikis/uploads/931aaaf8dca24bf31a7e169a83c17235/phonetrack-0.6.9.tar.gz";
-          #   version = "0.6.9";
-          # };
-        };
+        # List of apps we want to install and are already packaged in
+        # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
+        # phonetrack = pkgs.fetchNextcloudApp {
+        #   name = "phonetrack";
+        #   sha256 = "0qf366vbahyl27p9mshfma1as4nvql6w75zy2zk5xwwbp343vsbc";
+        #   url = "https://gitlab.com/eneiluj/phonetrack-oc/-/wikis/uploads/931aaaf8dca24bf31a7e169a83c17235/phonetrack-0.6.9.tar.gz";
+        #   version = "0.6.9";
+        # };
 
         settings = {
           overwriteprotocol = "https";
@@ -110,6 +109,12 @@ in
                   "proxy_ssl_server_name on;" +
                   "proxy_pass_header Authorization;";
           };
+        };
+
+        "nextcloud.${domain}" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/".return = "301 https://cloud.${domain}$request_uri";
         };
       };
 
