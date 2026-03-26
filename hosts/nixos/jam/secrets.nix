@@ -31,6 +31,13 @@ in
         group = "prometheus";
         mode = "0440";
       };
+      vaultwarden-database-url = mkSecret {
+        key = "VAULTWARDEN_DATABASE_URL";
+        path = "/var/secrets/vaultwarden/env";
+        owner = "vaultwarden";
+        group = "vaultwarden";
+        mode = "0400";
+      };
     };
   };
 }

@@ -11,6 +11,12 @@ in
   options.modules.services.vaultwarden = {
     enable = mkBoolOpt false;
 
+    databaseUrlFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = "Path to an environment file containing DATABASE_URL=...";
+    };
+
     smtp = {
       host = mkOption {
         type = types.str;
@@ -57,11 +63,11 @@ in
 
     services.vaultwarden = {
       enable = true;
+      environmentFile = mkIf (cfg.databaseUrlFile != null) cfg.databaseUrlFile;
       dbBackend = "postgresql";
       config = {
         domain = "https://passwort.${domain}";
         signupsAllowed = false;
-        databaseUrl = "postgresql:///vaultwarden?host=/run/postgresql";
         smtpHost = cfg.smtp.host;
         smtpPort = cfg.smtp.port;
         smtpSecurity = cfg.smtp.security;
@@ -72,6 +78,8 @@ in
         rocketAddress = "0.0.0.0";
         rocketPort = vaultwardenPort;
         rocketLog = "critical";
+      } // lib.optionalAttrs (cfg.databaseUrlFile == null) {
+        databaseUrl = "postgresql:///vaultwarden?host=/run/postgresql";
       } // lib.optionalAttrs (cfg.smtp.username != null) {
         smtpUsername = cfg.smtp.username;
       } // lib.optionalAttrs (cfg.smtp.passwordFile != null) {
