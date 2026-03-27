@@ -4,6 +4,11 @@ We update this file as we go. Priority order: top to bottom.
 
 ### Now
 
+- [ ] Declarative uptime monitoring overhaul (`gatus` + existing Uptime Kuma)
+  - [ ] Define all endpoint checks in dotfiles (single source of truth)
+  - [ ] Add alerts/notifications wiring (ntfy/email)
+  - [ ] Decide long-term role of Uptime Kuma (UI-only vs phased migration)
+
 - [ ] Finalize backups on `violet`
   - [ ] Create + mount LVs for `violet-backup`, `jam-backup`, `grape-backup`
   - [ ] Add declarative mounts in `hosts/nixos/violet/mounts.nix`
