@@ -156,7 +156,6 @@ in
           locations."/" = {
             proxyPass = "http://localhost:${toString prometheusPort}";
             proxyWebsockets = true;
-            basicAuthFile = "/var/secrets/prometheus";
           };
         };
         # "zugriffs.${domain}" = {
