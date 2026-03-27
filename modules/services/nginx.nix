@@ -15,6 +15,9 @@ let
 
   adminEmail = "admin@thym.at";
 
+  acmeWildcardCertName = domain;
+  acmeChallengeWebroot = "/var/lib/acme/acme-challenge";
+
   server = "100.64.0.3";
 
   # jam
@@ -56,6 +59,12 @@ in
       recommendedTlsSettings = true;
 
       virtualHosts = {
+        "_" = {
+          default = true;
+          forceSSL = true;
+          useACMEHost = acmeWildcardCertName;
+          globalRedirect = domain;
+        };
         "${domain}" = {
           enableACME = true;
           forceSSL = true;
@@ -336,16 +345,30 @@ in
       };
     };
 
+    security.acme.certs."${acmeWildcardCertName}" = {
+      domain = domain;
+      extraDomainNames = [ "*.${domain}" ];
+      group = "nginx";
+      dnsProvider = "netcup";
+      credentialFiles = {
+        "NETCUP_CUSTOMER_NUMBER_FILE" = "/var/secrets/acme/netcup-customer-number";
+        "NETCUP_API_KEY_FILE" = "/var/secrets/acme/netcup-api-key";
+        "NETCUP_API_PASSWORD_FILE" = "/var/secrets/acme/netcup-api-password";
+      };
+      dnsPropagationCheck = true;
+      server = "https://acme-v02.api.letsencrypt.org/directory";
+    };
+
     security.acme.certs."reise.${domain}" = {
       email = adminEmail;
-      webroot = "/var/lib/acme/acme-challenge";
+      webroot = acmeChallengeWebroot;
       group = "nginx";
       server = "https://acme-v02.api.letsencrypt.org/directory";
     };
 
     security.acme.certs."reise-api.${domain}" = {
       email = adminEmail;
-      webroot = "/var/lib/acme/acme-challenge";
+      webroot = acmeChallengeWebroot;
       group = "nginx";
       server = "https://acme-v02.api.letsencrypt.org/directory";
     };
@@ -353,7 +376,7 @@ in
     security.acme.certs."${thymITDomain}" = {
       domain = thymITDomain;
       extraDomainNames = [ "www.${thymITDomain}" ];
-      webroot = "/var/lib/acme/acme-challenge";
+      webroot = acmeChallengeWebroot;
       group = "nginx";
       server = "https://acme-v02.api.letsencrypt.org/directory";
     };

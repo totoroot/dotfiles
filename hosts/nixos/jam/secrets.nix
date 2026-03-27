@@ -66,6 +66,18 @@ in
         group = "authelia";
         mode = "0400";
       };
+      acme-netcup-customer-number = mkSecret {
+        key = "ACME_NETCUP_CUSTOMER_NUMBER";
+        path = "/var/secrets/acme/netcup-customer-number";
+      };
+      acme-netcup-api-key = mkSecret {
+        key = "ACME_NETCUP_API_KEY";
+        path = "/var/secrets/acme/netcup-api-key";
+      };
+      acme-netcup-api-password = mkSecret {
+        key = "ACME_NETCUP_API_PASSWORD";
+        path = "/var/secrets/acme/netcup-api-password";
+      };
     };
   };
 }
