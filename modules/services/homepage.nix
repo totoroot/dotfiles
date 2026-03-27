@@ -101,6 +101,34 @@ in
                 icon = "mdi-chart-box";
               };
             }
+            {
+              "festplatten.überwachungsbehör.de" = {
+                href = "https://festplatten.überwachungsbehör.de/";
+                description = "S.M.A.R.T. Disk Monitoring";
+                icon = "mdi-harddisk";
+              };
+            }
+            {
+              "anzeigen.überwachungsbehör.de" = {
+                href = "https://anzeigen.überwachungsbehör.de/";
+                description = "Ad Blocking/DNS";
+                icon = "mdi-advertisements-off";
+              };
+            }
+            {
+              "benachrichtigungs.überwachungsbehör.de" = {
+                href = "https://benachrichtigungs.überwachungsbehör.de/";
+                description = "Push Notifications";
+                icon = "mdi-bell-ring";
+              };
+            }
+            {
+              "website.überwachungsbehör.de" = {
+                href = "https://website.überwachungsbehör.de/";
+                description = "Website Change Detection";
+                icon = "mdi-web-remove";
+              };
+            }
           ];
         }
         {
@@ -134,38 +162,10 @@ in
               };
             }
             {
-              "festplatten.überwachungsbehör.de" = {
-                href = "https://festplatten.überwachungsbehör.de/";
-                description = "S.M.A.R.T. Disk Monitoring";
-                icon = "mdi-harddisk";
-              };
-            }
-            {
               "rezept.überwachungsbehör.de" = {
                 href = "https://rezept.überwachungsbehör.de/";
                 description = "Recipe Management";
                 icon = "mdi-silverware";
-              };
-            }
-            {
-              "anzeigen.überwachungsbehör.de" = {
-                href = "https://anzeigen.überwachungsbehör.de/";
-                description = "Ad Blocking/DNS";
-                icon = "mdi-advertisements-off";
-              };
-            }
-            {
-              "benachrichtigungs.überwachungsbehör.de" = {
-                href = "https://benachrichtigungs.überwachungsbehör.de/";
-                description = "Push Notifications";
-                icon = "mdi-bell-ring";
-              };
-            }
-            {
-              "website.überwachungsbehör.de" = {
-                href = "https://website.überwachungsbehör.de/";
-                description = "Website Change Detection";
-                icon = "mdi-web-remove";
               };
             }
           ];
