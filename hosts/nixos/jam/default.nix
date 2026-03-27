@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   domain = "xn--berwachungsbehr-mtb1g.de";
+  gatusEndpoints = import ./gatus-endpoints.nix;
 in
 {
   imports = [
@@ -38,6 +39,10 @@ in
     };
     services = {
       fail2ban.enable = true;
+      gatus = {
+        enable = true;
+        endpoints = gatusEndpoints;
+      };
       headscale.enable = true;
       homepage.enable = true;
       nextcloud.enable = true;
