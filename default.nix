@@ -41,12 +41,6 @@ with inputs;
     registry = {
       nixos.flake = nixos;
     };
-    # Take out the garbage every once in a while
-    gc = {
-      automatic = mkDefault true;
-      dates = mkDefault "weekly";
-      options = mkDefault "--delete-older-than 30d";
-    };
     # useSandbox = true;
   };
 
