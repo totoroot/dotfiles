@@ -143,13 +143,18 @@ in
           };
         };
         # violet
-        "jellyfin.${domain}" = {
+        "medien.${domain}" = {
           enableACME = true;
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://${server}:${toString jellyfinPort}";
             proxyWebsockets = true;
           };
+        };
+        "jellyfin.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          globalRedirect = "medien.${domain}";
         };
         "grafana.${domain}" = {
           enableACME = true;

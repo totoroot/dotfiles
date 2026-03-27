@@ -148,8 +148,8 @@ in
               };
             }
             {
-              "jellyfin.überwachungsbehör.de" = {
-                href = "https://jellyfin.überwachungsbehör.de/";
+              "medien.überwachungsbehör.de" = {
+                href = "https://medien.überwachungsbehör.de/";
                 description = "Media Server";
                 icon = "si-jellyfin";
               };

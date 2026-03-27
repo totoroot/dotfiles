@@ -117,7 +117,7 @@
           "https://uptime.xn--berwachungsbehr-mtb1g.de"
           "https://grafana.xn--berwachungsbehr-mtb1g.de"
           "https://headscale.xn--berwachungsbehr-mtb1g.de"
-          "https://jellyfin.xn--berwachungsbehr-mtb1g.de"
+          "https://medien.xn--berwachungsbehr-mtb1g.de"
           "https://liebes.xn--berwachungsbehr-mtb1g.de"
           "https://benachrichtigungs.xn--berwachungsbehr-mtb1g.de"
           "https://prometheus.xn--berwachungsbehr-mtb1g.de"
