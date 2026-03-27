@@ -350,6 +350,7 @@ in
       extraDomainNames = [ "*.${domain}" ];
       group = "nginx";
       dnsProvider = "netcup";
+      webroot = null;
       credentialFiles = {
         "NETCUP_CUSTOMER_NUMBER_FILE" = "/var/secrets/acme/netcup-customer-number";
         "NETCUP_API_KEY_FILE" = "/var/secrets/acme/netcup-api-key";
