@@ -13,7 +13,7 @@ let
     then inputs.nixos-mailserver.nixosModules.default
     else (builtins.fetchTarball {
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-      sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
+      sha256 = "QHzRqq6gh+t3F/QU9DkP7X63dDDcuIQmaDz12p7ANTg=";
     });
 in
 {
