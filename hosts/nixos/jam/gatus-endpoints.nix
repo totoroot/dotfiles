@@ -125,6 +125,21 @@
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
   }
 
+  {
+    name = "medien";
+    group = "services";
+    url = "https://medien.xn--berwachungsbehr-mtb1g.de";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
+  {
+    name = "seerr";
+    group = "services";
+    url = "https://seerr.xn--berwachungsbehr-mtb1g.de";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
+
   # Mail protocol checks
   {
     name = "smtp";
