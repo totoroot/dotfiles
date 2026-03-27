@@ -4,6 +4,15 @@ We update this file as we go. Priority order: top to bottom.
 
 ### Now
 
+- [ ] Homelab access and auth overhaul (Authelia)
+  - [ ] Add `modules/services/authelia.nix` (Authelia + Redis + Postgres, secrets via sops-nix)
+  - [ ] Enable Authelia on `jam` behind nginx at `auth.<domain>`
+  - [ ] Add reusable nginx forward-auth pattern for protected services
+  - [ ] Define service access matrix (public, tailnet-only, authelia-protected)
+  - [ ] Migrate admin/internal services first: `gatus`, `grafana`, `prometheus`
+  - [ ] Keep app-native auth initially for `nextcloud` and `vaultwarden`
+  - [ ] Replace remaining `basicAuthFile` entries incrementally after validation
+
 - [ ] Declarative uptime monitoring overhaul (`gatus` + existing Uptime Kuma)
   - [ ] Define all endpoint checks in dotfiles (single source of truth)
   - [ ] Add alerts/notifications wiring (ntfy/email)
