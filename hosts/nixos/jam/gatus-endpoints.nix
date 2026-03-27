@@ -117,6 +117,13 @@
     interval = "1m";
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
   }
+  {
+    name = "goaccess";
+    group = "services";
+    url = "https://zugriffs.xn--berwachungsbehr-mtb1g.de";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
 
   # Mail protocol checks
   {
