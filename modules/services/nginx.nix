@@ -66,7 +66,7 @@ in
           globalRedirect = domain;
         };
         "${domain}" = {
-          enableACME = true;
+          useACMEHost = acmeWildcardCertName;
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://localhost:${toString homepagePort}";
