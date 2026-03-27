@@ -66,7 +66,8 @@
       gitea.enable = false;
       grafana.enable = false;
       home-assistant.enable = true;
-      jellyfin.enable = false;
+      jellyfin.enable = true;
+      jellyseerr.enable = true;
       nginx.enable = false;
       vaultwarden.enable = false;
       vpn.enable = false;

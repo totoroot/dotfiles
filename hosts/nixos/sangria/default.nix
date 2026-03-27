@@ -148,7 +148,7 @@
         vaultwarden.enable = false;
       };
       gitea.enable = false;
-      jellyfin.enable = true;
+      jellyfin.enable = false;
       k8s.enable = false;
       nginx.enable = false;
       vpn.enable = true;
