@@ -42,6 +42,13 @@ in
               };
             }
             {
+              "thym.it" = {
+                href = "https://thym.it/";
+                description = "Short domain redirect";
+                icon = "mdi-link-variant";
+              };
+            }
+            {
               "blog.thym.at" = {
                 href = "https://blog.thym.at";
                 description = "Personal Blog";
@@ -58,7 +65,21 @@ in
           ];
         }
         {
-          "Services" = [
+          "SSO Protected" = [
+            {
+              "zugangs.überwachungsbehör.de" = {
+                href = "https://zugangs.überwachungsbehör.de/";
+                description = "Authelia SSO portal";
+                icon = "mdi-shield-account";
+              };
+            }
+            {
+              "status.überwachungsbehör.de" = {
+                href = "https://status.überwachungsbehör.de/";
+                description = "Declarative uptime checks (Gatus)";
+                icon = "mdi-list-status";
+              };
+            }
             {
               "grafana.überwachungsbehör.de" = {
                 href = "https://grafana.überwachungsbehör.de/";
@@ -69,10 +90,21 @@ in
             {
               "prometheus.überwachungsbehör.de" = {
                 href = "https://prometheus.überwachungsbehör.de/";
-                description = "Metric";
+                description = "Metrics";
                 icon = "si-prometheus";
               };
             }
+            {
+              "zugriffs.überwachungsbehör.de" = {
+                href = "https://zugriffs.überwachungsbehör.de/";
+                description = "NGINX access analytics (GoAccess)";
+                icon = "mdi-chart-box";
+              };
+            }
+          ];
+        }
+        {
+          "Services" = [
             {
               "uptime.überwachungsbehör.de" = {
                 href = "https://uptime.überwachungsbehör.de/";
