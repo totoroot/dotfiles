@@ -1,4 +1,5 @@
 [
+  # Domains
   {
     name = "thym.at";
     group = "domains";
@@ -55,6 +56,69 @@
     interval = "1m";
     conditions = [ "[STATUS] == 200" ];
   }
+
+  # Jam services
+  {
+    name = "homepage";
+    group = "services";
+    url = "https://überwachungsbehör.de";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
+    name = "ntfy";
+    group = "services";
+    url = "https://benachrichtigungs.xn--berwachungsbehr-mtb1g.de";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
+  {
+    name = "uptime-kuma";
+    group = "services";
+    url = "https://uptime.xn--berwachungsbehr-mtb1g.de";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
+  {
+    name = "vaultwarden";
+    group = "services";
+    url = "https://passwort.xn--berwachungsbehr-mtb1g.de/alive";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
+    name = "grafana";
+    group = "services";
+    url = "https://grafana.xn--berwachungsbehr-mtb1g.de/login";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
+  {
+    name = "prometheus";
+    group = "services";
+    url = "https://prometheus.xn--berwachungsbehr-mtb1g.de/";
+    interval = "1m";
+    conditions = [ "[STATUS] == 401" ];
+  }
+  {
+    name = "nextcloud";
+    group = "services";
+    url = "https://cloud.thym.at/status.php";
+    interval = "1m";
+    conditions = [
+      "[STATUS] == 200"
+      "[BODY].installed == true"
+    ];
+  }
+  {
+    name = "roundcube-webmail";
+    group = "services";
+    url = "https://mail.xn--berwachungsbehr-mtb1g.de";
+    interval = "1m";
+    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+  }
+
+  # Mail protocol checks
   {
     name = "smtp";
     group = "mail";
