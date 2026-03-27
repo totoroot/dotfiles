@@ -27,6 +27,7 @@ let
   vaultwardenPort = 8222;
   # violet
   jellyfinPort = 8096;
+  jellyseerrPort = 5055;
   grafanaPort = 3000;
   prometheusPort = 9090;
   lokiPort = 3100;
@@ -155,6 +156,14 @@ in
           enableACME = true;
           forceSSL = true;
           globalRedirect = "medien.${domain}";
+        };
+        "seerr.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString jellyseerrPort}";
+            proxyWebsockets = true;
+          };
         };
         "grafana.${domain}" = {
           enableACME = true;
