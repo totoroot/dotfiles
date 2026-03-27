@@ -32,7 +32,6 @@ in
           enable = true;
           datasources.settings.datasources = [
             {
-              uid = "prometheus";
               name = "Prometheus";
               type = "prometheus";
               access = "proxy";
@@ -41,7 +40,6 @@ in
               editable = false;
             }
             {
-              uid = "loki";
               name = "Loki";
               type = "loki";
               access = "proxy";
