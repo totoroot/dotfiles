@@ -32,17 +32,21 @@ in
           enable = true;
           datasources.settings.datasources = [
             {
+              uid = "prometheus";
               name = "Prometheus";
               type = "prometheus";
-              url = "https://prometheus.${domain}";
+              access = "proxy";
+              url = "http://127.0.0.1:9090";
               isDefault = true;
-              editable = true;
+              editable = false;
             }
             {
+              uid = "loki";
               name = "Loki";
               type = "loki";
-              url = "https://loki.${domain}";
-              editable = true;
+              access = "proxy";
+              url = "http://127.0.0.1:3100";
+              editable = false;
             }
           ];
           dashboards.settings.providers = [
