@@ -64,6 +64,7 @@ in
     services.vaultwarden = {
       enable = true;
       environmentFile = mkIf (cfg.databaseUrlFile != null) cfg.databaseUrlFile;
+      # dbBackend = "sqlite";
       dbBackend = "postgresql";
       config = {
         domain = "https://passwort.${domain}";
