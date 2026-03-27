@@ -89,7 +89,7 @@ in
       ntfy.enable = true;
       plausible.enable = false;
       ssh.enable = true;
-      uptime-kuma.enable = true;
+      uptime-kuma.enable = false;
       tailscale.enable = true;
       vaultwarden.enable = true;
       vaultwarden.databaseUrlFile = "/var/secrets/vaultwarden-db.env";

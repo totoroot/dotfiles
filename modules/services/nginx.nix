@@ -22,7 +22,6 @@ let
 
   # jam
   homepagePort = 8082;
-  uptimePort = 4042;
   ntfyPort = 6780;
   vaultwardenPort = 8222;
   # violet
@@ -126,21 +125,6 @@ in
           locations."/" = {
             proxyPass = "http://localhost:${toString config.services.headscale.port}";
             proxyWebsockets = true;
-          };
-        };
-        "uptime.${domain}" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/" = {
-            extraConfig = ''
-              proxy_pass http://localhost:${toString uptimePort};
-              proxy_set_header Host $host;
-              proxy_redirect http:// https://;
-              proxy_http_version 1.1;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection $connection_upgrade;
-            '';
           };
         };
         # violet

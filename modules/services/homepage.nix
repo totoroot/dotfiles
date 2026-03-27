@@ -134,13 +134,6 @@ in
         {
           "Services" = [
             {
-              "uptime.überwachungsbehör.de" = {
-                href = "https://uptime.überwachungsbehör.de/";
-                description = "Uptime and Status Dashboard";
-                icon = "si-uptimekuma";
-              };
-            }
-            {
               "passwort.überwachungsbehör.de" = {
                 href = "https://passwort.überwachungsbehör.de/";
                 description = "Password Manager Vault";

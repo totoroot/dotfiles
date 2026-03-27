@@ -73,13 +73,6 @@
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
   }
   {
-    name = "uptime-kuma";
-    group = "services";
-    url = "https://uptime.xn--berwachungsbehr-mtb1g.de";
-    interval = "1m";
-    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
-  }
-  {
     name = "vaultwarden";
     group = "services";
     url = "https://passwort.xn--berwachungsbehr-mtb1g.de/alive";
