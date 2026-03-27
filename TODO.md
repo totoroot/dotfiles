@@ -9,7 +9,8 @@ We update this file as we go. Priority order: top to bottom.
   - [ ] Enable Authelia on `jam` behind nginx at `auth.<domain>`
   - [ ] Add reusable nginx forward-auth pattern for protected services
   - [ ] Define service access matrix (public, tailnet-only, authelia-protected)
-  - [ ] Migrate admin/internal services first: `gatus`, `grafana`, `prometheus`
+  - [ ] Migrate admin/internal services first: `gatus`, `grafana`, `prometheus`, `goaccess`
+  - [ ] Use `zugangs.<domain>` as Authelia portal and keep `auth.<domain>` as redirect alias
   - [ ] Keep app-native auth initially for `nextcloud` and `vaultwarden`
   - [ ] Replace remaining `basicAuthFile` entries incrementally after validation
 
