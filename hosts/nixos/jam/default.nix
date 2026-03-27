@@ -38,6 +38,11 @@ in
       utilities.enable = true;
     };
     services = {
+      authelia = {
+        enable = true;
+        hostName = "zugangs.${domain}";
+        legacyHostNames = [ "auth.${domain}" ];
+      };
       fail2ban.enable = true;
       gatus = {
         enable = true;
