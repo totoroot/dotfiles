@@ -11,7 +11,6 @@ let
   nixosDomain = "nixos.at";
   theaterDomain = "theaterschaffen.de";
   praxisDomain = "grueneis-psychologie.at";
-  cysDomain = "cambodianyouthsupport.com";
   womanMadeDomain = "womanma.de";
 
   adminEmail = "admin@thym.at";
@@ -33,11 +32,9 @@ let
   immichPort = 2283;
   recipePort = 8491;
   adguardHTTPPort = 3300;
-  adguardDNSPort = 53;
   esphomePort = 6052;
   changedetectionPort = 5002;
   adventurelogPort = 2104;
-  adventurelogBackendPort = 2000;
   adventurelogBackendProxyPort = 2026;
 in
 {
@@ -246,10 +243,7 @@ in
         "dns.${domain}" = {
           enableACME = true;
           forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://${server}:${toString adguardDNSPort}";
-            proxyWebsockets = true;
-          };
+          globalRedirect = "anzeigen.${domain}";
         };
         "iot.${domain}" = {
           enableACME = true;
@@ -296,7 +290,7 @@ in
           enableACME = true;
           forceSSL = true;
           root = "/var/www/theaterschaffen";
-          serverAliases = [ "www.${domain}" ];
+          serverAliases = [ "www.${theaterDomain}" ];
         };
         "die.${theaterDomain}" = {
           enableACME = true;
@@ -339,7 +333,11 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "${adminEmail}";
+      defaults = {
+        email = "${adminEmail}";
+        # Force public LE CA; prevents accidental local minica cert issuance.
+        server = "https://acme-v02.api.letsencrypt.org/directory";
+      };
     };
 
     security.acme.certs."reise.${domain}" = {
