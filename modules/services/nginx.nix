@@ -157,7 +157,7 @@ in
           forceSSL = true;
           globalRedirect = "medien.${domain}";
         };
-        "seerr.${domain}" = {
+        "wunschliste.${domain}" = {
           enableACME = true;
           forceSSL = true;
           locations."/" = {

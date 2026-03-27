@@ -133,9 +133,9 @@
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
   }
   {
-    name = "seerr";
+    name = "wunschliste";
     group = "services";
-    url = "https://seerr.xn--berwachungsbehr-mtb1g.de";
+    url = "https://wunschliste.xn--berwachungsbehr-mtb1g.de";
     interval = "1m";
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
   }
