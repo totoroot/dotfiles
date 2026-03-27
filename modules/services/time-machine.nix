@@ -51,6 +51,13 @@ in
               "fruit:aapl" = "yes";
               "vfs objects" = "catia fruit streams_xattr";
 
+              # Keep nmbd/NetBIOS browser elections disabled to avoid nmbd crashes.
+              "disable netbios" = "yes";
+              "local master" = "no";
+              "domain master" = "no";
+              "preferred master" = "no";
+              "os level" = "0";
+
               # Only available on localhost, local network and Tailscale
               # Note: localhost is the ipv6 localhost ::1
               "hosts allow" = "100.64.0.0/10 10.0.0.0/24 127.0.0.1 localhost";
@@ -77,6 +84,10 @@ in
         enable = true;
         discovery = true;
       };
+
+      # nmbd is legacy NetBIOS discovery and not required for SMB Time Machine.
+      # Disable it to avoid crashes in browser-election code paths.
+      samba.nmbd.enable = false;
 
       avahi = {
         enable = true;
