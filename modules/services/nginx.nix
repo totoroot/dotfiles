@@ -76,8 +76,8 @@ in
           root = "/var/www/matthias.thym.at";
         };
         "${thymITDomain}" = {
-          enableACME = true;
           forceSSL = true;
+          useACMEHost = thymITDomain;
           serverAliases = [ "www.${thymITDomain}" ];
           globalRedirect = "matthias.${thymDomain}";
         };
@@ -349,6 +349,14 @@ in
 
     security.acme.certs."reise-api.${domain}" = {
       email = adminEmail;
+      webroot = "/var/lib/acme/acme-challenge";
+      group = "nginx";
+      server = "https://acme-v02.api.letsencrypt.org/directory";
+    };
+
+    security.acme.certs."${thymITDomain}" = {
+      domain = thymITDomain;
+      extraDomainNames = [ "www.${thymITDomain}" ];
       webroot = "/var/lib/acme/acme-challenge";
       group = "nginx";
       server = "https://acme-v02.api.letsencrypt.org/directory";
