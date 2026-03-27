@@ -219,7 +219,6 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString scrutinyPort}";
             proxyWebsockets = true;
-            basicAuthFile = "/var/secrets/scrutiny";
           };
         };
         "rezept.${domain}" = {
@@ -236,7 +235,6 @@ in
           locations."/" = {
             proxyPass = "http://${server}:${toString adguardHTTPPort}";
             proxyWebsockets = true;
-            basicAuthFile = "/var/secrets/adguard";
           };
         };
         "dns.${domain}" = {
@@ -279,7 +277,6 @@ in
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
               proxy_set_header Upgrade $http_upgrade;
               proxy_set_header Connection $connection_upgrade;
-              auth_basic_user_file /var/secrets/changedetection;
               # proxy_set_header X-Forwarded-Prefix /changedetection/;
               proxy_set_header X-Forwarded-Proto $scheme;
             '';

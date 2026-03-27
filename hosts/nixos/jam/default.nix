@@ -189,6 +189,26 @@ in
       "/ws".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
+
+    "website.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
+    "benachrichtigungs.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
+    "festplatten.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
+    "anzeigen.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
   };
 
   # Set stateVersion
