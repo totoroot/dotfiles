@@ -89,9 +89,9 @@
   {
     name = "prometheus";
     group = "services";
-    url = "https://prometheus.xn--berwachungsbehr-mtb1g.de/";
+    url = "http://127.0.0.1:9090/-/healthy";
     interval = "1m";
-    conditions = [ "[STATUS] == 401" ];
+    conditions = [ "[STATUS] == 200" ];
   }
   {
     name = "nextcloud";
