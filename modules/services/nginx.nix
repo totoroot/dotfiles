@@ -7,6 +7,7 @@ let
 
   domain = "xn--berwachungsbehr-mtb1g.de";
   thymDomain = "thym.at";
+  thymITDomain = "thym.it";
   nixosDomain = "nixos.at";
   theaterDomain = "theaterschaffen.de";
   praxisDomain = "grueneis-psychologie.at";
@@ -76,6 +77,12 @@ in
           enableACME = true;
           forceSSL = true;
           root = "/var/www/matthias.thym.at";
+        };
+        "${thymITDomain}" = {
+          enableACME = true;
+          forceSSL = true;
+          serverAliases = [ "www.${thymITDomain}" ];
+          globalRedirect = "matthias.${thymDomain}";
         };
         "blog.${thymDomain}" = {
           enableACME = true;
