@@ -38,6 +38,34 @@ in
         group = "vaultwarden";
         mode = "0400";
       };
+      authelia-users-database = mkSecret {
+        key = "AUTHELIA_USERS_DATABASE";
+        path = "/var/secrets/authelia/users_database.yml";
+        owner = "authelia";
+        group = "authelia";
+        mode = "0400";
+      };
+      authelia-jwt-secret = mkSecret {
+        key = "AUTHELIA_JWT_SECRET";
+        path = "/var/secrets/authelia/jwt_secret";
+        owner = "authelia";
+        group = "authelia";
+        mode = "0400";
+      };
+      authelia-storage-encryption-key = mkSecret {
+        key = "AUTHELIA_STORAGE_ENCRYPTION_KEY";
+        path = "/var/secrets/authelia/storage_encryption_key";
+        owner = "authelia";
+        group = "authelia";
+        mode = "0400";
+      };
+      authelia-session-secret = mkSecret {
+        key = "AUTHELIA_SESSION_SECRET";
+        path = "/var/secrets/authelia/session_secret";
+        owner = "authelia";
+        group = "authelia";
+        mode = "0400";
+      };
     };
   };
 }
