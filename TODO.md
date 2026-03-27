@@ -1,79 +1,32 @@
-## Open
+## TODO
 
-- Replace greenclip with Wayland tools
-    + Issue: greenclip is only compatible with X11, so it should be replaced with a suitable Wayland alternative
-    - [ ] Remove greenclip config
-    - [ ] Install Wayland clipboard tools
-    - [ ] Adapt rofi clipmenu
-    - [ ] Launch clipboard daemon with user session
-- Install wluma for adjusting screen brightness
-- Handle rofi errors
-    + Handle errors when e.g. app was not found  with appmenu rofi script
-- Auto-detect devices for scrutiny config
-- Refine taskell keybindings
-- Refine keybindings for hyprland compositor
-- Install gparted
-- Fix languagetool systemd errors
-- Fix rofi bookmarkmenu
-- Install screenshot utility on Wayland
-- Rofi session switcher
-- Switch to flake for Hyprland
-- Add keyboard layout in Plasma with config
-- Fix keyboardswitcher shell script
-- Switch to flake for Hyrland
-- Fix missing polkit agent (use Etcher to reproduce)
-- Fix Docker and Git aliases sourcing problem
-- Install a proper diff tool
-- Add WakeOnLAN config for all hosts
-- Add disk labels for sangria and grape and update mount configs
-- Fix dolphin no found error on Hyprland
-- Fix Nextcloud Client window autoclose on Hyprland
-- Make disk clone of raspberry and mulberry after successful boot into new generation
-- Fix "warning: optionsDocBook is deprecated since 23.11 and will be removed in 24.05"
-- Fix "warning: mdadm: Neither MAILADDR nor PROGRAM has been set. This will cause the `mdmon` service to crash."
-- Re-enable `needsreboot` activation hook after fixing nixos-needsreboot failure on violet
-- Violet: optional TPM2 unlock for LUKS array (keep keyfile fallback)
-    + Keyfile secret: `QUAD_LUKS_KEY` in `secrets/violet.yaml` (YAML `|-` to avoid trailing newline).
-    + Prereqs: confirm TPM2 device present (`/dev/tpmrm0`).
-    - [ ] Enroll TPM for each LUKS device (default PCRs):
-          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/f9c857dc-b812-47e2-ba29-57a28a54aec5
-          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/a3e9833a-7895-4433-829c-b8e433312174
-          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/cdf77a2a-f0c4-4a25-b6a2-e9b8c732c5bb
-          sudo systemd-cryptenroll --tpm2-device=/dev/tpmrm0 /dev/disk/by-uuid/c0dbea84-1277-413d-81fb-78e873ec385b
-    - [ ] Rebuild + reboot and verify auto-unlock via TPM:
-          nixos-rebuild switch
-          reboot
-          lsblk -f
-    - [ ] If motherboard changes or TPM reset: re-enroll or fall back to keyfile.
-- Run ssh-setup script after install to add host key to Codeberg and update remote
-- Fix random sleep issues on purple
-- Add Firefox extension configs (uBlock Origin, Sidebery, uBlacklist etc.)
-- Disk setup with disko
-- Install diskonaut
-- Upgrade hosts to 23.05
-	- [x] purple
-	- [x] grape
-	- [ ] violet
-	- [ ] macbook
-	- [x] sangria
+We update this file as we go. Priority order: top to bottom.
 
-## In Progress
+### Now
 
-- Fix missing polkit agent (use Etcher to reproduce)
-- zgen not being initialized when no internet connection
-- Fix rofi windowmenu
-- Enable screen sharing on Wayland
-    - [ ] Install and configure pipewire
-    - [ ] Disable pulseaudio
-    - [ ] Test OBS screen recording
-- Fix home-manager issues with Trolltech.conf and gtk2 conf
+- [ ] Finalize backups on `violet`
+  - [ ] Create + mount LVs for `violet-backup`, `jam-backup`, `grape-backup`
+  - [ ] Add declarative mounts in `hosts/nixos/violet/mounts.nix`
+  - [ ] Add backup jobs/services (remote hosts -> `violet`)
+  - [ ] Document restore steps in `hosts/nixos/violet/README.md`
 
-## Completed
+- [ ] Add Paperless-ngx module for `violet`
+  - [ ] NixOS service module
+  - [ ] Postgres wiring
+  - [ ] Network exposure limited to local LAN + tailnet
+  - [ ] Reverse proxy from `jam`
 
-- Fix random sleep issues on purple (due to picom)
-- Install Dracula KDE theme with NixOS config
-- Install Plasma on purple
-- Install XFCE on purple
-- Unify audio modules
-- Enable HDMI audio output on grape
-- Replace zgen with zgenom
+### Next
+
+- [ ] Plan and execute `violet` system disk migration to btrfs
+  - [ ] Define subvolume layout
+  - [ ] Snapshot + rollback approach
+  - [ ] Migration/restore checklist in `violet-migration.md`
+
+- [ ] Media stack decision for `violet`
+  - [ ] Evaluate Jellyfin vs Navidrome/Koel/Funkwhale
+  - [ ] Implement chosen module cleanly
+
+### Cleanup / follow-up
+
+- [ ] Re-enable and validate `needsreboot` activation hook on `violet`
