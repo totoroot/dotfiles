@@ -63,11 +63,16 @@ in
 
         authentication_backend.file.path = cfg.usersDatabaseFile;
 
-        access_control.default_policy = "deny";
+        access_control.default_policy = "one_factor";
 
         session = {
-          name = "authelia_session";
-          domain = cfg.cookieDomain;
+          cookies = [
+            {
+              name = "authelia_session";
+              domain = cfg.cookieDomain;
+              authelia_url = "https://${cfg.hostName}";
+            }
+          ];
           redis = {
             host = "127.0.0.1";
             port = 6379;
