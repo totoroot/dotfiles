@@ -58,6 +58,7 @@ in
         {
           name = "forgejo";
           ensureDBOwnership = true;
+          passwordFile = "/var/secrets/forgejo-db-password";
         }
       ];
     };
