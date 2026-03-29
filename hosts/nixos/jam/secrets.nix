@@ -38,6 +38,10 @@ in
         group = "vaultwarden";
         mode = "0400";
       };
+      forgejo-runner-codeberg-token = mkSecret {
+        key = "FORGEJO_RUNNER_CODEBERG_TOKEN";
+        path = "/var/secrets/forgejo-runner-codeberg.token";
+      };
       authelia-users-database = mkSecret {
         key = "AUTHELIA_USERS_DATABASE";
         path = "/var/secrets/authelia/users_database.yml";
