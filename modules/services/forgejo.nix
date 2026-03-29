@@ -26,6 +26,7 @@ in
       package = pkgs.forgejo;
 
       user = "git";
+      createDatabase = false;
       database.user = "forgejo";
       database.type = "postgres";
       database.name = "forgejo";
