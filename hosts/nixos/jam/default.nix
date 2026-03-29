@@ -73,6 +73,7 @@ in
       };
       headscale.enable = true;
       homepage.enable = true;
+      forgejo.enable = true;
       nextcloud.enable = true;
       mailserver.enable = true;
       nginx.enable = true;

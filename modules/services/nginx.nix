@@ -24,6 +24,7 @@ let
   homepagePort = 8082;
   ntfyPort = 6780;
   vaultwardenPort = 8222;
+  forgejoPort = 3001;
   # violet
   jellyfinPort = 8096;
   jellyseerrPort = 5055;
@@ -126,6 +127,19 @@ in
             proxyPass = "http://localhost:${toString config.services.headscale.port}";
             proxyWebsockets = true;
           };
+        };
+        "versions.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:${toString forgejoPort}";
+            proxyWebsockets = true;
+          };
+        };
+        "git.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          globalRedirect = "versions.${domain}";
         };
         # violet
         "medien.${domain}" = {
