@@ -145,8 +145,9 @@
       zsh.enable = true;
     };
     services = {
-      containerization.enable = true;
-      gitea.enable = false;
+      docker.enable = true;
+      podman.enable = true;
+      forgejo.enable = false;
       jellyfin.enable = false;
       k8s.enable = true;
       nginx.enable = false;

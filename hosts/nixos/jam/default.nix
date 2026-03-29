@@ -78,6 +78,7 @@ in
       nextcloud.enable = true;
       mailserver.enable = true;
       nginx.enable = true;
+      podman.enable = true;
       goaccess = {
         enable = true;
         logFilePath = "/var/log/nginx/access.log";

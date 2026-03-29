@@ -48,7 +48,8 @@
       utilities.enable = true;
     };
     services = {
-      containerization.enable = true;
+      docker.enable = true;
+      podman.enable = true;
       adventurelog.enable = true;
       snowflake.enable = true;
       pods = {
@@ -63,7 +64,7 @@
         enable = true;
         openFirewall = true;
       };
-      gitea.enable = false;
+      forgejo.enable = false;
       grafana.enable = false;
       home-assistant.enable = true;
       jellyfin.enable = true;

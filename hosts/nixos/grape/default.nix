@@ -161,7 +161,8 @@
       zsh.enable = true;
     };
     services = {
-      containerization.enable = true;
+      docker.enable = true;
+      podman.enable = true;
       containers = {
         snowflake.enable = false;
       };
@@ -171,7 +172,7 @@
         scrutiny.enable = true;
         vaultwarden.enable = false;
       };
-      gitea.enable = false;
+      forgejo.enable = false;
       jellyfin.enable = false;
       k8s.enable = false;
       nginx.enable = false;

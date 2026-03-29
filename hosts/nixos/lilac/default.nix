@@ -43,7 +43,7 @@
     };
     services = {
       containers.enable = true;
-      gitea.enable = false;
+      forgejo.enable = false;
       jellyfin.enable = false;
       kdeconnect.enable = false;
       k8s.enable = true;
