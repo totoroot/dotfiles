@@ -17,6 +17,20 @@ in
   };
 
   config = mkIf cfg.enable {
+    users.groups.gitea-runner = { };
+
+    users.users.gitea-runner = {
+      isSystemUser = true;
+      group = "gitea-runner";
+      home = "/var/lib/gitea-runner";
+      createHome = true;
+    };
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/gitea-runner 0750 gitea-runner gitea-runner -"
+      "d /var/lib/gitea-runner/codeberg 0750 gitea-runner gitea-runner -"
+    ];
+
     services.gitea-actions-runner.instances.codeberg = {
       enable = true;
       inherit (cfg) name url tokenFile;
