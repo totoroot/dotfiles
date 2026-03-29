@@ -82,9 +82,9 @@
   {
     name = "grafana";
     group = "services";
-    url = "https://grafana.xn--berwachungsbehr-mtb1g.de/login";
+    url = "http://127.0.0.1:3000/api/health";
     interval = "1m";
-    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+    conditions = [ "[STATUS] == 200" ];
   }
   {
     name = "prometheus";
@@ -113,24 +113,31 @@
   {
     name = "goaccess";
     group = "services";
-    url = "https://zugriffs.xn--berwachungsbehr-mtb1g.de";
+    url = "http://127.0.0.1:7890";
     interval = "1m";
-    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
+    name = "adguard";
+    group = "services";
+    url = "http://100.64.0.3:3300/login.html";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
   }
 
   {
     name = "medien";
     group = "services";
-    url = "https://medien.xn--berwachungsbehr-mtb1g.de";
+    url = "http://100.64.0.3:8096/health";
     interval = "1m";
-    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+    conditions = [ "[STATUS] == 200" ];
   }
   {
     name = "wunschliste";
     group = "services";
-    url = "https://wunschliste.xn--berwachungsbehr-mtb1g.de";
+    url = "http://100.64.0.3:5055/api/v1/status";
     interval = "1m";
-    conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
+    conditions = [ "[STATUS] == 200" ];
   }
 
   # Mail protocol checks
