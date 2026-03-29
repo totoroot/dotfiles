@@ -13,28 +13,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Keep the familiar git SSH identity while running Forgejo.
-    users.users.git = {
-      isSystemUser = true;
-      useDefaultShell = true;
-      home = "/var/lib/forgejo";
-      group = "forgejo";
-    };
-
     services.forgejo = {
       enable = true;
       package = pkgs.forgejo;
 
-      user = "git";
-      group = "forgejo";
-
+      # Keep defaults for service user/group from the Forgejo module.
       database = {
         type = "postgres";
         name = "forgejo";
         user = "forgejo";
+        socket = "/run/postgresql";
         createDatabase = false;
-        host = "127.0.0.1";
-        passwordFile = "/var/secrets/forgejo-db-password";
       };
 
       settings = {
@@ -58,7 +47,6 @@ in
         {
           name = "forgejo";
           ensureDBOwnership = true;
-          passwordFile = "/var/secrets/forgejo-db-password";
         }
       ];
     };
