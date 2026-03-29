@@ -1,4 +1,4 @@
-{ options, config, lib, ... }:
+{ options, config, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -12,29 +12,16 @@ in
     name = mkOpt types.str "forgejo-runner-codeberg";
     url = mkOpt types.str "https://codeberg.org";
     tokenFile = mkOpt types.str "/var/secrets/forgejo-runner-codeberg.token";
-
     labels = mkOpt (types.listOf types.str) [ "native:host" ];
   };
 
   config = mkIf cfg.enable {
-    users.groups.gitea-runner = { };
-
-    users.users.gitea-runner = {
-      isSystemUser = true;
-      group = "gitea-runner";
-      home = "/var/lib/gitea-runner";
-      createHome = true;
-    };
-
-    systemd.tmpfiles.rules = [
-      "d /var/lib/gitea-runner 0750 gitea-runner gitea-runner -"
-      "d /var/lib/gitea-runner/codeberg 0750 gitea-runner gitea-runner -"
-    ];
-
-    services.gitea-actions-runner.instances.codeberg = {
-      enable = true;
-      inherit (cfg) name url tokenFile;
-      labels = cfg.labels;
+    services.gitea-actions-runner = {
+      package = pkgs.forgejo-runner;
+      instances.codeberg = {
+        enable = true;
+        inherit (cfg) name url tokenFile labels;
+      };
     };
   };
 }
