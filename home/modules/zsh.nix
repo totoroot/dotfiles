@@ -76,7 +76,6 @@ in
         "extract.zsh"
         "keybinds.zsh"
         "prompt.zsh"
-        ".zshrc"
         # ".zshenv"
       ]);
 
@@ -86,6 +85,10 @@ in
         export ZDOTDIR="$HOME/.config/zsh"
         source "$ZDOTDIR/.zshrc"
       '';
+
+      # Keep this file in the Home Manager generation to avoid dangling
+      # out-of-store symlinks when source paths are garbage collected.
+      ".config/zsh/.zshrc".text = builtins.readFile "${configDir}/zsh/.zshrc";
 
       # Why am I creating extra.zsh{rc,env} when I could be using extraInit?
       # Because extraInit generates those files in /etc/profile, and mine just
