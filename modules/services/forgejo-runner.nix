@@ -9,7 +9,7 @@ in
   options.modules.services.forgejo-runner = {
     enable = mkBoolOpt false;
 
-    name = mkOpt types.str "jam-codeberg-runner";
+    name = mkOpt types.str "forgejo-runner-codeberg";
     url = mkOpt types.str "https://codeberg.org";
     tokenFile = mkOpt types.str "/var/secrets/forgejo-runner-codeberg.token";
 
