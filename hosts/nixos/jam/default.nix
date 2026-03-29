@@ -75,6 +75,7 @@ in
       homepage.enable = true;
       forgejo.enable = false;
       forgejo-runner.enable = false;
+      gitlab-runner.enable = false;
       nextcloud.enable = true;
       mailserver.enable = true;
       nginx.enable = true;
@@ -142,6 +143,31 @@ in
       };
       webmail.enable = true;
       wordpress.enable = false;
+    };
+  };
+
+  services.gitlab-runner.services = {
+    # Prepared declaratively; module toggle keeps runner disabled until rollout.
+    default = {
+      registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
+      dockerImage = "debian:stable";
+      dockerDisableCache = true;
+      tagList = [ "jam" "docker" "default" ];
+    };
+
+    nix = {
+      registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
+      dockerImage = "alpine:3.22";
+      dockerDisableCache = true;
+      dockerVolumes = [
+        "/nix/store:/nix/store:ro"
+        "/nix/var/nix/db:/nix/var/nix/db:ro"
+        "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
+      ];
+      environmentVariables = {
+        NIX_REMOTE = "daemon";
+      };
+      tagList = [ "jam" "docker" "nix" ];
     };
   };
 
