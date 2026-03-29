@@ -25,7 +25,23 @@ We update this file as we go. Priority order: top to bottom.
   - [ ] Define retention, backup, and restore procedures
   - [ ] Add smoke-test endpoint + Gatus checks
 
-- [ ] Establish deployment strategy for static websites (Forgejo/Codeberg-first on `jam`)
+- [ ] Forgejo + runner bootstrap issues on `jam` (blocked)
+  - [ ] Runner service fails first-boot bootstrap (`.runner` missing in `/var/lib/gitea-runner/codeberg`)
+  - [ ] Investigate why `services.gitea-actions-runner` does not create instance state dir declaratively on this channel
+  - [ ] Verify token ingestion path for `tokenFile` (observed "token is empty" during auto-register despite non-empty secret)
+  - [ ] Decide final auth mode for Forgejo DB (socket/peer vs password) and keep it fully declarative
+  - [ ] Re-enable `forgejo` and `forgejo-runner` on `jam` after bootstrap path is stable
+
+- [ ] GitLab runner on `jam` (prepared but disabled)
+  - [ ] Keep `modules.services.gitlab-runner.enable = false` until deployment strategy is finalized
+  - [ ] Use container executor only (no shell runner)
+  - [ ] Prefer Podman/docker-compat backend for job isolation
+  - [ ] Enable container virtualization on runner hosts (`virtualisation.podman.enable` or `virtualisation.docker.enable`) before turning runners on
+  - [ ] Define token secrets (`authenticationTokenConfigFile`) for `default` and `nix` runners
+  - [ ] Add narrow runner labels and keep high-risk capabilities off by default
+  - [ ] Enable and validate once static-site deploy module is ready
+
+- [ ] Establish deployment strategy for static websites (runner-backed, currently blocked on forgejo path)
   - [ ] Set up self-hosted Forgejo runner on `jam` first (dedicated unprivileged runner user)
   - [ ] Define one declarative deploy module for static sites (`sites` attrset: domain, root, keepReleases, healthcheck)
   - [ ] Implement atomic release flow (`incoming` artifact -> `releases/<ts>-<sha>` -> `current` symlink switch)
