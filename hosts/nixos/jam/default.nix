@@ -74,6 +74,7 @@ in
       headscale.enable = true;
       homepage.enable = true;
       forgejo.enable = true;
+      forgejo-runner.enable = true;
       nextcloud.enable = true;
       mailserver.enable = true;
       nginx.enable = true;
