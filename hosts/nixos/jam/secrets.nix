@@ -38,6 +38,13 @@ in
         group = "vaultwarden";
         mode = "0400";
       };
+      forgejo-db-password = mkSecret {
+        key = "FORGEJO_DB_PASSWORD";
+        path = "/var/secrets/forgejo-db-password";
+        owner = "postgres";
+        group = "postgres";
+        mode = "0400";
+      };
       authelia-users-database = mkSecret {
         key = "AUTHELIA_USERS_DATABASE";
         path = "/var/secrets/authelia/users_database.yml";

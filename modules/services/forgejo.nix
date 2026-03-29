@@ -33,6 +33,8 @@ in
         name = "forgejo";
         user = "forgejo";
         createDatabase = false;
+        host = "127.0.0.1";
+        passwordFile = "/var/secrets/forgejo-db-password";
       };
 
       settings = {
