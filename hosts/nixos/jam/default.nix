@@ -158,6 +158,7 @@ in
         dockerImage = "debian:stable";
         dockerDisableCache = true;
         requestConcurrency = 2;
+        registrationFlags = [ "--shell" "bash" ];
         tagList = [ "jam" "docker" "default" ];
       };
 
@@ -166,6 +167,7 @@ in
         dockerImage = "alpine:3.22";
         dockerDisableCache = true;
         requestConcurrency = 2;
+        registrationFlags = [ "--shell" "bash" ];
         dockerVolumes = [
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db:ro"
