@@ -146,12 +146,16 @@ in
     };
   };
 
-  services.gitlab-runner.services = {
+  services.gitlab-runner.services = lib.mkIf config.modules.services.gitlab-runner.enable {
     # Prepared declaratively; module toggle keeps runner disabled until rollout.
     default = {
       registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
       dockerImage = "debian:stable";
       dockerDisableCache = true;
+      registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
+      environmentVariables = {
+        DOCKER_HOST = "unix:///run/podman/podman.sock";
+      };
       tagList = [ "jam" "docker" "default" ];
     };
 
@@ -159,17 +163,22 @@ in
       registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
       dockerImage = "alpine:3.22";
       dockerDisableCache = true;
+      registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
       dockerVolumes = [
         "/nix/store:/nix/store:ro"
         "/nix/var/nix/db:/nix/var/nix/db:ro"
         "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
       ];
       environmentVariables = {
+        DOCKER_HOST = "unix:///run/podman/podman.sock";
         NIX_REMOTE = "daemon";
       };
       tagList = [ "jam" "docker" "nix" ];
     };
   };
+
+  # Keep jam podman-only even when docker executor runners are defined.
+  virtualisation.docker.enable = lib.mkForce false;
 
   services.endlessh-go = {
     enable = true;

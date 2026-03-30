@@ -4,7 +4,6 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.podman;
-  dockerEnabled = config.modules.services.docker.enable;
 in
 {
   options.modules.services.podman = {
@@ -28,7 +27,7 @@ in
     virtualisation.podman = {
       enable = true;
       # Expose a Docker-compatible CLI only when the Docker module is not enabled.
-      dockerCompat = !dockerEnabled;
+      dockerCompat = !config.virtualisation.docker.enable;
     };
   };
 }
