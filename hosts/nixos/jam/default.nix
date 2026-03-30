@@ -76,6 +76,7 @@ in
       forgejo.enable = false;
       forgejo-runner.enable = false;
       gitlab-runner.enable = false;
+      docker.enable = true;
       nextcloud.enable = true;
       mailserver.enable = true;
       nginx.enable = true;
@@ -157,10 +158,6 @@ in
         dockerImage = "debian:stable";
         dockerDisableCache = true;
         requestConcurrency = 2;
-        registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
-        environmentVariables = {
-          DOCKER_HOST = "unix:///run/podman/podman.sock";
-        };
         tagList = [ "jam" "docker" "default" ];
       };
 
@@ -169,14 +166,12 @@ in
         dockerImage = "alpine:3.22";
         dockerDisableCache = true;
         requestConcurrency = 2;
-        registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
         dockerVolumes = [
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db:ro"
           "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
         ];
         environmentVariables = {
-          DOCKER_HOST = "unix:///run/podman/podman.sock";
           NIX_REMOTE = "daemon";
         };
         tagList = [ "jam" "docker" "nix" ];
@@ -184,21 +179,17 @@ in
     };
   };
 
-  # Keep jam podman-only even when docker executor runners are defined.
-  virtualisation.docker.enable = lib.mkForce false;
-
   systemd.services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
-    wants = [ "podman.socket" ];
-    after = [ "podman.socket" ];
+    wants = [ "docker.service" ];
+    after = [ "docker.service" ];
     environment = {
       HOME = "/var/lib/gitlab-runner";
       XDG_RUNTIME_DIR = "/run/gitlab-runner";
-      DOCKER_HOST = "unix:///run/podman/podman.sock";
     };
     serviceConfig = {
       RuntimeDirectory = "gitlab-runner";
       RuntimeDirectoryMode = "0700";
-      SupplementaryGroups = [ "podman" ];
+      SupplementaryGroups = [ "docker" ];
     };
   };
 
