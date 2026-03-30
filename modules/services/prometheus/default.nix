@@ -173,6 +173,12 @@ in
             targets = mkTargetsFor 9187 (if cfg.scrapeHosts ? postgres then cfg.scrapeHosts.postgres else null);
           }];
         }
+        {
+          job_name = "gitlab-runner";
+          static_configs = [{
+            targets = mkTargetsFor 9252 (if cfg.scrapeHosts ? gitlabRunner then cfg.scrapeHosts.gitlabRunner else null);
+          }];
+        }
         (mkIf (config.services.endlessh-go.enable && config.services.endlessh-go.prometheus.enable) {
           job_name = "endlessh-go";
           static_configs = [{

@@ -127,6 +127,7 @@ in
           postgres = [ "localhost" "violet-ts" ];
           endlesshGo = [ "localhost" ];
           immich = [ "violet-ts" ];
+          gitlabRunner = [ "localhost" ];
         };
         exporters = {
           node.enable = true;
@@ -146,12 +147,18 @@ in
     };
   };
 
+  services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
+    concurrent = 3;
+    prometheusListenAddress = "127.0.0.1:9252";
+  };
+
   services.gitlab-runner.services = lib.mkIf config.modules.services.gitlab-runner.enable {
     # Prepared declaratively; module toggle keeps runner disabled until rollout.
     default = {
       registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
       dockerImage = "debian:stable";
       dockerDisableCache = true;
+      requestConcurrency = 2;
       registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
       environmentVariables = {
         DOCKER_HOST = "unix:///run/podman/podman.sock";
@@ -163,6 +170,7 @@ in
       registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
       dockerImage = "alpine:3.22";
       dockerDisableCache = true;
+      requestConcurrency = 2;
       registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
       dockerVolumes = [
         "/nix/store:/nix/store:ro"
