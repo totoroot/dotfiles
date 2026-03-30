@@ -150,38 +150,37 @@ in
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
     concurrent = 3;
     prometheusListenAddress = "127.0.0.1:9252";
-  };
-
-  services.gitlab-runner.services = lib.mkIf config.modules.services.gitlab-runner.enable {
-    # Prepared declaratively; module toggle keeps runner disabled until rollout.
-    default = {
-      registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
-      dockerImage = "debian:stable";
-      dockerDisableCache = true;
-      requestConcurrency = 2;
-      registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
-      environmentVariables = {
-        DOCKER_HOST = "unix:///run/podman/podman.sock";
+    services = {
+      # Prepared declaratively; module toggle keeps runner disabled until rollout.
+      default = {
+        registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
+        dockerImage = "debian:stable";
+        dockerDisableCache = true;
+        requestConcurrency = 2;
+        registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
+        environmentVariables = {
+          DOCKER_HOST = "unix:///run/podman/podman.sock";
+        };
+        tagList = [ "jam" "docker" "default" ];
       };
-      tagList = [ "jam" "docker" "default" ];
-    };
 
-    nix = {
-      registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
-      dockerImage = "alpine:3.22";
-      dockerDisableCache = true;
-      requestConcurrency = 2;
-      registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
-      dockerVolumes = [
-        "/nix/store:/nix/store:ro"
-        "/nix/var/nix/db:/nix/var/nix/db:ro"
-        "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
-      ];
-      environmentVariables = {
-        DOCKER_HOST = "unix:///run/podman/podman.sock";
-        NIX_REMOTE = "daemon";
+      nix = {
+        registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
+        dockerImage = "alpine:3.22";
+        dockerDisableCache = true;
+        requestConcurrency = 2;
+        registrationFlags = [ "--docker-host" "unix:///run/podman/podman.sock" ];
+        dockerVolumes = [
+          "/nix/store:/nix/store:ro"
+          "/nix/var/nix/db:/nix/var/nix/db:ro"
+          "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
+        ];
+        environmentVariables = {
+          DOCKER_HOST = "unix:///run/podman/podman.sock";
+          NIX_REMOTE = "daemon";
+        };
+        tagList = [ "jam" "docker" "nix" ];
       };
-      tagList = [ "jam" "docker" "nix" ];
     };
   };
 
