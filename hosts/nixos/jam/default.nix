@@ -153,7 +153,7 @@ in
     services = {
       # Prepared declaratively; module toggle keeps runner disabled until rollout.
       default = {
-        registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
+        authenticationTokenConfigFile = "/var/secrets/gitlab-runner-default-token.env";
         dockerImage = "debian:stable";
         dockerDisableCache = true;
         requestConcurrency = 2;
@@ -165,7 +165,7 @@ in
       };
 
       nix = {
-        registrationConfigFile = "/var/secrets/gitlab-runner-registration.env";
+        authenticationTokenConfigFile = "/var/secrets/gitlab-runner-nix-token.env";
         dockerImage = "alpine:3.22";
         dockerDisableCache = true;
         requestConcurrency = 2;

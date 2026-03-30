@@ -38,9 +38,13 @@ in
         group = "vaultwarden";
         mode = "0400";
       };
-      gitlab-runner-registration = mkSecret {
-        key = "GITLAB_RUNNER_REGISTRATION_ENV";
-        path = "/var/secrets/gitlab-runner-registration.env";
+      gitlab-runner-default-token = mkSecret {
+        key = "GITLAB_RUNNER_DEFAULT_TOKEN_ENV";
+        path = "/var/secrets/gitlab-runner-default-token.env";
+      };
+      gitlab-runner-nix-token = mkSecret {
+        key = "GITLAB_RUNNER_NIX_TOKEN_ENV";
+        path = "/var/secrets/gitlab-runner-nix-token.env";
       };
       forgejo-runner-codeberg-token = mkSecret {
         key = "FORGEJO_RUNNER_CODEBERG_TOKEN";
