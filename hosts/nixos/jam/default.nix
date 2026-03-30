@@ -187,6 +187,24 @@ in
   # Keep jam podman-only even when docker executor runners are defined.
   virtualisation.docker.enable = lib.mkForce false;
 
+  users.users.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
+    extraGroups = [ "podman" ];
+  };
+
+  systemd.services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
+    wants = [ "podman.socket" ];
+    after = [ "podman.socket" ];
+    environment = {
+      HOME = "/var/lib/gitlab-runner";
+      XDG_RUNTIME_DIR = "/run/gitlab-runner";
+      DOCKER_HOST = "unix:///run/podman/podman.sock";
+    };
+    serviceConfig = {
+      RuntimeDirectory = "gitlab-runner";
+      RuntimeDirectoryMode = "0700";
+    };
+  };
+
   services.endlessh-go = {
     enable = true;
     listenAddress = "0.0.0.0";
