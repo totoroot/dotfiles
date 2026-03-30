@@ -300,6 +300,7 @@ in
   };
 
   users.users.goaccess.extraGroups = [ "nginx" ];
+  users.users.${config.user.name}.extraGroups = [ "docker" ];
 
 
   home-manager.users.${config.user.name} = { config, ... }: {
