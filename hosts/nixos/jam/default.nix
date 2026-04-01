@@ -102,7 +102,7 @@ in
         host = "127.0.0.1";
         port = 25;
         security = "off";
-        from = "admin@xn--berwachungsbehr-mtb1g.de";
+        from = "admin@thym.it";
         fromName = "Vaultwarden Admin";
         username = null;
         passwordFile = null;

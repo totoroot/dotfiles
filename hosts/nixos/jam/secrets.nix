@@ -94,8 +94,11 @@ in
       plausible-keybase = mkSecret {
         key = "PLAUSIBLE_SECRET_KEYBASE";
         path = "/var/secrets/plausible/keybase";
-        owner = "plausible";
-        group = "plausible";
+        mode = "0400";
+      };
+      mailserver-admin-thym-it-password-hash = mkSecret {
+        key = "MAILSERVER_ADMIN_THYM_IT_PASSWORD_HASH";
+        path = "/var/secrets/mailserver/admin@thym.it";
         mode = "0400";
       };
     };
