@@ -82,7 +82,7 @@ in
       certificateScheme = "acme-nginx";
     };
     security.acme.acceptTerms = true;
-    security.acme.defaults.email = "admin@thym.at";
+    security.acme.defaults.email = "admin@thym.it";
 
     # services.opendkim = {
     #   enable = true;

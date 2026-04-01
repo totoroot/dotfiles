@@ -7,7 +7,7 @@ let
 
   domain = "xn--berwachungsbehr-mtb1g.de";
   subdomain = "mail";
-  adminEmail = "admin@thym.at";
+  adminEmail = "admin@thym.it";
 in
 {
   options.modules.services.webmail = {
