@@ -151,7 +151,7 @@ in
   };
 
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
-    concurrent = 3;
+    settings.concurrent = 3;
     prometheusListenAddress = "127.0.0.1:9252";
     services = {
       # Prepared declaratively; module toggle keeps runner disabled until rollout.
@@ -161,7 +161,6 @@ in
         dockerDisableCache = true;
         requestConcurrency = 2;
         registrationFlags = [ "--shell" "bash" ];
-        tagList = [ "jam" "docker" "default" ];
       };
 
       nix = {
@@ -178,7 +177,6 @@ in
         environmentVariables = {
           NIX_REMOTE = "daemon";
         };
-        tagList = [ "jam" "docker" "nix" ];
       };
     };
   };
