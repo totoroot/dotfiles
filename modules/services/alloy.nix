@@ -52,7 +52,7 @@ in
 
             stage.static_labels {
               values = {
-                stream = "mail"
+                stream = "mail",
               }
             }
           }
