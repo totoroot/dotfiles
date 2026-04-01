@@ -53,6 +53,9 @@ in
             stage.static_labels {
               values = {
                 stream = "mail",
+                job = "mail",
+                host_id = "${config.networking.hostName}",
+                filename = "/var/mail/mail.log",
               }
             }
           }
