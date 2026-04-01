@@ -26,7 +26,7 @@ in
 
           rule {
             action = "replace"
-            source_labels = ["__journal__systemd_unit"]
+            source_labels = ["service_name"]
             target_label = "unit"
           }
 
@@ -48,7 +48,7 @@ in
           forward_to = [loki.write.default.receiver]
 
           stage.match {
-            selector = "{unit=~\"postfix.*|dovecot2.service\"}"
+            selector = "{service_name=~\"postfix.*|dovecot2.service\"}"
 
             stage.static_labels {
               values = {
