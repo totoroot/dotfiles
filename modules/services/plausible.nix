@@ -29,8 +29,27 @@ in
         enable = true;
         server = {
           baseUrl = "https://besucherinnen.${domain}";
+          disableRegistration = true;
+          listenAddress = "127.0.0.1";
           port = plausiblePort;
           secretKeybaseFile = "/var/secrets/plausible/keybase";
+        };
+        mail = {
+          email = "admin@überwachungsbehör.de";
+          smtp = {
+            hostAddr = "127.0.0.1";
+            hostPort = 25;
+            enableSSL = false;
+            retries = 3;
+          };
+        };
+        database = {
+          postgres = {
+            socket = "/run/postgresql";
+            dbname = "plausible";
+            setup = false;
+          };
+          clickhouse.setup = true;
         };
       };
 
@@ -44,14 +63,6 @@ in
           };
         };
       };
-    };
-
-    # Use local plaintext SMTP relay on jam to avoid TLS hostname mismatch
-    # when connecting via localhost.
-    systemd.services.plausible.environment = {
-      SMTP_HOST_ADDR = "127.0.0.1";
-      SMTP_HOST_PORT = "25";
-      SMTP_HOST_SSL_ENABLED = "false";
     };
 
     security.acme = {
