@@ -25,6 +25,20 @@ We update this file as we go. Priority order: top to bottom.
   - [ ] Define retention, backup, and restore procedures
   - [ ] Add smoke-test endpoint + Gatus checks
 
+- [ ] Migrate mail stack primary domain from `überwachungsbehör.de` to `thym.it` on `jam`
+  - [ ] Keep transition-safe dual-domain acceptance during rollout (`thym.it` + old domain)
+  - [ ] Update `modules/services/mailserver.nix` domain/fqdn/login aliases for `admin@thym.it` + `info@thym.it`
+  - [ ] Update `modules/services/webmail.nix` host to `mail.thym.it`
+  - [ ] Add/verify SOPS secret path for `admin@thym.it` hashed password
+  - [ ] Rebuild to generate DKIM key material for `thym.it`, then publish full `mail._domainkey.thym.it` TXT (`p=...`)
+  - [ ] Ensure DNS is complete for `thym.it`: MX, A/AAAA for `mail`, SPF, DKIM, DMARC
+  - [ ] DMARC rollout for `thym.it` (currently set):
+    - [ ] `v=DMARC1; p=none; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` (monitor-only, collect reports, no enforcement)
+    - [ ] next target TXT: `v=DMARC1; p=quarantine; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` (failed alignment goes to spam/quarantine)
+    - [ ] final target TXT: `v=DMARC1; p=reject; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` (failed alignment rejected at SMTP time)
+  - [ ] Validate post-cutover mail flow: SMTP submission (587), IMAPS (993), inbound/outbound delivery, TLS cert CN/SAN
+  - [ ] Keep old domain aliases active for a grace period, then remove legacy records/config
+
 - [ ] Forgejo + runner bootstrap issues on `jam` (blocked)
   - [ ] Runner service fails first-boot bootstrap (`.runner` missing in `/var/lib/gitea-runner/codeberg`)
   - [ ] Investigate why `services.gitea-actions-runner` does not create instance state dir declaratively on this channel
