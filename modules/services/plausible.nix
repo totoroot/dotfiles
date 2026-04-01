@@ -46,6 +46,14 @@ in
       };
     };
 
+    # Use local plaintext SMTP relay on jam to avoid TLS hostname mismatch
+    # when connecting via localhost.
+    systemd.services.plausible.environment = {
+      SMTP_HOST_ADDR = "127.0.0.1";
+      SMTP_HOST_PORT = "25";
+      SMTP_HOST_SSL_ENABLED = "false";
+    };
+
     security.acme = {
       acceptTerms = mkDefault true;
       certs = {
