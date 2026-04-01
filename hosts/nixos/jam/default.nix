@@ -73,6 +73,8 @@ in
       };
       headscale.enable = true;
       homepage.enable = true;
+      loki.enable = true;
+      alloy.enable = true;
       forgejo.enable = false;
       forgejo-runner.enable = false;
       gitlab-runner.enable = true;
@@ -233,6 +235,11 @@ in
     };
 
     "prometheus.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
+    "loki.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };

@@ -94,6 +94,13 @@
     conditions = [ "[STATUS] == 200" ];
   }
   {
+    name = "loki";
+    group = "services";
+    url = "http://127.0.0.1:3100/ready";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
     name = "nextcloud";
     group = "services";
     url = "https://cloud.thym.at/status.php";
