@@ -95,6 +95,13 @@ in
               };
             }
             {
+              "loki.überwachungsbehör.de" = {
+                href = "https://loki.überwachungsbehör.de/";
+                description = "Log aggregation API";
+                icon = "si-grafana";
+              };
+            }
+            {
               "zugriffs.überwachungsbehör.de" = {
                 href = "https://zugriffs.überwachungsbehör.de/";
                 description = "NGINX access analytics (GoAccess)";
