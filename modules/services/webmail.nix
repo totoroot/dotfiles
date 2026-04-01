@@ -5,7 +5,7 @@ with lib.my;
 let
   cfg = config.modules.services.webmail;
 
-  domain = "xn--berwachungsbehr-mtb1g.de";
+  domain = "thym.it";
   subdomain = "mail";
   adminEmail = "admin@thym.it";
 in

@@ -5,7 +5,8 @@ with lib.my;
 let
   cfg = config.modules.services.mailserver;
 
-  domain = "xn--berwachungsbehr-mtb1g.de";
+  domain = "thym.it";
+  legacyDomain = "xn--berwachungsbehr-mtb1g.de";
   praxisDomain = "grueneis-psychologie.at";
   release = "25.05";
   mailserverModule =
@@ -51,6 +52,7 @@ in
       fqdn = "mail.${domain}";
       domains = [
         "${domain}"
+        "${legacyDomain}"
         "${praxisDomain}"
       ];
       enableImap = true;
@@ -69,8 +71,12 @@ in
       # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
       loginAccounts = {
         "admin@${domain}" = {
-          hashedPasswordFile = "/var/secrets/mailserver/admin@überwachungsbehör.de";
-          aliases = ["info@${domain}"];
+          hashedPasswordFile = "/var/secrets/mailserver/admin@thym.it";
+          aliases = [
+            "info@${domain}"
+            "admin@${legacyDomain}"
+            "info@${legacyDomain}"
+          ];
         };
         "praxis@${praxisDomain}" = {
           hashedPasswordFile = "/var/secrets/mailserver/praxis@${praxisDomain}";
