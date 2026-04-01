@@ -20,9 +20,47 @@ in
           }
         }
 
+        // Normalize journald metadata into stable Loki labels for fast queries.
+        loki.relabel "journal" {
+          forward_to = [loki.process.mail.receiver, loki.write.default.receiver]
+
+          rule {
+            action = "replace"
+            source_labels = ["__journal__systemd_unit"]
+            target_label = "unit"
+          }
+
+          rule {
+            action = "replace"
+            source_labels = ["__journal__transport"]
+            target_label = "transport"
+          }
+
+          rule {
+            action = "replace"
+            source_labels = ["__journal_priority_keyword"]
+            target_label = "level"
+          }
+        }
+
+        // Add dedicated mail stream labels for postfix/dovecot logs.
+        loki.process "mail" {
+          forward_to = [loki.write.default.receiver]
+
+          stage.match {
+            selector = "{unit=~\"postfix.*|dovecot2.service\"}"
+
+            stage.static_labels {
+              values = {
+                stream = "mail"
+              }
+            }
+          }
+        }
+
         loki.source.journal "systemd" {
           max_age    = "24h"
-          forward_to = [loki.write.default.receiver]
+          forward_to = [loki.relabel.journal.receiver]
           labels = {
             job  = "systemd-journal"
             host = "${config.networking.hostName}"
