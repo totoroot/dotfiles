@@ -129,6 +129,13 @@ in
                 icon = "mdi-web-remove";
               };
             }
+            {
+              "besucherinnen.überwachungsbehör.de" = {
+                href = "https://besucherinnen.überwachungsbehör.de/";
+                description = "Plausible Analytics";
+                icon = "si-plausibleanalytics";
+              };
+            }
           ];
         }
         {
