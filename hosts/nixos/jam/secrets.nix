@@ -49,6 +49,7 @@ in
       forgejo-runner-codeberg-token = mkSecret {
         key = "FORGEJO_RUNNER_CODEBERG_TOKEN";
         path = "/var/secrets/forgejo-runner-codeberg.token";
+        mode = "0440";
       };
       authelia-users-database = mkSecret {
         key = "AUTHELIA_USERS_DATABASE";

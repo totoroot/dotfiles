@@ -75,11 +75,11 @@ in
       homepage.enable = true;
       forgejo.enable = false;
       forgejo-runner.enable = false;
-      gitlab-runner.enable = false;
-      docker.enable = true;
+      gitlab-runner.enable = true;
       nextcloud.enable = true;
       mailserver.enable = true;
       nginx.enable = true;
+      docker.enable = true;
       podman.enable = true;
       goaccess = {
         enable = true;
