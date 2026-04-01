@@ -15,6 +15,16 @@ in
 
   config = mkIf cfg.enable {
     services = {
+      postgresql = mkIf config.modules.services.postgresql.enable {
+        ensureDatabases = mkAfter [ "plausible" ];
+        ensureUsers = mkAfter [
+          {
+            name = "plausible";
+            ensureDBOwnership = true;
+          }
+        ];
+      };
+
       plausible = {
         enable = true;
         server = {

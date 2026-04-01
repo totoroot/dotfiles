@@ -91,6 +91,13 @@ in
         key = "ACME_NETCUP_API_PASSWORD";
         path = "/var/secrets/acme/netcup-api-password";
       };
+      plausible-keybase = mkSecret {
+        key = "PLAUSIBLE_SECRET_KEYBASE";
+        path = "/var/secrets/plausible/keybase";
+        owner = "plausible";
+        group = "plausible";
+        mode = "0400";
+      };
     };
   };
 }

@@ -92,7 +92,7 @@ in
         userName = "goaccess";
       };
       ntfy.enable = true;
-      plausible.enable = false;
+      plausible.enable = true;
       ssh.enable = true;
       uptime-kuma.enable = false;
       tailscale.enable = true;
@@ -259,6 +259,11 @@ in
     };
 
     "anzeigen.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
+    "besucherinnen.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };

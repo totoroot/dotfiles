@@ -124,6 +124,13 @@
     interval = "1m";
     conditions = [ "[STATUS] == 200" ];
   }
+  {
+    name = "plausible";
+    group = "services";
+    url = "http://127.0.0.1:7129/api/health";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
 
   {
     name = "medien";
