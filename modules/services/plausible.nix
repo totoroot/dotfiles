@@ -5,7 +5,7 @@ with lib.my;
 let
   cfg = config.modules.services.plausible;
   domain = "xn--berwachungsbehr-mtb1g.de";
-  adminEmail = "admin@thym.at";
+  adminEmail = "admin@thym.it";
   plausiblePort = 7129;
 in
 {
