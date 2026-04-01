@@ -35,7 +35,7 @@ in
           secretKeybaseFile = "/var/secrets/plausible/keybase";
         };
         mail = {
-          email = "admin@überwachungsbehör.de";
+          email = "${adminEmail}";
           smtp = {
             hostAddr = "127.0.0.1";
             hostPort = 25;
