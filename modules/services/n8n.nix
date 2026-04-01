@@ -5,7 +5,7 @@ with lib.my;
 let
   cfg = config.modules.services.n8n;
   domain = "xn--berwachungsbehr-mtb1g.de";
-  adminEmail = "admin@thym.at";
+  adminEmail = "admin@thym.it";
   n8nPort = "5678";
 in
 {

@@ -13,7 +13,7 @@ let
   praxisDomain = "grueneis-psychologie.at";
   womanMadeDomain = "womanma.de";
 
-  adminEmail = "admin@thym.at";
+  adminEmail = "admin@thym.it";
 
   acmeWildcardCertName = domain;
   acmeChallengeWebroot = "/var/lib/acme/acme-challenge";
