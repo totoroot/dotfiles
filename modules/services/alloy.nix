@@ -62,8 +62,8 @@ in
           max_age    = "24h"
           forward_to = [loki.relabel.journal.receiver]
           labels = {
-            job  = "systemd-journal"
-            host = "${config.networking.hostName}"
+            job  = "systemd-journal",
+            host = "${config.networking.hostName}",
           }
         }
       '';
