@@ -31,7 +31,6 @@ in
       kernelModules = [ "eeprom" "ee1004" "i2c-core" "i2c-dev" "i2c-piix4" ];
       kernelParams = [
         "acpi_enforce_resources=lax"
-        "pci=assign-busses"
       ];
     };
     hardware.i2c.enable = true;
