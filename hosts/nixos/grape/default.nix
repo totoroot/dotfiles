@@ -145,24 +145,17 @@
       wacom.enable = true;
     };
     shell = {
-      aerc.enable = true;
-      archive.enable = true;
-      borg.enable = true;
       cli.enable = true;
       devops.enable = true;
-      git.enable = true;
       gnupg.enable = true;
-      iperf.enable = true;
-      lf.enable = true;
-      nu.enable = true;
-      pass.enable = true;
       taskell.enable = false;
       utilities.enable = true;
-      zsh.enable = true;
     };
     services = {
       docker.enable = true;
-      podman.enable = true;
+      # Keep Docker as the single container runtime on grape.
+      # Scrutiny uses the docker backend in modules/services/pods/scrutiny.nix.
+      podman.enable = false;
       containers = {
         snowflake.enable = false;
       };
@@ -174,7 +167,6 @@
       };
       forgejo.enable = false;
       jellyfin.enable = false;
-      k8s.enable = false;
       nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;
@@ -253,16 +245,24 @@
       archive.enable = true;
       atuin.enable = true;
       borg.enable = true;
+      containers.enable = true;
       devenv.enable = true;
       duf.enable = true;
+      fonts.enable = true;
       git.enable = true;
+      gitlab.enable = true;
       helix.enable = true;
       lf.enable = true;
+      llm.enable = true;
       micro.enable = true;
+      modernShell.enable = true;
       nushell.enable = true;
+      pass.enable = true;
+      sops.enable = true;
       sshHosts.enable = true;
       trash.enable = true;
       viddy.enable = true;
+      vim.enable = true;
       zsh.enable = true;
     };
   };
