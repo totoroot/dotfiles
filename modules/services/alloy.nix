@@ -59,6 +59,33 @@ in
               }
             }
           }
+
+          // Enrich postfix logs with low-cardinality delivery metadata.
+          stage.match {
+            selector = "{service_name=~\"postfix.*\"}"
+
+            stage.regex {
+              expression = "postfix/(?P<mail_component>[a-z0-9_]+)\\[[0-9]+\\]:.*(?:dsn=(?P<mail_dsn>[^, ]+), )?status=(?P<mail_status>[a-z]+)"
+            }
+
+            stage.labels {
+              values = {
+                mail_component = "mail_component",
+                mail_dsn = "mail_dsn",
+                mail_status = "mail_status",
+              }
+            }
+          }
+
+          stage.match {
+            selector = "{service_name=\"dovecot2.service\"}"
+
+            stage.static_labels {
+              values = {
+                mail_component = "dovecot",
+              }
+            }
+          }
         }
 
         loki.source.journal "systemd" {
