@@ -68,7 +68,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -153,7 +153,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" | status != \"deferred\" [$__range]))",
@@ -170,7 +170,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -257,7 +257,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" status=sent \" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" [$__range])))",
@@ -292,7 +292,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -379,7 +379,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" status=bounced \" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" [$__range])))",
@@ -414,7 +414,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -513,7 +513,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "topk(100, sum by (dsn,status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" dsn=\" |= \" status=\" | regexp \"dsn=(?P<dsn>[^,]+), status=(?P<status>[a-z]+)\" [$__range])))",
@@ -548,7 +548,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -660,7 +660,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" [5m]))",
@@ -677,7 +677,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "${DS_LOKI}"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -788,7 +788,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" | status != \"deferred\" [5m]))",
@@ -845,5 +845,9 @@
   "version": 23,
   "weekStart": "",
   "gnetId": 20574,
-  "description": "Log-based solution for monitoring Postfix"
+  "description": "Log-based solution for monitoring Postfix",
+  "datasource": {
+    "type": "loki",
+    "uid": "loki"
+  }
 }
