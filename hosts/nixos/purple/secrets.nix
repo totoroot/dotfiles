@@ -19,6 +19,11 @@ in
         key = "ATTICD_ENV";
         path = "/etc/atticd.env";
       };
+
+      mullvad-account-number = mkSecret {
+        key = "MULLVAD_ACCOUNT_NUMBER";
+        path = "/var/secrets/mullvad-account-number";
+      };
     };
   };
 }

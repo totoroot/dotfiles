@@ -158,7 +158,8 @@
       forgejo.enable = false;
       jellyfin.enable = false;
       nginx.enable = false;
-      vpn.enable = true;
+      mullvad.enable = true;
+      vpn.enable = false;
       ssh.enable = true;
       syncthing.enable = true;
       tailscale.enable = true;
