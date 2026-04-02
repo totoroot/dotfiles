@@ -152,7 +152,7 @@ in
 
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
     settings.concurrent = 3;
-    prometheusListenAddress = "127.0.0.1:9252";
+    settings.listen_address = "127.0.0.1:9252";
     services = {
       # Prepared declaratively; module toggle keeps runner disabled until rollout.
       default = {
