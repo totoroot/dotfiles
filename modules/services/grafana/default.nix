@@ -30,23 +30,33 @@ in
 
         provision = {
           enable = true;
-          datasources.settings.datasources = [
-            {
-              name = "Prometheus";
-              type = "prometheus";
-              access = "proxy";
-              url = "http://127.0.0.1:9090";
-              isDefault = true;
-              editable = false;
-            }
-            {
-              name = "Loki";
-              type = "loki";
-              access = "proxy";
-              url = "http://127.0.0.1:3100";
-              editable = false;
-            }
-          ];
+          datasources.settings = {
+            # Remove ad-hoc UI-created datasources once they are absent from this list.
+            prune = true;
+            deleteDatasources = [
+              { name = "Prometheus"; orgId = 1; }
+              { name = "Loki"; orgId = 1; }
+            ];
+            datasources = [
+              {
+                uid = "prometheus";
+                name = "Prometheus";
+                type = "prometheus";
+                access = "proxy";
+                url = "http://127.0.0.1:9090";
+                isDefault = true;
+                editable = false;
+              }
+              {
+                uid = "loki";
+                name = "Loki";
+                type = "loki";
+                access = "proxy";
+                url = "http://127.0.0.1:3100";
+                editable = false;
+              }
+            ];
+          };
           dashboards.settings.providers = [
             {
               options.path = "/etc/dashboards";
