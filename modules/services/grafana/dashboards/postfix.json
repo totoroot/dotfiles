@@ -156,7 +156,7 @@
             "uid": "${DS_LOKI}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) \r\n   ( count_over_time({job=\"systemd-journal\",host=\"$host\",unit=~\"postfix.*|dovecot2.service\"} \r\n   | pattern `<_> postfix/smtp[<_>]: <internal_id>: to=<_>,<_> status=<status> (`   \r\n   | status !=\"\"| status !=\"deferred\"  \r\n  [$__range]) \r\n) \r\n\r\n",
+          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" | status != \"deferred\" [$__range]))",
           "legendFormat": "",
           "queryType": "instant",
           "refId": "A",
@@ -260,7 +260,7 @@
             "uid": "${DS_LOKI}"
           },
           "editorMode": "code",
-          "expr": "topk(25,\r\nsum by (domain)\r\n( count_over_time(\r\n  {job=\"systemd-journal\",host=\"$host\",unit=~\"postfix.*|dovecot2.service\"} \r\n   | pattern `<_> postfix/smtp[<_>]: <internal_id>: to=<_>@<domain>>,<_> status=<status> (`   \r\n   | status !=\"\"| status =\"sent\" \r\n  [$__range]\r\n  )\r\n)\r\n)",
+          "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" status=sent \" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" [$__range])))",
           "legendFormat": "",
           "queryType": "instant",
           "refId": "A",
@@ -382,7 +382,7 @@
             "uid": "${DS_LOKI}"
           },
           "editorMode": "code",
-          "expr": "topk(25,\r\nsum by (domain)\r\n( count_over_time(\r\n  {job=\"systemd-journal\",host=\"$host\",unit=~\"postfix.*|dovecot2.service\"} \r\n   | pattern `<_> postfix/smtp[<_>]: <internal_id>: to=<_>@<domain>>,<_> status=<status> (`   \r\n   | status !=\"\"| status =\"bounced\" \r\n  [$__range]\r\n  )\r\n)\r\n)",
+          "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" status=bounced \" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" [$__range])))",
           "legendFormat": "",
           "queryType": "instant",
           "refId": "A",
@@ -516,7 +516,7 @@
             "uid": "${DS_LOKI}"
           },
           "editorMode": "code",
-          "expr": "topk(100,\r\nsum by (dsn,status)\r\n( count_over_time(\r\n  {job=\"systemd-journal\",host=\"$host\",unit=~\"postfix.*|dovecot2.service\"} \r\n   | pattern `<_> dsn=<dsn>, status=<status> (`\r\n   | dsn !=\"\"\r\n  [$__range]\r\n  )\r\n)\r\n)",
+          "expr": "topk(100, sum by (dsn,status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" dsn=\" |= \" status=\" | regexp \"dsn=(?P<dsn>[^,]+), status=(?P<status>[a-z]+)\" [$__range])))",
           "legendFormat": "",
           "queryType": "instant",
           "refId": "A",
@@ -663,7 +663,7 @@
             "uid": "${DS_LOKI}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (\r\n    count_over_time(\r\n    {job=\"systemd-journal\",host=\"$host\",unit=~\"postfix.*|dovecot2.service\"} \r\n    | pattern `<_> postfix/smtp[<_>]: <internal_id>: to=<_>,<_> status=<status> (` \r\n    | status !=\"\"  \r\n    [5m])\r\n)\r\n",
+          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" [5m]))",
           "legendFormat": "{{status}}",
           "queryType": "range",
           "refId": "A",
@@ -791,7 +791,7 @@
             "uid": "${DS_LOKI}"
           },
           "editorMode": "code",
-          "expr": "sum by (status)\r\n( \r\n        count_over_time(\r\n        {job=\"systemd-journal\",host=\"$host\",unit=~\"postfix.*|dovecot2.service\"} \r\n        | pattern `<_> postfix/smtp[<_>]: <internal_id>: to=<<recipient>>,<_> status=<status> (`   \r\n        | status !=\"\"| status !=\"deferred\" \r\n        [5m]\r\n        )   \r\n)",
+          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" | status != \"deferred\" [5m]))",
           "legendFormat": "{{status}}",
           "queryType": "range",
           "refId": "A",
