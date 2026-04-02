@@ -19,5 +19,20 @@ in {
     networking.iproute2.enable = true;
     networking.firewall.checkReversePath = "loose";
     services.mullvad-vpn.enable = true;
+
+    # Delay Mullvad startup until network and tailscale autoconnect settled.
+    systemd.services.mullvad-daemon = {
+      after = [
+        "network-online.target"
+        "tailscaled.service"
+        "tailscale-autoconnect.service"
+      ];
+      wants = [
+        "network-online.target"
+        "tailscaled.service"
+        "tailscale-autoconnect.service"
+      ];
+      serviceConfig.ExecStartPre = [ "${pkgs.coreutils}/bin/sleep 8" ];
+    };
   };
 }

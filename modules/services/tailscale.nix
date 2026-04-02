@@ -21,9 +21,10 @@ in
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to Tailscale";
 
-      # Make sure tailscale is running before trying to connect to tailscale
-      after = [ "network-pre.target" "tailscale.service" ];
-      wants = [ "network-pre.target" "tailscale.service" ];
+      # Avoid route/DNS races during early boot.
+      # Wait for full network readiness and a running tailscaled daemon.
+      after = [ "network-online.target" "tailscaled.service" ];
+      wants = [ "network-online.target" "tailscaled.service" ];
       wantedBy = [ "multi-user.target" ];
 
       # Set this service as a oneshot job
