@@ -50,8 +50,22 @@ alias rs='rswitch'
 alias zshconfig="$EDITOR ~/.zshrc"
 # source zshrc
 alias zshsource="source ~/.zshrc"
-# alias to scan wireless network for connected devices
-alias scan="sudo nmap -sn $(route -n get default | rg 'gateway' | awk '{print $2}')/24 | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'"
+# scan local /24 network for active hosts (linux + darwin compatible)
+scan() {
+  local gw
+  if command -v ip >/dev/null 2>&1; then
+    gw="$(ip route 2>/dev/null | awk '/^default/ {print $3; exit}')"
+  elif command -v route >/dev/null 2>&1; then
+    gw="$(route -n get default 2>/dev/null | awk '/gateway/ {print $2; exit}')"
+  fi
+
+  if [ -z "$gw" ]; then
+    echo "Could not determine default gateway" >&2
+    return 1
+  fi
+
+  sudo nmap -sn "${gw}/24" | sed -e 's#.*for \(\)#\1#' | sed '/^Host/d' | sed '/MAC/{G;}'
+}
 # find largest files in directory
 alias ducks="sudo du -cks -- * | sort -rn | head"
 # rm EXIF data from images in directory

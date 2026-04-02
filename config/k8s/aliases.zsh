@@ -3,7 +3,9 @@ alias kubectl='kubecolor'
 
 # Make completion work with kubecolor
 # source <(kubectl completion zsh)
-compdef kubecolor=kubectl
+if command -v compdef >/dev/null 2>&1 && command -v kubecolor >/dev/null 2>&1 && command -v kubectl >/dev/null 2>&1; then
+  compdef kubecolor=kubectl
+fi
 
 # kubectl utils aliases
 alias kns='kubens'
