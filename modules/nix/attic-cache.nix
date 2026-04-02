@@ -120,9 +120,8 @@ in
           export HOME=/root
           export XDG_CONFIG_HOME=/root/.config
           install -d /root/.config/attic
-          if [ ! -f /root/.config/attic/config.toml ]; then
-            ${pkgs.attic-client}/bin/attic login --set-default "${cfg.cacheName}" "http://${cfg.clientHost}:${toString cfg.port}" "$token_value"
-          fi
+          # Always (re)login so rotated tokens in ${cfg.environmentFile} take effect.
+          ${pkgs.attic-client}/bin/attic login --set-default "${cfg.cacheName}" "http://${cfg.clientHost}:${toString cfg.port}" "$token_value"
         '';
       };
 
