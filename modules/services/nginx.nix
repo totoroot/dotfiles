@@ -110,7 +110,7 @@ in
         "kuh.${domain}" = {
           enableACME = true;
           forceSSL = true;
-          root = "/var/www/kuh";
+          root = "/var/www/kuh.${domain}";
         };
         "benachrichtigungs.${domain}" = {
           enableACME = true;
@@ -306,8 +306,13 @@ in
         "${theaterDomain}" = {
           enableACME = true;
           forceSSL = true;
-          root = "/var/www/theaterschaffen";
+          root = "/var/www/theaterschaffen.de";
           serverAliases = [ "www.${theaterDomain}" ];
+        };
+        "julia.${thymDomain}" = {
+          enableACME = true;
+          forceSSL = true;
+          globalRedirect = theaterDomain;
         };
         "die.${theaterDomain}" = {
           enableACME = true;
@@ -336,7 +341,7 @@ in
           enableACME = true;
           forceSSL = true;
           locations."/" = {
-            root = "/var/www/womanmade";
+            root = "/var/www/womanma.de";
           };
           serverAliases = [ "www.${womanMadeDomain}" ];
         };
