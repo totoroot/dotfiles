@@ -314,6 +314,22 @@ in
   users.users.goaccess.extraGroups = [ "nginx" ];
   users.users.${config.user.name}.extraGroups = [ "docker" ];
 
+  users.groups.deploy-web = { };
+  users.users.deploy-web = {
+    isSystemUser = true;
+    uid = 5005;
+    group = "deploy-web";
+    home = "/var/www";
+    createHome = false;
+    useDefaultShell = true;
+  };
+
+  # Consolidated static-site deployment ownership (replaces per-site users like blog/praxis).
+  systemd.tmpfiles.rules = [
+    "d /var/www/blog.thym.at 0755 deploy-web deploy-web -"
+    "d /var/www/grueneis-psychologie.at 0755 deploy-web deploy-web -"
+  ];
+
 
   home-manager.users.${config.user.name} = { config, ... }: {
     imports = [
