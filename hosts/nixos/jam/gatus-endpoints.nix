@@ -15,6 +15,20 @@
     conditions = [ "[STATUS] == 200" ];
   }
   {
+    name = "blog.thym.at";
+    group = "domains";
+    url = "https://blog.thym.at";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
+    name = "nixos.at";
+    group = "domains";
+    url = "https://nixos.at";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
     name = "theaterschaffen.de";
     group = "domains";
     url = "https://theaterschaffen.de";
@@ -53,6 +67,13 @@
     name = "überwachungsbehör.de";
     group = "domains";
     url = "https://überwachungsbehör.de";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
+    name = "kuh.überwachungsbehör.de";
+    group = "domains";
+    url = "https://kuh.xn--berwachungsbehr-mtb1g.de";
     interval = "1m";
     conditions = [ "[STATUS] == 200" ];
   }
