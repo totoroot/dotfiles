@@ -271,6 +271,20 @@ in
     "besucherinnen.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;
+      "/js/" = {
+        proxyPass = "http://127.0.0.1:7129";
+        proxyWebsockets = true;
+        extraConfig = ''
+          auth_request off;
+        '';
+      };
+      "= /api/event" = {
+        proxyPass = "http://127.0.0.1:7129";
+        proxyWebsockets = true;
+        extraConfig = ''
+          auth_request off;
+        '';
+      };
     };
   };
 
