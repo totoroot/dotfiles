@@ -330,12 +330,30 @@ in
           locations."/" = {
             root = "/var/www/praxis";
           };
+          extraConfig = ''
+            error_page 404 /de/404/;
+          '';
+
+          locations."= /de/404/" = {
+            extraConfig = ''
+              internal;
+            '';
+          };
           serverAliases = [ "www.${praxisDomain}" ];
         };
         "konzept.${praxisDomain}" = {
           enableACME = true;
           forceSSL = true;
           root = "/var/www/grueneis-psychologie.at";
+          extraConfig = ''
+            error_page 404 /de/404/;
+          '';
+
+          locations."= /de/404/" = {
+            extraConfig = ''
+              internal;
+            '';
+          };
         };
         "${womanMadeDomain}" = {
           enableACME = true;
