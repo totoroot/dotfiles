@@ -112,6 +112,11 @@ in
           forceSSL = true;
           root = "/var/www/kuh.${domain}";
         };
+        "geburtstags.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          root = "/var/www/geburtstags.${domain}";
+        };
         "benachrichtigungs.${domain}" = {
           enableACME = true;
           forceSSL = true;

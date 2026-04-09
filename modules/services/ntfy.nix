@@ -33,6 +33,7 @@ in
           # Needed to get UnifiedPush to work if deny-all default access
           "*:up*:rw"
           "*:service-status:rw"
+          "*:gitlab-pipelines:rw"
           "*:announcements:ro"
         ];
         # cache-file = "/var/cache/ntfy/cache.db";
