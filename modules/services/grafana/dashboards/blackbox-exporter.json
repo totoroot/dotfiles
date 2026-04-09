@@ -37,7 +37,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -134,7 +134,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -153,7 +153,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -237,7 +237,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_success{target=~\"$target\"}",
@@ -254,7 +254,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -339,7 +339,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_http_status_code{target=~\"$target\"}",
@@ -356,7 +356,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -424,7 +424,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_http_version{target=~\"$target\"}",
@@ -442,7 +442,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -530,7 +530,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_duration_seconds{target=~\"$target\"}",
@@ -547,7 +547,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -619,7 +619,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "avg(probe_duration_seconds{target=~\"$target\"}) by (target)",
@@ -636,7 +636,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -710,7 +710,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "avg(probe_dns_lookup_time_seconds{target=~\"$target\"}) by (target)",
@@ -727,7 +727,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -795,7 +795,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_ip_protocol{target=~\"$target\"}",
@@ -812,7 +812,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -896,7 +896,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_http_duration_seconds{target=~\"$target\", phase=~\"$phase\"}",
@@ -913,7 +913,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -998,7 +998,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_ssl_earliest_cert_expiry{target=~\"$target\"} - time()",
@@ -1015,7 +1015,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1099,7 +1099,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_http_ssl{target=~\"$target\"}",
@@ -1116,7 +1116,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1191,7 +1191,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "exemplar": true,
           "expr": "probe_tls_version_info{target=~\"$target\"}",
@@ -1370,7 +1370,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "Prometheus"
         },
         "definition": "label_values(probe_success,target)",
         "hide": 0,
@@ -1401,7 +1401,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "Prometheus"
         },
         "definition": "label_values(probe_http_duration_seconds, phase)",
         "hide": 0,

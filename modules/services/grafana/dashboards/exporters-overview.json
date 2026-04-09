@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -111,7 +111,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "topk(5, max(scrape_duration_seconds) by (job))",
           "format": "time_series",

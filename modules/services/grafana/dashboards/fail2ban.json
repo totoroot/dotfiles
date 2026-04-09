@@ -30,7 +30,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -115,7 +115,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -162,7 +162,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "f2b_jail_banned_current{instance=~\"$instance\", jail=~\"$jail\"}",
@@ -179,7 +179,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -226,7 +226,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "f2b_jail_banned_total{instance=~\"$instance\", jail=~\"$jail\"}",
@@ -243,7 +243,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -316,7 +316,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -415,7 +415,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -514,7 +514,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -614,7 +614,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -713,7 +713,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -898,7 +898,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "Prometheus"
         },
         "definition": "f2b_up",
         "description": "Select which instance(s) to show",
@@ -930,7 +930,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "Prometheus"
         },
         "definition": "f2b_jail_failed_total",
         "description": "Select which jail(s) to show",

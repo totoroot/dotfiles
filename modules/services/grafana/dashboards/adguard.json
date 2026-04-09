@@ -5,7 +5,7 @@
         "builtIn": 1,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "Prometheus"
         },
         "enable": true,
         "hide": true,
@@ -28,7 +28,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -42,7 +42,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "refId": "A"
         }
@@ -53,7 +53,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -121,7 +121,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_running{hostname=~'$node'}",
           "format": "time_series",
@@ -138,7 +138,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -206,7 +206,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_protection_enabled{hostname=~'$node'}",
           "format": "time_series",
@@ -223,7 +223,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -284,7 +284,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_avg_processing_time{hostname=~'$node'}",
           "format": "time_series",
@@ -301,7 +301,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -361,7 +361,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_num_dns_queries{hostname=~'$node'}",
           "format": "time_series",
@@ -378,7 +378,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -428,7 +428,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_num_blocked_filtering{hostname=~'$node'}",
           "format": "time_series",
@@ -445,7 +445,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -506,7 +506,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_num_blocked_filtering{hostname=~'$node'} / adguard_num_dns_queries{hostname=~'$node'} * 100",
           "format": "time_series",
@@ -524,7 +524,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -587,7 +587,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_top_queried_domains{hostname=~'$node'}",
           "format": "time_series",
@@ -605,7 +605,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -668,7 +668,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_top_blocked_domains{hostname=~'$node'}",
           "format": "time_series",
@@ -692,7 +692,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -733,7 +733,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_num_dns_queries{hostname=~'$node'}",
           "format": "time_series",
@@ -783,7 +783,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -823,7 +823,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_query_types{hostname=~'$node'}",
           "interval": "",
@@ -865,7 +865,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -928,7 +928,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_query_types{hostname=~'$node'}",
           "format": "time_series",
@@ -946,7 +946,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1009,7 +1009,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_top_clients{hostname=~'$node'}",
           "format": "time_series",
@@ -1033,7 +1033,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1075,7 +1075,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_num_blocked_filtering{hostname=~'$node'}",
           "format": "time_series",
@@ -1122,7 +1122,7 @@
       "columns": [],
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fontSize": "100%",
       "gridPos": {
@@ -1166,7 +1166,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_top_clients{hostname=~'$node'}",
           "format": "time_series",
@@ -1190,7 +1190,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1231,7 +1231,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_num_blocked_filtering{hostname=~'$node'} / adguard_num_dns_queries{hostname=~'$node'} * 100",
           "format": "time_series",
@@ -1278,7 +1278,7 @@
       "columns": [],
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fontSize": "100%",
       "gridPos": {
@@ -1322,7 +1322,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_top_blocked_domains{hostname=~'$node'}",
           "format": "time_series",
@@ -1341,7 +1341,7 @@
       "columns": [],
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fontSize": "100%",
       "gridPos": {
@@ -1381,7 +1381,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "expr": "adguard_top_queried_domains{hostname=~'$node'}",
           "format": "time_series",
@@ -1413,7 +1413,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "Prometheus"
         },
         "definition": "label_values(adguard_num_dns_queries, hostname)",
         "hide": 0,

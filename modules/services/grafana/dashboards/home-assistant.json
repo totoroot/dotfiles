@@ -38,7 +38,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -114,7 +114,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_binary_sensor_state{friendly_name=~\".*Motion.*\"}",
@@ -131,7 +131,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -207,7 +207,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_binary_sensor_state{friendly_name=~\".*Door.*\"}",
@@ -237,7 +237,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "2.5µm particulate matter concentration as a measure of air quality",
       "fieldConfig": {
@@ -340,7 +340,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_sensor_pm25_u0xb5g_per_mu0xb3",
@@ -370,7 +370,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -417,7 +417,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_sensor_energy_kwh",
@@ -434,7 +434,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -518,7 +518,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_sensor_power_w",
@@ -547,7 +547,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -623,7 +623,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_switch_state{friendly_name=~\".*Switch\"}",
@@ -640,7 +640,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -695,7 +695,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "homeassistant_light_brightness_percent",
@@ -711,7 +711,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "Prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -762,7 +762,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "Prometheus"
           },
           "editorMode": "code",
           "expr": "avg by (friendly_name) (homeassistant_sensor_battery_percent{friendly_name!=\"FP5 Battery level\"})",

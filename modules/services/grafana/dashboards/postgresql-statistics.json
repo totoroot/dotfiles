@@ -46,7 +46,7 @@
         "text": "",
         "value": ""
       },
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -109,7 +109,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_static{app=\"$app\"}",
           "format": "time_series",
@@ -123,7 +123,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -186,7 +186,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_max_connections{app=\"$app\"}",
           "format": "time_series",
@@ -200,7 +200,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -263,7 +263,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_shared_buffers_bytes{app=\"$app\"}",
           "format": "time_series",
@@ -277,7 +277,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -340,7 +340,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_effective_cache_size_bytes{app=\"$app\"}",
           "format": "time_series",
@@ -354,7 +354,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -417,7 +417,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_maintenance_work_mem_bytes{app=\"$app\"}",
           "format": "time_series",
@@ -431,7 +431,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -494,7 +494,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_work_mem_bytes{app=\"$app\"}",
           "format": "time_series",
@@ -508,7 +508,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -572,7 +572,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_max_wal_size_bytes{app=\"$app\"}",
           "format": "time_series",
@@ -586,7 +586,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -649,7 +649,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_random_page_cost{app=\"$app\"}",
           "format": "time_series",
@@ -663,7 +663,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -726,7 +726,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_seq_page_cost{app=\"$app\"}",
           "format": "time_series",
@@ -740,7 +740,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -803,7 +803,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_max_worker_processes{app=\"$app\"}",
           "format": "time_series",
@@ -817,7 +817,7 @@
       "type": "stat"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -880,7 +880,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_settings_max_parallel_workers{app=\"$app\"}",
           "format": "time_series",
@@ -907,7 +907,7 @@
       "type": "row"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -993,7 +993,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "editorMode": "code",
           "expr": "pg_database_size_bytes{app=\"$app\", datname=\"$db\"}",
           "legendFormat": "size",
@@ -1018,7 +1018,7 @@
       "type": "row"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1104,7 +1104,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_stat_activity_count{app=\"$app\", datname=\"$db\"}",
           "format": "time_series",
@@ -1118,7 +1118,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1199,7 +1199,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_xact_commit{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1209,7 +1209,7 @@
           "refId": "A"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_xact_rollback{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1223,7 +1223,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1309,7 +1309,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_tup_fetched{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1319,7 +1319,7 @@
           "refId": "A"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_tup_returned{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1333,7 +1333,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1419,7 +1419,7 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_tup_inserted{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1429,7 +1429,7 @@
           "refId": "A"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_tup_updated{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1439,7 +1439,7 @@
           "refId": "B"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_tup_deleted{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1453,7 +1453,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1531,7 +1531,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_stat_activity_max_tx_duration{app=\"$app\", datname=\"$db\"}",
           "format": "time_series",
@@ -1545,7 +1545,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1619,7 +1619,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_stat_database_blks_hit{app=\"$app\", datname=\"$db\"} / (pg_stat_database_blks_read{app=\"$app\", datname=\"$db\"} + pg_stat_database_blks_hit{app=\"$app\", datname=\"$db\"})",
           "format": "time_series",
@@ -1646,7 +1646,7 @@
       "type": "row"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1724,7 +1724,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_buffers_backend_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -1734,7 +1734,7 @@
           "refId": "A"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_buffers_alloc_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -1744,7 +1744,7 @@
           "refId": "B"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_buffers_backend_fsync_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -1754,7 +1754,7 @@
           "refId": "C"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_buffers_checkpoint_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -1764,7 +1764,7 @@
           "refId": "D"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_buffers_clean_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -1778,7 +1778,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1851,7 +1851,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_conflicts{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1861,7 +1861,7 @@
           "refId": "B"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_deadlocks{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -1875,7 +1875,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1954,7 +1954,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "pg_locks_count{app=\"$app\", datname=\"$db\"}",
           "format": "time_series",
@@ -1968,7 +1968,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "description": "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting.",
       "fieldConfig": {
         "defaults": {
@@ -2042,7 +2042,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_database_temp_bytes{app=\"$app\", datname=\"$db\"}[5m])",
           "format": "time_series",
@@ -2056,7 +2056,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "PBFA97CFB590B2093",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2134,7 +2134,7 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_checkpoint_write_time_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -2144,7 +2144,7 @@
           "refId": "B"
         },
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "irate(pg_stat_bgwriter_checkpoint_sync_time_total{app=\"$app\"}[5m])",
           "format": "time_series",
@@ -2174,7 +2174,7 @@
           "text": "",
           "value": ""
         },
-        "datasource": "PBFA97CFB590B2093",
+        "datasource": "Prometheus",
         "definition": "label_values(pg_up, app)",
         "includeAll": false,
         "label": "App",
@@ -2189,7 +2189,7 @@
         "type": "query"
       },
       {
-        "datasource": "PBFA97CFB590B2093",
+        "datasource": "Prometheus",
         "definition": "label_values(pg_stat_database_tup_fetched{datname!~\"template.*|postgres\",app=\"$app\"},datname)",
         "includeAll": false,
         "label": "Database",
