@@ -23,6 +23,10 @@ let
       recipientFromField = routeCfg.recipientFromField;
       subject = routeCfg.subject;
       sender = routeCfg.sender;
+      subjects = routeCfg.subjects;
+      templates = routeCfg.templates;
+      languageMode = routeCfg.languageMode;
+      language = routeCfg.language;
       requiredFields = routeCfg.requiredFields;
     }) cfg.routes;
   };
@@ -53,6 +57,18 @@ let
       handler.send_header("Content-Length", str(len(body)))
       handler.end_headers()
       handler.wfile.write(body)
+
+    def normalize_lang(raw):
+      value = str(raw or "").lower()
+      if value.startswith("de"):
+        return "de"
+      return "en"
+
+    def render_template(template, payload):
+      result = template
+      for key, value in payload.items():
+        result = result.replace("{{" + str(key) + "}}", str(value))
+      return result
 
     class Handler(BaseHTTPRequestHandler):
       def do_OPTIONS(self):
@@ -94,10 +110,29 @@ let
           as_json(self, 400, {"ok": False, "error": "missing_fields", "fields": missing})
           return
 
+        if route_cfg.get("languageMode") == "fixed":
+          route_lang = normalize_lang(route_cfg.get("language"))
+        else:
+          route_lang = normalize_lang(payload.get("lang"))
+
         lines = []
         for key in sorted(payload.keys()):
           value = payload.get(key)
           lines.append(f"{key}: {value}")
+
+        default_body = "\n".join(lines)
+
+        subject = route_cfg.get("subject") or f"Form submission ({route})"
+        body = default_body
+
+        localized_subjects = route_cfg.get("subjects") or {}
+        localized_templates = route_cfg.get("templates") or {}
+        if route_lang in localized_subjects:
+          subject = localized_subjects.get(route_lang) or subject
+        if route_lang in localized_templates:
+          template = localized_templates.get(route_lang) or ""
+          if template:
+            body = render_template(template, payload)
 
         message = EmailMessage()
         message["From"] = route_cfg.get("sender") or CONFIG["sender"]
@@ -112,8 +147,8 @@ let
           return
 
         message["To"] = recipient_value
-        message["Subject"] = route_cfg.get("subject") or f"Form submission ({route})"
-        message.set_content("\n".join(lines))
+        message["Subject"] = subject
+        message.set_content(body)
 
         smtp_cfg = CONFIG["smtp"]
         try:
@@ -168,6 +203,10 @@ in
         recipientFromField = mkOpt' (types.nullOr types.str) null "Use a payload field as recipient email address for this route.";
         subject = mkOpt' types.str "" "Email subject for this route.";
         sender = mkOpt' (types.nullOr types.str) null "Optional sender override for this route.";
+        subjects = mkOpt' (types.attrsOf types.str) { } "Optional localized subject map, e.g. { de = \"...\"; en = \"...\"; }.";
+        templates = mkOpt' (types.attrsOf types.lines) { } "Optional localized body templates with {{field}} placeholders.";
+        languageMode = mkOpt' (types.enum [ "payload" "fixed" ]) "payload" "Use payload language or fixed route language for localization lookup.";
+        language = mkOpt' types.str "en" "Fixed route language when languageMode is set to fixed.";
         requiredFields = mkOpt' (types.listOf types.str) [ "name" "email" "message" ] "Required payload keys for this route.";
       };
     }))) { } "Route map for /send/<route> endpoints.";

@@ -102,14 +102,75 @@ in
           rsvp = {
             recipient = "admin@xn--berwachungsbehr-mtb1g.de";
             sender = "admin@xn--berwachungsbehr-mtb1g.de";
+            languageMode = "fixed";
+            language = "en";
             subject = "RSVP submission";
+            subjects = {
+              de = "Neue Antwort auf Einladung";
+              en = "New RSVP submission";
+            };
+            templates = {
+              de = ''
+                Neue RSVP Anmeldung
+
+                Name: {{name}}
+                E-Mail: {{email}}
+                Teilnahme: {{attendance}}
+                +1: {{guests}}
+                Ernährung: {{diet}}
+                Ernährung (+1): {{plusOneDiet}}
+                Nachricht: {{message}}
+                Sprache: {{lang}}
+              '';
+              en = ''
+                New RSVP submission
+
+                Name: {{name}}
+                Email: {{email}}
+                Attendance: {{attendance}}
+                Plus one: {{guests}}
+                Diet: {{diet}}
+                Diet (plus one): {{plusOneDiet}}
+                Message: {{message}}
+                Language: {{lang}}
+              '';
+            };
             requiredFields = [ "name" "email" "attendance" ];
           };
           rsvp-confirmation = {
             recipient = "";
             recipientFromField = "email";
             sender = "admin@xn--berwachungsbehr-mtb1g.de";
-            subject = "Danke für deine RSVP";
+            languageMode = "payload";
+            subject = "Danke für deine Antwort auf die Einladung";
+            subjects = {
+              de = "Danke für deine Antwort auf die Einladung";
+              en = "Thanks for your RSVP";
+            };
+            templates = {
+              de = ''
+                Hallo {{name}},
+
+                danke für deine Rückmeldung zu meiner Geburtstagsparty.
+
+                Deine Auswahl: {{attendance}}
+                +1: {{guests}}
+
+                Liebe Grüße
+                Matthias
+              '';
+              en = ''
+                Hi {{name}},
+
+                thanks for your RSVP to my birthday party.
+
+                Your selection: {{attendance}}
+                Plus one: {{guests}}
+
+                Best regards,
+                Matthias
+              '';
+            };
             requiredFields = [ "name" "email" "attendance" ];
           };
           kontakt = {
