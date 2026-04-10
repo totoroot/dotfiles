@@ -20,6 +20,7 @@ let
     };
     routes = mapAttrs (_name: routeCfg: {
       recipient = routeCfg.recipient;
+      recipientFromField = routeCfg.recipientFromField;
       subject = routeCfg.subject;
       sender = routeCfg.sender;
       requiredFields = routeCfg.requiredFields;
@@ -100,7 +101,17 @@ let
 
         message = EmailMessage()
         message["From"] = route_cfg.get("sender") or CONFIG["sender"]
-        message["To"] = route_cfg["recipient"]
+        recipient_from_field = route_cfg.get("recipientFromField")
+        if recipient_from_field:
+          recipient_value = str(payload.get(recipient_from_field, "")).strip()
+        else:
+          recipient_value = route_cfg.get("recipient", "")
+
+        if not recipient_value:
+          as_json(self, 400, {"ok": False, "error": "missing_recipient"})
+          return
+
+        message["To"] = recipient_value
         message["Subject"] = route_cfg.get("subject") or f"Form submission ({route})"
         message.set_content("\n".join(lines))
 
@@ -154,6 +165,7 @@ in
     routes = mkOpt' (types.attrsOf (types.submodule ({ ... }: {
       options = {
         recipient = mkOpt' types.str "" "Destination email address for this route.";
+        recipientFromField = mkOpt' (types.nullOr types.str) null "Use a payload field as recipient email address for this route.";
         subject = mkOpt' types.str "" "Email subject for this route.";
         sender = mkOpt' (types.nullOr types.str) null "Optional sender override for this route.";
         requiredFields = mkOpt' (types.listOf types.str) [ "name" "email" "message" ] "Required payload keys for this route.";
@@ -168,8 +180,8 @@ in
         message = "modules.services.email-backend.routes must define at least one route.";
       }
       {
-        assertion = all (routeCfg: routeCfg.recipient != "") (attrValues cfg.routes);
-        message = "Every email-backend route must configure a non-empty recipient.";
+        assertion = all (routeCfg: (routeCfg.recipient != "") || (routeCfg.recipientFromField != null)) (attrValues cfg.routes);
+        message = "Every email-backend route must configure recipient or recipientFromField.";
       }
     ];
 

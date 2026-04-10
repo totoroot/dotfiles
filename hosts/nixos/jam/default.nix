@@ -105,6 +105,13 @@ in
             subject = "RSVP submission";
             requiredFields = [ "name" "email" "attendance" ];
           };
+          rsvp-confirmation = {
+            recipient = "";
+            recipientFromField = "email";
+            sender = "admin@xn--berwachungsbehr-mtb1g.de";
+            subject = "Danke für deine RSVP";
+            requiredFields = [ "name" "email" "attendance" ];
+          };
           kontakt = {
             recipient = "praxis@grueneis-psychologie.at";
             sender = "praxis@grueneis-psychologie.at";
@@ -252,12 +259,22 @@ in
 
   # Protect selected dashboards behind Authelia forward-auth.
   services.nginx.virtualHosts = {
-    "geburtstags.${domain}".locations."/api/rsvp" = {
-      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/rsvp";
-      recommendedProxySettings = true;
-      extraConfig = ''
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      '';
+    "geburtstags.${domain}".locations = {
+      "/api/rsvp" = {
+        proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/rsvp";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
+      };
+
+      "/api/rsvp-confirmation" = {
+        proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/rsvp-confirmation";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
+      };
     };
 
     "konzept.grueneis-psychologie.at".locations."/api/contact" = {
