@@ -111,7 +111,7 @@ in
             };
             templates = {
               de = ''
-                Neue RSVP Anmeldung
+                Neue Antwort auf Einladung
 
                 Name: {{name}}
                 E-Mail: {{email}}
@@ -149,25 +149,25 @@ in
             };
             templates = {
               de = ''
-                Hallo {{name}},
+                Servus {{name}},
 
-                danke für deine Rückmeldung zu meiner Geburtstagsparty.
+                Danke für deine Rückmeldung zu meiner Geburtstagsparty.
 
                 Deine Auswahl: {{attendance}}
                 +1: {{guests}}
 
-                Liebe Grüße
+                Bussal
                 Matthias
               '';
               en = ''
-                Hi {{name}},
+                hey {{name}},
 
-                thanks for your RSVP to my birthday party.
+                Thanks for your RSVP to my birthday party.
 
                 Your selection: {{attendance}}
                 Plus one: {{guests}}
 
-                Best regards,
+                All the best,
                 Matthias
               '';
             };
