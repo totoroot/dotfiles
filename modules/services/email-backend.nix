@@ -21,6 +21,7 @@ let
     routes = mapAttrs (_name: routeCfg: {
       recipient = routeCfg.recipient;
       subject = routeCfg.subject;
+      sender = routeCfg.sender;
       requiredFields = routeCfg.requiredFields;
     }) cfg.routes;
   };
@@ -98,7 +99,7 @@ let
           lines.append(f"{key}: {value}")
 
         message = EmailMessage()
-        message["From"] = CONFIG["sender"]
+        message["From"] = route_cfg.get("sender") or CONFIG["sender"]
         message["To"] = route_cfg["recipient"]
         message["Subject"] = route_cfg.get("subject") or f"Form submission ({route})"
         message.set_content("\n".join(lines))
@@ -139,7 +140,7 @@ in
     enable = mkBoolOpt false;
     bindHost = mkOpt' types.str "127.0.0.1" "Bind host for the mail API.";
     port = mkOpt' types.port 8787 "Bind port for the mail API.";
-    sender = mkOpt' types.str "admin@xn--berwachungsbehr-mtb1g.de" "Sender email address for outgoing mails.";
+    sender = mkOpt' types.str "admin@thym.it" "Default sender email address for outgoing mails.";
     allowedOrigins = mkOpt' (types.listOf types.str) [ ] "Allowed HTTP origins. Empty list disables origin checks.";
 
     smtp = {
@@ -154,6 +155,7 @@ in
       options = {
         recipient = mkOpt' types.str "" "Destination email address for this route.";
         subject = mkOpt' types.str "" "Email subject for this route.";
+        sender = mkOpt' (types.nullOr types.str) null "Optional sender override for this route.";
         requiredFields = mkOpt' (types.listOf types.str) [ "name" "email" "message" ] "Required payload keys for this route.";
       };
     }))) { } "Route map for /send/<route> endpoints.";

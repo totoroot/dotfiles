@@ -83,6 +83,36 @@ in
       nginx.enable = true;
       docker.enable = true;
       podman.enable = true;
+      email-backend = {
+        enable = true;
+        sender = "admin@thym.it";
+        allowedOrigins = [
+          "https://geburtstags.${domain}"
+          "https://konzept.grueneis-psychologie.at"
+          "https://grueneis-psychologie.at"
+        ];
+        smtp = {
+          host = "127.0.0.1";
+          port = 25;
+          starttls = false;
+          username = null;
+          passwordFile = null;
+        };
+        routes = {
+          rsvp = {
+            recipient = "admin@xn--berwachungsbehr-mtb1g.de";
+            sender = "admin@xn--berwachungsbehr-mtb1g.de";
+            subject = "RSVP submission";
+            requiredFields = [ "name" "email" "attendance" ];
+          };
+          kontakt = {
+            recipient = "praxis@grueneis-psychologie.at";
+            sender = "praxis@grueneis-psychologie.at";
+            subject = "Praxis Kontaktformular";
+            requiredFields = [ "name" "email" "message" ];
+          };
+        };
+      };
       goaccess = {
         enable = true;
         logFilePath = "/var/log/nginx/access.log";
@@ -222,6 +252,30 @@ in
 
   # Protect selected dashboards behind Authelia forward-auth.
   services.nginx.virtualHosts = {
+    "geburtstags.${domain}".locations."/api/rsvp" = {
+      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/rsvp";
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      '';
+    };
+
+    "konzept.grueneis-psychologie.at".locations."/api/contact" = {
+      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/kontakt";
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      '';
+    };
+
+    "grueneis-psychologie.at".locations."/api/contact" = {
+      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/kontakt";
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      '';
+    };
+
     "status.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;
