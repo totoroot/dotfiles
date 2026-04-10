@@ -27,6 +27,9 @@ let
       templates = routeCfg.templates;
       languageMode = routeCfg.languageMode;
       language = routeCfg.language;
+      requireSharedSecret = routeCfg.requireSharedSecret;
+      sharedSecret = routeCfg.sharedSecret;
+      sharedSecretFile = routeCfg.sharedSecretFile;
       requiredFields = routeCfg.requiredFields;
     }) cfg.routes;
   };
@@ -109,6 +112,16 @@ let
         if missing:
           as_json(self, 400, {"ok": False, "error": "missing_fields", "fields": missing})
           return
+
+        if route_cfg.get("requireSharedSecret"):
+          provided_secret = str(payload.get("inviteSecret", "")).strip()
+          expected_secret = str(route_cfg.get("sharedSecret", "")).strip()
+          secret_file = route_cfg.get("sharedSecretFile")
+          if secret_file:
+            expected_secret = Path(secret_file).read_text().strip()
+          if not expected_secret or provided_secret != expected_secret:
+            as_json(self, 403, {"ok": False, "error": "invalid_invite_secret"})
+            return
 
         if route_cfg.get("languageMode") == "fixed":
           route_lang = normalize_lang(route_cfg.get("language"))
@@ -207,6 +220,9 @@ in
         templates = mkOpt' (types.attrsOf types.lines) { } "Optional localized body templates with {{field}} placeholders.";
         languageMode = mkOpt' (types.enum [ "payload" "fixed" ]) "payload" "Use payload language or fixed route language for localization lookup.";
         language = mkOpt' types.str "en" "Fixed route language when languageMode is set to fixed.";
+        requireSharedSecret = mkOpt' types.bool false "Require inviteSecret in payload for this route.";
+        sharedSecret = mkOpt' types.str "" "Inline shared secret value for this route (prefer sharedSecretFile).";
+        sharedSecretFile = mkOpt' (types.nullOr types.path) null "File containing shared secret value for this route.";
         requiredFields = mkOpt' (types.listOf types.str) [ "name" "email" "message" ] "Required payload keys for this route.";
       };
     }))) { } "Route map for /send/<route> endpoints.";
@@ -237,7 +253,9 @@ in
         PrivateTmp = true;
         ProtectSystem = "strict";
         ProtectHome = true;
-        ReadOnlyPaths = lib.optional (cfg.smtp.passwordFile != null) cfg.smtp.passwordFile;
+        ReadOnlyPaths =
+          (lib.optional (cfg.smtp.passwordFile != null) cfg.smtp.passwordFile)
+          ++ (lib.flatten (mapAttrsToList (_: routeCfg: lib.optional (routeCfg.sharedSecretFile != null) routeCfg.sharedSecretFile) cfg.routes));
         WorkingDirectory = "/";
       };
     };

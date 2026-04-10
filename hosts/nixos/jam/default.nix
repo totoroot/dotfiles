@@ -104,6 +104,8 @@ in
             sender = "admin@xn--berwachungsbehr-mtb1g.de";
             languageMode = "fixed";
             language = "en";
+            requireSharedSecret = true;
+            sharedSecretFile = "/var/secrets/rsvp-invite-code";
             subject = "RSVP submission";
             subjects = {
               de = "Neue Antwort auf Einladung";
@@ -142,6 +144,8 @@ in
             recipientFromField = "email";
             sender = "admin@xn--berwachungsbehr-mtb1g.de";
             languageMode = "payload";
+            requireSharedSecret = true;
+            sharedSecretFile = "/var/secrets/rsvp-invite-code";
             subject = "Danke für deine Antwort auf die Einladung";
             subjects = {
               de = "Danke für deine Antwort auf die Einladung";

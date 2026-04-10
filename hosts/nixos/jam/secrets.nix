@@ -96,6 +96,10 @@ in
         path = "/var/secrets/plausible/keybase";
         mode = "0400";
       };
+      rsvp-invite-code = mkSecret {
+        key = "RSVP_INVITE_CODE";
+        path = "/var/secrets/rsvp-invite-code";
+      };
       mailserver-admin-thym-it-password-hash = mkSecret {
         key = "MAILSERVER_ADMIN_THYM_IT_PASSWORD_HASH";
         path = "/var/secrets/mailserver/admin@thym.it";
