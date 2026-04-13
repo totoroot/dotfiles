@@ -22,7 +22,7 @@
       # Advanced file renaming utility
       #"a-better-finder-rename"
       # Ungoogled Chromium
-      "ungoogled-chromium"
+      # "ungoogled-chromium"
       "gimp"
       # Offline AI chat tool
 	    # "jan"
@@ -39,6 +39,7 @@
       "lunar"
       "kitty"
       "inkscape"
+      "vscodium"
       "siyuan"
     ];
     taps = [];

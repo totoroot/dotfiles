@@ -169,9 +169,6 @@ in
     # A terminal based graphical activity monitor inspired by gtop and vtop
     gotop
 
-    # Open source source code editor developed by Microsoft for Windows, Linux and macOS (VS Code without MS branding/telemetry/licensing)
-    vscodium
-
     # rcat from flake
     inputs.rcat.packages.${pkgs.system}.default
 
