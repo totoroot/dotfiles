@@ -133,6 +133,7 @@ in
           de = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-templates/rsvp-confirmation.de.txt";
           en = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-templates/rsvp-confirmation.en.txt";
             };
+            icsFile = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-assets/event.ics";
             requiredFields = [ "name" "email" "attendance" ];
           };
           kontakt = {

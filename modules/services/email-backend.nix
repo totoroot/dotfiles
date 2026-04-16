@@ -26,6 +26,7 @@ let
       subjects = routeCfg.subjects;
       templates = routeCfg.templates;
       templateFiles = routeCfg.templateFiles;
+      icsFile = routeCfg.icsFile;
       languageMode = routeCfg.languageMode;
       language = routeCfg.language;
       ics = routeCfg.ics;
@@ -75,7 +76,7 @@ let
         result = result.replace("{{" + str(key) + "}}", str(value))
       return result
 
-    def read_template_file(path_value):
+    def read_text_file(path_value):
       if not path_value:
         return ""
       return Path(path_value).read_text()
@@ -198,7 +199,7 @@ let
         template = localized_templates.get(route_lang) or ""
         template_file = localized_template_files.get(route_lang) or ""
         if template_file:
-          template = read_template_file(template_file)
+          template = read_text_file(template_file)
         if template:
           body = render_template(template, payload)
 
@@ -218,7 +219,11 @@ let
         message["Subject"] = subject
         message.set_content(body)
 
-        ics_content = build_ics(route_cfg, route_lang)
+        ics_file = route_cfg.get("icsFile") or ""
+        if ics_file:
+          ics_content = read_text_file(ics_file)
+        else:
+          ics_content = build_ics(route_cfg, route_lang)
         if ics_content:
           message.add_attachment(
             ics_content.encode("utf-8"),
@@ -283,6 +288,7 @@ in
         subjects = mkOpt' (types.attrsOf types.str) { } "Optional localized subject map, e.g. { de = \"...\"; en = \"...\"; }.";
         templates = mkOpt' (types.attrsOf types.lines) { } "Optional localized body templates with {{field}} placeholders.";
         templateFiles = mkOpt' (types.attrsOf types.path) { } "Optional localized body template file paths.";
+        icsFile = mkOpt' (types.nullOr types.path) null "Optional ICS file path to attach to outgoing mails.";
         languageMode = mkOpt' (types.enum [ "payload" "fixed" ]) "payload" "Use payload language or fixed route language for localization lookup.";
         language = mkOpt' types.str "en" "Fixed route language when languageMode is set to fixed.";
         ics = mkOpt' (types.submodule ({ ... }: {
@@ -337,6 +343,7 @@ in
           ++ (lib.flatten (mapAttrsToList (_: routeCfg:
             (lib.optional (routeCfg.sharedSecretFile != null) routeCfg.sharedSecretFile)
             ++ (attrValues routeCfg.templateFiles)
+            ++ (lib.optional (routeCfg.icsFile != null) routeCfg.icsFile)
           ) cfg.routes));
         WorkingDirectory = "/";
       };
