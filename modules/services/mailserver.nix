@@ -58,8 +58,9 @@ in
         };
       };
 
-      # down nginx and opens port 80.
-      certificateScheme = "acme-nginx";
+      # Use explicit ACME cert paths so dovecot always gets concrete file paths.
+      certificateFile = "/var/lib/acme/mail.${domain}/fullchain.pem";
+      keyFile = "/var/lib/acme/mail.${domain}/key.pem";
     };
     security.acme.acceptTerms = true;
     security.acme.defaults.email = "admin@thym.it";
