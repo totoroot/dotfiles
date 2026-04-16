@@ -111,31 +111,9 @@ in
               de = "Neue Antwort auf Einladung";
               en = "New RSVP submission";
             };
-            templates = {
-              de = ''
-                Neue Antwort auf Einladung
-
-                Name: {{name}}
-                E-Mail: {{email}}
-                Teilnahme: {{attendance}}
-                +1: {{guests}}
-                Ernährung: {{diet}}
-                Ernährung (+1): {{plusOneDiet}}
-                Nachricht: {{message}}
-                Sprache: {{lang}}
-              '';
-              en = ''
-                New RSVP submission
-
-                Name: {{name}}
-                Email: {{email}}
-                Attendance: {{attendance}}
-                Plus one: {{guests}}
-                Diet: {{diet}}
-                Diet (plus one): {{plusOneDiet}}
-                Message: {{message}}
-                Language: {{lang}}
-              '';
+            templateFiles = {
+              de = "/var/www/_mail-templates/geburtstags.ueberwachungsbehoer.de/rsvp.de.txt";
+              en = "/var/www/_mail-templates/geburtstags.ueberwachungsbehoer.de/rsvp.en.txt";
             };
             requiredFields = [ "name" "email" "attendance" ];
           };
@@ -151,29 +129,10 @@ in
               de = "Danke für deine Antwort auf die Einladung";
               en = "Thanks for your RSVP";
             };
-            templates = {
-              de = ''
-                Servus {{name}},
-
-                Danke für deine Rückmeldung zu meiner Geburtstagsparty.
-
-                Deine Auswahl: {{attendance}}
-                +1: {{guests}}
-
-                Bussal
-                Matthias
-              '';
-              en = ''
-                hey {{name}},
-
-                Thanks for your RSVP to my birthday party.
-
-                Your selection: {{attendance}}
-                Plus one: {{guests}}
-
-                All the best,
-                Matthias
-              '';
+            templateFiles = {
+              de = "/var/www/_mail-templates/geburtstags.ueberwachungsbehoer.de/rsvp-confirmation.de.txt";
+              en = "/var/www/_mail-templates/geburtstags.ueberwachungsbehoer.de/rsvp-confirmation.en.txt";
+            };
             };
             requiredFields = [ "name" "email" "attendance" ];
           };
@@ -181,7 +140,15 @@ in
             recipient = "praxis@grueneis-psychologie.at";
             sender = "praxis@grueneis-psychologie.at";
             subject = "Praxis Kontaktformular";
-            requiredFields = [ "name" "email" "message" ];
+            subjects = {
+              de = "Neue Anfrage über das Kontaktformular";
+              en = "New contact form inquiry";
+            };
+            templateFiles = {
+              de = "/var/www/_mail-templates/grueneis-psychologie.at/kontakt.de.txt";
+              en = "/var/www/_mail-templates/grueneis-psychologie.at/kontakt.en.txt";
+            };
+            requiredFields = [ "name" "email" "inquiry" ];
           };
         };
       };
