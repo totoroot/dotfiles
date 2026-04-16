@@ -133,7 +133,6 @@ in
               de = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp-confirmation.de.txt";
               en = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp-confirmation.en.txt";
             };
-            };
             requiredFields = [ "name" "email" "attendance" ];
           };
           kontakt = {
