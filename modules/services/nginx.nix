@@ -116,6 +116,12 @@ in
           enableACME = true;
           forceSSL = true;
           root = "/var/www/geburtstags.${domain}";
+          locations."^~ /mail-templates/" = {
+            extraConfig = ''
+              deny all;
+              return 404;
+            '';
+          };
         };
         "benachrichtigungs.${domain}" = {
           enableACME = true;
@@ -335,6 +341,12 @@ in
           locations."/" = {
             root = "/var/www/praxis";
           };
+          locations."^~ /mail-templates/" = {
+            extraConfig = ''
+              deny all;
+              return 404;
+            '';
+          };
           extraConfig = ''
             error_page 404 /de/404/;
           '';
@@ -350,6 +362,12 @@ in
           enableACME = true;
           forceSSL = true;
           root = "/var/www/grueneis-psychologie.at";
+          locations."^~ /mail-templates/" = {
+            extraConfig = ''
+              deny all;
+              return 404;
+            '';
+          };
           extraConfig = ''
             error_page 404 /de/404/;
           '';
