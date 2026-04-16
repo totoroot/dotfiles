@@ -112,8 +112,8 @@ in
               en = "New RSVP submission";
             };
             templateFiles = {
-              de = "/var/www/_mail-templates/geburtstags.ueberwachungsbehoer.de/rsvp.de.txt";
-              en = "/var/www/_mail-templates/geburtstags.ueberwachungsbehoer.de/rsvp.en.txt";
+              de = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp.de.txt";
+              en = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp.en.txt";
             };
             requiredFields = [ "name" "email" "attendance" ];
           };
@@ -145,8 +145,8 @@ in
               en = "New contact form inquiry";
             };
             templateFiles = {
-              de = "/var/www/_mail-templates/grueneis-psychologie.at/kontakt.de.txt";
-              en = "/var/www/_mail-templates/grueneis-psychologie.at/kontakt.en.txt";
+              de = "/var/www/grueneis-psychologie.at/mail-templates/kontakt.de.txt";
+              en = "/var/www/grueneis-psychologie.at/mail-templates/kontakt.en.txt";
             };
             requiredFields = [ "name" "email" "inquiry" ];
           };
