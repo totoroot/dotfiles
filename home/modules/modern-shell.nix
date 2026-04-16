@@ -12,6 +12,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      # Command-line fuzzy finder written in Go
       fzf
       # cat(1) clone with syntax highlighting and Git integration
       bat
@@ -23,6 +24,10 @@ in
       sd
       # Intuitive find alternative
       fd
+      # grep that riiiiiiips
+      ripgrep
+      # Interactive replacer for ripgrep that makes it easy to find and replace across files on the command line
+      repgrep
     ];
 
     home.sessionVariables = {
