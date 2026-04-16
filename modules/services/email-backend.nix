@@ -25,8 +25,10 @@ let
       sender = routeCfg.sender;
       subjects = routeCfg.subjects;
       templates = routeCfg.templates;
+      templateFiles = routeCfg.templateFiles;
       languageMode = routeCfg.languageMode;
       language = routeCfg.language;
+      ics = routeCfg.ics;
       requireSharedSecret = routeCfg.requireSharedSecret;
       sharedSecret = routeCfg.sharedSecret;
       sharedSecretFile = routeCfg.sharedSecretFile;
@@ -72,6 +74,56 @@ let
       for key, value in payload.items():
         result = result.replace("{{" + str(key) + "}}", str(value))
       return result
+
+    def read_template_file(path_value):
+      if not path_value:
+        return ""
+      return Path(path_value).read_text()
+
+    def build_ics(route_cfg, route_lang):
+      ics_cfg = route_cfg.get("ics") or {}
+      if not ics_cfg.get("enable"):
+        return None
+
+      localized_summary = ics_cfg.get("summaryByLang", {}).get(route_lang)
+      localized_description = ics_cfg.get("descriptionByLang", {}).get(route_lang)
+      summary = localized_summary or ics_cfg.get("summary", "Event")
+      description = localized_description or ics_cfg.get("description", "")
+      location = ics_cfg.get("location", "")
+      dtstart = ics_cfg.get("dtstart", "")
+      dtend = ics_cfg.get("dtend", "")
+      uid = ics_cfg.get("uid", "event@localhost")
+      organizer = ics_cfg.get("organizer", "")
+
+      if not dtstart or not dtend:
+        return None
+
+      lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//thym.it//email-backend//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        f"UID:{uid}",
+        f"DTSTART:{dtstart}",
+        f"DTEND:{dtend}",
+        f"SUMMARY:{summary}",
+      ]
+
+      if description:
+        lines.append(f"DESCRIPTION:{description}")
+      if location:
+        lines.append(f"LOCATION:{location}")
+      if organizer:
+        lines.append(f"ORGANIZER:{organizer}")
+
+      lines.extend([
+        "END:VEVENT",
+        "END:VCALENDAR",
+      ])
+
+      return "\r\n".join(lines) + "\r\n"
 
     class Handler(BaseHTTPRequestHandler):
       def do_OPTIONS(self):
@@ -140,12 +192,15 @@ let
 
         localized_subjects = route_cfg.get("subjects") or {}
         localized_templates = route_cfg.get("templates") or {}
+        localized_template_files = route_cfg.get("templateFiles") or {}
         if route_lang in localized_subjects:
           subject = localized_subjects.get(route_lang) or subject
-        if route_lang in localized_templates:
-          template = localized_templates.get(route_lang) or ""
-          if template:
-            body = render_template(template, payload)
+        template = localized_templates.get(route_lang) or ""
+        template_file = localized_template_files.get(route_lang) or ""
+        if template_file:
+          template = read_template_file(template_file)
+        if template:
+          body = render_template(template, payload)
 
         message = EmailMessage()
         message["From"] = route_cfg.get("sender") or CONFIG["sender"]
@@ -162,6 +217,15 @@ let
         message["To"] = recipient_value
         message["Subject"] = subject
         message.set_content(body)
+
+        ics_content = build_ics(route_cfg, route_lang)
+        if ics_content:
+          message.add_attachment(
+            ics_content.encode("utf-8"),
+            maintype="text",
+            subtype="calendar",
+            filename="event.ics",
+          )
 
         smtp_cfg = CONFIG["smtp"]
         try:
@@ -218,8 +282,23 @@ in
         sender = mkOpt' (types.nullOr types.str) null "Optional sender override for this route.";
         subjects = mkOpt' (types.attrsOf types.str) { } "Optional localized subject map, e.g. { de = \"...\"; en = \"...\"; }.";
         templates = mkOpt' (types.attrsOf types.lines) { } "Optional localized body templates with {{field}} placeholders.";
+        templateFiles = mkOpt' (types.attrsOf types.path) { } "Optional localized body template file paths.";
         languageMode = mkOpt' (types.enum [ "payload" "fixed" ]) "payload" "Use payload language or fixed route language for localization lookup.";
         language = mkOpt' types.str "en" "Fixed route language when languageMode is set to fixed.";
+        ics = mkOpt' (types.submodule ({ ... }: {
+          options = {
+            enable = mkOpt' types.bool false "Attach ICS calendar file.";
+            uid = mkOpt' types.str "event@localhost" "ICS UID.";
+            dtstart = mkOpt' types.str "" "ICS DTSTART in UTC format YYYYMMDDTHHMMSSZ.";
+            dtend = mkOpt' types.str "" "ICS DTEND in UTC format YYYYMMDDTHHMMSSZ.";
+            summary = mkOpt' types.str "Event" "Default ICS summary.";
+            summaryByLang = mkOpt' (types.attrsOf types.str) { } "Localized ICS summary map.";
+            description = mkOpt' types.str "" "Default ICS description.";
+            descriptionByLang = mkOpt' (types.attrsOf types.str) { } "Localized ICS description map.";
+            location = mkOpt' types.str "" "ICS location.";
+            organizer = mkOpt' types.str "" "ICS organizer, e.g. MAILTO:admin@example.com.";
+          };
+        })) { } "Optional ICS attachment settings for this route.";
         requireSharedSecret = mkOpt' types.bool false "Require inviteSecret in payload for this route.";
         sharedSecret = mkOpt' types.str "" "Inline shared secret value for this route (prefer sharedSecretFile).";
         sharedSecretFile = mkOpt' (types.nullOr types.path) null "File containing shared secret value for this route.";
@@ -255,7 +334,10 @@ in
         ProtectHome = true;
         ReadOnlyPaths =
           (lib.optional (cfg.smtp.passwordFile != null) cfg.smtp.passwordFile)
-          ++ (lib.flatten (mapAttrsToList (_: routeCfg: lib.optional (routeCfg.sharedSecretFile != null) routeCfg.sharedSecretFile) cfg.routes));
+          ++ (lib.flatten (mapAttrsToList (_: routeCfg:
+            (lib.optional (routeCfg.sharedSecretFile != null) routeCfg.sharedSecretFile)
+            ++ (attrValues routeCfg.templateFiles)
+          ) cfg.routes));
         WorkingDirectory = "/";
       };
     };
