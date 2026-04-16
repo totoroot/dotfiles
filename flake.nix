@@ -88,6 +88,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:

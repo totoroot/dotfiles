@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, inputs, ... }:
+{ config, lib, inputs, ... }:
 
 with lib;
 with lib.my;
@@ -8,37 +8,11 @@ let
   domain = "thym.it";
   legacyDomain = "xn--berwachungsbehr-mtb1g.de";
   praxisDomain = "grueneis-psychologie.at";
-  release = "25.05";
-  mailserverModule =
-    if inputs ? nixos-mailserver
-    then inputs.nixos-mailserver.nixosModules.default
-    else (builtins.fetchTarball {
-      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-      sha256 = "QHzRqq6gh+t3F/QU9DkP7X63dDDcuIQmaDz12p7ANTg=";
-    });
+  mailserverModule = inputs.nixos-mailserver.nixosModules.default;
 in
 {
 
-  imports = [
-    mailserverModule
-    # (pkgs.fetchFromGitLab {
-    #   owner = "simple-nixos-mailserver";
-    #   repo = "nixos-mailserver";
-    #   rev = "master";
-    #   hash = "";
-    # })
-    # (builtins.fetchTarball {
-    #   url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-    #   sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
-    # })
-    # (builtins.fetchTarball {
-    #   # Pick a release version you are interested in and set its hash, e.g.
-    #   url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-${release}/nixos-mailserver-nixos-${release}.tar.gz";
-    #   # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
-    #   # release="nixos-24.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-    #   sha256 = "1qn5fg0h62r82q7xw54ib9wcpflakix2db2mahbicx540562la1y";
-    # })
-  ];
+  imports = [ mailserverModule ];
 
   options.modules.services.mailserver = {
     enable = mkBoolOpt false;
