@@ -112,8 +112,8 @@ in
               en = "New RSVP submission";
             };
             templateFiles = {
-              de = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp.de.txt";
-              en = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp.en.txt";
+          de = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-templates/rsvp.de.txt";
+          en = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-templates/rsvp.en.txt";
             };
             requiredFields = [ "name" "email" "attendance" ];
           };
@@ -130,8 +130,8 @@ in
               en = "Thanks for your RSVP";
             };
             templateFiles = {
-              de = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp-confirmation.de.txt";
-              en = "/var/www/geburtstags.überwachungsbehör.de/mail-templates/rsvp-confirmation.en.txt";
+          de = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-templates/rsvp-confirmation.de.txt";
+          en = "/var/www/geburtstags.xn--berwachungsbehr-mtb1g.de/mail-templates/rsvp-confirmation.en.txt";
             };
             requiredFields = [ "name" "email" "attendance" ];
           };
