@@ -43,7 +43,7 @@ in
 
       # A list of all login accounts. To create the password hashes, use
       # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
-      loginAccounts = {
+      accounts = {
         "admin@${domain}" = {
           hashedPasswordFile = "/var/secrets/mailserver/admin@thym.it";
           aliases = [
@@ -59,8 +59,10 @@ in
       };
 
       # Use explicit ACME cert paths so dovecot always gets concrete file paths.
-      certificateFile = "/var/lib/acme/mail.${domain}/fullchain.pem";
-      keyFile = "/var/lib/acme/mail.${domain}/key.pem";
+      x509 = {
+        certificateFile = "/var/lib/acme/mail.${domain}/fullchain.pem";
+        privateKeyFile = "/var/lib/acme/mail.${domain}/key.pem";
+      };
     };
     security.acme.acceptTerms = true;
     security.acme.defaults.email = "admin@thym.it";
