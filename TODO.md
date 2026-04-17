@@ -25,19 +25,13 @@ We update this file as we go. Priority order: top to bottom.
   - [ ] Define retention, backup, and restore procedures
   - [x] Add smoke-test endpoint + Gatus checks
 
-- [ ] Migrate mail stack primary domain from `überwachungsbehör.de` to `thym.it` on `jam` (mostly done, DMARC enforcement + legacy cleanup left)
-  - [x] Keep transition-safe dual-domain acceptance during rollout (`thym.it` + old domain)
-  - [x] Update `modules/services/mailserver.nix` domain/fqdn/login aliases for `admin@thym.it` + `info@thym.it`
-  - [x] Update `modules/services/webmail.nix` host to `mail.thym.it`
-  - [x] Add/verify SOPS secret path for `admin@thym.it` hashed password
-  - [x] Rebuild to generate DKIM key material for `thym.it`, then publish full `mail._domainkey.thym.it` TXT (`p=...`)
-  - [x] Ensure DNS is complete for `thym.it`: MX, A/AAAA for `mail`, SPF, DKIM, DMARC
-  - [ ] DMARC rollout for `thym.it` (currently set):
-    - [x] `v=DMARC1; p=none; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` (monitor-only, collect reports, no enforcement)
-    - [ ] next target TXT: `v=DMARC1; p=quarantine; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` (failed alignment goes to spam/quarantine)
-    - [ ] final target TXT: `v=DMARC1; p=reject; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` (failed alignment rejected at SMTP time)
-  - [x] Validate post-cutover mail flow: SMTP submission (587), IMAPS (993), inbound/outbound delivery, TLS cert CN/SAN
-  - [ ] Keep old domain aliases active for a grace period, then remove legacy records/config
+- [ ] Finalize `thym.it` mail migration on `jam`
+  - [ ] DMARC rollout for `thym.it` (currently `p=none`)
+    - [ ] move to `v=DMARC1; p=quarantine; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` after confirming legit mail still aligns
+    - [ ] later move to `v=DMARC1; p=reject; rua=mailto:admin@thym.it; adkim=s; aspf=s; pct=100` after quarantine period stays clean
+  - [ ] Remove legacy `überwachungsbehör.de` mail acceptance after grace period
+    - [ ] remove legacy aliases from mailserver config
+    - [ ] remove legacy DNS records/config no longer needed
 
 - [ ] Forgejo + runner bootstrap issues on `jam` (blocked)
   - [ ] Runner service fails first-boot bootstrap (`.runner` missing in `/var/lib/gitea-runner/codeberg`)
