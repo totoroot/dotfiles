@@ -35,7 +35,11 @@ in
       # goose-cli
     ];
 
-    home.file.".pi/agent/settings.json".source =
-      config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
+    home.file = {
+      ".pi/agent/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
+      ".pi/agent/themes/dracula.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/themes/dracula.json";
+    };
   };
 }

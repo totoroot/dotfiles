@@ -1,5 +1,6 @@
 {
   "defaultProvider": "openai",
+  "theme": "dracula",
   "defaultThinkingLevel": "off",
   "hideThinkingBlock": true,
   "compaction": {
@@ -11,5 +12,6 @@
   "collapseChangelog": true,
   "packages": [
     "git:github.com/JuliusBrussee/caveman"
-  ]
+  ],
+  "enableInstallTelemetry": true
 }
