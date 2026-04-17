@@ -1,0 +1,15 @@
+{
+  "defaultProvider": "openai",
+  "defaultThinkingLevel": "off",
+  "hideThinkingBlock": true,
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 8192,
+    "keepRecentTokens": 12000
+  },
+  "quietStartup": true,
+  "collapseChangelog": true,
+  "packages": [
+    "git:github.com/JuliusBrussee/caveman"
+  ]
+}

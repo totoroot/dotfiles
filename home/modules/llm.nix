@@ -4,6 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.llm;
+  dotfilesDir = "${config.xdg.configHome}/dotfiles";
 in
 {
   options.modules.home.llm = {
@@ -33,5 +34,8 @@ in
       # Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM
       # goose-cli
     ];
+
+    home.file.".pi/agent/settings.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
   };
 }
