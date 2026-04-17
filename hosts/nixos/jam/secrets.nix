@@ -105,6 +105,11 @@ in
         path = "/var/secrets/mailserver/admin@thym.it";
         mode = "0400";
       };
+      mailserver-praxis-grueneis-psychologie-at-password-hash = mkSecret {
+        key = "MAILSERVER_PRAXIS_GRUENEIS_PSYCHOLOGIE_AT_PASSWORD_HASH";
+        path = "/var/secrets/mailserver/praxis@grueneis-psychologie.at";
+        mode = "0400";
+      };
     };
   };
 }

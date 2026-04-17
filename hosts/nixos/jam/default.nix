@@ -100,8 +100,8 @@ in
         };
         routes = {
           rsvp = {
-            recipient = "admin@xn--berwachungsbehr-mtb1g.de";
-            sender = "admin@xn--berwachungsbehr-mtb1g.de";
+            recipient = "admin@thym.it";
+            sender = "admin@thym.it";
             languageMode = "fixed";
             language = "en";
             requireSharedSecret = true;
@@ -120,7 +120,7 @@ in
           rsvp-confirmation = {
             recipient = "";
             recipientFromField = "email";
-            sender = "admin@xn--berwachungsbehr-mtb1g.de";
+            sender = "admin@thym.it";
             languageMode = "payload";
             requireSharedSecret = true;
             sharedSecretFile = "/var/secrets/rsvp-invite-code";

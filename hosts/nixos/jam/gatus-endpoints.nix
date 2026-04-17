@@ -134,7 +134,7 @@
   {
     name = "roundcube-webmail";
     group = "services";
-    url = "https://mail.xn--berwachungsbehr-mtb1g.de";
+    url = "https://mail.thym.it";
     interval = "1m";
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
   }
