@@ -51,7 +51,7 @@ in
     llm.enable = true;
     micro.enable = true;
     modernShell.enable = true;
-    nushell.enable = true;
+    nushell.enable = false;
     sshHosts = {
       enable = true;
       hostName = "ATGRZMBP43";
