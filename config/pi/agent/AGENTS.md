@@ -17,7 +17,7 @@ Prefer reusable module changes over single-host patches unless host-local behavi
 Conventional commits only
 Never push unless I explicitly instruct push after commit
 Output compact: one short code fence for related commands
-Put brief comments in same fence. Avoid heading/fence spam
+Comment/explain before fence. Avoid heading/fence spam
 
 If useful, load Caveman skills:
 /skill:caveman
