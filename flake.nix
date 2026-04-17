@@ -137,9 +137,15 @@
       overlays =
         mapModules ./overlays import;
 
-      packages.${system} =
-        mapModules ./packages
-          (p: pkgs.callPackage p { });
+      packages =
+        baseLib.genAttrs supportedSystems (sys:
+          let
+            pkgsFor = import nixos {
+              system = sys;
+              config.allowUnfree = true;
+            };
+          in
+          mapModules ./packages (p: pkgsFor.callPackage p { }));
 
       nixosModules =
         { dotfiles = import ./.; }

@@ -171,6 +171,7 @@ in
 
     # rcat from flake
     inputs.rcat.packages.${pkgs.system}.default
+    inputs.self.packages.${pkgs.system}.pi-coding-agent
 
     llmfit
   ];
