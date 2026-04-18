@@ -22,6 +22,8 @@ in
       # Replacement for a shell history which records additional commands
       # context with optional encrypted synchronization between machines
       atuin
+      # TODO Make desktop option
+      # atuin-desktop
     ];
 
     modules.home.configSymlinks.entries =
