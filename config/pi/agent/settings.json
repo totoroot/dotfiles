@@ -11,7 +11,7 @@
   "quietStartup": true,
   "collapseChangelog": true,
   "packages": [
-    "git:github.com/JuliusBrussee/caveman"
+    "../../Development/agentic/pi-agent-content"
   ],
   "enableInstallTelemetry": true
 }
