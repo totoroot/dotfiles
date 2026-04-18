@@ -89,12 +89,12 @@
     };
 
     pi-coding-agent-flake = {
-      url = "path:/Users/mathym/Development/pi-coding-agent-flake";
+      url = "path:/Users/mathym/Development/agentic/pi-coding-agent-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hazmat-flake = {
-      url = "path:/Users/mathym/Development/hazmat-flake";
+      url = "path:/Users/mathym/Development/agentic/hazmat-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

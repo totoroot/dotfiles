@@ -232,13 +232,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1776520073,
-        "narHash": "sha256-smZyHf3pZqjhUd86W1eUoLoSPmfsNp9CpNsFIuigLo8=",
-        "path": "/Users/mathym/Development/hazmat-flake",
+        "lastModified": 1776520215,
+        "narHash": "sha256-p91dQmwmWAlGFuO55ss06EwyzQQuT2O3j67kplsxPFE=",
+        "path": "/Users/mathym/Development/agentic/hazmat-flake",
         "type": "path"
       },
       "original": {
-        "path": "/Users/mathym/Development/hazmat-flake",
+        "path": "/Users/mathym/Development/agentic/hazmat-flake",
         "type": "path"
       }
     },
@@ -515,13 +515,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1776519748,
-        "narHash": "sha256-PgjyKhFhomDgmZwt1OxD+1451zqdpCmhb9+/cr2yR2E=",
-        "path": "/Users/mathym/Development/pi-coding-agent-flake",
+        "lastModified": 1776519880,
+        "narHash": "sha256-iY2/iypO4pMxEFkhjJ9x7ueit8zboeZUDRWrobrcg/E=",
+        "path": "/Users/mathym/Development/agentic/pi-coding-agent-flake",
         "type": "path"
       },
       "original": {
-        "path": "/Users/mathym/Development/pi-coding-agent-flake",
+        "path": "/Users/mathym/Development/agentic/pi-coding-agent-flake",
         "type": "path"
       }
     },
