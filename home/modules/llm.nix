@@ -33,6 +33,8 @@ in
       # codex
       # AI coding agent built for the terminal
       opencode
+      # Linux virtual machines with automatic file sharing and port forwarding
+      lima
       # macOS containment for AI agents
       hazmat
       # Interactive coding agent CLI from the Pi monorepo

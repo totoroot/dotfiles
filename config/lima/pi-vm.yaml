@@ -1,0 +1,48 @@
+images:
+  - location: "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-arm64.img"
+    arch: "aarch64"
+cpus: 6
+memory: "16GiB"
+disk: "50GiB"
+mounts: []
+provision:
+  - mode: system
+    script: |
+      set -eux
+      export DEBIAN_FRONTEND=noninteractive
+      apt-get update
+      apt-get install -y ca-certificates curl git iptables
+      curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+      apt-get install -y nodejs
+      npm install -g @mariozechner/pi-coding-agent
+
+      cat >/usr/local/bin/pi-vm-lockdown <<'EOF'
+      #!/usr/bin/env bash
+      set -euo pipefail
+      iptables -P OUTPUT DROP
+      iptables -F OUTPUT
+      iptables -A OUTPUT -o lo -j ACCEPT
+      iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+      iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT
+      iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
+      EOF
+      chmod 0755 /usr/local/bin/pi-vm-lockdown
+
+      cat >/etc/systemd/system/pi-vm-lockdown.service <<'EOF'
+      [Unit]
+      Description=Restrict VM egress for pi-vm sessions
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/bin/pi-vm-lockdown
+      RemainAfterExit=yes
+
+      [Install]
+      WantedBy=multi-user.target
+      EOF
+
+      systemctl daemon-reload
+      systemctl enable --now pi-vm-lockdown.service

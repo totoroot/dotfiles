@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+instance="${PI_VM_NAME:-pi-sandbox}"
+config_file="${PI_VM_CONFIG:-$HOME/.config/dotfiles/config/lima/pi-vm.yaml}"
+state_dir="${LIMA_HOME:-$HOME/.lima}/$instance"
+
+require() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "pi-vm: required command not found: $1" >&2
+    exit 1
+  fi
+}
+
+ensure_vm_exists() {
+  if [ ! -d "$state_dir" ]; then
+    echo "pi-vm: creating VM '$instance' from $config_file" >&2
+    limactl create --name="$instance" "$config_file"
+  fi
+}
+
+ensure_vm_started() {
+  ensure_vm_exists
+  if ! limactl list 2>/dev/null | awk 'NR>1 { print $1 }' | grep -qx "$instance"; then
+    echo "pi-vm: starting VM '$instance'" >&2
+    limactl start "$instance"
+    return
+  fi
+
+  if ! limactl shell "$instance" -- true >/dev/null 2>&1; then
+    echo "pi-vm: starting VM '$instance'" >&2
+    limactl start "$instance"
+  fi
+}
+
+collect_env_args() {
+  local vars=(
+    ANTHROPIC_API_KEY
+    OPENAI_API_KEY
+    OPENROUTER_API_KEY
+    GOOGLE_API_KEY
+    GEMINI_API_KEY
+    MISTRAL_API_KEY
+    XAI_API_KEY
+    GROQ_API_KEY
+    DEEPSEEK_API_KEY
+    TOGETHER_API_KEY
+    PERPLEXITY_API_KEY
+    AZURE_OPENAI_API_KEY
+    AZURE_OPENAI_ENDPOINT
+    AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY
+    AWS_SESSION_TOKEN
+    AWS_REGION
+    AWS_DEFAULT_REGION
+  )
+
+  local args=()
+  local var value
+  for var in "${vars[@]}"; do
+    if [ -n "${!var:-}" ]; then
+      value=${!var}
+      args+=("$var=$value")
+    fi
+  done
+
+  printf '%s\0' "${args[@]}"
+}
+
+run_pi() {
+  ensure_vm_started
+
+  local -a env_args=()
+  while IFS= read -r -d '' item; do
+    [ -n "$item" ] && env_args+=("$item")
+  done < <(collect_env_args)
+
+  if [ ${#env_args[@]} -gt 0 ]; then
+    exec limactl shell "$instance" -- env "${env_args[@]}" pi "$@"
+  else
+    exec limactl shell "$instance" -- pi "$@"
+  fi
+}
+
+require limactl
+
+cmd="${1:-run}"
+case "$cmd" in
+  init|create)
+    ensure_vm_exists
+    ;;
+  start)
+    ensure_vm_started
+    ;;
+  shell)
+    ensure_vm_started
+    shift || true
+    exec limactl shell "$instance" -- "${@:-bash}"
+    ;;
+  stop)
+    exec limactl stop "$instance"
+    ;;
+  delete|reset)
+    if [ -d "$state_dir" ]; then
+      limactl delete -f "$instance"
+    fi
+    ;;
+  recreate)
+    if [ -d "$state_dir" ]; then
+      limactl delete -f "$instance"
+    fi
+    ensure_vm_exists
+    ensure_vm_started
+    ;;
+  run)
+    shift || true
+    run_pi "$@"
+    ;;
+  *)
+    run_pi "$@"
+    ;;
+esac
