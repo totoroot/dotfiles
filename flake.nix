@@ -89,7 +89,7 @@
     };
 
     pi-coding-agent-flake = {
-      url = "path:/Users/mathym/Development/private/pi-coding-agent-flake";
+      url = "path:/Users/mathym/Development/pi-coding-agent-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

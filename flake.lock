@@ -498,13 +498,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1776516796,
-        "narHash": "sha256-2sBBsb1RKPgJPrIqPQbgO1eXGUWDi2Y5btyQ0ddxH6w=",
-        "path": "/Users/mathym/Development/private/pi-coding-agent-flake",
+        "lastModified": 1776519748,
+        "narHash": "sha256-PgjyKhFhomDgmZwt1OxD+1451zqdpCmhb9+/cr2yR2E=",
+        "path": "/Users/mathym/Development/pi-coding-agent-flake",
         "type": "path"
       },
       "original": {
-        "path": "/Users/mathym/Development/private/pi-coding-agent-flake",
+        "path": "/Users/mathym/Development/pi-coding-agent-flake",
         "type": "path"
       }
     },
