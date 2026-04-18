@@ -232,8 +232,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1776520215,
-        "narHash": "sha256-p91dQmwmWAlGFuO55ss06EwyzQQuT2O3j67kplsxPFE=",
+        "lastModified": 1776521329,
+        "narHash": "sha256-SrPJxiYTRr4ySyFSj5uJU2Pebgp4z/EaQO69LOyBTKY=",
         "path": "/Users/mathym/Development/agentic/hazmat-flake",
         "type": "path"
       },
