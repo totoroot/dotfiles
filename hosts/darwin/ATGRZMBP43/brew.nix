@@ -17,6 +17,7 @@
       "qemu"
       "podman"
       "displayplacer"
+      "hazmat"
     ];
     casks = [
       # Advanced file renaming utility
@@ -42,7 +43,9 @@
       "vscodium"
       "siyuan"
     ];
-    taps = [];
+    taps = [
+      "dredozubov/tap"
+    ];
   };
   environment.variables = {
      HOMEBREW_NO_UPDATE_REPORT_FORMULAE = "TRUE";

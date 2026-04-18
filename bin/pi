@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v hazmat >/dev/null 2>&1; then
+  echo "pi wrapper: hazmat not found in PATH" >&2
+  exit 1
+fi
+
+if ! command -v pi-coding-agent >/dev/null 2>&1; then
+  echo "pi wrapper: pi-coding-agent not found in PATH" >&2
+  exit 1
+fi
+
+exec hazmat exec pi-coding-agent "$@"
