@@ -5,6 +5,7 @@ with lib.my;
 let
   cfg = config.modules.home.llm;
   dotfilesDir = "${config.xdg.configHome}/dotfiles";
+  piAgentContentDir = "${config.home.homeDirectory}/Development/agentic/pi-agent-content";
   hazmat = inputs."hazmat-flake".packages.${pkgs.system}.default;
   piCodingAgent = inputs."pi-coding-agent-flake".packages.${pkgs.system}.default;
 in
@@ -43,11 +44,11 @@ in
 
     home.file = {
       ".pi/agent/AGENTS.md".source =
-        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/AGENTS.md";
+        config.lib.file.mkOutOfStoreSymlink "${piAgentContentDir}/AGENTS.md";
       ".pi/agent/settings.json".source =
         config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
       ".pi/agent/themes/dracula.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/themes/dracula.json";
+        config.lib.file.mkOutOfStoreSymlink "${piAgentContentDir}/themes/dracula.json";
     };
   };
 }
