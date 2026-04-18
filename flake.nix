@@ -88,14 +88,30 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    pi-coding-agent-flake = {
+      url = "path:/Users/mathym/Development/private/pi-coding-agent-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+  	nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+  	# Optional: Declarative tap management
+  	homebrew-core = {
+  	  url = "github:homebrew/homebrew-core";
+  	  flake = false;
+  	};
+  	homebrew-cask = {
+  	  url = "github:homebrew/homebrew-cask";
+  	  flake = false;
+  	};
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
     let
       system = "x86_64-linux";
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];

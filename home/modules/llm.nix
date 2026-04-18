@@ -1,10 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 with lib;
 with lib.my;
 let
   cfg = config.modules.home.llm;
   dotfilesDir = "${config.xdg.configHome}/dotfiles";
+  piCodingAgent = inputs."pi-coding-agent-flake".packages.${pkgs.system}.default;
 in
 {
   options.modules.home.llm = {
@@ -27,15 +28,19 @@ in
       llmfit
       # Minimal CLI coding agent by Mistral
       mistral-vibe
-    	# Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
+      # Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
       codex
       # AI coding agent built for the terminal
       opencode
+      # Interactive coding agent CLI from the Pi monorepo
+      piCodingAgent
       # Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM
       # goose-cli
     ];
 
     home.file = {
+      ".pi/agent/AGENTS.md".source =
+        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/AGENTS.md";
       ".pi/agent/settings.json".source =
         config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
       ".pi/agent/themes/dracula.json".source =
