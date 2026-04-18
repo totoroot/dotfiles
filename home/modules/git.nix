@@ -30,6 +30,12 @@ in {
       gitlint
       # A syntax-highlighting pager for Git
       delta
+      # GitHub CLI
+      gh
+      # GitLab CLI
+      glab
+      # Remote repository management tool
+      ghq
       # CLI Tool for Codeberg similar to gh and glab
       codeberg-cli
     ];
@@ -44,6 +50,9 @@ in {
         "ignore"
         "includes/private"
         "includes/work"
+      ]) ++
+      (map (name: "gitlab-cli/${name}") [
+        "config.yml"
       ]) ++
       (map (name: "gitlint/${name}") [
         "default.ini"

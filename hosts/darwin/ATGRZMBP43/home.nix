@@ -42,7 +42,6 @@ in
     containers.enable = true;
     duf.enable = true;
     git.enable = true;
-    gitlab-cli.enable = true;
     fonts.enable = true;
     helix.enable = true;
     kitty.enable = true;

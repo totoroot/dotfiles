@@ -13,7 +13,6 @@
     ./modules/containers.nix
     ./modules/fonts.nix
     ./modules/git.nix
-    ./modules/gitlab-cli.nix
     ./modules/helix.nix
     ./modules/kitty.nix
     ./modules/kubernetes.nix
