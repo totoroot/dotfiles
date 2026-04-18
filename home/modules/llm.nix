@@ -5,6 +5,7 @@ with lib.my;
 let
   cfg = config.modules.home.llm;
   dotfilesDir = "${config.xdg.configHome}/dotfiles";
+  hazmat = inputs."hazmat-flake".packages.${pkgs.system}.default;
   piCodingAgent = inputs."pi-coding-agent-flake".packages.${pkgs.system}.default;
 in
 {
@@ -27,15 +28,15 @@ in
       # Terminal tool that right-sizes LLM models to your system's RAM, CPU, and GPU
       llmfit
       # Minimal CLI coding agent by Mistral
-      mistral-vibe
+      # mistral-vibe
       # Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
-      codex
+      # codex
       # AI coding agent built for the terminal
       opencode
+      # macOS containment for AI agents
+      hazmat
       # Interactive coding agent CLI from the Pi monorepo
       piCodingAgent
-      # Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM
-      # goose-cli
     ];
 
     home.file = {

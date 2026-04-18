@@ -17,7 +17,6 @@
       "qemu"
       "podman"
       "displayplacer"
-      "hazmat"
       "signal-cli"
     ];
     casks = [
@@ -45,9 +44,7 @@
       "signal"
       "wispr-flow"
     ];
-    taps = [
-      "dredozubov/tap"
-    ];
+    taps = [];
   };
   environment.variables = {
      HOMEBREW_NO_UPDATE_REPORT_FORMULAE = "TRUE";
