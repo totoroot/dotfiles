@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+import json
+import re
+import subprocess
+import sys
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+FIREFOX_MODULE = ROOT / "home/modules/firefox.nix"
+FLAKE_LOCK = ROOT / "flake.lock"
+AMO_API = "https://addons.mozilla.org/api/v5/addons/addon/{slug}/"
+FIREFOX_VERSIONS_URL = "https://product-details.mozilla.org/1.0/firefox_versions.json"
+NIXPKGS_FIREFOX_EXPR = ".#darwinConfigurations.ATGRZMBP43.pkgs.firefox.version"
+
+EXTENSION_SLUGS = {
+    "{446900e4-71c2-419f-a6a7-df9c091e268b}": "bitwarden-password-manager",
+    "{3c078156-979c-498b-8990-85f7987dd929}": "sidebery",
+    "idcac-pub@guus.ninja": "istilldontcareaboutcookies",
+    "jid1-MnnxcxisBPnSXQ@jetpack": "privacy-badger17",
+    "CookieAutoDelete@kennydo.com": "cookie-autodelete",
+    "{b86e4813-687a-43e6-ab65-0bde4ab75758}": "localcdn-fork-of-decentraleyes",
+    "uBlock0@raymondhill.net": "ublock-origin",
+}
+
+
+def parse_extensions(text: str):
+    pattern = re.compile(
+        r'\{\s*id = "(?P<id>[^"]+)";\s*url = "(?P<url>[^"]+)";\s*sha256 = "(?P<sha>[^"]+)";\s*\}',
+        re.S,
+    )
+    items = []
+    for m in pattern.finditer(text):
+        url = m.group("url")
+        version_match = re.search(r'-([0-9][A-Za-z0-9._-]*)\.xpi$', url)
+        items.append(
+            {
+                "id": m.group("id"),
+                "url": url,
+                "sha256": m.group("sha"),
+                "pinned_version": version_match.group(1) if version_match else "unknown",
+            }
+        )
+    return items
+
+
+def get_latest_addon(slug: str):
+    with urllib.request.urlopen(AMO_API.format(slug=slug)) as resp:
+        data = json.load(resp)
+    return {
+        "slug": data["slug"],
+        "name": data.get("name", {}).get("en-US") or data["slug"],
+        "version": data["current_version"]["version"],
+        "url": data["current_version"]["file"]["url"],
+        "hash": data["current_version"]["file"]["hash"],
+        "amo": data["url"],
+    }
+
+
+def get_firefox_version():
+    try:
+        out = subprocess.check_output(
+            ["nix", "eval", "--raw", NIXPKGS_FIREFOX_EXPR, "--no-warn-dirty"],
+            cwd=ROOT,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+        return out.strip()
+    except Exception:
+        return None
+
+
+def get_nixpkgs_rev():
+    try:
+        with FLAKE_LOCK.open() as f:
+            lock = json.load(f)
+        return lock["nodes"]["nixpkgs"]["locked"]["rev"]
+    except Exception:
+        return None
+
+
+def get_latest_firefox_release():
+    req = urllib.request.Request(
+        FIREFOX_VERSIONS_URL,
+        headers={"User-Agent": "check-firefox-extensions"},
+    )
+    with urllib.request.urlopen(req) as resp:
+        data = json.load(resp)
+    return {
+        "version": data["LATEST_FIREFOX_VERSION"],
+        "esr": data.get("FIREFOX_ESR"),
+        "url": "https://www.mozilla.org/firefox/releases/",
+    }
+
+
+def normalize_version(v: str):
+    return re.sub(r'[^0-9.]', '', v or '')
+
+
+def main():
+    if not FIREFOX_MODULE.exists():
+        print(f"error: missing {FIREFOX_MODULE}", file=sys.stderr)
+        return 1
+
+    text = FIREFOX_MODULE.read_text()
+    extensions = parse_extensions(text)
+
+    outdated = False
+
+    print("Firefox")
+    firefox_version = get_firefox_version()
+    nixpkgs_rev = get_nixpkgs_rev()
+
+    print(f"  pinned nixpkgs version: {firefox_version or '<unable to evaluate>'}")
+    if nixpkgs_rev:
+        print(f"  nixpkgs rev: {nixpkgs_rev}")
+
+    try:
+        latest_firefox = get_latest_firefox_release()
+        status = "up-to-date"
+        if normalize_version(firefox_version or "") != normalize_version(latest_firefox["version"]):
+            status = "OUTDATED"
+            outdated = True
+        print(f"  latest upstream version: {latest_firefox['version']}")
+        print(f"  status: {status}")
+        print(f"  release info: {latest_firefox['url']}")
+    except Exception as e:
+        print(f"  latest upstream version: <unable to query: {e}>")
+        print("  status: unable to verify")
+    print()
+
+    print("Extensions")
+    for ext in extensions:
+        slug = EXTENSION_SLUGS.get(ext["id"])
+        if not slug:
+            print(f"- {ext['id']}: no AMO slug mapping configured")
+            outdated = True
+            continue
+
+        latest = get_latest_addon(slug)
+        status = "up-to-date" if ext["pinned_version"] == latest["version"] else "OUTDATED"
+        if status != "up-to-date":
+            outdated = True
+
+        print(f"- {latest['name']}")
+        print(f"  id: {ext['id']}")
+        print(f"  pinned: {ext['pinned_version']}")
+        print(f"  latest: {latest['version']}")
+        print(f"  status: {status}")
+        print(f"  pinned url: {ext['url']}")
+        print(f"  latest url: {latest['url']}")
+        print(f"  latest hash: {latest['hash']}")
+        print(f"  AMO: {latest['amo']}")
+        print()
+
+    return 2 if outdated else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
