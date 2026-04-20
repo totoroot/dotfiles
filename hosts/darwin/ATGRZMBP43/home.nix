@@ -59,6 +59,10 @@ in
     };
     trash.enable = true;
     viddy.enable = true;
+    firefox = {
+      enable = true;
+      profileDirectory = "lxyotzh1.default";
+    };
     zsh.enable = true;
   };
 

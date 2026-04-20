@@ -28,6 +28,7 @@
     ./modules/trash.nix
     ./modules/unfree-packages.nix
     ./modules/viddy.nix
+    ./modules/firefox.nix
     ./modules/vim.nix
     ./modules/zsh.nix
   ];

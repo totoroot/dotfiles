@@ -21,11 +21,10 @@ in {
 
         home-manager.users.${config.user.name}.modules.home.zsh.rcFiles =
           [ ./config/zsh/prompt.zsh ];
-        desktop.browsers = {
-          firefox.userChrome = concatMapStringsSep "\n" readFile [
+        home-manager.users.${config.user.name}.modules.home.firefox.extraUserChrome =
+          concatMapStringsSep "\n" readFile [
             ./config/firefox/userChrome.css
           ];
-        };
       };
 
       env = {
