@@ -9,22 +9,20 @@ in {
   config = mkIf (cfg.active == "nord") (mkMerge [
     # Desktop-agnostic configuration
     {
-      modules = {
-        theme = {
-          # wallpaper = mkDefault "$DOTFILES/config/wallpapers/nord.png";
-          gtk = {
-            theme = "Nord";
-            iconTheme = "Papirus";
-            cursorTheme = "Nord-cursors";
-          };
+      modules.theme = {
+        # wallpaper = mkDefault "$DOTFILES/config/wallpapers/nord.png";
+        gtk = {
+          theme = "Nord";
+          iconTheme = "Papirus";
+          cursorTheme = "Nord-cursors";
         };
+      };
 
-        home-manager.users.${config.user.name}.modules.home.zsh.rcFiles =
-          [ ./config/zsh/prompt.zsh ];
-        home-manager.users.${config.user.name}.modules.home.firefox.extraUserChrome =
-          concatMapStringsSep "\n" readFile [
-            ./config/firefox/userChrome.css
-          ];
+      home-manager.users.${config.user.name}.modules.home = {
+        zsh.rcFiles = [ ./config/zsh/prompt.zsh ];
+        firefox.extraUserChrome = concatMapStringsSep "\n" readFile [
+          ./config/firefox/userChrome.css
+        ];
       };
 
       env = {
