@@ -88,7 +88,6 @@ in
         sender = "admin@thym.it";
         allowedOrigins = [
           "https://geburtstags.${domain}"
-          "https://konzept.grueneis-psychologie.at"
           "https://grueneis-psychologie.at"
         ];
         smtp = {
@@ -307,14 +306,6 @@ in
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         '';
       };
-    };
-
-    "konzept.grueneis-psychologie.at".locations."/api/contact" = {
-      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/kontakt";
-      recommendedProxySettings = true;
-      extraConfig = ''
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      '';
     };
 
     "grueneis-psychologie.at".locations."/api/contact" = {
