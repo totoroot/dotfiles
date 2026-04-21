@@ -339,7 +339,7 @@ in
           enableACME = true;
           forceSSL = true;
           locations."/" = {
-            root = "/var/www/praxis";
+            root = "/var/www/grueneis-psychologie.at";
           };
           locations."^~ /mail-templates/" = {
             extraConfig = ''
@@ -357,26 +357,6 @@ in
             '';
           };
           serverAliases = [ "www.${praxisDomain}" ];
-        };
-        "konzept.${praxisDomain}" = {
-          enableACME = true;
-          forceSSL = true;
-          root = "/var/www/grueneis-psychologie.at";
-          locations."^~ /mail-templates/" = {
-            extraConfig = ''
-              deny all;
-              return 404;
-            '';
-          };
-          extraConfig = ''
-            error_page 404 /de/404/;
-          '';
-
-          locations."= /de/404/" = {
-            extraConfig = ''
-              internal;
-            '';
-          };
         };
         "${womanMadeDomain}" = {
           enableACME = true;
