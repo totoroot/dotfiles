@@ -57,7 +57,12 @@ in
         };
         "praxis@${praxisDomain}" = {
           hashedPasswordFile = "/var/secrets/mailserver/praxis@${praxisDomain}";
-          aliases = ["clemens@${praxisDomain}"];
+          aliases = [
+            "clemens@${praxisDomain}"
+            "office@${praxisDomain}"
+            "contact@${praxisDomain}"
+            "hello@${praxisDomain}"
+          ];
         };
       };
 
