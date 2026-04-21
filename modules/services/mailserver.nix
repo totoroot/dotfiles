@@ -48,6 +48,9 @@ in
           hashedPasswordFile = "/var/secrets/mailserver/admin@thym.it";
           aliases = [
             "info@${domain}"
+            "hello@${domain}"
+            "office@${domain}"
+            "contact@${domain}"
             "admin@${legacyDomain}"
             "info@${legacyDomain}"
           ];
