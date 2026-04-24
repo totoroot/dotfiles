@@ -42,7 +42,7 @@ in
         fi
 
         # Otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up --ssh --qr --reset --login-server https://headscale.xn--berwachungsbehr-mtb1g.de
+        ${tailscale}/bin/tailscale up --qr --reset --login-server https://headscale.xn--berwachungsbehr-mtb1g.de
       '';
     };
 
