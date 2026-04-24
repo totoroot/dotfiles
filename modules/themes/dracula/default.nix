@@ -10,7 +10,6 @@ in {
     # Desktop-agnostic configuration
     {
       modules.theme = {
-        # wallpaper = mkDefault "$DOTFILES/config/wallpapers/quack.png";
         gtk = {
           theme = "Dracula";
           iconTheme = "Papirus";
