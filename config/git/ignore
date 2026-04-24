@@ -62,3 +62,7 @@ config.codekit
 # SonarQube scan directory #
 ############################
 .scannerwork
+
+# AI assistant local instructions #
+###################################
+CLAUDE.md
