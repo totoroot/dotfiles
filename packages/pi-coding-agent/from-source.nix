@@ -11,7 +11,7 @@
 
 buildNpmPackage rec {
   pname = "pi-coding-agent";
-  version = "0.67.6";
+  version = "0.70.2";
   nodejs = nodejs_22;
 
   src = fetchFromGitHub {

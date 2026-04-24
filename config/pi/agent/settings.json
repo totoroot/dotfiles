@@ -1,5 +1,5 @@
 {
-  "defaultProvider": "openai",
+  "defaultProvider": "openai-codex",
   "theme": "dracula",
   "defaultThinkingLevel": "off",
   "hideThinkingBlock": true,
@@ -13,5 +13,7 @@
   "packages": [
     "git:github.com/JuliusBrussee/caveman"
   ],
-  "enableInstallTelemetry": true
+  "enableInstallTelemetry": true,
+  "lastChangelogVersion": "0.70.2",
+  "defaultModel": "gpt-5.5"
 }

@@ -7,19 +7,20 @@
 , pango
 , pixman
 , pkg-config
+, stdenv
 }:
 
 buildNpmPackage rec {
   pname = "pi-coding-agent";
-  version = "0.67.6";
+  version = "0.70.2";
   nodejs = nodejs_22;
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@mariozechner/pi-coding-agent/-/pi-coding-agent-${version}.tgz";
-    hash = "sha256-Iut4BnDx3OzdrSpAf2IPW4oh2/99CHxYEJMVPieeu3Q=";
+    hash = "sha256-bv+JqGQb0tIUXkm4B7f874y9VUzxlP/DHRq+DjYGddU=";
   };
 
-  npmDepsHash = "sha256-bjPrS+6XVoh6IbBkg4a84i4Iw6ycp3AL5uvOXVgC1fE=";
+  npmDepsHash = "sha256-TlR3rPGY9cs7tDbtYY6hpb0ckbbZ9Bm67jPHOjI2JyA=";
 
   nativeBuildInputs = [
     makeWrapper
@@ -31,6 +32,8 @@ buildNpmPackage rec {
     pango
     pixman
   ];
+
+  dontPatchELF = stdenv.isDarwin;
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json
