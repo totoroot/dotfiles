@@ -52,7 +52,6 @@ in
         enableCheck = true;
       };
     };
-    theme.active = "dracula";
     editors = {
       default = "micro";
       vim.enable = true;

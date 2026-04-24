@@ -1,4 +1,4 @@
-# modules/themes/quack/default.nix --- a regal dracula-inspired theme
+# Dracula application theme defaults.
 
 { config, lib, pkgs, ... }:
 
@@ -6,15 +6,12 @@ with lib;
 with lib.my;
 let cfg = config.modules.theme;
 in {
-  config = mkIf (cfg.active == "dracula") (mkMerge [
-    # Desktop-agnostic configuration
+  config = mkIf cfg.enable (mkMerge [
     {
-      modules.theme = {
-        gtk = {
-          theme = "Dracula";
-          iconTheme = "Papirus";
-          cursorTheme = "Dracula-cursors";
-        };
+      modules.theme.gtk = {
+        theme = "Dracula";
+        iconTheme = "Papirus";
+        cursorTheme = "Dracula-cursors";
       };
 
       home-manager.users.${config.user.name}.modules.home = {
@@ -31,7 +28,6 @@ in {
       };
     }
 
-    # Desktop theming
     (mkIf config.xdg.portal.enable {
       environment.systemPackages = with pkgs; [
         dracula-theme
@@ -50,8 +46,6 @@ in {
         monospace = [ "Mononoki" ];
       };
 
-
-      # Other dotfiles
       home.configFile = with config.modules; mkMerge [
         (mkIf desktop.rofi.enable {
           "rofi/theme" = { source = ./config/rofi; recursive = true; };

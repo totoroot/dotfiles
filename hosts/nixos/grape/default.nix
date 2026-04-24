@@ -26,7 +26,6 @@
       systems = [ "x86_64-linux" ];
       enableCheck = true;
     };
-    theme.active = "dracula";
     desktop = {
       environments = {
         bspwm.enable = false;

@@ -31,7 +31,6 @@
       systems = [ "aarch64-linux" ];
       enableCheck = true;
     };
-    theme.active = "dracula";
     editors = {
       default = "micro";
       helix.enable = true;

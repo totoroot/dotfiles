@@ -9,11 +9,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    modules.theme.onReload.bspwm = ''
-      ${pkgs.bspwm}/bin/bspc wm -r
-      source $XDG_CONFIG_HOME/bspwm/bspwmrc
-    '';
-
     environment.systemPackages = with pkgs; [
       # Adds layout managing capabilities for bspwm
       bsp-layout

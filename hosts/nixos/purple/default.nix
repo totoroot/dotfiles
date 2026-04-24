@@ -20,7 +20,6 @@
       # Add ATTIC_SERVER_TOKEN_* secrets here (see attic docs)
       environmentFile = "/etc/atticd.env";
     };
-    theme.active = "dracula";
     desktop = {
       environments = {
         bspwm.enable = false;

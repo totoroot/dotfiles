@@ -8,7 +8,6 @@
   ];
 
   modules = {
-    theme.active = "dracula";
     desktop = {
       environments = {
         bspwm.enable = false;

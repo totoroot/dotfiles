@@ -10,7 +10,6 @@
 
   ## Modules
   modules = {
-    theme.active = "dracula";
     dev = {
       cc.enable = false;
       clojure.enable = false;
