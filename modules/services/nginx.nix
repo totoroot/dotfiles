@@ -35,7 +35,7 @@ let
   scrutinyPort = 9080;
   immichPort = 2283;
   recipePort = 8491;
-  adguardHTTPPort = 3300;
+  adguardHTTPPort = 6060;
   esphomePort = 6052;
   changedetectionPort = 5002;
   adventurelogPort = 2104;

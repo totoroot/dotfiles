@@ -148,7 +148,7 @@
   {
     name = "adguard";
     group = "services";
-    url = "http://100.64.0.3:3300/login.html";
+    url = "http://100.64.0.3:6060/login.html";
     interval = "1m";
     conditions = [ "[STATUS] == 200" ];
   }
