@@ -253,6 +253,7 @@
       unfreePackages.enable = true;
       archive.enable = true;
       atuin.enable = true;
+      bitwarden.enable = true;
       borg.enable = true;
       containers.enable = true;
       devenv.enable = true;

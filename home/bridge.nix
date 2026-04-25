@@ -5,6 +5,7 @@
     ./modules/aerc.nix
     ./modules/atuin.nix
     ./modules/archive.nix
+    ./modules/bitwarden.nix
     ./modules/borg.nix
     ./modules/config-symlinks.nix
     ./modules/duf.nix
