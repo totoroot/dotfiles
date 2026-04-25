@@ -38,6 +38,7 @@
       fonts.enable = true;
       ides.enable = true;
       ghostwriter.enable = false;
+      handy.enable = true;
       godot.enable = true;
       gpa.enable = true;
       gsmartcontrol.enable = true;

@@ -44,6 +44,7 @@
       fonts.enable = true;
       ides.enable = true;
       ghostwriter.enable = false;
+      handy.enable = true;
       godot.enable = false;
       gpa.enable = false;
       gsmartcontrol.enable = true;
