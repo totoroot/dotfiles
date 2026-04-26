@@ -70,8 +70,12 @@ The package also needs normal Tauri/Rust/frontend packaging work:
    - disable updater artifacts
    - disable macOS signing identity
    - disable hardened runtime
-7. Use `cargo-tauri.hook` to build the app bundle.
-8. Disable checks; upstream tests are not wired for this package build.
+7. Use `rustPlatform.bindgenHook` for libclang/include-path setup.
+   - This avoids manual `LIBCLANG_PATH`/`BINDGEN_EXTRA_CLANG_ARGS` wiring.
+   - On Linux it also avoids accidentally pointing bindgen at the wrong libc
+     output; the cc-wrapper-provided include paths include `libc.dev`.
+8. Use `cargo-tauri.hook` to build the app bundle.
+9. Disable checks; upstream tests are not wired for this package build.
 
 ## Linux-specific notes
 
@@ -102,6 +106,9 @@ $out/bin/handy
 ```
 
 The app binary has an `onnxruntime` rpath.
+
+This package uses `rustPlatform.bindgenHook`, matching the cleaner approach from
+nixpkgs packaging review, instead of manually setting libclang include paths.
 
 Linux package evaluation works, but a full `x86_64-linux` build requires a Linux
 builder. It cannot be completed locally from an `aarch64-darwin` machine unless a

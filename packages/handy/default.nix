@@ -8,7 +8,6 @@
 , nodejs
 , cargo-tauri
 , jq
-, llvmPackages
 , writableTmpDirAsHomeHook
 , makeBinaryWrapper
 , symlinkJoin
@@ -121,7 +120,7 @@ in
     nodejs
     cargo-tauri.hook
     jq
-    llvmPackages.libclang
+    rustPlatform.bindgenHook
   ]
   ++ lib.optionals stdenv.hostPlatform.isLinux [
     wrapGAppsHook4
@@ -155,10 +154,6 @@ in
   ++ gstPlugins;
 
   env = {
-    LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
-    BINDGEN_EXTRA_CLANG_ARGS = lib.concatStringsSep " " ([
-      "-isystem ${llvmPackages.libclang.lib}/lib/clang/${lib.getVersion llvmPackages.libclang}/include"
-    ] ++ lib.optional stdenv.hostPlatform.isLinux "-isystem ${stdenv.cc.libc.dev}/include");
     ORT_LIB_LOCATION = "${onnxruntime}/lib";
     ORT_PREFER_DYNAMIC_LINK = "1";
     GST_PLUGIN_SYSTEM_PATH_1_0 = lib.optionalString stdenv.hostPlatform.isLinux (
