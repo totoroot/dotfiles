@@ -96,7 +96,7 @@ in
               source_labels = [ "__param_target" ];
               # Create domain label
               target_label = "domain";
-              regex = "^https:\/\/(?:[-a-z0-9]+\.)?([-a-z0-9]+\.(?:at|de))(?:(?:\/|$))";
+              regex = "^https://(?:[-a-z0-9]+\.)?([-a-z0-9]+\.(?:at|de))(?:(?:/|$))";
               replacement = "$1";
             }
           ];
