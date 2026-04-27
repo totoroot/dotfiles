@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# check-overlays: Validate Darwin package patches
+#
+# Usage:
+#   ./bin/check-overlays PKG [HOST]
+#
+# Examples:
+#   ./bin/check-overlays aprutil
+#   ./bin/check-overlays aprutil ATGRZMBP43
+
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+PKG="${1:-aprutil}"
+HOST="${2:-ATGRZMBP43}"
+
+echo "=== Darwin Patches Check: $PKG on $HOST ==="
+echo
+
+# Get patches as JSON array
+nix eval ".#darwinConfigurations.$HOST" \
+  --apply "x: builtins.toJSON (map toString x.pkgs.pkgs.${PKG}.patches)" 2>/dev/null || echo "[]"
+
+echo
+echo "Verify manually:"
+echo "  nix eval .#darwinConfigurations.$HOST \\"
+echo "    --apply 'x: map toString x.pkgs.pkgs.$PKG.patches'"
