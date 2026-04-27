@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# rswitch — rebuild and switch to NixOS/Darwin configuration
+#
+# Usage:
+#   rswitch [--host HOST] [--force-host] [-- EXTRA_ARGS...]
+#
+# Examples:
+#   rswitch                          # rebuild current host
+#   rswitch --host myhost           # rebuild specific host
+#   rswitch --host myhost -- --show-trace    # with extra nix flags
+#   rswitch --host myhost -- --cores 0 --show-trace
+#
+# The -- separator passes EXTRA_ARGS directly to nixos-rebuild/darwin-rebuild.
+# Useful flags:
+#   --show-trace     # verbose error output
+#   --cores N        # parallelize build (0 = all cores)
+#   --keep-going     # continue after failed builds
+#   --fallback       # fetch binary substitues if build fails
 
 host="$(hostname)"
 flake_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
