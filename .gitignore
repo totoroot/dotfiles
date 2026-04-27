@@ -1,7 +1,5 @@
 result
 
-config/aerc/accounts.conf
-
 # Devenv
 .direnv*
 .devenv*
@@ -10,3 +8,7 @@ devenv.local.nix
 
 .cache
 .nix-cache
+
+ignored
+
+AGENTS.md
