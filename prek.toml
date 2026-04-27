@@ -1,0 +1,27 @@
+# Configuration for `prek`, a Git hook manager written in Rust.
+# See https://prek.j178.dev for details.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-added-large-files" },
+  { id = "check-merge-conflict" },
+  { id = "check-toml" },
+  { id = "check-yaml" },
+]
+
+[[repos]]
+repo = "https://github.com/gitleaks/gitleaks"
+rev = "83d9cd684c87d95d656c1458ef04895a7f1cbd8e"
+hooks = [
+  { id = "gitleaks" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "nix-flake-check", name = "nix flake check", entry = "nix flake check --no-build", language = "system", pass_filenames = false, files = "^flake\\.(nix|lock)$" },
+]
