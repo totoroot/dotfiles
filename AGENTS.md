@@ -31,6 +31,28 @@ Mixed fleet: servers, desktops, laptops.
 - When adding custom packages, expose them through flake for target systems.
 - Linux and Darwin both matter. Check system-specific availability.
 
+## Build failures and package patches
+
+When a Nix package build fails and the fix hasn't propagated to channels yet:
+
+1. **Add patch file** to `overlays/patches/<package>-<reason>.patch`
+2. **Uncomment in** `overlays/darwin-patches.nix` or add new overlay for the package
+3. **Test**: `nix eval .#darwinConfigurations.ATGRZMBP43 --apply 'x: map toString x.pkgs.pkgs.<package>.patches'`
+4. **Verify** patch appears in output
+
+**Pattern for Darwin patches:**
+```nix
+pkg-name = prev.pkg-name.overrideAttrs (old: {
+  patches = (old.patches or []) ++ [ ./patches/<name>.patch ];
+  NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -std=gnu17";
+});
+```
+
+**Troubleshooting:**
+- Use `./bin/check-overlays <package>` to verify patch application
+- Check `docs/overlays-troubleshoot.md` for debug commands
+- If package vendored (e.g., gitFull), override top-level attribute
+
 ## Existing repo direction
 
 - Broad service management already lives here: monitoring, auth, mail, web, CI/CD, deployment.
