@@ -33,7 +33,6 @@
     };
     editors = {
       default = "micro";
-      helix.enable = true;
       micro.enable = true;
       vim.enable = true;
     };
