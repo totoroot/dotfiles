@@ -90,8 +90,6 @@
       clojure.enable = false;
       common-lisp.enable = false;
       db.enable = false;
-      go.enable = false;
-      java.enable = false;
       julia.enable = false;
       lua.enable = false;
       node.enable = false;

@@ -114,8 +114,6 @@
       clojure.enable = false;
       common-lisp.enable = false;
       db.enable = true;
-      go.enable = false;
-      java.enable = false;
       julia.enable = true;
       lua.enable = false;
       node.enable = false;
