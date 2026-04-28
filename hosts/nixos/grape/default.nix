@@ -61,9 +61,7 @@
       unity.enable = false;
       vscodium.enable = true;
       browsers = {
-        default = "firefox";
         chromium.enable = true;
-        firefox.enable = true;
         lynx.enable = false;
         tor.enable = false;
       };
