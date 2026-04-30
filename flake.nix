@@ -116,7 +116,7 @@
         overlays = extraOverlays;
       };
       # Use different channels for installed packages for increased flexibility
-      pkgs = mkPkgs nixos [ self.overlay ];
+      pkgs = mkPkgs nixos [ ];
       unstable = mkPkgs nixos-unstable [ ];
       nixpkgs = mkPkgs nixpkgs [ ];
 
