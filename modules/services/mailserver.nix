@@ -33,12 +33,7 @@ in
       enableSubmission = true;
 
       fullTextSearch = {
-        enable = true;
-        # Index new email as they arrive
-        autoIndex = true;
-        # This only applies to plain text attachments, binary attachments are never indexed
-        # indexAttachments = true;
-        enforced = "body";
+        enable = false;
       };
 
       # A list of all login accounts. To create the password hashes, use
