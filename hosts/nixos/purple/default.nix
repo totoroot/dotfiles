@@ -113,7 +113,6 @@
       scala.enable = false;
     };
     editors = {
-      default = "micro";
       vim.enable = true;
     };
     hardware = {
@@ -274,7 +273,6 @@
       kitty.enable = true;
       kubernetes.enable = true;
       lf.enable = true;
-      micro.enable = true;
       nushell.enable = true;
       sshHosts.enable = true;
       trash.enable = true;

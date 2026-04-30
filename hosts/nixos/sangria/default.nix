@@ -89,8 +89,6 @@
       scala.enable = false;
     };
     editors = {
-      default = "micro";
-      micro.enable = true;
       vim.enable = true;
     };
     hardware = {
@@ -213,7 +211,6 @@
       duf.enable = true;
       git.enable = true;
       lf.enable = true;
-      micro.enable = true;
       nushell.enable = true;
       sshHosts.enable = true;
       trash.enable = true;

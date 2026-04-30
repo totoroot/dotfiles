@@ -23,7 +23,6 @@
       scala.enable = false;
     };
     editors = {
-      default = "micro";
       vim.enable = true;
     };
     hardware = {
@@ -289,7 +288,6 @@
       helix.enable = true;
       lf.enable = true;
       llm.enable = true;
-      micro.enable = true;
       modernShell.enable = true;
       nushell.enable = true;
       sshHosts.enable = true;

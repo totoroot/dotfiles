@@ -1,5 +1,5 @@
 {
-  "defaultProvider": "openai-codex",
+  "defaultProvider": "minimax",
   "theme": "dracula",
   "defaultThinkingLevel": "off",
   "hideThinkingBlock": true,
@@ -15,5 +15,5 @@
   ],
   "enableInstallTelemetry": true,
   "lastChangelogVersion": "0.70.2",
-  "defaultModel": "gpt-5.5"
+  "defaultModel": "MiniMax-M2.7"
 }

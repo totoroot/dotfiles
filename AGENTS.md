@@ -21,6 +21,11 @@ Mixed fleet: servers, desktops, laptops.
 - `packages/` — custom flake packages
 - `config/` — static config files and templates
 - `lib/` — custom helpers
+- `secrets/` — sops-nix secrets (never commit raw values)
+- `overlays/` — package overlays for patching (e.g., darwin-patches.nix)
+- `patches/` — patch files for upstream packages
+- `docs/` — troubleshooting and reference docs
+- `bin/` — helper scripts (check-overlays, rswitch)
 
 ## Durable patterns
 
@@ -53,6 +58,16 @@ pkg-name = prev.pkg-name.overrideAttrs (old: {
 - Check `docs/overlays-troubleshoot.md` for debug commands
 - If package vendored (e.g., gitFull), override top-level attribute
 
+## Pre-commit hooks
+
+Repo uses `prek` with gitleaks for secret detection.
+
+- Install: `nix develop --command prek install`
+- Run hooks: `nix develop --command prek run`
+- Hooks auto-install on clone via prek.toml
+
+To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
+
 ## Existing repo direction
 
 - Broad service management already lives here: monitoring, auth, mail, web, CI/CD, deployment.
@@ -71,6 +86,13 @@ pkg-name = prev.pkg-name.overrideAttrs (old: {
 - Understand existing module and host structure before adding one-off fixes.
 - Prefer modifying existing reusable module structure over patching a single host file, unless host-local behavior is intended.
 
+## File management rules
+
+- **Do not delete files or revert changes unless explicitly instructed to do so.**
+- If asked to remove something specific (e.g., "remove the aprutil patch"), only remove that exact thing. Preserve all other work — documentation, helpers, scripts, overlays — even if not immediately active.
+- If unsure what to remove, ask: "Do you want me to remove X and keep Y, or remove everything related to X?"
+- When cleaning up test/temporary changes, restore to clean state, not to empty state.
+
 ## Working style in this repo
 
 - Inspect existing modules before creating new ones.
@@ -78,3 +100,4 @@ pkg-name = prev.pkg-name.overrideAttrs (old: {
 - Do not commit secrets.
 - For packaging changes, ensure package is both defined and consumed correctly.
 - For service changes, check related host wiring, proxying, secrets, and monitoring implications.
+- **Never push. User pushes manually.** Inform before every commit, explain why atomic.

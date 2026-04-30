@@ -115,8 +115,6 @@
       scala.enable = false;
     };
     editors = {
-      default = "micro";
-      micro.enable = true;
       vim.enable = true;
     };
     hardware = {
@@ -253,7 +251,6 @@
       gitlab.enable = true;
       lf.enable = true;
       llm.enable = true;
-      micro.enable = true;
       modernShell.enable = true;
       nushell.enable = true;
       pass.enable = true;

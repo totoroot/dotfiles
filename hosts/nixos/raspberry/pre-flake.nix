@@ -6,7 +6,6 @@
 {
   # Install some essential packages
   environment.systemPackages = with pkgs; [
-    micro
     git
     bat
     helix

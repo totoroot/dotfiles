@@ -32,8 +32,6 @@
       enableCheck = true;
     };
     editors = {
-      default = "micro";
-      micro.enable = true;
       vim.enable = true;
     };
     shell = {
