@@ -74,8 +74,22 @@ if [[ ${#args[@]} -gt 0 ]]; then
 fi
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
+  darwin_action="$action"
+  case "$action" in
+    switch)
+      darwin_action="switch"
+      ;;
+    test)
+      darwin_action="check"
+      ;;
+    boot)
+      echo "Darwin does not support 'boot' via darwin-rebuild." >&2
+      exit 1
+      ;;
+  esac
+
   exec sudo -H nix run nix-darwin/master#darwin-rebuild -- \
-    "$action" --flake "${flake_root}#${target_host}" --impure "${nix_args[@]}"
+    "$darwin_action" --flake "${flake_root}#${target_host}" --impure "${nix_args[@]}"
 fi
 
 build_attr="${flake_root}#nixosConfigurations.${target_host}.config.system.build.toplevel"
