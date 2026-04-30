@@ -73,6 +73,11 @@ if [[ ${#args[@]} -gt 0 ]]; then
   esac
 fi
 
+# Remove leading "--" separator from nix_args (not needed for rebuild commands)
+if [[ "${nix_args[0]:-}" == "--" ]]; then
+  nix_args=("${nix_args[@]:1}")
+fi
+
 if [[ "$(uname -s)" == "Darwin" ]]; then
   darwin_action="$action"
   case "$action" in
