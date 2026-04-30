@@ -144,8 +144,12 @@
               system = sys;
               config.allowUnfree = true;
             };
+            allPackages = mapModules ./packages (p: pkgsFor.callPackage p { });
           in
-          mapModules ./packages (p: pkgsFor.callPackage p { }));
+          if sys == "aarch64-darwin" then
+            allPackages
+          else
+            builtins.removeAttrs allPackages [ "handy" ]);
 
       nixosModules =
         { dotfiles = import ./.; }
