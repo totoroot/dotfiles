@@ -144,12 +144,13 @@
               system = sys;
               config.allowUnfree = true;
             };
-            allPackages = mapModules ./packages (p: pkgsFor.callPackage p { });
           in
           if sys == "aarch64-darwin" then
-            allPackages
+            mapModules ./packages (p: pkgsFor.callPackage p { })
           else
-            builtins.removeAttrs allPackages [ "handy" ]);
+            {
+              pi-coding-agent = pkgsFor.callPackage ./packages/pi-coding-agent { };
+            });
 
       nixosModules =
         { dotfiles = import ./.; }
