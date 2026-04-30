@@ -96,11 +96,6 @@
           transcoding.enable = false;
         };
       };
-      term = {
-        default = "kitty";
-        st.enable = true;
-        kitty.enable = true;
-      };
       vm = {
         qemu.enable = false;
         virtualbox.enable = false;
@@ -121,7 +116,6 @@
     };
     editors = {
       default = "micro";
-      helix.enable = true;
       micro.enable = true;
       vim.enable = true;
     };
@@ -257,7 +251,6 @@
       fonts.enable = true;
       git.enable = true;
       gitlab.enable = true;
-      helix.enable = true;
       lf.enable = true;
       llm.enable = true;
       micro.enable = true;

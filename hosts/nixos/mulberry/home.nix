@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../home/modules/helix.nix
+    ../../../home/modules/helix.nix
   ];
 
   home.file = {

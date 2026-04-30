@@ -24,7 +24,6 @@
       flatpak.enable = true;
       fm.enable = true;
       fonts.enable = true;
-      geany.enable = false;
       ghostwriter.enable = false;
       godot.enable = false;
       gpa.enable = false;
@@ -38,7 +37,6 @@
       polish.enable = false;
       rofi.enable = false;
       screenshot.enable = false;
-      thonny.enable = false;
       torrent.enable = false;
       unity.enable = false;
       vscodium.enable = false;
@@ -72,11 +70,6 @@
           transcoding.enable = false;
         };
       };
-      term = {
-        default = "kitty";
-        st.enable = true;
-        kitty.enable = true;
-      };
       vm = {
         qemu.enable = false;
         virtualbox.enable = false;
@@ -97,7 +90,6 @@
     };
     editors = {
       default = "micro";
-      helix.enable = true;
       micro.enable = true;
       vim.enable = true;
     };
@@ -220,7 +212,6 @@
       borg.enable = true;
       duf.enable = true;
       git.enable = true;
-      helix.enable = true;
       lf.enable = true;
       micro.enable = true;
       nushell.enable = true;

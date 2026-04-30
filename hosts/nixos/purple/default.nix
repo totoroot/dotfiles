@@ -271,7 +271,6 @@
       duf.enable = true;
       fonts.enable = true;
       git.enable = true;
-      helix.enable = true;
       kitty.enable = true;
       kubernetes.enable = true;
       lf.enable = true;
