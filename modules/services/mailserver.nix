@@ -38,7 +38,6 @@ in
         autoIndex = true;
         # This only applies to plain text attachments, binary attachments are never indexed
         # indexAttachments = true;
-        enforced = "body";
       };
 
       # A list of all login accounts. To create the password hashes, use
