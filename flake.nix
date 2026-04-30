@@ -113,7 +113,7 @@
         inherit system;
         # Allow the use of unfree software
         config.allowUnfree = true;
-        overlays = extraOverlays ++ (attrValues self.overlays);
+        overlays = extraOverlays;
       };
       # Use different channels for installed packages for increased flexibility
       pkgs = mkPkgs nixos [ self.overlay ];
@@ -205,6 +205,14 @@
           system = "aarch64-darwin";
           useGlobalPkgs = false;
           includeDotfilesModule = false;
+          pkgs = import inputs.nixpkgs {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+            overlays = [
+              self.overlay
+              self.overlays.darwin-patches
+            ];
+          };
         };
 
       # Configuration for generic Linux distros using Nix and home-manager
