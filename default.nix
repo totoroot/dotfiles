@@ -25,7 +25,6 @@ with inputs;
     extraOptions = "experimental-features = nix-command flakes";
     nixPath = [
       "nixpkgs=${nixos}"
-      "nixpkgs-overlays=${dotFilesDir}/overlays"
       "home-manager=${home-manager}"
       "dotfiles=${dotFilesDir}"
     ];
