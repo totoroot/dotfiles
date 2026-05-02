@@ -43,6 +43,13 @@
     conditions = [ "[STATUS] == 200" ];
   }
   {
+    name = "blob.thym.it";
+    group = "domains";
+    url = "https://blob.thym.it";
+    interval = "1m";
+    conditions = [ "[STATUS] == 200" ];
+  }
+  {
     name = "cambodianyouthsupport.com";
     group = "domains";
     url = "https://cambodianyouthsupport.com";

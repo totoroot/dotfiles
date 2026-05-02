@@ -366,6 +366,13 @@ in
           };
           serverAliases = [ "www.${womanMadeDomain}" ];
         };
+        "blob.${thymITDomain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            root = "/var/www/blob.thym.it";
+          };
+        };
       };
     };
 
