@@ -26,11 +26,11 @@ in
       # Terminal tool that right-sizes LLM models to your system's RAM, CPU, and GPU
       llmfit
       # Minimal CLI coding agent by Mistral
-      mistral-vibe
+      # mistral-vibe
     	# Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
-      codex
+      # codex
       # AI coding agent built for the terminal
-      opencode
+      # opencode
       # Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM
       # goose-cli
     ];
