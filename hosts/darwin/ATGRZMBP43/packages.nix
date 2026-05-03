@@ -57,6 +57,8 @@ in
     clolcat
     # General-purpose media player, fork of MPlayer and mplayer2
     mpv
+    # Node.js for Gondolin and other JavaScript tools
+    nodejs_23
     # A fast, highly customizable system info script
     # neofetch
     # Review pull-requests on https://github.com/NixOS/nixpkgs
@@ -175,5 +177,7 @@ in
     inputs.nixpkgs-handy.legacyPackages.${pkgs.system}.handy
 
     llmfit
+    # Gondolin - Agent sandbox for running untrusted code
+    inputs.self.packages.${pkgs.system}.gondolin
   ];
 }

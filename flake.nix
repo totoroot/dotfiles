@@ -151,7 +151,9 @@
             };
           in
             if sys == "aarch64-darwin" then
-              mapModules ./packages (p: pkgsFor.callPackage p { })
+              (mapModules ./packages (p: pkgsFor.callPackage p { })) // {
+                gondolin = pkgsFor.callPackage ./packages/gondolin { };
+              }
             else
               {
                 pi-coding-agent = pkgsFor.callPackage ./packages/pi-coding-agent { };
