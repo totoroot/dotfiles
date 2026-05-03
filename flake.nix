@@ -48,6 +48,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Handy package from PR
+    nixpkgs-handy = {
+      url = "github:NixOS/nixpkgs/pull/507754/head";
+    };
+
     # YES!!! https://lix.systems/
     lix = {
       # Get latest release with `get-releases https://git.lix.systems/lix-project/nixos-module | head -n1`
@@ -145,12 +150,15 @@
               config.allowUnfree = true;
             };
           in
-          if sys == "aarch64-darwin" then
-            mapModules ./packages (p: pkgsFor.callPackage p { })
-          else
-            {
-              pi-coding-agent = pkgsFor.callPackage ./packages/pi-coding-agent { };
-            });
+            if sys == "aarch64-darwin" then
+              mapModules ./packages (p: pkgsFor.callPackage p { })
+            else
+              {
+                pi-coding-agent = pkgsFor.callPackage ./packages/pi-coding-agent { };
+              }
+        );
+
+      handy = inputs.nixpkgs-handy.legacyPackages;
 
       nixosModules =
         { dotfiles = import ./.; }

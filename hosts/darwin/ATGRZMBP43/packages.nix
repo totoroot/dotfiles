@@ -172,7 +172,7 @@ in
     # rcat from flake
     inputs.rcat.packages.${pkgs.system}.default
     inputs.self.packages.${pkgs.system}.pi-coding-agent
-    inputs.self.packages.${pkgs.system}.handy
+    inputs.nixpkgs-handy.legacyPackages.${pkgs.system}.handy
 
     llmfit
   ];
