@@ -12,7 +12,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      user.handy
+      inputs.nixpkgs-handy.legacyPackages.${system}.handy
       dotool
       wtype
       xdotool
