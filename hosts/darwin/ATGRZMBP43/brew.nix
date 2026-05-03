@@ -41,6 +41,7 @@
       "inkscape"
       "vscodium"
       "siyuan"
+      "android-studio"
     ];
     taps = [];
   };
