@@ -1,5 +1,5 @@
 {
-  "defaultProvider": "minimax",
+  "defaultProvider": "mistral",
   "theme": "dracula",
   "defaultThinkingLevel": "off",
   "hideThinkingBlock": true,
@@ -11,9 +11,10 @@
   "quietStartup": true,
   "collapseChangelog": true,
   "packages": [
-    "git:github.com/JuliusBrussee/caveman"
+    "../../Development/private/pi-setup",
+    "../../Development/private/pi-ano"
   ],
   "enableInstallTelemetry": true,
   "lastChangelogVersion": "0.70.2",
-  "defaultModel": "MiniMax-M2.7"
+  "defaultModel": "devstral-medium-latest"
 }
