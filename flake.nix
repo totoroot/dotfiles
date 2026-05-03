@@ -158,7 +158,7 @@
               }
         );
 
-      handy = inputs.nixpkgs-handy.legacyPackages;
+      handy = inputs.nixpkgs-handy.legacyPackages.${system}.handy;
 
       nixosModules =
         { dotfiles = import ./.; }
