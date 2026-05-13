@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode="${1:-summary}"
+needle="requester account did not request the certificate being replaced by this order"
+
+failed_units() {
+  systemctl --failed --plain --no-legend | awk '{print $1}' | grep '^acme-order-renew-' || true
+}
+
+failed_names() {
+  failed_units | sed 's/^acme-order-renew-//; s/\.service$//'
+}
+
+ari_units() {
+  systemctl list-unit-files 'acme-order-renew-*.service' --no-legend | awk '{print $1}' | while read -r u; do
+    journalctl -u "$u" -n 50 --no-pager | grep -q "$needle" && echo "$u"
+  done
+}
+
+expiries() {
+  for d in /var/lib/acme/*; do
+    if [ -f "$d/fullchain.pem" ]; then
+      echo -n "$(basename "$d") "
+      openssl x509 -in "$d/fullchain.pem" -noout -enddate
+    fi
+  done
+}
+
+repair_one() {
+  local name="$1"
+  echo "=== $name ==="
+  sudo mkdir -p /root/acme-backups/"$name"
+  sudo cp -a /var/lib/acme/"$name" /root/acme-backups/"$name"/
+  sudo cp -a /var/lib/acme/.lego/"$name" /root/acme-backups/"$name"/
+  sudo rm -rf /var/lib/acme/.lego/"$name"
+  sudo rm -f /var/lib/acme/"$name"/*.pem
+  sudo systemctl start "acme-order-renew-$name.service"
+  journalctl -u "acme-order-renew-$name.service" -n 50 --no-pager
+  sudo openssl x509 -in /var/lib/acme/"$name"/fullchain.pem -noout -enddate -subject
+}
+
+repair_failed() {
+  failed_names | while read -r name; do
+    [ -n "$name" ] || continue
+    repair_one "$name"
+  done
+}
+
+case "$mode" in
+  summary)
+    echo "Failed ACME renewal units:"
+    failed_units
+    echo
+    echo "Affected cert names:"
+    failed_names
+    ;;
+  failed-units)
+    failed_units
+    ;;
+  failed-names)
+    failed_names
+    ;;
+  ari-units)
+    ari_units
+    ;;
+  expiries)
+    expiries
+    ;;
+  repair-one)
+    [ $# -eq 2 ] || { echo "Usage: $0 repair-one <name>" >&2; exit 1; }
+    repair_one "$2"
+    ;;
+  repair-failed)
+    repair_failed
+    ;;
+  *)
+    echo "Usage: $0 [summary|failed-units|failed-names|ari-units|expiries|repair-one <name>|repair-failed]" >&2
+    exit 1
+    ;;
+esac
