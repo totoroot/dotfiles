@@ -25,6 +25,8 @@ in
       ollama
       # Terminal tool that right-sizes LLM models to your system's RAM, CPU, and GPU
       llmfit
+      # Coding agent CLI with read, bash, edit, write tools and session management
+      pi-coding-agent
       # Minimal CLI coding agent by Mistral
       # mistral-vibe
     	# Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
@@ -38,8 +40,6 @@ in
     home.file = {
       ".pi/agent/settings.json".source =
         config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
-      ".pi/agent/themes/dracula.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/themes/dracula.json";
     };
   };
 }

@@ -1,5 +1,5 @@
 {
-  "defaultProvider": "mistral",
+  "defaultProvider": "openai-codex",
   "theme": "dracula",
   "defaultThinkingLevel": "off",
   "hideThinkingBlock": true,
@@ -11,10 +11,9 @@
   "quietStartup": true,
   "collapseChangelog": true,
   "packages": [
-    "../../Development/private/pi-setup",
     "../../Development/private/pi-ano"
   ],
   "enableInstallTelemetry": true,
-  "lastChangelogVersion": "0.70.2",
-  "defaultModel": "devstral-medium-latest"
+  "lastChangelogVersion": "0.73.0",
+  "defaultModel": "gpt-5.4"
 }

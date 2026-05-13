@@ -7,6 +7,13 @@
       upgrade = true;
       # "zap" removes manually installed brews and casks
       cleanup = "zap";
+      extraEnv = {
+        # nix-darwin runs `brew bundle` via a separate `env brew bundle ...`
+        # activation command, so global environment.variables are not applied
+        # to that subprocess. Set this here so bundle/fetch avoid the broken
+        # Homebrew API cask path and use tap-based resolution instead.
+        HOMEBREW_NO_INSTALL_FROM_API = "1";
+      };
     };
     brews = [
       # CLI tool for executing mouse- and keyboard-related actions
@@ -42,12 +49,17 @@
       "vscodium"
       "siyuan"
       "android-studio"
+      "tidal"
     ];
     taps = [];
   };
   environment.variables = {
-     HOMEBREW_NO_UPDATE_REPORT_FORMULAE = "TRUE";
-     HOMEBREW_NO_UPDATE_REPORT_CASKS = "TRUE";
+    HOMEBREW_NO_UPDATE_REPORT_FORMULAE = "TRUE";
+    HOMEBREW_NO_UPDATE_REPORT_CASKS = "TRUE";
+    # Keep this for interactive `brew` usage too. The actual nix-darwin
+    # activation path needs the matching `homebrew.onActivation.extraEnv`
+    # override above.
+    HOMEBREW_NO_INSTALL_FROM_API = "1";
   };
 
   environment.systemPath = lib.mkAfter [

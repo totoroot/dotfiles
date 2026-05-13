@@ -11,4 +11,5 @@ devenv.local.nix
 
 ignored
 
+.pi/
 AGENTS.md
