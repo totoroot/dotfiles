@@ -23,6 +23,9 @@ in
         settings.security.secret_key = mkDefault (
           builtins.hashString "sha256" config.networking.hostName
         );
+        settings.rendering.renderer_token = mkDefault (
+          builtins.hashString "sha256" "${config.networking.hostName}-grafana-renderer"
+        );
         settings."auth.anonymous" = {
           enabled = true;
           org_role = "Editor";
@@ -72,6 +75,9 @@ in
           metrics.enabled = true;
           port = 3030;
         };
+        settings.security.authToken = mkDefault (
+          builtins.hashString "sha256" "${config.networking.hostName}-grafana-renderer"
+        );
       };
     };
 

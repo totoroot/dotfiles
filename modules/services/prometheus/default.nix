@@ -28,6 +28,13 @@ in
       description = "Targets to monitor with the Blackbox exporter";
     };
 
+    certificateAlertTargets = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "https://thym.at" "https://cloud.thym.at" ];
+      description = "HTTPS targets for certificate expiry alerting via blackbox metrics.";
+    };
+
     jsonTargets = mkOption {
       type = types.listOf types.str;
       default = [ "" ];
@@ -59,6 +66,44 @@ in
       webExternalUrl = "https://prometheus.${domain}";
       checkConfig = mkIf (cfg.homeAssistantApiTokenFile != null) false;
       enableReload = true;
+      rules = [
+        ''
+          groups:
+            - name: certificate-expiry
+              rules:
+                - alert: CertificateExpiringSoon
+                  expr: |
+                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} - time()) < 21 * 24 * 3600
+                    and
+                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} - time()) > 7 * 24 * 3600
+                  for: 15m
+                  labels:
+                    severity: warning
+                  annotations:
+                    summary: "Certificate expiring soon for {{ $labels.target }}"
+                    description: "The TLS certificate for {{ $labels.target }} expires in less than 21 days."
+
+                - alert: CertificateExpiringVerySoon
+                  expr: |
+                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} - time()) <= 7 * 24 * 3600
+                  for: 15m
+                  labels:
+                    severity: critical
+                  annotations:
+                    summary: "Certificate expiring very soon for {{ $labels.target }}"
+                    description: "The TLS certificate for {{ $labels.target }} expires in less than 7 days."
+
+                - alert: CertificateProbeMissing
+                  expr: |
+                    probe_success{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} == 0
+                  for: 15m
+                  labels:
+                    severity: warning
+                  annotations:
+                    summary: "Certificate probe failing for {{ $labels.target }}"
+                    description: "Blackbox probing failed for {{ $labels.target }}, so certificate expiry cannot be verified."
+        ''
+      ];
       exporters = {
         node = {
           enable = true;

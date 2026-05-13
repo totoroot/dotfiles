@@ -179,6 +179,36 @@ in
       prometheus = {
         enable = true;
         homeAssistantApiTokenFile = "/var/secrets/prometheus-home-assistant-api.token";
+        blackboxTargets = [
+          "https://thym.at"
+          "https://matthias.thym.at"
+          "https://blog.thym.at"
+          "https://nixos.at"
+          "https://theaterschaffen.de"
+          "https://womanma.de"
+          "https://blob.thym.it"
+          "https://cambodianyouthsupport.com"
+          "https://thym.it"
+          "https://grueneis-psychologie.at"
+          "https://kuh.xn--berwachungsbehr-mtb1g.de"
+          "https://cloud.thym.at"
+          "https://mail.thym.it"
+        ];
+        certificateAlertTargets = [
+          "https://thym.at"
+          "https://matthias.thym.at"
+          "https://blog.thym.at"
+          "https://nixos.at"
+          "https://theaterschaffen.de"
+          "https://womanma.de"
+          "https://blob.thym.it"
+          "https://cambodianyouthsupport.com"
+          "https://thym.it"
+          "https://grueneis-psychologie.at"
+          "https://kuh.xn--berwachungsbehr-mtb1g.de"
+          "https://cloud.thym.at"
+          "https://mail.thym.it"
+        ];
         scrapeHosts = {
           node = [ "localhost" "purple-ts" "violet-ts" "grape-ts" ];
           systemd = [ "localhost" "purple-ts" "grape-ts" ];
