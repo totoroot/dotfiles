@@ -1,7 +1,10 @@
 { config, lib, ... }:
 let
   domain = "xn--berwachungsbehr-mtb1g.de";
-  gatusEndpoints = import ./gatus-endpoints.nix;
+  monitoringTargets = import ./monitoring-targets.nix;
+  gatusEndpoints = lib.filter (t: t.gatus or false) monitoringTargets;
+  blackboxTargets = map (t: t.url) (lib.filter (t: t.blackbox or false) monitoringTargets);
+  certificateAlertTargets = map (t: t.url) (lib.filter (t: t.certificate or false) monitoringTargets);
   autheliaHost = "zugangs.${domain}";
   autheliaBackend = "http://127.0.0.1:9091";
   autheliaAuthSnippet = ''
@@ -179,36 +182,7 @@ in
       prometheus = {
         enable = true;
         homeAssistantApiTokenFile = "/var/secrets/prometheus-home-assistant-api.token";
-        blackboxTargets = [
-          "https://thym.at"
-          "https://matthias.thym.at"
-          "https://blog.thym.at"
-          "https://nixos.at"
-          "https://theaterschaffen.de"
-          "https://womanma.de"
-          "https://blob.thym.it"
-          "https://cambodianyouthsupport.com"
-          "https://thym.it"
-          "https://grueneis-psychologie.at"
-          "https://kuh.xn--berwachungsbehr-mtb1g.de"
-          "https://cloud.thym.at"
-          "https://mail.thym.it"
-        ];
-        certificateAlertTargets = [
-          "https://thym.at"
-          "https://matthias.thym.at"
-          "https://blog.thym.at"
-          "https://nixos.at"
-          "https://theaterschaffen.de"
-          "https://womanma.de"
-          "https://blob.thym.it"
-          "https://cambodianyouthsupport.com"
-          "https://thym.it"
-          "https://grueneis-psychologie.at"
-          "https://kuh.xn--berwachungsbehr-mtb1g.de"
-          "https://cloud.thym.at"
-          "https://mail.thym.it"
-        ];
+        inherit blackboxTargets certificateAlertTargets;
         scrapeHosts = {
           node = [ "localhost" "purple-ts" "violet-ts" "grape-ts" ];
           systemd = [ "localhost" "purple-ts" "grape-ts" ];
