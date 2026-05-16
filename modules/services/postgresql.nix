@@ -12,6 +12,8 @@ in
   options.modules.services.postgresql = {
     enable = mkBoolOpt false;
 
+    openFirewall = mkBoolOpt false;
+
     pgweb = {
       enable = mkBoolOpt false;
       port = mkOption {
@@ -69,9 +71,13 @@ in
       ];
     };
 
-    networking.firewall.allowedTCPPorts = [
+    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [
       config.services.postgresql.settings.port
     ] ++ lib.optional cfg.pgweb.enable cfg.pgweb.port;
+
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = mkIf cfg.openFirewall [
+      config.services.postgresql.settings.port
+    ];
 
     environment.systemPackages =
       [ config.services.postgresql.package ]
