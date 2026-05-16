@@ -102,7 +102,7 @@
           nginx.enable = false;
           nginxlog.enable = false;
           fail2ban.enable = false;
-          adguard.enable = true;
+          adguard.enable = false;
           fritzbox.enable = false;
           postgres.enable = true;
           immich = {
