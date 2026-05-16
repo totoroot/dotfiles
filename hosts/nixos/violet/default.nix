@@ -58,7 +58,7 @@
         enable = true;
         openFirewall = true;
       };
-      changedetection.enable = true;
+      changedetection.enable = false;
       esphome = {
         enable = true;
         openFirewall = true;
@@ -69,7 +69,7 @@
         enable = true;
         port = 7901;
       };
-      jellyfin.enable = true;
+      jellyfin.enable = false;
       jellyseerr.enable = true;
       nginx.enable = false;
       vaultwarden.enable = false;
@@ -82,8 +82,8 @@
       paperless.enable = true;
       recipes.enable = true;
       immich = {
-        enable = true;
-        openFirewall = true;
+        enable = false;
+        openFirewall = false;
       };
       ssh.enable = true;
       syncthing.enable = true;
@@ -106,7 +106,7 @@
           fritzbox.enable = false;
           postgres.enable = true;
           immich = {
-            enable = true;
+            enable = false;
             envFile = "/var/secrets/immich-exporter.env";
           };
           speedtest.enable = false;
