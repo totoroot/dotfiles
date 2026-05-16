@@ -115,11 +115,5 @@ in
         };
       };
     };
-
-    # For troubleshooting DNS
-    environment.systemPackages = with pkgs; [
-      # DNS tools (e.g. nslookup, dig)
-      dnsutils
-    ];
   };
 }
