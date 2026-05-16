@@ -97,8 +97,6 @@ in
             {
               name = "LAN Clients";
               ids = [ "${lanCIDR}" ];
-              # Don't block anything for LAN clients initially
-              use_global_blocked_services = true;
             }
           ];
         };
