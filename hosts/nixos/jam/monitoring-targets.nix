@@ -204,9 +204,9 @@ in
   {
     name = "goaccess";
     group = "services";
-    url = "http://127.0.0.1:7890";
+    url = "tcp://127.0.0.1:7890";
     interval = minute;
-    conditions = [ "[STATUS] == 200" ];
+    conditions = [ "[CONNECTED] == true" ];
     gatus = true;
   }
   {
