@@ -13,11 +13,13 @@ in
 {
   options.modules.services.adguard = {
     enable = mkBoolOpt false;
+    openFirewall = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
     networking.firewall.interfaces.tailscale0 = {
       allowedUDPPorts = [ adguardDNSPort ];
+      allowedTCPPorts = mkIf cfg.openFirewall [ adguardHTTPPort ];
     };
 
     # Web UI is reachable from LAN and from jam's reverse proxy, where the
