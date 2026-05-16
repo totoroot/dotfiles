@@ -54,7 +54,10 @@
         scrutiny.enable = true;
         vaultwarden.enable = true;
       };
-      adguard.enable = true;
+      adguard = {
+        enable = true;
+        openFirewall = true;
+      };
       changedetection.enable = true;
       esphome = {
         enable = true;
@@ -68,8 +71,11 @@
       nginx.enable = false;
       vaultwarden.enable = false;
       vpn.enable = false;
-      postgresql.enable = true;
-      postgresql.pgweb.enable = true;
+      postgresql = {
+        enable = true;
+        openFirewall = true;
+        pgweb.enable = true;
+      };
       paperless.enable = true;
       recipes.enable = true;
       immich.enable = true;
@@ -95,6 +101,7 @@
           postgres.enable = true;
           immich = {
             enable = true;
+            openFirewall = true;
             envFile = "/var/secrets/immich-exporter.env";
           };
           speedtest.enable = false;
@@ -137,11 +144,10 @@
   networking = {
     networkmanager.enable = true;
     interfaces.enp9s0.wakeOnLan.enable = true;
-    # Allow local network access
-    # firewall.extraCommands = ''
-    #   iptables -A nixos-fw -p tcp --source 192.168.8.0/24 --dport 0:9999 -j nixos-fw-accept
-    #   iptables -A nixos-fw -p udp --source 192.168.8.0/24 --dport 0:9999 -j nixos-fw-accept
-    # '';
+    # Allow SSH only from local network (10.0.0.0/24)
+    firewall.extraCommands = ''
+      iptables -A nixos-fw -p tcp --source 10.0.0.0/24 --dport 22 -j nixos-fw-accept
+    '';
   };
 
   virtualisation.oci-containers.containers."scrutiny".extraOptions = [
@@ -312,9 +318,7 @@
     };
   };
 
-  # Allow Prometheus on jam to scrape the Home Assistant API on violet
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
-    8123
-  ];
+  # Tailscale access to services is now handled by individual service modules
+  # with their openFirewall options set to true.
 
 }
