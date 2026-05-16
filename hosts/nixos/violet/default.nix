@@ -78,7 +78,10 @@
       };
       paperless.enable = true;
       recipes.enable = true;
-      immich.enable = true;
+      immich = {
+        enable = true;
+        openFirewall = true;
+      };
       ssh.enable = true;
       syncthing.enable = true;
       tailscale.enable = true;
@@ -101,7 +104,6 @@
           postgres.enable = true;
           immich = {
             enable = true;
-            openFirewall = true;
             envFile = "/var/secrets/immich-exporter.env";
           };
           speedtest.enable = false;
