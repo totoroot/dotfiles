@@ -75,15 +75,17 @@ in
           metrics.enabled = true;
           port = 3030;
         };
-        settings.renderer.token = mkDefault (
-          builtins.hashString "sha256" "${config.networking.hostName}-grafana-renderer"
-        );
       };
     };
 
     # Set environment variables for Grafana service
     systemd.services.grafana.serviceConfig.Environment = [
-      "GF_RENDERING_TOKEN=${config.services.grafana-image-renderer.settings.renderer.token}"
+      "GF_RENDERING_TOKEN=${config.services.grafana.settings.rendering.renderer_token}"
+    ];
+
+    # Set environment variables for grafana-image-renderer service
+    systemd.services.grafana-image-renderer.serviceConfig.Environment = lib.mkIf config.services.grafana-image-renderer.enable [
+      "RENDERING_TOKEN=${config.services.grafana.settings.rendering.renderer_token}"
     ];
 
     # Provision each dashboard in /etc/dashboard
