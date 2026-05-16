@@ -31,6 +31,13 @@ in
           org_role = "Editor";
         };
 
+        # Pass the renderer token as an environment variable
+        environment = {
+          GF_RENDERING_TOKEN = mkDefault (
+            builtins.hashString "sha256" "${config.networking.hostName}-grafana-renderer"
+          );
+        };
+
         provision = {
           enable = true;
           datasources.settings = {
