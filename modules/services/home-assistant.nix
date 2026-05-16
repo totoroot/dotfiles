@@ -29,6 +29,7 @@ in
         extraOptions = [
           "--device=/dev/ttyUSB0"
           "--device=/dev/bus/usb"
+          "--network=host"
           # Needed for Bluetooth to work
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
