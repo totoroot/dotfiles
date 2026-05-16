@@ -75,7 +75,7 @@ in
           metrics.enabled = true;
           port = 3030;
         };
-        settings.security.authToken = mkDefault (
+        settings.renderer.token = mkDefault (
           builtins.hashString "sha256" "${config.networking.hostName}-grafana-renderer"
         );
       };
