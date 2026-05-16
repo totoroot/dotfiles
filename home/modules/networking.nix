@@ -14,12 +14,16 @@ in
           iperf3
           # Collection of common network programs (including telnet, hostname, ifconfig)
           inetutils
+          # DNS tools (e.g. nslookup, dig)
+          dnsutils
           # Tool for retrieving files using HTTP, HTTPS, and FTP
           wget
           # Network diagnostics tool
           mtr
           # Network discovery utility
           nmap
+          # HTTP load testing application inspired by Ansible syntax
+          drill
         ]
         ++ lib.optionals stdenv.isLinux [
           # Utility for controlling network drivers and hardware (Linux only)
