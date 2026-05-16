@@ -65,7 +65,10 @@
       };
       forgejo.enable = false;
       grafana.enable = false;
-      home-assistant.enable = true;
+      home-assistant = {
+        enable = true;
+        port = 7901;
+      };
       jellyfin.enable = true;
       jellyseerr.enable = true;
       nginx.enable = false;
@@ -352,7 +355,7 @@
     lib.optional config.modules.services.immich.openFirewall 2283
     ++ lib.optional config.modules.services.postgresql.openFirewall 5432
     ++ lib.optional config.modules.services.adguard.openFirewall 6060
-    ++ lib.optional config.modules.services.home-assistant.enable 8123
+    ++ lib.optional config.modules.services.home-assistant.enable config.modules.services.home-assistant.port
   );
 
 }

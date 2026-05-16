@@ -4,12 +4,16 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.home-assistant;
-  port = 7901;
   version = "2026.1";
 in
 {
   options.modules.services.home-assistant = {
     enable = mkBoolOpt false;
+    port = mkOption {
+      type = with types; int;
+      default = 7901;
+      description = "Port for Home Assistant web interface";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -25,20 +29,18 @@ in
         extraOptions = [
           "--device=/dev/ttyUSB0"
           "--device=/dev/bus/usb"
-          # TODO Replace this with port mapping
-          "--network=host"
           # Needed for Bluetooth to work
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
         ];
         ports = [
-          "${toString port}:${toString port}"
+          "${toString cfg.port}:${toString cfg.port}"
         ];
         autoStart = true;
       };
     };
 
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ port ];
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ cfg.port ];
 
     # Never got the ZigBee Home Automation Integration to work with the Home Assistant module
 

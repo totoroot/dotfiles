@@ -243,7 +243,7 @@ in
           scrape_interval = "60s";
           scheme = "http";
           static_configs = [{
-            targets = mkTargetsFor 8123 (if cfg.scrapeHosts ? homeAssistant then cfg.scrapeHosts.homeAssistant else null);
+            targets = mkTargetsFor config.modules.services.home-assistant.port (if cfg.scrapeHosts ? homeAssistant then cfg.scrapeHosts.homeAssistant else null);
           }];
           metrics_path = "/api/prometheus";
           authorization = mkIf (cfg.homeAssistantApiTokenFile != null) {
