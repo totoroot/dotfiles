@@ -44,6 +44,13 @@ in
 
         # DNS configuration
         dns = {
+          # Bootstrap DNS servers (required when mutableSettings = false)
+          bootstrap_dns = [
+            "9.9.9.10"
+            "149.112.112.10"
+            "2620:fe::10"
+            "2620:fe::fe:10"
+          ];
           # Use multiple upstream DNS providers for redundancy
           upstream_dns = [
             "https://dns.quad9.net/dns-query"
