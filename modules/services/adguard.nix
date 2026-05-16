@@ -33,7 +33,7 @@ in
 
     services.adguardhome = {
       enable = true;
-      mutableSettings = true;
+      mutableSettings = false;  # Force complete overwrite to fix invalid YAML
       host = "0.0.0.0";
       port = adguardHTTPPort;
 
