@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.home-assistant;
-  version = "2026.1";
+  version = "2026.5.2";
 in
 {
   options.modules.services.home-assistant = {
