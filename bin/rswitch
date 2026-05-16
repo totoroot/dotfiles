@@ -98,7 +98,8 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 build_attr="${flake_root}#nixosConfigurations.${target_host}.config.system.build.toplevel"
-result_link="${flake_root}/result-rswitch-${target_host}"
 
-sudo nix build "$build_attr" --impure -o "$result_link" "${nix_args[@]}"
-exec sudo "$result_link/bin/switch-to-configuration" "$action"
+# Build the configuration
+store_path=$(sudo nix build "$build_attr" --impure --print-out-paths --no-link "${nix_args[@]}")
+
+exec sudo "$store_path/bin/switch-to-configuration" "$action"
