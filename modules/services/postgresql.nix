@@ -71,11 +71,11 @@ in
       ];
     };
 
-    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [
-      config.services.postgresql.settings.port
-    ] ++ lib.optional cfg.pgweb.enable cfg.pgweb.port;
+    networking.firewall.allowedTCPPorts = (
+      lib.optional cfg.openFirewall [ config.services.postgresql.settings.port ]
+    ) ++ lib.optional cfg.pgweb.enable cfg.pgweb.port;
 
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = mkIf cfg.openFirewall [
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = lib.optional cfg.openFirewall [
       config.services.postgresql.settings.port
     ];
 
