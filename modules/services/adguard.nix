@@ -33,7 +33,8 @@ in
 
     services.adguardhome = {
       enable = true;
-      mutableSettings = false;  # Force complete overwrite to fix invalid YAML
+      # Force complete overwrite to fix invalid YAML
+      mutableSettings = false;
       host = "0.0.0.0";
       port = adguardHTTPPort;
 
@@ -93,7 +94,7 @@ in
           # Use default filter lists
           protection_enabled = true;
           # Block IPv6 addresses in filters
-          blocking_ipv6 = true;
+          # blocking_ipv6 = true;
           # Number of filtering rules to load at once
           filters_update_interval = 24;
         };
