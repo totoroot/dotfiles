@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     ../personal.nix
@@ -320,7 +320,13 @@
     };
   };
 
-  # Tailscale access to services is now handled by individual service modules
-  # with their openFirewall options set to true.
+  # Tailscale access to services - build the allowed ports list based on
+  # which services have openFirewall enabled
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = (
+    lib.optional config.modules.services.immich.openFirewall 2283
+    ++ lib.optional config.modules.services.postgresql.openFirewall 5432
+    ++ lib.optional config.modules.services.adguard.openFirewall 6060
+    ++ lib.optional config.modules.services.home-assistant.enable 8123
+  );
 
 }

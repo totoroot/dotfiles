@@ -75,10 +75,6 @@ in
       lib.optional cfg.openFirewall [ config.services.postgresql.settings.port ]
     ) ++ lib.optional cfg.pgweb.enable cfg.pgweb.port;
 
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = lib.optional cfg.openFirewall [
-      config.services.postgresql.settings.port
-    ];
-
     environment.systemPackages =
       [ config.services.postgresql.package ]
       ++ (with config.services.postgresql.package.pkgs; [ postgis ]);
