@@ -34,13 +34,90 @@ in
     services.adguardhome = {
       enable = true;
       mutableSettings = true;
+      host = "0.0.0.0";
       port = adguardHTTPPort;
+
+      # Configure upstream DNS servers and other settings
+      settings = {
+        # Use the current schema version from the package
+        # schema_version is automatically set by the package
+
+        # DNS configuration
+        dns = {
+          # Use multiple upstream DNS providers for redundancy
+          upstream_dns = [
+            "https://dns.quad9.net/dns-query"
+            "https://cloudflare-dns.com/dns-query"
+            "https://dns.google/dns-query"
+            "tls://1.1.1.1"
+            "tls://1.0.0.1"
+          ];
+          # Enable DNS caching
+          caching = true;
+          # Cache size and TTL
+          cache_size = 10000000; # 10MB cache
+          cache_ttl_min = 0;
+          cache_ttl_max = 86400;
+          # Enable DNSSEC
+          dnssec = true;
+          # Enable EDNS Client Subnet
+          edns_cs_enabled = false;
+        };
+
+        # Query logging for debugging
+        query_log = {
+          enabled = true;
+          file_enabled = true;
+          interval = 24; # hours
+          # Log anonymized client IP addresses
+          anonymize_client_ip = true;
+        };
+
+        # Statistics configuration
+        stats = {
+          enabled = true;
+          interval = 1; # hours
+        };
+
+        # Filtering configuration
+        filtering = {
+          enabled = true;
+          # Use default filter lists
+          protection_enabled = true;
+          # Block IPv6 addresses in filters
+          blocking_ipv6 = true;
+          # Number of filtering rules to load at once
+          filters_update_interval = 24;
+        };
+
+        # Clients configuration
+        clients = {
+          # Persistent clients configuration
+          persistent = [
+            {
+              name = "LAN Clients";
+              ids = [ "${lanCIDR}" ];
+              # Don't block anything for LAN clients initially
+              use_global_blocked_services = true;
+            }
+          ];
+        };
+
+        # Logging configuration
+        log = {
+          file = "";
+          max_backups = 0;
+          max_size = 100;
+          max_age = 3;
+          compress = false;
+          local_time = false;
+          verbose = false;
+        };
+      };
     };
 
     # For troubleshooting DNS
     environment.systemPackages = with pkgs; [
-      # Collection of common network programs (e.g. ftp, ping, traceroute, hostname, ifconfig)
-      inetutils
       # DNS tools (e.g. nslookup, dig)
       dnsutils
     ];
