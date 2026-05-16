@@ -146,6 +146,24 @@
   networking = {
     networkmanager.enable = true;
     interfaces.enp9s0.wakeOnLan.enable = true;
+    # Configure static IP for Ethernet and DHCP for WiFi
+    networkmanager.connections = [
+      {
+        name = "Wired Static";
+        interfaceName = "enp9s0";
+        type = "802-3-ethernet";
+        ipv4.method = "manual";
+        ipv4.addresses = [ { address = "10.0.0.3"; prefixLength = 24; } ];
+        ipv4.gateway = "10.0.0.1";
+        ipv4.dns = [ "10.0.0.1" ];
+      }
+      {
+        name = "WiFi DHCP";
+        interfaceName = "wlp8s0";
+        type = "802-11-wireless";
+        ipv4.method = "auto";
+      }
+    ];
     # Allow SSH only from local network (10.0.0.0/24)
     firewall.extraCommands = ''
       iptables -A nixos-fw -p tcp --source 10.0.0.0/24 --dport 22 -j nixos-fw-accept
