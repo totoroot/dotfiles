@@ -31,13 +31,6 @@ in
           org_role = "Editor";
         };
 
-        # Pass the renderer token as an environment variable
-        environment = {
-          GF_RENDERING_TOKEN = mkDefault (
-            builtins.hashString "sha256" "${config.networking.hostName}-grafana-renderer"
-          );
-        };
-
         provision = {
           enable = true;
           datasources.settings = {
@@ -87,6 +80,11 @@ in
         );
       };
     };
+
+    # Set environment variables for Grafana service
+    systemd.services.grafana.serviceConfig.Environment = [
+      "GF_RENDERING_TOKEN=${config.services.grafana-image-renderer.settings.renderer.token}"
+    ];
 
     # Provision each dashboard in /etc/dashboard
     environment.etc = builtins.mapAttrs
