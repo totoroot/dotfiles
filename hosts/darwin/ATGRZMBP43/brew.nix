@@ -7,6 +7,7 @@
       upgrade = true;
       # "zap" removes manually installed brews and casks
       cleanup = "zap";
+      extraFlags = [ "--force" ];
       extraEnv = {
         # nix-darwin runs `brew bundle` via a separate `env brew bundle ...`
         # activation command, so global environment.variables are not applied
