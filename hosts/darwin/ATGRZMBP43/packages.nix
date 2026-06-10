@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, ... }:
+ { pkgs, inputs, lib, ... }:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents( with pkgs.google-cloud-sdk.components; [
     gke-gcloud-auth-plugin
@@ -53,8 +53,6 @@ in
     # lazygit
     # A terminal file manager written in Go and heavily inspired by ranger
     lf
-    # A rainbow version of cat
-    clolcat
     # General-purpose media player, fork of MPlayer and mplayer2
     mpv
     # A fast, highly customizable system info script

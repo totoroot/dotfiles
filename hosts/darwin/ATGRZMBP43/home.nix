@@ -39,12 +39,13 @@ in
   modules.home = {
     unfreePackages.enable = true;
     atuin.enable = true;
-    bitwarden.enable = true;
+    bitwarden.enable = false;
     containers.enable = true;
     duf.enable = true;
     git.enable = true;
     gitlab-cli.enable = true;
     fonts.enable = true;
+    ghostty.enable = true;
     helix.enable = true;
     kitty.enable = true;
     kubernetes.enable = true;

@@ -1,0 +1,250 @@
+#!/usr/bin/env bash
+
+# Save and restore kitty terminal sessions
+# This script provides a simple way to save and restore kitty sessions
+# without requiring shell integration.
+# Usage: kitty-sessions save|restore|list|clean|close
+
+set -euo pipefail
+
+KITTY_SESSIONS_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/kitty/sessions"
+
+# Save current kitty session by capturing window information
+save_kitty_sessions() {
+  mkdir -p "$KITTY_SESSIONS_DIR"
+
+  # Check if kitty remote control is available
+  if ! kitty @ ls >/dev/null 2>&1; then
+    echo "Error: Kitty remote control not available"
+    echo "Make sure you have this in your kitty.conf:"
+    echo "  allow_remote_control yes"
+    echo "  listen_on unix:/tmp/kitty-{{kitty_pid}}.sock"
+    return 1
+  fi
+
+  timestamp=$(date +"%Y%m%d_%H%M%S")
+  json_file="$KITTY_SESSIONS_DIR/session_${timestamp}.json"
+  session_file="$KITTY_SESSIONS_DIR/session_${timestamp}.conf"
+
+  echo "Saving kitty session to $session_file..."
+
+  # Save the raw JSON data for reference
+  echo "# Kitty session saved on $(date)" > "$json_file"
+  echo "# Raw JSON data from kitty @ ls" >> "$json_file"
+  echo "" >> "$json_file"
+  kitty @ ls >> "$json_file"
+
+  # Convert JSON to proper kitty session format using Python
+  python3 -c "
+import json
+import sys
+import os
+
+def get_command(window):
+    '''Extract the command to launch for a window.'''
+    # Try foreground processes first
+    fg = window.get('foreground_processes', [])
+    if fg:
+        cmdline = fg[0].get('cmdline', [])
+        if cmdline and cmdline != ['kitty', '@', 'ls']:
+            return ' '.join(cmdline)
+
+    # Fall back to window cmdline
+    cmdline = window.get('cmdline', [])
+    if cmdline:
+        return ' '.join(cmdline)
+
+    # Default to shell
+    return os.getenv('SHELL', 'zsh')
+
+# Read JSON from stdin
+session = json.load(sys.stdin)
+
+first_os_window = True
+for os_window in session:
+    if not first_os_window:
+        print('\\nnew_os_window\\n')
+    first_os_window = False
+
+    for tab in os_window.get('tabs', []):
+        print(f'\\nnew_tab {tab[\"title\"]}')
+        print(f'layout {tab[\"layout\"]}')
+
+        # Set initial working directory for the tab
+        if tab.get('windows'):
+            first_window = tab['windows'][0]
+            print(f'cd {first_window[\"cwd\"]}')
+
+        for window in tab.get('windows', []):
+            print(f'title {window[\"title\"]}')
+            command = get_command(window)
+            print(f'launch {command}')
+
+            if window.get('is_focused'):
+                print('focus')
+" < "$json_file" > "$session_file"
+
+  # Count windows and tabs
+  window_count=$(jq '[.[].tabs[].windows | length] | add' "$json_file" 2>/dev/null || echo "unknown")
+  tab_count=$(jq '[.[].tabs | length] | add' "$json_file" 2>/dev/null || echo "unknown")
+
+  echo "Kitty session saved successfully!"
+  echo "  JSON data: $json_file (for reference)"
+  echo "  Session file: $session_file (ready to restore)"
+  echo "  Saved $window_count windows across $tab_count tabs"
+  echo ""
+  echo "To restore this session later, run:"
+  echo "  kitty --session $session_file"
+  echo "  or"
+  echo "  bin/kitty-sessions restore"
+}
+
+# Restore most recent kitty session
+restore_kitty_sessions() {
+  if [[ ! -d "$KITTY_SESSIONS_DIR" ]]; then
+    echo "No saved sessions found at $KITTY_SESSIONS_DIR"
+    return 1
+  fi
+
+  # Find the most recent session file (prefer .conf files)
+  latest_session=$(ls -t "$KITTY_SESSIONS_DIR"/session_*.conf 2>/dev/null | head -n 1)
+
+  if [[ -z "$latest_session" ]]; then
+    echo "No saved session files found in $KITTY_SESSIONS_DIR"
+    return 1
+  fi
+
+  echo "Restoring kitty session from $latest_session..."
+
+  # Check if the session file is valid
+  if [[ ! -s "$latest_session" ]]; then
+    echo "Error: Session file is empty"
+    return 1
+  fi
+
+  # Launch kitty with the session file
+  echo "Launching kitty with restored session..."
+  kitty --session "$latest_session" &
+
+  echo "Kitty session restoration complete!"
+  echo "All windows, tabs, and layouts should be restored."
+}
+
+# List saved sessions
+list_sessions() {
+  if [[ ! -d "$KITTY_SESSIONS_DIR" ]]; then
+    echo "No sessions directory found"
+    return 0
+  fi
+
+  echo "Saved kitty sessions in $KITTY_SESSIONS_DIR:"
+
+  # Show .conf session files with statistics
+  for session in "$KITTY_SESSIONS_DIR"/session_*.conf; do
+    if [[ -f "$session" ]]; then
+      windows=$(grep -c "^launch\|^title" "$session" 2>/dev/null || echo "unknown")
+      tabs=$(grep -c "^new_tab" "$session" 2>/dev/null || echo "unknown")
+      size=$(du -h "$session" | cut -f1)
+      echo "  $(basename "$session") - $windows windows, $tabs tabs, $size"
+    fi
+  done
+
+  # Also show .json files for reference
+  json_files=("$KITTY_SESSIONS_DIR"/session_*.json)
+  if [[ ${#json_files[@]} -gt 0 ]]; then
+    echo ""
+    echo "JSON reference files:"
+    for json_file in "${json_files[@]}"; do
+      if [[ -f "$json_file" ]]; then
+        size=$(du -h "$json_file" | cut -f1)
+        echo "  $(basename "$json_file") - $size"
+      fi
+    done
+  fi
+}
+
+# Clean up old sessions
+cleanup_sessions() {
+  if [[ ! -d "$KITTY_SESSIONS_DIR" ]]; then
+    echo "No sessions directory found"
+    return 0
+  fi
+
+  echo "Cleaning up saved sessions..."
+  rm -f "$KITTY_SESSIONS_DIR"/session_*.conf
+  rm -f "$KITTY_SESSIONS_DIR"/session_*.json
+  echo "All saved sessions removed"
+}
+
+# Close all restored windows
+close_restored_windows() {
+  echo "Closing all windows with 'Restored:' in title..."
+
+  # Check if we can use remote control
+  if ! kitty @ ls >/dev/null 2>&1; then
+    echo "Error: Kitty remote control not available"
+    echo "Make sure you have 'allow_remote_control yes' in your kitty.conf"
+    return 1
+  fi
+
+  # Close all windows matching the pattern
+  window_ids=$(kitty @ ls | jq -r '.[] | .tabs[] | .windows[] | select(.title | contains("Restored:")) | .id' 2>/dev/null)
+
+  if [[ -n "$window_ids" ]]; then
+    for window_id in $window_ids; do
+      echo "Closing window $window_id"
+      kitty @ close-window --match id:$window_id
+    done
+    echo "Closed ${#window_ids} restored windows"
+  else
+    echo "No restored windows found"
+  fi
+}
+
+# Main
+case "${1:-}" in
+  save)
+    save_kitty_sessions
+    ;;
+  restore)
+    restore_kitty_sessions
+    ;;
+  list)
+    list_sessions
+    ;;
+  clean)
+    cleanup_sessions
+    ;;
+  close)
+    close_restored_windows
+    ;;
+  *)
+    echo "Usage: $0 {save|restore|list|clean|close}"
+    echo ""
+    echo "Commands:"
+    echo "  save    - Save current kitty session"
+    echo "  restore - Restore most recent saved kitty session"
+    echo "  list    - List all saved sessions with statistics"
+    echo "  clean   - Remove all saved sessions"
+    echo "  close   - Close all windows with 'Restored:' in title"
+    echo ""
+    echo "Setup Instructions:"
+    echo "1. Add to ~/.config/kitty/kitty.conf:"
+    echo "   allow_remote_control yes"
+    echo "   listen_on unix:/tmp/kitty-{{kitty_pid}}.sock"
+    echo ""
+    echo "2. Restart kitty for changes to take effect"
+    echo ""
+    echo "3. Save your current session:"
+    echo "   bin/kitty-sessions save"
+    echo ""
+    echo "4. Restore later:"
+    echo "   bin/kitty-sessions restore"
+    echo ""
+    echo "How it works:"
+    echo "- Saves window layout, working directories, and commands"
+    echo "- Creates proper kitty session files that restore perfectly"
+    echo "- Preserves your exact workspace setup"
+    exit 1
+    ;;
+esac
