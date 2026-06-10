@@ -27,6 +27,11 @@ in
 
   modules.home.gitlab-cli.enable = true;
 
+  modules.home.llm.piAgentSettingsOverride = {
+    defaultProvider = "openai-codex";
+    defaultModel = "gpt-5.4";
+  };
+
   programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"
   '';

@@ -4,11 +4,18 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.home.llm;
-  dotfilesDir = "${config.xdg.configHome}/dotfiles";
+  basePiAgentSettings = builtins.fromJSON (builtins.readFile ../../config/pi/agent/settings.json);
+  mergedPiAgentSettings = recursiveUpdate basePiAgentSettings cfg.piAgentSettingsOverride;
 in
 {
   options.modules.home.llm = {
     enable = mkBoolOpt false;
+
+    piAgentSettingsOverride = mkOption {
+      type = types.attrs;
+      default = { };
+      description = "Host-specific overrides merged into Pi agent settings.json.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -29,7 +36,7 @@ in
       pi-coding-agent
       # Minimal CLI coding agent by Mistral
       # mistral-vibe
-    	# Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
+      # Lightweight coding agent that runs in your terminal (by NotVeryOpenAI)
       # codex
       # AI coding agent built for the terminal
       # opencode
@@ -38,8 +45,7 @@ in
     ];
 
     home.file = {
-      ".pi/agent/settings.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/config/pi/agent/settings.json";
+      ".pi/agent/settings.json".text = builtins.toJSON mergedPiAgentSettings;
     };
   };
 }

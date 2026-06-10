@@ -15,5 +15,5 @@
   ],
   "enableInstallTelemetry": true,
   "lastChangelogVersion": "0.73.0",
-  "defaultModel": "devstral-2512"
+  "defaultModel": "devstral-medium-latest"
 }
