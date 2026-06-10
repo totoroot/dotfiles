@@ -100,4 +100,8 @@ To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
 - Do not commit secrets.
 - For packaging changes, ensure package is both defined and consumed correctly.
 - For service changes, check related host wiring, proxying, secrets, and monitoring implications.
+- Darwin shared config lives in `hosts/darwin/modules/`, and shared Darwin Home Manager defaults live in `home/modules/darwin-common.nix`.
+- When changing Darwin hosts, prefer updating shared modules for cross-host behavior and keep only machine-specific launchd, Homebrew, package, and user settings in host-local files.
+- Host-local Darwin `brew.nix` files must stay imported from the host `configuration.nix`/main nix-darwin module so nix-darwin sees host-specific Homebrew entries.
+- Before rebuilding a Darwin host with Homebrew cleanup enabled, verify the evaluated lists are populated: `nix eval .#darwinConfigurations.<host>.config.homebrew.brews` and `nix eval .#darwinConfigurations.<host>.config.homebrew.casks`.
 - **Never push. User pushes manually.** Inform before every commit, explain why atomic.
