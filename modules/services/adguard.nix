@@ -64,7 +64,8 @@ in
           # Enable DNS caching
           caching = true;
           # Cache size and TTL
-          cache_size = 10000000; # 10MB cache
+          # 10MB cache
+          cache_size = 10000000;
           cache_ttl_min = 0;
           cache_ttl_max = 86400;
           # Enable DNSSEC
