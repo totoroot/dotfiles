@@ -1,11 +1,8 @@
-{ config, pkgs, ... }:
+{ ... }:
 
-let
-  configDir = "$HOME/.config";
-in
 {
   home = {
-    username = "matthias.thym";
+    username = "mathym";
     stateVersion = "25.11";
   };
 
@@ -17,15 +14,10 @@ in
 
   modules.home.darwinCommon = {
     enable = true;
-    hostName = "ATGRZMBP43";
     defaultUser = "mathym";
-    firefoxProfileDirectory = "lxyotzh1.default";
-    enableBitwarden = false;
-    enableContainers = true;
-    enableGhostty = true;
+    enableContainers = false;
+    enableGhostty = false;
   };
-
-  modules.home.gitlab-cli.enable = true;
 
   programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"

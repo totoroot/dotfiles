@@ -162,7 +162,7 @@
         // mapModulesRec ./modules import;
 
       darwinModules =
-        mapModulesRec ./hosts/darwin/modules import;
+        mapModules ./hosts/darwin/modules import;
 
       devShells =
         baseLib.genAttrs supportedSystems (sys:

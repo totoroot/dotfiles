@@ -12,6 +12,7 @@
     ./modules/modern-shell.nix
     ./modules/devenv.nix
     ./modules/containers.nix
+    ./modules/darwin-common.nix
     ./modules/fonts.nix
     ./modules/git.nix
     ./modules/ghostty.nix
