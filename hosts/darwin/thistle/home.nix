@@ -15,9 +15,11 @@
   modules.home.darwinCommon = {
     enable = true;
     defaultUser = "mathym";
-    enableContainers = false;
-    enableGhostty = false;
+    enableContainers = true;
+    enableGhostty = true;
   };
+
+  modules.home.gitlab-cli.enable = true;
 
   programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -12,6 +12,8 @@
 
   system.primaryUser = "mathym";
 
+  modules.darwin.containers.enable = true;
+
   launchd.user.agents.displayplacer-layout = {
     serviceConfig = {
       ProgramArguments = [
@@ -21,6 +23,19 @@
       StartInterval = 10;
       StandardErrorPath = "/tmp/displayplacer-layout.err";
       StandardOutPath = "/tmp/displayplacer-layout.out";
+    };
+  };
+
+  launchd.user.agents.ollama-serve = {
+    serviceConfig = {
+      ProgramArguments = [
+        "${pkgs.ollama}/bin/ollama"
+        "serve"
+      ];
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardErrorPath = "/tmp/ollama-serve.err";
+      StandardOutPath = "/tmp/ollama-serve.out";
     };
   };
 }

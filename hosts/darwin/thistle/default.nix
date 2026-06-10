@@ -7,6 +7,7 @@ in
   imports = [
     inputs.home-manager.darwinModules.home-manager
     ../modules/common.nix
+    ../modules/containers.nix
     ../modules/homebrew.nix
     ./configuration.nix
   ];

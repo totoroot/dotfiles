@@ -67,5 +67,6 @@ in
     orbstack
     vscodium
     inputs.rcat.packages.${pkgs.system}.default
+    inputs.nixpkgs-handy.legacyPackages.${pkgs.system}.handy
   ];
 }
