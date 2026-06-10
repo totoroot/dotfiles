@@ -26,11 +26,14 @@ let
       identityFile = hostCfg.identityFile or cfg.defaultIdentityFile;
       port = hostCfg.port or null;
       extraOptions = hostCfg.extraOptions or { };
+      base = filterAttrs (_: v: v != null) {
+        HostName = hostCfg.host or name;
+        User = user;
+        IdentityFile = identityFile;
+        Port = port;
+      };
     in
-    filterAttrs (_: v: v != null) ({
-      hostname = hostCfg.host or name;
-      inherit user identityFile port extraOptions;
-    });
+    base // extraOptions;
 in
 {
   options.modules.home.sshHosts = with types; {
@@ -73,22 +76,19 @@ in
       enable = true;
       enableDefaultConfig = false;
       includes = [ "~/.ssh/config.local" ];
-      matchBlocks = mkMerge [
+      settings =
         {
           "*" = {
-            serverAliveInterval = 30;
-            serverAliveCountMax = 4;
-            identitiesOnly = true;
-            controlMaster = "auto";
-            controlPersist = "10m";
-            controlPath = "~/.ssh/cm-%r@%h:%p";
-            extraOptions = {
-              StrictHostKeyChecking = "accept-new";
-            };
+            ServerAliveInterval = 30;
+            ServerAliveCountMax = 4;
+            IdentitiesOnly = true;
+            ControlMaster = "auto";
+            ControlPersist = "10m";
+            ControlPath = "~/.ssh/cm-%r@%h:%p";
+            StrictHostKeyChecking = "accept-new";
           };
         }
-        (mapAttrs mkMatchBlock (defaultEntriesWithPorts // cfg.entries))
-      ];
+        // mapAttrs mkMatchBlock (defaultEntriesWithPorts // cfg.entries);
     };
 
     home.file.".config/git/includes/ssh".text =
