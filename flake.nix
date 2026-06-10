@@ -28,8 +28,7 @@
 
     # User space configuration, dotfile and package management
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/master";
     };
 
     # Darwin configuration and package managements
@@ -38,9 +37,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix User Repository packages
-    # Add "nur.nixosModules.nur" to the host modules
-    nur.url = "github:nix-community/NUR";
+
 
     # Secrets management
     sops-nix = {
