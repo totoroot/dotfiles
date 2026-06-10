@@ -32,6 +32,5 @@
       "ueli"
       "mullvad-vpn"
       "signal"
-      "wispr-flow"
   ];
 }
