@@ -217,6 +217,14 @@ in
       };
       webmail.enable = true;
       wordpress.enable = false;
+      rustypaste = {
+        enable = true;
+        serverHost = "bin.thym.it";
+      };
+      privatebin = {
+        enable = true;
+        serverHost = "daten.${domain}";
+      };
     };
   };
 
