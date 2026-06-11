@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
   homebrew.enable = true;
@@ -8,7 +8,7 @@
     cleanup = "zap";
     extraFlags = [ "--force" ];
   };
-  homebrew.taps = [];
+  homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
 
   environment.variables = {
     HOMEBREW_NO_UPDATE_REPORT_FORMULAE = "TRUE";

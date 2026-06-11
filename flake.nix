@@ -37,7 +37,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
 
     # Secrets management
     sops-nix = {
@@ -97,7 +107,7 @@
 
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
     let
       system = "x86_64-linux";
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
