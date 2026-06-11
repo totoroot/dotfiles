@@ -9,7 +9,6 @@ in
     ../modules/common.nix
     ../modules/containers.nix
     ../modules/homebrew.nix
-    ./agent.nix
     ./configuration.nix
   ];
 
