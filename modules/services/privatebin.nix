@@ -61,9 +61,11 @@ in
     services.phpfpm.pools.${userName} = {
       user = userName;
       group = userName;
-      listen = "${cfg.host}:9001";
-      pm = "ondemand";
-      pm.maxChildren = 5;
+      settings = {
+        listen = "${cfg.host}:9001";
+        pm = "ondemand";
+        "pm.max_children" = 5;
+      };
       phpAdminValues = {
         "open_basedir" = cfg.dataDir;
         "upload_max_filesize" = cfg.sizeLimit;
@@ -161,7 +163,7 @@ in
             extraConfig = ''
               # Increase client max body size to match PrivateBin limit
               client_max_body_size ${cfg.sizeLimit};
-              
+
               # Security headers for PrivateBin
               add_header X-Frame-Options "SAMEORIGIN" always;
               add_header X-Content-Type-Options "nosniff" always;
