@@ -135,7 +135,6 @@
       };
       forgejo.enable = false;
       jellyfin.enable = false;
-      k8s.enable = false;
       nginx.enable = false;
       vpn.enable = true;
       ssh.enable = true;

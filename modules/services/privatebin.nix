@@ -151,14 +151,14 @@ in
       };
     };
 
-    services.nginx = lib.mkIf cfg.enableNginx {
+    services.nginx = lib.mkIf enableNginx {
       enable = true;
       virtualHosts."${cfg.serverHost}" = {
-        forceSSL = cfg.nginxEnableSSL;
-        enableACME = cfg.nginxEnableSSL;
+        forceSSL = nginxEnableSSL;
+        enableACME = nginxEnableSSL;
         locations = {
           "${cfg.serverPath}" = {
-            proxyPass = "http://${cfg.host}:${toString cfg.port}";
+            proxyPass = "http://${host}:${toString cfg.port}";
             proxyWebsockets = true;
             extraConfig = ''
               # Increase client max body size to match PrivateBin limit

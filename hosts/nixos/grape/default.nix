@@ -248,7 +248,7 @@
       duf.enable = true;
       fonts.enable = true;
       git.enable = true;
-      gitlab.enable = true;
+      gitlab-cli.enable = true;
       lf.enable = true;
       llm.enable = true;
       modernShell.enable = true;

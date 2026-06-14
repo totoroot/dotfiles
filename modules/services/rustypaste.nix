@@ -63,10 +63,10 @@ in
         WorkingDirectory = cfg.dataDir;
         Type = "simple";
         ExecStart = ''
-          ${cfg.package}/bin/rustypaste \
-            --host ${cfg.host} \
+          ${pkgs.rustypaste}/bin/rustypaste \
+            --host ${host} \
             --port ${toString cfg.port} \
-            --data-dir ${cfg.dataDir} \
+            --data-dir ${dataDir} \
             --max-file-size ${cfg.maxFileSize}
         '';
 
@@ -122,14 +122,14 @@ in
       };
     };
 
-    services.nginx = lib.mkIf cfg.enableNginx {
+    services.nginx = lib.mkIf enableNginx {
       enable = true;
       virtualHosts."${cfg.serverHost}" = {
-        forceSSL = cfg.nginxEnableSSL;
-        enableACME = cfg.nginxEnableSSL;
+        forceSSL = nginxEnableSSL;
+        enableACME = nginxEnableSSL;
         locations = {
-          "${cfg.serverPath}" = {
-            proxyPass = "http://${cfg.host}:${toString cfg.port}";
+          "${serverPath}" = {
+            proxyPass = "http://${host}:${toString cfg.port}";
             proxyWebsockets = true;
             extraConfig = ''
               # Increase client max body size to match RustyPaste limit
