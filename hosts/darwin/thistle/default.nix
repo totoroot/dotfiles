@@ -22,6 +22,7 @@ in
 
   nix-homebrew = {
     enable = true;
+    autoMigrate = true;
     enableRosetta = true;
     user = user;
     taps = {
