@@ -4,7 +4,7 @@
       {
         "builtIn": 1,
         "datasource": {
-          "type": "datasource",
+          "type": "grafana",
           "uid": "grafana"
         },
         "enable": true,
@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
   "links": [
     {
       "asDropdown": false,
@@ -40,18 +39,18 @@
       "url": "https://github.com/shizunge/endlessh-go"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -61,8 +60,7 @@
               }
             ]
           }
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 3,
@@ -91,12 +89,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "(endlessh_client_open_count{instance=~\"$host\", local_port=~\"$port\",job=~\"$job\"} - endlessh_client_open_count{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} offset $__interval) > 0 or (endlessh_client_open_count{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"}!=0 unless endlessh_client_open_count{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} offset $__interval)",
@@ -109,12 +107,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "(endlessh_client_trapped_time_seconds{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} - endlessh_client_trapped_time_seconds{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} offset $__interval) > 0 or (endlessh_client_trapped_time_seconds{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"}!=0 unless endlessh_client_trapped_time_seconds{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} offset $__interval)",
           "format": "table",
-          "hide": false,
           "instant": false,
           "legendFormat": "Trapped {{ip}}",
           "range": true,
@@ -198,7 +195,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -209,8 +205,7 @@
             ]
           },
           "unit": "s"
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 3,
@@ -237,7 +232,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -319,14 +314,13 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -337,8 +331,7 @@
             ]
           },
           "unit": "bytes"
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 3,
@@ -365,17 +358,16 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
           "expr": "sum(increase(endlessh_sent_bytes_total{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"}[$__range]))",
-          "hide": false,
           "interval": "",
           "legendFormat": "Bytes sent by endlessh",
           "range": true,
@@ -395,7 +387,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -405,8 +396,7 @@
               }
             ]
           }
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 3,
@@ -433,7 +423,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -511,7 +501,6 @@
               "url": "https://search.arin.net/rdap/?query=${__value.text}"
             }
           ],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -521,8 +510,7 @@
               }
             ]
           }
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 3,
@@ -549,7 +537,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -641,14 +629,13 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -668,8 +655,7 @@
             ]
           },
           "unit": "short"
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 3,
@@ -696,12 +682,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -717,8 +703,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
+        "type": "prometheus",
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -759,7 +745,6 @@
               "mode": "off"
             }
           },
-          "mappings": [],
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -770,8 +755,7 @@
               }
             ]
           }
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 4,
@@ -781,6 +765,10 @@
       },
       "id": 30,
       "options": {
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -793,14 +781,18 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
+            "type": "prometheus",
+            "uid": "prometheus"
           },
-          "panelId": 20,
+          "editorMode": "code",
+          "expr": "sum((endlessh_client_open_count_total{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"}) - (endlessh_client_closed_count_total{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} or\n endlessh_client_open_count_total{instance=~\"$host\",local_port=~\"$port\",job=~\"$job\"} * 0))",
+          "instant": false,
+          "legendFormat": "Open Connections",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -823,10 +815,8 @@
               "tooltip": false,
               "viz": false
             }
-          },
-          "mappings": []
-        },
-        "overrides": []
+          }
+        }
       },
       "gridPos": {
         "h": 8,
@@ -861,7 +851,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -950,14 +940,11 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1037,7 +1024,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -1231,8 +1218,6 @@
             "inspect": false,
             "minWidth": 50
           },
-          "links": [],
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1314,7 +1299,7 @@
           }
         ]
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -1502,7 +1487,6 @@
               "viz": false
             }
           },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1512,8 +1496,7 @@
               }
             ]
           }
-        },
-        "overrides": []
+        }
       },
       "gridPos": {
         "h": 12,
@@ -1583,6 +1566,7 @@
         },
         "view": {
           "allLayers": true,
+          "dashboardVariable": false,
           "id": "zero",
           "lat": 0,
           "lon": 0,
@@ -1590,7 +1574,7 @@
           "zoom": 1
         }
       },
-      "pluginVersion": "12.3.3",
+      "pluginVersion": "13.0.1",
       "targets": [
         {
           "datasource": {
@@ -1686,6 +1670,7 @@
     "list": [
       {
         "allValue": ".*",
+        "allowCustomValue": true,
         "current": {
           "text": "All",
           "value": [
@@ -1694,9 +1679,10 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "definition": "label_values(endlessh_client_open_count_total, job)",
+        "hide": 0,
         "includeAll": true,
         "label": "Job",
         "multi": true,
@@ -1708,11 +1694,14 @@
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
         "allValue": ".*",
+        "allowCustomValue": true,
         "current": {
           "text": "All",
           "value": [
@@ -1721,9 +1710,10 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "definition": "label_values(endlessh_client_open_count_total{job=~\"$job\"}, instance)",
+        "hide": 0,
         "includeAll": true,
         "label": "Host",
         "multi": true,
@@ -1735,19 +1725,23 @@
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
         "allValue": ".*",
+        "allowCustomValue": true,
         "current": {
           "text": "All",
-          "value": [
-            "$__all"
-          ]
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus"
         },
         "definition": "label_values(endlessh_client_open_count_total{job=~\"$job\", instance=~\"$host\"},local_port)",
-        "description": "",
+        "hide": 0,
         "includeAll": true,
         "label": "Port",
         "multi": true,
@@ -1760,6 +1754,8 @@
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       }
@@ -1769,9 +1765,23 @@
     "from": "now-24h",
     "to": "now"
   },
-  "timepicker": {},
-  "timezone": "",
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "browser",
   "title": "SSH Tarpit",
+  "version": 7,
   "uid": "ATIxYkO7k",
-  "version": 4
+  "id": 46
 }
