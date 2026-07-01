@@ -10,6 +10,9 @@ let
     lib.foldl' (acc: ip:
       acc // lib.listToAttrs (map (name: { inherit name; value = ip; }) hostsByIp.${ip})
     ) { } (builtins.attrNames hostsByIp);
+  certificateTargetRegex = lib.concatStringsSep "|" (
+    map (t: lib.replaceStrings [ "\\" ] [ "\\\\" ] (lib.escapeRegex t)) cfg.certificateAlertTargets
+  );
   mkTargetsFor = port: names:
     let
       hosts = if names == null then [ ] else names;
@@ -73,9 +76,9 @@ in
               rules:
                 - alert: CertificateExpiringSoon
                   expr: |
-                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} - time()) < 21 * 24 * 3600
+                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${certificateTargetRegex}"} - time()) < 21 * 24 * 3600
                     and
-                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} - time()) > 7 * 24 * 3600
+                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${certificateTargetRegex}"} - time()) > 7 * 24 * 3600
                   for: 15m
                   labels:
                     severity: warning
@@ -85,7 +88,7 @@ in
 
                 - alert: CertificateExpiringVerySoon
                   expr: |
-                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} - time()) <= 7 * 24 * 3600
+                    (probe_ssl_earliest_cert_expiry{job="blackbox", target=~"${certificateTargetRegex}"} - time()) <= 7 * 24 * 3600
                   for: 15m
                   labels:
                     severity: critical
@@ -95,7 +98,7 @@ in
 
                 - alert: CertificateProbeMissing
                   expr: |
-                    probe_success{job="blackbox", target=~"${lib.concatStringsSep "|" (map lib.escapeRegex cfg.certificateAlertTargets)}"} == 0
+                    probe_success{job="blackbox", target=~"${certificateTargetRegex}"} == 0
                   for: 15m
                   labels:
                     severity: warning
