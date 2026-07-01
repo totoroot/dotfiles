@@ -10,23 +10,23 @@ let
   baseAppNames = [
     "bookmarks"
     "calendar"
-    "contacts"
-    "cookbook"
-    "cospend"
+    # "contacts"
+    # "cookbook"
+    # "cospend"
     "deck"
-    "files_automatedtagging"
+    # "files_automatedtagging"
     "forms"
-    "groupfolders"
+    # "groupfolders"
     "mail"
-    "music"
+    # "music"
     "news"
     "notes"
     "onlyoffice"
-    "polls"
+    # "polls"
     "qownnotesapi"
-    "richdocuments"
-    "tasks"
-    "whiteboard"
+    # "richdocuments"
+    # "tasks"
+    # "whiteboard"
   ];
   optionalAppNames = lib.optionals (lib.versionOlder nextcloudPackage.version "33") [ "memories" ];
   selectedAppNames = baseAppNames ++ optionalAppNames;
@@ -62,12 +62,15 @@ in
         https = true;
 
         autoUpdateApps.enable = true;
+        # To be able to install apps, even if they are failing in nixpkgs
+        appstoreEnable = true;
         extraAppsEnable = true;
         extraApps =
           let
             appPackages = config.services.nextcloud.package.packages.apps;
           in
           lib.genAttrs selectedAppNames (name: builtins.getAttr name appPackages);
+
         # List of apps we want to install and are already packaged in
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
         # phonetrack = pkgs.fetchNextcloudApp {
