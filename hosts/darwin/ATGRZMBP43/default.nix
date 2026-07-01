@@ -17,6 +17,20 @@ in
     useGlobalPkgs = false;
     useUserPackages = true;
     extraSpecialArgs = { inherit user inputs; };
+    sharedModules = [
+      {
+        nixpkgs = {
+          config = {
+            allowUnfree = true;
+            allowUnsupportedSystem = true;
+          };
+          overlays = [
+            inputs.self.overlay
+            inputs.self.overlays.darwin-patches
+          ];
+        };
+      }
+    ];
     users.${user} = import ./home.nix;
   };
 

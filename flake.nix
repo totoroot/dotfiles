@@ -107,7 +107,7 @@
 
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
     let
       system = "x86_64-linux";
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
@@ -239,7 +239,8 @@
       homeConfigurations = (
         import ./hosts/linux {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager;
+          inherit inputs home-manager;
+          nixpkgs = nixpkgsPkgs;
         }
       );
     };

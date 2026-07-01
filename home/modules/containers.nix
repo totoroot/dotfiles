@@ -19,12 +19,14 @@ in
       # Podman tooling
       podman
       podman-compose
+      # Management UI for Podman containers, images, etc.
+      podman-desktop
+    ] ++ optionals pkgs.stdenv.isDarwin [
       # VM backends for macOS
       # Colima: simplest way to run Docker (and optionally Podman) on macOS.
       colima
       # Lima: general VM manager; used if you want separate VMs for Podman and Docker.
       lima
-      podman-desktop
     ];
 
     modules.home.zsh.rcInit = mkAfter ''

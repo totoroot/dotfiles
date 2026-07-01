@@ -6,7 +6,6 @@
       "gnu-indent"
       "kube-ps1"
       "qemu"
-      "podman"
       "displayplacer"
       "signal-cli"
     ];
