@@ -240,7 +240,6 @@
         import ./hosts/linux {
           inherit (nixpkgs) lib;
           inherit inputs home-manager;
-          nixpkgs = nixpkgsPkgs;
         }
       );
     };
