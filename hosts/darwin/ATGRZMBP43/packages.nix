@@ -60,8 +60,6 @@ in
     # Review pull-requests on https://github.com/NixOS/nixpkgs
     nixpkgs-review
     # pandoc
-    # podman
-    podman-compose
     # A PDF processor written in Go
     pdfcpu
     # Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more
