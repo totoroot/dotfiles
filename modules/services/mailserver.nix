@@ -39,6 +39,18 @@ in
       # A list of all login accounts. To create the password hashes, use
       # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
       accounts = {
+        # Sensible mailbox/alias set for later
+        # We can add mailboxes later as needed
+        # matthias@ personal
+        # admin@    infra, hosting, DNS, registrar, technical notices
+        # info@     general inbound / contact
+        # hello@    friendlier public contact
+        # contact@  generic fallback/public website address
+        # office@   business admin / general operations
+        # billing@  invoices, accounting, payment topics
+        # legal@    contracts, compliance, formal requests
+        # privacy@  GDPR/data protection requests
+        # security@ vulnerability reports, security contact
         "admin@${domain}" = {
           hashedPasswordFile = "/var/secrets/mailserver/admin@thym.it";
           aliases = [
