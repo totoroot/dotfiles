@@ -33,6 +33,10 @@ in {
         "settings.json"
         "bindings.json"
         "init.lua"
+      ];
+
+    modules.home.configSymlinks.recursiveEntries =
+      map (name: "micro/${name}") [
         "syntax"
         "colorschemes"
         "plug"

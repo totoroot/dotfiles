@@ -26,8 +26,12 @@ in
       # To import accounts, move accounts.conf to dir and chmod 600
       "binds.conf"
       "aerc.conf"
-      "filters"
-      "templates"
+      ];
+
+    modules.home.configSymlinks.recursiveEntries =
+      map (name: "aerc/${name}") [
+        "filters"
+        "templates"
       ];
   };
 }

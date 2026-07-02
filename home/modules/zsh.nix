@@ -71,13 +71,16 @@ in
       (map (name: "zsh/${name}") [
         "aliases.zsh"
         "completion.zsh"
-        "completions"
         "config.zsh"
         "extract.zsh"
         "keybinds.zsh"
         "prompt.zsh"
         # ".zshenv"
       ]);
+
+    modules.home.configSymlinks.recursiveEntries = [
+      "zsh/completions"
+    ];
 
     home.file = {
       ".zshrc".text = ''
