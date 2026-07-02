@@ -42,17 +42,14 @@ in
         "admin@${domain}" = {
           hashedPasswordFile = "/var/secrets/mailserver/admin@thym.it";
           aliases = [
-            "info@${domain}"
-            "hello@${domain}"
-            "office@${domain}"
-            "contact@${domain}"
-            "admin@${legacyDomain}"
-            "info@${legacyDomain}"
+            "@${domain}"
+            "@${legacyDomain}"
           ];
         };
         "praxis@${praxisDomain}" = {
           hashedPasswordFile = "/var/secrets/mailserver/praxis@${praxisDomain}";
           aliases = [
+            "@${praxisDomain}"
             "clemens@${praxisDomain}"
             "office@${praxisDomain}"
             "contact@${praxisDomain}"
