@@ -6,9 +6,12 @@ let
   profilePath = "${profileBasePath}/${cfg.profileDirectory}";
   mkExtensionFile = ext: {
     name = "${profilePath}/extensions/${ext.id}.xpi";
-    value.source = pkgs.fetchurl {
-      url = ext.url;
-      sha256 = ext.sha256;
+    value = {
+      source = pkgs.fetchurl {
+        url = ext.url;
+        sha256 = ext.sha256;
+      };
+      force = true;
     };
   };
   userJsText = ''
