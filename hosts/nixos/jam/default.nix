@@ -56,6 +56,7 @@ in
       };
     };
     editors = {
+      default = "micro";
       vim.enable = true;
     };
     shell = {
@@ -473,6 +474,7 @@ in
       git.enable = true;
       helix.enable = true;
       lf.enable = true;
+      micro.enable = true;
       nushell.enable = true;
       sshHosts.enable = true;
       trash.enable = true;
