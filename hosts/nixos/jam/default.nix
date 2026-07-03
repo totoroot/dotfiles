@@ -372,6 +372,11 @@ in
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
+    "papier.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
     "besucherinnen.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;

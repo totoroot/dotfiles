@@ -40,6 +40,7 @@ let
   changedetectionPort = 5002;
   adventurelogPort = 2104;
   adventurelogBackendProxyPort = 2026;
+  paperlessPort = 28981;
 in
 {
   options.modules.services.nginx = {
@@ -258,6 +259,14 @@ in
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://${server}:${toString recipePort}";
+            proxyWebsockets = true;
+          };
+        };
+        "papier.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://${server}:${toString paperlessPort}";
             proxyWebsockets = true;
           };
         };
