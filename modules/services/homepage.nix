@@ -175,6 +175,13 @@ in
                 icon = "mdi-silverware";
               };
             }
+            {
+              "papier.überwachungsbehör.de" = {
+                href = "https://papier.überwachungsbehör.de/";
+                description = "Document Archive";
+                icon = "mdi-file-document-multiple";
+              };
+            }
           ];
         }
         {
