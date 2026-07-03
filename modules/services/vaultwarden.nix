@@ -2,7 +2,6 @@
 
 with lib;
 with lib.my;
-with pkgs;
 let
   cfg = config.modules.services.vaultwarden;
   domain = "xn--berwachungsbehr-mtb1g.de";
@@ -94,7 +93,7 @@ in
       serviceConfig = {
         Type = "oneshot";
       };
-      path = [ gnutar findutils coreutils ];
+      path = [ pkgs.gnutar pkgs.gzip pkgs.findutils pkgs.coreutils ];
       script = ''
         set -euo pipefail
         ts="$(date +%F-%H%M%S)"
