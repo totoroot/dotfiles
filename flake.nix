@@ -157,12 +157,7 @@
               config.allowUnfree = true;
             };
           in
-            if sys == "aarch64-darwin" then
-              mapModules ./packages (p: pkgsFor.callPackage p { })
-            else
-              {
-                pi-coding-agent = pkgsFor.callPackage ./packages/pi-coding-agent { };
-              }
+            mapModules ./packages (p: pkgsFor.callPackage p { })
         );
 
       handy = inputs.nixpkgs-handy.legacyPackages.${system}.handy;
