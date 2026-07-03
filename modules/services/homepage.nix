@@ -33,39 +33,53 @@ in
       ];
       services = [
         {
-          "Static Sites" = [
+          "Communication & Personal Infra" = [
             {
-              "matthias.thym.at" = {
-                href = "https://matthias.thym.at/";
-                description = "Professional Resume";
-                icon = "mdi-file-account";
+              "passwort.überwachungsbehör.de" = {
+                href = "https://passwort.überwachungsbehör.de/";
+                description = "Password Manager Vault";
+                icon = "si-bitwarden";
               };
             }
             {
-              "thym.it" = {
-                href = "https://thym.it/";
-                description = "Short domain redirect";
-                icon = "mdi-link-variant";
+              "cloud.thym.at" = {
+                href = "https://cloud.thym.at/";
+                description = "Nextcloud";
+                icon = "si-nextcloud";
               };
             }
             {
-              "blog.thym.at" = {
-                href = "https://blog.thym.at";
-                description = "Personal Blog";
-                icon = "mdi-notebook";
+              "mail.thym.it" = {
+                href = "https://mail.thym.it/";
+                description = "Webmail";
+                icon = "mdi-email";
               };
             }
             {
-              "nixos.at" = {
-                href = "https://nixos.at";
-                description = "NixOS User Group Website";
-                icon = "si-nixos";
+              "benachrichtigungs.überwachungsbehör.de" = {
+                href = "https://benachrichtigungs.überwachungsbehör.de/";
+                description = "Push Notifications";
+                icon = "mdi-bell-ring";
+              };
+            }
+            {
+              "daten.überwachungsbehör.de" = {
+                href = "https://daten.überwachungsbehör.de/";
+                description = "PrivateBin";
+                icon = "mdi-note-text";
+              };
+            }
+            {
+              "bin.thym.it" = {
+                href = "https://bin.thym.it/";
+                description = "Rustypaste";
+                icon = "mdi-file-upload";
               };
             }
           ];
         }
         {
-          "SSO Protected" = [
+          "Monitoring & Admin" = [
             {
               "zugangs.überwachungsbehör.de" = {
                 href = "https://zugangs.überwachungsbehör.de/";
@@ -123,13 +137,6 @@ in
               };
             }
             {
-              "benachrichtigungs.überwachungsbehör.de" = {
-                href = "https://benachrichtigungs.überwachungsbehör.de/";
-                description = "Push Notifications";
-                icon = "mdi-bell-ring";
-              };
-            }
-            {
               "website.überwachungsbehör.de" = {
                 href = "https://website.überwachungsbehör.de/";
                 description = "Website Change Detection";
@@ -146,14 +153,7 @@ in
           ];
         }
         {
-          "Services" = [
-            {
-              "passwort.überwachungsbehör.de" = {
-                href = "https://passwort.überwachungsbehör.de/";
-                description = "Password Manager Vault";
-                icon = "si-bitwarden";
-              };
-            }
+          "Homelab Apps" = [
             {
               "medien.überwachungsbehör.de" = {
                 href = "https://medien.überwachungsbehör.de/";
@@ -180,6 +180,38 @@ in
                 href = "https://papier.überwachungsbehör.de/";
                 description = "Document Archive";
                 icon = "mdi-file-document-multiple";
+              };
+            }
+          ];
+        }
+        {
+          "Public Sites" = [
+            {
+              "matthias.thym.at" = {
+                href = "https://matthias.thym.at/";
+                description = "Professional Resume";
+                icon = "mdi-file-account";
+              };
+            }
+            {
+              "thym.it" = {
+                href = "https://thym.it/";
+                description = "Short domain redirect";
+                icon = "mdi-link-variant";
+              };
+            }
+            {
+              "blog.thym.at" = {
+                href = "https://blog.thym.at";
+                description = "Personal Blog";
+                icon = "mdi-notebook";
+              };
+            }
+            {
+              "nixos.at" = {
+                href = "https://nixos.at";
+                description = "NixOS User Group Website";
+                icon = "si-nixos";
               };
             }
           ];
