@@ -293,6 +293,24 @@ in
     openFirewall = true;
   };
 
+  services.spliit = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PORT = 3011;
+      NEXT_PUBLIC_BASE_URL = "https://ausgaben.xn--berwachungsbehr-mtb1g.de";
+      NEXT_PUBLIC_DEFAULT_CURRENCY_CODE = "EUR";
+      NEXT_PUBLIC_ENABLE_EXPENSE_DOCUMENTS = false;
+      NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT = false;
+      NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT = false;
+    };
+    database = {
+      createLocally = true;
+      name = "spliit";
+      user = "spliit";
+    };
+  };
+
 
   services.prometheus.exporters.nextcloud = {
     tokenFile = "/var/secrets/nextcloud-exporter.token";
@@ -374,6 +392,11 @@ in
     };
 
     "papier.${domain}".locations = {
+      "/".extraConfig = autheliaAuthSnippet;
+      "/authelia".extraConfig = autheliaLocationSnippet;
+    };
+
+    "ausgaben.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };

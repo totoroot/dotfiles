@@ -105,6 +105,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    spliit = {
+      url = "github:totoroot/spliit";
+    };
+
   };
 
   outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
@@ -160,6 +164,23 @@
             mapModules ./packages (p: pkgsFor.callPackage p { })
         );
 
+      apps =
+        baseLib.genAttrs supportedSystems (sys:
+          let
+            pkgsFor = self.packages.${sys};
+          in
+          {
+            beautiful-mermaid = {
+              type = "app";
+              program = "${pkgsFor.beautiful-mermaid}/bin/beautiful-mermaid";
+            };
+            beautiful-mermaid-ascii = {
+              type = "app";
+              program = "${pkgsFor.beautiful-mermaid}/bin/beautiful-mermaid-ascii";
+            };
+          }
+        );
+
       handy = inputs.nixpkgs-handy.legacyPackages.${system}.handy;
 
       nixosModules =
@@ -210,7 +231,10 @@
       nixosConfigurations =
         mapHosts ./hosts/nixos {
           inherit system pkgs;
-          extraModules = [ inputs.sops-nix.nixosModules.sops ];
+          extraModules = [
+            inputs.sops-nix.nixosModules.sops
+            inputs.spliit.nixosModules.default
+          ];
         };
 
       # Configuration for macOS using Nix, nix-darwin and home-manager

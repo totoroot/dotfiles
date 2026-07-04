@@ -41,6 +41,7 @@ let
   adventurelogPort = 2104;
   adventurelogBackendProxyPort = 2026;
   paperlessPort = 28981;
+  spliitPort = 3011;
 in
 {
   options.modules.services.nginx = {
@@ -267,6 +268,14 @@ in
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://${server}:${toString paperlessPort}";
+            proxyWebsockets = true;
+          };
+        };
+        "ausgaben.${domain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:${toString spliitPort}";
             proxyWebsockets = true;
           };
         };
