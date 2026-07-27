@@ -6,7 +6,7 @@ let
   cfg = config.modules.services.nextcloud;
   domain = "thym.at";
   adminEmail = "admin@thym.it";
-  nextcloudPackage = pkgs.nextcloud33;
+  nextcloudPackage = pkgs.nextcloud34;
   baseAppNames = [
     "bookmarks"
     "calendar"
