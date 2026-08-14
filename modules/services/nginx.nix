@@ -396,6 +396,9 @@ in
           forceSSL = true;
           locations."/" = {
             root = "/var/www/assets.thym.it";
+            extraConfig = ''
+              add_header Access-Control-Allow-Origin "*" always;
+            '';
           };
         };
       };
