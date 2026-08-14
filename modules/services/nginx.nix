@@ -19,6 +19,15 @@ let
   acmeChallengeWebroot = "/var/lib/acme/acme-challenge";
 
   server = "100.64.0.3";
+  assetConsumerOrigins = concatStringsSep " " [
+    ''~^https://([a-z0-9-]+\.)?${thymITDomain}$ $http_origin''
+    ''~^https://([a-z0-9-]+\.)?${thymDomain}$ $http_origin''
+    ''~^https://([a-z0-9-]+\.)?${nixosDomain}$ $http_origin''
+    ''~^https://([a-z0-9-]+\.)?${praxisDomain}$ $http_origin''
+    ''~^https://([a-z0-9-]+\.)?${theaterDomain}$ $http_origin''
+    ''~^https://([a-z0-9-]+\.)?${womanMadeDomain}$ $http_origin''
+    ''default ""''
+  ];
 
   # jam
   homepagePort = 8082;
@@ -60,6 +69,12 @@ in
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+
+      appendHttpConfig = ''
+        map $http_origin $assets_cors_origin {
+          ${assetConsumerOrigins}
+        }
+      '';
 
       virtualHosts = {
         "_" = {
@@ -397,7 +412,10 @@ in
           locations."/" = {
             root = "/var/www/assets.thym.it";
             extraConfig = ''
-              add_header Access-Control-Allow-Origin "*" always;
+              if ($assets_cors_origin != "") {
+                add_header Access-Control-Allow-Origin $assets_cors_origin always;
+              }
+              add_header Vary "Origin" always;
             '';
           };
         };
