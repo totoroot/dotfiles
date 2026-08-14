@@ -391,6 +391,13 @@ in
             root = "/var/www/blob.thym.it";
           };
         };
+        "assets.${thymITDomain}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            root = "/var/www/assets.thym.it";
+          };
+        };
       };
     };
 
