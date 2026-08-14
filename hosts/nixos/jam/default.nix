@@ -151,6 +151,35 @@ in
             };
             requiredFields = [ "name" "email" "inquiry" ];
           };
+          thymit-contact = {
+            recipient = "hello@thym.it";
+            sender = "hello@thym.it";
+            subject = "thym.IT contact form";
+            subjects = {
+              de = "Neue Anfrage über das Kontaktformular";
+              en = "New contact form inquiry";
+            };
+            templateFiles = {
+              de = "/var/www/thym.it/mail-templates/contact.de.txt";
+              en = "/var/www/thym.it/mail-templates/contact.en.txt";
+            };
+            requiredFields = [ "email" "subject" "message" ];
+          };
+          thymit-contact-confirmation = {
+            recipient = "";
+            recipientFromField = "email";
+            sender = "hello@thym.it";
+            subject = "Thank you for your inquiry";
+            subjects = {
+              de = "Vielen Dank für deine Anfrage";
+              en = "Thank you for your inquiry";
+            };
+            templateFiles = {
+              de = "/var/www/thym.it/mail-templates/contact-confirmation.de.txt";
+              en = "/var/www/thym.it/mail-templates/contact-confirmation.en.txt";
+            };
+            requiredFields = [ "email" "subject" "message" ];
+          };
         };
       };
       goaccess = {
@@ -339,6 +368,22 @@ in
 
     "grueneis-psychologie.at".locations."/api/contact" = {
       proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/kontakt";
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      '';
+    };
+
+    "thym.it".locations."/api/contact" = {
+      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/thymit-contact";
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      '';
+    };
+
+    "thym.it".locations."/api/contact-confirmation" = {
+      proxyPass = "http://127.0.0.1:${toString config.modules.services.email-backend.port}/send/thymit-contact-confirmation";
       recommendedProxySettings = true;
       extraConfig = ''
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
