@@ -90,8 +90,8 @@ in
         "${thymITDomain}" = {
           forceSSL = true;
           useACMEHost = thymITDomain;
+          root = "/var/www/thym.it";
           serverAliases = [ "www.${thymITDomain}" ];
-          globalRedirect = "matthias.${thymDomain}";
         };
         "blog.${thymDomain}" = {
           enableACME = true;

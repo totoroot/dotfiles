@@ -522,6 +522,7 @@ in
   systemd.tmpfiles.rules = [
     "d /var/www/assets.thym.it 0755 deploy-web deploy-web -"
     "d /var/www/blog.thym.at 0755 deploy-web deploy-web -"
+    "d /var/www/thym.it 0755 deploy-web deploy-web -"
     "d /var/www/grueneis-psychologie.at 0755 deploy-web deploy-web -"
     "d /var/www/matthias.thym.at 0755 deploy-web deploy-web -"
     "d /var/www/theaterschaffen.de 0755 deploy-web deploy-web -"
