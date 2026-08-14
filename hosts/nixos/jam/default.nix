@@ -91,6 +91,8 @@ in
         allowedOrigins = [
           "https://geburtstags.${domain}"
           "https://grueneis-psychologie.at"
+          "https://thym.it"
+          "https://draft.thym.it"
         ];
         smtp = {
           host = "127.0.0.1";
