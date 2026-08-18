@@ -1,5 +1,9 @@
 { ... }:
 {
+  homebrew.taps = [
+    "datadog-labs/pack"
+  ];
+
   homebrew.brews = [
       # CLI tool for executing mouse- and keyboard-related actions
       "cliclick"
@@ -8,6 +12,7 @@
       "kube-ps1"
       "qemu"
       "displayplacer"
+      "pup"
     ];
   homebrew.casks = [
       # Advanced file renaming utility
