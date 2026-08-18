@@ -18,8 +18,8 @@ in
       bat
       # Replacement for 'ls' written in Rust
       eza
-      # Quick command-line access to files and directories for POSIX shells
-      fasd
+      # Fast cd command that learns your habits
+      zoxide
       # Intuitive sed alternative
       sd
       # Intuitive find alternative
