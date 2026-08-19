@@ -35,4 +35,10 @@ in
   programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"
   '';
+
+  modules.home.zsh.rcInit = ''
+    if command -v direnv >/dev/null 2>&1; then
+      eval "$(direnv hook zsh)"
+    fi
+  '';
 }
