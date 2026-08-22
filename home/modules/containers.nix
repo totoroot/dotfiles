@@ -63,9 +63,42 @@ in
     '';
 
     programs.ssh.includes = mkIf pkgs.stdenv.isDarwin (mkAfter [
-      "~/.lima/docker/ssh.config"
-      "~/.lima/podman/ssh.config"
+      "~/.ssh/lima-hosts.config"
     ]);
+
+    home.file.".ssh/lima-hosts.config".text = ''
+      Host lima-docker
+        Hostname 127.0.0.1
+        Port 49278
+        User lima
+        IdentityFile ~/.lima/_config/user
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
+        NoHostAuthenticationForLocalhost yes
+        PreferredAuthentications publickey
+        Compression no
+        BatchMode yes
+        IdentitiesOnly yes
+        ControlMaster auto
+        ControlPath ~/.lima/docker/ssh.sock
+        ControlPersist yes
+
+      Host lima-podman
+        Hostname 127.0.0.1
+        Port 49276
+        User lima
+        IdentityFile ~/.lima/_config/user
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
+        NoHostAuthenticationForLocalhost yes
+        PreferredAuthentications publickey
+        Compression no
+        BatchMode yes
+        IdentitiesOnly yes
+        ControlMaster auto
+        ControlPath ~/.lima/podman/ssh.sock
+        ControlPersist yes
+    '';
 
     home.activation.ensureLimaPodmanConnection = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       if [[ "$(uname -s)" == "Darwin" ]]; then
