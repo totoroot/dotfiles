@@ -37,7 +37,8 @@
 [merge]
     ff = only
 [push]
-    default = current
+    default = simple
+    autoSetupRemote = true
 [pack]
     windowMemory = 2g
     packSizeLimit = 1g

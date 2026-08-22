@@ -58,10 +58,8 @@ alias gr='git reflog'
 # Reflog in the style of ´git log´
 alias glg='git log -g'
 alias gp='git push'
-# Push feature branch to remote and set upstream
-alias gpb='() {
-    git push --set-upstream origin $(git branch --show-current)
-}'
+# Deprecated compatibility alias; remove after muscle memory catches up.
+alias gpb='git push'
 alias gpf!='git push --force-with-lease'
 alias gpl='git pull --rebase --autostash'
 # Prune local branches
