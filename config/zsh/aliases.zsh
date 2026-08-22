@@ -50,6 +50,12 @@ alias rs='rswitch'
 alias zshconfig="$EDITOR ~/.zshrc"
 # source zshrc
 alias zshsource="source ~/.zshrc"
+
+# pi shortcuts
+alias pins='pi --no-session'
+alias pinf='pi --no-session --no-tools --no-context-files'
+alias pinfs='pi --no-session --no-tools --no-context-files --no-skills --no-extensions'
+
 # scan local /24 network for active hosts (linux + darwin compatible)
 scan() {
   local gw
