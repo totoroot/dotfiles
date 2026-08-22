@@ -49,6 +49,11 @@
       flake = false;
     };
 
+    datadog-homebrew-pack = {
+      url = "github:datadog-labs/homebrew-pack";
+      flake = false;
+    };
+
     # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -111,7 +116,7 @@
 
   };
 
-  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+  outputs = inputs @ { self, nixos, nixos-unstable, nixpkgs, home-manager, darwin, nix-homebrew, homebrew-core, homebrew-cask, datadog-homebrew-pack, ... }:
     let
       system = "x86_64-linux";
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];

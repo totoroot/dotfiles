@@ -42,6 +42,7 @@ in
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "datadog-labs/homebrew-pack" = inputs.datadog-homebrew-pack;
     };
     mutableTaps = false;
   };
