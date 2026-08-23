@@ -21,7 +21,9 @@ in
       '';
       "fail2ban/filter.d/nginx-probing.conf".text = ''
         [Definition]
-        failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
+        # Match specific probe signatures only. Do not ban ordinary Nextcloud
+        # DAV or application requests just because a PHP-backed endpoint is 404.
+        failregex = ^<HOST>.*GET.*(matrix/server|wp\-|xmlrpc\.php|phpmyadmin|adminer).* HTTP/\d.\d\" 404.*$
       '';
       # SSH invalid-user jail (ban any user != mathym).
       # "fail2ban/filter.d/sshd-invalid-user.conf".text = ''
