@@ -54,7 +54,7 @@ in
         let
           hostName = lib.attrsets.attrByPath [ "networking" "hostName" ] null config;
         in
-        if pkgs.stdenv.isLinux && hostName != null then "~/.ssh/${hostName}" else null;
+        if pkgs.stdenv.hostPlatform.isLinux && hostName != null then "~/.ssh/${hostName}" else null;
     };
 
     entries = mkOption {

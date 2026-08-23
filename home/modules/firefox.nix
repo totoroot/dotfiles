@@ -2,7 +2,7 @@
 
 let
   cfg = config.modules.home.firefox;
-  profileBasePath = if pkgs.stdenv.isDarwin then "Library/Application Support/Firefox/Profiles" else ".mozilla/firefox";
+  profileBasePath = if pkgs.stdenv.hostPlatform.isDarwin then "Library/Application Support/Firefox/Profiles" else ".mozilla/firefox";
   profilePath = "${profileBasePath}/${cfg.profileDirectory}";
   mkExtensionFile = ext: {
     name = "${profilePath}/extensions/${ext.id}.xpi";

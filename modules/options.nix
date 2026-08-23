@@ -74,10 +74,10 @@ with lib.my;
     # Ensure a valid login shell exists in the system profile on Linux hosts.
     users.users.${config.user.name} = mkMerge [
       (mkAliasDefinitions options.user)
-      (mkIf pkgs.stdenv.isLinux { shell = pkgs.zsh; })
+      (mkIf pkgs.stdenv.hostPlatform.isLinux { shell = pkgs.zsh; })
     ];
     # Needed so /run/current-system/sw/bin/zsh exists for ssh logins.
-    programs.zsh.enable = mkIf pkgs.stdenv.isLinux true;
+    programs.zsh.enable = mkIf pkgs.stdenv.hostPlatform.isLinux true;
 
     nix = let users = [ "root" config.user.name ]; in {
       settings = {

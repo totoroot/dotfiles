@@ -43,7 +43,7 @@ in
       coreutils
       cachix
       niv
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       cocoapods
       m-cli
     ];

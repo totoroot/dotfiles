@@ -33,7 +33,7 @@ buildNpmPackage rec {
     pixman
   ];
 
-  dontPatchELF = stdenv.isDarwin;
+  dontPatchELF = stdenv.hostPlatform.isDarwin;
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json

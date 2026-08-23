@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 # rswitch — rebuild and switch to NixOS/Darwin configuration
 #
 # Usage:
@@ -99,7 +101,17 @@ fi
 
 build_attr="${flake_root}#nixosConfigurations.${target_host}.config.system.build.toplevel"
 
-# Build the configuration
-store_path=$(sudo nix build "$build_attr" --impure --print-out-paths --no-link "${nix_args[@]}")
+# Build the configuration. Do not attempt activation when the build fails;
+# otherwise an empty store_path produces the misleading /bin/switch-to-configuration
+# error instead of preserving the actual evaluation/build failure.
+if ! store_path=$(sudo nix build "$build_attr" --impure --print-out-paths --no-link "${nix_args[@]}"); then
+  echo "Error: failed to build $build_attr; refusing to activate." >&2
+  exit 1
+fi
+
+if [[ -z "$store_path" ]]; then
+  echo "Error: nix build returned no store path; refusing to activate." >&2
+  exit 1
+fi
 
 exec sudo "$store_path/bin/switch-to-configuration" "$action"

@@ -21,7 +21,7 @@ in
       podman-compose
       # Management UI for Podman containers, images, etc.
       podman-desktop
-    ] ++ optionals pkgs.stdenv.isDarwin [
+    ] ++ optionals pkgs.stdenv.hostPlatform.isDarwin [
       # VM backends for macOS
       # Colima: simplest way to run Docker (and optionally Podman) on macOS.
       colima
@@ -62,7 +62,7 @@ in
       fi
     '';
 
-    programs.ssh.includes = mkIf pkgs.stdenv.isDarwin (mkAfter [
+    programs.ssh.includes = mkIf pkgs.stdenv.hostPlatform.isDarwin (mkAfter [
       "~/.ssh/lima-hosts.config"
     ]);
 

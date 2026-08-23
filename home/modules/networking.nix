@@ -25,7 +25,7 @@ in
           # HTTP load testing application inspired by Ansible syntax
           drill
         ]
-        ++ lib.optionals stdenv.isLinux [
+        ++ lib.optionals stdenv.hostPlatform.isLinux [
           # Utility for controlling network drivers and hardware (Linux only)
           ethtool
         ];
