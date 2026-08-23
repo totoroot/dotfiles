@@ -4,6 +4,51 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.fail2ban;
+  bannedIpsCollector = pkgs.writeText "fail2ban-banned-ips.py" ''
+    #!${pkgs.python3}/bin/python3
+    import ipaddress
+    import os
+    import re
+    import subprocess
+    import sys
+    import tempfile
+
+    fail2ban_client = "${pkgs.fail2ban}/bin/fail2ban-client"
+    output_path = "/var/lib/fail2ban-prometheus/f2b-banned-ips.prom"
+
+    def command(*args):
+        return subprocess.run(
+            [fail2ban_client, *args], check=True, text=True,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        ).stdout
+
+    try:
+        status = command("status")
+        jail_list = re.search(r"Jail list:\\s*(.*)", status)
+        jails = [] if jail_list is None else [jail.strip() for jail in jail_list.group(1).split(",")]
+
+        metrics = [
+            "# HELP f2b_banned_ip Whether an IP is currently banned by Fail2ban.",
+            "# TYPE f2b_banned_ip gauge",
+        ]
+        for jail in jails:
+            for token in command("get", jail, "banip").replace(",", " ").split():
+                try:
+                    ip = str(ipaddress.ip_address(token.strip("[]()")))
+                except ValueError:
+                    continue
+                metrics.append(f'f2b_banned_ip{{jail="{jail}",ip="{ip}"}} 1')
+
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            mode="w", dir=os.path.dirname(output_path), delete=False
+        ) as metric_file:
+            metric_file.write("\\n".join(metrics) + "\\n")
+            os.replace(metric_file.name, output_path)
+    except subprocess.CalledProcessError as error:
+        print(error.stderr, file=sys.stderr, end="")
+        sys.exit(error.returncode)
+  '';
 in
 {
   options.modules.services.fail2ban = {
@@ -87,6 +132,30 @@ in
         #   bantime = 600;
         #   maxretry = 5;
         # };
+      };
+    };
+
+    # The packaged Fail2ban exporter reports only aggregate ban counts. Export
+    # the live jail/IP membership through node_exporter's textfile collector.
+    services.prometheus.exporters.node.extraFlags = [
+      "--collector.textfile.directory=/var/lib/fail2ban-prometheus"
+    ];
+    systemd.tmpfiles.rules = [ "d /var/lib/fail2ban-prometheus 0750 root root -" ];
+    systemd.services.fail2ban-banned-ips = {
+      description = "Export current Fail2ban banned IPs for Prometheus";
+      after = [ "fail2ban.service" ];
+      requires = [ "fail2ban.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.python3}/bin/python3 ${bannedIpsCollector}";
+      };
+    };
+    systemd.timers.fail2ban-banned-ips = {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "1min";
+        OnUnitActiveSec = "30s";
+        Persistent = true;
       };
     };
   };
