@@ -1,12 +1,10 @@
 --- a/proxy.php
 +++ b/proxy.php
-@@ -171,7 +171,9 @@ function checkCoolwsdSetup()
-     if ($return)
-         return 'no_glibc';
-
+@@ -174 +174,6 @@ function checkCoolwsdSetup()
 -    exec('( /sbin/ldconfig -p || scanelf -l ) | grep fontconfig > /dev/null 2>&1', $output, $return);
 +    // NixOS does not maintain an ldconfig cache. nix-ld exposes configured
 +    // libraries through this symlink farm instead.
-+    exec('(( /sbin/ldconfig -p || scanelf -l ); test -e /run/current-system/sw/share/nix-ld/lib/libfontconfig.so.1 && echo fontconfig) | grep fontconfig > /dev/null 2>&1', $output, $return);
-     if ($return)
-         return 'no_fontconfig';
++    if (file_exists('/run/current-system/sw/share/nix-ld/lib/libfontconfig.so.1'))
++        return '';
++
++    exec('( /sbin/ldconfig -p || scanelf -l ) | grep fontconfig > /dev/null 2>&1', $output, $return);
