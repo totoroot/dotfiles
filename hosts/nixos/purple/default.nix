@@ -38,7 +38,7 @@
       fonts.enable = true;
       ides.enable = true;
       ghostwriter.enable = false;
-      handy.enable = true;
+      handy.enable = false;
       godot.enable = true;
       gpa.enable = true;
       gsmartcontrol.enable = true;
@@ -52,8 +52,8 @@
       rofi.enable = true;
       screenshot.enable = true;
       torrent.enable = true;
-      unity.enable = true;
-      vscodium.enable = true;
+      unity.enable = false;
+      vscodium.enable = false;
       browsers = {
         chromium.enable = true;
         lynx.enable = false;

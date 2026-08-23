@@ -14,8 +14,8 @@ in {
     user.packages = with pkgs; [
       # ESP8266 and ESP32 serial bootloader utility
       esptool
-      # Python implementation for MCUs
-      micropython
+      # Python implementation for MCUs. Removed from nixpkgs.
+      # micropython
     ];
   };
 }

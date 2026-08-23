@@ -30,7 +30,7 @@ in {
 
     (mkIf config.xdg.portal.enable {
       environment.systemPackages = with pkgs; [
-        dracula-theme
+        dracula-qt5-theme
         papirus-icon-theme
       ];
 
