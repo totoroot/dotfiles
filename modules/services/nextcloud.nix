@@ -12,18 +12,23 @@ let
     "calendar"
     "contacts"
     "collectives"
+    "countdown"
     "cookbook"
     "cospend"
     "deck"
+    "drawio"
     "files_automatedtagging"
     "forms"
     "groupfolders"
+    "integration_immich"
     "mail"
     "music"
     "news"
     "notes"
     "polls"
     "qownnotesapi"
+    "quicknotes"
+    "repod"
     "richdocuments"
     "richdocumentscode"
     "secrets"
@@ -186,6 +191,30 @@ let
       url = "https://github.com/theCalcaholic/nextcloud-secrets/releases/download/v3.0.6/secrets.tar.gz";
       license = "agpl3Plus";
     };
+    countdown = pkgs.fetchNextcloudApp {
+      name = "countdown";
+      appName = "countdown";
+      appVersion = "1.2.11";
+      hash = "sha256-tGsQBetnBlE6gU7Ot+z0XB9BargWWA2SpsRic4pKXpc=";
+      url = "https://github.com/infinit7even/countdown/releases/download/v1.2.11/countdown.tar.gz";
+      license = "agpl3Plus";
+    };
+    integration_immich = pkgs.fetchNextcloudApp {
+      name = "integration_immich";
+      appName = "integration_immich";
+      appVersion = "1.4.0";
+      hash = "sha256-PKL0FtM2oVWqlo1lAm3G3pC8Tkfzm/W4ySWAa4HG9R4=";
+      url = "https://github.com/xXRoxXeRXx/integration_immich/releases/download/v1.4.0/integration_immich.tar.gz";
+      license = "agpl3Plus";
+    };
+    quicknotes = pkgs.fetchNextcloudApp {
+      name = "quicknotes";
+      appName = "quicknotes";
+      appVersion = "1.0.0";
+      hash = "sha256-zkprBUXhtPVytRar1buExaiCPraWA1bISlfjpQiqaI0=";
+      url = "https://github.com/matiasdelellis/quicknotes/releases/download/v1.0.0/quicknotes.tar.gz";
+      license = "agpl3Plus";
+    };
     tasks = pkgs.fetchNextcloudApp {
       name = "tasks";
       appName = "tasks";
@@ -251,6 +280,9 @@ in
             customExtraApps = {
               richdocumentscode = nc4nixApps.richdocumentscode;
               secrets = nc4nixApps.secrets;
+              countdown = nc4nixApps.countdown;
+              integration_immich = nc4nixApps.integration_immich;
+              quicknotes = nc4nixApps.quicknotes;
             };
             packagedAppNames = lib.filter (name: !(builtins.hasAttr name customExtraApps)) selectedAppNames;
           in
