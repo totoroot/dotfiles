@@ -210,6 +210,13 @@ in
   };
 
   config = mkIf cfg.enable {
+    # richdocumentscode ships a conventional glibc AppImage.  NixOS needs a
+    # compatible /lib64 loader and fontconfig visible to that binary.
+    programs.nix-ld = {
+      enable = true;
+      libraries = [ pkgs.fontconfig ];
+    };
+
     services = {
       postgresql = {
         enable = true;
