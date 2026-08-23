@@ -307,6 +307,15 @@ in
             "@allow" = true;
             host = [ "cloud\\.thym\\.at" ];
           };
+          # Nextcloud's server-side preview crawler reaches the public office
+          # endpoint via this host's IPv4 or IPv6, then nginx proxies locally.
+          net.post_allow.host = [
+            "127\\.0\\.0\\.1"
+            "::1"
+            "::ffff:127\\.0\\.0\\.1"
+            "45\\.83\\.104\\.124"
+            "2a03:4000:46:a49::"
+          ];
         };
       };
 
