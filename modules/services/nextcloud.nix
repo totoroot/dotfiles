@@ -172,7 +172,7 @@ let
       appName = "richdocumentscode";
       # Latest Built-in CODE release compatible with Nextcloud 34.
       appVersion = "25.4.904";
-      hash = "sha256-Crf6v/aQHRY/WhdCSVm9J9crOa+HMd83Qbsi4hSnnCw=";
+      hash = "sha256-Ziuw5Nb66zb80oLsdzDQu6soos7FdJT75gztND4WHxk=";
       url = "https://github.com/CollaboraOnline/richdocumentscode/releases/download/25.4.904/richdocumentscode.tar.gz";
       license = "asl20";
     };
