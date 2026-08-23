@@ -25,6 +25,7 @@ let
     "qownnotesapi"
     "richdocuments"
     "richdocumentscode"
+    "secrets"
     "tasks"
     "whiteboard"
   ];
@@ -176,6 +177,14 @@ let
       url = "https://github.com/CollaboraOnline/richdocumentscode/releases/download/25.4.904/richdocumentscode.tar.gz";
       license = "asl20";
     };
+    secrets = pkgs.fetchNextcloudApp {
+      name = "secrets";
+      appName = "secrets";
+      appVersion = "3.0.6";
+      hash = "sha256-lxOyt3mf0YqK3V4rUp3DcIrg9nRapivpMVQU+jq0awA=";
+      url = "https://github.com/theCalcaholic/nextcloud-secrets/releases/download/v3.0.6/secrets.tar.gz";
+      license = "agpl3Plus";
+    };
     tasks = pkgs.fetchNextcloudApp {
       name = "tasks";
       appName = "tasks";
@@ -231,12 +240,14 @@ in
         extraApps =
           let
             appPackages = config.services.nextcloud.package.packages.apps;
-            packagedAppNames = lib.filter (name: name != "richdocumentscode") selectedAppNames;
+            customExtraApps = {
+              richdocumentscode = nc4nixApps.richdocumentscode;
+              secrets = nc4nixApps.secrets;
+            };
+            packagedAppNames = lib.filter (name: !(builtins.hasAttr name customExtraApps)) selectedAppNames;
           in
           lib.genAttrs packagedAppNames (name: builtins.getAttr name appPackages)
-          // {
-            richdocumentscode = nc4nixApps.richdocumentscode;
-          };
+          // customExtraApps;
 
         # extraApps = lib.genAttrs selectedAppNames (name: builtins.getAttr name nc4nixApps);
 
