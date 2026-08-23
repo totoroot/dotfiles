@@ -245,6 +245,19 @@
     usbutils
   ];
 
+  users.groups.builder = { };
+
+  users.users.builder = {
+    isSystemUser = true;
+    group = "builder";
+    createHome = true;
+    home = "/var/lib/builder";
+    useDefaultShell = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFlY9nUgPjYiWGIGw0S0HTuSVMhSPSJt2zN9Y21XD72 matthias.thym@ATGRZMBP43"
+    ];
+  };
+
   virtualisation.oci-containers.containers."scrutiny".extraOptions = [
     "--device=/dev/nvme0n1"
     "--device=/dev/nvme1n1"
