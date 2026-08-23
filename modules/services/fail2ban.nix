@@ -32,9 +32,10 @@ in
 
     services.fail2ban = {
       enable = true;
-      # Needed to ban on IPv4 and IPv6 for all ports
       extraPackages = [ pkgs.ipset ];
-      banaction = "iptables-ipset-proto6-allports";
+      # Restrict bans to the affected service ports. A web-probing ban must
+      # never prevent SSH recovery from a changing public IP address.
+      banaction = "iptables-ipset-proto6";
       # Ban IP after 5 failures
       maxretry = 5;
       ignoreIP = [
@@ -62,6 +63,7 @@ in
           filter = nginx-probing
           logpath = /var/log/nginx/access.log
           backend = auto
+          port = http,https
           maxretry = 5
           findtime = 600
         '';
