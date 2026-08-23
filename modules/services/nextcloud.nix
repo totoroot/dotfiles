@@ -21,10 +21,10 @@ let
     "music"
     "news"
     "notes"
-    "onlyoffice"
     "polls"
     "qownnotesapi"
     "richdocuments"
+    "richdocumentscode"
     "tasks"
     "whiteboard"
   ];
@@ -167,6 +167,15 @@ let
       url = "https://github.com/nextcloud-releases/richdocuments/releases/download/v10.2.0/richdocuments-v10.2.0.tar.gz";
       license = "agpl3Plus";
     };
+    richdocumentscode = pkgs.fetchNextcloudApp {
+      name = "richdocumentscode";
+      appName = "richdocumentscode";
+      # Latest Built-in CODE release compatible with Nextcloud 34.
+      appVersion = "25.4.904";
+      hash = "sha256-Crf6v/aQHRY/WhdCSVm9J9crOa+HMd83Qbsi4hSnnCw=";
+      url = "https://github.com/CollaboraOnline/richdocumentscode/releases/download/25.4.904/richdocumentscode.tar.gz";
+      license = "asl20";
+    };
     tasks = pkgs.fetchNextcloudApp {
       name = "tasks";
       appName = "tasks";
@@ -222,8 +231,12 @@ in
         extraApps =
           let
             appPackages = config.services.nextcloud.package.packages.apps;
+            packagedAppNames = lib.filter (name: name != "richdocumentscode") selectedAppNames;
           in
-          lib.genAttrs selectedAppNames (name: builtins.getAttr name appPackages);
+          lib.genAttrs packagedAppNames (name: builtins.getAttr name appPackages)
+          // {
+            richdocumentscode = nc4nixApps.richdocumentscode;
+          };
 
         # extraApps = lib.genAttrs selectedAppNames (name: builtins.getAttr name nc4nixApps);
 
