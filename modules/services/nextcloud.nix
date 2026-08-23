@@ -8,6 +8,7 @@ let
   adminEmail = "admin@thym.it";
   nextcloudPackage = pkgs.nextcloud34;
   baseAppNames = [
+    "attendance"
     "bookmarks"
     "calendar"
     "contacts"
@@ -38,6 +39,14 @@ let
   optionalAppNames = lib.optionals (lib.versionOlder nextcloudPackage.version "33") [ "memories" ];
   selectedAppNames = baseAppNames ++ optionalAppNames;
   nc4nixApps = {
+    attendance = pkgs.fetchNextcloudApp {
+      name = "attendance";
+      appName = "attendance";
+      appVersion = "1.50.0";
+      hash = "sha256-QDJJbUxL+MA7HCmrCwJiLPMisXdB0QjYRHRsxq8quik=";
+      url = "https://github.com/luflow/attendance/releases/download/v1.50.0/attendance.tar.gz";
+      license = "agpl3Plus";
+    };
     bookmarks = pkgs.fetchNextcloudApp {
       name = "bookmarks";
       appName = "bookmarks";
@@ -278,6 +287,7 @@ in
           let
             appPackages = config.services.nextcloud.package.packages.apps;
             customExtraApps = {
+              attendance = nc4nixApps.attendance;
               richdocumentscode = nc4nixApps.richdocumentscode;
               secrets = nc4nixApps.secrets;
               countdown = nc4nixApps.countdown;
