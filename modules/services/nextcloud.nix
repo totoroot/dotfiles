@@ -190,6 +190,7 @@ let
       appVersion = "25.4.904";
       hash = "sha256-Ziuw5Nb66zb80oLsdzDQu6soos7FdJT75gztND4WHxk=";
       url = "https://github.com/CollaboraOnline/richdocumentscode/releases/download/25.4.904/richdocumentscode.tar.gz";
+      patches = [ ../../patches/richdocumentscode-nixos-fontconfig.patch ];
       license = "asl20";
     };
     secrets = pkgs.fetchNextcloudApp {
