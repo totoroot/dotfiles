@@ -388,8 +388,8 @@ in
         User = "nextcloud";
       };
       script = ''
-        /run/current-system/sw/bin/nextcloud-occ config:app:set richdocuments wopi_url --value="https://office.${domain}"
         /run/current-system/sw/bin/nextcloud-occ config:app:delete richdocuments disable_certificate_verification || true
+        /run/current-system/sw/bin/nextcloud-occ richdocuments:activate-config --wopi-url="https://office.${domain}"
       '';
     };
   };
