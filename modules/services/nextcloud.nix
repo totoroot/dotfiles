@@ -31,7 +31,6 @@ let
     "quicknotes"
     "repod"
     "richdocuments"
-    "richdocumentscode"
     "secrets"
     "tasks"
     "whiteboard"
@@ -183,16 +182,6 @@ let
       url = "https://github.com/nextcloud-releases/richdocuments/releases/download/v10.2.0/richdocuments-v10.2.0.tar.gz";
       license = "agpl3Plus";
     };
-    richdocumentscode = pkgs.fetchNextcloudApp {
-      name = "richdocumentscode";
-      appName = "richdocumentscode";
-      # Latest Built-in CODE release compatible with Nextcloud 34.
-      appVersion = "25.4.904";
-      hash = "sha256-Ziuw5Nb66zb80oLsdzDQu6soos7FdJT75gztND4WHxk=";
-      url = "https://github.com/CollaboraOnline/richdocumentscode/releases/download/25.4.904/richdocumentscode.tar.gz";
-      patches = [ ../../patches/richdocumentscode-nixos-fontconfig.patch ];
-      license = "asl20";
-    };
     secrets = pkgs.fetchNextcloudApp {
       name = "secrets";
       appName = "secrets";
@@ -249,13 +238,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # richdocumentscode ships a conventional glibc AppImage.  NixOS needs a
-    # compatible /lib64 loader and fontconfig visible to that binary.
-    programs.nix-ld = {
-      enable = true;
-      libraries = [ pkgs.fontconfig ];
-    };
-
     services = {
       postgresql = {
         enable = true;
@@ -289,7 +271,6 @@ in
             appPackages = config.services.nextcloud.package.packages.apps;
             customExtraApps = {
               attendance = nc4nixApps.attendance;
-              richdocumentscode = nc4nixApps.richdocumentscode;
               secrets = nc4nixApps.secrets;
               countdown = nc4nixApps.countdown;
               integration_immich = nc4nixApps.integration_immich;
@@ -311,6 +292,21 @@ in
           dbtype = "pgsql";
           adminuser = "admin";
           adminpassFile = "/var/secrets/nextcloud";
+        };
+      };
+
+      collabora-online = {
+        enable = true;
+        aliasGroups = [{ host = "https://cloud.${domain}"; }];
+        settings = {
+          ssl = {
+            enable = false;
+            termination = true;
+          };
+          storage.wopi = {
+            "@allow" = true;
+            host = [ "cloud\\.thym\\.at" ];
+          };
         };
       };
 
@@ -336,6 +332,20 @@ in
           };
         };
 
+        "office.${domain}" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:9980";
+            proxyWebsockets = true;
+            extraConfig = ''
+              client_max_body_size 0;
+              proxy_read_timeout 36000s;
+              proxy_send_timeout 36000s;
+            '';
+          };
+        };
+
         "nextcloud.${domain}" = {
           forceSSL = true;
           enableACME = true;
@@ -357,6 +367,22 @@ in
           email = "${adminEmail}";
         };
       };
+    };
+
+    systemd.services.nextcloud-configure-collabora = {
+      description = "Configure Nextcloud Office to use Collabora Online";
+      after = [ "nextcloud-setup.service" "coolwsd.service" ];
+      requires = [ "nextcloud-setup.service" "coolwsd.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = "nextcloud";
+      };
+      script = ''
+        /run/current-system/sw/bin/nextcloud-occ config:app:set richdocuments wopi_url --value="https://office.${domain}"
+        /run/current-system/sw/bin/nextcloud-occ config:app:delete richdocuments disable_certificate_verification || true
+        /run/current-system/sw/bin/nextcloud-occ app:disable richdocumentscode || true
+      '';
     };
   };
 }
