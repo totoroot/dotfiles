@@ -11,6 +11,7 @@ let
     "bookmarks"
     "calendar"
     "contacts"
+    "collectives"
     "cookbook"
     "cospend"
     "deck"
