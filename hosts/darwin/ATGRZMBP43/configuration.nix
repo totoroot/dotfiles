@@ -35,11 +35,20 @@
     settings.builders-use-substitutes = true;
   };
 
-  programs.ssh.extraConfig = ''
-    Host jam-builder
-      HostName 45.83.104.124
-      Port 21042
-  '';
+  programs.ssh = {
+    extraConfig = ''
+      Host jam-builder
+        HostName 45.83.104.124
+        Port 21042
+    '';
+    knownHosts.jam-builder = {
+      hostNames = [ "jam-builder" "[45.83.104.124]:21042" ];
+      publicKey = "ssh-ed25519 " + builtins.concatStringsSep "" [
+        "AAAAC3NzaC1lZDI1NTE5AAAAILpQeOZlcEkngp6n"
+        "SLsaDSFFlfaCOwagK87nN3Xl96aU"
+      ];
+    };
+  };
 
   modules.darwin.containers.enable = true;
 
