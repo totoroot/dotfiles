@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.windshift;
-  toEnvironment = mapAttrsToList (name: value: "${name}=${toString value}");
+  toEnvironment = mapAttrs (_: value: if isBool value then boolToString value else toString value);
   runtimeDir = "/run/${cfg.user}";
 in
 {
@@ -71,7 +71,7 @@ in
     };
 
     memoryLimitMB = mkOption {
-      type = types.positive;
+      type = types.ints.positive;
       default = 2048;
       description = "Windshift process memory budget in MiB.";
     };
@@ -106,16 +106,16 @@ in
       wants = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
 
-      environment = {
-        PORT = toString cfg.port;
+      environment = toEnvironment ({
+        PORT = cfg.port;
         DB_PATH = "${cfg.stateDir}/windshift.db";
         ATTACHMENT_PATH = "${cfg.stateDir}/attachments";
         PLUGIN_DIR = "${cfg.stateDir}/plugins";
         AI_PROMPTS_DIR = "${cfg.stateDir}/prompts";
         TMPDIR = runtimeDir;
         SQLITE_TMPDIR = runtimeDir;
-        WINDSHIFT_MEMORY_LIMIT_MB = toString cfg.memoryLimitMB;
-      } // optionalAttrs (cfg.baseUrl != null) { BASE_URL = cfg.baseUrl; } // cfg.settings;
+        WINDSHIFT_MEMORY_LIMIT_MB = cfg.memoryLimitMB;
+      } // optionalAttrs (cfg.baseUrl != null) { BASE_URL = cfg.baseUrl; } // cfg.settings);
 
       serviceConfig = {
         Type = "simple";
