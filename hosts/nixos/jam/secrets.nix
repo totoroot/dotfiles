@@ -5,6 +5,10 @@ let
     path = ../../../secrets/jam.yaml;
     name = "jam-secrets";
   };
+  windshiftSecretsFile = builtins.path {
+    path = ../../../secrets/windshift.yaml;
+    name = "windshift-secrets";
+  };
   mkSecret = { key, path, owner ? "root", group ? "root", mode ? "0400", format ? "yaml" }: {
     sopsFile = secretsFile;
     inherit key path owner mode format;
@@ -18,6 +22,15 @@ in
       attic-client-env = mkSecret {
         key = "ATTICD_ENV";
         path = "/etc/atticd.env";
+      };
+      windshift-env = {
+        sopsFile = windshiftSecretsFile;
+        key = "WINDSHIFT_ENV";
+        path = "/var/secrets/windshift.env";
+        owner = "windshift";
+        group = "windshift";
+        mode = "0400";
+        format = "yaml";
       };
       nextcloud-exporter-token = mkSecret {
         key = "NEXTCLOUD_EXPORTER_TOKEN";

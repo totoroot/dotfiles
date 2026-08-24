@@ -263,7 +263,27 @@ in
         enable = true;
         serverHost = "daten.${domain}";
       };
+      windshift = {
+        enable = true;
+        baseUrl = "https://delivery.thym.it";
+        environmentFile = config.sops.secrets.windshift-env.path;
+        settings = {
+          USE_PROXY = true;
+          LOG_FORMAT = "json";
+          POSTGRES_CONNECTION_STRING = "postgresql:///windshift?host=/run/postgresql";
+        };
+      };
     };
+  };
+
+  services.postgresql = {
+    ensureDatabases = lib.mkAfter [ "windshift" ];
+    ensureUsers = lib.mkAfter [
+      {
+        name = "windshift";
+        ensureDBOwnership = true;
+      }
+    ];
   };
 
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
@@ -396,6 +416,19 @@ in
       extraConfig = ''
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       '';
+    };
+
+    "delivery.thym.it" = {
+      enableACME = true;
+      forceSSL = true;
+      locations = {
+        "/" = {
+          proxyPass = "http://127.0.0.1:${toString config.modules.services.windshift.port}";
+          proxyWebsockets = true;
+          extraConfig = autheliaAuthSnippet;
+        };
+        "/authelia".extraConfig = autheliaLocationSnippet;
+      };
     };
 
     "status.${domain}".locations = {
