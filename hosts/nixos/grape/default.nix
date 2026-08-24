@@ -156,7 +156,6 @@
       forgejo.enable = false;
       jellyfin.enable = false;
       nginx.enable = false;
-      mullvad.enable = true;
       vpn.enable = false;
       ssh.enable = true;
       syncthing.enable = true;
@@ -215,13 +214,6 @@
   # See https://mastodon.online/@nomeata/109915786344697931
   documentation.nixos.enable = false;
 
-  sops.secrets.mullvad-account-number = {
-    key = "MULLVAD_ACCOUNT_NUMBER";
-    path = "/var/secrets/mullvad-account-number";
-    owner = "root";
-    group = "root";
-    mode = "0400";
-  };
 
 
   home.file = {

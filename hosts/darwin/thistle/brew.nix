@@ -26,7 +26,7 @@
       "waterfox"
       "wacom-tablet"
       "tidal"
-      "mullvad-vpn"
+      "ivpn"
       "signal"
   ];
 }

@@ -42,7 +42,6 @@ in {
           "firefox.dockitem"
           "thunar.dockitem"
           "keepassxc.dockitem"
-          "mullvad.dockitem"
           "lollypop.dockitem"
           "signal.dockitem"
           "telegram.dockitem"
@@ -71,10 +70,6 @@ in {
       "plank/default/launchers/keepassxc.dockitem".text = ''
         [PlankDockItemPreferences]
         Launcher=file:///etc/profiles/per-user/mathym/share/applications/org.keepassxc.KeePassXC.desktop
-      '';
-      "plank/default/launchers/mullvad.dockitem".text = ''
-        [PlankDockItemPreferences]
-        Launcher=file:///run/current-system/sw/share/applications/mullvad-vpn.desktop
       '';
       "plank/default/launchers/lollypop.dockitem".text = ''
         [PlankDockItemPreferences]
