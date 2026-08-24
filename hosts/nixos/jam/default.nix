@@ -263,11 +263,11 @@ in
       webmail.enable = true;
       wordpress.enable = false;
       rustypaste = {
-        enable = true;
+        enable = false;
         serverHost = "bin.thym.it";
       };
       privatebin = {
-        enable = true;
+        enable = false;
         serverHost = "daten.${domain}";
       };
       windshift = {
