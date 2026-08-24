@@ -232,17 +232,17 @@ in
         {
           "Public Sites" = [
             {
+              "thym.it" = {
+                href = "https://thym.it/";
+                description = "IT consultancy";
+                icon = "mdi-briefcase-outline";
+              };
+            }
+            {
               "matthias.thym.at" = {
                 href = "https://matthias.thym.at/";
                 description = "Professional Resume";
                 icon = "mdi-file-account";
-              };
-            }
-            {
-              "thym.it" = {
-                href = "https://thym.it/";
-                description = "Short domain redirect";
-                icon = "mdi-link-variant";
               };
             }
             {
