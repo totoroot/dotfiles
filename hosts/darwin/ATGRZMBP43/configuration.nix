@@ -17,7 +17,7 @@
     distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "45.83.104.124:21042";
+        hostName = "jam-builder";
         sshUser = "builder";
         sshKey = "/Users/matthias.thym/.ssh/nix-builder-jam";
         system = "x86_64-linux";
@@ -34,6 +34,12 @@
     ];
     settings.builders-use-substitutes = true;
   };
+
+  programs.ssh.extraConfig = ''
+    Host jam-builder
+      HostName 45.83.104.124
+      Port 21042
+  '';
 
   modules.darwin.containers.enable = true;
 
