@@ -25,7 +25,7 @@
         maxJobs = 12;
         speedFactor = 2;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-        mandatoryFeatures = [ "big-parallel" ];
+        mandatoryFeatures = [ ];
         publicHostKey = builtins.concatStringsSep "" [
           "AAAAC3NzaC1lZDI1NTE5AAAAILpQeOZlcEkngp6n"
           "SLsaDSFFlfaCOwagK87nN3Xl96aU"

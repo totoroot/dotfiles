@@ -40,8 +40,8 @@ in
 
     mandatoryFeatures = mkOption {
       type = with types; listOf str;
-      default = [ "big-parallel" ];
-      description = "Mandatory features required for scheduling builds on the remote builder.";
+      default = [ ];
+      description = "Features a derivation must require before Nix schedules it on the remote builder.";
     };
 
     # Provide per-system builders, so we can map aarch64 hosts to the same
