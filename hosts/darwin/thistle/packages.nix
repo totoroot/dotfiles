@@ -13,7 +13,7 @@ in
   modules.home.unfreePackages = {
     enable = true;
     packageNames = [
-      "orbstack"
+      # "orbstack"
     ];
   };
 
@@ -64,7 +64,7 @@ in
     python313Packages.pylint
     python313Packages.beautifulsoup4
     gotop
-    orbstack
+    # orbstack
     vscodium
     inputs.rcat.packages.${pkgs.system}.default
     inputs.nixpkgs-handy.legacyPackages.${pkgs.system}.handy
