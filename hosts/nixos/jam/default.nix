@@ -6,8 +6,9 @@ let
   blackboxTargets = map (t: t.url) (lib.filter (t: t.blackbox or false) monitoringTargets);
   certificateAlertTargets = map (t: t.url) (lib.filter (t: t.certificate or false) monitoringTargets);
   autheliaHost = "zugangs.${domain}";
+  thymITAutheliaHost = "login.thym.it";
   autheliaBackend = "http://127.0.0.1:9091";
-  autheliaAuthSnippet = ''
+  autheliaAuthSnippet = host: ''
     auth_request /authelia;
     auth_request_set $user $upstream_http_remote_user;
     auth_request_set $groups $upstream_http_remote_groups;
@@ -17,7 +18,7 @@ let
     proxy_set_header Remote-Groups $groups;
     proxy_set_header Remote-Name $name;
     proxy_set_header Remote-Email $email;
-    error_page 401 =302 https://${autheliaHost}/?rd=$scheme://$http_host$request_uri;
+    error_page 401 =302 https://${host}/?rd=$scheme://$http_host$request_uri;
   '';
   autheliaLocationSnippet = ''
     internal;
@@ -73,6 +74,12 @@ in
         enable = true;
         hostName = autheliaHost;
         legacyHostNames = [ "auth.${domain}" ];
+        additionalPortals = [
+          {
+            hostName = thymITAutheliaHost;
+            cookieDomain = "thym.it";
+          }
+        ];
       };
       fail2ban.enable = true;
       gatus = {
@@ -425,70 +432,70 @@ in
         "/" = {
           proxyPass = "http://127.0.0.1:${toString config.modules.services.windshift.port}";
           proxyWebsockets = true;
-          extraConfig = autheliaAuthSnippet;
+          extraConfig = autheliaAuthSnippet thymITAutheliaHost;
         };
         "/authelia".extraConfig = autheliaLocationSnippet;
       };
     };
 
     "status.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "grafana.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "prometheus.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "loki.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "zugriffs.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
-      "/ws".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
+      "/ws".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "website.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "benachrichtigungs.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "festplatten.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "anzeigen.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "papier.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "ausgaben.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
     "besucherinnen.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet;
+      "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
       "/js/" = {
         proxyPass = "http://127.0.0.1:7129";

@@ -18,6 +18,19 @@ in
 
     cookieDomain = mkOpt types.str domain;
 
+    additionalPortals = mkOpt (types.listOf (types.submodule {
+      options = {
+        hostName = mkOption {
+          type = types.str;
+          description = "Hostname serving this Authelia portal.";
+        };
+        cookieDomain = mkOption {
+          type = types.str;
+          description = "Cookie domain authorized by this portal.";
+        };
+      };
+    })) [ ];
+
     usersDatabaseFile = mkOpt types.str "/var/secrets/authelia/users_database.yml";
 
     jwtSecretFile = mkOpt types.str "/var/secrets/authelia/jwt_secret";
@@ -72,7 +85,11 @@ in
               domain = cfg.cookieDomain;
               authelia_url = "https://${cfg.hostName}";
             }
-          ];
+          ] ++ map (portal: {
+            name = "authelia_session";
+            domain = portal.cookieDomain;
+            authelia_url = "https://${portal.hostName}";
+          }) cfg.additionalPortals;
           redis = {
             host = "127.0.0.1";
             port = 6379;
@@ -106,6 +123,19 @@ in
           };
         };
       }
+      // builtins.listToAttrs (
+        map (portal: {
+          name = portal.hostName;
+          value = {
+            enableACME = true;
+            forceSSL = true;
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${toString cfg.port}";
+              proxyWebsockets = true;
+            };
+          };
+        }) cfg.additionalPortals
+      )
       // builtins.listToAttrs (
         map (host: {
           name = host;
