@@ -26,6 +26,7 @@
     ./modules/networking.nix
     ./modules/nushell.nix
     ./modules/pass.nix
+    ./modules/qownnotes.nix
     ./modules/ssh-hosts.nix
     ./modules/sops.nix
     ./modules/trash.nix
