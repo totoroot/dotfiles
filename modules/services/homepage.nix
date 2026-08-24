@@ -16,6 +16,22 @@ in
       enable = true;
       listenPort = homepagePort;
       allowedHosts = "localhost:${toString homepagePort},127.0.0.1:${toString homepagePort},xn--berwachungsbehr-mtb1g.de";
+      customCSS = ''
+        [id^="authelia-"] {
+          position: relative;
+        }
+
+        [id^="authelia-"]::after {
+          content: "🔒";
+          position: absolute;
+          top: 0.5rem;
+          right: 0.5rem;
+          z-index: 1;
+          font-size: 1rem;
+          line-height: 1;
+          pointer-events: none;
+        }
+      '';
       widgets = [
         {
           resources = {
@@ -36,6 +52,7 @@ in
           "Communication & Personal Infra" = [
             {
               "passwort.überwachungsbehör.de" = {
+                id = "authelia-vaultwarden";
                 href = "https://passwort.überwachungsbehör.de/";
                 description = "Password Manager Vault";
                 icon = "si-bitwarden";
@@ -57,6 +74,7 @@ in
             }
             {
               "benachrichtigungs.überwachungsbehör.de" = {
+                id = "authelia-ntfy";
                 href = "https://benachrichtigungs.überwachungsbehör.de/";
                 description = "Push Notifications";
                 icon = "mdi-bell-ring";
@@ -64,6 +82,7 @@ in
             }
             {
               "daten.überwachungsbehör.de" = {
+                id = "authelia-privatebin";
                 href = "https://daten.überwachungsbehör.de/";
                 description = "PrivateBin";
                 icon = "mdi-note-text";
@@ -82,6 +101,7 @@ in
           "Work & Planning" = [
             {
               "delivery.thym.it" = {
+                id = "authelia-windshift";
                 href = "https://delivery.thym.it/";
                 description = "Work Management (Windshift; Authelia protected)";
                 icon = "mdi-clipboard-text";
@@ -93,6 +113,7 @@ in
           "Monitoring & Admin" = [
             {
               "zugangs.überwachungsbehör.de" = {
+                id = "authelia-portal";
                 href = "https://zugangs.überwachungsbehör.de/";
                 description = "Authelia SSO portal";
                 icon = "mdi-shield-account";
@@ -100,6 +121,7 @@ in
             }
             {
               "status.überwachungsbehör.de" = {
+                id = "authelia-gatus";
                 href = "https://status.überwachungsbehör.de/";
                 description = "Declarative uptime checks (Gatus)";
                 icon = "mdi-list-status";
@@ -107,6 +129,7 @@ in
             }
             {
               "grafana.überwachungsbehör.de" = {
+                id = "authelia-grafana";
                 href = "https://grafana.überwachungsbehör.de/";
                 description = "Dashboards";
                 icon = "si-grafana";
@@ -114,6 +137,7 @@ in
             }
             {
               "prometheus.überwachungsbehör.de" = {
+                id = "authelia-prometheus";
                 href = "https://prometheus.überwachungsbehör.de/";
                 description = "Metrics";
                 icon = "si-prometheus";
@@ -121,6 +145,7 @@ in
             }
             {
               "loki.überwachungsbehör.de" = {
+                id = "authelia-loki";
                 href = "https://loki.überwachungsbehör.de/";
                 description = "Log aggregation API";
                 icon = "si-grafana";
@@ -128,6 +153,7 @@ in
             }
             {
               "zugriffs.überwachungsbehör.de" = {
+                id = "authelia-goaccess";
                 href = "https://zugriffs.überwachungsbehör.de/";
                 description = "NGINX access analytics (GoAccess)";
                 icon = "mdi-chart-box";
@@ -135,6 +161,7 @@ in
             }
             {
               "festplatten.überwachungsbehör.de" = {
+                id = "authelia-scrutiny";
                 href = "https://festplatten.überwachungsbehör.de/";
                 description = "S.M.A.R.T. Disk Monitoring";
                 icon = "mdi-harddisk";
@@ -142,6 +169,7 @@ in
             }
             {
               "anzeigen.überwachungsbehör.de" = {
+                id = "authelia-adguard";
                 href = "https://anzeigen.überwachungsbehör.de/";
                 description = "Ad Blocking/DNS";
                 icon = "mdi-advertisements-off";
@@ -149,6 +177,7 @@ in
             }
             {
               "website.überwachungsbehör.de" = {
+                id = "authelia-changedetection";
                 href = "https://website.überwachungsbehör.de/";
                 description = "Website Change Detection";
                 icon = "mdi-web-remove";
@@ -156,6 +185,7 @@ in
             }
             {
               "besucherinnen.überwachungsbehör.de" = {
+                id = "authelia-plausible";
                 href = "https://besucherinnen.überwachungsbehör.de/";
                 description = "Plausible Analytics";
                 icon = "si-plausibleanalytics";
@@ -167,6 +197,7 @@ in
           "Homelab Apps" = [
             {
               "medien.überwachungsbehör.de" = {
+                id = "authelia-jellyfin";
                 href = "https://medien.überwachungsbehör.de/";
                 description = "Media Server";
                 icon = "si-jellyfin";
@@ -174,6 +205,7 @@ in
             }
             {
               "hass.überwachungsbehör.de" = {
+                id = "authelia-homeassistant";
                 href = "https://hass.überwachungsbehör.de/";
                 description = "Home Automation";
                 icon = "si-homeassistant";
@@ -181,6 +213,7 @@ in
             }
             {
               "rezept.überwachungsbehör.de" = {
+                id = "authelia-recipes";
                 href = "https://rezept.überwachungsbehör.de/";
                 description = "Recipe Management";
                 icon = "mdi-silverware";
@@ -188,6 +221,7 @@ in
             }
             {
               "papier.überwachungsbehör.de" = {
+                id = "authelia-paperless";
                 href = "https://papier.überwachungsbehör.de/";
                 description = "Document Archive";
                 icon = "mdi-file-document-multiple";
