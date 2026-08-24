@@ -26,6 +26,7 @@ in
   };
 
   modules.home.gitlab-cli.enable = true;
+  modules.home.qownnotes.enable = true;
 
   modules.home.llm.piAgentSettingsOverride = {
     defaultProvider = "openai-codex";

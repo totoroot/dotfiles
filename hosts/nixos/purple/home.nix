@@ -5,4 +5,5 @@
   ];
 
   modules.home.firefox.enable = true;
+  modules.home.qownnotes.enable = true;
 }
