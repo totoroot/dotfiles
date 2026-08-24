@@ -79,6 +79,17 @@ in
           ];
         }
         {
+          "Work & Planning" = [
+            {
+              "delivery.thym.it" = {
+                href = "https://delivery.thym.it/";
+                description = "Work Management (Windshift; Authelia protected)";
+                icon = "mdi-clipboard-text";
+              };
+            }
+          ];
+        }
+        {
           "Monitoring & Admin" = [
             {
               "zugangs.überwachungsbehör.de" = {
