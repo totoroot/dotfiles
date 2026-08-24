@@ -54,6 +54,12 @@ in
         systems = [ "x86_64-linux" ];
         enableCheck = true;
       };
+      remoteBuilderServer = {
+        enable = true;
+        authorizedKeys = [
+          "restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgUeIeU7yj63m+YWbrtYmV1oBqDlj038tUJu7faCDPj nix-builder@ATGRZMBP43"
+        ];
+      };
     };
     editors = {
       default = "micro";
