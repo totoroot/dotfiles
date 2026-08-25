@@ -31,7 +31,7 @@ let
   grafanaPort = 3000;
   prometheusPort = 9090;
   lokiPort = 3100;
-  hassPort = config.modules.services.home-assistant.port;
+  hassPort = 8123;
   scrutinyPort = 9080;
   immichPort = 2283;
   recipePort = 8491;
