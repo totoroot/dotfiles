@@ -254,7 +254,6 @@
     "--device=/dev/nvme0n1"
     "--device=/dev/nvme1n1"
     "--device=/dev/sda"
-    "--device=/dev/sdb"
   ];
 
   # To be able to use ttyUSB etc.
