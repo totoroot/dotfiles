@@ -34,9 +34,6 @@ in
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
         ];
-        ports = [
-          "${toString cfg.port}:${toString cfg.port}"
-        ];
         autoStart = true;
       };
     };

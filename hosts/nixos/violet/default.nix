@@ -68,7 +68,7 @@
       grafana.enable = false;
       home-assistant = {
         enable = true;
-        port = 7901;
+        port = 8123;
       };
       jellyfin.enable = false;
       jellyseerr.enable = true;
