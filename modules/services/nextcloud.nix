@@ -21,6 +21,7 @@ let
     "files_automatedtagging"
     "forms"
     "groupfolders"
+    "gpoddersync"
     "integration_immich"
     "mail"
     "music"
