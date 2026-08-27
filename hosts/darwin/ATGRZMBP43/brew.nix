@@ -37,5 +37,7 @@
       "siyuan"
       "android-studio"
       "tidal"
+      # Menu bar internet radio player
+      "radiola"
   ];
 }

@@ -28,5 +28,7 @@
       "tidal"
       "ivpn"
       "signal"
+      # Menu bar internet radio player
+      "radiola"
   ];
 }
