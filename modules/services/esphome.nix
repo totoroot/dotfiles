@@ -4,7 +4,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.services.esphome;
-  version = "2026.2";
+  version = "2026.8";
   port = 6052;
 in
 {
