@@ -26,9 +26,11 @@ in
           "/var/lib/esphome/config:/config"
           "/etc/localtime:/etc/localtime:ro"
         ];
-        # extraOptions = [
-        #   "--device=/dev/ttyUSB1"
-        # ];
+        extraOptions = [
+          "--dns=9.9.9.9"
+          "--dns=149.112.112.112"
+          # "--device=/dev/ttyUSB1"
+        ];
         environment = {
           ESPHOME_DASHBOARD_USE_PING = "true";
         } // cfg.environment;
