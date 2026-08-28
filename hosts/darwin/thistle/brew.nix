@@ -30,5 +30,6 @@
       "signal"
       # Menu bar internet radio player
       "radiola"
+      "prusaslicer"
   ];
 }
