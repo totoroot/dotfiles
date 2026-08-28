@@ -146,6 +146,16 @@ in
     gatus = true;
   }
   {
+    name = "windshift-api";
+    group = "services";
+    url = "https://api.delivery.thym.it/rest/api/v1/openapi.json";
+    interval = minute;
+    conditions = [ "[STATUS] == 200" ];
+    blackbox = true;
+    certificate = true;
+    gatus = true;
+  }
+  {
     name = "ntfy";
     group = "services";
     url = "https://benachrichtigungs.xn--berwachungsbehr-mtb1g.de";

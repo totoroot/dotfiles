@@ -438,6 +438,28 @@ in
       };
     };
 
+    # API-only hostname: Windshift authenticates requests with scoped bearer
+    # tokens. Do not add Authelia here; the REST API rejects session cookies.
+    "api.delivery.thym.it" = {
+      enableACME = true;
+      forceSSL = true;
+      locations = {
+        "/".extraConfig = "return 404;";
+        "/rest/api/v1/" = {
+          proxyPass = "http://127.0.0.1:${toString config.modules.services.windshift.port}";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_set_header Authorization $http_authorization;
+            proxy_set_header Cookie "";
+            proxy_set_header Remote-User "";
+            proxy_set_header Remote-Groups "";
+            proxy_set_header Remote-Name "";
+            proxy_set_header Remote-Email "";
+          '';
+        };
+      };
+    };
+
     "status.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
