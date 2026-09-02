@@ -438,6 +438,16 @@ in
       };
     };
 
+    "ausm-keller.thym.it" = {
+      enableACME = true;
+      forceSSL = true;
+      root = "/var/www/ausm-keller.at";
+      locations = {
+        "/".extraConfig = autheliaAuthSnippet thymITAutheliaHost;
+        "/authelia".extraConfig = autheliaLocationSnippet;
+      };
+    };
+
     # API-only hostname: Windshift authenticates requests with scoped bearer
     # tokens. Do not add Authelia here; the REST API rejects session cookies.
     "api.delivery.thym.it" = {
@@ -589,6 +599,7 @@ in
   # Consolidated static-site deployment ownership (replaces per-site users like blog/praxis).
   systemd.tmpfiles.rules = [
     "d /var/www/assets.thym.it 0755 deploy-web deploy-web -"
+    "d /var/www/ausm-keller.at 0755 deploy-web deploy-web -"
     "d /var/www/blog.thym.at 0755 deploy-web deploy-web -"
     "d /var/www/thym.it 0755 deploy-web deploy-web -"
     "d /var/www/grueneis-psychologie.at 0755 deploy-web deploy-web -"
