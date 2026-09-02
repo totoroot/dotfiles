@@ -30,7 +30,12 @@ in
 
   modules.home.llm.piAgentSettingsOverride = {
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.4";
+    defaultModel = "gpt-5.6-luna";
+    scopedModels = [
+      "gpt-5.6-luna"
+      "gpt-5.6-sol"
+      "gpt-5.6-terra"
+    ];
   };
 
   programs.zsh.initContent = ''
