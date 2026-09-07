@@ -452,6 +452,7 @@ in
       enableACME = true;
       forceSSL = true;
       root = "/var/www/ausm-keller.at";
+      serverAliases = [ "www.ausm-keller.at" ];
       locations = {
         "= /index.html".extraConfig = ''
           return 301 /$is_args$args;
