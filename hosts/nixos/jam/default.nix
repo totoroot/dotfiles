@@ -448,6 +448,12 @@ in
       };
     };
 
+    "ausm-keller.at" = {
+      enableACME = true;
+      forceSSL = true;
+      root = "/var/www/ausm-keller.at";
+    };
+
     # API-only hostname: Windshift authenticates requests with scoped bearer
     # tokens. Do not add Authelia here; the REST API rejects session cookies.
     "api.delivery.thym.it" = {
