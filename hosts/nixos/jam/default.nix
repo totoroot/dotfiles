@@ -452,6 +452,17 @@ in
       enableACME = true;
       forceSSL = true;
       root = "/var/www/ausm-keller.at";
+      locations = {
+        "= /index.html".extraConfig = ''
+          return 301 /$is_args$args;
+        '';
+        "~ ^/(.+)\\.html$".extraConfig = ''
+          return 301 /$1$is_args$args;
+        '';
+        "/".extraConfig = ''
+          try_files $uri $uri.html =404;
+        '';
+      };
     };
 
     # API-only hostname: Windshift authenticates requests with scoped bearer
