@@ -454,6 +454,9 @@ in
       root = "/var/www/ausm-keller.at";
       serverAliases = [ "www.ausm-keller.at" ];
       locations = {
+        "= /".extraConfig = ''
+          try_files /index.html =404;
+        '';
         "= /index.html".extraConfig = ''
           return 301 /$is_args$args;
         '';
