@@ -458,7 +458,7 @@ in
           return 301 /$is_args$args;
         '';
         "~ ^/(.+)\\.html$".extraConfig = ''
-          return 301 /$1$is_args$args;
+          rewrite ^/(.+)\\.html$ /$1 permanent;
         '';
         "/".extraConfig = ''
           try_files $uri $uri.html =404;
