@@ -453,9 +453,15 @@ in
       forceSSL = true;
       root = "/var/www/ausm-keller.at";
       serverAliases = [ "www.ausm-keller.at" ];
+      extraConfig = ''
+        error_page 404 /404.html;
+      '';
       locations = {
         "= /".extraConfig = ''
           try_files /index.html =404;
+        '';
+        "= /404.html".extraConfig = ''
+          internal;
         '';
         "= /index.html".extraConfig = ''
           return 301 /$is_args$args;
