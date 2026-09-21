@@ -31,6 +31,12 @@ in
       description = "Firefox package to install.";
     };
 
+    installPackage = lib.mkOption {
+      type = bool;
+      default = true;
+      description = "Whether Home Manager installs the Firefox package.";
+    };
+
     profileDirectory = lib.mkOption {
       type = str;
       default = "default-release";
@@ -197,7 +203,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = lib.optional cfg.installPackage cfg.package;
     home.file =
       (builtins.listToAttrs (map mkExtensionFile cfg.extensions))
       // {

@@ -25,6 +25,11 @@ in
     enableGhostty = true;
   };
 
+  # The declarative profile is shared with the signed Firefox cask installed by
+  # nix-darwin/Homebrew; the Nix-wrapped bundle is incompatible with macOS
+  # LaunchServices on this host.
+  modules.home.firefox.installPackage = false;
+
   modules.home.gitlab-cli.enable = true;
   modules.home.qownnotes.enable = true;
 
