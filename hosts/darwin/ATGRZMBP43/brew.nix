@@ -40,7 +40,6 @@
       # Menu bar internet radio player
       "radiola"
       "prusaslicer"
-      # Signed upstream bundle; Home Manager still manages its profile files.
-      "firefox"
+      "vlc"
   ];
 }
