@@ -17,8 +17,6 @@ in
   config = mkIf cfg.enable {
     services.ntfy-sh = {
       enable = true;
-      group = "ntfy";
-      user = "ntfy";
       settings = {
         base-url = "https://${ntfyHost}";
         listen-http = ":${toString ntfyPort}";
@@ -47,17 +45,6 @@ in
         metrics-listen-http = ":${toString ntfyMetricsPort}";
       };
     };
-
-    users = {
-      groups."ntfy" = { };
-      users."ntfy" = {
-        name = "ntfy";
-        group = "ntfy";
-        isSystemUser = true;
-      };
-    };
-
-    user.extraGroups = [ "ntfy" ];
 
     environment.systemPackages = [ config.services.ntfy-sh.package ];
 
