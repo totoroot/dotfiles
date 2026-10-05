@@ -52,7 +52,7 @@ in
     gnutls
     gawk
     maccy
-    rectangle
+    rectangle-pro
     itsycal
     karabiner-elements
     alt-tab-macos

@@ -13,7 +13,7 @@ in
   modules.home.unfreePackages = {
     enable = true;
     packageNames = [
-      # "rectangle-pro"
+      "rectangle-pro"
       # "orbstack"
     ];
   };
@@ -116,7 +116,7 @@ in
     # Simple clipboard manager for macOS
     maccy
     # Move and resize windows in macOS using keyboard shortcuts or snap areas
-    rectangle
+    rectangle-pro
     # Tiny menu bar calendar
 	  itsycal
     # Keymap remap utilility
