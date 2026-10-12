@@ -1,6 +1,6 @@
 { lib
 , fetchgit
-, buildGoModule
+, buildGo127Module
 , buildNpmPackage
 , nodejs_24
 , git
@@ -8,13 +8,13 @@
 
 let
   pname = "windshift";
-  version = "0.8.6-7";
-  rev = "10512c09d893fb4f73f442985f4032c046144b41";
+  version = "0.8.9";
+  rev = "ed6124bc3686a30d440678878518e4d49f8d3976";
 
   src = fetchgit {
     url = "https://github.com/Windshiftapp/core.git";
     inherit rev;
-    hash = "sha256-PS0QE++Q3s8jproy9X50nvUjTTRYS1ggNzOTJWrG7IQ=";
+    hash = "sha256-cRGysC7N0TMlwmIPKNt/CDL+Dmxn4tqw249aLbTzL/g=";
   };
 
   frontend = buildNpmPackage {
@@ -24,10 +24,10 @@ let
     sourceRoot = "${src.name}/frontend";
     nodejs = nodejs_24;
     npmDepsFetcherVersion = 2;
-    npmDepsHash = "sha256-g5nW0lq/0AUNUbyaEt/BFolEHoroihuam47DL831Cy0=";
+    npmDepsHash = "sha256-g+DFQdBxNrFSQq0rprmAApCaevcvk3EeIJejQIK0ZTo=";
 
-    # nixpkgs currently supplies Node 24.19/npm 11.17, while upstream pins
-    # 24.18/11.16 exactly. The patch-level difference is acceptable here.
+    # Upstream pins exact Node/npm patch releases; nixpkgs patch differences
+    # are acceptable for this frontend build.
     npmFlags = [ "--ignore-scripts" "--no-audit" "--no-fund" "--engine-strict=false" ];
 
     buildPhase = ''
@@ -46,22 +46,16 @@ let
     meta.platforms = lib.platforms.all;
   };
 in
-buildGoModule {
+buildGo127Module {
   inherit pname version src;
 
-  vendorHash = "sha256-nni0FAx+dD+6cBy4hVYt48HtED/JLkbBUl+QaDEOPRI=";
+  vendorHash = "sha256-5GvviGtgPoofDXYrsUJrwOyfRG91l+YeT2Kc3BlYrlY=";
   subPackages = [ "." ];
 
   nativeBuildInputs = [ git ];
 
   env.CGO_ENABLED = 0;
   env.GOTOOLCHAIN = "local";
-
-  # nixpkgs currently provides Go 1.26.5 while upstream requires the 1.26.6
-  # patch release. The module sources do not rely on a patch-release feature.
-  postPatch = ''
-    substituteInPlace go.mod --replace-fail "go 1.26.6" "go 1.26.5"
-  '';
 
   preBuild = ''
     rm -rf frontend/dist
