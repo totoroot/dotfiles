@@ -7,11 +7,12 @@ let
   domain = "xn--berwachungsbehr-mtb1g.de";
   ntfyPort = 6780;
   ntfyMetricsPort = 9095;
-  ntfyHost = "benachrichtigungs.${domain}";
+  ntfyHost = cfg.hostName;
 in
 {
   options.modules.services.ntfy = {
     enable = mkBoolOpt false;
+    hostName = mkOpt types.str "benachrichtigungs.${domain}";
   };
 
   config = mkIf cfg.enable {

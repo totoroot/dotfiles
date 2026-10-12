@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   domain = "xn--berwachungsbehr-mtb1g.de";
   monitoringTargets = import ./monitoring-targets.nix;
@@ -207,7 +207,10 @@ in
         serverPath = "";
         userName = "goaccess";
       };
-      ntfy.enable = true;
+      ntfy = {
+        enable = true;
+        hostName = "ntfy.thym.it";
+      };
       plausible.enable = true;
       ssh.enable = true;
       uptime-kuma.enable = false;
@@ -381,13 +384,6 @@ in
     url = "https://cloud.thym.at";
   };
 
-  services.authelia.instances.main.settings.access_control.rules = [
-    {
-      domain = "status.thym.it";
-      policy = "one_factor";
-    }
-  ];
-
   # Protect selected dashboards behind Authelia forward-auth.
   services.nginx.virtualHosts = {
     "geburtstags.${domain}".locations = {
@@ -430,42 +426,6 @@ in
       extraConfig = ''
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       '';
-    };
-
-    "status.thym.it" = {
-      enableACME = true;
-      forceSSL = true;
-      locations = {
-        "/" = {
-          proxyPass = "https://193.30.121.17";
-          recommendedProxySettings = false;
-          extraConfig = autheliaAuthSnippet thymITAutheliaHost + ''
-            proxy_ssl_server_name on;
-            proxy_ssl_name teal-status.thym.it;
-            proxy_ssl_verify on;
-            proxy_ssl_verify_depth 3;
-            proxy_ssl_trusted_certificate ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt;
-            proxy_set_header Host teal-status.thym.it;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header X-Forwarded-Host $host;
-          '';
-        };
-        "/authelia".extraConfig = autheliaLocationSnippet;
-      };
-    };
-
-    # Certificate bootstrap/renewal only. DNS points at jam, not teal.
-    "teal-status.thym.it" = {
-      locations = {
-        "^~ /.well-known/acme-challenge/" = {
-          proxyPass = "http://193.30.121.17";
-          recommendedProxySettings = false;
-          extraConfig = ''proxy_set_header Host teal-status.thym.it;'';
-        };
-        "/".return = "404";
-      };
     };
 
     "delivery.thym.it" = {
@@ -571,8 +531,8 @@ in
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
-    "benachrichtigungs.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet autheliaHost;
+    "ntfy.thym.it".locations = {
+      "/".extraConfig = autheliaAuthSnippet thymITAutheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 

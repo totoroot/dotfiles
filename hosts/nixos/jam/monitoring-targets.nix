@@ -158,7 +158,7 @@ in
   {
     name = "ntfy";
     group = "services";
-    url = "https://benachrichtigungs.xn--berwachungsbehr-mtb1g.de";
+    url = "https://ntfy.thym.it";
     interval = minute;
     conditions = [ "[STATUS] >= 200 && [STATUS] < 400" ];
     blackbox = true;

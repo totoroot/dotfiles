@@ -125,7 +125,7 @@ in
             '';
           };
         };
-        "benachrichtigungs.${domain}" = {
+        "${config.modules.services.ntfy.hostName}" = {
           enableACME = true;
           forceSSL = true;
           locations."/" = {
