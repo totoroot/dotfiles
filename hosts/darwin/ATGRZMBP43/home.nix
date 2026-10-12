@@ -28,9 +28,14 @@ in
   modules.home.gitlab-cli.enable = true;
   modules.home.qownnotes.enable = true;
 
+  modules.home.firefox.settings = {
+    "browser.nova.enabled" = false;
+  };
+
   modules.home.llm.piAgentSettingsOverride = {
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.6-luna";
+    defaultModel = "gpt-6-luna";
+    defaultThinkingLevel = "medium";
     scopedModels = [
       "gpt-5.6-luna"
       "gpt-5.6-sol"

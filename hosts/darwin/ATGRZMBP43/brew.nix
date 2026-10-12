@@ -41,5 +41,6 @@
       "radiola"
       "prusaslicer"
       "vlc"
+      "zen"
   ];
 }
