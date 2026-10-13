@@ -6,7 +6,7 @@ let
   cfg = config.modules.services.nextcloud;
   domain = "thym.at";
   adminEmail = "admin@thym.it";
-  nextcloudPackage = pkgs.nextcloud34;
+  nextcloudPackage = pkgs.nextcloud35;
   baseAppNames = [
     "attendance"
     "bookmarks"
@@ -25,7 +25,6 @@ let
     "integration_immich"
     "mail"
     "music"
-    "news"
     "notes"
     "polls"
     "qownnotesapi"
