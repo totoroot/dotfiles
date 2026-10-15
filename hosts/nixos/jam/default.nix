@@ -44,6 +44,8 @@ in
         enableClient = true;
         host = "purple-ts";
         port = 5129;
+        # Use purple's stable Tailscale IP; jam's resolv.conf uses upstream DNS.
+        substituterUrl = "http://100.64.0.2:5129/purple-cache";
         # Set to your cache public key, e.g. "cache-name:BASE64"
         publicKey = "purple-cache:YdLJ8t36I3Kk7kdd6NsW84UK5bf2bDYctMuFk6d3vCw=";
         environmentFile = "/etc/atticd.env";

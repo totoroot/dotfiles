@@ -33,6 +33,12 @@ in
       description = "Attic server port.";
     };
 
+    substituterUrl = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Explicit cache URL; when set, avoids resolving the cache host through Tailscale MagicDNS.";
+    };
+
     publicKey = mkOption {
       type = types.nullOr types.str;
       default = null;
@@ -130,7 +136,7 @@ in
           connect-timeout = 1;
           download-attempts = 1;
           substituters = lib.mkForce [
-            "http://${cfg.host}:${toString cfg.port}/${cfg.cacheName}"
+            (if cfg.substituterUrl != null then cfg.substituterUrl else "http://${cfg.host}:${toString cfg.port}/${cfg.cacheName}")
             "https://cache.nixos.org/"
             "https://nix-community.cachix.org"
           ];
