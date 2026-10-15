@@ -17,6 +17,10 @@ let
   };
 
   listFilesRecursive = relativeDir: acc:
+    let
+      directory = "${cfg.sourceDir}/${relativeDir}${lib.optionalString (acc != "") "/${acc}"}";
+    in
+    if !builtins.pathExists directory then [ ] else
     lib.flatten (lib.mapAttrsToList
       (name: kind:
         let
@@ -28,7 +32,7 @@ let
           listFilesRecursive relativeDir path
         else
           [ ])
-      (builtins.readDir "${cfg.sourceDir}/${if acc == "" then relativeDir else "${relativeDir}/${acc}"}"));
+      (builtins.readDir directory));
 in
 {
   options.modules.home.configSymlinks = {

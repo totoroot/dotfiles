@@ -78,9 +78,9 @@ in
         # ".zshenv"
       ]);
 
-    modules.home.configSymlinks.recursiveEntries = [
-      "zsh/completions"
-    ];
+    modules.home.configSymlinks.recursiveEntries = lib.optional
+      (builtins.pathExists "${config.modules.home.configSymlinks.sourceDir}/zsh/completions")
+      "zsh/completions";
 
     home.activation.fixDeadZshCompletionsSymlink = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
       target="$HOME/.config/zsh/completions"
