@@ -8,6 +8,9 @@ let
   adminEmail = "admin@thym.it";
   nextcloudPackage = pkgs.nextcloud35;
   baseAppNames = [
+    # Quick Notes currently declares compatibility only through Nextcloud 34.
+    # Omit it from extraApps so the setup hook doesn't reject Nextcloud 35.
+    # Re-enable once upstream publishes a compatible release.
     "attendance"
     "bookmarks"
     "calendar"
@@ -28,7 +31,6 @@ let
     "notes"
     "polls"
     "qownnotesapi"
-    "quicknotes"
     "repod"
     "richdocuments"
     "secrets"
@@ -206,14 +208,6 @@ let
       url = "https://github.com/xXRoxXeRXx/integration_immich/releases/download/v1.4.0/integration_immich.tar.gz";
       license = "agpl3Plus";
     };
-    quicknotes = pkgs.fetchNextcloudApp {
-      name = "quicknotes";
-      appName = "quicknotes";
-      appVersion = "1.0.0";
-      hash = "sha256-zkprBUXhtPVytRar1buExaiCPraWA1bISlfjpQiqaI0=";
-      url = "https://github.com/matiasdelellis/quicknotes/releases/download/v1.0.0/quicknotes.tar.gz";
-      license = "agpl3Plus";
-    };
     tasks = pkgs.fetchNextcloudApp {
       name = "tasks";
       appName = "tasks";
@@ -274,7 +268,6 @@ in
               secrets = nc4nixApps.secrets;
               countdown = nc4nixApps.countdown;
               integration_immich = nc4nixApps.integration_immich;
-              quicknotes = nc4nixApps.quicknotes;
             };
             packagedAppNames = lib.filter (name: !(builtins.hasAttr name customExtraApps)) selectedAppNames;
           in
