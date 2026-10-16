@@ -45,7 +45,15 @@ with inputs;
 
   nixpkgs.overlays = [
     (final: prev: {
-      inherit (prev.lixPackageSets.stable)
+      # Lix 2.95.4 removed this Meson option, but nixpkgs still passes it.
+      lixPackageSets = prev.lixPackageSets // {
+        stable = prev.lixPackageSets.stable.overrideScope (_: previous: {
+          lix = previous.lix.overrideAttrs (old: lib.optionalAttrs (old.version == "2.95.4") {
+            mesonFlags = lib.filter (flag: !(lib.hasPrefix "-Dmimalloc=" flag)) old.mesonFlags;
+          });
+        });
+      };
+      inherit (final.lixPackageSets.stable)
         nixpkgs-review
         nix-eval-jobs
         nix-fast-build
