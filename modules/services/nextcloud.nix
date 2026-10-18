@@ -8,15 +8,13 @@ let
   adminEmail = "admin@thym.it";
   nextcloudPackage = pkgs.nextcloud35;
   baseAppNames = [
-    # Quick Notes currently declares compatibility only through Nextcloud 34.
-    # Omit it from extraApps so the setup hook doesn't reject Nextcloud 35.
-    # Re-enable once upstream publishes a compatible release.
-    "attendance"
+    # Attendance, Countdown, Immich Integration and Quick Notes are omitted:
+    # their pinned releases reject Nextcloud 35. Re-enable after checking
+    # upstream compatibility; flake updates do not update custom app pins.
     "bookmarks"
     "calendar"
     "contacts"
     "collectives"
-    "countdown"
     "cookbook"
     "cospend"
     "deck"
@@ -25,7 +23,6 @@ let
     "forms"
     "groupfolders"
     "gpoddersync"
-    "integration_immich"
     "mail"
     "music"
     "notes"
@@ -264,10 +261,7 @@ in
           let
             appPackages = config.services.nextcloud.package.packages.apps;
             customExtraApps = {
-              attendance = nc4nixApps.attendance;
               secrets = nc4nixApps.secrets;
-              countdown = nc4nixApps.countdown;
-              integration_immich = nc4nixApps.integration_immich;
             };
             packagedAppNames = lib.filter (name: !(builtins.hasAttr name customExtraApps)) selectedAppNames;
           in
