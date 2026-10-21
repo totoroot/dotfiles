@@ -44,6 +44,7 @@ with inputs;
   };
 
   nixpkgs.overlays = [
+    (import ./overlays/php-security.nix { inherit inputs; })
     (final: prev: {
       # Lix 2.95.4 removed this Meson option, but nixpkgs still passes it.
       lixPackageSets = prev.lixPackageSets // {
