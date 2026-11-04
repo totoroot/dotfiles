@@ -289,10 +289,15 @@ in
   };
 
   services.postgresql = {
-    ensureDatabases = lib.mkAfter [ "windshift" ];
+    # Preserve Spliit's database and role independently of the paused service.
+    ensureDatabases = lib.mkAfter [ "windshift" "spliit" ];
     ensureUsers = lib.mkAfter [
       {
         name = "windshift";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "spliit";
         ensureDBOwnership = true;
       }
     ];
@@ -363,8 +368,9 @@ in
   };
 
   services.spliit = {
-    enable = true;
-    openFirewall = true;
+    # Paused while expenses use Nextcloud Cospend. Keep configuration for later.
+    enable = false;
+    openFirewall = false;
     settings = {
       PORT = 3011;
       NEXT_PUBLIC_BASE_URL = "https://ausgaben.xn--berwachungsbehr-mtb1g.de";
@@ -549,11 +555,6 @@ in
     };
 
     "papier.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet autheliaHost;
-      "/authelia".extraConfig = autheliaLocationSnippet;
-    };
-
-    "ausgaben.${domain}".locations = {
       "/".extraConfig = autheliaAuthSnippet autheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
