@@ -4,13 +4,14 @@ let
   cfg = config.modules.home.firefox;
   profileBasePath = if pkgs.stdenv.hostPlatform.isDarwin then "Library/Application Support/Firefox/Profiles" else ".mozilla/firefox";
   profilePath = "${profileBasePath}/${cfg.profileDirectory}";
+  extensionPackage = ext: pkgs.fetchurl {
+    url = ext.url;
+    sha256 = ext.sha256;
+  };
   mkExtensionFile = ext: {
     name = "${profilePath}/extensions/${ext.id}.xpi";
     value = {
-      source = pkgs.fetchurl {
-        url = ext.url;
-        sha256 = ext.sha256;
-      };
+      source = extensionPackage ext;
       force = true;
     };
   };
@@ -29,6 +30,12 @@ in
       type = package;
       default = pkgs.firefox;
       description = "Firefox package to install.";
+    };
+
+    installPackage = lib.mkOption {
+      type = bool;
+      default = true;
+      description = "Whether Home Manager installs the Firefox package.";
     };
 
     profileDirectory = lib.mkOption {
@@ -192,14 +199,33 @@ in
           sha256 = "sha256-8nMNKHcAV2OkXXZXSYkuk29JyucT0o96puoxRFS4nPE=";
         }
       ];
-      description = "Extensions to install declaratively into the selected Firefox profile.";
+      description = "Pinned extensions to install declaratively. On macOS, native Firefox policies install them in every profile. On Linux, they are linked into the selected profile.";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = lib.optional cfg.installPackage cfg.package;
+
+    # Home Manager writes native macOS policies for the signed Homebrew app.
+    # Let Firefox install the pinned XPIs instead of sideloading profile symlinks.
+    # No profiles are declared here, so Firefox retains its writable registry.
+    programs.firefox = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      enable = true;
+      package = null;
+      darwinDefaultsId = "org.mozilla.firefox";
+      policies.ExtensionSettings = builtins.listToAttrs (map (ext: {
+        name = ext.id;
+        value = {
+          installation_mode = "force_installed";
+          install_url = "file://${extensionPackage ext}";
+          updates_disabled = true;
+        };
+      }) cfg.extensions);
+    };
+
     home.file =
-      (builtins.listToAttrs (map mkExtensionFile cfg.extensions))
+      (builtins.listToAttrs (map mkExtensionFile
+        (lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) cfg.extensions)))
       // {
         "${profilePath}/user.js" = lib.mkIf (cfg.settings != { } || cfg.extraConfig != "") {
           text = userJsText;

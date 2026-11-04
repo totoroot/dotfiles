@@ -19,11 +19,15 @@ in
     enable = true;
     hostName = "ATGRZMBP43";
     defaultUser = "mathym";
-    firefoxProfileDirectory = "lxyotzh1.default";
+    firefoxProfileDirectory = "recovered-iml5duog.cOKXLZF1";
     enableBitwarden = false;
     enableContainers = true;
     enableGhostty = true;
   };
+
+  # Use the signed upstream app for reliable macOS LaunchServices support.
+  # Home Manager still manages the profile files, but not the Firefox app.
+  modules.home.firefox.installPackage = false;
 
   modules.home.gitlab-cli.enable = true;
   modules.home.qownnotes.enable = true;

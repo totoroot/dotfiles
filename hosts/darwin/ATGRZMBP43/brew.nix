@@ -42,5 +42,7 @@
       "prusaslicer"
       "vlc"
       "zen"
+      # Signed upstream bundle. Home Manager still manages its profile files.
+      "firefox"
   ];
 }
