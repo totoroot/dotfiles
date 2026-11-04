@@ -93,6 +93,14 @@ To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
 - If unsure what to remove, ask: "Do you want me to remove X and keep Y, or remove everything related to X?"
 - When cleaning up test/temporary changes, restore to clean state, not to empty state.
 
+## Change safety and verification
+
+- **Inspect destructive side effects before running or recommending activation.** Check cleanup/zap, file replacement, and migrations. Compare installed Homebrew casks with evaluated declarations and inspect removal stanzas. Rebuild approval is not approval to delete application data or silently change cleanup policy.
+- **Protect mutable data.** Nix rollback does not restore profiles or databases. Before migration, identify the actual active executable/profile, close the application, and back up source, destination, and selection metadata. Verify contents and relevant data dates. Recover into a separate directory and preserve originals.
+- **Check prior evidence before repeating fixes.** Read relevant git history, repo docs, and previous sessions under `~/.pi/agent/sessions/`. Distinguish confirmed working fixes from unsuccessful experiments.
+- **Verify deployment and behavior, not just builds.** Check evaluation, activation, the running application's selected data, and the user-visible result separately. A fresh profile or surviving process is not proof of recovery. Report exactly what changed, what was verified, and what remains unknown.
+- **Respect access and recovery boundaries.** Run available local read-only diagnostics directly and explain access limitations. Remote administration requires explicit authorization for the host and action. During suspected data loss, stop rebuilds, cleanup, and unnecessary writes. Search read-only and do not infer permanent loss from an incomplete search.
+
 ## Working style in this repo
 
 - Inspect existing modules before creating new ones.
