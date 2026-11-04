@@ -5,7 +5,9 @@
   homebrew.onActivation = {
     autoUpdate = true;
     upgrade = true;
-    cleanup = "zap";
+    # Keep cleanup disabled (the default). Zap can remove application data,
+    # including Firefox profiles, when a cask is omitted or moved to Nix.
+    # cleanup = "zap";
     extraFlags = [ "--force" ];
   };
   homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
