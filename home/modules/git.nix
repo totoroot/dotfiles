@@ -31,7 +31,7 @@ in {
       # A syntax-highlighting pager for Git
       delta
       # CLI Tool for Codeberg similar to gh and glab
-      codeberg-cli
+      forgejo-cli
     ];
 
     programs.git.includes = {
