@@ -104,7 +104,8 @@ in
       in
       lib.optionalString (hostName != null) ''
         [core]
-            sshCommand = "ssh -i ~/.ssh/${hostName}"
+            # Isolate private Git connections from work and generic SSH masters.
+            sshCommand = "ssh -i ~/.ssh/${hostName} -o ControlPath=~/.ssh/cm-git-private-%C"
       '';
   };
 }

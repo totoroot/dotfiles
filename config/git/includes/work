@@ -4,6 +4,7 @@
 [commit]
     gpgsign = false
 [core]
-    sshCommand = "ssh -i ~/.ssh/work"
+    # Isolate work Git connections from private and generic SSH masters.
+    sshCommand = "ssh -i ~/.ssh/work -o ControlPath=~/.ssh/cm-git-work-%C"
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
