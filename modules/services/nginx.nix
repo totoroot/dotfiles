@@ -323,26 +323,34 @@ in
             '';
           };
         };
-        "${theaterDomain}" = {
-          enableACME = true;
+        # The exact canonical host wins over the wildcard alias below.
+        "die.${theaterDomain}" = {
+          useACMEHost = theaterDomain;
           forceSSL = true;
-          root = "/var/www/theaterschaffen.de";
-          serverAliases = [ "www.${theaterDomain}" ];
+          root = "/var/www/die.theaterschaffen.de";
+          extraConfig = ''
+            error_page 404 /404.html;
+          '';
+          locations."/".tryFiles = "$uri $uri/ =404";
+          locations."/en/" = {
+            tryFiles = "$uri $uri/ =404";
+            extraConfig = ''
+              error_page 404 /en/404.html;
+            '';
+          };
+        };
+        "${theaterDomain}" = {
+          useACMEHost = theaterDomain;
+          # Serve HTTP and HTTPS in one redirect vhost, avoiding an extra hop.
+          addSSL = true;
+          serverAliases = [ "*.${theaterDomain}" ];
+          globalRedirect = "die.${theaterDomain}";
+          redirectCode = 301;
         };
         "julia.${thymDomain}" = {
           enableACME = true;
           forceSSL = true;
-          globalRedirect = theaterDomain;
-        };
-        "die.${theaterDomain}" = {
-          enableACME = true;
-          forceSSL = true;
-          root = "/var/www/julia";
-        };
-        "der.${theaterDomain}" = {
-          enableACME = true;
-          forceSSL = true;
-          root = "/var/www/fabian";
+          globalRedirect = "die.${theaterDomain}";
         };
         "${praxisDomain}" = {
           enableACME = true;
@@ -412,6 +420,23 @@ in
     security.acme.certs."${acmeWildcardCertName}" = {
       domain = domain;
       extraDomainNames = [ "*.${domain}" ];
+      group = "nginx";
+      dnsProvider = "netcup";
+      webroot = null;
+      credentialFiles = {
+        "NETCUP_CUSTOMER_NUMBER_FILE" = "/var/secrets/acme/netcup-customer-number";
+        "NETCUP_API_KEY_FILE" = "/var/secrets/acme/netcup-api-key";
+        "NETCUP_API_PASSWORD_FILE" = "/var/secrets/acme/netcup-api-password";
+      };
+      dnsPropagationCheck = true;
+      server = "https://acme-v02.api.letsencrypt.org/directory";
+    };
+
+    # HTTPS redirects from arbitrary first-level subdomains need a wildcard
+    # certificate. Reuse jam's existing Netcup DNS-01 credential files.
+    security.acme.certs."${theaterDomain}" = {
+      domain = theaterDomain;
+      extraDomainNames = [ "*.${theaterDomain}" ];
       group = "nginx";
       dnsProvider = "netcup";
       webroot = null;

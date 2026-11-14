@@ -638,6 +638,7 @@ in
     "d /var/www/grueneis-psychologie.at 0755 deploy-web deploy-web -"
     "d /var/www/matthias.thym.at 0755 deploy-web deploy-web -"
     "d /var/www/theaterschaffen.de 0755 deploy-web deploy-web -"
+    "d /var/www/die.theaterschaffen.de 0755 deploy-web deploy-web -"
     "d /var/www/nixos.at 0755 deploy-web deploy-web -"
     "d /var/www/thym.at 0755 deploy-web deploy-web -"
     "d /var/www/womanma.de 0755 deploy-web deploy-web -"
