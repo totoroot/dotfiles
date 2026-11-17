@@ -82,6 +82,13 @@ in
         "datareporting.healthreport.service.enabled" = false;
         "datareporting.policy.dataSubmissionEnabled" = false;
       };
+      # Keep startup defaults when a host supplies its own preference set.
+      apply = settings: {
+        "sidebar.visibility" = "hide-sidebar";
+        "browser.tabs.warnOnClose" = true;
+        "browser.warnOnQuit" = true;
+        "browser.warnOnQuitShortcut" = true;
+      } // settings;
       description = "Firefox preferences to set in user.js.";
     };
 
