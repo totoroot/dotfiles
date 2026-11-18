@@ -19,7 +19,7 @@ set -euo pipefail
 # On Linux/NixOS, rswitch builds `config.system.build.toplevel` directly to
 # avoid nixos-rebuild-specific evaluation issues. It records a generation for
 # switch and boot before calling switch-to-configuration. Test is temporary.
-# On Darwin, it still uses darwin-rebuild.
+# On Darwin, use darwin-rebuild from the target's pinned nix-darwin module.
 #
 # NIX_BUILD_ARGS after `--` are passed to `nix build` (Linux) or
 # `darwin-rebuild` (Darwin).
@@ -96,7 +96,8 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
       ;;
   esac
 
-  exec sudo -H nix run nix-darwin/master#darwin-rebuild -- \
+  darwin_rebuild="${flake_root}#darwinConfigurations.${target_host}.config.system.build.darwin-rebuild"
+  exec sudo -H nix run --no-update-lock-file "$darwin_rebuild" -- \
     "$darwin_action" --flake "${flake_root}#${target_host}" --impure "${nix_args[@]}"
 fi
 
