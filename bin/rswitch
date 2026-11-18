@@ -16,9 +16,10 @@ set -euo pipefail
 #   rswitch -- --show-trace
 #   rswitch test -- --cores 0 --show-trace
 #
-# On Linux/NixOS, rswitch builds `config.system.build.toplevel` directly and
-# runs `switch-to-configuration`, avoiding nixos-rebuild-specific evaluation
-# issues. On Darwin, it still uses darwin-rebuild.
+# On Linux/NixOS, rswitch builds `config.system.build.toplevel` directly to
+# avoid nixos-rebuild-specific evaluation issues. It records a generation for
+# switch and boot before calling switch-to-configuration. Test is temporary.
+# On Darwin, it still uses darwin-rebuild.
 #
 # NIX_BUILD_ARGS after `--` are passed to `nix build` (Linux) or
 # `darwin-rebuild` (Darwin).
@@ -112,6 +113,18 @@ fi
 if [[ -z "$store_path" ]]; then
   echo "Error: nix build returned no store path; refusing to activate." >&2
   exit 1
+fi
+
+if [[ ! -x "$store_path/bin/switch-to-configuration" ]]; then
+  echo "Error: build output has no executable switch-to-configuration; refusing to activate." >&2
+  exit 1
+fi
+
+# The bootloader enumerates the system profile's generations. Register the
+# closure before activation so switch and boot can install the new boot entry.
+# Unlike switch and boot, test must not change the persistent system profile.
+if [[ "$action" != "test" ]]; then
+  sudo nix-env --profile /nix/var/nix/profiles/system --set "$store_path"
 fi
 
 exec sudo "$store_path/bin/switch-to-configuration" "$action"
