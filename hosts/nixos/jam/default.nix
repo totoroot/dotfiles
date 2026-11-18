@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   domain = "xn--berwachungsbehr-mtb1g.de";
   monitoringTargets = import ./monitoring-targets.nix;
@@ -578,6 +578,19 @@ in
       };
     };
   };
+
+  # Defense in depth after the November 2026 nginx2root disclosure:
+  # https://xint.io/blog/nginx2root-remote-code-execution
+  # The nginx update closes the reported web entry point, but it does not fix
+  # the separate Linux SCTP privilege escalation. Jam's running kernel (7.0.5
+  # when checked) shipped SCTP as a loadable module. It was not loaded, but
+  # modprobe would load it on demand. No SCTP consumers are declared on jam.
+  # Deny modprobe loads rather than just suppressing alias-based autoloading.
+  # This does not unload an existing module or cover built-in SCTP. Revisit
+  # once the deployed kernel is confirmed fixed or a service needs SCTP.
+  boot.extraModprobeConfig = ''
+    install sctp ${pkgs.coreutils}/bin/false
+  '';
 
   # Set stateVersion
   system.stateVersion = "25.11";
