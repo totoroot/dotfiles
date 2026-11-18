@@ -43,6 +43,8 @@ in
     htop
     # A lightweight and flexible command-line JSON processor
     jq
+    # GitLab pipeline dashboard. Use a dedicated read_api token in Keychain.
+    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.invocra
     # Ranger-like terminal file manager written in Rust
     joshuto
     # High-level, high-performance, dynamic language for technical computing
