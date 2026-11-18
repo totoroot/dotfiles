@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../modules/editors
     ./modules/aerc.nix
     ./modules/atuin.nix
     ./modules/archive.nix

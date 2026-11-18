@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../../modules/editors
   ];
 
   fonts.fontconfig.enable = true;

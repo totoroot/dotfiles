@@ -664,12 +664,6 @@ in
       ../../../home/bridge.nix
     ];
 
-    home.sessionVariables = {
-      EDITOR = "micro";
-      VISUAL = "micro";
-      GIT_EDITOR = "micro";
-    };
-
     modules.home = {
       unfreePackages.enable = true;
       atuin.enable = true;

@@ -50,7 +50,6 @@ in
 
     home.sessionVariables = {
       HOMEBREW_NO_INSTALL_CLEANUP = "TRUE";
-      EDITOR = "micro";
     };
 
     home.sessionPath = [
