@@ -45,16 +45,12 @@ in
     jq
     # GitLab pipeline dashboard. Use a dedicated read_api token in Keychain.
     inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.invocra
-    # Ranger-like terminal file manager written in Rust
-    joshuto
     # High-level, high-performance, dynamic language for technical computing
     # julia-bin
     # A simple terminal UI for both docker and docker-compose
     # lazydocker
     # Simple terminal UI for git commands
     # lazygit
-    # A terminal file manager written in Go and heavily inspired by ranger
-    lf
     # General-purpose media player, fork of MPlayer and mplayer2
     mpv
     # A fast, highly customizable system info script
