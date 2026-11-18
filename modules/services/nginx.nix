@@ -1,4 +1,4 @@
-{ config, options, lib, ... }:
+{ config, options, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -17,6 +17,13 @@ let
 
   acmeWildcardCertName = domain;
   acmeChallengeWebroot = "/var/lib/acme/acme-challenge";
+  acmeDefaultOptions = options.security.acme.defaults.type.getSubOptions [ ];
+  dnsPropagationChecks = if acmeDefaultOptions ? dnsAuthoritativePropagationCheck then {
+    dnsAuthoritativePropagationCheck = true;
+    dnsRecursivePropagationCheck = true;
+  } else {
+    dnsPropagationCheck = true;
+  };
 
   server = "100.64.0.3";
 
@@ -50,6 +57,18 @@ in
   config = mkIf cfg.enable {
     services.nginx = {
       enable = true;
+
+      # Use the fixed stable release until nixpkgs supplies it.
+      package = mkIf (versionOlder pkgs.nginxStable.version "1.30.7") (
+        pkgs.nginxStable.overrideAttrs (_: {
+          version = "1.30.7";
+          nginxVersion = "1.30.7";
+          src = pkgs.fetchurl {
+            url = "https://nginx.org/download/nginx-1.30.7.tar.gz";
+            hash = "sha256-JWW1yDcFDpWPcPsPc8SOK8pFQq00n9NW9G+wxyYQvG4=";
+          };
+        })
+      );
 
       # Enable the NGINX status page
       statusPage = true;
@@ -428,9 +447,8 @@ in
         "NETCUP_API_KEY_FILE" = "/var/secrets/acme/netcup-api-key";
         "NETCUP_API_PASSWORD_FILE" = "/var/secrets/acme/netcup-api-password";
       };
-      dnsPropagationCheck = true;
       server = "https://acme-v02.api.letsencrypt.org/directory";
-    };
+    } // dnsPropagationChecks;
 
     # HTTPS redirects from arbitrary first-level subdomains need a wildcard
     # certificate. Reuse jam's existing Netcup DNS-01 credential files.
@@ -445,9 +463,8 @@ in
         "NETCUP_API_KEY_FILE" = "/var/secrets/acme/netcup-api-key";
         "NETCUP_API_PASSWORD_FILE" = "/var/secrets/acme/netcup-api-password";
       };
-      dnsPropagationCheck = true;
       server = "https://acme-v02.api.letsencrypt.org/directory";
-    };
+    } // dnsPropagationChecks;
 
     security.acme.certs."reise.${domain}" = {
       email = adminEmail;
