@@ -70,6 +70,7 @@ To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
 
 ## Existing repo direction
 
+- The active targets are `jam` (NixOS server), `ATGRZMBP43`, and `thistle` (Darwin). Run `bin/check-fleet` before committing shared module or lockfile changes. Leave dormant hosts out of this gate. See [active-host operations](docs/active-hosts.md).
 - Broad service management already lives here: monitoring, auth, mail, web, CI/CD, deployment.
 - Access control direction favors SSO and declarative policy over ad-hoc basic auth.
 - Monitoring stack includes Gatus, Loki, Alloy, Grafana, and Prometheus.

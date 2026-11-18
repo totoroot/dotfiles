@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Only active hosts gate changes. See README.md for the support policy.
+root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
+status=0
+
+check() {
+  local host=$1 attr=$2 result
+  if result=$(nix eval --no-update-lock-file --raw "$root#$attr"); then
+    printf 'PASS  %s  %s\n' "$host" "$result"
+  else
+    printf 'FAIL  %s\n' "$host" >&2
+    status=1
+  fi
+}
+
+check jam nixosConfigurations.jam.config.system.build.toplevel.drvPath
+check ATGRZMBP43 darwinConfigurations.ATGRZMBP43.system.drvPath
+check thistle darwinConfigurations.thistle.system.drvPath
+
+exit "$status"

@@ -22,6 +22,16 @@ This repository manages:
 This is a personal configuration, not a turnkey installer. Reuse pieces, but
 expect to adapt host names, disks, users, secrets, domains, and service choices.
 
+## Supported hosts
+
+- `jam`: active NixOS server. Prefer targeted security updates over broad input refreshes.
+- `ATGRZMBP43` and `thistle`: active macOS hosts, primarily managed with Home Manager.
+- Other configurations are dormant and retained for reference. They do not block updates. Plan a fresh setup for Steam Deck.
+
+Run `bin/check-fleet` before committing shared module or lockfile changes. It
+evaluates the three active targets without building or activating them. See
+[active-host operations](docs/active-hosts.md) for build, boot, and service checks.
+
 ## Layout
 
 | Path | Purpose |
@@ -48,20 +58,15 @@ nix eval .#darwinConfigurations --apply builtins.attrNames
 nix eval .#homeConfigurations --apply builtins.attrNames
 ```
 
-Current evaluated hosts include:
-
-- NixOS: `grape`, `jam`, `lilac`, `moooh`, `mulberry`, `purple`, `raspberry`,
-  `sangria`, `violet`
-- Darwin: `ATGRZMBP43`
-- Home Manager on generic Linux: `debian`, `steamdeck`
+These discovery commands include dormant outputs, which may not evaluate.
 
 ## Common commands
 
 From repo root:
 
 ```sh
-# Check flake outputs where feasible
-nix flake check
+# Evaluate the active hosts
+bin/check-fleet
 
 # Build a NixOS system
 nix build .#nixosConfigurations.<host>.config.system.build.toplevel
@@ -69,8 +74,8 @@ nix build .#nixosConfigurations.<host>.config.system.build.toplevel
 # Switch a NixOS host
 sudo nixos-rebuild switch --flake .#<host> --impure
 
-# Switch a nix-darwin host
-sudo darwin-rebuild switch --flake .#<host>
+# Switch the local nix-darwin host with the pinned rebuild tool
+bin/rswitch switch
 
 # Apply a standalone Home Manager profile
 home-manager switch --flake .#<profile>
