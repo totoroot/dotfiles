@@ -57,14 +57,7 @@ Include the encrypted entry alongside the NixOS wiring before rebuilding jam. Th
 
 The PostgreSQL dump and Restic upload both trigger `restic-pantry-notify.service` on failure. Restic triggers `restic-pantry-heartbeat.service` only on success. Notification failures are logged separately and do not change the backup result. Missing credential files skip their respective hooks, so deploying the units alone does not enable alert delivery.
 
-On jam, provision the following curl config files as `root:root`, mode `0600`. Use only a trusted editor, put the real values in the files rather than shell arguments, and keep them out of Git:
-
-- `/var/secrets/restic-pantry-ntfy.curl`: an authenticated, private ntfy topic. Use a token for `jam-backup-publisher`, which has write-only access to `jam-backups`. The `matthias-desktop` and `matthias-phone` accounts have read-only access. See [ntfy account provisioning](jam-ntfy.md) before deploying the account configuration.
-
-  ```text
-  url = "https://ntfy.thym.it/jam-backups"
-  header = "Authorization: Bearer YOUR_NTFY_TOKEN"
-  ```
+The ntfy curl config is delivered from the SOPS key `RESTIC_PANTRY_NTFY_CURL`, using the token declared in `NTFY_AUTH_ENV`. See [ntfy account provisioning](jam-ntfy.md). Do not put credentials in shell arguments or Git.
 
 - `/var/secrets/restic-pantry-heartbeat.curl`: the private success-ping URL for an off-host check, for example [Healthchecks.io](https://healthchecks.io/). Expect one success per day with a two-hour grace period. Route missed-ping alerts independently of jam and its ntfy instance.
 

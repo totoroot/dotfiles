@@ -33,7 +33,20 @@ test -n "$sqlite" && sudo "$sqlite" /var/lib/ntfy-sh/user.db \
 
 If `sqlite3` is not installed, enter a shell with `nix shell nixpkgs#sqlite` first. The database copy contains authentication state. Keep it under `/root` and out of Git.
 
-Keep the existing `jam-backup-publisher` user. ntfy 2.37.2 adopts an existing username in place, updating its password hash and declared ACL without recreating its row or removing a manually issued token. The publisher token itself is not provisioned by this change. After rebuilding, check the accounts and permissions on jam:
+Keep the existing `jam-backup-publisher` user. ntfy 2.37.2 adopts an existing username in place, updating its password hash and declared ACL without recreating its row or removing a manually issued token. Declare the publisher token in the same SOPS-protected `NTFY_AUTH_ENV` value by adding a second environment line. Do not use `ntfy token add`, which would leave it only in the live database:
+
+```text
+NTFY_AUTH_TOKENS='jam-backup-publisher:YOUR_GENERATED_TOKEN:Jam backup alerts'
+```
+
+Also add a top-level SOPS string named `RESTIC_PANTRY_NTFY_CURL` containing the curl config for the notifier. Use the same token value, and keep the whole config value in SOPS:
+
+```text
+url = "https://ntfy.thym.it/jam-backups"
+header = "Authorization: Bearer YOUR_GENERATED_TOKEN"
+```
+
+The `RESTIC_PANTRY_NTFY_CURL` secret is installed as root-only `/var/secrets/restic-pantry-ntfy.curl`. After rebuilding, check the accounts and permissions on jam:
 
 ```sh
 sudo env NTFY_AUTH_FILE=/var/lib/ntfy-sh/user.db \
