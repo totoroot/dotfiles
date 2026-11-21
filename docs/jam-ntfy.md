@@ -2,11 +2,11 @@
 
 Jam provisions three regular accounts when `ntfy-sh.service` starts. The existing anonymous topic rules stay unchanged.
 
-| Account | Permission on `jam-backups` |
-| --- | --- |
-| `mathym-desktop` | Read-only |
-| `mathym-phone` | Read-only |
-| `jam-backup-publisher` | Write-only |
+| Account | `jam-backups` | `uptime-alerts` |
+| --- | --- | --- |
+| `mathym-desktop` | Read-only | Read-only |
+| `mathym-phone` | Read-only | Read-only |
+| `jam-backup-publisher` | Write-only | No access |
 
 ## Prepare credentials
 

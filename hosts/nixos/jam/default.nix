@@ -332,7 +332,9 @@ in
     environmentFile = config.sops.secrets.ntfy-auth-env.path;
     settings.auth-access = [
       "mathym-desktop:jam-backups:ro"
+      "mathym-desktop:uptime-alerts:ro"
       "mathym-phone:jam-backups:ro"
+      "mathym-phone:uptime-alerts:ro"
       "jam-backup-publisher:jam-backups:wo"
     ];
   };
