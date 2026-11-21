@@ -27,7 +27,7 @@ This is the index of hosts, retained configurations, and managed resources. **Ac
 
 | Resource | Provider and location | Purpose | Setup and operations |
 | --- | --- | --- | --- |
-| `pantry` | Hetzner Storage Box BX11, Falkenstein, Germany | Off-host Restic storage for `jam`. A PostgreSQL snapshot has been retrieved and verified. The nightly timer rollout is pending. | [Storage Box setup](pantry.md), [Jam backup and recovery](jam-backups.md) |
+| `pantry` | Hetzner Storage Box BX11, Falkenstein, Germany | Off-host Restic storage for `jam`. A PostgreSQL snapshot has been retrieved and verified. Nightly uploads are running. | [Storage Box setup](pantry.md), [Jam backup and recovery](jam-backups.md) |
 
 ## Maintaining this inventory
 

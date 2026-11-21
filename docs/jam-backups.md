@@ -4,7 +4,7 @@
 
 - Jam's PostgreSQL dump has been verified locally with `gzip -t`. A database import has not been tested.
 - The encrypted Restic repository `0403d19480` was initialized on `pantry`. Jam uploaded the PostgreSQL dump as snapshot `4d326540`. The Mac restored it with Restic verification, and the restored archive passed `gzip -t`. Import into PostgreSQL is deferred.
-- The deployed systemd job successfully uploaded PostgreSQL snapshot `01b1d013` without prompting. The timer rollout is pending. The schedule uses a single persistent timer at 02:15 Europe/Vienna, replacing the separate dump timer. The job requires a successful fresh dump and reads its repository password from sops-nix. No pruning or external monitoring is configured.
+- The systemd timer ran at 02:15 Europe/Vienna and saved the first expanded snapshot, `d73e55da`. The job requires a successful fresh dump and reads its repository password from sops-nix. Pruning is disabled. The monitoring hooks below require deployment and local credentials before they can send alerts.
 
 ## Backup scope
 
@@ -16,7 +16,7 @@
 | `/var/www` | Deployed site files and assets |
 | `/var/lib/vaultwarden` | Vaultwarden file state, such as attachments and configuration, without re-uploading its rotating local archives |
 
-The expanded scope has not been verified on jam yet. The job reads live application files without pausing services, so the file tree and database dump are not an atomic recovery point. Test an application restore before relying on that combination. The Nix store, live PostgreSQL directory, and `/var/secrets` are not backup inputs. Keep independently recoverable configuration and credentials for services that require them.
+The first expanded upload succeeded, but its individual paths have not been restored and tested. The job reads live application files without pausing services, so the file tree and database dump are not an atomic recovery point. Test an application restore before relying on that combination. The Nix store, live PostgreSQL directory, and `/var/secrets` are not backup inputs. Keep independently recoverable configuration and credentials for services that require them.
 
 ## Backup destination
 
@@ -53,12 +53,41 @@ Open `secrets/jam.yaml` with `sops edit secrets/jam.yaml` on a trusted machine t
 
 Include the encrypted entry alongside the NixOS wiring before rebuilding jam. The SOPS manifest validates the key during the build. On activation, sops-nix installs it as root-owned `0400` at `/var/secrets/restic-pantry-password`. The service uses that path, not an environment variable containing the password. No SOPS recipients or age keys are changed.
 
+## Monitoring
+
+The PostgreSQL dump and Restic upload both trigger `restic-pantry-notify.service` on failure. Restic triggers `restic-pantry-heartbeat.service` only on success. Notification failures are logged separately and do not change the backup result. Missing credential files skip their respective hooks, so deploying the units alone does not enable alert delivery.
+
+On jam, provision the following curl config files as `root:root`, mode `0600`. Use only a trusted editor, put the real values in the files rather than shell arguments, and keep them out of Git:
+
+- `/var/secrets/restic-pantry-ntfy.curl`: an authenticated, private ntfy topic. Give the token's account publish access only where needed.
+
+  ```text
+  url = "https://ntfy.thym.it/jam-backups"
+  header = "Authorization: Bearer YOUR_NTFY_TOKEN"
+  ```
+
+- `/var/secrets/restic-pantry-heartbeat.curl`: the private success-ping URL for an off-host check, for example [Healthchecks.io](https://healthchecks.io/). Expect one success per day with a two-hour grace period. Route missed-ping alerts independently of jam and its ntfy instance.
+
+  ```text
+  url = "https://hc-ping.com/YOUR_CHECK_ID"
+  ```
+
+After deploying and provisioning, test both hooks without failing a real backup:
+
+```sh
+sudo systemctl start restic-pantry-notify.service   # Sends a real alert
+sudo systemctl start restic-pantry-heartbeat.service # Records a test success ping
+sudo journalctl -u restic-pantry-notify.service -u restic-pantry-heartbeat.service -n 30 --no-pager
+```
+
+Confirm the alert arrives and the monitor records the ping. Then verify a scheduled backup updates the heartbeat automatically. Verify missed-ping delivery separately with a disposable check rather than disrupting the production backup.
+
 ## Next steps
 
-1. Deploy the timer and verify the first scheduled PostgreSQL upload.
+1. Provision and verify both monitoring channels.
 2. When ready to test database recovery, import the independently restored dump into a disposable PostgreSQL cluster with compatible versions and extensions. Check that the expected databases and roles exist and sample the recovered data. Never import the full cluster dump into production as a test.
 3. Verify a snapshot contains the expanded paths and test restoring representative mail, web, Nextcloud, and Vaultwarden files into a scratch location. Assess whether Nextcloud needs coordinated database and file snapshots for reliable recovery.
-4. Proposed retention: 14 daily, 8 weekly, and 6 monthly snapshots. Preview the policy before enabling Restic pruning. Alert on failed runs with ntfy and add an off-host heartbeat check for stale backups, since jam also hosts ntfy.
+4. Proposed retention: 14 daily, 8 weekly, and 6 monthly snapshots. Preview the policy before enabling Restic pruning.
 5. Measure repository growth and test restores periodically. Add violet as an independent second destination when it returns.
 
 Do not call the setup recoverable until an off-host restore succeeds without relying on secrets available only through jam.
