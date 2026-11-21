@@ -8,18 +8,7 @@
 
 ## Backup destination
 
-`pantry` is a Hetzner Storage Box BX11 in Falkenstein, Germany, separate from jam's Netcup VPS. Repository: `sftp:u725720@u725720.your-storagebox.de:jam-restic`. Use SFTP on port 22. The console's port 23 refers to Hetzner's extended SSH service, which this setup does not need.
-
-The box has deletion protection and snapshot directory access enabled. Automatic snapshots run daily at 04:00 UTC, with eight retained to leave room for two manual snapshots. No subaccounts are configured. Storage Box snapshots do not replace Restic retention, and box deletion protection should not be treated as protection against deletion of individual repository files.
-
-| Tier | Capacity | Monthly price before VAT |
-| --- | ---: | ---: |
-| BX11 | 1 TB | €3.20 |
-| BX21 | 5 TB | €10.90 |
-| BX31 | 10 TB | €20.80 |
-| BX41 | 20 TB | €40.60 |
-
-These are the console prices recorded at setup, not guaranteed future prices. Rescaling keeps the data in place. Downgrades require both usage and snapshot counts to fit the smaller tier.
+Jam backs up over SFTP to [`pantry`](pantry.md), a Hetzner Storage Box separate from jam's Netcup VPS. The Storage Box setup page records connection details, console settings, snapshot limits, and pricing.
 
 ## Recovery gaps (deferred)
 

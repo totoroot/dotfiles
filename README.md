@@ -31,6 +31,8 @@ expect to adapt host names, disks, users, secrets, domains, and service choices.
 Run `bin/check-fleet` before committing shared module or lockfile changes. It
 evaluates the three active targets without building or activating them. See
 [active-host operations](docs/active-hosts.md) for build, boot, and service checks.
+The [infrastructure inventory](docs/inventory.md) lists active and dormant hosts
+and managed resources such as the `pantry` backup destination.
 
 ## Layout
 

@@ -1,6 +1,6 @@
 # Active-host operations
 
-`jam`, `ATGRZMBP43`, and `thistle` are the supported targets. Dormant hosts stay in Git, outside the evaluation gate. Review their hardware and upstream migrations before bringing them back. Steam Deck is a fresh setup, not an upgrade of the old configuration.
+`jam`, `ATGRZMBP43`, and `thistle` are the supported targets. See the [infrastructure inventory](inventory.md) for host roles and managed resources. Review dormant hosts' hardware and upstream migrations before bringing them back.
 
 ## Before deployment
 
