@@ -6,6 +6,18 @@
 - The encrypted Restic repository `0403d19480` was initialized on `pantry`. Jam uploaded the PostgreSQL dump as snapshot `4d326540`. The Mac restored it with Restic verification, and the restored archive passed `gzip -t`. Import into PostgreSQL is deferred.
 - The deployed systemd job successfully uploaded PostgreSQL snapshot `01b1d013` without prompting. The timer rollout is pending. The new schedule uses a single persistent timer at 01:00 UTC (02:00 CET, 03:00 CEST), replacing the separate dump timer. The job requires a successful fresh dump and reads its repository password from sops-nix. No pruning or external monitoring is configured.
 
+## Backup scope
+
+| Path | What it covers |
+| --- | --- |
+| `/var/backup/postgresql/all.sql.gz` | Fresh logical dump of the PostgreSQL cluster, including the Nextcloud and Vaultwarden databases |
+| `/var/vmail` | The configured mail store on jam. `/var/mail` is not where the virtual mailboxes live. |
+| `/var/lib/nextcloud` | Nextcloud data and local configuration |
+| `/var/www` | Deployed site files and assets |
+| `/var/lib/vaultwarden` | Vaultwarden file state, such as attachments and configuration, without re-uploading its rotating local archives |
+
+The expanded scope has not been verified on jam yet. The job reads live application files without pausing services, so the file tree and database dump are not an atomic recovery point. Test an application restore before relying on that combination. The Nix store, live PostgreSQL directory, and `/var/secrets` are not backup inputs. Keep independently recoverable configuration and credentials for services that require them.
+
 ## Backup destination
 
 Jam backs up over SFTP to [`pantry`](pantry.md), a Hetzner Storage Box separate from jam's Netcup VPS. The Storage Box setup page records connection details, console settings, snapshot limits, and pricing.
@@ -45,7 +57,7 @@ Include the encrypted entry alongside the NixOS wiring before rebuilding jam. Th
 
 1. Deploy the timer and verify the first scheduled PostgreSQL upload.
 2. When ready to test database recovery, import the independently restored dump into a disposable PostgreSQL cluster with compatible versions and extensions. Check that the expected databases and roles exist and sample the recovered data. Never import the full cluster dump into production as a test.
-3. Confirm the full backup scope: the PostgreSQL dump, Nextcloud data and configuration, `/var/vmail`, `/var/www`, and a verified Vaultwarden backup artifact. Check that Nextcloud's file and database recovery points are consistent. Exclude caches and the Nix store.
+3. Verify a snapshot contains the expanded paths and test restoring representative mail, web, Nextcloud, and Vaultwarden files into a scratch location. Assess whether Nextcloud needs coordinated database and file snapshots for reliable recovery.
 4. Proposed retention: 14 daily, 8 weekly, and 6 monthly snapshots. Preview the policy before enabling Restic pruning. Alert on failed runs with ntfy and add an off-host heartbeat check for stale backups, since jam also hosts ntfy.
 5. Measure repository growth and test restores periodically. Add violet as an independent second destination when it returns.
 

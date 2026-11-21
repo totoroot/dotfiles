@@ -312,7 +312,13 @@ in
   services.restic.backups.pantry = {
     repository = "sftp:u725720@u725720.your-storagebox.de:jam-restic";
     passwordFile = config.sops.secrets.restic-pantry-password.path;
-    paths = [ "/var/backup/postgresql/all.sql.gz" ];
+    paths = [
+      "/var/backup/postgresql/all.sql.gz"
+      config.mailserver.storage.path
+      config.services.nextcloud.datadir
+      "/var/www"
+      "/var/lib/vaultwarden"
+    ];
     extraOptions = [
       ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
     ];
