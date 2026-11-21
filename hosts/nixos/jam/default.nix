@@ -306,10 +306,8 @@ in
   services.postgresqlBackup = {
     enable = true;
     backupAll = true;
-    startAt = "*-*-* 01:00:00 UTC"; # 02:00 CET year-round
+    startAt = [ ]; # The Restic job starts the dump before uploading.
   };
-
-  systemd.timers.postgresqlBackup.timerConfig.Persistent = true;
 
   services.restic.backups.pantry = {
     repository = "sftp:u725720@u725720.your-storagebox.de:jam-restic";
@@ -318,7 +316,10 @@ in
     extraOptions = [
       ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
     ];
-    timerConfig = null; # Enable after a successful manual service run.
+    timerConfig = {
+      OnCalendar = "*-*-* 01:00:00 UTC"; # 02:00 CET, 03:00 CEST
+      Persistent = true;
+    };
   };
 
   systemd.services.restic-backups-pantry = {
