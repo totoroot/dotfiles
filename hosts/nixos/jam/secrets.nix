@@ -19,6 +19,15 @@ in
     age.keyFile = "/var/lib/sops-nix/jam.txt";
     useSystemdActivation = true;
     secrets = {
+      restic-pantry-heartbeat-curl = (mkSecret {
+        key = "RESTIC_PANTRY_HEARTBEAT_CURL";
+        path = "/var/secrets/restic-pantry-heartbeat.curl";
+      }) // {
+        sopsFile = builtins.path {
+          path = ../../../secrets/jam-backup-heartbeat.yaml;
+          name = "jam-backup-heartbeat-secrets";
+        };
+      };
       restic-pantry-ntfy-curl = mkSecret {
         key = "RESTIC_PANTRY_NTFY_CURL";
         path = "/var/secrets/restic-pantry-ntfy.curl";

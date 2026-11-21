@@ -370,11 +370,11 @@ in
 
   systemd.services.restic-pantry-heartbeat = {
     description = "Report successful jam backup to an off-host monitor";
-    unitConfig.ConditionPathExists = "/var/secrets/restic-pantry-heartbeat.curl";
+    unitConfig.ConditionPathExists = config.sops.secrets.restic-pantry-heartbeat-curl.path;
     serviceConfig = {
       Type = "oneshot";
       DynamicUser = true;
-      LoadCredential = "request:/var/secrets/restic-pantry-heartbeat.curl";
+      LoadCredential = "request:${config.sops.secrets.restic-pantry-heartbeat-curl.path}";
       ExecStart = ''
         ${lib.getExe pkgs.curl} --disable --config %d/request --proto =https --fail --silent --show-error --output /dev/null --max-time 15 --retry 2 --retry-max-time 45
       '';
