@@ -19,6 +19,10 @@ in
     age.keyFile = "/var/lib/sops-nix/jam.txt";
     useSystemdActivation = true;
     secrets = {
+      restic-pantry-password = mkSecret {
+        key = "RESTIC_PANTRY_PASSWORD";
+        path = "/var/secrets/restic-pantry-password";
+      };
       attic-client-env = mkSecret {
         key = "ATTICD_ENV";
         path = "/etc/atticd.env";

@@ -313,17 +313,17 @@ in
 
   services.restic.backups.pantry = {
     repository = "sftp:u725720@u725720.your-storagebox.de:jam-restic";
-    passwordFile = "/var/lib/restic-jam/password";
+    passwordFile = config.sops.secrets.restic-pantry-password.path;
     paths = [ "/var/backup/postgresql/all.sql.gz" ];
     extraOptions = [
       ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
     ];
-    timerConfig = null; # Enable only once unattended password provisioning is agreed.
+    timerConfig = null; # Enable after a successful manual service run.
   };
 
   systemd.services.restic-backups-pantry = {
-    requires = [ "postgresqlBackup.service" ];
-    after = [ "postgresqlBackup.service" ];
+    requires = [ "postgresqlBackup.service" "sops-install-secrets.service" ];
+    after = [ "postgresqlBackup.service" "sops-install-secrets.service" ];
   };
 
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
