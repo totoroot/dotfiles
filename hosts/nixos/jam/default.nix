@@ -303,6 +303,14 @@ in
     ];
   };
 
+  services.postgresqlBackup = {
+    enable = true;
+    backupAll = true;
+    startAt = "*-*-* 01:15:00 UTC";
+  };
+
+  systemd.timers.postgresqlBackup.timerConfig.Persistent = true;
+
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
     settings.concurrent = 3;
     settings.listen_address = "127.0.0.1:9252";
