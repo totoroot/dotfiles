@@ -620,6 +620,13 @@ in
     "ntfy.thym.it".locations = {
       "/".extraConfig = autheliaAuthSnippet thymITAutheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
+      # Native ntfy clients authenticate against ntfy's own per-topic ACLs.
+      # Bypass Authelia only for the two explicitly managed client topics.
+      "~ ^/(jam-backups|uptime-alerts)(/(json|sse|ws|raw))?$" = {
+        proxyPass = "http://localhost:6780";
+        proxyWebsockets = true;
+        extraConfig = "auth_request off;";
+      };
     };
 
     "festplatten.${domain}".locations = {

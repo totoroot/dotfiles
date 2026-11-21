@@ -1,6 +1,6 @@
 # Jam ntfy accounts
 
-Jam provisions three regular accounts when `ntfy-sh.service` starts. The existing anonymous topic rules stay unchanged.
+Jam provisions three regular accounts when `ntfy-sh.service` starts. The existing anonymous topic rules stay unchanged. The ntfy web UI remains behind Authelia. Nginx bypasses Authelia only for the native protocol endpoints of `jam-backups` and `uptime-alerts`, so ntfy clients can authenticate directly against the per-topic ACLs. Other topics and paths remain behind Authelia.
 
 | Account | `jam-backups` | `uptime-alerts` |
 | --- | --- | --- |
