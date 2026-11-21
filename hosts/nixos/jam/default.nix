@@ -311,6 +311,21 @@ in
 
   systemd.timers.postgresqlBackup.timerConfig.Persistent = true;
 
+  services.restic.backups.pantry = {
+    repository = "sftp:u725720@u725720.your-storagebox.de:jam-restic";
+    passwordFile = "/var/lib/restic-jam/password";
+    paths = [ "/var/backup/postgresql/all.sql.gz" ];
+    extraOptions = [
+      ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
+    ];
+    timerConfig = null; # Enable only once unattended password provisioning is agreed.
+  };
+
+  systemd.services.restic-backups-pantry = {
+    requires = [ "postgresqlBackup.service" ];
+    after = [ "postgresqlBackup.service" ];
+  };
+
   services.gitlab-runner = lib.mkIf config.modules.services.gitlab-runner.enable {
     settings.concurrent = 3;
     settings.listen_address = "127.0.0.1:9252";
