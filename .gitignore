@@ -1,5 +1,8 @@
 result
 
+# Local API credentials
+.envrc.local
+
 # Devenv
 .direnv*
 .devenv*

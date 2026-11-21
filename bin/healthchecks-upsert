@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: healthchecks-upsert NAME SLUG SCHEDULE TIMEZONE GRACE_SECONDS [CHANNELS]
+
+Create or update a Healthchecks.io check, matched by slug. CHANNELS is optional
+and accepts integration names, UUIDs, or '*' as supported by the API.
+Requires HC_API_KEY in the environment.
+EOF
+}
+
+if [[ $# -lt 5 || $# -gt 6 ]]; then
+  usage >&2
+  exit 2
+fi
+
+: "${HC_API_KEY:?Set HC_API_KEY in your ignored .envrc.local}"
+
+name=$1
+slug=$2
+schedule=$3
+timezone=$4
+grace=$5
+channels=${6:-}
+
+if [[ ! "$slug" =~ ^[a-z0-9_-]{1,100}$ ]]; then
+  echo "slug must contain only lowercase letters, digits, hyphens, or underscores" >&2
+  exit 2
+fi
+if [[ ! "$grace" =~ ^[0-9]+$ ]] || (( grace < 60 || grace > 31536000 )); then
+  echo "grace must be between 60 and 31536000 seconds" >&2
+  exit 2
+fi
+if [[ -z "$name" || ${#name} -gt 100 || -z "$schedule" || -z "$timezone" ]]; then
+  echo "name (max 100 chars), schedule, and timezone must be non-empty" >&2
+  exit 2
+fi
+
+payload=$(jq -cn \
+  --arg name "$name" \
+  --arg slug "$slug" \
+  --arg schedule "$schedule" \
+  --arg tz "$timezone" \
+  --arg channels "$channels" \
+  --argjson grace "$grace" \
+  '{name:$name,slug:$slug,schedule:$schedule,tz:$tz,grace:$grace,unique:["slug"]} +
+   (if $channels == "" then {} else {channels:$channels} end)')
+
+# Pass the API key to curl through a pipe, not an argument visible in process listings.
+response=$(curl --fail --silent --show-error \
+  --config <(printf 'header = "X-Api-Key: %s"\n' "$HC_API_KEY") \
+  --header 'Content-Type: application/json' \
+  --data-binary "$payload" \
+  https://healthchecks.io/api/v3/checks/)
+
+# ping_url is a bearer secret. Display it for the operator to store securely.
+printf '%s\n' "$response" | jq '{name,slug,uuid,status,schedule,tz,grace,ping_url}'

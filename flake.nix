@@ -223,6 +223,7 @@
                 ripgrep
                 fd
                 jq
+                curl
                 nixBin
               ];
               GREET = "Welcome to the development shell for totoroot's dotfiles";
