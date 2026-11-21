@@ -59,13 +59,9 @@ The PostgreSQL dump and Restic upload both trigger `restic-pantry-notify.service
 
 The ntfy curl config is delivered from the SOPS key `RESTIC_PANTRY_NTFY_CURL`, using the token declared in `NTFY_AUTH_ENV`. See [ntfy account provisioning](jam-ntfy.md). Do not put credentials in shell arguments or Git.
 
-- `/var/secrets/restic-pantry-heartbeat.curl`: the private success-ping URL for an off-host check, for example [Healthchecks.io](https://healthchecks.io/). Expect one success per day with a two-hour grace period. Route missed-ping alerts independently of jam and its ntfy instance.
+sops-nix installs `RESTIC_PANTRY_HEARTBEAT_CURL` from `secrets/jam.yaml` as `/var/secrets/restic-pantry-heartbeat.curl` (`root:root`, `0400`). It contains the check-specific UUID ping URL for the off-host `jam-backup` check. Healthchecks.io expects a success ping at 02:15 Europe/Vienna, with 5 hours 45 minutes of grace and a Signal alert at 08:00 local time on normal days if the ping is missed. The ntfy failure alert is still immediate.
 
-  ```text
-  url = "https://hc-ping.com/YOUR_CHECK_ID"
-  ```
-
-After deploying and provisioning, test both hooks without failing a real backup:
+After deploying, test both hooks without failing a real backup:
 
 ```sh
 sudo systemctl start restic-pantry-notify.service   # Sends a real alert
