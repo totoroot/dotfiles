@@ -44,7 +44,6 @@ let
   recipePort = 8491;
   adguardHTTPPort = 6060;
   esphomePort = 6052;
-  changedetectionPort = 5002;
   adventurelogPort = 2104;
   adventurelogBackendProxyPort = 2026;
   paperlessPort = 28981;
@@ -322,23 +321,6 @@ in
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
               proxy_set_header Upgrade $http_upgrade;
               proxy_set_header Connection $connection_upgrade;
-            '';
-          };
-        };
-        "website.${domain}" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/" = {
-            extraConfig = ''
-              proxy_pass http://${server}:${toString changedetectionPort};
-              proxy_set_header Host $host;
-              proxy_redirect http:// https://;
-              proxy_http_version 1.1;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection $connection_upgrade;
-              # proxy_set_header X-Forwarded-Prefix /changedetection/;
-              proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
         };

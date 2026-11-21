@@ -328,11 +328,13 @@ in
     };
   };
 
-  # Keep the dashboard private. Use an SSH tunnel for administration.
+  # Expose the dashboard only through the Authelia-protected virtual host.
   services.changedetection-io = {
     enable = true;
     listenAddress = "127.0.0.1";
     port = 5002;
+    behindProxy = true;
+    baseURL = "https://website.${domain}";
   };
 
   services.ntfy-sh = {
@@ -622,9 +624,17 @@ in
       "/authelia".extraConfig = autheliaLocationSnippet;
     };
 
-    "website.${domain}".locations = {
-      "/".extraConfig = autheliaAuthSnippet autheliaHost;
-      "/authelia".extraConfig = autheliaLocationSnippet;
+    "website.${domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations = {
+        "/" = {
+          proxyPass = "http://${config.services.changedetection-io.listenAddress}:${toString config.services.changedetection-io.port}";
+          proxyWebsockets = true;
+          extraConfig = autheliaAuthSnippet autheliaHost;
+        };
+        "/authelia".extraConfig = autheliaLocationSnippet;
+      };
     };
 
     "ntfy.thym.it".locations = {

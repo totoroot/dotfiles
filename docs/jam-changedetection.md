@@ -1,6 +1,8 @@
 # Changedetection on jam
 
-Changedetection listens on `127.0.0.1:5002` with state under `/var/lib/changedetection-io`. There is no public dashboard or firewall opening for this instance. The `change-alerts` topic is private and uses the ntfy ACLs for the desktop and phone readers and a separate write-only publisher.
+Changedetection runs on jam and listens on `127.0.0.1:5002`. Nginx serves [website.überwachungsbehör.de](https://website.xn--berwachungsbehr-mtb1g.de/) behind Authelia and proxies to the local instance. No SSH tunnel or firewall opening is needed. The `change-alerts` topic remains private, with separate reader and publisher accounts.
+
+The cutover does not copy violet's old datastore. Jam keeps its own watches and history under `/var/lib/changedetection-io`. If you need old watches or history, back up both datastores before attempting a migration.
 
 ## Before deploying
 
@@ -13,14 +15,9 @@ Deploy only after both the encrypted update and the ACL changes are included. nt
 
 ## Add and test a watch
 
-From the Mac, open a tunnel and leave it running:
+After deploying, verify that a signed-out browser is redirected to Authelia and that signing in opens Changedetection.
 
-```sh
-ssh -i ~/.ssh/ATGRZMBP43 -o ExitOnForwardFailure=yes -N \
-  -L 127.0.0.1:5002:127.0.0.1:5002 jam
-```
-
-1. Open `http://127.0.0.1:5002`, add the site URL, and start with the default HTTP fetcher and no content filters. This compares extracted page text, not every underlying HTML or visual change. If the site renders relevant content with JavaScript, a browser fetcher may be needed.
+1. Open [website.überwachungsbehör.de](https://website.xn--berwachungsbehr-mtb1g.de/), add the site URL, and start with the default HTTP fetcher and no content filters. This compares extracted page text, not every underlying HTML or visual change. If the site renders relevant content with JavaScript, a browser fetcher may be needed.
 2. In the watch's notification settings, add `ntfy://127.0.0.1:6780/change-alerts?token=YOUR_TOKEN`. The URL is evaluated on jam, not on the Mac. Enter it directly in the dashboard. Do not paste the real token into chat or Git.
 3. Subscribe to `change-alerts` on `https://ntfy.thym.it` using the existing reader account. Send a test notification from Changedetection and confirm it reaches the phone. Set the watch's check interval and verify the first fetch becomes its baseline.
 
