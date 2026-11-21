@@ -328,6 +328,13 @@ in
     };
   };
 
+  # Keep the dashboard private. Use an SSH tunnel for administration.
+  services.changedetection-io = {
+    enable = true;
+    listenAddress = "127.0.0.1";
+    port = 5002;
+  };
+
   services.ntfy-sh = {
     environmentFile = config.sops.secrets.ntfy-auth-env.path;
     settings.auth-access = [
@@ -336,6 +343,9 @@ in
       "mathym-phone:jam-backups:ro"
       "mathym-phone:uptime-alerts:ro"
       "jam-backup-publisher:jam-backups:wo"
+      "mathym-desktop:change-alerts:ro"
+      "mathym-phone:change-alerts:ro"
+      "jam-change-publisher:change-alerts:wo"
     ];
   };
 
@@ -621,8 +631,8 @@ in
       "/".extraConfig = autheliaAuthSnippet thymITAutheliaHost;
       "/authelia".extraConfig = autheliaLocationSnippet;
       # Native ntfy clients authenticate against ntfy's own per-topic ACLs.
-      # Bypass Authelia only for the two explicitly managed client topics.
-      "~ ^/((jam-backups|uptime-alerts)(,(jam-backups|uptime-alerts))*)(/(json|sse|ws|raw))?$" = {
+      # Bypass Authelia only for the explicitly managed client topics.
+      "~ ^/((jam-backups|uptime-alerts|change-alerts)(,(jam-backups|uptime-alerts|change-alerts))*)(/(auth|json|sse|ws|raw))?$" = {
         proxyPass = "http://localhost:6780";
         proxyWebsockets = true;
         extraConfig = "auth_request off;";
