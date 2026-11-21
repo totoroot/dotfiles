@@ -306,7 +306,7 @@ in
   services.postgresqlBackup = {
     enable = true;
     backupAll = true;
-    startAt = "*-*-* 01:15:00 UTC";
+    startAt = "*-*-* 01:00:00 UTC"; # 02:00 CET year-round
   };
 
   systemd.timers.postgresqlBackup.timerConfig.Persistent = true;
