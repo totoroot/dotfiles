@@ -49,6 +49,7 @@ in {
         "default.ini"
       ]);
 
-    modules.home.zsh.rcFiles = [ "${configDir}/git/aliases.zsh" ];
+    # Keep the alias file alive with the Home Manager generation.
+    modules.home.zsh.rcFiles = [ "${../../config/git/aliases.zsh}" ];
   };
 }
