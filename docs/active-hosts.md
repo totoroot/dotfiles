@@ -37,6 +37,10 @@ pid=$(systemctl show nginx.service -p MainPID --value)
 if [ "$pid" -gt 0 ]; then sudo "/proc/$pid/exe" -v; fi
 ```
 
+## Jam: backups and recovery
+
+See [Jam backup and recovery](jam-backups.md) for the PostgreSQL dump, Restic setup, and restore checklist.
+
 ## macOS: configuration and package upgrades
 
 `bin/rswitch switch` uses the target's locked nix-darwin rebuild tool. Activation installs missing declared Homebrew packages without a bundle auto-update, upgrade, or cleanup. Review `brew outdated` separately and upgrade named packages explicitly when ready. Do not use zap as part of activation or routine maintenance.
