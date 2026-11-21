@@ -323,7 +323,7 @@ in
       ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
     ];
     timerConfig = {
-      OnCalendar = "*-*-* 01:00:00 UTC"; # 02:00 CET, 03:00 CEST
+      OnCalendar = "*-*-* 02:15:00 Europe/Vienna";
       Persistent = true;
     };
   };

@@ -4,7 +4,7 @@
 
 - Jam's PostgreSQL dump has been verified locally with `gzip -t`. A database import has not been tested.
 - The encrypted Restic repository `0403d19480` was initialized on `pantry`. Jam uploaded the PostgreSQL dump as snapshot `4d326540`. The Mac restored it with Restic verification, and the restored archive passed `gzip -t`. Import into PostgreSQL is deferred.
-- The deployed systemd job successfully uploaded PostgreSQL snapshot `01b1d013` without prompting. The timer rollout is pending. The new schedule uses a single persistent timer at 01:00 UTC (02:00 CET, 03:00 CEST), replacing the separate dump timer. The job requires a successful fresh dump and reads its repository password from sops-nix. No pruning or external monitoring is configured.
+- The deployed systemd job successfully uploaded PostgreSQL snapshot `01b1d013` without prompting. The timer rollout is pending. The schedule uses a single persistent timer at 02:15 Europe/Vienna, replacing the separate dump timer. The job requires a successful fresh dump and reads its repository password from sops-nix. No pruning or external monitoring is configured.
 
 ## Backup scope
 
