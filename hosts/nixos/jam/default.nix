@@ -328,6 +328,20 @@ in
     };
   };
 
+  services.ntfy-sh = {
+    environmentFile = config.sops.secrets.ntfy-auth-env.path;
+    settings.auth-access = [
+      "mathym-desktop:jam-backups:ro"
+      "mathym-phone:jam-backups:ro"
+      "jam-backup-publisher:jam-backups:wo"
+    ];
+  };
+
+  systemd.services.ntfy-sh = {
+    requires = [ "sops-install-secrets.service" ];
+    after = [ "sops-install-secrets.service" ];
+  };
+
   # A failed dump prevents Restic from starting, so monitor the dump directly too.
   systemd.services.postgresqlBackup.onFailure = [ "restic-pantry-notify.service" ];
 

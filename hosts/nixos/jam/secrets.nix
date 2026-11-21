@@ -19,6 +19,12 @@ in
     age.keyFile = "/var/lib/sops-nix/jam.txt";
     useSystemdActivation = true;
     secrets = {
+      ntfy-auth-env = (mkSecret {
+        key = "NTFY_AUTH_ENV";
+        path = "/var/secrets/ntfy-auth.env";
+      }) // {
+        restartUnits = [ "ntfy-sh.service" ];
+      };
       restic-pantry-password = mkSecret {
         key = "RESTIC_PANTRY_PASSWORD";
         path = "/var/secrets/restic-pantry-password";

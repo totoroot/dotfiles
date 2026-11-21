@@ -59,7 +59,7 @@ The PostgreSQL dump and Restic upload both trigger `restic-pantry-notify.service
 
 On jam, provision the following curl config files as `root:root`, mode `0600`. Use only a trusted editor, put the real values in the files rather than shell arguments, and keep them out of Git:
 
-- `/var/secrets/restic-pantry-ntfy.curl`: an authenticated, private ntfy topic. Give the token's account publish access only where needed.
+- `/var/secrets/restic-pantry-ntfy.curl`: an authenticated, private ntfy topic. Use a token for `jam-backup-publisher`, which has write-only access to `jam-backups`. The `matthias-desktop` and `matthias-phone` accounts have read-only access. See [ntfy account provisioning](jam-ntfy.md) before deploying the account configuration.
 
   ```text
   url = "https://ntfy.thym.it/jam-backups"
