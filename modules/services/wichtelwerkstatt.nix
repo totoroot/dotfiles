@@ -25,7 +25,7 @@ let
   };
   serviceDefaults = {
     inherit environment;
-    unitConfig.ConditionPathExists = "${cfg.releaseDir}/backend/app.py";
+    unitConfig.ConditionPathExists = "${cfg.webRoot}/.app/backend/app.py";
     after = [ "postgresql.service" "postgresql-setup.service" ];
     requires = [ "postgresql.service" "postgresql-setup.service" ];
     serviceConfig = {
@@ -33,7 +33,7 @@ let
       Group = name;
       StateDirectory = name;
       StateDirectoryMode = "0700";
-      WorkingDirectory = cfg.releaseDir;
+      WorkingDirectory = "${cfg.webRoot}/.app";
       UMask = "0077";
       NoNewPrivileges = true;
       PrivateTmp = true;
@@ -54,10 +54,10 @@ in
       type = lib.types.port;
       default = 8394;
     };
-    releaseDir = lib.mkOption {
+    webRoot = lib.mkOption {
       type = lib.types.str;
-      default = "/srv/wichtelwerkstatt/current";
-      description = "Root-owned release containing backend/ and public/.";
+      default = "/var/www/wichteln.thym.it";
+      description = "GitLab CI rsync destination containing Hugo and the private .app payload.";
     };
     sendMail = lib.mkEnableOption "delivery through local Postfix";
   };
@@ -77,7 +77,6 @@ in
       ensureUsers = [{ inherit name; ensureDBOwnership = true; }];
     };
     systemd.tmpfiles.rules = [
-      "d /srv/wichtelwerkstatt 0755 root root -"
       "d ${state} 0700 ${name} ${name} -"
     ];
 
@@ -105,19 +104,34 @@ in
       wantedBy = [ "timers.target" ];
       timerConfig = { OnBootSec = "1min"; OnUnitInactiveSec = "1min"; };
     };
+    systemd.paths.wichtelwerkstatt-deploy = {
+      wantedBy = [ "multi-user.target" ];
+      pathConfig.PathChanged = "${cfg.webRoot}/.revision";
+    };
+    systemd.services.wichtelwerkstatt-deploy = {
+      description = "Restart Wichtelwerkstatt after a successful CI sync";
+      unitConfig.ConditionPathExists = "${cfg.webRoot}/.app/backend/app.py";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.systemd}/bin/systemctl restart wichtelwerkstatt.service";
+      };
+    };
 
     services.nginx.virtualHosts.${cfg.hostName} = {
       enableACME = true;
       forceSSL = true;
-      root = "${cfg.releaseDir}/public";
+      root = cfg.webRoot;
       extraConfig = ''
         error_page 404 /404.html;
       '';
       locations = {
         "/".extraConfig = "try_files $uri $uri/ =404;";
+        "= /.app".extraConfig = "return 404;";
+        "^~ /.app/".extraConfig = "return 404;";
         "= /404.html".extraConfig = "internal;";
         "^~ /runde/" = {
           proxyPass = "http://127.0.0.1:${toString cfg.port}";
+          recommendedProxySettings = false;
           extraConfig = ''
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $remote_addr;
