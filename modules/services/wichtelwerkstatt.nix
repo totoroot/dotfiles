@@ -141,7 +141,6 @@ in
         "^~ /.app/".extraConfig = "return 404;";
         "= /404.html".extraConfig = "internal;";
         "^~ /wichteln/" = privateProxy;
-        "^~ /runde/" = privateProxy;
       };
     };
   };
