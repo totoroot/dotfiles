@@ -275,6 +275,10 @@ in
         enable = false;
         serverHost = "daten.${domain}";
       };
+      wichtelwerkstatt = {
+        enable = true;
+        sendMail = true;
+      };
       windshift = {
         enable = true;
         baseUrl = "https://delivery.thym.it";
@@ -318,6 +322,7 @@ in
       config.services.nextcloud.datadir
       "/var/www"
       "/var/lib/vaultwarden"
+      "/var/lib/wichtelwerkstatt"
     ];
     extraOptions = [
       ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
