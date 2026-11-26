@@ -4,6 +4,17 @@ let
   name = "wichtelwerkstatt";
   runtime = pkgs.python3.withPackages (p: [ p.flask p.gunicorn p.psycopg ]);
   state = "/var/lib/${name}";
+  privateProxy = {
+    proxyPass = "http://127.0.0.1:${toString cfg.port}";
+    recommendedProxySettings = false;
+    extraConfig = ''
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_cache off;
+      access_log off;
+      error_log /dev/null;
+    '';
+  };
   initializeKey = pkgs.writeShellScript "wichtelwerkstatt-key" ''
     set -eu
     key=${state}/signing-key
@@ -129,17 +140,8 @@ in
         "= /.app".extraConfig = "return 404;";
         "^~ /.app/".extraConfig = "return 404;";
         "= /404.html".extraConfig = "internal;";
-        "^~ /runde/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          recommendedProxySettings = false;
-          extraConfig = ''
-            proxy_set_header Host $host;
-            proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_cache off;
-            access_log off;
-            error_log /dev/null;
-          '';
-        };
+        "^~ /wichteln/" = privateProxy;
+        "^~ /runde/" = privateProxy;
       };
     };
   };
