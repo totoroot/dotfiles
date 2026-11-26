@@ -15,7 +15,7 @@
       }
     ]
   },
-  "description": "Log-based solution for monitoring Postfix",
+  "description": "Postfix delivery attempts from the canonical Journal stream. Sent means accepted by the next hop, not necessarily delivered to an inbox.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -121,39 +121,41 @@
       },
       "id": 3,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
+        "textMode": "value_and_name",
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto"
       },
       "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" | status != \"deferred\" [$__range]))",
-          "queryType": "range",
-          "refId": "A"
+          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=~\"${host:regex}\"} |= \" dsn=\" |= \", status=\" | regexp \"dsn=(?P<dsn>[245][.][0-9]+[.][0-9]+), status=(?P<status>[a-z]+)\" | status != \"\" [$__range]))",
+          "queryType": "instant",
+          "refId": "A",
+          "legendFormat": "{{status}}"
         }
       ],
-      "title": "Total reasons",
-      "type": "timeseries"
+      "title": "Delivery attempts by status",
+      "type": "stat"
     },
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -235,12 +237,12 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" status=sent \" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" [$__range])))",
-          "queryType": "range",
+          "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=~\"${host:regex}\"} |= \" dsn=\" |= \", status=\" | regexp \"dsn=(?P<dsn>[245][.][0-9]+[.][0-9]+), status=(?P<status>[a-z]+)\" | status != \"\" | status=\"sent\" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" | domain != \"\" [$__range])))",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
@@ -269,7 +271,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -350,12 +352,12 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" status=bounced \" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" [$__range])))",
-          "queryType": "range",
+          "expr": "topk(25, sum by (domain) (count_over_time({job=\"systemd-journal\",host=~\"${host:regex}\"} |= \" dsn=\" |= \", status=\" | regexp \"dsn=(?P<dsn>[245][.][0-9]+[.][0-9]+), status=(?P<status>[a-z]+)\" | status != \"\" | status=\"bounced\" | regexp \"to=<[^@>]+@(?P<domain>[^>]+)>\" | domain != \"\" [$__range])))",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
@@ -384,7 +386,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -477,16 +479,16 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "topk(100, sum by (dsn,status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \" dsn=\" |= \" status=\" | regexp \"dsn=(?P<dsn>[^,]+), status=(?P<status>[a-z]+)\" [$__range])))",
-          "queryType": "range",
+          "expr": "sum by (dsn,status) (count_over_time({job=\"systemd-journal\",host=~\"${host:regex}\"} |= \" dsn=\" |= \", status=\" | regexp \"dsn=(?P<dsn>[245][.][0-9]+[.][0-9]+), status=(?P<status>[a-z]+)\" | status != \"\" [$__range]))",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
-      "title": "Delivery Status Notification",
+      "title": "Delivery status codes",
       "transformations": [
         {
           "id": "organize",
@@ -511,7 +513,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -625,22 +627,22 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" status=\" | regexp \"status=(?P<status>[a-z]+)\" | status != \"\" [5m]))",
+          "expr": "sum by (status) (count_over_time({job=\"systemd-journal\",host=~\"${host:regex}\"} |= \" dsn=\" |= \", status=\" | regexp \"dsn=(?P<dsn>[245][.][0-9]+[.][0-9]+), status=(?P<status>[a-z]+)\" | status != \"\" [5m]))",
           "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "Mail events rate",
+      "title": "Delivery attempts per 5 minutes",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -754,16 +756,16 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count(sum by (recipient) (count_over_time({job=\"systemd-journal\",host=\"$host\"} |= \"postfix/smtp\" |= \" to=<\" | regexp \"to=<(?P<recipient>[^>]+)>\" [5m])))",
+          "expr": "sum(count_over_time({job=\"systemd-journal\",host=~\"${host:regex}\"} |= \" dsn=\" |= \", status=\" | regexp \"dsn=(?P<dsn>[245][.][0-9]+[.][0-9]+), status=(?P<status>[a-z]+)\" | status != \"\" | status=\"deferred\" [5m]))",
           "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "Unique recipients",
+      "title": "Deferred attempts per 5 minutes",
       "type": "timeseries"
     }
   ],
@@ -774,10 +776,13 @@
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": "jam",
+          "value": "jam"
+        },
         "datasource": {
           "type": "loki",
-          "uid": "P8E80F9AEF21F6940"
+          "uid": "loki"
         },
         "definition": "label_values({job=\"systemd-journal\"}, host)",
         "includeAll": false,

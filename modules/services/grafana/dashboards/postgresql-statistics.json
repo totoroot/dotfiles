@@ -46,7 +46,10 @@
         "text": "",
         "value": ""
       },
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -109,9 +112,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_static{app=\"$app\"}",
+          "expr": "pg_static{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -123,7 +129,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -186,9 +195,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_max_connections{app=\"$app\"}",
+          "expr": "pg_settings_max_connections{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -200,7 +212,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -263,9 +278,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_shared_buffers_bytes{app=\"$app\"}",
+          "expr": "pg_settings_shared_buffers_bytes{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -277,7 +295,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -340,9 +361,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_effective_cache_size_bytes{app=\"$app\"}",
+          "expr": "pg_settings_effective_cache_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -354,7 +378,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -417,9 +444,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_maintenance_work_mem_bytes{app=\"$app\"}",
+          "expr": "pg_settings_maintenance_work_mem_bytes{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -431,7 +461,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -494,9 +527,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_work_mem_bytes{app=\"$app\"}",
+          "expr": "pg_settings_work_mem_bytes{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -508,7 +544,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -572,9 +611,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_max_wal_size_bytes{app=\"$app\"}",
+          "expr": "pg_settings_max_wal_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -586,7 +628,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -649,9 +694,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_random_page_cost{app=\"$app\"}",
+          "expr": "pg_settings_random_page_cost{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -663,7 +711,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -726,9 +777,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_seq_page_cost{app=\"$app\"}",
+          "expr": "pg_settings_seq_page_cost{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -740,7 +794,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -803,9 +860,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_max_worker_processes{app=\"$app\"}",
+          "expr": "pg_settings_max_worker_processes{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -817,7 +877,10 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -880,9 +943,12 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_settings_max_parallel_workers{app=\"$app\"}",
+          "expr": "pg_settings_max_parallel_workers{job=\"postgres\",instance=~\"${instance:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -907,7 +973,10 @@
       "type": "row"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -993,10 +1062,13 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "editorMode": "code",
-          "expr": "pg_database_size_bytes{app=\"$app\", datname=\"$db\"}",
-          "legendFormat": "size",
+          "expr": "pg_database_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}",
+          "legendFormat": "{{datname}} · size",
           "range": true,
           "refId": "A"
         }
@@ -1018,7 +1090,10 @@
       "type": "row"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1104,13 +1179,16 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_stat_activity_count{app=\"$app\", datname=\"$db\"}",
+          "expr": "pg_stat_database_numbackends{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{state}}",
+          "legendFormat": "{{datname}} · connections",
           "refId": "A"
         }
       ],
@@ -1118,7 +1196,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1199,23 +1280,29 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_xact_commit{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_xact_commit{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "commits",
+          "legendFormat": "{{datname}} · commits",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_xact_rollback{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_xact_rollback{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "rollbacks",
+          "legendFormat": "{{datname}} · rollbacks",
           "refId": "B"
         }
       ],
@@ -1223,7 +1310,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1309,23 +1399,29 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_tup_fetched{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_fetched{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "SELECT (index scan)",
+          "legendFormat": "{{datname}} · SELECT (index scan)",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_tup_returned{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_returned{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "SELECT (table scan)",
+          "legendFormat": "{{datname}} · SELECT (table scan)",
           "refId": "B"
         }
       ],
@@ -1333,7 +1429,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1419,33 +1518,42 @@
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_tup_inserted{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_inserted{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "INSERT",
+          "legendFormat": "{{datname}} · INSERT",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_tup_updated{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_updated{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "UPDATE",
+          "legendFormat": "{{datname}} · UPDATE",
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_tup_deleted{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_tup_deleted{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "DELETE",
+          "legendFormat": "{{datname}} · DELETE",
           "refId": "C"
         }
       ],
@@ -1453,7 +1561,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1531,13 +1642,16 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_stat_activity_max_tx_duration{app=\"$app\", datname=\"$db\"}",
+          "expr": "pg_stat_activity_max_tx_duration{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "max_tx_duration [{{state}}]",
+          "legendFormat": "{{datname}} · max_tx_duration [{{state}}]",
           "refId": "A"
         }
       ],
@@ -1545,7 +1659,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1619,13 +1736,16 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_stat_database_blks_hit{app=\"$app\", datname=\"$db\"} / (pg_stat_database_blks_read{app=\"$app\", datname=\"$db\"} + pg_stat_database_blks_hit{app=\"$app\", datname=\"$db\"})",
+          "expr": "pg_stat_database_blks_hit{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"} / (pg_stat_database_blks_read{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"} + pg_stat_database_blks_hit{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Cache Hit Rate",
+          "legendFormat": "{{datname}} · Cache Hit Rate",
           "refId": "A"
         }
       ],
@@ -1646,7 +1766,10 @@
       "type": "row"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1724,9 +1847,12 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_buffers_backend_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_backend_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1734,9 +1860,12 @@
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_buffers_alloc_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_alloc_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1744,9 +1873,12 @@
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_buffers_backend_fsync_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_backend_fsync_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1754,9 +1886,12 @@
           "refId": "C"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_buffers_checkpoint_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_checkpoint_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1764,9 +1899,12 @@
           "refId": "D"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_buffers_clean_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_clean_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1778,7 +1916,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1851,23 +1992,29 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_conflicts{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_conflicts{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "conflicts",
+          "legendFormat": "{{datname}} · conflicts",
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_deadlocks{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_deadlocks{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "deadlocks",
+          "legendFormat": "{{datname}} · deadlocks",
           "refId": "A"
         }
       ],
@@ -1875,7 +2022,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1954,13 +2104,16 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "pg_locks_count{app=\"$app\", datname=\"$db\"}",
+          "expr": "pg_locks_count{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{mode}}",
+          "legendFormat": "{{datname}} · {{mode}}",
           "refId": "A"
         }
       ],
@@ -1968,7 +2121,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting.",
       "fieldConfig": {
         "defaults": {
@@ -2042,13 +2198,16 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_database_temp_bytes{app=\"$app\", datname=\"$db\"}[5m])",
+          "expr": "irate(pg_stat_database_temp_bytes{job=\"postgres\",instance=~\"${instance:regex}\", datname=~\"${db:regex}\",datname!~\"template.*|^$\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Temp Bytes",
+          "legendFormat": "{{datname}} · Temp Bytes",
           "refId": "A"
         }
       ],
@@ -2056,7 +2215,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2134,9 +2296,12 @@
       "pluginVersion": "9.0.5",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_checkpoint_write_time_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_checkpoint_write_time_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2144,9 +2309,12 @@
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
-          "expr": "irate(pg_stat_bgwriter_checkpoint_sync_time_total{app=\"$app\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_checkpoint_sync_time_total{job=\"postgres\",instance=~\"${instance:regex}\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2163,45 +2331,57 @@
   "schemaVersion": 42,
   "tags": [
     "postgres",
-    "postgresql"
-    "databases"
+    "postgresql",
+    "databases",
     "prometheus"
   ],
   "templating": {
     "list": [
       {
         "current": {
-          "text": "",
-          "value": ""
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(pg_up, app)",
-        "includeAll": false,
-        "label": "App",
-        "name": "app",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "definition": "label_values(pg_up{job=\"postgres\"}, instance)",
+        "includeAll": true,
+        "label": "Instance",
+        "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(pg_up, app)",
+          "query": "label_values(pg_up{job=\"postgres\"}, instance)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "regex": "",
-        "type": "query"
+        "type": "query",
+        "allValue": ".*"
       },
       {
-        "datasource": "Prometheus",
-        "definition": "label_values(pg_stat_database_tup_fetched{datname!~\"template.*|postgres\",app=\"$app\"},datname)",
-        "includeAll": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "definition": "label_values(pg_stat_database_numbackends{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template.*|^$\"}, datname)",
+        "includeAll": true,
         "label": "Database",
         "name": "db",
         "options": [],
         "query": {
-          "query": "label_values(pg_stat_database_tup_fetched{datname!~\"template.*|postgres\",app=\"$app\"},datname)",
+          "query": "label_values(pg_stat_database_numbackends{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template.*|^$\"}, datname)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "regex": "",
-        "type": "query"
+        "type": "query",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "allValue": ".*"
       }
     ]
   },
