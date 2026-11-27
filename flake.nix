@@ -264,8 +264,8 @@
       # Configuration for generic Linux distros using Nix and home-manager
       homeConfigurations = (
         import ./hosts/linux {
-          inherit (nixpkgs) lib;
-          inherit inputs home-manager;
+          inherit lib inputs home-manager;
+          nixpkgs = inputs.nixpkgs;
         }
       );
     };

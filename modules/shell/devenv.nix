@@ -11,14 +11,7 @@ in {
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       devenv
-      direnv
-      nix-direnv
     ];
-
-    home-manager.users.${config.user.name}.modules.home.zsh.rcInit =
-      ''eval "$(direnv hook zsh)"'';
-
-    env.DIRENV_LOG_FORMAT = "";
 
     environment.shellAliases = {
       dsh = "devenv shell zsh";

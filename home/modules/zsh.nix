@@ -34,6 +34,10 @@ in
     };
 
 
+    modules.home.zsh.rcInit = lib.mkIf config.programs.direnv.enable (lib.mkAfter ''
+      eval "$(${lib.getExe config.programs.direnv.package} hook zsh)"
+    '');
+
     home.packages = with pkgs; [
       zsh
       # Additional completion definitions for zsh

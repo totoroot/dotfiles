@@ -15,17 +15,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       devenv
-      direnv
-      nix-direnv
     ];
-
-    home.sessionVariables = {
-      DIRENV_LOG_FORMAT = "";
-    };
-
-    modules.home.zsh.rcInit = mkAfter ''
-      eval "$(direnv hook zsh)"
-    '';
 
     modules.home.zsh.aliases = {
       dsh = "devenv shell zsh";

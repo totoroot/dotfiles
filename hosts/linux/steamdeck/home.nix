@@ -3,6 +3,7 @@
 {
   imports = [
     ../../../modules/editors
+    ../../../home/modules/direnv.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -14,7 +15,7 @@
 
     packages = with pkgs; [
       gotop
-      neofetch
+      fastfetch
       micro
       pfetch
     ];
@@ -32,18 +33,15 @@
     dircolors.enable = true;
     htop.enable = true;
     info.enable = true;
-    exa.enable = true;
+    eza.enable = true;
+    bash.enable = true;
     kitty.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv = {
-        enable = true;
-      };
-    };
     git = {
       enable = true;
-      userEmail = "git@thym.at";
-      userName = "totoroot";
+      settings.user = {
+        email = "git@thym.at";
+        name = "totoroot";
+      };
     };
   };
 }

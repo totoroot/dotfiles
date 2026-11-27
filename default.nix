@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 with lib;
 with lib.my;
@@ -11,6 +11,15 @@ with inputs;
     ]
     # All my personal modules
     ++ (mapModulesRec' (toString ./modules) import);
+
+  home-manager.sharedModules = [ ./home/modules/direnv.nix ];
+
+  # NixOS machines without a Home Manager Zsh configuration use the system hook.
+  programs.zsh.interactiveShellInit = let
+    homeConfig = config.home-manager.users.${config.user.name};
+  in mkIf (!homeConfig.programs.zsh.enable) ''
+    eval "$(${lib.getExe homeConfig.programs.direnv.package} hook zsh)"
+  '';
 
   # Common config for all NixOS machines; and to ensure the flake operates
   # soundly

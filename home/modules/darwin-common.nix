@@ -56,13 +56,6 @@ in
       "$HOME/.config/dotfiles/bin"
     ];
 
-    programs.direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-      config.global.hide_env_diff = true;
-    };
-
     modules.home.unfreePackages.enable = true;
     modules.home.atuin.enable = true;
     modules.home.bitwarden.enable = cfg.enableBitwarden;

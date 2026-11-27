@@ -12,6 +12,7 @@
     ./modules/duf.nix
     ./modules/modern-shell.nix
     ./modules/devenv.nix
+    ./modules/direnv.nix
     ./modules/containers.nix
     ./modules/darwin-common.nix
     ./modules/fonts.nix
