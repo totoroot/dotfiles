@@ -108,7 +108,7 @@ To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
 - Keep changes minimal and targeted.
 - Never commit plaintext secrets. Use exactly one SOPS-encrypted file per host, `secrets/<host>.yaml`. Do not create separate files for new services or credentials.
 - The owner edits the existing SOPS file on the corresponding host (for example, `secrets/jam.yaml` on jam). Add only the Nix wiring and tell the owner which keys to add. Do not edit the encrypted file or copy host decryption keys off the host.
-- Follow the [host secret provisioning runbook](docs/secret-provisioning.md). Use Vaultwarden for the recovery copy of service credentials and the pinned `nix develop '.#secrets'` shell on either Mac. `bin/provision-host-secret` is dry-run only: it verifies Vaultwarden access and sends an encrypted dummy payload, not a real credential. Do not automate vault writes, secret changes, or deployment through the dry run.
+- Follow the [host secret provisioning runbook](docs/secret-provisioning.md). Use Vaultwarden for the recovery copy of service credentials and the pinned `nix develop '.#secrets'` shell on either Mac. `bin/provision-host-secret --dry-run` verifies access with an encrypted dummy payload. The owner can use `--apply` or `--curl-url` to add an entry to the selected host's existing file using its on-host key. The helper must only read Vaultwarden items and must not commit or deploy.
 - For packaging changes, ensure package is both defined and consumed correctly.
 - For service changes, check related host wiring, proxying, secrets, and monitoring implications.
 - Darwin shared config lives in `hosts/darwin/modules/`, and shared Darwin Home Manager defaults live in `home/modules/darwin-common.nix`.
