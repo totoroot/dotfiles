@@ -1321,20 +1321,17 @@
         "type": "interval"
       },
       {
+        "allValue": ".+",
         "current": {
           "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(probe_success{job=\"blackbox\"},target)",
+        "definition": "label_values(up{job=\"blackbox\"}, target)",
         "hide": 0,
         "includeAll": true,
         "label": "Target",
@@ -1342,8 +1339,7 @@
         "name": "target",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(probe_success{job=\"blackbox\"},target)",
+          "query": "label_values(up{job=\"blackbox\"}, target)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1356,8 +1352,9 @@
         "useTags": false
       },
       {
+        "allValue": ".+",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -1374,7 +1371,7 @@
         "options": [],
         "query": {
           "query": "label_values(probe_http_duration_seconds{job=\"blackbox\"}, phase)",
-          "refId": "StandardVariableQuery"
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
