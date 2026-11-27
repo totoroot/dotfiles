@@ -227,11 +227,9 @@
                 curl
                 nixBin
               ];
-              GREET = "Welcome to the development shell for totoroot's dotfiles";
               shellHook = ''
                 export DOTFILES="$(pwd)"
                 export PATH="$DOTFILES/bin:$PATH"
-                echo "$GREET"
               '';
             };
           });
