@@ -87,10 +87,10 @@
       "id": 9,
       "type": "bargauge",
       "title": "Transactions per second by database",
-      "description": "Recent commits plus rollbacks per second. Databases without enough samples are omitted.",
+      "description": "Commits plus rollbacks per second, averaged over five minutes. Databases without enough samples are omitted.",
       "gridPos": {"x": 16, "y": 4, "w": 8, "h": 11},
       "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "targets": [{"refId": "A", "legendFormat": "{{datname}}", "instant": true, "range": false, "expr": "sort_desc(sum by (datname) (rate({__name__=~\"pg_stat_database_xact_(commit|rollback)\",job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"}[$__rate_interval])))"}],
+      "targets": [{"refId": "A", "legendFormat": "{{datname}}", "instant": true, "range": false, "expr": "sort_desc(sum by (datname) (rate(pg_stat_database_xact_commit{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"}[5m])) + sum by (datname) (rate(pg_stat_database_xact_rollback{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"}[5m])))"}],
       "fieldConfig": {"defaults": {"min": 0, "color": {"mode": "fixed", "fixedColor": "teal"}, "decimals": 2}},
       "options": {"orientation": "horizontal", "displayMode": "basic", "showUnfilled": true, "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}}
     },
