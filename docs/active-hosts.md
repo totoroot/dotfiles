@@ -37,6 +37,10 @@ pid=$(systemctl show nginx.service -p MainPID --value)
 if [ "$pid" -gt 0 ]; then sudo "/proc/$pid/exe" -v; fi
 ```
 
+## Jam: monitoring
+
+See [Monitoring on jam and teal](monitoring.md) for the stack inventory, mail coverage, alerting gaps, and runtime checks.
+
 ## Jam: backups and recovery
 
 See [Jam backup and recovery](jam-backups.md) for the PostgreSQL dump, Restic setup, and restore checklist.

@@ -106,7 +106,8 @@ To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
 
 - Inspect existing modules before creating new ones.
 - Keep changes minimal and targeted.
-- Do not commit secrets.
+- Never commit plaintext secrets. Use exactly one SOPS-encrypted file per host, `secrets/<host>.yaml`. Do not create separate files for new services or credentials.
+- The owner edits the existing SOPS file on the corresponding host (for example, `secrets/jam.yaml` on jam). Add only the Nix wiring and tell the owner which keys to add. Do not edit the encrypted file or copy host decryption keys off the host.
 - For packaging changes, ensure package is both defined and consumed correctly.
 - For service changes, check related host wiring, proxying, secrets, and monitoring implications.
 - Darwin shared config lives in `hosts/darwin/modules/`, and shared Darwin Home Manager defaults live in `home/modules/darwin-common.nix`.
