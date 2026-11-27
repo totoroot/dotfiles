@@ -5,9 +5,11 @@
     inherit (prev.lixPackageSets.latest)
       nixpkgs-review
       nix-eval-jobs
-      nix-fast-build
-      colmena;
+      nix-fast-build;
   }) ];
+
+  # Use the default nixpkgs Colmena. The Lix package-set override recurses.
+  environment.systemPackages = [ pkgs.colmena ];
 
   nix = {
     package = pkgs.lixPackageSets.latest.lix;
