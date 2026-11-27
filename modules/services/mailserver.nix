@@ -19,9 +19,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    mailserver.enableNixpkgsReleaseCheck = mkDefault false;
     mailserver = {
       enable = true;
+      assertions.nixpkgsRelease = mkDefault false;
       stateVersion = 3;
       fqdn = "mail.${domain}";
       domains = [
@@ -29,8 +29,10 @@ in
         "${legacyDomain}"
         "${praxisDomain}"
       ];
-      enableImap = true;
-      enableSubmission = true;
+      listeners = {
+        imap.enable = true;
+        submission.enable = true;
+      };
 
       fullTextSearch = {
         enable = false;
