@@ -14,12 +14,7 @@
         "target": {
           "limit": 100,
           "matchAny": false,
-          "tags": [
-            "prometheus"
-            "blackbox",
-            "http",
-            "probing"
-          ],
+          "tags": ["prometheus", "blackbox", "http", "probing"],
           "type": "dashboard"
         },
         "type": "dashboard"
@@ -37,7 +32,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -134,11 +129,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_http_status_code{target=~\"$target\"}",
+          "expr": "probe_http_status_code{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -153,7 +148,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -237,10 +232,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_success{target=~\"$target\"}",
+          "expr": "probe_success{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -254,7 +249,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -339,10 +334,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_http_status_code{target=~\"$target\"}",
+          "expr": "probe_http_status_code{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -356,7 +351,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -424,10 +419,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_http_version{target=~\"$target\"}",
+          "expr": "probe_http_version{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -442,7 +437,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -530,10 +525,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_duration_seconds{target=~\"$target\"}",
+          "expr": "probe_duration_seconds{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -547,7 +542,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -619,10 +614,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "avg(probe_duration_seconds{target=~\"$target\"}) by (target)",
+          "expr": "avg(probe_duration_seconds{job=\"blackbox\",target=~\"${target:regex}\"}) by (target)",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -636,7 +631,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -710,10 +705,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "avg(probe_dns_lookup_time_seconds{target=~\"$target\"}) by (target)",
+          "expr": "avg(probe_dns_lookup_time_seconds{job=\"blackbox\",target=~\"${target:regex}\"}) by (target)",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -727,7 +722,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -795,10 +790,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_ip_protocol{target=~\"$target\"}",
+          "expr": "probe_ip_protocol{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -812,7 +807,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -896,10 +891,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_http_duration_seconds{target=~\"$target\", phase=~\"$phase\"}",
+          "expr": "probe_http_duration_seconds{job=\"blackbox\",target=~\"${target:regex}\", phase=~\"${phase:regex}\"}",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -907,13 +902,13 @@
           "refId": "B"
         }
       ],
-      "title": "HTTP Duration (phase = $phase)",
+      "title": "HTTP Duration (phase = ${phase:regex})",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -998,10 +993,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_ssl_earliest_cert_expiry{target=~\"$target\"} - time()",
+          "expr": "probe_ssl_earliest_cert_expiry{job=\"blackbox\",target=~\"${target:regex}\"} - time()",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -1015,7 +1010,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1099,10 +1094,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_http_ssl{target=~\"$target\"}",
+          "expr": "probe_http_ssl{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -1116,7 +1111,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1191,10 +1186,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "prometheus"
           },
           "exemplar": true,
-          "expr": "probe_tls_version_info{target=~\"$target\"}",
+          "expr": "probe_tls_version_info{job=\"blackbox\",target=~\"${target:regex}\"}",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -1328,39 +1323,6 @@
       {
         "current": {
           "selected": true,
-          "text": "überwachungsbehör.de",
-          "value": "überwachungsbehör.de"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "Domain",
-        "multi": false,
-        "name": "domain",
-        "options": [
-          {
-            "selected": false,
-            "text": "thym.at",
-            "value": "thym.at"
-          },
-          {
-            "selected": false,
-            "text": "nixos.at",
-            "value": "nixos.at"
-          },
-          {
-            "selected": true,
-            "text": "überwachungsbehör.de",
-            "value": "überwachungsbehör.de"
-          }
-        ],
-        "query": "thym.at, nixos.at, überwachungsbehör.de",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "current": {
-          "selected": true,
           "text": [
             "All"
           ],
@@ -1370,9 +1332,9 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "Prometheus"
+          "uid": "prometheus"
         },
-        "definition": "label_values(probe_success,target)",
+        "definition": "label_values(probe_success{job=\"blackbox\"},target)",
         "hide": 0,
         "includeAll": true,
         "label": "Target",
@@ -1381,11 +1343,11 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(probe_success,target)",
+          "query": "label_values(probe_success{job=\"blackbox\"},target)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": ".*${domain}.*",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1401,9 +1363,9 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "Prometheus"
+          "uid": "prometheus"
         },
-        "definition": "label_values(probe_http_duration_seconds, phase)",
+        "definition": "label_values(probe_http_duration_seconds{job=\"blackbox\"}, phase)",
         "hide": 0,
         "includeAll": true,
         "label": "HTTP phase",
@@ -1411,7 +1373,7 @@
         "name": "phase",
         "options": [],
         "query": {
-          "query": "label_values(probe_http_duration_seconds, phase)",
+          "query": "label_values(probe_http_duration_seconds{job=\"blackbox\"}, phase)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
