@@ -34,6 +34,21 @@ evaluates the three active targets without building or activating them. See
 The [infrastructure inventory](docs/inventory.md) lists active and dormant hosts
 and managed resources such as the `pantry` backup destination.
 
+## Git hooks
+
+Install the hooks once per checkout, then commit from the dev shell (or ensure
+`nix-instantiate` and `shellcheck` are on your `PATH`):
+
+```sh
+nix develop --command prek install
+nix develop --command prek run
+```
+
+The hooks validate staged JSON, TOML, YAML, and Nix syntax, scan for secrets,
+and run ShellCheck at error severity on supported shell scripts, including
+extensionless scripts. Zsh is not supported by ShellCheck. Run `bin/check-fleet`
+separately for shared Nix or lockfile changes.
+
 ## Layout
 
 | Path | Purpose |

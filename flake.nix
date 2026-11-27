@@ -218,6 +218,7 @@
                 deadnix
                 mdl
                 nixpkgs-fmt
+                prek
                 shellcheck
                 nixfmt
                 ripgrep

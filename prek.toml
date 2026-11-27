@@ -9,6 +9,7 @@ hooks = [
   { id = "end-of-file-fixer" },
   { id = "check-added-large-files" },
   { id = "check-merge-conflict" },
+  { id = "check-json" },
   { id = "check-toml" },
   { id = "check-yaml" },
 ]
@@ -23,7 +24,7 @@ hooks = [
 [[repos]]
 repo = "local"
 hooks = [
-  # Temporarily disabled: repo-wide flake checks currently fail for unrelated
-  # existing issues and block otherwise isolated commits.
-  # { id = "nix-flake-check", name = "nix flake check", entry = "nix flake check --no-build", language = "system", pass_filenames = false, files = "^flake\\.(nix|lock)$" },
+  # Keep host evaluation separate. See bin/check-fleet.
+  { id = "nix-parse", name = "Parse Nix files", entry = '''bash -c 'status=0; for file; do nix-instantiate --parse "./$file" >/dev/null || status=1; done; exit "$status"' --''', language = "system", types = ["nix"] },
+  { id = "shellcheck", name = "ShellCheck (errors only)", entry = "shellcheck --severity=error --", language = "system", types_or = ["bash", "sh", "dash", "ksh"] },
 ]

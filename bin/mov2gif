@@ -1,5 +1,6 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p ffmpeg gifsicle
+# shellcheck shell=bash
 
 # Uses ffmpeg to convert a video file to a gif file. Optimizes the final result
 # with gifsicle.
