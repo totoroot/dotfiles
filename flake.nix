@@ -210,6 +210,10 @@
               '';
           in
           {
+            secrets = pkgsFor.mkShellNoCC {
+              packages = with pkgsFor; [ age bitwarden-cli jq openssh sops ];
+            };
+
             default = pkgsFor.mkShell {
               buildInputs = with pkgsFor; [
                 git
