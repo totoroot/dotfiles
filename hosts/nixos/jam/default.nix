@@ -342,6 +342,9 @@ in
     baseURL = "https://website.${domain}";
   };
 
+  mailserver.accounts."mail-canary@thym.it".hashedPasswordFile =
+    config.sops.secrets.mail-canary-password-hash.path;
+
   services.ntfy-sh = {
     environmentFile = config.sops.secrets.ntfy-auth-env.path;
     settings.auth-access = [

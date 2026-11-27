@@ -131,6 +131,11 @@ in
         key = "RSVP_INVITE_CODE";
         path = "/var/secrets/rsvp-invite-code";
       };
+      mail-canary-password-hash = mkSecret {
+        key = "MAIL_CANARY_PASSWORD_HASH";
+        path = "/var/secrets/mailserver/mail-canary@thym.it";
+        mode = "0400";
+      };
       mailserver-admin-thym-it-password-hash = mkSecret {
         key = "MAILSERVER_ADMIN_THYM_IT_PASSWORD_HASH";
         path = "/var/secrets/mailserver/admin@thym.it";
