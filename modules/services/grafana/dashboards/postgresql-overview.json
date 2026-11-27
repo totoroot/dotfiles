@@ -1,0 +1,102 @@
+{
+  "uid": "postgresql-overview",
+  "title": "PostgreSQL Overview",
+  "description": "Compare database size, connections, and workload within one PostgreSQL cluster. Use PostgreSQL Statistics for detailed troubleshooting.",
+  "schemaVersion": 42,
+  "tags": ["postgresql", "overview"],
+  "timezone": "browser",
+  "time": {"from": "now-24h", "to": "now"},
+  "refresh": "1m",
+  "links": [
+    {"type": "link", "title": "PostgreSQL Statistics", "url": "/d/OpKZVIAMza/postgresql-statistics", "includeVars": true, "keepTime": true}
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "instance",
+        "label": "Cluster",
+        "type": "query",
+        "datasource": {"type": "prometheus", "uid": "prometheus"},
+        "query": {"query": "label_values(up{job=\"postgres\"}, instance)", "refId": "PrometheusVariableQueryEditor-VariableQuery"},
+        "refresh": 1,
+        "sort": 1,
+        "multi": false,
+        "includeAll": false
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1, "type": "stat", "title": "PostgreSQL health",
+      "description": "Distinguishes a failed Prometheus scrape from an exporter that cannot connect to PostgreSQL.",
+      "gridPos": {"x": 0, "y": 0, "w": 6, "h": 4},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"refId": "A", "instant": true, "range": false, "expr": "(pg_up{job=\"postgres\",instance=~\"${instance:regex}\"} and on(instance) (up{job=\"postgres\",instance=~\"${instance:regex}\"} == 1)) or on(instance) (-1 - up{job=\"postgres\",instance=~\"${instance:regex}\"})"}],
+      "fieldConfig": {"defaults": {"mappings": [{"type": "value", "options": {"-2": {"text": "No database status", "color": "orange"}, "-1": {"text": "Scrape failed", "color": "red"}, "0": {"text": "Database down", "color": "red"}, "1": {"text": "Reachable", "color": "green"}}}]}},
+      "options": {"colorMode": "value", "graphMode": "none", "textMode": "value"}
+    },
+    {
+      "id": 2, "type": "stat", "title": "Databases",
+      "description": "Databases reported by the exporter, excluding template0 and template1.",
+      "gridPos": {"x": 6, "y": 0, "w": 6, "h": 4},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"refId": "A", "instant": true, "range": false, "expr": "count(pg_database_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"})"}],
+      "options": {"graphMode": "none", "textMode": "value"}
+    },
+    {
+      "id": 3, "type": "stat", "title": "Total database size",
+      "description": "Sum of non-template database sizes. This is not filesystem usage and does not include WAL.",
+      "gridPos": {"x": 12, "y": 0, "w": 6, "h": 4},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"refId": "A", "instant": true, "range": false, "expr": "sum(pg_database_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"})"}],
+      "fieldConfig": {"defaults": {"unit": "bytes"}},
+      "options": {"graphMode": "none", "textMode": "value"}
+    },
+    {
+      "id": 4, "type": "stat", "title": "Connection usage",
+      "description": "Reported database backends divided by max_connections. This is an estimate, not the number of free slots available to an application role.",
+      "gridPos": {"x": 18, "y": 0, "w": 6, "h": 4},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"refId": "A", "instant": true, "range": false, "expr": "sum(pg_stat_database_numbackends{job=\"postgres\",instance=~\"${instance:regex}\",datname!=\"\"}) / max(pg_settings_max_connections{job=\"postgres\",instance=~\"${instance:regex}\"})"}],
+      "fieldConfig": {"defaults": {"unit": "percentunit", "decimals": 1, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "orange", "value": 0.75}, {"color": "red", "value": 0.9}]}}},
+      "options": {"colorMode": "value", "graphMode": "none", "textMode": "value"}
+    },
+    {
+      "id": 5, "type": "table", "title": "Compare databases",
+      "description": "One row per non-template database. Connections include idle sessions. Transactions are commits plus rollbacks per second. A blank cell means no metric, not zero.",
+      "gridPos": {"x": 0, "y": 4, "w": 24, "h": 10},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [
+        {"refId": "A", "format": "table", "instant": true, "range": false, "expr": "sum by (datname) (pg_database_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"})"},
+        {"refId": "B", "format": "table", "instant": true, "range": false, "expr": "sum by (datname) (pg_stat_database_numbackends{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"})"},
+        {"refId": "C", "format": "table", "instant": true, "range": false, "expr": "sum by (datname) (rate({__name__=~\"pg_stat_database_xact_(commit|rollback)\",job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"}[$__rate_interval]))"}
+      ],
+      "transformations": [
+        {"id": "joinByField", "options": {"byField": "datname", "mode": "outerTabular"}},
+        {"id": "organize", "options": {"excludeByName": {"Time": true, "Time 1": true, "Time 2": true, "Time 3": true}, "indexByName": {"datname": 0, "Value #A": 1, "Value #B": 2, "Value #C": 3}, "renameByName": {"datname": "Database", "Value #A": "Size", "Value #B": "Connections", "Value #C": "Transactions / s"}}}
+      ],
+      "fieldConfig": {"defaults": {}, "overrides": [
+        {"matcher": {"id": "byName", "options": "Size"}, "properties": [{"id": "unit", "value": "bytes"}]},
+        {"matcher": {"id": "byName", "options": "Connections"}, "properties": [{"id": "decimals", "value": 0}]},
+        {"matcher": {"id": "byName", "options": "Transactions / s"}, "properties": [{"id": "decimals", "value": 2}]}
+      ]},
+      "options": {"showHeader": true, "sortBy": [{"displayName": "Size", "desc": true}]}
+    },
+    {
+      "id": 6, "type": "timeseries", "title": "Database size over time",
+      "gridPos": {"x": 0, "y": 14, "w": 12, "h": 9},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"refId": "A", "legendFormat": "{{datname}}", "expr": "pg_database_size_bytes{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"}"}],
+      "fieldConfig": {"defaults": {"unit": "bytes"}},
+      "options": {"legend": {"displayMode": "table", "placement": "bottom", "calcs": ["lastNotNull"], "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}}
+    },
+    {
+      "id": 7, "type": "timeseries", "title": "Connections over time",
+      "gridPos": {"x": 12, "y": 14, "w": 12, "h": 9},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"refId": "A", "legendFormat": "{{datname}}", "expr": "pg_stat_database_numbackends{job=\"postgres\",instance=~\"${instance:regex}\",datname!~\"template[01]|^$\"}"}],
+      "fieldConfig": {"defaults": {"decimals": 0, "min": 0}},
+      "options": {"legend": {"displayMode": "table", "placement": "bottom", "calcs": ["lastNotNull", "max"], "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}}
+    }
+  ]
+}
