@@ -31,7 +31,7 @@ Teal is a separate netcup VPS (1 vCPU, 1 GiB RAM) managed through Colmena in `th
 - Gatus checks `127.0.0.1:25` (SMTP), `:587` (submission), and `:993` (IMAPS) for TCP connectivity only. These checks do not verify public reachability, protocol negotiation, certificates served by the mail daemons, authentication, or delivery. Port 465 is allowed by the evaluated firewall but is not in the check manifest. Confirm which client listeners are in use before extending coverage.
 - Gatus and Blackbox check the Roundcube HTTPS endpoint. A working web page and valid nginx HTTPS certificate do not establish that mail works or that SMTP/IMAP serve a current certificate.
 - Grafana’s [Postfix Delivery Status dashboard](../modules/services/grafana/dashboards/postfix.json) parses Loki journal entries for delivery attempts, DSNs, deferrals, bounces, and recipient domains. These are historical attempts, not current queue depth or oldest queued message age. A `sent` log on an outbound SMTP hop also does not prove inbox placement.
-- Teal covers public transport and certificate checks, but does not authenticate or verify delivery. An inbound canary is prepared for manual testing, not deployed or scheduled. Neither host declares a mail queue scrape. Jam's Prometheus evaluates HTTPS certificate rules, but the evaluated `alertmanagers` list is empty and Alertmanager is disabled. Those rules alone do not notify anyone.
+- Teal covers public transport and certificate checks, but does not authenticate or verify delivery. The manual inbound canary passed on 2026-11-27: jam accepted the message over public SMTP and teal found the exact Message-ID over authenticated IMAP five seconds later. The hourly timer is deployed for minute 10 UTC. After a manual run, Healthchecks.io reported `teal-mail-canary` Up with a ping at 16:57:58 UTC on 2026-11-27. The first scheduled run and the missed-heartbeat alert have not yet been verified. [Postfix queue telemetry](../hosts/nixos/jam/mail-queue-metrics.nix) is prepared for jam but not yet deployed. Jam's Prometheus evaluates HTTPS certificate rules, but the evaluated `alertmanagers` list is empty and Alertmanager is disabled. Those rules alone do not notify anyone.
 
 ## Recommended rollout
 
@@ -42,6 +42,12 @@ Teal is a separate netcup VPS (1 vCPU, 1 GiB RAM) managed through Colmena in `th
 5. **Check DNS, capacity, and backend access.** Track MX and address records, PTR/forward DNS, and expected SPF, DKIM and DMARC for the served domains. Validate DKIM and DMARC on received test messages where possible. Set a Loki retention budget and monitor disk usage. Review direct Grafana exposure: the evaluated config binds port 3000 to all interfaces, allows it in the host firewall, and enables anonymous Editor. Confirm upstream reachability controls and restrict backend access to the intended proxy path. Review renderer port 3030 at the same time.
 
 **Next mail milestone:** deploy the dedicated mailbox and verify one manual inbound delivery from teal. Keep Prometheus, Grafana and Loki on jam rather than duplicating them on the 1 GiB VPS.
+
+## Postfix queue telemetry on jam
+
+A one-minute timer runs `postqueue -j` and publishes only aggregate counts, oldest-message age, and the last successful collection time through the existing node exporter. It exposes no addresses or message IDs and does not open another port. A failed collection leaves the previous sample in place so stale data can be detected. An empty, successfully inspected queue reports zero.
+
+After activation, check `systemctl list-timers postfix-queue-metrics.timer`, then query `postfix_queue_messages`, `postfix_queue_deferred_messages`, and `postfix_queue_oldest_message_age_seconds` in Prometheus. `PostfixQueueMetricsStale` fires after five minutes of missing or stale telemetry, with a sample considered stale once it exceeds five minutes. `PostfixQueueOldMessage` fires when the oldest message exceeds an hour continuously for 15 minutes with fresh metrics. These rules are visible in Prometheus only until notification routing is configured.
 
 ## Runtime verification checklist
 

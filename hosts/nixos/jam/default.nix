@@ -34,6 +34,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./mounts.nix
+    ./mail-queue-metrics.nix
     ./secrets.nix
   ];
 
