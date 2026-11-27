@@ -114,4 +114,5 @@ To bypass hook for emergency commits: `git commit --no-verify` (use sparingly).
 - Host-local Darwin `brew.nix` files must stay imported from the host `configuration.nix`/main nix-darwin module so nix-darwin sees host-specific Homebrew entries.
 - Before rebuilding a Darwin host with Homebrew cleanup enabled, verify the evaluated lists are populated: `nix eval .#darwinConfigurations.<host>.config.homebrew.brews` and `nix eval .#darwinConfigurations.<host>.config.homebrew.casks`.
 - **Commit straightforward, low-risk fixes directly.** If a fix is only a few lines and targeted verification gives high confidence, make an atomic local commit without asking for separate approval. Inform the user before committing, explain the scope, and exclude unrelated changes. Leave uncertain or higher-risk changes for review unless asked to commit them.
+- **Commit `flake.lock` whenever it is modified.** Run `bin/check-fleet` first, then commit only `flake.lock` in a separate local commit titled `chore(flake): update locked inputs`.
 - **Never push. User pushes manually.** A local commit does not authorize deployment.
