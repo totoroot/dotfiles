@@ -1,84 +1,68 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# rswitch — rebuild and switch to NixOS/Darwin configuration
-#
-# Usage:
-#   rswitch [--host HOST] [--force-host] [ACTION] [-- NIX_BUILD_ARGS...]
-#
-# Actions:
-#   switch | test | boot
-#
-# Examples:
-#   rswitch
-#   rswitch test
-#   rswitch --host myhost switch
-#   rswitch -- --show-trace
-#   rswitch test -- --cores 0 --show-trace
-#
-# On Linux/NixOS, rswitch builds `config.system.build.toplevel` directly to
-# avoid nixos-rebuild-specific evaluation issues. It records a generation for
-# switch and boot before calling switch-to-configuration. Test is temporary.
-# On Darwin, use darwin-rebuild from the target's pinned nix-darwin module.
-#
-# NIX_BUILD_ARGS after `--` are passed to `nix build` (Linux) or
-# `darwin-rebuild` (Darwin).
-# Useful flags:
-#   --show-trace
-#   --cores N
-#   --keep-going
-#   --fallback
+usage() {
+  printf '%s\n' \
+    'Usage: rswitch [--host HOST] [--force-host] [ACTION] [-- NIX_ARGS...]' \
+    '' \
+    '  switch   Register and activate the configuration (default)' \
+    '  test     Activate temporarily on NixOS, or run darwin-rebuild check' \
+    '  boot     Register for the next boot on NixOS only' \
+    '  -h, --help  Show this help without building or activating' \
+    '' \
+    'Use --force-host to permit an explicitly selected host other than this one.' \
+    'Arguments after -- are forwarded to nix build or darwin-rebuild.' \
+    'Example: rswitch test -- --show-trace'
+}
+
+die() {
+  printf 'Error: %s\nRun rswitch --help for usage.\n' "$1" >&2
+  exit 1
+}
 
 host="$(hostname)"
 flake_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 target_host="$host"
 force_host=0
-args=()
-action="switch"
+action=""
 nix_args=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
     --host)
+      [[ -n ${2:-} && $2 != -* ]] || die '--host requires a value'
       shift
-      target_host="${1:-}"
+      target_host="$1"
       ;;
     --force-host)
       force_host=1
       ;;
+    switch|test|boot)
+      [[ -z $action ]] || die "unexpected second action: $1"
+      action="$1"
+      ;;
+    --)
+      shift
+      nix_args=("$@")
+      break
+      ;;
     *)
-      args+=("$1")
+      die "unexpected argument: $1 (put Nix arguments after --)"
       ;;
   esac
-  shift || true
+  shift
 done
 
-if [[ -z "$target_host" ]]; then
-  echo "Error: --host requires a value" >&2
-  exit 1
-fi
+action=${action:-switch}
 
 if [[ $force_host -ne 1 && "$target_host" != "$host" ]]; then
   echo "Refusing to rebuild: host is $host (expected $target_host)." >&2
   echo "Use --force-host to override." >&2
   exit 1
-fi
-
-if [[ ${#args[@]} -gt 0 ]]; then
-  case "${args[0]}" in
-    switch|test|boot)
-      action="${args[0]}"
-      nix_args=("${args[@]:1}")
-      ;;
-    *)
-      nix_args=("${args[@]}")
-      ;;
-  esac
-fi
-
-# Remove leading "--" separator from nix_args (not needed for rebuild commands)
-if [[ "${nix_args[0]:-}" == "--" ]]; then
-  nix_args=("${nix_args[@]:1}")
 fi
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -98,7 +82,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
   darwin_rebuild="${flake_root}#darwinConfigurations.${target_host}.config.system.build.darwin-rebuild"
   exec sudo -H nix run --no-update-lock-file "$darwin_rebuild" -- \
-    "$darwin_action" --flake "${flake_root}#${target_host}" --impure "${nix_args[@]}"
+    "$darwin_action" --flake "${flake_root}#${target_host}" --impure ${nix_args[@]+"${nix_args[@]}"}
 fi
 
 build_attr="${flake_root}#nixosConfigurations.${target_host}.config.system.build.toplevel"
@@ -106,7 +90,7 @@ build_attr="${flake_root}#nixosConfigurations.${target_host}.config.system.build
 # Build the configuration. Do not attempt activation when the build fails;
 # otherwise an empty store_path produces the misleading /bin/switch-to-configuration
 # error instead of preserving the actual evaluation/build failure.
-if ! store_path=$(sudo nix build "$build_attr" --impure --print-out-paths --no-link "${nix_args[@]}"); then
+if ! store_path=$(sudo nix build "$build_attr" --impure --print-out-paths --no-link ${nix_args[@]+"${nix_args[@]}"}); then
   echo "Error: failed to build $build_attr; refusing to activate." >&2
   exit 1
 fi

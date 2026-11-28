@@ -18,6 +18,11 @@ tee "$tmp/sudo" >/dev/null <<'MOCK'
 case "$1" in
   nix)
     [ "$2" = build ] || exit 99
+    if [ "${MOCK_FORWARD:-}" = yes ]; then
+      shift 6
+      [ "$#" = 4 ] && [ "$1" = --host ] && [ "$2" = other ] &&
+        [ "$3" = --option ] && [ "$4" = 'a b' ] || exit 99
+    fi
     echo build >> "$MOCK_LOG"
     case "${MOCK_FAILURE:-}" in
       build) exit 1 ;;
@@ -49,6 +54,20 @@ expect_log() {
     exit 1
   fi
 }
+
+: > "$MOCK_LOG"
+bash "$root/bin/rswitch" --help > "$tmp/help"
+grep -q '^Usage:' "$tmp/help"
+for bad in swtich 'test boot' '--host --force-host' '--host' '--host other' '--show-trace'; do
+  read -r -a bad_args <<< "$bad"
+  if bash "$root/bin/rswitch" "${bad_args[@]}" 2>"$tmp/error"; then
+    echo "Unexpected success for $bad" >&2
+    exit 1
+  fi
+done
+expect_log ''
+MOCK_FORWARD=yes bash "$root/bin/rswitch" test -- --host other --option 'a b'
+expect_log $'build\nactivate test'
 
 for action in switch boot test; do
   : > "$MOCK_LOG"
