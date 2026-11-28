@@ -21,7 +21,7 @@ This is the index of hosts, retained configurations, and managed resources. **Ac
 | `sangria` | 2010 Mac mini running NixOS | [sangria](../hosts/nixos/sangria/README.md) |
 | `violet` | Home server, currently offline. Candidate for a second backup destination, not in use for jam's backups. | [violet](../hosts/nixos/violet/README.md) |
 
-`personal` appears in the flake's NixOS output list but is a [shared settings module](../hosts/nixos/personal.nix), not a machine. The [Debian](../hosts/linux/debian/home.nix) and [Steam Deck](../hosts/linux/steamdeck/home.nix) Home Manager profiles are retained configurations, not active hosts. The `homeConfigurations` output currently fails to evaluate because the Linux profile import is missing its `nixpkgs` argument. Plan a fresh Steam Deck setup rather than an in-place upgrade.
+[`personal.nix`](../hosts/nixos/personal.nix) is a shared settings module, not a machine. The [Debian](../hosts/linux/debian/home.nix) and [Steam Deck](../hosts/linux/steamdeck/home.nix) Home Manager profiles are retained configurations, not active hosts. Both activation derivations evaluate with the current lockfile, but they are not built or deployed by the fleet check. Plan a fresh Steam Deck setup rather than an in-place upgrade.
 
 ## Managed resources
 
@@ -31,6 +31,6 @@ This is the index of hosts, retained configurations, and managed resources. **Ac
 
 ## Maintaining this inventory
 
-- When adding or retiring a machine or managed resource, update its inventory entry alongside the configuration. Record its role, lifecycle status, platform or provider, dependencies, and links to configuration and operations.
+- When adding or retiring a machine, update the [host registry](../hosts/registry.nix) and this inventory. Record each machine or managed resource's role, lifecycle status, platform or provider, dependencies, and links to configuration and operations.
 - Keep host-specific hardware, deployment, and recovery details with the host or resource. Record what was actually verified and label planned work or unconfirmed details as such.
 - Keep credentials and recovery material out of Git. Document how access is managed without including passwords, private keys, tokens, or recovery codes.

@@ -2,6 +2,8 @@
 
 Each host has one SOPS file, `secrets/<host>.yaml`. Vaultwarden holds the recovery copy of service credentials. Host private age identities stay on their hosts. Do not create a separate encrypted file per credential.
 
+For a new NixOS host only, [`bin/setup-sops-age-key`](../bin/setup-sops-age-key) can set up the identity on that host. Review any changes it makes to `.sops.yaml` and the host's YAML stub. Encrypt the file with `sops` before staging it, and never commit the private identity or plaintext credentials. For an existing host, use its current identity and encrypted file.
+
 ## Dry run on either Mac
 
 From the dotfiles checkout on ATGRZMBP43 or thistle, use the pinned CLI tools:

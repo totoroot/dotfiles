@@ -1,59 +1,18 @@
-# Darwin Setup
+# macOS bootstrap
 
-To setup Nix and nix-darwin to be able to then use these dotfiles for configuration management on a system runnning macOS, follow these instructions:
+For routine configuration deployments and package upgrades, see [active-host operations](../../docs/active-hosts.md#macos-configuration-and-package-upgrades). Bootstrap uses the checked-in `flake.lock`. It does not require a channel or flake update.
 
-## Install Nix (multi-user mode):
-```
-curl -L https://nixos.org/nix/install | sh
-```
+1. Install [Nix](https://nixos.org/download/) in multi-user mode. Enable `nix-command` and `flakes` in your Nix configuration without overwriting existing settings.
+2. Check the [host registry](../registry.nix) and choose the config for this machine. The supported hosts are `ATGRZMBP43` and `thistle`. Verify the machine name, primary user, and home directory before proceeding.
+3. Review the evaluated Homebrew package lists and activation policy before the first switch. Both configurations use `nix-homebrew` to manage Homebrew and its taps, with migration enabled for existing installs.
 
+From the checkout, for example on `thistle`:
 
-## Enable nix-command and flakes to bootstrap 
-```
-cat <<EOF > ~/.config/nix/nix.conf
-experimental-features = nix-command flakes
-EOF
-```
-
-
-## Install homebrew:
-
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```sh
+nix eval .#darwinConfigurations.thistle.config.homebrew.brews
+nix eval .#darwinConfigurations.thistle.config.homebrew.casks
+nix eval --raw .#darwinConfigurations.thistle.config.homebrew.onActivation.cleanup
+nix build --no-update-lock-file .#darwinConfigurations.thistle.system
 ```
 
-
-## Backup Nix default config
-
-Until [this](https://github.com/LnL7/nix-darwin/issues/149) is addressed.
-
-```
-sudo mv /etc/nix/nix.conf /etc/nix/.nix-darwin.bkp.nix.conf
-```
-
-
-## Update Nix channels
-
-```
-nix-channel --update
-```
-
-
-# Update flake inputs
-
-```
-nix flake update
-```
-
-
-## Build the configuration
-```
-nix build .#darwinConfigurations.macbook.system
-```
-
-
-## Switch to new configuration
-
-```
-./result/sw/bin/darwin-rebuild switch --flake .
-```
+Once the build and activation review pass, follow the [macOS switch runbook](../../docs/active-hosts.md#macos-configuration-and-package-upgrades) to use the pinned rebuild tool.
