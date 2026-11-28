@@ -13,6 +13,7 @@ in
     ./hardware-configuration.nix
     ./mounts.nix
     ./backups.nix
+    ./gramps-web.nix
     (import ./nginx.nix { inherit domain autheliaHost thymITAutheliaHost; })
     ./mail-queue-metrics.nix
     ./secrets.nix
@@ -69,7 +70,6 @@ in
         enable = true;
         endpoints = gatusEndpoints;
       };
-      gramps-web.enable = true;
       headscale.enable = true;
       homepage.enable = true;
       loki.enable = true;

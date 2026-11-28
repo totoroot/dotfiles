@@ -19,6 +19,12 @@ in
     age.keyFile = "/var/lib/sops-nix/jam.txt";
     useSystemdActivation = true;
     secrets = {
+      gramps-web-postgresql-env = lib.mkIf config.modules.services.gramps-web.postgresql.enable ((mkSecret {
+        key = "GRAMPS_WEB_POSTGRESQL_ENV";
+        path = "/var/secrets/gramps-web-postgresql.env";
+      }) // {
+        restartUnits = [ "podman-gramps-web.service" "podman-gramps-web-worker.service" ];
+      });
       restic-pantry-heartbeat-curl = mkSecret {
         key = "RESTIC_PANTRY_HEARTBEAT_CURL";
         path = "/var/secrets/restic-pantry-heartbeat.curl";
