@@ -15,7 +15,13 @@ let
     media = "/app/media";
   };
   broker = if cfg.postgresql.enable then "redis://127.0.0.1:16385" else "redis://gramps-web-valkey:6379";
-  databaseOrdering = lib.optionalAttrs cfg.postgresql.enable {
+  appUnit = {
+    # Recreate bind-mount sources even when the boot-time tmpfiles unit has
+    # already run or the service is being restarted during activation.
+    preStart = lib.mkBefore ''
+      ${lib.getExe' config.systemd.package "systemd-tmpfiles"} --create --prefix=/run/gramps-web --prefix=${stateDir}
+    '';
+  } // lib.optionalAttrs cfg.postgresql.enable {
     requires = [ "postgresql-setup.service" ];
     after = [ "postgresql-setup.service" ];
   };
@@ -75,8 +81,8 @@ in
       }
     ];
 
-    systemd.services.podman-gramps-web = databaseOrdering;
-    systemd.services.podman-gramps-web-worker = databaseOrdering;
+    systemd.services.podman-gramps-web = appUnit;
+    systemd.services.podman-gramps-web-worker = appUnit;
 
     systemd.tmpfiles.rules = [
       "d ${stateDir} 0700 root root -"
