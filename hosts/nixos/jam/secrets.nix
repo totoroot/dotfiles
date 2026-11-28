@@ -15,6 +15,13 @@ let
   } // lib.optionalAttrs (group != null) { inherit group; };
 in
 {
+  systemd.services = lib.mkIf config.modules.services.gramps-web.postgresql.enable (lib.genAttrs
+    [ "podman-gramps-web" "podman-gramps-web-worker" ]
+    (_: {
+      requires = [ "sops-install-secrets.service" ];
+      after = [ "sops-install-secrets.service" ];
+    }));
+
   sops = {
     age.keyFile = "/var/lib/sops-nix/jam.txt";
     useSystemdActivation = true;

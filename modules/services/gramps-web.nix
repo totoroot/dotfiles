@@ -62,6 +62,11 @@ in
     };
     postgresql = {
       enable = lib.mkEnableOption "SharedPostgreSQL with a separate Gramps Web state directory";
+      provision = lib.mkOption {
+        type = lib.types.bool;
+        default = cfg.postgresql.enable;
+        description = "Provision the local PostgreSQL databases and roles, even before switching from SQLite.";
+      };
       environmentFile = lib.mkOption {
         type = lib.types.str;
         description = "Runtime environment file with the Gramps PostgreSQL password and user database URI.";
@@ -83,6 +88,15 @@ in
 
     systemd.services.podman-gramps-web = appUnit;
     systemd.services.podman-gramps-web-worker = appUnit;
+
+    services.postgresql = lib.mkIf cfg.postgresql.provision {
+      ensureDatabases = lib.mkBefore [ "gramps" "grampswebuser" ];
+      ensureUsers = lib.mkBefore (map (name: { inherit name; ensureDBOwnership = true; }) [ "gramps" "grampswebuser" ]);
+      authentication = lib.mkBefore ''
+        host gramps        gramps        127.0.0.1/32 scram-sha-256
+        host grampswebuser grampswebuser 127.0.0.1/32 scram-sha-256
+      '';
+    };
 
     systemd.tmpfiles.rules = [
       "d ${stateDir} 0700 root root -"

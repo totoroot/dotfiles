@@ -17,7 +17,10 @@
       "/var/www"
       "/var/lib/vaultwarden"
       "/var/lib/wichtelwerkstatt"
-    ];
+    ] ++ lib.optionals config.modules.services.gramps-web.postgresql.enable (
+      # The SQL dump does not contain the tree metadata, media, or signing secret.
+      map (name: "/var/lib/gramps-web-postgresql/${name}") [ "trees" "media" "secret" ]
+    );
     extraOptions = [
       ''"sftp.args=-p 22 -i /var/lib/restic-jam/key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/var/lib/restic-jam/known_hosts"''
     ];

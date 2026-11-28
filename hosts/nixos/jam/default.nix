@@ -13,7 +13,6 @@ in
     ./hardware-configuration.nix
     ./mounts.nix
     ./backups.nix
-    ./gramps-web.nix
     (import ./nginx.nix { inherit domain autheliaHost thymITAutheliaHost; })
     ./mail-queue-metrics.nix
     ./secrets.nix
@@ -69,6 +68,14 @@ in
       gatus = {
         enable = true;
         endpoints = gatusEndpoints;
+      };
+      gramps-web = {
+        enable = true;
+        postgresql = {
+          enable = true;
+          provision = true;
+          environmentFile = config.sops.secrets.gramps-web-postgresql-env.path;
+        };
       };
       headscale.enable = true;
       homepage.enable = true;

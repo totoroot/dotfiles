@@ -1,6 +1,6 @@
 # Gramps Web on jam
 
-[Gramps Web](https://www.grampsweb.org/install_setup/deployment/) runs as a web container and a Celery worker, with Valkey on a dedicated Podman bridge. Image digests and configuration live in [`modules/services/gramps-web.nix`](../modules/services/gramps-web.nix). The app only publishes `127.0.0.1:5085`. There is no public DNS, nginx vhost, or firewall exception.
+[Gramps Web](https://www.grampsweb.org/install_setup/deployment/) runs as a web container and a Celery worker, with Valkey on a dedicated Podman bridge. Image digests and configuration live in [`modules/services/gramps-web.nix`](../modules/services/gramps-web.nix). The app listens only on `127.0.0.1:5085`. There is no public DNS, nginx vhost, or firewall exception.
 
 ## First run and private access
 
@@ -26,13 +26,13 @@ Verify the owner can sign in and that a real background job, such as an export, 
 
 ## Data and backups
 
-`/var/lib/gramps-web` holds trees, users, media, the signing secret, and derived index and cache data. `/run/gramps-web/tmp` is shared scratch space, not durable storage. The Valkey broker is disposable, so drain background jobs before stopping or upgrading it.
+Jam uses SharedPostgreSQL. The nightly PostgreSQL dump includes `gramps` (trees) and `grampswebuser` (accounts). The [Restic job](../hosts/nixos/jam/backups.nix) also includes tree metadata, media, and the signing secret from `/var/lib/gramps-web-postgresql`.
 
-The state directory is **not** in the current `pantry` backup set. Before importing irreplaceable data, arrange an encrypted backup. For a consistent filesystem copy, stop the web and worker containers, back up `/var/lib/gramps-web` including metadata and permissions, then restart the containers. Keep the backup private and test recovery in a separate location.
+`/var/lib/gramps-web` is the old SQLite state and is **not** in the `pantry` backup set. Keep an encrypted copy until PostgreSQL recovery has been tested. `/run/gramps-web/tmp` is shared scratch space, not durable storage. The Valkey broker is disposable, so drain background jobs before stopping or upgrading it.
 
 ## Migrate the existing tree to PostgreSQL
 
-The [Jam configuration](../hosts/nixos/jam/gramps-web.nix) separates database provisioning from cutover. With `postgresql.enable = false`, Gramps Web continues using the existing SQLite state. Do not deploy a dirty checkout containing unrelated monitoring changes for this migration.
+The [Jam configuration](../hosts/nixos/jam/default.nix) enables PostgreSQL. For a staged migration from SQLite, keep `gramps-web.postgresql.provision = true` and set `gramps-web.postgresql.enable = false` until cutover. This provisions the databases while Gramps Web continues using the existing SQLite state. Do not deploy a dirty checkout containing unrelated changes.
 
 1. Keep both exports. In an agreed maintenance window, stop `podman-gramps-web-worker.service` and `podman-gramps-web.service` on Jam. Take a root-only backup of all of `/var/lib/gramps-web`, including the users database, signing secret, and any media. Verify the archive can be listed and restored into a separate directory. Restart the old services after the backup. Keep an encrypted copy off Jam. Freeze edits after the final export so the import is not missing later changes.
 2. Deploy the database preparation with PostgreSQL mode still off. Verify that `gramps` and `grampswebuser` exist and are owned by their corresponding roles. As the PostgreSQL administrator, set `password_encryption = 'scram-sha-256'` in your interactive session and use `\password gramps` and `\password grampswebuser`. Use separate randomly generated hex passwords. Gramps builds a connection URL internally, so hex also avoids URI-escaping issues. Test both roles over `127.0.0.1` with `psql -W` before switching.
