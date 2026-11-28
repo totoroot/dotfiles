@@ -1,6 +1,20 @@
-{ config, lib, ... }:
+{ config, inputs, lib, ... }:
 
 {
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
+
+  nix-homebrew = {
+    enable = true;
+    autoMigrate = true;
+    enableRosetta = true;
+    user = config.system.primaryUser;
+    taps = {
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+    };
+    mutableTaps = false;
+  };
+
   homebrew.enable = true;
   homebrew.onActivation = {
     # Install declared packages on activation, but review upgrades separately.
