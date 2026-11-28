@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Only active hosts gate changes. See README.md for the support policy.
+# Only active hosts in hosts/registry.nix gate changes.
 root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 status=0
 
@@ -15,8 +15,23 @@ check() {
   fi
 }
 
-check jam nixosConfigurations.jam.config.system.build.toplevel.drvPath
-check ATGRZMBP43 darwinConfigurations.ATGRZMBP43.system.drvPath
-check thistle darwinConfigurations.thistle.system.drvPath
+targets=$(nix eval --raw --file "$root/hosts/registry.nix" --apply 'hosts:
+  let
+    targetsFor = group: suffix: builtins.concatStringsSep "" (
+      builtins.map (name:
+        if hosts.${group}.${name}.active then "${name} ${group}.${name}.${suffix}\n" else ""
+      ) (builtins.attrNames hosts.${group})
+    );
+  in targetsFor "nixosConfigurations" "config.system.build.toplevel.drvPath"
+    + targetsFor "darwinConfigurations" "system.drvPath"
+')
+if [[ -z $targets ]]; then
+  echo 'No active hosts in hosts/registry.nix' >&2
+  exit 1
+fi
+while read -r host attr; do
+  [[ -n $host ]] || continue
+  check "$host" "$attr"
+done <<< "$targets"
 
 exit "$status"

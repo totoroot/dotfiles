@@ -19,6 +19,7 @@
 
     # Nix packages
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Separate pin for the exported overlay's alternate package set.
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # PHP2Shell fixes, pending propagation to the unstable channels.
@@ -145,7 +146,7 @@
 
       lib = nixos.lib.extend
         (self: _super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
-      inherit (lib.my) mapHosts;
+      hosts = import ./hosts/registry.nix;
     in
     {
       lib = lib.my;
@@ -240,18 +241,17 @@
 
       # Configuration for NixOS hosts
       nixosConfigurations =
-        mapHosts ./hosts/nixos {
+        builtins.mapAttrs (_: host: lib.my.mkNixosHost host.path {
           inherit system pkgs;
           extraModules = [
             inputs.sops-nix.nixosModules.sops
             inputs.spliit.nixosModules.default
           ];
-        };
+        }) hosts.nixosConfigurations;
 
       # Configuration for macOS using Nix, nix-darwin and home-manager
       darwinConfigurations =
-        mapHosts ./hosts/darwin {
-          builder = darwin.lib.darwinSystem;
+        builtins.mapAttrs (_: host: lib.my.mkDarwinHost host.path {
           system = "aarch64-darwin";
           useGlobalPkgs = false;
           includeDotfilesModule = false;
@@ -263,7 +263,7 @@
               self.overlays.darwin-patches
             ];
           };
-        };
+        }) hosts.darwinConfigurations;
 
       # Configuration for generic Linux distros using Nix and home-manager
       homeConfigurations = (
