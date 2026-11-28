@@ -45,6 +45,10 @@ See [Monitoring on jam and teal](monitoring.md) for the stack inventory, mail co
 
 See [Jam backup and recovery](jam-backups.md) for the PostgreSQL dump, Restic setup, and restore checklist.
 
+## Jam: Gramps Web
+
+See [Gramps Web on jam](jam-gramps-web.md) for private access, first-run setup, and data protection.
+
 ## macOS: configuration and package upgrades
 
 `bin/rswitch switch` uses the target's locked nix-darwin rebuild tool. Activation installs missing declared Homebrew packages without a bundle auto-update, upgrade, or cleanup. Review `brew outdated` separately and upgrade named packages explicitly when ready. Do not use zap as part of activation or routine maintenance.

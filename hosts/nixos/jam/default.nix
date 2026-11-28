@@ -69,6 +69,7 @@ in
         enable = true;
         endpoints = gatusEndpoints;
       };
+      gramps-web.enable = true;
       headscale.enable = true;
       homepage.enable = true;
       loki.enable = true;
