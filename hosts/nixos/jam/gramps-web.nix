@@ -7,8 +7,7 @@ in
   modules.services.gramps-web = {
     enable = true;
     postgresql = {
-      # Enable only after taking the SQLite backup and provisioning credentials.
-      enable = false;
+      enable = true;
       environmentFile = config.sops.secrets.gramps-web-postgresql-env.path;
     };
   };
